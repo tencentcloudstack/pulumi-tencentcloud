@@ -2,9 +2,11 @@
 ---
 title: "getInstance"
 title_tag: "tencentcloud.Enis.getInstance"
-meta_desc: "Documentation for the tencentcloud.Enis.getInstance function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query query ENIs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query query ENIs.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const name = tencentcloud.Enis.getInstance({
+const name = tencentcloud.enis.getInstance({
     name: "test eni",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-name = tencentcloud.Enis.get_instance(name="test eni")
+name = tencentcloud.enis.get_instance(name="test eni")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/enis"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := enis.GetInstance(ctx, &enis.GetInstanceArgs{
+			Name: pulumi.StringRef("test eni"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Enis"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Enis.GetInstance(ctx, &enis.GetInstanceArgs{
-			Name: pulumi.StringRef("test eni"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Enis.EnisFunctions;
 import com.pulumi.tencentcloud.Enis.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   name:
     fn::invoke:
-      Function: tencentcloud:Enis:getInstance
-      Arguments:
+      function: tencentcloud:Enis:getInstance
+      arguments:
         name: test eni
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_enis_getinstance" "name" {
+  name = "test eni"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ><span class="k">
-function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -142,21 +199,21 @@ function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">security_group</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstanceResult</span
 ><span class="k">
-def </span>get_instance_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">ipv4</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">security_group</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
+def </span>get_instance_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">ipv4</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">security_group</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -181,7 +238,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstance </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,7 +248,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,6 +261,15 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Enis/getInstance:getInstance
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_enis_get_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -220,8 +288,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_csharp" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -229,8 +296,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of the ENIs to be queried. Conflict with <code>vpc_id</code>,<code>subnet_id</code>,<code>instance_id</code>,<code>security_group</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the ENIs to be queried. Conflict with <code>vpcId</code>,<code>subnetId</code>,<code>instanceId</code>,<code>securityGroup</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -238,8 +304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_csharp" style="color: inherit; text-decoration: inherit;">Ipv4</a>
@@ -247,8 +312,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -256,8 +320,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -265,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroup_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group</a>
@@ -274,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -283,17 +344,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -301,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -316,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_go" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -325,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of the ENIs to be queried. Conflict with <code>vpc_id</code>,<code>subnet_id</code>,<code>instance_id</code>,<code>security_group</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the ENIs to be queried. Conflict with <code>vpcId</code>,<code>subnetId</code>,<code>instanceId</code>,<code>securityGroup</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -334,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_go" style="color: inherit; text-decoration: inherit;">Ipv4</a>
@@ -343,8 +398,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -352,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -361,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroup_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group</a>
@@ -370,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -379,17 +430,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -397,8 +446,93 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_hcl" style="color: inherit; text-decoration: inherit;">ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of the ENIs to be queried. Conflict with <code>vpcId</code>,<code>subnetId</code>,<code>instanceId</code>,<code>securityGroup</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_hcl" style="color: inherit; text-decoration: inherit;">ipv4</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Intranet IP of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -412,8 +546,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_java" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -421,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the ENIs to be queried. Conflict with <code>vpc_id</code>,<code>subnet_id</code>,<code>instance_id</code>,<code>security_group</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the ENIs to be queried. Conflict with <code>vpcId</code>,<code>subnetId</code>,<code>instanceId</code>,<code>securityGroup</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -430,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_java" style="color: inherit; text-decoration: inherit;">ipv4</a>
@@ -439,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet IP of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -448,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -457,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroup_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group</a>
@@ -466,8 +594,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -475,17 +602,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -493,8 +618,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -508,8 +632,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_nodejs" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -517,8 +640,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of the ENIs to be queried. Conflict with <code>vpc_id</code>,<code>subnet_id</code>,<code>instance_id</code>,<code>security_group</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the ENIs to be queried. Conflict with <code>vpcId</code>,<code>subnetId</code>,<code>instanceId</code>,<code>securityGroup</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -526,8 +648,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_nodejs" style="color: inherit; text-decoration: inherit;">ipv4</a>
@@ -535,8 +656,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -544,8 +664,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -553,8 +672,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroup_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group</a>
@@ -562,8 +680,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -571,17 +688,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -589,8 +704,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -604,8 +718,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_python" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -613,8 +726,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of the ENIs to be queried. Conflict with <code>vpc_id</code>,<code>subnet_id</code>,<code>instance_id</code>,<code>security_group</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the ENIs to be queried. Conflict with <code>vpcId</code>,<code>subnetId</code>,<code>instanceId</code>,<code>securityGroup</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -622,8 +734,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_python" style="color: inherit; text-decoration: inherit;">ipv4</a>
@@ -631,8 +742,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Intranet IP of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -640,8 +750,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -649,8 +758,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group</a>
@@ -658,8 +766,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -667,17 +774,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -685,8 +790,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -700,8 +804,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_yaml" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -709,8 +812,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the ENIs to be queried. Conflict with <code>vpc_id</code>,<code>subnet_id</code>,<code>instance_id</code>,<code>security_group</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the ENIs to be queried. Conflict with <code>vpcId</code>,<code>subnetId</code>,<code>instanceId</code>,<code>securityGroup</code>,<code>name</code>,<code>ipv4</code> and <code>tags</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -718,8 +820,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_yaml" style="color: inherit; text-decoration: inherit;">ipv4</a>
@@ -727,8 +828,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet IP of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -736,8 +836,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -745,8 +844,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroup_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group</a>
@@ -754,8 +852,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A set of security group IDs which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -763,17 +860,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -781,8 +876,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -805,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeni">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Enis.<wbr>Outputs.<wbr>Get<wbr>Instance<wbr>Eni&gt;</a></span>
     </dt>
-    <dd><p>An information list of ENIs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of ENIs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -814,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -823,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP.</p>
-</dd><dt class="property-"
+    <dd>Message description.</dd><dt class="property-"
             title="">
         <span id="ids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_csharp" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -840,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI.</p>
-</dd><dt class="property-"
+    <dd>ID of the instance which bind the ENI.</dd><dt class="property-"
             title="">
         <span id="ipv4_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_csharp" style="color: inherit; text-decoration: inherit;">Ipv4</a>
@@ -857,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Name of the ENI.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -882,17 +971,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-"
             title="">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Tags of the ENI.</dd><dt class="property-"
             title="">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -900,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeni">[]Get<wbr>Instance<wbr>Eni</a></span>
     </dt>
-    <dd><p>An information list of ENIs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of ENIs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -924,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -933,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP.</p>
-</dd><dt class="property-"
+    <dd>Message description.</dd><dt class="property-"
             title="">
         <span id="ids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_go" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -950,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI.</p>
-</dd><dt class="property-"
+    <dd>ID of the instance which bind the ENI.</dd><dt class="property-"
             title="">
         <span id="ipv4_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_go" style="color: inherit; text-decoration: inherit;">Ipv4</a>
@@ -967,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Name of the ENI.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -992,17 +1073,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-"
             title="">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Tags of the ENI.</dd><dt class="property-"
             title="">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1010,8 +1089,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="enis_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enis_hcl" style="color: inherit; text-decoration: inherit;">enis</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeni">list(object)</a></span>
+    </dt>
+    <dd>An information list of ENIs. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Message description.</dd><dt class="property-"
+            title="">
+        <span id="ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_hcl" style="color: inherit; text-decoration: inherit;">ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the instance which bind the ENI.</dd><dt class="property-"
+            title="">
+        <span id="ipv4_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_hcl" style="color: inherit; text-decoration: inherit;">ipv4</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the ENI.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="security_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the ENI.</dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1025,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeni">List&lt;Get<wbr>Instance<wbr>Eni&gt;</a></span>
     </dt>
-    <dd><p>An information list of ENIs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of ENIs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1034,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1043,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP.</p>
-</dd><dt class="property-"
+    <dd>Message description.</dd><dt class="property-"
             title="">
         <span id="ids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_java" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -1060,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI.</p>
-</dd><dt class="property-"
+    <dd>ID of the instance which bind the ENI.</dd><dt class="property-"
             title="">
         <span id="ipv4_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_java" style="color: inherit; text-decoration: inherit;">ipv4</a>
@@ -1077,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Name of the ENI.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1102,17 +1277,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-"
             title="">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Tags of the ENI.</dd><dt class="property-"
             title="">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1120,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1135,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeni">Get<wbr>Instance<wbr>Eni[]</a></span>
     </dt>
-    <dd><p>An information list of ENIs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of ENIs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1144,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1153,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP.</p>
-</dd><dt class="property-"
+    <dd>Message description.</dd><dt class="property-"
             title="">
         <span id="ids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_nodejs" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -1170,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI.</p>
-</dd><dt class="property-"
+    <dd>ID of the instance which bind the ENI.</dd><dt class="property-"
             title="">
         <span id="ipv4_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_nodejs" style="color: inherit; text-decoration: inherit;">ipv4</a>
@@ -1187,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Name of the ENI.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1212,17 +1379,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-"
             title="">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Tags of the ENI.</dd><dt class="property-"
             title="">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1230,8 +1395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1243,10 +1407,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enis_python" style="color: inherit; text-decoration: inherit;">enis</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstanceeni">Get<wbr>Instance<wbr>Eni]</a></span>
+        <span class="property-type"><a href="#getinstanceeni">Sequence[Get<wbr>Instance<wbr>Eni]</a></span>
     </dt>
-    <dd><p>An information list of ENIs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of ENIs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1254,8 +1417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1263,8 +1425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the IP.</p>
-</dd><dt class="property-"
+    <dd>Message description.</dd><dt class="property-"
             title="">
         <span id="ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_python" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -1280,8 +1441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI.</p>
-</dd><dt class="property-"
+    <dd>ID of the instance which bind the ENI.</dd><dt class="property-"
             title="">
         <span id="ipv4_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_python" style="color: inherit; text-decoration: inherit;">ipv4</a>
@@ -1297,8 +1457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Name of the ENI.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1322,17 +1481,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-"
             title="">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Tags of the ENI.</dd><dt class="property-"
             title="">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1340,8 +1497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1355,8 +1511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeni">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of ENIs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of ENIs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1364,8 +1519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1373,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP.</p>
-</dd><dt class="property-"
+    <dd>Message description.</dd><dt class="property-"
             title="">
         <span id="ids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_yaml" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -1390,8 +1543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI.</p>
-</dd><dt class="property-"
+    <dd>ID of the instance which bind the ENI.</dd><dt class="property-"
             title="">
         <span id="ipv4_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_yaml" style="color: inherit; text-decoration: inherit;">ipv4</a>
@@ -1407,8 +1559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Name of the ENI.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1432,17 +1583,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-"
             title="">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Tags of the ENI.</dd><dt class="property-"
             title="">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1450,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1469,14 +1617,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-required"
+            title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1484,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1493,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>ID of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1502,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipv4s_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_csharp" style="color: inherit; text-decoration: inherit;">Ipv4s</a>
@@ -1511,8 +1663,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeniipv4">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Enis.<wbr>Inputs.<wbr>Get<wbr>Instance<wbr>Eni<wbr>Ipv4&gt;</a></span>
     </dt>
-    <dd><p>A set of intranet IPv4s.</p>
-</dd><dt class="property-required"
+    <dd>A set of intranet IPv4s.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6s_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6s_csharp" style="color: inherit; text-decoration: inherit;">Ipv6s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeniipv6">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Enis.<wbr>Inputs.<wbr>Get<wbr>Instance<wbr>Eni<wbr>Ipv6&gt;</a></span>
+    </dt>
+    <dd>A set of intranet IPv6s.</dd><dt class="property-required"
             title="Required">
         <span id="mac_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_csharp" style="color: inherit; text-decoration: inherit;">Mac</a>
@@ -1520,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-required"
+    <dd>MAC address.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1529,8 +1687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="primary_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_csharp" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -1538,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1547,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI.</p>
-</dd><dt class="property-required"
+    <dd>A set of security group IDs which bind the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1556,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>States of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1565,17 +1719,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1583,8 +1735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1592,14 +1743,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-required"
+            title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1607,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1616,8 +1773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>ID of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1625,8 +1781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipv4s_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_go" style="color: inherit; text-decoration: inherit;">Ipv4s</a>
@@ -1634,8 +1789,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeniipv4">[]Get<wbr>Instance<wbr>Eni<wbr>Ipv4</a></span>
     </dt>
-    <dd><p>A set of intranet IPv4s.</p>
-</dd><dt class="property-required"
+    <dd>A set of intranet IPv4s.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6s_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6s_go" style="color: inherit; text-decoration: inherit;">Ipv6s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeniipv6">[]Get<wbr>Instance<wbr>Eni<wbr>Ipv6</a></span>
+    </dt>
+    <dd>A set of intranet IPv6s.</dd><dt class="property-required"
             title="Required">
         <span id="mac_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_go" style="color: inherit; text-decoration: inherit;">Mac</a>
@@ -1643,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-required"
+    <dd>MAC address.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1652,8 +1813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="primary_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_go" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -1661,8 +1821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1670,8 +1829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI.</p>
-</dd><dt class="property-required"
+    <dd>A set of security group IDs which bind the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1679,8 +1837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>States of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1688,17 +1845,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1706,8 +1861,133 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the ENI.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the ENI.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv4s_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_hcl" style="color: inherit; text-decoration: inherit;">ipv4s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeniipv4">list(object)</a></span>
+    </dt>
+    <dd>A set of intranet IPv4s.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6s_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6s_hcl" style="color: inherit; text-decoration: inherit;">ipv6s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeniipv6">list(object)</a></span>
+    </dt>
+    <dd>A set of intranet IPv6s.</dd><dt class="property-required"
+            title="Required">
+        <span id="mac_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_hcl" style="color: inherit; text-decoration: inherit;">mac</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MAC address.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_hcl" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A set of security group IDs which bind the ENI.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>States of the ENI.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1715,14 +1995,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-required"
+            title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1730,8 +2017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1739,8 +2025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>ID of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1748,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipv4s_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_java" style="color: inherit; text-decoration: inherit;">ipv4s</a>
@@ -1757,8 +2041,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeniipv4">List&lt;Get<wbr>Instance<wbr>Eni<wbr>Ipv4&gt;</a></span>
     </dt>
-    <dd><p>A set of intranet IPv4s.</p>
-</dd><dt class="property-required"
+    <dd>A set of intranet IPv4s.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6s_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6s_java" style="color: inherit; text-decoration: inherit;">ipv6s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeniipv6">List&lt;Get<wbr>Instance<wbr>Eni<wbr>Ipv6&gt;</a></span>
+    </dt>
+    <dd>A set of intranet IPv6s.</dd><dt class="property-required"
             title="Required">
         <span id="mac_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_java" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -1766,8 +2057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-required"
+    <dd>MAC address.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1775,8 +2065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="primary_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_java" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -1784,8 +2073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1793,8 +2081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI.</p>
-</dd><dt class="property-required"
+    <dd>A set of security group IDs which bind the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1802,8 +2089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>States of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1811,17 +2097,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1829,8 +2113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1838,14 +2121,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-required"
+            title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1853,8 +2143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1862,8 +2151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>ID of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1871,8 +2159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipv4s_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_nodejs" style="color: inherit; text-decoration: inherit;">ipv4s</a>
@@ -1880,8 +2167,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeniipv4">Get<wbr>Instance<wbr>Eni<wbr>Ipv4[]</a></span>
     </dt>
-    <dd><p>A set of intranet IPv4s.</p>
-</dd><dt class="property-required"
+    <dd>A set of intranet IPv4s.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6s_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6s_nodejs" style="color: inherit; text-decoration: inherit;">ipv6s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeniipv6">Get<wbr>Instance<wbr>Eni<wbr>Ipv6[]</a></span>
+    </dt>
+    <dd>A set of intranet IPv6s.</dd><dt class="property-required"
             title="Required">
         <span id="mac_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_nodejs" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -1889,8 +2183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-required"
+    <dd>MAC address.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1898,8 +2191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="primary_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_nodejs" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -1907,8 +2199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1916,8 +2207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI.</p>
-</dd><dt class="property-required"
+    <dd>A set of security group IDs which bind the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1925,8 +2215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>States of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1934,17 +2223,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1952,8 +2239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1961,14 +2247,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-required"
+            title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1976,8 +2269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1985,8 +2277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>ID of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1994,17 +2285,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipv4s_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_python" style="color: inherit; text-decoration: inherit;">ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstanceeniipv4">Get<wbr>Instance<wbr>Eni<wbr>Ipv4]</a></span>
+        <span class="property-type"><a href="#getinstanceeniipv4">Sequence[Get<wbr>Instance<wbr>Eni<wbr>Ipv4]</a></span>
     </dt>
-    <dd><p>A set of intranet IPv4s.</p>
-</dd><dt class="property-required"
+    <dd>A set of intranet IPv4s.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6s_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6s_python" style="color: inherit; text-decoration: inherit;">ipv6s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeniipv6">Sequence[Get<wbr>Instance<wbr>Eni<wbr>Ipv6]</a></span>
+    </dt>
+    <dd>A set of intranet IPv6s.</dd><dt class="property-required"
             title="Required">
         <span id="mac_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_python" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -2012,8 +2309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-required"
+    <dd>MAC address.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2021,8 +2317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="primary_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_python" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2030,8 +2325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-required"
             title="Required">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -2039,8 +2333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI.</p>
-</dd><dt class="property-required"
+    <dd>A set of security group IDs which bind the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2048,8 +2341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>States of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>States of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2057,17 +2349,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2075,8 +2365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2084,14 +2373,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-required"
+            title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2099,8 +2395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2108,8 +2403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>ID of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2117,8 +2411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance which bind the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipv4s_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_yaml" style="color: inherit; text-decoration: inherit;">ipv4s</a>
@@ -2126,8 +2419,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceeniipv4">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A set of intranet IPv4s.</p>
-</dd><dt class="property-required"
+    <dd>A set of intranet IPv4s.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6s_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6s_yaml" style="color: inherit; text-decoration: inherit;">ipv6s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceeniipv6">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>A set of intranet IPv6s.</dd><dt class="property-required"
             title="Required">
         <span id="mac_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_yaml" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -2135,8 +2435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-required"
+    <dd>MAC address.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2144,8 +2443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the ENI to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="primary_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_yaml" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2153,8 +2451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2162,8 +2459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs which bind the ENI.</p>
-</dd><dt class="property-required"
+    <dd>A set of security group IDs which bind the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2171,8 +2467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of the ENI.</p>
-</dd><dt class="property-required"
+    <dd>States of the ENI.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2180,17 +2475,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this vpc to be queried. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2198,8 +2491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried. Conflict with <code>ids</code>.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried. Conflict with <code>ids</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2217,8 +2509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2226,8 +2517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_csharp" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -2235,8 +2525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2250,8 +2539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2259,8 +2547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_go" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -2268,8 +2555,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Intranet IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_hcl" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2283,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2292,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_java" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2301,8 +2615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2316,8 +2629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2325,8 +2637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_nodejs" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2334,8 +2645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2349,8 +2659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2358,8 +2667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_python" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2367,8 +2675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2382,8 +2689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the ENI. Conflict with <code>ids</code>.</p>
-</dd><dt class="property-required"
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2391,8 +2697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_yaml" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2400,8 +2705,333 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="getinstanceeniipv6">Get<wbr>Instance<wbr>Eni<wbr>Ipv6</h4>
+
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_csharp" style="color: inherit; text-decoration: inherit;">Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>IPv6</code> address, such as <code>3402:4e00:20:100:0:8cd9:2a67:71f3</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressid_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The <code>ID</code> of the <code>EIP</code> instance, such as <code>eip-hxlqja90</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="iswanipblocked_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswanipblocked_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Wan<wbr>Ip<wbr>Blocked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the public IP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_csharp" style="color: inherit; text-decoration: inherit;">Primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_go" style="color: inherit; text-decoration: inherit;">Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>IPv6</code> address, such as <code>3402:4e00:20:100:0:8cd9:2a67:71f3</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressid_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The <code>ID</code> of the <code>EIP</code> instance, such as <code>eip-hxlqja90</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="iswanipblocked_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswanipblocked_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Wan<wbr>Ip<wbr>Blocked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the public IP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_go" style="color: inherit; text-decoration: inherit;">Primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_hcl" style="color: inherit; text-decoration: inherit;">address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>IPv6</code> address, such as <code>3402:4e00:20:100:0:8cd9:2a67:71f3</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="address_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_id_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The <code>ID</code> of the <code>EIP</code> instance, such as <code>eip-hxlqja90</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_wan_ip_blocked_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_wan_ip_blocked_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>wan_<wbr>ip_<wbr>blocked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the public IP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_hcl" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_java" style="color: inherit; text-decoration: inherit;">address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd><code>IPv6</code> address, such as <code>3402:4e00:20:100:0:8cd9:2a67:71f3</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressid_java" style="color: inherit; text-decoration: inherit;">address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The <code>ID</code> of the <code>EIP</code> instance, such as <code>eip-hxlqja90</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="iswanipblocked_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswanipblocked_java" style="color: inherit; text-decoration: inherit;">is<wbr>Wan<wbr>Ip<wbr>Blocked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the public IP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_java" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_nodejs" style="color: inherit; text-decoration: inherit;">address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>IPv6</code> address, such as <code>3402:4e00:20:100:0:8cd9:2a67:71f3</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressid_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The <code>ID</code> of the <code>EIP</code> instance, such as <code>eip-hxlqja90</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="iswanipblocked_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswanipblocked_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Wan<wbr>Ip<wbr>Blocked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the public IP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_nodejs" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_python" style="color: inherit; text-decoration: inherit;">address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd><code>IPv6</code> address, such as <code>3402:4e00:20:100:0:8cd9:2a67:71f3</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="address_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_id_python" style="color: inherit; text-decoration: inherit;">address_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The <code>ID</code> of the <code>EIP</code> instance, such as <code>eip-hxlqja90</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_wan_ip_blocked_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_wan_ip_blocked_python" style="color: inherit; text-decoration: inherit;">is_<wbr>wan_<wbr>ip_<wbr>blocked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the public IP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_python" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_yaml" style="color: inherit; text-decoration: inherit;">address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd><code>IPv6</code> address, such as <code>3402:4e00:20:100:0:8cd9:2a67:71f3</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressid_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The <code>ID</code> of the <code>EIP</code> instance, such as <code>eip-hxlqja90</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Description of the ENI. Conflict with <code>ids</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="iswanipblocked_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswanipblocked_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Wan<wbr>Ip<wbr>Blocked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the public IP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_yaml" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2416,7 +3046,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

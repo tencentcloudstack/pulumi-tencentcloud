@@ -2,9 +2,11 @@
 ---
 title: "Redirection"
 title_tag: "tencentcloud.Clb.Redirection"
-meta_desc: "Documentation for the tencentcloud.Clb.Redirection resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CLB redirection."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,65 +20,70 @@ Provides a resource to create a CLB redirection.
 
 ### Manual Rewrite
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.clb.Redirection("foo", {
-    clbId: "lb-p7olt9e5",
-    sourceListenerId: "lbl-jc1dx6ju",
-    sourceRuleId: "loc-ft8fmngv",
-    targetListenerId: "lbl-asj1hzuo",
-    targetRuleId: "loc-4xxr2cy7",
+const example = new tencentcloud.clb.Redirection("example", {
+    clbId: "lb-ab09jtd2",
+    sourceListenerId: "lbl-qgtfowas",
+    targetListenerId: "lbl-lpwdkukk",
+    sourceRuleId: "loc-liz99mtg",
+    targetRuleId: "loc-4f53xn52",
+    rewriteCode: 307,
+    takeUrl: true,
+    sourceDomian: "www.demo.com",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.clb.Redirection("foo",
-    clb_id="lb-p7olt9e5",
-    source_listener_id="lbl-jc1dx6ju",
-    source_rule_id="loc-ft8fmngv",
-    target_listener_id="lbl-asj1hzuo",
-    target_rule_id="loc-4xxr2cy7")
+example = tencentcloud.clb.Redirection("example",
+    clb_id="lb-ab09jtd2",
+    source_listener_id="lbl-qgtfowas",
+    target_listener_id="lbl-lpwdkukk",
+    source_rule_id="loc-liz99mtg",
+    target_rule_id="loc-4f53xn52",
+    rewrite_code=307,
+    take_url=True,
+    source_domian="www.demo.com")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Clb.Redirection("foo", new()
-    {
-        ClbId = "lb-p7olt9e5",
-        SourceListenerId = "lbl-jc1dx6ju",
-        SourceRuleId = "loc-ft8fmngv",
-        TargetListenerId = "lbl-asj1hzuo",
-        TargetRuleId = "loc-4xxr2cy7",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewRedirection(ctx, "foo", &Clb.RedirectionArgs{
-			ClbId:            pulumi.String("lb-p7olt9e5"),
-			SourceListenerId: pulumi.String("lbl-jc1dx6ju"),
-			SourceRuleId:     pulumi.String("loc-ft8fmngv"),
-			TargetListenerId: pulumi.String("lbl-asj1hzuo"),
-			TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
+		_, err := clb.NewRedirection(ctx, "example", &clb.RedirectionArgs{
+			ClbId:            pulumi.String("lb-ab09jtd2"),
+			SourceListenerId: pulumi.String("lbl-qgtfowas"),
+			TargetListenerId: pulumi.String("lbl-lpwdkukk"),
+			SourceRuleId:     pulumi.String("loc-liz99mtg"),
+			TargetRuleId:     pulumi.String("loc-4f53xn52"),
+			RewriteCode:      pulumi.Int(307),
+			TakeUrl:          pulumi.Bool(true),
+			SourceDomian:     pulumi.String("www.demo.com"),
 		})
 		if err != nil {
 			return err
@@ -85,6 +92,38 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Redirection("example", new()
+    {
+        ClbId = "lb-ab09jtd2",
+        SourceListenerId = "lbl-qgtfowas",
+        TargetListenerId = "lbl-lpwdkukk",
+        SourceRuleId = "loc-liz99mtg",
+        TargetRuleId = "loc-4f53xn52",
+        RewriteCode = 307,
+        TakeUrl = true,
+        SourceDomian = "www.demo.com",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -93,8 +132,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Redirection;
 import com.pulumi.tencentcloud.Clb.RedirectionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -106,87 +145,122 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Redirection("foo", RedirectionArgs.builder()        
-            .clbId("lb-p7olt9e5")
-            .sourceListenerId("lbl-jc1dx6ju")
-            .sourceRuleId("loc-ft8fmngv")
-            .targetListenerId("lbl-asj1hzuo")
-            .targetRuleId("loc-4xxr2cy7")
+        var example = new Redirection("example", RedirectionArgs.builder()
+            .clbId("lb-ab09jtd2")
+            .sourceListenerId("lbl-qgtfowas")
+            .targetListenerId("lbl-lpwdkukk")
+            .sourceRuleId("loc-liz99mtg")
+            .targetRuleId("loc-4f53xn52")
+            .rewriteCode(307)
+            .takeUrl(true)
+            .sourceDomian("www.demo.com")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Clb:Redirection
     properties:
-      clbId: lb-p7olt9e5
-      sourceListenerId: lbl-jc1dx6ju
-      sourceRuleId: loc-ft8fmngv
-      targetListenerId: lbl-asj1hzuo
-      targetRuleId: loc-4xxr2cy7
+      clbId: lb-ab09jtd2
+      sourceListenerId: lbl-qgtfowas
+      targetListenerId: lbl-lpwdkukk
+      sourceRuleId: loc-liz99mtg
+      targetRuleId: loc-4f53xn52
+      rewriteCode: 307
+      takeUrl: true
+      sourceDomian: www.demo.com
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_redirection" "example" {
+  clb_id             = "lb-ab09jtd2"
+  source_listener_id = "lbl-qgtfowas"
+  target_listener_id = "lbl-lpwdkukk"
+  source_rule_id     = "loc-liz99mtg"
+  target_rule_id     = "loc-4f53xn52"
+  rewrite_code       = 307
+  take_url           = true
+  source_domian      = "www.demo.com"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Auto Rewrite
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.clb.Redirection("foo", {
-    clbId: "lb-p7olt9e5",
+const example = new tencentcloud.clb.Redirection("example", {
+    clbId: "lb-ab09jtd2",
+    targetListenerId: "lbl-l7550kum",
+    targetRuleId: "loc-op7uz010",
     isAutoRewrite: true,
-    targetListenerId: "lbl-asj1hzuo",
-    targetRuleId: "loc-4xxr2cy7",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.clb.Redirection("foo",
-    clb_id="lb-p7olt9e5",
-    is_auto_rewrite=True,
-    target_listener_id="lbl-asj1hzuo",
-    target_rule_id="loc-4xxr2cy7")
+example = tencentcloud.clb.Redirection("example",
+    clb_id="lb-ab09jtd2",
+    target_listener_id="lbl-l7550kum",
+    target_rule_id="loc-op7uz010",
+    is_auto_rewrite=True)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Clb.Redirection("foo", new()
-    {
-        ClbId = "lb-p7olt9e5",
-        IsAutoRewrite = true,
-        TargetListenerId = "lbl-asj1hzuo",
-        TargetRuleId = "loc-4xxr2cy7",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewRedirection(ctx, "foo", &Clb.RedirectionArgs{
-			ClbId:            pulumi.String("lb-p7olt9e5"),
+		_, err := clb.NewRedirection(ctx, "example", &clb.RedirectionArgs{
+			ClbId:            pulumi.String("lb-ab09jtd2"),
+			TargetListenerId: pulumi.String("lbl-l7550kum"),
+			TargetRuleId:     pulumi.String("loc-op7uz010"),
 			IsAutoRewrite:    pulumi.Bool(true),
-			TargetListenerId: pulumi.String("lbl-asj1hzuo"),
-			TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
 		})
 		if err != nil {
 			return err
@@ -195,6 +269,34 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Redirection("example", new()
+    {
+        ClbId = "lb-ab09jtd2",
+        TargetListenerId = "lbl-l7550kum",
+        TargetRuleId = "loc-op7uz010",
+        IsAutoRewrite = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -203,8 +305,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Redirection;
 import com.pulumi.tencentcloud.Clb.RedirectionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -216,91 +318,149 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Redirection("foo", RedirectionArgs.builder()        
-            .clbId("lb-p7olt9e5")
+        var example = new Redirection("example", RedirectionArgs.builder()
+            .clbId("lb-ab09jtd2")
+            .targetListenerId("lbl-l7550kum")
+            .targetRuleId("loc-op7uz010")
             .isAutoRewrite(true)
-            .targetListenerId("lbl-asj1hzuo")
-            .targetRuleId("loc-4xxr2cy7")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Clb:Redirection
     properties:
-      clbId: lb-p7olt9e5
+      clbId: lb-ab09jtd2
+      targetListenerId: lbl-l7550kum
+      targetRuleId: loc-op7uz010
       isAutoRewrite: true
-      targetListenerId: lbl-asj1hzuo
-      targetRuleId: loc-4xxr2cy7
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_redirection" "example" {
+  clb_id             = "lb-ab09jtd2"
+  target_listener_id = "lbl-l7550kum"
+  target_rule_id     = "loc-op7uz010"
+  is_auto_rewrite    = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AutoRewrite](https://www.tencentcloud.com/document/api/214/33846)
+  - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+  - [ManualRewrite](https://www.tencentcloud.com/document/api/214/33821)
+* Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
+* Delete:
+  - [DeleteRewrite](https://www.tencentcloud.com/document/api/214/33836)
+  - [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
 
 
 ## Create Redirection Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                 <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">target_listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">target_rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">delete_all_auto_rewrite</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                 <span class="nx">is_auto_rewrite</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                <span class="nx">rewrite_code</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                <span class="nx">source_domian</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">source_listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">source_rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">target_listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">target_rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">take_url</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewRedirection</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Redirection</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewRedirection</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Redirection</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Redirection</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RedirectionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:Redirection</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:Redirection</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_clb_redirection&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -321,7 +481,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -438,11 +598,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Redirection Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Redirection resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -458,8 +626,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of CLB instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetlistenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetlistenerid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Listener<wbr>Id</a>
@@ -467,8 +634,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetruleid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Rule<wbr>Id</a>
@@ -476,8 +642,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd><dt class="property-optional"
+    <dd>Rule ID of target listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteallautorewrite_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteallautorewrite_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -485,8 +650,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isautorewrite_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautorewrite_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Rewrite</a>
@@ -494,8 +658,23 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rewritecode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritecode_csharp" style="color: inherit; text-decoration: inherit;">Rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="sourcedomian_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcedomian_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourcelistenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelistenerid_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Listener<wbr>Id</a>
@@ -503,8 +682,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourceruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceruleid_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Rule<wbr>Id</a>
@@ -512,8 +690,15 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd></dl>
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="takeurl_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#takeurl_csharp" style="color: inherit; text-decoration: inherit;">Take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -527,8 +712,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of CLB instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetlistenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetlistenerid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Listener<wbr>Id</a>
@@ -536,8 +720,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetruleid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Rule<wbr>Id</a>
@@ -545,8 +728,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd><dt class="property-optional"
+    <dd>Rule ID of target listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteallautorewrite_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteallautorewrite_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -554,8 +736,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isautorewrite_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautorewrite_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Rewrite</a>
@@ -563,8 +744,23 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rewritecode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritecode_go" style="color: inherit; text-decoration: inherit;">Rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="sourcedomian_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcedomian_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourcelistenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelistenerid_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Listener<wbr>Id</a>
@@ -572,8 +768,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourceruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceruleid_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Rule<wbr>Id</a>
@@ -581,8 +776,101 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd></dl>
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="takeurl_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#takeurl_go" style="color: inherit; text-decoration: inherit;">Take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CLB instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="target_listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_listener_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of source listener.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="target_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_rule_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule ID of target listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_all_auto_rewrite_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_all_auto_rewrite_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>all_<wbr>auto_<wbr>rewrite</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="is_auto_rewrite_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auto_rewrite_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>rewrite</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rewrite_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewrite_code_hcl" style="color: inherit; text-decoration: inherit;">rewrite_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="source_domian_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_domian_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="source_listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_listener_id_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="source_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_rule_id_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="take_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#take_url_hcl" style="color: inherit; text-decoration: inherit;">take_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -596,8 +884,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of CLB instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetlistenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetlistenerid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Listener<wbr>Id</a>
@@ -605,8 +892,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetruleid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Rule<wbr>Id</a>
@@ -614,8 +900,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd><dt class="property-optional"
+    <dd>Rule ID of target listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteallautorewrite_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteallautorewrite_java" style="color: inherit; text-decoration: inherit;">delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -623,8 +908,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isautorewrite_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautorewrite_java" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Rewrite</a>
@@ -632,8 +916,23 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rewritecode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritecode_java" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="sourcedomian_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcedomian_java" style="color: inherit; text-decoration: inherit;">source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourcelistenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelistenerid_java" style="color: inherit; text-decoration: inherit;">source<wbr>Listener<wbr>Id</a>
@@ -641,8 +940,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourceruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceruleid_java" style="color: inherit; text-decoration: inherit;">source<wbr>Rule<wbr>Id</a>
@@ -650,8 +948,15 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd></dl>
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="takeurl_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#takeurl_java" style="color: inherit; text-decoration: inherit;">take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -665,8 +970,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of CLB instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetlistenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetlistenerid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Listener<wbr>Id</a>
@@ -674,8 +978,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetruleid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Rule<wbr>Id</a>
@@ -683,8 +986,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd><dt class="property-optional"
+    <dd>Rule ID of target listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteallautorewrite_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteallautorewrite_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -692,8 +994,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isautorewrite_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautorewrite_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Rewrite</a>
@@ -701,8 +1002,23 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rewritecode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritecode_nodejs" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="sourcedomian_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcedomian_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourcelistenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelistenerid_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Listener<wbr>Id</a>
@@ -710,8 +1026,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourceruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceruleid_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Rule<wbr>Id</a>
@@ -719,8 +1034,15 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd></dl>
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="takeurl_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#takeurl_nodejs" style="color: inherit; text-decoration: inherit;">take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -734,8 +1056,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of CLB instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="target_listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_listener_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>listener_<wbr>id</a>
@@ -743,8 +1064,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="target_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_rule_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>rule_<wbr>id</a>
@@ -752,8 +1072,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd><dt class="property-optional"
+    <dd>Rule ID of target listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="delete_all_auto_rewrite_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_all_auto_rewrite_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>all_<wbr>auto_<wbr>rewrite</a>
@@ -761,8 +1080,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="is_auto_rewrite_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auto_rewrite_python" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>rewrite</a>
@@ -770,8 +1088,23 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rewrite_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewrite_code_python" style="color: inherit; text-decoration: inherit;">rewrite_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="source_domian_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_domian_python" style="color: inherit; text-decoration: inherit;">source_<wbr>domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="source_listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_listener_id_python" style="color: inherit; text-decoration: inherit;">source_<wbr>listener_<wbr>id</a>
@@ -779,8 +1112,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="source_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_rule_id_python" style="color: inherit; text-decoration: inherit;">source_<wbr>rule_<wbr>id</a>
@@ -788,8 +1120,15 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd></dl>
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="take_url_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#take_url_python" style="color: inherit; text-decoration: inherit;">take_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -803,8 +1142,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of CLB instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetlistenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetlistenerid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Listener<wbr>Id</a>
@@ -812,8 +1150,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="targetruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetruleid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Rule<wbr>Id</a>
@@ -821,8 +1158,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd><dt class="property-optional"
+    <dd>Rule ID of target listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteallautorewrite_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteallautorewrite_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -830,8 +1166,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isautorewrite_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautorewrite_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Rewrite</a>
@@ -839,8 +1174,23 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rewritecode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritecode_yaml" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="sourcedomian_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcedomian_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourcelistenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelistenerid_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Listener<wbr>Id</a>
@@ -848,8 +1198,7 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sourceruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceruleid_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Rule<wbr>Id</a>
@@ -857,8 +1206,15 @@ The Redirection resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd></dl>
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="takeurl_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#takeurl_yaml" style="color: inherit; text-decoration: inherit;">take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -879,8 +1235,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -894,8 +1249,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -909,8 +1277,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -924,8 +1291,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -939,8 +1305,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -954,8 +1319,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -965,126 +1329,168 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Redirection resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">RedirectionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Redirection</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">RedirectionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Redirection</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">delete_all_auto_rewrite</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">is_auto_rewrite</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">rewrite_code</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">source_domian</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">source_listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">source_rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">take_url</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">target_listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">target_rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Redirection</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetRedirection<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">RedirectionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Redirection</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetRedirection<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">RedirectionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Redirection</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Redirection</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RedirectionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Redirection</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RedirectionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Redirection</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RedirectionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Redirection</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RedirectionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingRedirection</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Clb:Redirection</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_clb_redirection</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RedirectionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RedirectionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1092,28 +1498,31 @@ Get an existing Redirection resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RedirectionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1121,28 +1530,31 @@ Get an existing Redirection resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RedirectionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1162,8 +1574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteallautorewrite_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteallautorewrite_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -1171,8 +1582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_isautorewrite_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautorewrite_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Rewrite</a>
@@ -1180,8 +1590,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rewritecode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewritecode_csharp" style="color: inherit; text-decoration: inherit;">Rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_sourcedomian_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcedomian_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcelistenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelistenerid_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Listener<wbr>Id</a>
@@ -1189,8 +1614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourceruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourceruleid_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Rule<wbr>Id</a>
@@ -1198,8 +1622,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_takeurl_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_takeurl_csharp" style="color: inherit; text-decoration: inherit;">Take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetlistenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetlistenerid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Listener<wbr>Id</a>
@@ -1207,8 +1638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetruleid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Rule<wbr>Id</a>
@@ -1216,8 +1646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd></dl>
+    <dd>Rule ID of target listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1231,8 +1660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteallautorewrite_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteallautorewrite_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -1240,8 +1668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_isautorewrite_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautorewrite_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Rewrite</a>
@@ -1249,8 +1676,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rewritecode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewritecode_go" style="color: inherit; text-decoration: inherit;">Rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_sourcedomian_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcedomian_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcelistenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelistenerid_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Listener<wbr>Id</a>
@@ -1258,8 +1700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourceruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourceruleid_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Rule<wbr>Id</a>
@@ -1267,8 +1708,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_takeurl_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_takeurl_go" style="color: inherit; text-decoration: inherit;">Take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetlistenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetlistenerid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Listener<wbr>Id</a>
@@ -1276,8 +1724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetruleid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Rule<wbr>Id</a>
@@ -1285,8 +1732,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd></dl>
+    <dd>Rule ID of target listener.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_all_auto_rewrite_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_all_auto_rewrite_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>all_<wbr>auto_<wbr>rewrite</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_is_auto_rewrite_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_auto_rewrite_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>rewrite</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rewrite_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewrite_code_hcl" style="color: inherit; text-decoration: inherit;">rewrite_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_source_domian_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_domian_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_source_listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_listener_id_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_source_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_rule_id_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_take_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_take_url_hcl" style="color: inherit; text-decoration: inherit;">take_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_target_listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_listener_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_target_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_rule_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule ID of target listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1300,8 +1832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteallautorewrite_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteallautorewrite_java" style="color: inherit; text-decoration: inherit;">delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -1309,8 +1840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_isautorewrite_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautorewrite_java" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Rewrite</a>
@@ -1318,8 +1848,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rewritecode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewritecode_java" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_sourcedomian_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcedomian_java" style="color: inherit; text-decoration: inherit;">source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcelistenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelistenerid_java" style="color: inherit; text-decoration: inherit;">source<wbr>Listener<wbr>Id</a>
@@ -1327,8 +1872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourceruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourceruleid_java" style="color: inherit; text-decoration: inherit;">source<wbr>Rule<wbr>Id</a>
@@ -1336,8 +1880,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_takeurl_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_takeurl_java" style="color: inherit; text-decoration: inherit;">take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetlistenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetlistenerid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Listener<wbr>Id</a>
@@ -1345,8 +1896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetruleid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Rule<wbr>Id</a>
@@ -1354,8 +1904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd></dl>
+    <dd>Rule ID of target listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1369,8 +1918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteallautorewrite_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteallautorewrite_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -1378,8 +1926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_isautorewrite_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautorewrite_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Rewrite</a>
@@ -1387,8 +1934,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rewritecode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewritecode_nodejs" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_sourcedomian_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcedomian_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcelistenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelistenerid_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Listener<wbr>Id</a>
@@ -1396,8 +1958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourceruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourceruleid_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Rule<wbr>Id</a>
@@ -1405,8 +1966,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_takeurl_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_takeurl_nodejs" style="color: inherit; text-decoration: inherit;">take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetlistenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetlistenerid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Listener<wbr>Id</a>
@@ -1414,8 +1982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetruleid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Rule<wbr>Id</a>
@@ -1423,8 +1990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd></dl>
+    <dd>Rule ID of target listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1438,8 +2004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_delete_all_auto_rewrite_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_all_auto_rewrite_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>all_<wbr>auto_<wbr>rewrite</a>
@@ -1447,8 +2012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_is_auto_rewrite_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_auto_rewrite_python" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>rewrite</a>
@@ -1456,8 +2020,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rewrite_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewrite_code_python" style="color: inherit; text-decoration: inherit;">rewrite_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_source_domian_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_domian_python" style="color: inherit; text-decoration: inherit;">source_<wbr>domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_source_listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_listener_id_python" style="color: inherit; text-decoration: inherit;">source_<wbr>listener_<wbr>id</a>
@@ -1465,8 +2044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_source_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_rule_id_python" style="color: inherit; text-decoration: inherit;">source_<wbr>rule_<wbr>id</a>
@@ -1474,8 +2052,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_take_url_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_take_url_python" style="color: inherit; text-decoration: inherit;">take_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_target_listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_listener_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>listener_<wbr>id</a>
@@ -1483,8 +2068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_target_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_rule_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>rule_<wbr>id</a>
@@ -1492,8 +2076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd></dl>
+    <dd>Rule ID of target listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1507,8 +2090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteallautorewrite_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteallautorewrite_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>All<wbr>Auto<wbr>Rewrite</a>
@@ -1516,8 +2098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether delete all auto redirection. Default is <code>false</code>. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_isautorewrite_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautorewrite_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Rewrite</a>
@@ -1525,8 +2106,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether automatic forwarding is enable, default is <code>false</code>. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rewritecode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewritecode_yaml" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Redirection status codes, with possible values of <code>301</code>, <code>302</code>, <code>307</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_sourcedomian_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcedomian_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Domian</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The domain name for source forwarding must be the domain name corresponding to <code>sourceRuleId</code>, which is required when configuring <code>rewriteCode</code>. Only support <code>isAutoRewrite</code> is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcelistenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelistenerid_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Listener<wbr>Id</a>
@@ -1534,8 +2130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourceruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourceruleid_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Rule<wbr>Id</a>
@@ -1543,8 +2138,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Rule ID of source listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_takeurl_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_takeurl_yaml" style="color: inherit; text-decoration: inherit;">take<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the redirect carries a matching URL is required when configuring <code>rewriteCode</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetlistenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetlistenerid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Listener<wbr>Id</a>
@@ -1552,8 +2154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of source listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of source listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetruleid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Rule<wbr>Id</a>
@@ -1561,8 +2162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule ID of target listener.</p>
-</dd></dl>
+    <dd>Rule ID of target listener.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1577,12 +2177,15 @@ The following state arguments are supported:
 
 
 
-CLB redirection can be imported using the id, e.g.
+CLB redirection can be imported using the sourceLocId#targetLocId#sourceListenerId#targetListenerId#clbId, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+$ pulumi import tencentcloud:Clb/redirection:Redirection example loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1594,7 +2197,6 @@ $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4x
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

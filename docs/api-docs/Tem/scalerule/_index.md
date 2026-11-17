@@ -2,9 +2,11 @@
 ---
 title: "ScaleRule"
 title_tag: "tencentcloud.Tem.ScaleRule"
-meta_desc: "Documentation for the tencentcloud.Tem.ScaleRule resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tem scaleRule"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Provides a resource to create a tem scaleRule
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -24,7 +31,7 @@ import * as tencentcloud from "@tencentcloud_iac/pulumi";
 const scaleRule = new tencentcloud.tem.ScaleRule("scaleRule", {
     environmentId: "en-o5edaepv",
     applicationId: "app-3j29aa2p",
-    workloadId: resource.tencentcloud_tem_workload.workload.id,
+    workloadId: tencentcloudTemWorkload.workload.id,
     autoscaler: {
         autoscalerName: "test3123",
         description: "test",
@@ -63,6 +70,11 @@ const scaleRule = new tencentcloud.tem.ScaleRule("scaleRule", {
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -70,44 +82,118 @@ import tencentcloud_iac_pulumi as tencentcloud
 scale_rule = tencentcloud.tem.ScaleRule("scaleRule",
     environment_id="en-o5edaepv",
     application_id="app-3j29aa2p",
-    workload_id=resource["tencentcloud_tem_workload"]["workload"]["id"],
-    autoscaler=tencentcloud.tem.ScaleRuleAutoscalerArgs(
-        autoscaler_name="test3123",
-        description="test",
-        enabled=True,
-        min_replicas=1,
-        max_replicas=4,
-        cron_horizontal_autoscalers=[
-            tencentcloud.tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs(
-                name="test",
-                period="* * *",
-                priority=1,
-                enabled=True,
-                schedules=[tencentcloud.tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs(
-                    start_at="03:00",
-                    target_replicas=1,
-                )],
-            ),
-            tencentcloud.tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs(
-                name="test123123",
-                period="* * *",
-                priority=0,
-                enabled=True,
-                schedules=[tencentcloud.tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs(
-                    start_at="04:13",
-                    target_replicas=1,
-                )],
-            ),
+    workload_id=tencentcloud_tem_workload["workload"]["id"],
+    autoscaler={
+        "autoscaler_name": "test3123",
+        "description": "test",
+        "enabled": True,
+        "min_replicas": 1,
+        "max_replicas": 4,
+        "cron_horizontal_autoscalers": [
+            {
+                "name": "test",
+                "period": "* * *",
+                "priority": 1,
+                "enabled": True,
+                "schedules": [{
+                    "start_at": "03:00",
+                    "target_replicas": 1,
+                }],
+            },
+            {
+                "name": "test123123",
+                "period": "* * *",
+                "priority": 0,
+                "enabled": True,
+                "schedules": [{
+                    "start_at": "04:13",
+                    "target_replicas": 1,
+                }],
+            },
         ],
-        horizontal_autoscalers=[tencentcloud.tem.ScaleRuleAutoscalerHorizontalAutoscalerArgs(
-            metrics="CPU",
-            enabled=True,
-            max_replicas=4,
-            min_replicas=1,
-            threshold=60,
-        )],
-    ))
+        "horizontal_autoscalers": [{
+            "metrics": "CPU",
+            "enabled": True,
+            "max_replicas": 4,
+            "min_replicas": 1,
+            "threshold": 60,
+        }],
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tem"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tem.NewScaleRule(ctx, "scaleRule", &tem.ScaleRuleArgs{
+			EnvironmentId: pulumi.String("en-o5edaepv"),
+			ApplicationId: pulumi.String("app-3j29aa2p"),
+			WorkloadId:    pulumi.Any(tencentcloudTemWorkload.Workload.Id),
+			Autoscaler: &tem.ScaleRuleAutoscalerArgs{
+				AutoscalerName: pulumi.String("test3123"),
+				Description:    pulumi.String("test"),
+				Enabled:        pulumi.Bool(true),
+				MinReplicas:    pulumi.Int(1),
+				MaxReplicas:    pulumi.Int(4),
+				CronHorizontalAutoscalers: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArray{
+					&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{
+						Name:     pulumi.String("test"),
+						Period:   pulumi.String("* * *"),
+						Priority: pulumi.Int(1),
+						Enabled:  pulumi.Bool(true),
+						Schedules: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{
+							&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{
+								StartAt:        pulumi.String("03:00"),
+								TargetReplicas: pulumi.Int(1),
+							},
+						},
+					},
+					&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{
+						Name:     pulumi.String("test123123"),
+						Period:   pulumi.String("* * *"),
+						Priority: pulumi.Int(0),
+						Enabled:  pulumi.Bool(true),
+						Schedules: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{
+							&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{
+								StartAt:        pulumi.String("04:13"),
+								TargetReplicas: pulumi.Int(1),
+							},
+						},
+					},
+				},
+				HorizontalAutoscalers: tem.ScaleRuleAutoscalerHorizontalAutoscalerArray{
+					&tem.ScaleRuleAutoscalerHorizontalAutoscalerArgs{
+						Metrics:     pulumi.String("CPU"),
+						Enabled:     pulumi.Bool(true),
+						MaxReplicas: pulumi.Int(4),
+						MinReplicas: pulumi.Int(1),
+						Threshold:   pulumi.Int(60),
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -120,7 +206,7 @@ return await Deployment.RunAsync(() =>
     {
         EnvironmentId = "en-o5edaepv",
         ApplicationId = "app-3j29aa2p",
-        WorkloadId = resource.Tencentcloud_tem_workload.Workload.Id,
+        WorkloadId = tencentcloudTemWorkload.Workload.Id,
         Autoscaler = new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerArgs
         {
             AutoscalerName = "test3123",
@@ -177,70 +263,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tem.NewScaleRule(ctx, "scaleRule", &Tem.ScaleRuleArgs{
-			EnvironmentId: pulumi.String("en-o5edaepv"),
-			ApplicationId: pulumi.String("app-3j29aa2p"),
-			WorkloadId:    pulumi.Any(resource.Tencentcloud_tem_workload.Workload.Id),
-			Autoscaler: &tem.ScaleRuleAutoscalerArgs{
-				AutoscalerName: pulumi.String("test3123"),
-				Description:    pulumi.String("test"),
-				Enabled:        pulumi.Bool(true),
-				MinReplicas:    pulumi.Int(1),
-				MaxReplicas:    pulumi.Int(4),
-				CronHorizontalAutoscalers: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArray{
-					&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{
-						Name:     pulumi.String("test"),
-						Period:   pulumi.String("* * *"),
-						Priority: pulumi.Int(1),
-						Enabled:  pulumi.Bool(true),
-						Schedules: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{
-							&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{
-								StartAt:        pulumi.String("03:00"),
-								TargetReplicas: pulumi.Int(1),
-							},
-						},
-					},
-					&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{
-						Name:     pulumi.String("test123123"),
-						Period:   pulumi.String("* * *"),
-						Priority: pulumi.Int(0),
-						Enabled:  pulumi.Bool(true),
-						Schedules: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{
-							&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{
-								StartAt:        pulumi.String("04:13"),
-								TargetReplicas: pulumi.Int(1),
-							},
-						},
-					},
-				},
-				HorizontalAutoscalers: tem.ScaleRuleAutoscalerHorizontalAutoscalerArray{
-					&tem.ScaleRuleAutoscalerHorizontalAutoscalerArgs{
-						Metrics:     pulumi.String("CPU"),
-						Enabled:     pulumi.Bool(true),
-						MaxReplicas: pulumi.Int(4),
-						MinReplicas: pulumi.Int(1),
-						Threshold:   pulumi.Int(60),
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -250,8 +277,11 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tem.ScaleRule;
 import com.pulumi.tencentcloud.Tem.ScaleRuleArgs;
 import com.pulumi.tencentcloud.Tem.inputs.ScaleRuleAutoscalerArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Tem.inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs;
+import com.pulumi.tencentcloud.Tem.inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs;
+import com.pulumi.tencentcloud.Tem.inputs.ScaleRuleAutoscalerHorizontalAutoscalerArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -263,10 +293,10 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var scaleRule = new ScaleRule("scaleRule", ScaleRuleArgs.builder()        
+        var scaleRule = new ScaleRule("scaleRule", ScaleRuleArgs.builder()
             .environmentId("en-o5edaepv")
             .applicationId("app-3j29aa2p")
-            .workloadId(resource.tencentcloud_tem_workload().workload().id())
+            .workloadId(tencentcloudTemWorkload.workload().id())
             .autoscaler(ScaleRuleAutoscalerArgs.builder()
                 .autoscalerName("test3123")
                 .description("test")
@@ -307,6 +337,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   scaleRule:
@@ -314,7 +349,7 @@ resources:
     properties:
       environmentId: en-o5edaepv
       applicationId: app-3j29aa2p
-      workloadId: ${resource.tencentcloud_tem_workload.workload.id}
+      workloadId: ${tencentcloudTemWorkload.workload.id}
       autoscaler:
         autoscalerName: test3123
         description: test
@@ -343,68 +378,148 @@ resources:
             minReplicas: 1
             threshold: 60
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tem_scalerule" "scaleRule" {
+  environment_id = "en-o5edaepv"
+  application_id = "app-3j29aa2p"
+  workload_id    = tencentcloudTemWorkload.workload.id
+  autoscaler = {
+    autoscaler_name = "test3123"
+    description     = "test"
+    enabled         = true
+    min_replicas    = 1
+    max_replicas    = 4
+    cron_horizontal_autoscalers = [{
+      "name"     = "test"
+      "period"   = "* * *"
+      "priority" = 1
+      "enabled"  = true
+      "schedules" = [{
+        "startAt"        = "03:00"
+        "targetReplicas" = 1
+      }]
+      }, {
+      "name"     = "test123123"
+      "period"   = "* * *"
+      "priority" = 0
+      "enabled"  = true
+      "schedules" = [{
+        "startAt"        = "04:13"
+        "targetReplicas" = 1
+      }]
+    }]
+    horizontal_autoscalers = [{
+      "metrics"     = "CPU"
+      "enabled"     = true
+      "maxReplicas" = 4
+      "minReplicas" = 1
+      "threshold"   = 60
+    }]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateApplicationAutoscaler](https://www.tencentcloud.com/document/api/1094/52755)
+* Read: [DescribeApplicationAutoscalerList](https://www.tencentcloud.com/document/api/1094/52753)
+* Update: [ModifyApplicationAutoscaler](https://www.tencentcloud.com/document/api/1094/52750)
+* Delete:
+  - [DeleteApplicationAutoscaler](https://www.tencentcloud.com/document/api/1094/52754)
+  - [DisableApplicationAutoscaler](https://www.tencentcloud.com/document/api/1094/52752)
 
 
 ## Create ScaleRule Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
               <span class="nx">application_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">autoscaler</span><span class="p">:</span> <span class="nx">Optional[_tem.ScaleRuleAutoscalerArgs]</span> = None<span class="p">,</span>
+              <span class="nx">autoscaler</span><span class="p">:</span> <span class="nx">Optional[ScaleRuleAutoscalerArgs]</span> = None<span class="p">,</span>
               <span class="nx">environment_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">workload_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">workload_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScaleRule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScaleRule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScaleRule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScaleRule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ScaleRule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScaleRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tem:ScaleRule</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tem:ScaleRule</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tem_scale_rule&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -425,7 +540,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -542,11 +657,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ScaleRule Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -562,17 +685,15 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscaler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaler_csharp" style="color: inherit; text-decoration: inherit;">Autoscaler</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscaler">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
+        <span class="property-type"><a href="#scaleruleautoscaler">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Scale<wbr>Rule<wbr>Autoscaler</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -580,8 +701,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="workloadid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloadid_csharp" style="color: inherit; text-decoration: inherit;">Workload<wbr>Id</a>
@@ -589,8 +709,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -604,8 +723,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscaler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaler_go" style="color: inherit; text-decoration: inherit;">Autoscaler</a>
@@ -613,8 +731,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -622,8 +739,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="workloadid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloadid_go" style="color: inherit; text-decoration: inherit;">Workload<wbr>Id</a>
@@ -631,8 +747,45 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="autoscaler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaler_hcl" style="color: inherit; text-decoration: inherit;">autoscaler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scaleruleautoscaler">object</a></span>
+    </dt>
+    <dd>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="environment_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="workload_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_id_hcl" style="color: inherit; text-decoration: inherit;">workload_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -646,17 +799,15 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscaler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaler_java" style="color: inherit; text-decoration: inherit;">autoscaler</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
+        <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -664,8 +815,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="workloadid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloadid_java" style="color: inherit; text-decoration: inherit;">workload<wbr>Id</a>
@@ -673,8 +823,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -688,17 +837,15 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscaler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaler_nodejs" style="color: inherit; text-decoration: inherit;">autoscaler</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
+        <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -706,8 +853,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="workloadid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloadid_nodejs" style="color: inherit; text-decoration: inherit;">workload<wbr>Id</a>
@@ -715,8 +861,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -730,8 +875,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscaler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaler_python" style="color: inherit; text-decoration: inherit;">autoscaler</a>
@@ -739,8 +883,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environment_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
@@ -748,8 +891,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="workload_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_id_python" style="color: inherit; text-decoration: inherit;">workload_<wbr>id</a>
@@ -757,8 +899,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -772,8 +913,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscaler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaler_yaml" style="color: inherit; text-decoration: inherit;">autoscaler</a>
@@ -781,8 +921,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscaler">Property Map</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -790,8 +929,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="workloadid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloadid_yaml" style="color: inherit; text-decoration: inherit;">workload<wbr>Id</a>
@@ -799,8 +937,7 @@ The ScaleRule resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -821,8 +958,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -836,8 +972,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +1000,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -866,8 +1014,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -881,8 +1028,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -896,8 +1042,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -907,123 +1052,162 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ScaleRule resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScaleRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ScaleRule</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScaleRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ScaleRule</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">application_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">autoscaler</span><span class="p">:</span> <span class="nx">Optional[_tem.ScaleRuleAutoscalerArgs]</span> = None<span class="p">,</span>
+        <span class="nx">autoscaler</span><span class="p">:</span> <span class="nx">Optional[ScaleRuleAutoscalerArgs]</span> = None<span class="p">,</span>
         <span class="nx">environment_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">workload_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ScaleRule</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScaleRule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScaleRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScaleRule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScaleRule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScaleRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScaleRule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ScaleRule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScaleRuleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ScaleRule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScaleRuleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ScaleRule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScaleRuleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ScaleRule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScaleRuleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingScaleRule</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tem:ScaleRule</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tem_scale_rule</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScaleRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScaleRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1031,28 +1215,31 @@ Get an existing ScaleRule resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScaleRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1060,28 +1247,31 @@ Get an existing ScaleRule resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScaleRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1101,17 +1291,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscaler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaler_csharp" style="color: inherit; text-decoration: inherit;">Autoscaler</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscaler">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
+        <span class="property-type"><a href="#scaleruleautoscaler">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Scale<wbr>Rule<wbr>Autoscaler</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -1119,8 +1307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>environment ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workloadid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workloadid_csharp" style="color: inherit; text-decoration: inherit;">Workload<wbr>Id</a>
@@ -1128,8 +1315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1143,8 +1329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscaler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaler_go" style="color: inherit; text-decoration: inherit;">Autoscaler</a>
@@ -1152,8 +1337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -1161,8 +1345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>environment ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workloadid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workloadid_go" style="color: inherit; text-decoration: inherit;">Workload<wbr>Id</a>
@@ -1170,8 +1353,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_autoscaler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaler_hcl" style="color: inherit; text-decoration: inherit;">autoscaler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scaleruleautoscaler">object</a></span>
+    </dt>
+    <dd>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_environment_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_id_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_workload_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workload_id_hcl" style="color: inherit; text-decoration: inherit;">workload_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1185,17 +1405,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscaler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaler_java" style="color: inherit; text-decoration: inherit;">autoscaler</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
+        <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -1203,8 +1421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>environment ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workloadid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workloadid_java" style="color: inherit; text-decoration: inherit;">workload<wbr>Id</a>
@@ -1212,8 +1429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1227,17 +1443,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscaler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaler_nodejs" style="color: inherit; text-decoration: inherit;">autoscaler</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
+        <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -1245,8 +1459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>environment ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workloadid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workloadid_nodejs" style="color: inherit; text-decoration: inherit;">workload<wbr>Id</a>
@@ -1254,8 +1467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1269,8 +1481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscaler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaler_python" style="color: inherit; text-decoration: inherit;">autoscaler</a>
@@ -1278,8 +1489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_id_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
@@ -1287,8 +1497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>environment ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workload_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workload_id_python" style="color: inherit; text-decoration: inherit;">workload_<wbr>id</a>
@@ -1296,8 +1505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1311,8 +1519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscaler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaler_yaml" style="color: inherit; text-decoration: inherit;">autoscaler</a>
@@ -1320,8 +1527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscaler">Property Map</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -1329,8 +1535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>environment ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_workloadid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workloadid_yaml" style="color: inherit; text-decoration: inherit;">workload<wbr>Id</a>
@@ -1338,8 +1543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</p>
-</dd></dl>
+    <dd>application ID, which is combined by environment ID and application ID, like <code>en-o5edaepv#app-3j29aa2p</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1354,7 +1558,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="scaleruleautoscaler">Scale<wbr>Rule<wbr>Autoscaler</h4>
+<h4 id="scaleruleautoscaler">
+Scale<wbr>Rule<wbr>Autoscaler<pulumi-choosable type="language" values="python,go" class="inline">, Scale<wbr>Rule<wbr>Autoscaler<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1366,8 +1572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -1375,8 +1580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable AutoScaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Replicas</a>
@@ -1384,8 +1588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Replicas</a>
@@ -1393,8 +1596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-optional"
+    <dd>minimal replica number.</dd><dt class="property-optional"
             title="Optional">
         <span id="cronhorizontalautoscalers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronhorizontalautoscalers_csharp" style="color: inherit; text-decoration: inherit;">Cron<wbr>Horizontal<wbr>Autoscalers</a>
@@ -1402,8 +1604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscaler">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler&gt;</a></span>
     </dt>
-    <dd><p>scaler based on cron configuration.</p>
-</dd><dt class="property-optional"
+    <dd>scaler based on cron configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1411,8 +1612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>description.</p>
-</dd><dt class="property-optional"
+    <dd>description.</dd><dt class="property-optional"
             title="Optional">
         <span id="horizontalautoscalers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#horizontalautoscalers_csharp" style="color: inherit; text-decoration: inherit;">Horizontal<wbr>Autoscalers</a>
@@ -1420,8 +1620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalerhorizontalautoscaler">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler&gt;</a></span>
     </dt>
-    <dd><p>scaler based on metrics.</p>
-</dd></dl>
+    <dd>scaler based on metrics.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1435,8 +1634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -1444,8 +1642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable AutoScaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Replicas</a>
@@ -1453,8 +1650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Replicas</a>
@@ -1462,8 +1658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-optional"
+    <dd>minimal replica number.</dd><dt class="property-optional"
             title="Optional">
         <span id="cronhorizontalautoscalers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronhorizontalautoscalers_go" style="color: inherit; text-decoration: inherit;">Cron<wbr>Horizontal<wbr>Autoscalers</a>
@@ -1471,8 +1666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscaler">[]Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler</a></span>
     </dt>
-    <dd><p>scaler based on cron configuration.</p>
-</dd><dt class="property-optional"
+    <dd>scaler based on cron configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1480,8 +1674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>description.</p>
-</dd><dt class="property-optional"
+    <dd>description.</dd><dt class="property-optional"
             title="Optional">
         <span id="horizontalautoscalers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#horizontalautoscalers_go" style="color: inherit; text-decoration: inherit;">Horizontal<wbr>Autoscalers</a>
@@ -1489,8 +1682,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalerhorizontalautoscaler">[]Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler</a></span>
     </dt>
-    <dd><p>scaler based on metrics.</p>
-</dd></dl>
+    <dd>scaler based on metrics.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="autoscaler_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaler_name_hcl" style="color: inherit; text-decoration: inherit;">autoscaler_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>name.</dd><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>enable scaler.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_replicas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replicas_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>replicas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>maximal replica number.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_replicas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_replicas_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>replicas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>minimal replica number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cron_horizontal_autoscalers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cron_horizontal_autoscalers_hcl" style="color: inherit; text-decoration: inherit;">cron_<wbr>horizontal_<wbr>autoscalers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscaler">list(object)</a></span>
+    </dt>
+    <dd>scaler based on cron configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="horizontal_autoscalers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#horizontal_autoscalers_hcl" style="color: inherit; text-decoration: inherit;">horizontal_<wbr>autoscalers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scaleruleautoscalerhorizontalautoscaler">list(object)</a></span>
+    </dt>
+    <dd>scaler based on metrics.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1504,8 +1758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -1513,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>enable AutoScaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_java" style="color: inherit; text-decoration: inherit;">max<wbr>Replicas</a>
@@ -1522,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_java" style="color: inherit; text-decoration: inherit;">min<wbr>Replicas</a>
@@ -1531,8 +1782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-optional"
+    <dd>minimal replica number.</dd><dt class="property-optional"
             title="Optional">
         <span id="cronhorizontalautoscalers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronhorizontalautoscalers_java" style="color: inherit; text-decoration: inherit;">cron<wbr>Horizontal<wbr>Autoscalers</a>
@@ -1540,8 +1790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscaler">List&lt;Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler&gt;</a></span>
     </dt>
-    <dd><p>scaler based on cron configuration.</p>
-</dd><dt class="property-optional"
+    <dd>scaler based on cron configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1549,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>description.</p>
-</dd><dt class="property-optional"
+    <dd>description.</dd><dt class="property-optional"
             title="Optional">
         <span id="horizontalautoscalers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#horizontalautoscalers_java" style="color: inherit; text-decoration: inherit;">horizontal<wbr>Autoscalers</a>
@@ -1558,8 +1806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalerhorizontalautoscaler">List&lt;Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler&gt;</a></span>
     </dt>
-    <dd><p>scaler based on metrics.</p>
-</dd></dl>
+    <dd>scaler based on metrics.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1573,8 +1820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -1582,8 +1828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>enable AutoScaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Replicas</a>
@@ -1591,8 +1836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Replicas</a>
@@ -1600,8 +1844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-optional"
+    <dd>minimal replica number.</dd><dt class="property-optional"
             title="Optional">
         <span id="cronhorizontalautoscalers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronhorizontalautoscalers_nodejs" style="color: inherit; text-decoration: inherit;">cron<wbr>Horizontal<wbr>Autoscalers</a>
@@ -1609,8 +1852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler[]</a></span>
     </dt>
-    <dd><p>scaler based on cron configuration.</p>
-</dd><dt class="property-optional"
+    <dd>scaler based on cron configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1618,8 +1860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>description.</p>
-</dd><dt class="property-optional"
+    <dd>description.</dd><dt class="property-optional"
             title="Optional">
         <span id="horizontalautoscalers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#horizontalautoscalers_nodejs" style="color: inherit; text-decoration: inherit;">horizontal<wbr>Autoscalers</a>
@@ -1627,8 +1868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalerhorizontalautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler[]</a></span>
     </dt>
-    <dd><p>scaler based on metrics.</p>
-</dd></dl>
+    <dd>scaler based on metrics.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1642,8 +1882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -1651,8 +1890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable AutoScaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="max_replicas_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replicas_python" style="color: inherit; text-decoration: inherit;">max_<wbr>replicas</a>
@@ -1660,8 +1898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="min_replicas_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_replicas_python" style="color: inherit; text-decoration: inherit;">min_<wbr>replicas</a>
@@ -1669,17 +1906,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-optional"
+    <dd>minimal replica number.</dd><dt class="property-optional"
             title="Optional">
         <span id="cron_horizontal_autoscalers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cron_horizontal_autoscalers_python" style="color: inherit; text-decoration: inherit;">cron_<wbr>horizontal_<wbr>autoscalers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler]</a></span>
+        <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscaler">Sequence[Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler]</a></span>
     </dt>
-    <dd><p>scaler based on cron configuration.</p>
-</dd><dt class="property-optional"
+    <dd>scaler based on cron configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1687,17 +1922,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>description.</p>
-</dd><dt class="property-optional"
+    <dd>description.</dd><dt class="property-optional"
             title="Optional">
         <span id="horizontal_autoscalers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#horizontal_autoscalers_python" style="color: inherit; text-decoration: inherit;">horizontal_<wbr>autoscalers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscalerhorizontalautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler]</a></span>
+        <span class="property-type"><a href="#scaleruleautoscalerhorizontalautoscaler">Sequence[Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler]</a></span>
     </dt>
-    <dd><p>scaler based on metrics.</p>
-</dd></dl>
+    <dd>scaler based on metrics.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1711,8 +1944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -1720,8 +1952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>enable AutoScaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Replicas</a>
@@ -1729,8 +1960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Replicas</a>
@@ -1738,8 +1968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-optional"
+    <dd>minimal replica number.</dd><dt class="property-optional"
             title="Optional">
         <span id="cronhorizontalautoscalers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronhorizontalautoscalers_yaml" style="color: inherit; text-decoration: inherit;">cron<wbr>Horizontal<wbr>Autoscalers</a>
@@ -1747,8 +1976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscaler">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>scaler based on cron configuration.</p>
-</dd><dt class="property-optional"
+    <dd>scaler based on cron configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1756,8 +1984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>description.</p>
-</dd><dt class="property-optional"
+    <dd>description.</dd><dt class="property-optional"
             title="Optional">
         <span id="horizontalautoscalers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#horizontalautoscalers_yaml" style="color: inherit; text-decoration: inherit;">horizontal<wbr>Autoscalers</a>
@@ -1765,12 +1992,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalerhorizontalautoscaler">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>scaler based on metrics.</p>
-</dd></dl>
+    <dd>scaler based on metrics.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="scaleruleautoscalercronhorizontalautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler</h4>
+<h4 id="scaleruleautoscalercronhorizontalautoscaler">
+Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<pulumi-choosable type="language" values="python,go" class="inline">, Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1782,8 +2010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1791,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1800,8 +2026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>period.</p>
-</dd><dt class="property-required"
+    <dd>period.</dd><dt class="property-required"
             title="Required">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1809,8 +2034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>priority.</p>
-</dd><dt class="property-required"
+    <dd>priority.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_csharp" style="color: inherit; text-decoration: inherit;">Schedules</a>
@@ -1818,8 +2042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscalerschedule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule&gt;</a></span>
     </dt>
-    <dd><p>schedule payload.</p>
-</dd></dl>
+    <dd>schedule payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1833,8 +2056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1842,8 +2064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1851,8 +2072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>period.</p>
-</dd><dt class="property-required"
+    <dd>period.</dd><dt class="property-required"
             title="Required">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1860,8 +2080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>priority.</p>
-</dd><dt class="property-required"
+    <dd>priority.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_go" style="color: inherit; text-decoration: inherit;">Schedules</a>
@@ -1869,8 +2088,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscalerschedule">[]Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule</a></span>
     </dt>
-    <dd><p>schedule payload.</p>
-</dd></dl>
+    <dd>schedule payload.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>enable scaler.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>name.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>period.</dd><dt class="property-required"
+            title="Required">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>priority.</dd><dt class="property-required"
+            title="Required">
+        <span id="schedules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_hcl" style="color: inherit; text-decoration: inherit;">schedules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscalerschedule">list(object)</a></span>
+    </dt>
+    <dd>schedule payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1884,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1893,8 +2156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1902,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>period.</p>
-</dd><dt class="property-required"
+    <dd>period.</dd><dt class="property-required"
             title="Required">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1911,8 +2172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>priority.</p>
-</dd><dt class="property-required"
+    <dd>priority.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_java" style="color: inherit; text-decoration: inherit;">schedules</a>
@@ -1920,8 +2180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscalerschedule">List&lt;Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule&gt;</a></span>
     </dt>
-    <dd><p>schedule payload.</p>
-</dd></dl>
+    <dd>schedule payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1935,8 +2194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1944,8 +2202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1953,8 +2210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>period.</p>
-</dd><dt class="property-required"
+    <dd>period.</dd><dt class="property-required"
             title="Required">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1962,8 +2218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>priority.</p>
-</dd><dt class="property-required"
+    <dd>priority.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_nodejs" style="color: inherit; text-decoration: inherit;">schedules</a>
@@ -1971,8 +2226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscalerschedule">Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule[]</a></span>
     </dt>
-    <dd><p>schedule payload.</p>
-</dd></dl>
+    <dd>schedule payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1986,8 +2240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1995,8 +2248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2004,8 +2256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>period.</p>
-</dd><dt class="property-required"
+    <dd>period.</dd><dt class="property-required"
             title="Required">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -2013,17 +2264,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>priority.</p>
-</dd><dt class="property-required"
+    <dd>priority.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_python" style="color: inherit; text-decoration: inherit;">schedules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscalerschedule">Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule]</a></span>
+        <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscalerschedule">Sequence[Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule]</a></span>
     </dt>
-    <dd><p>schedule payload.</p>
-</dd></dl>
+    <dd>schedule payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2037,8 +2286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2046,8 +2294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>name.</p>
-</dd><dt class="property-required"
+    <dd>name.</dd><dt class="property-required"
             title="Required">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2055,8 +2302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>period.</p>
-</dd><dt class="property-required"
+    <dd>period.</dd><dt class="property-required"
             title="Required">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -2064,8 +2310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>priority.</p>
-</dd><dt class="property-required"
+    <dd>priority.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_yaml" style="color: inherit; text-decoration: inherit;">schedules</a>
@@ -2073,12 +2318,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scaleruleautoscalercronhorizontalautoscalerschedule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>schedule payload.</p>
-</dd></dl>
+    <dd>schedule payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="scaleruleautoscalercronhorizontalautoscalerschedule">Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule</h4>
+<h4 id="scaleruleautoscalercronhorizontalautoscalerschedule">
+Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule<pulumi-choosable type="language" values="python,go" class="inline">, Scale<wbr>Rule<wbr>Autoscaler<wbr>Cron<wbr>Horizontal<wbr>Autoscaler<wbr>Schedule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2090,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="targetreplicas_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetreplicas_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Replicas</a>
@@ -2099,8 +2344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>target replica number.</p>
-</dd></dl>
+    <dd>target replica number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2114,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="targetreplicas_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetreplicas_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Replicas</a>
@@ -2123,8 +2366,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>target replica number.</p>
-</dd></dl>
+    <dd>target replica number.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="start_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_at_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_replicas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_replicas_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>replicas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>target replica number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2138,8 +2402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="targetreplicas_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetreplicas_java" style="color: inherit; text-decoration: inherit;">target<wbr>Replicas</a>
@@ -2147,8 +2410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>target replica number.</p>
-</dd></dl>
+    <dd>target replica number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2162,8 +2424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="targetreplicas_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetreplicas_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Replicas</a>
@@ -2171,8 +2432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>target replica number.</p>
-</dd></dl>
+    <dd>target replica number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2186,8 +2446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="target_replicas_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_replicas_python" style="color: inherit; text-decoration: inherit;">target_<wbr>replicas</a>
@@ -2195,8 +2454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>target replica number.</p>
-</dd></dl>
+    <dd>target replica number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2210,8 +2468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="targetreplicas_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetreplicas_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Replicas</a>
@@ -2219,12 +2476,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>target replica number.</p>
-</dd></dl>
+    <dd>target replica number.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="scaleruleautoscalerhorizontalautoscaler">Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler</h4>
+<h4 id="scaleruleautoscalerhorizontalautoscaler">
+Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler<pulumi-choosable type="language" values="python,go" class="inline">, Scale<wbr>Rule<wbr>Autoscaler<wbr>Horizontal<wbr>Autoscaler<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2236,8 +2494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Replicas</a>
@@ -2245,8 +2502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_csharp" style="color: inherit; text-decoration: inherit;">Metrics</a>
@@ -2254,8 +2510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>metric name.</p>
-</dd><dt class="property-required"
+    <dd>metric name.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Replicas</a>
@@ -2263,8 +2518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-required"
+    <dd>minimal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_csharp" style="color: inherit; text-decoration: inherit;">Threshold</a>
@@ -2272,8 +2526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>metric threshold.</p>
-</dd></dl>
+    <dd>metric threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2287,8 +2540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Replicas</a>
@@ -2296,8 +2548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_go" style="color: inherit; text-decoration: inherit;">Metrics</a>
@@ -2305,8 +2556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>metric name.</p>
-</dd><dt class="property-required"
+    <dd>metric name.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Replicas</a>
@@ -2314,8 +2564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-required"
+    <dd>minimal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_go" style="color: inherit; text-decoration: inherit;">Threshold</a>
@@ -2323,8 +2572,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>metric threshold.</p>
-</dd></dl>
+    <dd>metric threshold.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>enable scaler.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_replicas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replicas_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>replicas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>maximal replica number.</dd><dt class="property-required"
+            title="Required">
+        <span id="metrics_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_hcl" style="color: inherit; text-decoration: inherit;">metrics</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>metric name.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_replicas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_replicas_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>replicas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>minimal replica number.</dd><dt class="property-required"
+            title="Required">
+        <span id="threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_hcl" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>metric threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2338,8 +2632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_java" style="color: inherit; text-decoration: inherit;">max<wbr>Replicas</a>
@@ -2347,8 +2640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_java" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -2356,8 +2648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>metric name.</p>
-</dd><dt class="property-required"
+    <dd>metric name.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_java" style="color: inherit; text-decoration: inherit;">min<wbr>Replicas</a>
@@ -2365,8 +2656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-required"
+    <dd>minimal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_java" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -2374,8 +2664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>metric threshold.</p>
-</dd></dl>
+    <dd>metric threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2389,8 +2678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Replicas</a>
@@ -2398,8 +2686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_nodejs" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -2407,8 +2694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>metric name.</p>
-</dd><dt class="property-required"
+    <dd>metric name.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Replicas</a>
@@ -2416,8 +2702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-required"
+    <dd>minimal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_nodejs" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -2425,8 +2710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>metric threshold.</p>
-</dd></dl>
+    <dd>metric threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2440,8 +2724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="max_replicas_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replicas_python" style="color: inherit; text-decoration: inherit;">max_<wbr>replicas</a>
@@ -2449,8 +2732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_python" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -2458,8 +2740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>metric name.</p>
-</dd><dt class="property-required"
+    <dd>metric name.</dd><dt class="property-required"
             title="Required">
         <span id="min_replicas_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_replicas_python" style="color: inherit; text-decoration: inherit;">min_<wbr>replicas</a>
@@ -2467,8 +2748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-required"
+    <dd>minimal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_python" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -2476,8 +2756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>metric threshold.</p>
-</dd></dl>
+    <dd>metric threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2491,8 +2770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>enable scaler.</p>
-</dd><dt class="property-required"
+    <dd>enable scaler.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicas_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicas_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Replicas</a>
@@ -2500,8 +2778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>maximal replica number.</p>
-</dd><dt class="property-required"
+    <dd>maximal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_yaml" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -2509,8 +2786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>metric name.</p>
-</dd><dt class="property-required"
+    <dd>metric name.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicas_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicas_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Replicas</a>
@@ -2518,8 +2794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>minimal replica number.</p>
-</dd><dt class="property-required"
+    <dd>minimal replica number.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_yaml" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -2527,8 +2802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>metric threshold.</p>
-</dd></dl>
+    <dd>metric threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2537,11 +2811,13 @@ The following state arguments are supported:
 
 
 tem scaleRule can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Tem/scaleRule:ScaleRule scaleRule environmentId#applicationId#scaleRuleId
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2553,7 +2829,6 @@ $ pulumi import tencentcloud:Tem/scaleRule:ScaleRule scaleRule environmentId#app
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

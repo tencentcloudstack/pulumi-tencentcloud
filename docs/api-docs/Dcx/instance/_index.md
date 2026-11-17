@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Dcx.Instance"
-meta_desc: "Documentation for the tencentcloud.Dcx.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to creating dedicated tunnels instances. NOTE: 1. ID of the DC is queried, can only apply for this resource offline."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,166 +20,87 @@ Provides a resource to creating dedicated tunnels instances.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### If networkType is VPC
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const config = new pulumi.Config();
-const dcId = config.get("dcId") || "dc-kax48sg7";
-const dcgId = config.get("dcgId") || "dcg-dmbhf7jf";
-const vpcId = config.get("vpcId") || "vpc-4h9v4mo3";
-const bgpMain = new tencentcloud.dcx.Instance("bgpMain", {
-    bandwidth: 900,
-    dcId: dcId,
-    dcgId: dcgId,
+const example = new tencentcloud.dcx.Instance("example", {
+    dcId: "dc-ink7y3qf",
+    name: "tf-example",
+    dcOwnerAccount: "100017971194",
     networkType: "VPC",
+    networkRegion: "ap-guangzhou",
+    vpcId: "vpc-nzuu8dyj",
+    dcgId: "dcg-ehr22qfb",
+    bandwidth: 100,
     routeType: "BGP",
-    vlan: 306,
-    vpcId: vpcId,
-});
-const staticMain = new tencentcloud.dcx.Instance("staticMain", {
-    bandwidth: 900,
-    dcId: dcId,
-    dcgId: dcgId,
-    dcOwnerAccount: "xxxxxxxx",
-    networkType: "VPC",
-    routeType: "STATIC",
-    vlan: 301,
-    vpcId: vpcId,
-    routeFilterPrefixes: ["10.10.10.101/32"],
-    tencentAddress: "100.93.46.1/30",
-    customerAddress: "100.93.46.2/30",
+    bgpAsn: 64511,
+    vlan: 60,
+    tencentAddress: "10.8.254.14/30",
+    customerAddress: "10.8.254.13/30",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-config = pulumi.Config()
-dc_id = config.get("dcId")
-if dc_id is None:
-    dc_id = "dc-kax48sg7"
-dcg_id = config.get("dcgId")
-if dcg_id is None:
-    dcg_id = "dcg-dmbhf7jf"
-vpc_id = config.get("vpcId")
-if vpc_id is None:
-    vpc_id = "vpc-4h9v4mo3"
-bgp_main = tencentcloud.dcx.Instance("bgpMain",
-    bandwidth=900,
-    dc_id=dc_id,
-    dcg_id=dcg_id,
+example = tencentcloud.dcx.Instance("example",
+    dc_id="dc-ink7y3qf",
+    name="tf-example",
+    dc_owner_account="100017971194",
     network_type="VPC",
+    network_region="ap-guangzhou",
+    vpc_id="vpc-nzuu8dyj",
+    dcg_id="dcg-ehr22qfb",
+    bandwidth=100,
     route_type="BGP",
-    vlan=306,
-    vpc_id=vpc_id)
-static_main = tencentcloud.dcx.Instance("staticMain",
-    bandwidth=900,
-    dc_id=dc_id,
-    dcg_id=dcg_id,
-    dc_owner_account="xxxxxxxx",
-    network_type="VPC",
-    route_type="STATIC",
-    vlan=301,
-    vpc_id=vpc_id,
-    route_filter_prefixes=["10.10.10.101/32"],
-    tencent_address="100.93.46.1/30",
-    customer_address="100.93.46.2/30")
+    bgp_asn=64511,
+    vlan=60,
+    tencent_address="10.8.254.14/30",
+    customer_address="10.8.254.13/30")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var dcId = config.Get("dcId") ?? "dc-kax48sg7";
-    var dcgId = config.Get("dcgId") ?? "dcg-dmbhf7jf";
-    var vpcId = config.Get("vpcId") ?? "vpc-4h9v4mo3";
-    var bgpMain = new Tencentcloud.Dcx.Instance("bgpMain", new()
-    {
-        Bandwidth = 900,
-        DcId = dcId,
-        DcgId = dcgId,
-        NetworkType = "VPC",
-        RouteType = "BGP",
-        Vlan = 306,
-        VpcId = vpcId,
-    });
-
-    var staticMain = new Tencentcloud.Dcx.Instance("staticMain", new()
-    {
-        Bandwidth = 900,
-        DcId = dcId,
-        DcgId = dcgId,
-        DcOwnerAccount = "xxxxxxxx",
-        NetworkType = "VPC",
-        RouteType = "STATIC",
-        Vlan = 301,
-        VpcId = vpcId,
-        RouteFilterPrefixes = new[]
-        {
-            "10.10.10.101/32",
-        },
-        TencentAddress = "100.93.46.1/30",
-        CustomerAddress = "100.93.46.2/30",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcx"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcx"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		dcId := "dc-kax48sg7"
-		if param := cfg.Get("dcId"); param != "" {
-			dcId = param
-		}
-		dcgId := "dcg-dmbhf7jf"
-		if param := cfg.Get("dcgId"); param != "" {
-			dcgId = param
-		}
-		vpcId := "vpc-4h9v4mo3"
-		if param := cfg.Get("vpcId"); param != "" {
-			vpcId = param
-		}
-		_, err := Dcx.NewInstance(ctx, "bgpMain", &Dcx.InstanceArgs{
-			Bandwidth:   pulumi.Int(900),
-			DcId:        pulumi.String(dcId),
-			DcgId:       pulumi.String(dcgId),
-			NetworkType: pulumi.String("VPC"),
-			RouteType:   pulumi.String("BGP"),
-			Vlan:        pulumi.Int(306),
-			VpcId:       pulumi.String(vpcId),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Dcx.NewInstance(ctx, "staticMain", &Dcx.InstanceArgs{
-			Bandwidth:      pulumi.Int(900),
-			DcId:           pulumi.String(dcId),
-			DcgId:          pulumi.String(dcgId),
-			DcOwnerAccount: pulumi.String("xxxxxxxx"),
-			NetworkType:    pulumi.String("VPC"),
-			RouteType:      pulumi.String("STATIC"),
-			Vlan:           pulumi.Int(301),
-			VpcId:          pulumi.String(vpcId),
-			RouteFilterPrefixes: pulumi.StringArray{
-				pulumi.String("10.10.10.101/32"),
-			},
-			TencentAddress:  pulumi.String("100.93.46.1/30"),
-			CustomerAddress: pulumi.String("100.93.46.2/30"),
+		_, err := dcx.NewInstance(ctx, "example", &dcx.InstanceArgs{
+			DcId:            pulumi.String("dc-ink7y3qf"),
+			Name:            pulumi.String("tf-example"),
+			DcOwnerAccount:  pulumi.String("100017971194"),
+			NetworkType:     pulumi.String("VPC"),
+			NetworkRegion:   pulumi.String("ap-guangzhou"),
+			VpcId:           pulumi.String("vpc-nzuu8dyj"),
+			DcgId:           pulumi.String("dcg-ehr22qfb"),
+			Bandwidth:       pulumi.Int(100),
+			RouteType:       pulumi.String("BGP"),
+			BgpAsn:          pulumi.Int(64511),
+			Vlan:            pulumi.Int(60),
+			TencentAddress:  pulumi.String("10.8.254.14/30"),
+			CustomerAddress: pulumi.String("10.8.254.13/30"),
 		})
 		if err != nil {
 			return err
@@ -186,6 +109,43 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Dcx.Instance("example", new()
+    {
+        DcId = "dc-ink7y3qf",
+        Name = "tf-example",
+        DcOwnerAccount = "100017971194",
+        NetworkType = "VPC",
+        NetworkRegion = "ap-guangzhou",
+        VpcId = "vpc-nzuu8dyj",
+        DcgId = "dcg-ehr22qfb",
+        Bandwidth = 100,
+        RouteType = "BGP",
+        BgpAsn = 64511,
+        Vlan = 60,
+        TencentAddress = "10.8.254.14/30",
+        CustomerAddress = "10.8.254.13/30",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -194,8 +154,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dcx.Instance;
 import com.pulumi.tencentcloud.Dcx.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -207,103 +167,569 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var config = ctx.config();
-        final var dcId = config.get("dcId").orElse("dc-kax48sg7");
-        final var dcgId = config.get("dcgId").orElse("dcg-dmbhf7jf");
-        final var vpcId = config.get("vpcId").orElse("vpc-4h9v4mo3");
-        var bgpMain = new Instance("bgpMain", InstanceArgs.builder()        
-            .bandwidth(900)
-            .dcId(dcId)
-            .dcgId(dcgId)
+        var example = new Instance("example", InstanceArgs.builder()
+            .dcId("dc-ink7y3qf")
+            .name("tf-example")
+            .dcOwnerAccount("100017971194")
             .networkType("VPC")
+            .networkRegion("ap-guangzhou")
+            .vpcId("vpc-nzuu8dyj")
+            .dcgId("dcg-ehr22qfb")
+            .bandwidth(100)
             .routeType("BGP")
-            .vlan(306)
-            .vpcId(vpcId)
-            .build());
-
-        var staticMain = new Instance("staticMain", InstanceArgs.builder()        
-            .bandwidth(900)
-            .dcId(dcId)
-            .dcgId(dcgId)
-            .dcOwnerAccount("xxxxxxxx")
-            .networkType("VPC")
-            .routeType("STATIC")
-            .vlan(301)
-            .vpcId(vpcId)
-            .routeFilterPrefixes("10.10.10.101/32")
-            .tencentAddress("100.93.46.1/30")
-            .customerAddress("100.93.46.2/30")
+            .bgpAsn(64511)
+            .vlan(60)
+            .tencentAddress("10.8.254.14/30")
+            .customerAddress("10.8.254.13/30")
             .build());
 
     }
 }
 ```
-```yaml
-configuration:
-  dcId:
-    type: string
-    default: dc-kax48sg7
-  dcgId:
-    type: string
-    default: dcg-dmbhf7jf
-  vpcId:
-    type: string
-    default: vpc-4h9v4mo3
-resources:
-  bgpMain:
-    type: tencentcloud:Dcx:Instance
-    properties:
-      bandwidth: 900
-      dcId: ${dcId}
-      dcgId: ${dcgId}
-      networkType: VPC
-      routeType: BGP
-      vlan: 306
-      vpcId: ${vpcId}
-  staticMain:
-    type: tencentcloud:Dcx:Instance
-    properties:
-      bandwidth: 900
-      dcId: ${dcId}
-      dcgId: ${dcgId}
-      dcOwnerAccount: xxxxxxxx
-      networkType: VPC
-      routeType: STATIC
-      vlan: 301
-      vpcId: ${vpcId}
-      routeFilterPrefixes:
-        - 10.10.10.101/32
-      tencentAddress: 100.93.46.1/30
-      customerAddress: 100.93.46.2/30
-```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
 
+```yaml
+resources:
+  example:
+    type: tencentcloud:Dcx:Instance
+    properties:
+      dcId: dc-ink7y3qf
+      name: tf-example
+      dcOwnerAccount: '100017971194'
+      networkType: VPC
+      networkRegion: ap-guangzhou
+      vpcId: vpc-nzuu8dyj
+      dcgId: dcg-ehr22qfb
+      bandwidth: 100
+      routeType: BGP
+      bgpAsn: 64511
+      vlan: 60
+      tencentAddress: 10.8.254.14/30
+      customerAddress: 10.8.254.13/30
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dcx_instance" "example" {
+  dc_id            = "dc-ink7y3qf"
+  name             = "tf-example"
+  dc_owner_account = "100017971194"
+  network_type     = "VPC"
+  network_region   = "ap-guangzhou"
+  vpc_id           = "vpc-nzuu8dyj"
+  dcg_id           = "dcg-ehr22qfb"
+  bandwidth        = 100
+  route_type       = "BGP"
+  bgp_asn          = 64511
+  vlan             = 60
+  tencent_address  = "10.8.254.14/30"
+  customer_address = "10.8.254.13/30"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### If networkType is CCN
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.dcx.Instance("example", {
+    dcId: "dc-ink7y3qf",
+    name: "tf-example",
+    dcOwnerAccount: "100017971194",
+    networkType: "CCN",
+    networkRegion: "ap-guangzhou",
+    dcgId: "dcg-6d4uaubp",
+    bandwidth: 100,
+    routeType: "BGP",
+    bgpAsn: 64511,
+    vlan: 10,
+    tencentAddress: "10.8.254.10/30",
+    customerAddress: "10.8.254.9/30",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.dcx.Instance("example",
+    dc_id="dc-ink7y3qf",
+    name="tf-example",
+    dc_owner_account="100017971194",
+    network_type="CCN",
+    network_region="ap-guangzhou",
+    dcg_id="dcg-6d4uaubp",
+    bandwidth=100,
+    route_type="BGP",
+    bgp_asn=64511,
+    vlan=10,
+    tencent_address="10.8.254.10/30",
+    customer_address="10.8.254.9/30")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcx"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dcx.NewInstance(ctx, "example", &dcx.InstanceArgs{
+			DcId:            pulumi.String("dc-ink7y3qf"),
+			Name:            pulumi.String("tf-example"),
+			DcOwnerAccount:  pulumi.String("100017971194"),
+			NetworkType:     pulumi.String("CCN"),
+			NetworkRegion:   pulumi.String("ap-guangzhou"),
+			DcgId:           pulumi.String("dcg-6d4uaubp"),
+			Bandwidth:       pulumi.Int(100),
+			RouteType:       pulumi.String("BGP"),
+			BgpAsn:          pulumi.Int(64511),
+			Vlan:            pulumi.Int(10),
+			TencentAddress:  pulumi.String("10.8.254.10/30"),
+			CustomerAddress: pulumi.String("10.8.254.9/30"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Dcx.Instance("example", new()
+    {
+        DcId = "dc-ink7y3qf",
+        Name = "tf-example",
+        DcOwnerAccount = "100017971194",
+        NetworkType = "CCN",
+        NetworkRegion = "ap-guangzhou",
+        DcgId = "dcg-6d4uaubp",
+        Bandwidth = 100,
+        RouteType = "BGP",
+        BgpAsn = 64511,
+        Vlan = 10,
+        TencentAddress = "10.8.254.10/30",
+        CustomerAddress = "10.8.254.9/30",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Dcx.Instance;
+import com.pulumi.tencentcloud.Dcx.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Instance("example", InstanceArgs.builder()
+            .dcId("dc-ink7y3qf")
+            .name("tf-example")
+            .dcOwnerAccount("100017971194")
+            .networkType("CCN")
+            .networkRegion("ap-guangzhou")
+            .dcgId("dcg-6d4uaubp")
+            .bandwidth(100)
+            .routeType("BGP")
+            .bgpAsn(64511)
+            .vlan(10)
+            .tencentAddress("10.8.254.10/30")
+            .customerAddress("10.8.254.9/30")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Dcx:Instance
+    properties:
+      dcId: dc-ink7y3qf
+      name: tf-example
+      dcOwnerAccount: '100017971194'
+      networkType: CCN
+      networkRegion: ap-guangzhou
+      dcgId: dcg-6d4uaubp
+      bandwidth: 100
+      routeType: BGP
+      bgpAsn: 64511
+      vlan: 10
+      tencentAddress: 10.8.254.10/30
+      customerAddress: 10.8.254.9/30
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dcx_instance" "example" {
+  dc_id            = "dc-ink7y3qf"
+  name             = "tf-example"
+  dc_owner_account = "100017971194"
+  network_type     = "CCN"
+  network_region   = "ap-guangzhou"
+  dcg_id           = "dcg-6d4uaubp"
+  bandwidth        = 100
+  route_type       = "BGP"
+  bgp_asn          = 64511
+  vlan             = 10
+  tencent_address  = "10.8.254.10/30"
+  customer_address = "10.8.254.9/30"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Update bandwidth in place
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.dcx.Instance("example", {
+    dcId: "dc-ink7y3qf",
+    name: "tf-example",
+    dcOwnerAccount: "100017971194",
+    networkType: "VPC",
+    networkRegion: "ap-guangzhou",
+    vpcId: "vpc-nzuu8dyj",
+    dcgId: "dcg-ehr22qfb",
+    bandwidth: 200,
+    routeType: "BGP",
+    bgpAsn: 64511,
+    vlan: 60,
+    tencentAddress: "10.8.254.14/30",
+    customerAddress: "10.8.254.13/30",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.dcx.Instance("example",
+    dc_id="dc-ink7y3qf",
+    name="tf-example",
+    dc_owner_account="100017971194",
+    network_type="VPC",
+    network_region="ap-guangzhou",
+    vpc_id="vpc-nzuu8dyj",
+    dcg_id="dcg-ehr22qfb",
+    bandwidth=200,
+    route_type="BGP",
+    bgp_asn=64511,
+    vlan=60,
+    tencent_address="10.8.254.14/30",
+    customer_address="10.8.254.13/30")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcx"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dcx.NewInstance(ctx, "example", &dcx.InstanceArgs{
+			DcId:            pulumi.String("dc-ink7y3qf"),
+			Name:            pulumi.String("tf-example"),
+			DcOwnerAccount:  pulumi.String("100017971194"),
+			NetworkType:     pulumi.String("VPC"),
+			NetworkRegion:   pulumi.String("ap-guangzhou"),
+			VpcId:           pulumi.String("vpc-nzuu8dyj"),
+			DcgId:           pulumi.String("dcg-ehr22qfb"),
+			Bandwidth:       pulumi.Int(200),
+			RouteType:       pulumi.String("BGP"),
+			BgpAsn:          pulumi.Int(64511),
+			Vlan:            pulumi.Int(60),
+			TencentAddress:  pulumi.String("10.8.254.14/30"),
+			CustomerAddress: pulumi.String("10.8.254.13/30"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Dcx.Instance("example", new()
+    {
+        DcId = "dc-ink7y3qf",
+        Name = "tf-example",
+        DcOwnerAccount = "100017971194",
+        NetworkType = "VPC",
+        NetworkRegion = "ap-guangzhou",
+        VpcId = "vpc-nzuu8dyj",
+        DcgId = "dcg-ehr22qfb",
+        Bandwidth = 200,
+        RouteType = "BGP",
+        BgpAsn = 64511,
+        Vlan = 60,
+        TencentAddress = "10.8.254.14/30",
+        CustomerAddress = "10.8.254.13/30",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Dcx.Instance;
+import com.pulumi.tencentcloud.Dcx.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Instance("example", InstanceArgs.builder()
+            .dcId("dc-ink7y3qf")
+            .name("tf-example")
+            .dcOwnerAccount("100017971194")
+            .networkType("VPC")
+            .networkRegion("ap-guangzhou")
+            .vpcId("vpc-nzuu8dyj")
+            .dcgId("dcg-ehr22qfb")
+            .bandwidth(200)
+            .routeType("BGP")
+            .bgpAsn(64511)
+            .vlan(60)
+            .tencentAddress("10.8.254.14/30")
+            .customerAddress("10.8.254.13/30")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Dcx:Instance
+    properties:
+      dcId: dc-ink7y3qf
+      name: tf-example
+      dcOwnerAccount: '100017971194'
+      networkType: VPC
+      networkRegion: ap-guangzhou
+      vpcId: vpc-nzuu8dyj
+      dcgId: dcg-ehr22qfb
+      bandwidth: 200
+      routeType: BGP
+      bgpAsn: 64511
+      vlan: 60
+      tencentAddress: 10.8.254.14/30
+      customerAddress: 10.8.254.13/30
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dcx_instance" "example" {
+  dc_id            = "dc-ink7y3qf"
+  name             = "tf-example"
+  dc_owner_account = "100017971194"
+  network_type     = "VPC"
+  network_region   = "ap-guangzhou"
+  vpc_id           = "vpc-nzuu8dyj"
+  dcg_id           = "dcg-ehr22qfb"
+  bandwidth        = 200
+  route_type       = "BGP"
+  bgp_asn          = 64511
+  vlan             = 60
+  tencent_address  = "10.8.254.14/30"
+  customer_address = "10.8.254.13/30"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19821)
+  - [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+* Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+* Update: [ModifyDirectConnectTunnelAttribute](https://www.tencentcloud.com/document/api/216/19818)
+* Delete: [DeleteDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19820)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">bandwidth</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">bgp_asn</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">bgp_auth_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">customer_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">dc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">dc_owner_account</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">dcg_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">customer_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">bandwidth</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">bgp_auth_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">dc_owner_account</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">bgp_asn</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">network_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -311,44 +737,50 @@ resources:
              <span class="nx">route_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">tencent_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">vlan</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dcx:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dcx:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dcx_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -369,7 +801,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -486,11 +918,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -506,8 +946,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dcgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_csharp" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -515,8 +954,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -524,8 +962,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpasn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_csharp" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Asn</a>
@@ -533,8 +970,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpauthkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_csharp" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Auth<wbr>Key</a>
@@ -542,8 +978,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP key of the user.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="customeraddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Address</a>
@@ -551,8 +986,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dcowneraccount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcowneraccount_csharp" style="color: inherit; text-decoration: inherit;">Dc<wbr>Owner<wbr>Account</a>
@@ -560,8 +994,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -569,8 +1002,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Region</a>
@@ -578,8 +1010,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -587,8 +1018,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routefilterprefixes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Filter<wbr>Prefixes</a>
@@ -596,8 +1026,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -605,8 +1034,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="tencentaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_csharp" style="color: inherit; text-decoration: inherit;">Tencent<wbr>Address</a>
@@ -614,8 +1042,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vlan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_csharp" style="color: inherit; text-decoration: inherit;">Vlan</a>
@@ -623,8 +1050,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -632,8 +1058,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -647,8 +1072,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dcgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_go" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -656,8 +1080,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -665,8 +1088,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpasn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_go" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Asn</a>
@@ -674,8 +1096,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpauthkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_go" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Auth<wbr>Key</a>
@@ -683,8 +1104,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP key of the user.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="customeraddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Address</a>
@@ -692,8 +1112,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dcowneraccount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcowneraccount_go" style="color: inherit; text-decoration: inherit;">Dc<wbr>Owner<wbr>Account</a>
@@ -701,8 +1120,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -710,8 +1128,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Region</a>
@@ -719,8 +1136,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -728,8 +1144,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routefilterprefixes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Filter<wbr>Prefixes</a>
@@ -737,8 +1152,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -746,8 +1160,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="tencentaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_go" style="color: inherit; text-decoration: inherit;">Tencent<wbr>Address</a>
@@ -755,8 +1168,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vlan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_go" style="color: inherit; text-decoration: inherit;">Vlan</a>
@@ -764,8 +1176,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -773,8 +1184,133 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="dc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_id_hcl" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="dcg_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_hcl" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgp_asn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_asn_hcl" style="color: inherit; text-decoration: inherit;">bgp_<wbr>asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgp_auth_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_auth_key_hcl" style="color: inherit; text-decoration: inherit;">bgp_<wbr>auth_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>BGP key of the user.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="customer_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_address_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="dc_owner_account_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_owner_account_hcl" style="color: inherit; text-decoration: inherit;">dc_<wbr>owner_<wbr>account</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="network_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_region_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="route_filter_prefixes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_filter_prefixes_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>filter_<wbr>prefixes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_type_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="tencent_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencent_address_hcl" style="color: inherit; text-decoration: inherit;">tencent_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vlan_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_hcl" style="color: inherit; text-decoration: inherit;">vlan</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -788,8 +1324,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dcgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_java" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -797,8 +1332,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -806,8 +1340,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpasn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_java" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -815,8 +1348,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpauthkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_java" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -824,8 +1356,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP key of the user.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="customeraddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -833,8 +1364,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dcowneraccount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcowneraccount_java" style="color: inherit; text-decoration: inherit;">dc<wbr>Owner<wbr>Account</a>
@@ -842,8 +1372,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -851,8 +1380,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_java" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -860,8 +1388,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -869,8 +1396,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routefilterprefixes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_java" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -878,8 +1404,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_java" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -887,8 +1412,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="tencentaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_java" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -896,8 +1420,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vlan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_java" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -905,8 +1428,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -914,8 +1436,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -929,8 +1450,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dcgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_nodejs" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -938,8 +1458,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -947,8 +1466,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpasn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_nodejs" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -956,8 +1474,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpauthkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_nodejs" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -965,8 +1482,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP key of the user.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="customeraddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -974,8 +1490,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dcowneraccount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcowneraccount_nodejs" style="color: inherit; text-decoration: inherit;">dc<wbr>Owner<wbr>Account</a>
@@ -983,8 +1498,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -992,8 +1506,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -1001,8 +1514,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1010,8 +1522,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routefilterprefixes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -1019,8 +1530,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -1028,8 +1538,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="tencentaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_nodejs" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -1037,8 +1546,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vlan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_nodejs" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -1046,8 +1554,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1055,8 +1562,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1070,8 +1576,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dcg_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_python" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
@@ -1079,8 +1584,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1088,8 +1592,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgp_asn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_asn_python" style="color: inherit; text-decoration: inherit;">bgp_<wbr>asn</a>
@@ -1097,8 +1600,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgp_auth_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_auth_key_python" style="color: inherit; text-decoration: inherit;">bgp_<wbr>auth_<wbr>key</a>
@@ -1106,8 +1608,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP key of the user.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="customer_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_address_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>address</a>
@@ -1115,8 +1616,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dc_owner_account_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_owner_account_python" style="color: inherit; text-decoration: inherit;">dc_<wbr>owner_<wbr>account</a>
@@ -1124,8 +1624,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1133,8 +1632,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="network_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_region_python" style="color: inherit; text-decoration: inherit;">network_<wbr>region</a>
@@ -1142,8 +1640,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -1151,8 +1648,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="route_filter_prefixes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_filter_prefixes_python" style="color: inherit; text-decoration: inherit;">route_<wbr>filter_<wbr>prefixes</a>
@@ -1160,8 +1656,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="route_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_type_python" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
@@ -1169,8 +1664,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="tencent_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencent_address_python" style="color: inherit; text-decoration: inherit;">tencent_<wbr>address</a>
@@ -1178,8 +1672,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vlan_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_python" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -1187,8 +1680,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1196,8 +1688,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1211,8 +1702,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dcgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_yaml" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -1220,8 +1710,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1229,8 +1718,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpasn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_yaml" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -1238,8 +1726,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bgpauthkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_yaml" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -1247,8 +1734,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP key of the user.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="customeraddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -1256,8 +1742,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dcowneraccount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcowneraccount_yaml" style="color: inherit; text-decoration: inherit;">dc<wbr>Owner<wbr>Account</a>
@@ -1265,8 +1750,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1274,8 +1758,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -1283,8 +1766,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1292,8 +1774,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routefilterprefixes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -1301,8 +1782,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -1310,8 +1790,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="tencentaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_yaml" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -1319,8 +1798,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vlan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_yaml" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -1328,8 +1806,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1337,8 +1814,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1359,8 +1835,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1368,8 +1843,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1377,8 +1851,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd></dl>
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1392,8 +1865,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1401,8 +1873,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1410,8 +1881,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd></dl>
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1425,8 +1925,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1434,8 +1933,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1443,8 +1941,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd></dl>
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1458,8 +1955,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1467,8 +1963,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1476,8 +1971,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd></dl>
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1491,8 +1985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1500,8 +1993,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1509,8 +2001,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd></dl>
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1524,8 +2015,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1533,8 +2023,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1542,8 +2031,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd></dl>
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1553,18 +2041,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1585,104 +2073,143 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">tencent_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vlan</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dcx:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dcx_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1690,28 +2217,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1719,28 +2249,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1752,7 +2285,7 @@ The following state arguments are supported:
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -1760,8 +2293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpasn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpasn_csharp" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Asn</a>
@@ -1769,8 +2301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpauthkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpauthkey_csharp" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Auth<wbr>Key</a>
@@ -1778,8 +2309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional"
+    <dd>BGP key of the user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1787,8 +2317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customeraddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customeraddress_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Address</a>
@@ -1796,8 +2325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcid_csharp" style="color: inherit; text-decoration: inherit;">Dc<wbr>Id</a>
@@ -1805,8 +2333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcowneraccount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcowneraccount_csharp" style="color: inherit; text-decoration: inherit;">Dc<wbr>Owner<wbr>Account</a>
@@ -1814,8 +2341,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcgid_csharp" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -1823,8 +2349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1832,8 +2357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkregion_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Region</a>
@@ -1841,8 +2365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1850,8 +2373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routefilterprefixes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routefilterprefixes_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Filter<wbr>Prefixes</a>
@@ -1859,8 +2381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -1868,8 +2389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1877,8 +2397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tencentaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tencentaddress_csharp" style="color: inherit; text-decoration: inherit;">Tencent<wbr>Address</a>
@@ -1886,8 +2405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vlan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vlan_csharp" style="color: inherit; text-decoration: inherit;">Vlan</a>
@@ -1895,8 +2413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1904,14 +2421,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -1919,8 +2435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpasn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpasn_go" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Asn</a>
@@ -1928,8 +2443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpauthkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpauthkey_go" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Auth<wbr>Key</a>
@@ -1937,8 +2451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional"
+    <dd>BGP key of the user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1946,8 +2459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customeraddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customeraddress_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Address</a>
@@ -1955,8 +2467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcid_go" style="color: inherit; text-decoration: inherit;">Dc<wbr>Id</a>
@@ -1964,8 +2475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcowneraccount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcowneraccount_go" style="color: inherit; text-decoration: inherit;">Dc<wbr>Owner<wbr>Account</a>
@@ -1973,8 +2483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcgid_go" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -1982,8 +2491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1991,8 +2499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkregion_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Region</a>
@@ -2000,8 +2507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -2009,8 +2515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routefilterprefixes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routefilterprefixes_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Filter<wbr>Prefixes</a>
@@ -2018,8 +2523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -2027,8 +2531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -2036,8 +2539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tencentaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tencentaddress_go" style="color: inherit; text-decoration: inherit;">Tencent<wbr>Address</a>
@@ -2045,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vlan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vlan_go" style="color: inherit; text-decoration: inherit;">Vlan</a>
@@ -2054,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2063,14 +2563,155 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgp_asn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgp_asn_hcl" style="color: inherit; text-decoration: inherit;">bgp_<wbr>asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgp_auth_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgp_auth_key_hcl" style="color: inherit; text-decoration: inherit;">bgp_<wbr>auth_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>BGP key of the user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_customer_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customer_address_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dc_id_hcl" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dc_owner_account_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dc_owner_account_hcl" style="color: inherit; text-decoration: inherit;">dc_<wbr>owner_<wbr>account</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dcg_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcg_id_hcl" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_network_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_region_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_route_filter_prefixes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_filter_prefixes_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>filter_<wbr>prefixes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_type_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_tencent_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tencent_address_hcl" style="color: inherit; text-decoration: inherit;">tencent_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vlan_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vlan_hcl" style="color: inherit; text-decoration: inherit;">vlan</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -2078,8 +2719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpasn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpasn_java" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -2087,8 +2727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpauthkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpauthkey_java" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -2096,8 +2735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional"
+    <dd>BGP key of the user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2105,8 +2743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customeraddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customeraddress_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -2114,8 +2751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcid_java" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -2123,8 +2759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcowneraccount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcowneraccount_java" style="color: inherit; text-decoration: inherit;">dc<wbr>Owner<wbr>Account</a>
@@ -2132,8 +2767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcgid_java" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -2141,8 +2775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2150,8 +2783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkregion_java" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -2159,8 +2791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2168,8 +2799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routefilterprefixes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routefilterprefixes_java" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -2177,8 +2807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_java" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -2186,8 +2815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2195,8 +2823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tencentaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tencentaddress_java" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -2204,8 +2831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vlan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vlan_java" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -2213,8 +2839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2222,14 +2847,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -2237,8 +2861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpasn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpasn_nodejs" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -2246,8 +2869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpauthkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpauthkey_nodejs" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -2255,8 +2877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional"
+    <dd>BGP key of the user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2264,8 +2885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customeraddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customeraddress_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -2273,8 +2893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcid_nodejs" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -2282,8 +2901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcowneraccount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcowneraccount_nodejs" style="color: inherit; text-decoration: inherit;">dc<wbr>Owner<wbr>Account</a>
@@ -2291,8 +2909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcgid_nodejs" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -2300,8 +2917,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2309,8 +2925,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkregion_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -2318,8 +2933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2327,8 +2941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routefilterprefixes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routefilterprefixes_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -2336,8 +2949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -2345,8 +2957,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2354,8 +2965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tencentaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tencentaddress_nodejs" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -2363,8 +2973,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vlan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vlan_nodejs" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -2372,8 +2981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2381,14 +2989,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -2396,8 +3003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgp_asn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgp_asn_python" style="color: inherit; text-decoration: inherit;">bgp_<wbr>asn</a>
@@ -2405,8 +3011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgp_auth_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgp_auth_key_python" style="color: inherit; text-decoration: inherit;">bgp_<wbr>auth_<wbr>key</a>
@@ -2414,8 +3019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional"
+    <dd>BGP key of the user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2423,8 +3027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customer_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customer_address_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>address</a>
@@ -2432,8 +3035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dc_id_python" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
@@ -2441,8 +3043,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dc_owner_account_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dc_owner_account_python" style="color: inherit; text-decoration: inherit;">dc_<wbr>owner_<wbr>account</a>
@@ -2450,8 +3051,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcg_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcg_id_python" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
@@ -2459,8 +3059,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2468,8 +3067,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_network_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_region_python" style="color: inherit; text-decoration: inherit;">network_<wbr>region</a>
@@ -2477,8 +3075,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -2486,8 +3083,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_route_filter_prefixes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_filter_prefixes_python" style="color: inherit; text-decoration: inherit;">route_<wbr>filter_<wbr>prefixes</a>
@@ -2495,8 +3091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_route_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_type_python" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
@@ -2504,8 +3099,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2513,8 +3107,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tencent_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tencent_address_python" style="color: inherit; text-decoration: inherit;">tencent_<wbr>address</a>
@@ -2522,8 +3115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vlan_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vlan_python" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -2531,8 +3123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2540,14 +3131,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -2555,8 +3145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Bandwidth of the DC.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpasn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpasn_yaml" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -2564,8 +3153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>BGP ASN of the user. A required field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>BGP ASN of the user. A required field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bgpauthkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpauthkey_yaml" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -2573,8 +3161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-optional"
+    <dd>BGP key of the user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2582,8 +3169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customeraddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customeraddress_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -2591,8 +3177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcid_yaml" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -2600,8 +3185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC to be queried, application deployment offline.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the DC to be queried, application deployment offline.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcowneraccount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcowneraccount_yaml" style="color: inherit; text-decoration: inherit;">dc<wbr>Owner<wbr>Account</a>
@@ -2609,8 +3193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dcgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dcgid_yaml" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -2618,8 +3201,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2627,8 +3209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkregion_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -2636,8 +3217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network region.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network region.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2645,8 +3225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the network. Valid value: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routefilterprefixes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routefilterprefixes_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -2654,8 +3233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -2663,8 +3241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the route, and available values include BGP and STATIC. The default value is <code>BGP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2672,8 +3249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the dedicated tunnels. Valid value: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tencentaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tencentaddress_yaml" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -2681,8 +3257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vlan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vlan_yaml" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -2690,8 +3265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vlan of the dedicated tunnels. Valid value ranges: (0~3000). <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2699,8 +3273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2718,9 +3291,12 @@ The following state arguments are supported:
 DCX instance can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
+$ pulumi import tencentcloud:Dcx/instance:Instance example dcx-cbbr1gjk
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2732,7 +3308,6 @@ $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

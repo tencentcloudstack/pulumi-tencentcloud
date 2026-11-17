@@ -2,9 +2,11 @@
 ---
 title: "BasicInstance"
 title_tag: "tencentcloud.Sqlserver.BasicInstance"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.BasicInstance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a SQL Server instance resource to create basic database instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,36 @@ Provides a SQL Server instance resource to create basic database instances.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "sqlserver",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+    name: "subnet-example",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-example",
+    description: "desc.",
+});
 const example = new tencentcloud.sqlserver.BasicInstance("example", {
+    name: "tf-example",
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
     chargeType: "POSTPAID_BY_HOUR",
     vpcId: vpc.id,
@@ -56,20 +70,31 @@ const example = new tencentcloud.sqlserver.BasicInstance("example", {
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="sqlserver")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[4].name,
+    name="subnet-example",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-example",
+    description="desc.")
 example = tencentcloud.sqlserver.BasicInstance("example",
+    name="tf-example",
     availability_zone=zones.zones[4].name,
     charge_type="POSTPAID_BY_HOUR",
     vpc_id=vpc.id,
@@ -91,11 +116,96 @@ example = tencentcloud.sqlserver.BasicInstance("example",
         "test": "test",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "sqlserver",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+			Name:             pulumi.String("subnet-example"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-example"),
+			Description: pulumi.String("desc."),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = sqlserver.NewBasicInstance(ctx, "example", &sqlserver.BasicInstanceArgs{
+			Name:             pulumi.String("tf-example"),
+			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			ProjectId:        pulumi.Int(0),
+			Memory:           pulumi.Int(4),
+			Storage:          pulumi.Int(100),
+			Cpu:              pulumi.Int(2),
+			MachineType:      pulumi.String("CLOUD_PREMIUM"),
+			MaintenanceWeekSets: pulumi.IntArray{
+				pulumi.Int(1),
+				pulumi.Int(2),
+				pulumi.Int(3),
+			},
+			MaintenanceStartTime: pulumi.String("09:00"),
+			MaintenanceTimeSpan:  pulumi.Int(3),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -107,24 +217,28 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Name = "subnet-example",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
     });
 
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
     {
+        Name = "sg-example",
         Description = "desc.",
     });
 
     var example = new Tencentcloud.Sqlserver.BasicInstance("example", new()
     {
+        Name = "tf-example",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
         ChargeType = "POSTPAID_BY_HOUR",
         VpcId = vpc.Id,
@@ -154,78 +268,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "sqlserver",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-			Description: pulumi.String("desc."),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Sqlserver.NewBasicInstance(ctx, "example", &Sqlserver.BasicInstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			ProjectId:        pulumi.Int(0),
-			Memory:           pulumi.Int(4),
-			Storage:          pulumi.Int(100),
-			Cpu:              pulumi.Int(2),
-			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-			MaintenanceWeekSets: pulumi.IntArray{
-				pulumi.Int(1),
-				pulumi.Int(2),
-				pulumi.Int(3),
-			},
-			MaintenanceStartTime: pulumi.String("09:00"),
-			MaintenanceTimeSpan:  pulumi.Int(3),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -234,16 +281,12 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
 import com.pulumi.tencentcloud.Sqlserver.BasicInstance;
 import com.pulumi.tencentcloud.Sqlserver.BasicInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -259,23 +302,27 @@ public class App {
             .product("sqlserver")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[4].name())
+            .name("subnet-example")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-example")
             .description("desc.")
             .build());
 
-        var example = new BasicInstance("example", BasicInstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var example = new BasicInstance("example", BasicInstanceArgs.builder()
+            .name("tf-example")
+            .availabilityZone(zones.zones()[4].name())
             .chargeType("POSTPAID_BY_HOUR")
             .vpcId(vpc.id())
             .subnetId(subnet.id())
@@ -297,26 +344,36 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[4].name}
+      name: subnet-example
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-example
       description: desc.
   example:
     type: tencentcloud:Sqlserver:BasicInstance
     properties:
+      name: tf-example
       availabilityZone: ${zones.zones[4].name}
       chargeType: POSTPAID_BY_HOUR
       vpcId: ${vpc.id}
@@ -339,89 +396,606 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: sqlserver
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "sqlserver"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  name              = "subnet-example"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-example"
+  description = "desc."
+}
+resource "tencentcloud_sqlserver_basicinstance" "example" {
+  name                   = "tf-example"
+  availability_zone      = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  charge_type            = "POSTPAID_BY_HOUR"
+  vpc_id                 = tencentcloud_vpc_instance.vpc.id
+  subnet_id              = tencentcloud_subnet_instance.subnet.id
+  project_id             = 0
+  memory                 = 4
+  storage                = 100
+  cpu                    = 2
+  machine_type           = "CLOUD_PREMIUM"
+  maintenance_week_sets  = [1, 2, 3]
+  maintenance_start_time = "09:00"
+  maintenance_time_span  = 3
+  security_groups        = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "test" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Example with custom timezone:
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const exampleTimezone = new tencentcloud.sqlserver.BasicInstance("example_timezone", {
+    name: "tf-example-utc",
+    availabilityZone: zones.zones[4].name,
+    chargeType: "POSTPAID_BY_HOUR",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    memory: 4,
+    storage: 100,
+    cpu: 2,
+    machineType: "CLOUD_PREMIUM",
+    timeZone: "UTC",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example_timezone = tencentcloud.sqlserver.BasicInstance("example_timezone",
+    name="tf-example-utc",
+    availability_zone=zones["zones"][4]["name"],
+    charge_type="POSTPAID_BY_HOUR",
+    vpc_id=vpc["id"],
+    subnet_id=subnet["id"],
+    memory=4,
+    storage=100,
+    cpu=2,
+    machine_type="CLOUD_PREMIUM",
+    time_zone="UTC")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := sqlserver.NewBasicInstance(ctx, "example_timezone", &sqlserver.BasicInstanceArgs{
+			Name:             pulumi.String("tf-example-utc"),
+			AvailabilityZone: pulumi.Any(zones.Zones[4].Name),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            pulumi.Any(vpc.Id),
+			SubnetId:         pulumi.Any(subnet.Id),
+			Memory:           pulumi.Int(4),
+			Storage:          pulumi.Int(100),
+			Cpu:              pulumi.Int(2),
+			MachineType:      pulumi.String("CLOUD_PREMIUM"),
+			TimeZone:         pulumi.String("UTC"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var exampleTimezone = new Tencentcloud.Sqlserver.BasicInstance("example_timezone", new()
+    {
+        Name = "tf-example-utc",
+        AvailabilityZone = zones.Zones[4].Name,
+        ChargeType = "POSTPAID_BY_HOUR",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Memory = 4,
+        Storage = 100,
+        Cpu = 2,
+        MachineType = "CLOUD_PREMIUM",
+        TimeZone = "UTC",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Sqlserver.BasicInstance;
+import com.pulumi.tencentcloud.Sqlserver.BasicInstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var exampleTimezone = new BasicInstance("exampleTimezone", BasicInstanceArgs.builder()
+            .name("tf-example-utc")
+            .availabilityZone(zones.zones()[4].name())
+            .chargeType("POSTPAID_BY_HOUR")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .memory(4)
+            .storage(100)
+            .cpu(2)
+            .machineType("CLOUD_PREMIUM")
+            .timeZone("UTC")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  exampleTimezone:
+    type: tencentcloud:Sqlserver:BasicInstance
+    name: example_timezone
+    properties:
+      name: tf-example-utc
+      availabilityZone: ${zones.zones[4].name}
+      chargeType: POSTPAID_BY_HOUR
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      memory: 4
+      storage: 100
+      cpu: 2
+      machineType: CLOUD_PREMIUM
+      timeZone: UTC
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_sqlserver_basicinstance" "example_timezone" {
+  name              = "tf-example-utc"
+  availability_zone = zones.zones[4].name
+  charge_type       = "POSTPAID_BY_HOUR"
+  vpc_id            = vpc.id
+  subnet_id         = subnet.id
+  memory            = 4
+  storage           = 100
+  cpu               = 2
+  machine_type      = "CLOUD_PREMIUM"
+  time_zone         = "UTC"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Example with disk encryption enabled:
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const exampleEncrypted = new tencentcloud.sqlserver.BasicInstance("example_encrypted", {
+    name: "tf-example-encrypted",
+    availabilityZone: zones.zones[4].name,
+    chargeType: "POSTPAID_BY_HOUR",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    memory: 4,
+    storage: 100,
+    cpu: 2,
+    machineType: "CLOUD_SSD",
+    diskEncryptFlag: 1,
+    timeZone: "China Standard Time",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example_encrypted = tencentcloud.sqlserver.BasicInstance("example_encrypted",
+    name="tf-example-encrypted",
+    availability_zone=zones["zones"][4]["name"],
+    charge_type="POSTPAID_BY_HOUR",
+    vpc_id=vpc["id"],
+    subnet_id=subnet["id"],
+    memory=4,
+    storage=100,
+    cpu=2,
+    machine_type="CLOUD_SSD",
+    disk_encrypt_flag=1,
+    time_zone="China Standard Time")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := sqlserver.NewBasicInstance(ctx, "example_encrypted", &sqlserver.BasicInstanceArgs{
+			Name:             pulumi.String("tf-example-encrypted"),
+			AvailabilityZone: pulumi.Any(zones.Zones[4].Name),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            pulumi.Any(vpc.Id),
+			SubnetId:         pulumi.Any(subnet.Id),
+			Memory:           pulumi.Int(4),
+			Storage:          pulumi.Int(100),
+			Cpu:              pulumi.Int(2),
+			MachineType:      pulumi.String("CLOUD_SSD"),
+			DiskEncryptFlag:  pulumi.Int(1),
+			TimeZone:         pulumi.String("China Standard Time"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var exampleEncrypted = new Tencentcloud.Sqlserver.BasicInstance("example_encrypted", new()
+    {
+        Name = "tf-example-encrypted",
+        AvailabilityZone = zones.Zones[4].Name,
+        ChargeType = "POSTPAID_BY_HOUR",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Memory = 4,
+        Storage = 100,
+        Cpu = 2,
+        MachineType = "CLOUD_SSD",
+        DiskEncryptFlag = 1,
+        TimeZone = "China Standard Time",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Sqlserver.BasicInstance;
+import com.pulumi.tencentcloud.Sqlserver.BasicInstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var exampleEncrypted = new BasicInstance("exampleEncrypted", BasicInstanceArgs.builder()
+            .name("tf-example-encrypted")
+            .availabilityZone(zones.zones()[4].name())
+            .chargeType("POSTPAID_BY_HOUR")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .memory(4)
+            .storage(100)
+            .cpu(2)
+            .machineType("CLOUD_SSD")
+            .diskEncryptFlag(1)
+            .timeZone("China Standard Time")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  exampleEncrypted:
+    type: tencentcloud:Sqlserver:BasicInstance
+    name: example_encrypted
+    properties:
+      name: tf-example-encrypted
+      availabilityZone: ${zones.zones[4].name}
+      chargeType: POSTPAID_BY_HOUR
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      memory: 4
+      storage: 100
+      cpu: 2
+      machineType: CLOUD_SSD
+      diskEncryptFlag: 1
+      timeZone: China Standard Time
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_sqlserver_basicinstance" "example_encrypted" {
+  name              = "tf-example-encrypted"
+  availability_zone = zones.zones[4].name
+  charge_type       = "POSTPAID_BY_HOUR"
+  vpc_id            = vpc.id
+  subnet_id         = subnet.id
+  memory            = 4
+  storage           = 100
+  cpu               = 2
+  machine_type      = "CLOUD_SSD"
+  disk_encrypt_flag = 1
+  time_zone         = "China Standard Time"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateBasicDBInstances](https://www.tencentcloud.com/document/api/238/66344)
+  - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+  - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+  - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+  - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+  - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+  - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72731)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+  - [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72728)
+  - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+  - [ModifyDBInstanceProject](https://www.tencentcloud.com/document/api/238/32103)
+  - [ModifyDBInstanceRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceRenewFlag&type=document&lang=en)
+  - [ModifyMaintenanceSpan](https://www.tencentcloud.com/document/api/238/72749)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+* Delete:
+  - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+  - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
 
 
 ## Create BasicInstance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                  <span class="nx">auto_renew</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">collation</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">machine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">maintenance_start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">maintenance_time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">maintenance_week_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">memory</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">machine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">maintenance_time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">disk_encrypt_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">maintenance_start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">auto_renew</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">maintenance_week_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">collation</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+                  <span class="nx">time_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">voucher_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBasicInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BasicInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBasicInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BasicInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">BasicInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BasicInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sqlserver:BasicInstance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sqlserver:BasicInstance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_sqlserver_basic_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -442,7 +1016,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -559,11 +1133,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## BasicInstance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The BasicInstance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -579,8 +1161,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-required"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -588,8 +1169,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -597,8 +1177,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -606,8 +1185,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenew_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenew_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew</a>
@@ -615,8 +1193,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -624,8 +1201,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -633,8 +1209,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -642,8 +1217,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="collation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#collation_csharp" style="color: inherit; text-decoration: inherit;">Collation</a>
@@ -651,8 +1225,15 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryptflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryptflag_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -660,8 +1241,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancestarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancestarttime_csharp" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Start<wbr>Time</a>
@@ -669,8 +1249,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancetimespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancetimespan_csharp" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Time<wbr>Span</a>
@@ -678,8 +1257,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenanceweeksets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenanceweeksets_csharp" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Week<wbr>Sets</a>
@@ -687,8 +1265,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -696,8 +1273,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -705,8 +1281,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -714,8 +1289,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -723,8 +1297,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -732,17 +1305,23 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="timezone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_csharp" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -750,8 +1329,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -759,8 +1337,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -774,8 +1351,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-required"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -783,8 +1359,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -792,8 +1367,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -801,8 +1375,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenew_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenew_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew</a>
@@ -810,8 +1383,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -819,8 +1391,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -828,8 +1399,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -837,8 +1407,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="collation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#collation_go" style="color: inherit; text-decoration: inherit;">Collation</a>
@@ -846,8 +1415,15 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryptflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryptflag_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -855,8 +1431,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancestarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancestarttime_go" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Start<wbr>Time</a>
@@ -864,8 +1439,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancetimespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancetimespan_go" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Time<wbr>Span</a>
@@ -873,8 +1447,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenanceweeksets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenanceweeksets_go" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Week<wbr>Sets</a>
@@ -882,8 +1455,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -891,8 +1463,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -900,8 +1471,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -909,8 +1479,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -918,8 +1487,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -927,17 +1495,23 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="timezone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_go" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -945,8 +1519,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -954,8 +1527,197 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="machine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_renew_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="collation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#collation_hcl" style="color: inherit; text-decoration: inherit;">collation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_encrypt_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_encrypt_flag_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>encrypt_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maintenance_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenance_start_time_hcl" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maintenance_time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenance_time_span_hcl" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maintenance_week_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenance_week_sets_hcl" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>week_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security group bound to the instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of subnet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="time_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_zone_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="voucher_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucher_ids_hcl" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -969,8 +1731,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-required"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -978,8 +1739,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -987,8 +1747,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -996,8 +1755,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenew_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenew_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew</a>
@@ -1005,8 +1763,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -1014,8 +1771,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1023,8 +1779,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1032,8 +1787,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="collation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#collation_java" style="color: inherit; text-decoration: inherit;">collation</a>
@@ -1041,8 +1795,15 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryptflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryptflag_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1050,8 +1811,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancestarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancestarttime_java" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Start<wbr>Time</a>
@@ -1059,8 +1819,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancetimespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancetimespan_java" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Time<wbr>Span</a>
@@ -1068,8 +1827,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenanceweeksets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenanceweeksets_java" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Week<wbr>Sets</a>
@@ -1077,8 +1835,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1086,8 +1843,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1095,8 +1851,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1104,8 +1859,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1113,8 +1867,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1122,17 +1875,23 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="timezone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_java" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_java" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -1140,8 +1899,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1149,8 +1907,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1164,8 +1921,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-required"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -1173,8 +1929,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1182,8 +1937,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1191,8 +1945,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenew_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenew_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew</a>
@@ -1200,8 +1953,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -1209,8 +1961,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1218,8 +1969,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1227,8 +1977,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="collation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#collation_nodejs" style="color: inherit; text-decoration: inherit;">collation</a>
@@ -1236,8 +1985,15 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryptflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryptflag_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1245,8 +2001,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancestarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancestarttime_nodejs" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Start<wbr>Time</a>
@@ -1254,8 +2009,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancetimespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancetimespan_nodejs" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Time<wbr>Span</a>
@@ -1263,8 +2017,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenanceweeksets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenanceweeksets_nodejs" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Week<wbr>Sets</a>
@@ -1272,8 +2025,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1281,8 +2033,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1290,8 +2041,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1299,8 +2049,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1308,8 +2057,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1317,17 +2065,23 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="timezone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_nodejs" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -1335,8 +2089,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1344,8 +2097,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1359,8 +2111,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-required"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-required"
             title="Required">
         <span id="machine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
@@ -1368,8 +2119,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1377,8 +2127,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1386,8 +2135,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_renew_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew</a>
@@ -1395,8 +2143,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_voucher_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
@@ -1404,8 +2151,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1413,8 +2159,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1422,8 +2167,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="collation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#collation_python" style="color: inherit; text-decoration: inherit;">collation</a>
@@ -1431,8 +2175,15 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_encrypt_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_encrypt_flag_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>encrypt_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -1440,8 +2191,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenance_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenance_start_time_python" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>start_<wbr>time</a>
@@ -1449,8 +2199,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenance_time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenance_time_span_python" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>time_<wbr>span</a>
@@ -1458,8 +2207,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenance_week_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenance_week_sets_python" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>week_<wbr>sets</a>
@@ -1467,8 +2215,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1476,8 +2223,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1485,8 +2231,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1494,8 +2239,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -1503,8 +2247,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1512,17 +2255,23 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="time_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_zone_python" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucher_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucher_ids_python" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
@@ -1530,8 +2279,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1539,8 +2287,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1554,8 +2301,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-required"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -1563,8 +2309,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-required"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1572,8 +2317,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1581,8 +2325,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenew_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenew_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew</a>
@@ -1590,8 +2333,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -1599,8 +2341,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1608,8 +2349,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1617,8 +2357,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="collation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#collation_yaml" style="color: inherit; text-decoration: inherit;">collation</a>
@@ -1626,8 +2365,15 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryptflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryptflag_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1635,8 +2381,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancestarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancestarttime_yaml" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Start<wbr>Time</a>
@@ -1644,8 +2389,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenancetimespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenancetimespan_yaml" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Time<wbr>Span</a>
@@ -1653,8 +2397,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="maintenanceweeksets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maintenanceweeksets_yaml" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Week<wbr>Sets</a>
@@ -1662,8 +2405,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1671,8 +2413,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1680,8 +2421,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1689,8 +2429,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1698,8 +2437,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1707,17 +2445,23 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="timezone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_yaml" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -1725,8 +2469,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1734,8 +2477,7 @@ The BasicInstance resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1756,8 +2498,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-"
+            title="">
+        <span id="dnspoddomain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnspoddomain_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1765,8 +2514,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instanceid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1774,8 +2530,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-"
+            title="">
+        <span id="tgwwanvport_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tgwwanvport_csharp" style="color: inherit; text-decoration: inherit;">Tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-"
+            title="">
+        <span id="uid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_csharp" style="color: inherit; text-decoration: inherit;">Uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-"
             title="">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1783,8 +2554,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -1792,8 +2562,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1807,8 +2576,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-"
+            title="">
+        <span id="dnspoddomain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnspoddomain_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1816,8 +2592,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instanceid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1825,8 +2608,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-"
+            title="">
+        <span id="tgwwanvport_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tgwwanvport_go" style="color: inherit; text-decoration: inherit;">Tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-"
+            title="">
+        <span id="uid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_go" style="color: inherit; text-decoration: inherit;">Uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-"
             title="">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1834,8 +2632,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -1843,8 +2640,85 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-"
+            title="">
+        <span id="dns_pod_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_pod_domain_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>pod_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-"
+            title="">
+        <span id="tgw_wan_vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tgw_wan_vport_hcl" style="color: inherit; text-decoration: inherit;">tgw_<wbr>wan_<wbr>vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-"
+            title="">
+        <span id="uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-"
+            title="">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP for private access.</dd><dt class="property-"
+            title="">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1858,8 +2732,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-"
+            title="">
+        <span id="dnspoddomain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnspoddomain_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1867,8 +2748,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instanceid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1876,8 +2764,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-"
+            title="">
+        <span id="tgwwanvport_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tgwwanvport_java" style="color: inherit; text-decoration: inherit;">tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-"
+            title="">
+        <span id="uid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_java" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-"
             title="">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1885,8 +2788,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1894,8 +2796,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1909,8 +2810,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-"
+            title="">
+        <span id="dnspoddomain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnspoddomain_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1918,8 +2826,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instanceid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1927,8 +2842,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-"
+            title="">
+        <span id="tgwwanvport_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tgwwanvport_nodejs" style="color: inherit; text-decoration: inherit;">tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-"
+            title="">
+        <span id="uid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_nodejs" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-"
             title="">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1936,8 +2866,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1945,8 +2874,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1960,8 +2888,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-"
+            title="">
+        <span id="dns_pod_domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_pod_domain_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>pod_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1969,8 +2904,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1978,8 +2920,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-"
+            title="">
+        <span id="tgw_wan_vport_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tgw_wan_vport_python" style="color: inherit; text-decoration: inherit;">tgw_<wbr>wan_<wbr>vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-"
+            title="">
+        <span id="uid_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_python" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-"
             title="">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1987,8 +2944,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1996,8 +2952,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2011,8 +2966,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-"
+            title="">
+        <span id="dnspoddomain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnspoddomain_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2020,8 +2982,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instanceid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2029,8 +2998,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-"
+            title="">
+        <span id="tgwwanvport_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tgwwanvport_yaml" style="color: inherit; text-decoration: inherit;">tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-"
+            title="">
+        <span id="uid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_yaml" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-"
             title="">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2038,8 +3022,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2047,8 +3030,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2058,18 +3040,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing BasicInstance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BasicInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BasicInstance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BasicInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BasicInstance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -2080,7 +3062,10 @@ Get an existing BasicInstance resource's state with the given name, ID, and opti
         <span class="nx">collation</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">disk_encrypt_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">dns_pod_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">machine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">maintenance_start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">maintenance_time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -2093,109 +3078,151 @@ Get an existing BasicInstance resource's state with the given name, ID, and opti
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+        <span class="nx">tgw_wan_vport</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">time_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">uid</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">voucher_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vport</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> BasicInstance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBasicInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BasicInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BasicInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBasicInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BasicInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BasicInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BasicInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BasicInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BasicInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BasicInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BasicInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BasicInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BasicInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BasicInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingBasicInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Sqlserver:BasicInstance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_sqlserver_basic_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BasicInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BasicInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2203,28 +3230,31 @@ Get an existing BasicInstance resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BasicInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2232,28 +3262,31 @@ Get an existing BasicInstance resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BasicInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2273,8 +3306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -2282,8 +3314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -2291,8 +3322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2300,8 +3330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_collation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_collation_csharp" style="color: inherit; text-decoration: inherit;">Collation</a>
@@ -2309,8 +3338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -2318,8 +3346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2327,8 +3354,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryptflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryptflag_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnspoddomain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnspoddomain_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -2336,8 +3378,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -2345,8 +3394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-optional"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancestarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancestarttime_csharp" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Start<wbr>Time</a>
@@ -2354,8 +3402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancetimespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancetimespan_csharp" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Time<wbr>Span</a>
@@ -2363,8 +3410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenanceweeksets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenanceweeksets_csharp" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Week<wbr>Sets</a>
@@ -2372,8 +3418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -2381,8 +3426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2390,8 +3434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -2399,8 +3442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2408,8 +3450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2417,8 +3458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2426,8 +3466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -2435,8 +3474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2444,17 +3482,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tgwwanvport_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tgwwanvport_csharp" style="color: inherit; text-decoration: inherit;">Tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_timezone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_csharp" style="color: inherit; text-decoration: inherit;">Uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2462,8 +3522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_csharp" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -2471,8 +3530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2480,8 +3538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2489,8 +3546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2504,8 +3560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -2513,8 +3568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -2522,8 +3576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2531,8 +3584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_collation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_collation_go" style="color: inherit; text-decoration: inherit;">Collation</a>
@@ -2540,8 +3592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -2549,8 +3600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2558,8 +3608,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryptflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryptflag_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnspoddomain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnspoddomain_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -2567,8 +3632,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -2576,8 +3648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-optional"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancestarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancestarttime_go" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Start<wbr>Time</a>
@@ -2585,8 +3656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancetimespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancetimespan_go" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Time<wbr>Span</a>
@@ -2594,8 +3664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenanceweeksets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenanceweeksets_go" style="color: inherit; text-decoration: inherit;">Maintenance<wbr>Week<wbr>Sets</a>
@@ -2603,8 +3672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -2612,8 +3680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2621,8 +3688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -2630,8 +3696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2639,8 +3704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2648,8 +3712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2657,8 +3720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -2666,8 +3728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2675,17 +3736,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tgwwanvport_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tgwwanvport_go" style="color: inherit; text-decoration: inherit;">Tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_timezone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_go" style="color: inherit; text-decoration: inherit;">Uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2693,8 +3776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_go" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -2702,8 +3784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2711,8 +3792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2720,8 +3800,261 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_renew_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_collation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_collation_hcl" style="color: inherit; text-decoration: inherit;">collation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disk_encrypt_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_encrypt_flag_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>encrypt_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dns_pod_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_pod_domain_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>pod_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_machine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machine_type_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maintenance_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenance_start_time_hcl" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maintenance_time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenance_time_span_hcl" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maintenance_week_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenance_week_sets_hcl" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>week_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security group bound to the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of subnet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tgw_wan_vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tgw_wan_vport_hcl" style="color: inherit; text-decoration: inherit;">tgw_<wbr>wan_<wbr>vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_time_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_zone_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP for private access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_voucher_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucher_ids_hcl" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2735,8 +4068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -2744,8 +4076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2753,8 +4084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2762,8 +4092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_collation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_collation_java" style="color: inherit; text-decoration: inherit;">collation</a>
@@ -2771,8 +4100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -2780,8 +4108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2789,8 +4116,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryptflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryptflag_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnspoddomain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnspoddomain_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2798,8 +4140,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -2807,8 +4156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-optional"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancestarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancestarttime_java" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Start<wbr>Time</a>
@@ -2816,8 +4164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancetimespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancetimespan_java" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Time<wbr>Span</a>
@@ -2825,8 +4172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenanceweeksets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenanceweeksets_java" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Week<wbr>Sets</a>
@@ -2834,8 +4180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2843,8 +4188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2852,8 +4196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2861,8 +4204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2870,8 +4212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2879,8 +4220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2888,8 +4228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -2897,8 +4236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2906,17 +4244,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tgwwanvport_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tgwwanvport_java" style="color: inherit; text-decoration: inherit;">tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_timezone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_java" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_java" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2924,8 +4284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_java" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -2933,8 +4292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2942,8 +4300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2951,8 +4308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2966,8 +4322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -2975,8 +4330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2984,8 +4338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2993,8 +4346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_collation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_collation_nodejs" style="color: inherit; text-decoration: inherit;">collation</a>
@@ -3002,8 +4354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -3011,8 +4362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3020,8 +4370,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryptflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryptflag_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnspoddomain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnspoddomain_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -3029,8 +4394,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -3038,8 +4410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-optional"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancestarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancestarttime_nodejs" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Start<wbr>Time</a>
@@ -3047,8 +4418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancetimespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancetimespan_nodejs" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Time<wbr>Span</a>
@@ -3056,8 +4426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenanceweeksets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenanceweeksets_nodejs" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Week<wbr>Sets</a>
@@ -3065,8 +4434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -3074,8 +4442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3083,8 +4450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3092,8 +4458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3101,8 +4466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3110,8 +4474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3119,8 +4482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -3128,8 +4490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3137,17 +4498,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tgwwanvport_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tgwwanvport_nodejs" style="color: inherit; text-decoration: inherit;">tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_timezone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_nodejs" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3155,8 +4538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_nodejs" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -3164,8 +4546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3173,8 +4554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3182,8 +4562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3197,8 +4576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_voucher_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
@@ -3206,8 +4584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -3215,8 +4592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -3224,8 +4600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_collation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_collation_python" style="color: inherit; text-decoration: inherit;">collation</a>
@@ -3233,8 +4608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -3242,8 +4616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3251,8 +4624,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disk_encrypt_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_encrypt_flag_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>encrypt_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dns_pod_domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_pod_domain_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>pod_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -3260,8 +4648,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machine_type_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
@@ -3269,8 +4664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-optional"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenance_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenance_start_time_python" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>start_<wbr>time</a>
@@ -3278,8 +4672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenance_time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenance_time_span_python" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>time_<wbr>span</a>
@@ -3287,8 +4680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenance_week_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenance_week_sets_python" style="color: inherit; text-decoration: inherit;">maintenance_<wbr>week_<wbr>sets</a>
@@ -3296,8 +4688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -3305,8 +4696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3314,8 +4704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3323,8 +4712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3332,8 +4720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -3341,8 +4728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3350,8 +4736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -3359,8 +4744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -3368,17 +4752,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tgw_wan_vport_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tgw_wan_vport_python" style="color: inherit; text-decoration: inherit;">tgw_<wbr>wan_<wbr>vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_time_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_zone_python" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_python" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3386,8 +4792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucher_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucher_ids_python" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
@@ -3395,8 +4800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3404,8 +4808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3413,8 +4816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3428,8 +4830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -3437,8 +4838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -3446,8 +4846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Availability zone.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3455,8 +4854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of the SQL Server basic instance. For now, only <code>POSTPAID_BY_HOUR</code> is valid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_collation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_collation_yaml" style="color: inherit; text-decoration: inherit;">collation</a>
@@ -3464,8 +4862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System character set sorting rule, default: Chinese_PRC_CI_AS.</p>
-</dd><dt class="property-optional"
+    <dd>System character set sorting rule, default: Chinese_PRC_CI_AS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -3473,8 +4870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The CPU number of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The CPU number of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3482,8 +4878,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the SQL Server basic instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the SQL Server basic instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryptflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryptflag_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Encrypt<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Disk encryption flag. <code>0</code> - Disabled (default), <code>1</code> - Enabled. Disk encryption cannot be changed after instance creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnspoddomain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnspoddomain_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Pod<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Internet address domain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -3491,8 +4902,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the SQL Server basic database engine. Allowed values are <code>2008R2</code>(SQL Server 2008 Enterprise), <code>2012SP3</code>(SQL Server 2012 Enterprise), <code>2016SP1</code> (SQL Server 2016 Enterprise), <code>201602</code>(SQL Server 2016 Standard) and <code>2017</code>(SQL Server 2017 Enterprise). Default is <code>2008R2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -3500,8 +4918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</p>
-</dd><dt class="property-optional"
+    <dd>The host type of the purchased instance, <code>CLOUD_PREMIUM</code> for virtual machine high-performance cloud disk, <code>CLOUD_SSD</code> for virtual machine SSD cloud disk, <code>CLOUD_HSSD</code> for virtual machine enhanced cloud disk, <code>CLOUD_BSSD</code> for virtual machine general purpose SSD cloud disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancestarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancestarttime_yaml" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Start<wbr>Time</a>
@@ -3509,8 +4926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the maintenance in one day, format like <code>HH:mm</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the maintenance in one day, format like <code>HH:mm</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenancetimespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenancetimespan_yaml" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Time<wbr>Span</a>
@@ -3518,8 +4934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The timespan of maintenance in one day, unit is hour.</p>
-</dd><dt class="property-optional"
+    <dd>The timespan of maintenance in one day, unit is hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maintenanceweeksets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maintenanceweeksets_yaml" style="color: inherit; text-decoration: inherit;">maintenance<wbr>Week<wbr>Sets</a>
@@ -3527,8 +4942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</p>
-</dd><dt class="property-optional"
+    <dd>A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -3536,8 +4950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3545,8 +4958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server basic instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3554,8 +4966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3563,8 +4974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID, default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID, default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3572,8 +4982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security group bound to the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security group bound to the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3581,8 +4990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -3590,8 +4998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud_sqlserver_specinfos</code> provides.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloudSqlserverSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3599,17 +5006,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of the SQL Server basic instance.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the SQL Server basic instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tgwwanvport_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tgwwanvport_yaml" style="color: inherit; text-decoration: inherit;">tgw<wbr>Wan<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>External port number.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_timezone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>System timezone for the SQL Server instance. Default is <code>China Standard Time</code>. This setting cannot be changed after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_yaml" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique UID of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3617,8 +5046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_yaml" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -3626,8 +5054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An array of voucher IDs, currently only one can be used for a single order.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An array of voucher IDs, currently only one can be used for a single order.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3635,8 +5062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3644,8 +5070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd></dl>
+    <dd>Port for private access.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3668,6 +5093,9 @@ $ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance example mssql
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3677,7 +5105,6 @@ $ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance example mssql
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

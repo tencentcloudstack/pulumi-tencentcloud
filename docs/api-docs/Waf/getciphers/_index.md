@@ -2,9 +2,11 @@
 ---
 title: "getCiphers"
 title_tag: "tencentcloud.Waf.getCiphers"
-meta_desc: "Documentation for the tencentcloud.Waf.getCiphers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of waf ciphers"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of waf ciphers
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Waf.getCiphers({});
+const example = tencentcloud.waf.getCiphers({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Waf.get_ciphers()
+example = tencentcloud.waf.get_ciphers()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Waf.GetCiphers.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/waf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Waf.GetCiphers(ctx, nil, nil)
+		_, err := waf.GetCiphers(ctx, &waf.GetCiphersArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Waf.GetCiphers.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Waf.WafFunctions;
 import com.pulumi.tencentcloud.Waf.inputs.GetCiphersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var example = WafFunctions.getCiphers();
+        final var example = WafFunctions.getCiphers(GetCiphersArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Waf:getCiphers
-      Arguments: {}
+      function: tencentcloud:Waf:getCiphers
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_waf_getciphers" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCiphers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCiphersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>></span
+><span class="k">function </span>getCiphers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCiphersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>></span
 ><span class="k">
-function </span>getCiphersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCiphersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>></span
+function </span>getCiphersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCiphersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getCiphersOutput<span class="p">(</span><span class="nx">args</s
 ><span class="k">def </span>get_ciphers<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetCiphersResult</span
 ><span class="k">
-def </span>get_ciphers_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCiphersResult]</span
+def </span>get_ciphers_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCiphersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetCiphersOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCiphers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetCiphersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCiphersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCiphersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCiphersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetCiphersOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>> </span>getCiphers<span class="p">(</span><span class="nx">GetCiphersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>> </span>getCiphers<span class="p">(</span><span class="nx">GetCiphersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCiphersResult</a></span>> </span>getCiphers<span class="p">(</span><span class="nx">GetCiphersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetCiphersOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Waf/getCiphers:getCiphers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_waf_get_ciphers&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="wafciphers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wafciphers_csharp" style="color: inherit; text-decoration: inherit;">Waf<wbr>Ciphers</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcipherscipher">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Waf.<wbr>Outputs.<wbr>Get<wbr>Ciphers<wbr>Cipher&gt;</a></span>
     </dt>
-    <dd><p>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcipherscipher">[]Get<wbr>Ciphers<wbr>Cipher</a></span>
     </dt>
-    <dd><p>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -332,11 +405,40 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="ciphers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ciphers_hcl" style="color: inherit; text-decoration: inherit;">ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcipherscipher">list(object)</a></span>
+    </dt>
+    <dd>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -355,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcipherscipher">List&lt;Get<wbr>Ciphers<wbr>Cipher&gt;</a></span>
     </dt>
-    <dd><p>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -364,8 +465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcipherscipher">Get<wbr>Ciphers<wbr>Cipher[]</a></span>
     </dt>
-    <dd><p>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -396,8 +495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -417,10 +515,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ciphers_python" style="color: inherit; text-decoration: inherit;">ciphers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcipherscipher">Get<wbr>Ciphers<wbr>Cipher]</a></span>
+        <span class="property-type"><a href="#getcipherscipher">Sequence[Get<wbr>Ciphers<wbr>Cipher]</a></span>
     </dt>
-    <dd><p>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -428,8 +525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -451,8 +547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcipherscipher">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Encryption Suite InformationNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -460,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ciphername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ciphername_csharp" style="color: inherit; text-decoration: inherit;">Cipher<wbr>Name</a>
@@ -502,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_csharp" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -511,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -526,8 +617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ciphername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ciphername_go" style="color: inherit; text-decoration: inherit;">Cipher<wbr>Name</a>
@@ -535,8 +625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_go" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -544,8 +633,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cipher_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cipher_id_hcl" style="color: inherit; text-decoration: inherit;">cipher_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="cipher_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cipher_name_hcl" style="color: inherit; text-decoration: inherit;">cipher_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_hcl" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -559,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ciphername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ciphername_java" style="color: inherit; text-decoration: inherit;">cipher<wbr>Name</a>
@@ -568,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_java" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -577,8 +693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -592,8 +707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ciphername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ciphername_nodejs" style="color: inherit; text-decoration: inherit;">cipher<wbr>Name</a>
@@ -601,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_nodejs" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -610,8 +723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -625,8 +737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="cipher_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cipher_name_python" style="color: inherit; text-decoration: inherit;">cipher_<wbr>name</a>
@@ -634,8 +745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="version_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_python" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
@@ -643,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -658,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ciphername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ciphername_yaml" style="color: inherit; text-decoration: inherit;">cipher<wbr>Name</a>
@@ -667,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Encryption Suite NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_yaml" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -676,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>TLS version IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -692,7 +798,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

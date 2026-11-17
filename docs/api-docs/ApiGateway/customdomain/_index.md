@@ -2,9 +2,11 @@
 ---
 title: "CustomDomain"
 title_tag: "tencentcloud.ApiGateway.CustomDomain"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.CustomDomain resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create custom domain of API gateway."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,40 +18,89 @@ Use this resource to create custom domain of API gateway.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.apigateway.CustomDomain("foo", {
-    defaultDomain: "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
-    isDefaultMapping: false,
+    serviceId: "service-ohxqslqe",
+    subDomain: "tic-test.dnsv1.com",
+    protocol: "http",
     netType: "OUTER",
+    isDefaultMapping: false,
+    defaultDomain: "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
     pathMappings: [
         "/good#test",
         "/root#release",
     ],
-    protocol: "http",
-    serviceId: "service-ohxqslqe",
-    subDomain: "tic-test.dnsv1.com",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.api_gateway.CustomDomain("foo",
-    default_domain="service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
-    is_default_mapping=False,
+foo = tencentcloud.apigateway.CustomDomain("foo",
+    service_id="service-ohxqslqe",
+    sub_domain="tic-test.dnsv1.com",
+    protocol="http",
     net_type="OUTER",
+    is_default_mapping=False,
+    default_domain="service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
     path_mappings=[
         "/good#test",
         "/root#release",
-    ],
-    protocol="http",
-    service_id="service-ohxqslqe",
-    sub_domain="tic-test.dnsv1.com")
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := apigateway.NewCustomDomain(ctx, "foo", &apigateway.CustomDomainArgs{
+			ServiceId:        pulumi.String("service-ohxqslqe"),
+			SubDomain:        pulumi.String("tic-test.dnsv1.com"),
+			Protocol:         pulumi.String("http"),
+			NetType:          pulumi.String("OUTER"),
+			IsDefaultMapping: pulumi.Bool(false),
+			DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
+			PathMappings: pulumi.StringArray{
+				pulumi.String("/good#test"),
+				pulumi.String("/root#release"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -60,50 +111,26 @@ return await Deployment.RunAsync(() =>
 {
     var foo = new Tencentcloud.ApiGateway.CustomDomain("foo", new()
     {
-        DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
-        IsDefaultMapping = false,
+        ServiceId = "service-ohxqslqe",
+        SubDomain = "tic-test.dnsv1.com",
+        Protocol = "http",
         NetType = "OUTER",
+        IsDefaultMapping = false,
+        DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
         PathMappings = new[]
         {
             "/good#test",
             "/root#release",
         },
-        Protocol = "http",
-        ServiceId = "service-ohxqslqe",
-        SubDomain = "tic-test.dnsv1.com",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
-			DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
-			IsDefaultMapping: pulumi.Bool(false),
-			NetType:          pulumi.String("OUTER"),
-			PathMappings: pulumi.StringArray{
-				pulumi.String("/good#test"),
-				pulumi.String("/root#release"),
-			},
-			Protocol:  pulumi.String("http"),
-			ServiceId: pulumi.String("service-ohxqslqe"),
-			SubDomain: pulumi.String("tic-test.dnsv1.com"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -112,8 +139,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.ApiGateway.CustomDomain;
 import com.pulumi.tencentcloud.ApiGateway.CustomDomainArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -125,104 +152,160 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new CustomDomain("foo", CustomDomainArgs.builder()        
-            .defaultDomain("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com")
-            .isDefaultMapping("false")
+        var foo = new CustomDomain("foo", CustomDomainArgs.builder()
+            .serviceId("service-ohxqslqe")
+            .subDomain("tic-test.dnsv1.com")
+            .protocol("http")
             .netType("OUTER")
+            .isDefaultMapping(false)
+            .defaultDomain("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com")
             .pathMappings(            
                 "/good#test",
                 "/root#release")
-            .protocol("http")
-            .serviceId("service-ohxqslqe")
-            .subDomain("tic-test.dnsv1.com")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:ApiGateway:CustomDomain
     properties:
-      defaultDomain: service-ohxqslqe-1259649581.gz.apigw.tencentcs.com
-      isDefaultMapping: 'false'
+      serviceId: service-ohxqslqe
+      subDomain: tic-test.dnsv1.com
+      protocol: http
       netType: OUTER
+      isDefaultMapping: 'false'
+      defaultDomain: service-ohxqslqe-1259649581.gz.apigw.tencentcs.com
       pathMappings:
         - /good#test
         - /root#release
-      protocol: http
-      serviceId: service-ohxqslqe
-      subDomain: tic-test.dnsv1.com
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_customdomain" "foo" {
+  service_id         = "service-ohxqslqe"
+  sub_domain         = "tic-test.dnsv1.com"
+  protocol           = "http"
+  net_type           = "OUTER"
+  is_default_mapping = "false"
+  default_domain     = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"
+  path_mappings      = ["/good#test", "/root#release"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [BindSubDomain](https://www.tencentcloud.com/search/?wd=BindSubDomain&type=document&lang=en)
+* Read:
+  - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&type=document&lang=en)
+  - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&type=document&lang=en)
+* Update: [ModifySubDomain](https://www.tencentcloud.com/search/?wd=ModifySubDomain&type=document&lang=en)
+* Delete: [UnBindSubDomain](https://www.tencentcloud.com/search/?wd=UnBindSubDomain&type=document&lang=en)
 
 
 
 ## Create CustomDomain Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                 <span class="nx">certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">default_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">is_default_mapping</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                 <span class="nx">is_forced_https</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                 <span class="nx">net_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">path_mappings</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">sub_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                 <span class="nx">default_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">net_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">sub_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">is_default_mapping</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                 <span class="nx">is_forced_https</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                 <span class="nx">path_mappings</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCustomDomain</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CustomDomain</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCustomDomain</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CustomDomain</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">CustomDomain</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CustomDomainArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:CustomDomain</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:CustomDomain</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_custom_domain&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -243,7 +326,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -360,11 +443,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## CustomDomain Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The CustomDomain resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -380,8 +471,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-required"
+    <dd>Default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Type</a>
@@ -389,8 +479,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-required"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -398,8 +487,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -407,8 +495,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique service ID.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -416,8 +503,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -425,8 +511,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefaultmapping_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default<wbr>Mapping</a>
@@ -434,8 +519,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="isforcedhttps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isforcedhttps_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Forced<wbr>Https</a>
@@ -443,8 +527,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="pathmappings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_csharp" style="color: inherit; text-decoration: inherit;">Path<wbr>Mappings</a>
@@ -452,8 +535,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd></dl>
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -467,8 +549,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-required"
+    <dd>Default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Type</a>
@@ -476,8 +557,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-required"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -485,8 +565,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -494,8 +573,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique service ID.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -503,8 +581,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -512,8 +589,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefaultmapping_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default<wbr>Mapping</a>
@@ -521,8 +597,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="isforcedhttps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isforcedhttps_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Forced<wbr>Https</a>
@@ -530,8 +605,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="pathmappings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_go" style="color: inherit; text-decoration: inherit;">Path<wbr>Mappings</a>
@@ -539,8 +613,85 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd></dl>
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="default_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_domain_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Default domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="net_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_type_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique service ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_domain_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom domain name to be bound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_default_mapping_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_mapping_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default_<wbr>mapping</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_forced_https_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_forced_https_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>forced_<wbr>https</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="path_mappings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_mappings_hcl" style="color: inherit; text-decoration: inherit;">path_<wbr>mappings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -554,8 +705,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-required"
+    <dd>Default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_java" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -563,8 +713,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-required"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -572,8 +721,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -581,8 +729,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique service ID.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -590,8 +737,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -599,8 +745,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefaultmapping_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -608,8 +753,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="isforcedhttps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isforcedhttps_java" style="color: inherit; text-decoration: inherit;">is<wbr>Forced<wbr>Https</a>
@@ -617,8 +761,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="pathmappings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_java" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -626,8 +769,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd></dl>
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -641,8 +783,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-required"
+    <dd>Default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -650,8 +791,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-required"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -659,8 +799,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -668,8 +807,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique service ID.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -677,8 +815,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -686,8 +823,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefaultmapping_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -695,8 +831,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="isforcedhttps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isforcedhttps_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Forced<wbr>Https</a>
@@ -704,8 +839,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="pathmappings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_nodejs" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -713,8 +847,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd></dl>
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -728,8 +861,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-required"
+    <dd>Default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="net_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_type_python" style="color: inherit; text-decoration: inherit;">net_<wbr>type</a>
@@ -737,8 +869,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-required"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -746,8 +877,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -755,8 +885,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique service ID.</dd><dt class="property-required"
             title="Required">
         <span id="sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_domain_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
@@ -764,8 +893,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -773,8 +901,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_default_mapping_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_mapping_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default_<wbr>mapping</a>
@@ -782,8 +909,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_forced_https_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_forced_https_python" style="color: inherit; text-decoration: inherit;">is_<wbr>forced_<wbr>https</a>
@@ -791,8 +917,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_mappings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_mappings_python" style="color: inherit; text-decoration: inherit;">path_<wbr>mappings</a>
@@ -800,8 +925,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd></dl>
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -815,8 +939,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-required"
+    <dd>Default domain name.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -824,8 +947,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-required"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -833,8 +955,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -842,8 +963,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique service ID.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -851,8 +971,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -860,8 +979,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefaultmapping_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -869,8 +987,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="isforcedhttps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isforcedhttps_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Forced<wbr>Https</a>
@@ -878,8 +995,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="pathmappings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_yaml" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -887,8 +1003,7 @@ The CustomDomain resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd></dl>
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -909,8 +1024,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -918,8 +1032,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd></dl>
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -933,8 +1046,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -942,8 +1054,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd></dl>
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -957,8 +1090,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -966,8 +1098,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd></dl>
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -981,8 +1112,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -990,8 +1120,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd></dl>
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1005,8 +1134,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1014,8 +1142,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd></dl>
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1029,8 +1156,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1038,8 +1164,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd></dl>
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1049,18 +1174,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing CustomDomain resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CustomDomainState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CustomDomain</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CustomDomainState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CustomDomain</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1074,104 +1199,143 @@ Get an existing CustomDomain resource's state with the given name, ID, and optio
         <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">sub_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> CustomDomain</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCustomDomain<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CustomDomainState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CustomDomain</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCustomDomain<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CustomDomainState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CustomDomain</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CustomDomain</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CustomDomainState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CustomDomain</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CustomDomainState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CustomDomain</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CustomDomainState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CustomDomain</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CustomDomainState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCustomDomain</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:CustomDomain</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_custom_domain</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomDomainState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomDomainState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1179,28 +1343,31 @@ Get an existing CustomDomain resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomDomainState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1208,28 +1375,31 @@ Get an existing CustomDomain resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomDomainState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1249,8 +1419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultdomain_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Domain</a>
@@ -1258,8 +1427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Default domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefaultmapping_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefaultmapping_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default<wbr>Mapping</a>
@@ -1267,8 +1435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isforcedhttps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isforcedhttps_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Forced<wbr>Https</a>
@@ -1276,8 +1443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettype_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Type</a>
@@ -1285,8 +1451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pathmappings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pathmappings_csharp" style="color: inherit; text-decoration: inherit;">Path<wbr>Mappings</a>
@@ -1294,8 +1459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1303,8 +1467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1312,8 +1475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1321,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -1330,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd></dl>
+    <dd>Custom domain name to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1345,8 +1505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultdomain_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Domain</a>
@@ -1354,8 +1513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Default domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefaultmapping_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefaultmapping_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default<wbr>Mapping</a>
@@ -1363,8 +1521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isforcedhttps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isforcedhttps_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Forced<wbr>Https</a>
@@ -1372,8 +1529,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettype_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Type</a>
@@ -1381,8 +1537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pathmappings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pathmappings_go" style="color: inherit; text-decoration: inherit;">Path<wbr>Mappings</a>
@@ -1390,8 +1545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1399,8 +1553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1408,8 +1561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1417,8 +1569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -1426,8 +1577,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd></dl>
+    <dd>Custom domain name to be bound.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_default_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_domain_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Default domain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_default_mapping_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_default_mapping_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default_<wbr>mapping</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_forced_https_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_forced_https_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>forced_<wbr>https</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_net_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_net_type_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_path_mappings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_path_mappings_hcl" style="color: inherit; text-decoration: inherit;">path_<wbr>mappings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique service ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_domain_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom domain name to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1441,8 +1677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultdomain_java" style="color: inherit; text-decoration: inherit;">default<wbr>Domain</a>
@@ -1450,8 +1685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Default domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefaultmapping_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefaultmapping_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -1459,8 +1693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isforcedhttps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isforcedhttps_java" style="color: inherit; text-decoration: inherit;">is<wbr>Forced<wbr>Https</a>
@@ -1468,8 +1701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettype_java" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -1477,8 +1709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pathmappings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pathmappings_java" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -1486,8 +1717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1495,8 +1725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1504,8 +1733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1513,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -1522,8 +1749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd></dl>
+    <dd>Custom domain name to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1537,8 +1763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultdomain_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Domain</a>
@@ -1546,8 +1771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Default domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefaultmapping_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefaultmapping_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -1555,8 +1779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isforcedhttps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isforcedhttps_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Forced<wbr>Https</a>
@@ -1564,8 +1787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettype_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -1573,8 +1795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pathmappings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pathmappings_nodejs" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -1582,8 +1803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1591,8 +1811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1600,8 +1819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1609,8 +1827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -1618,8 +1835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd></dl>
+    <dd>Custom domain name to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1633,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_default_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_domain_python" style="color: inherit; text-decoration: inherit;">default_<wbr>domain</a>
@@ -1642,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Default domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_default_mapping_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_default_mapping_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default_<wbr>mapping</a>
@@ -1651,8 +1865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_forced_https_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_forced_https_python" style="color: inherit; text-decoration: inherit;">is_<wbr>forced_<wbr>https</a>
@@ -1660,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_net_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_net_type_python" style="color: inherit; text-decoration: inherit;">net_<wbr>type</a>
@@ -1669,8 +1881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_path_mappings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_path_mappings_python" style="color: inherit; text-decoration: inherit;">path_<wbr>mappings</a>
@@ -1678,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1687,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -1696,8 +1905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1705,8 +1913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_domain_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
@@ -1714,8 +1921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd></dl>
+    <dd>Custom domain name to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1729,8 +1935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unique certificate ID of the custom domain name to be bound. You can choose to upload for the <code>protocol</code> attribute value <code>https</code> or <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultdomain_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Domain</a>
@@ -1738,8 +1943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Default domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefaultmapping_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefaultmapping_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -1747,8 +1951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>path_mappings</code> attribute is required.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the default path mapping is used. The default value is <code>true</code>. When it is <code>false</code>, it means custom path mapping. In this case, the <code>pathMappings</code> attribute is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isforcedhttps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isforcedhttps_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Forced<wbr>Https</a>
@@ -1756,8 +1959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettype_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -1765,8 +1967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. Valid values: <code>OUTER</code>, <code>INNER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pathmappings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pathmappings_yaml" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -1774,8 +1975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom domain name path mapping. The data format is: <code>path#environment</code>. Optional values for the environment are <code>test</code>, <code>prepub</code>, and <code>release</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1783,8 +1983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol supported by service. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1792,8 +1991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1801,8 +1999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name resolution status. <code>1</code> means normal analysis, <code>0</code> means parsing failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -1810,8 +2007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom domain name to be bound.</p>
-</dd></dl>
+    <dd>Custom domain name to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1830,7 +2026,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

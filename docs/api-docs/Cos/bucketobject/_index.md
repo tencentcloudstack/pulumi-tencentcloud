@@ -2,9 +2,11 @@
 ---
 title: "BucketObject"
 title_tag: "tencentcloud.Cos.BucketObject"
-meta_desc: "Documentation for the tencentcloud.Cos.BucketObject resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a COS object resource to put an object(content or file) to the bucket."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,7 +20,12 @@ Provides a COS object resource to put an object(content or file) to the bucket.
 
 ### Uploading a file to a bucket
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -29,6 +36,11 @@ const myobject = new tencentcloud.cos.BucketObject("myobject", {
     source: "path/to/file",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -38,6 +50,38 @@ myobject = tencentcloud.cos.BucketObject("myobject",
     key="new_object_key",
     source="path/to/file")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cos.NewBucketObject(ctx, "myobject", &cos.BucketObjectArgs{
+			Bucket: pulumi.String("mycos-1258798060"),
+			Key:    pulumi.String("new_object_key"),
+			Source: pulumi.String("path/to/file"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -55,28 +99,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
-			Bucket: pulumi.String("mycos-1258798060"),
-			Key:    pulumi.String("new_object_key"),
-			Source: pulumi.String("path/to/file"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -85,8 +112,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cos.BucketObject;
 import com.pulumi.tencentcloud.Cos.BucketObjectArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -98,7 +125,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var myobject = new BucketObject("myobject", BucketObjectArgs.builder()        
+        var myobject = new BucketObject("myobject", BucketObjectArgs.builder()
             .bucket("mycos-1258798060")
             .key("new_object_key")
             .source("path/to/file")
@@ -107,6 +134,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   myobject:
@@ -116,11 +148,38 @@ resources:
       key: new_object_key
       source: path/to/file
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cos_bucketobject" "myobject" {
+  bucket = "mycos-1258798060"
+  key    = "new_object_key"
+  source = "path/to/file"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Uploading a content to a bucket
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -135,6 +194,11 @@ const myobject = new tencentcloud.cos.BucketObject("myobject", {
     content: "the content that you want to upload.",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -147,6 +211,45 @@ myobject = tencentcloud.cos.BucketObject("myobject",
     key="new_object_key",
     content="the content that you want to upload.")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		mycos, err := cos.NewBucket(ctx, "mycos", &cos.BucketArgs{
+			Bucket: pulumi.String("mycos-1258798060"),
+			Acl:    pulumi.String("public-read"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cos.NewBucketObject(ctx, "myobject", &cos.BucketObjectArgs{
+			Bucket:  mycos.Bucket,
+			Key:     pulumi.String("new_object_key"),
+			Content: pulumi.String("the content that you want to upload."),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -170,35 +273,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		mycos, err := Cos.NewBucket(ctx, "mycos", &Cos.BucketArgs{
-			Bucket: pulumi.String("mycos-1258798060"),
-			Acl:    pulumi.String("public-read"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
-			Bucket:  mycos.Bucket,
-			Key:     pulumi.String("new_object_key"),
-			Content: pulumi.String("the content that you want to upload."),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -209,8 +288,8 @@ import com.pulumi.tencentcloud.Cos.Bucket;
 import com.pulumi.tencentcloud.Cos.BucketArgs;
 import com.pulumi.tencentcloud.Cos.BucketObject;
 import com.pulumi.tencentcloud.Cos.BucketObjectArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -222,12 +301,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var mycos = new Bucket("mycos", BucketArgs.builder()        
+        var mycos = new Bucket("mycos", BucketArgs.builder()
             .bucket("mycos-1258798060")
             .acl("public-read")
             .build());
 
-        var myobject = new BucketObject("myobject", BucketObjectArgs.builder()        
+        var myobject = new BucketObject("myobject", BucketObjectArgs.builder()
             .bucket(mycos.bucket())
             .key("new_object_key")
             .content("the content that you want to upload.")
@@ -236,6 +315,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   mycos:
@@ -250,77 +334,124 @@ resources:
       key: new_object_key
       content: the content that you want to upload.
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cos_bucket" "mycos" {
+  bucket = "mycos-1258798060"
+  acl    = "public-read"
+}
+resource "tencentcloud_cos_bucketobject" "myobject" {
+  bucket  = tencentcloud_cos_bucket.mycos.bucket
+  key     = "new_object_key"
+  content = "the content that you want to upload."
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+* Update: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
 
 
 
 ## Create BucketObject Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                 <span class="nx">acl</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">acl</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">cache_control</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">content</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">content_disposition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">content_encoding</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">content_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">etag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">source</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">storage_class</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBucketObject</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BucketObject</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBucketObject</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BucketObject</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">BucketObject</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BucketObjectArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cos:BucketObject</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cos:BucketObject</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cos_bucket_object&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -341,7 +472,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -458,11 +589,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## BucketObject Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The BucketObject resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -478,8 +617,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -487,8 +625,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_csharp" style="color: inherit; text-decoration: inherit;">Acl</a>
@@ -496,8 +633,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cachecontrol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cachecontrol_csharp" style="color: inherit; text-decoration: inherit;">Cache<wbr>Control</a>
@@ -505,8 +641,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_csharp" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -514,8 +649,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Disposition</a>
@@ -523,8 +657,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Encoding</a>
@@ -532,8 +665,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Type</a>
@@ -541,8 +673,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="etag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_csharp" style="color: inherit; text-decoration: inherit;">Etag</a>
@@ -550,8 +681,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_csharp" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -559,8 +689,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -568,17 +697,15 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -592,8 +719,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -601,8 +727,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_go" style="color: inherit; text-decoration: inherit;">Acl</a>
@@ -610,8 +735,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cachecontrol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cachecontrol_go" style="color: inherit; text-decoration: inherit;">Cache<wbr>Control</a>
@@ -619,8 +743,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_go" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -628,8 +751,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Disposition</a>
@@ -637,8 +759,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Encoding</a>
@@ -646,8 +767,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Type</a>
@@ -655,8 +775,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="etag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_go" style="color: inherit; text-decoration: inherit;">Etag</a>
@@ -664,8 +783,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_go" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -673,8 +791,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -682,17 +799,117 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_hcl" style="color: inherit; text-decoration: inherit;">acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cache_control_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cache_control_hcl" style="color: inherit; text-decoration: inherit;">cache_<wbr>control</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_disposition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_disposition_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>disposition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_encoding_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_encoding_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>encoding</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_type_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="etag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_hcl" style="color: inherit; text-decoration: inherit;">etag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -706,8 +923,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -715,8 +931,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_java" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -724,8 +939,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cachecontrol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cachecontrol_java" style="color: inherit; text-decoration: inherit;">cache<wbr>Control</a>
@@ -733,8 +947,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_java" style="color: inherit; text-decoration: inherit;">content</a>
@@ -742,8 +955,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_java" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -751,8 +963,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_java" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -760,8 +971,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_java" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -769,8 +979,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="etag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_java" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -778,8 +987,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_java" style="color: inherit; text-decoration: inherit;">source</a>
@@ -787,8 +995,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -796,17 +1003,15 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -820,8 +1025,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -829,8 +1033,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_nodejs" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -838,8 +1041,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cachecontrol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cachecontrol_nodejs" style="color: inherit; text-decoration: inherit;">cache<wbr>Control</a>
@@ -847,8 +1049,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_nodejs" style="color: inherit; text-decoration: inherit;">content</a>
@@ -856,8 +1057,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -865,8 +1065,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -874,8 +1073,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -883,8 +1081,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="etag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_nodejs" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -892,8 +1089,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_nodejs" style="color: inherit; text-decoration: inherit;">source</a>
@@ -901,8 +1097,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -910,17 +1105,15 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -934,8 +1127,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -943,8 +1135,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_python" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -952,8 +1143,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cache_control_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cache_control_python" style="color: inherit; text-decoration: inherit;">cache_<wbr>control</a>
@@ -961,8 +1151,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_python" style="color: inherit; text-decoration: inherit;">content</a>
@@ -970,8 +1159,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_disposition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_disposition_python" style="color: inherit; text-decoration: inherit;">content_<wbr>disposition</a>
@@ -979,8 +1167,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_encoding_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_encoding_python" style="color: inherit; text-decoration: inherit;">content_<wbr>encoding</a>
@@ -988,8 +1175,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_type_python" style="color: inherit; text-decoration: inherit;">content_<wbr>type</a>
@@ -997,8 +1183,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="etag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_python" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -1006,8 +1191,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_python" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1015,8 +1199,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
@@ -1024,17 +1207,15 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1048,8 +1229,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1057,8 +1237,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="acl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_yaml" style="color: inherit; text-decoration: inherit;">acl</a>
@@ -1066,8 +1245,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cachecontrol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cachecontrol_yaml" style="color: inherit; text-decoration: inherit;">cache<wbr>Control</a>
@@ -1075,8 +1253,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_yaml" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1084,8 +1261,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -1093,8 +1269,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -1102,8 +1277,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -1111,8 +1285,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="etag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_yaml" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -1120,8 +1293,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional"
             title="Optional">
         <span id="source_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_yaml" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1129,8 +1301,7 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -1138,17 +1309,15 @@ The BucketObject resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1169,8 +1338,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1184,8 +1352,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1199,8 +1380,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1214,8 +1394,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1408,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1244,8 +1422,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1255,18 +1432,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing BucketObject resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BucketObjectState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BucketObject</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BucketObjectState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BucketObject</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1281,105 +1458,144 @@ Get an existing BucketObject resource's state with the given name, ID, and optio
         <span class="nx">key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">source</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">storage_class</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> BucketObject</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> BucketObject</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBucketObject<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BucketObjectState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BucketObject</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBucketObject<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BucketObjectState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BucketObject</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BucketObject</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketObjectState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BucketObject</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketObjectState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BucketObject</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketObjectState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BucketObject</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BucketObjectState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingBucketObject</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cos:BucketObject</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cos_bucket_object</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketObjectState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketObjectState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1387,28 +1603,31 @@ Get an existing BucketObject resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketObjectState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1416,28 +1635,31 @@ Get an existing BucketObject resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BucketObjectState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1457,8 +1679,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_csharp" style="color: inherit; text-decoration: inherit;">Bucket</a>
@@ -1466,8 +1687,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cachecontrol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cachecontrol_csharp" style="color: inherit; text-decoration: inherit;">Cache<wbr>Control</a>
@@ -1475,8 +1695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_csharp" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -1484,8 +1703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentdisposition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentdisposition_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Disposition</a>
@@ -1493,8 +1711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentencoding_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentencoding_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Encoding</a>
@@ -1502,8 +1719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contenttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contenttype_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Type</a>
@@ -1511,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_etag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_etag_csharp" style="color: inherit; text-decoration: inherit;">Etag</a>
@@ -1520,8 +1735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -1529,8 +1743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_csharp" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1538,8 +1751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageclass_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -1547,17 +1759,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1571,8 +1781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_go" style="color: inherit; text-decoration: inherit;">Bucket</a>
@@ -1580,8 +1789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cachecontrol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cachecontrol_go" style="color: inherit; text-decoration: inherit;">Cache<wbr>Control</a>
@@ -1589,8 +1797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_go" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -1598,8 +1805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentdisposition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentdisposition_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Disposition</a>
@@ -1607,8 +1813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentencoding_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentencoding_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Encoding</a>
@@ -1616,8 +1821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contenttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contenttype_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Type</a>
@@ -1625,8 +1829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_etag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_etag_go" style="color: inherit; text-decoration: inherit;">Etag</a>
@@ -1634,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -1643,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_go" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1652,8 +1853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageclass_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -1661,17 +1861,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acl_hcl" style="color: inherit; text-decoration: inherit;">acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cache_control_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cache_control_hcl" style="color: inherit; text-decoration: inherit;">cache_<wbr>control</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_content_disposition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_disposition_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>disposition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_content_encoding_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_encoding_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>encoding</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_content_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_type_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_etag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_etag_hcl" style="color: inherit; text-decoration: inherit;">etag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1685,8 +1985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_java" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1694,8 +1993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cachecontrol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cachecontrol_java" style="color: inherit; text-decoration: inherit;">cache<wbr>Control</a>
@@ -1703,8 +2001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_java" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1712,8 +2009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentdisposition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentdisposition_java" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -1721,8 +2017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentencoding_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentencoding_java" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -1730,8 +2025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contenttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contenttype_java" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -1739,8 +2033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_etag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_etag_java" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -1748,8 +2041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1757,8 +2049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_java" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1766,8 +2057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageclass_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -1775,17 +2065,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1799,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_nodejs" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1808,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cachecontrol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cachecontrol_nodejs" style="color: inherit; text-decoration: inherit;">cache<wbr>Control</a>
@@ -1817,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_nodejs" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1826,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentdisposition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentdisposition_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -1835,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentencoding_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentencoding_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -1844,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contenttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contenttype_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -1853,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_etag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_etag_nodejs" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -1862,8 +2143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1871,8 +2151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_nodejs" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1880,8 +2159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageclass_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -1889,17 +2167,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1913,8 +2189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_python" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1922,8 +2197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cache_control_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cache_control_python" style="color: inherit; text-decoration: inherit;">cache_<wbr>control</a>
@@ -1931,8 +2205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_python" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1940,8 +2213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_disposition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_disposition_python" style="color: inherit; text-decoration: inherit;">content_<wbr>disposition</a>
@@ -1949,8 +2221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_encoding_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_encoding_python" style="color: inherit; text-decoration: inherit;">content_<wbr>encoding</a>
@@ -1958,8 +2229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_type_python" style="color: inherit; text-decoration: inherit;">content_<wbr>type</a>
@@ -1967,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_etag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_etag_python" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -1976,8 +2245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1985,8 +2253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_python" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1994,8 +2261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_class_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
@@ -2003,17 +2269,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2027,8 +2291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The canned ACL to apply. Available values include <code>private</code>, <code>public-read</code>, and <code>public-read-write</code>. Defaults to <code>private</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_yaml" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -2036,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a bucket to use. Bucket format should be [custom name]-[appid], for example <code>mycos-1258798060</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cachecontrol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cachecontrol_yaml" style="color: inherit; text-decoration: inherit;">cache<wbr>Control</a>
@@ -2045,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_yaml" style="color: inherit; text-decoration: inherit;">content</a>
@@ -2054,8 +2315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</p>
-</dd><dt class="property-optional"
+    <dd>Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentdisposition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentdisposition_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -2063,8 +2323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contentencoding_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contentencoding_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -2072,8 +2331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contenttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contenttype_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -2081,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-optional"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_etag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_etag_yaml" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -2090,8 +2347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ETag generated for the object (an MD5 sum of the object content).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ETag generated for the object (an MD5 sum of the object content).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2099,8 +2355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the object once it is in the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the object once it is in the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_yaml" style="color: inherit; text-decoration: inherit;">source</a>
@@ -2108,8 +2363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The path to the source file being uploaded to the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The path to the source file being uploaded to the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageclass_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -2117,17 +2371,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</p>
-</dd><dt class="property-optional"
+    <dd>Object storage type, Available values include <code>STANDARD_IA</code>, <code>MAZ_STANDARD_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>MAZ_INTELLIGENT_TIERING</code>, <code>ARCHIVE</code>, <code>DEEP_ARCHIVE</code>. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag of the object.</p>
-</dd></dl>
+    <dd>Tag of the object.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2146,7 +2398,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Script"
 title_tag: "tencentcloud.Wedata.Script"
-meta_desc: "Documentation for the tencentcloud.Wedata.Script resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a wedata script"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,30 +18,74 @@ Provides a resource to create a wedata script
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.wedata.Script("example", {
-    bucketName: "wedata-demo-1257305158",
-    fileExtensionType: "sql",
     filePath: "/datastudio/project/tf_example.sql",
     projectId: "1470575647377821696",
+    bucketName: "wedata-demo-1257305158",
     region: "ap-guangzhou",
+    fileExtensionType: "sql",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.wedata.Script("example",
-    bucket_name="wedata-demo-1257305158",
-    file_extension_type="sql",
     file_path="/datastudio/project/tf_example.sql",
     project_id="1470575647377821696",
-    region="ap-guangzhou")
+    bucket_name="wedata-demo-1257305158",
+    region="ap-guangzhou",
+    file_extension_type="sql")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/wedata"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := wedata.NewScript(ctx, "example", &wedata.ScriptArgs{
+			FilePath:          pulumi.String("/datastudio/project/tf_example.sql"),
+			ProjectId:         pulumi.String("1470575647377821696"),
+			BucketName:        pulumi.String("wedata-demo-1257305158"),
+			Region:            pulumi.String("ap-guangzhou"),
+			FileExtensionType: pulumi.String("sql"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -50,39 +96,20 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Wedata.Script("example", new()
     {
-        BucketName = "wedata-demo-1257305158",
-        FileExtensionType = "sql",
         FilePath = "/datastudio/project/tf_example.sql",
         ProjectId = "1470575647377821696",
+        BucketName = "wedata-demo-1257305158",
         Region = "ap-guangzhou",
+        FileExtensionType = "sql",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Wedata.NewScript(ctx, "example", &Wedata.ScriptArgs{
-			BucketName:        pulumi.String("wedata-demo-1257305158"),
-			FileExtensionType: pulumi.String("sql"),
-			FilePath:          pulumi.String("/datastudio/project/tf_example.sql"),
-			ProjectId:         pulumi.String("1470575647377821696"),
-			Region:            pulumi.String("ap-guangzhou"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -91,8 +118,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Wedata.Script;
 import com.pulumi.tencentcloud.Wedata.ScriptArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,91 +131,143 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Script("example", ScriptArgs.builder()        
-            .bucketName("wedata-demo-1257305158")
-            .fileExtensionType("sql")
+        var example = new Script("example", ScriptArgs.builder()
             .filePath("/datastudio/project/tf_example.sql")
             .projectId("1470575647377821696")
+            .bucketName("wedata-demo-1257305158")
             .region("ap-guangzhou")
+            .fileExtensionType("sql")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Wedata:Script
     properties:
-      bucketName: wedata-demo-1257305158
-      fileExtensionType: sql
       filePath: /datastudio/project/tf_example.sql
       projectId: '1470575647377821696'
+      bucketName: wedata-demo-1257305158
       region: ap-guangzhou
+      fileExtensionType: sql
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_wedata_script" "example" {
+  file_path           = "/datastudio/project/tf_example.sql"
+  project_id          = "1470575647377821696"
+  bucket_name         = "wedata-demo-1257305158"
+  region              = "ap-guangzhou"
+  file_extension_type = "sql"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [UploadContent](https://www.tencentcloud.com/document/api/1174/61143)
+* Read: [GetFileInfo](https://www.tencentcloud.com/document/api/1174/61151)
+* Update: [UploadContent](https://www.tencentcloud.com/document/api/1174/61143)
+* Delete: [DeleteFile](https://www.tencentcloud.com/document/api/1174/61166)
 
 
 ## Create Script Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Script</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ScriptArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Script</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ScriptArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Script</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ScriptArgs]</a></span> = None<span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Script</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
            <span class="nx">bucket_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">file_extension_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">file_path</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Script</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ScriptArgs]</a></span> = None<span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScript</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ScriptArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Script</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScript</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ScriptArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Script</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Script</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScriptArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Script</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScriptArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Script</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScriptArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Script</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScriptArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Wedata:Script</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Wedata:Script</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_wedata_script&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -209,7 +288,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -326,11 +405,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Script Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Script resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -346,8 +433,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileextensiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileextensiontype_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Extension<wbr>Type</a>
@@ -355,8 +441,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="filepath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepath_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Path</a>
@@ -364,8 +449,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -373,8 +457,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -382,8 +465,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd></dl>
+    <dd>Cos region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -397,8 +479,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileextensiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileextensiontype_go" style="color: inherit; text-decoration: inherit;">File<wbr>Extension<wbr>Type</a>
@@ -406,8 +487,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="filepath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepath_go" style="color: inherit; text-decoration: inherit;">File<wbr>Path</a>
@@ -415,8 +495,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -424,8 +503,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -433,8 +511,53 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd></dl>
+    <dd>Cos region.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="bucket_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_name_hcl" style="color: inherit; text-decoration: inherit;">bucket_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos bucket name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="file_extension_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_extension_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>extension_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="file_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_path_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -448,8 +571,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileextensiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileextensiontype_java" style="color: inherit; text-decoration: inherit;">file<wbr>Extension<wbr>Type</a>
@@ -457,8 +579,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="filepath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepath_java" style="color: inherit; text-decoration: inherit;">file<wbr>Path</a>
@@ -466,8 +587,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -475,8 +595,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -484,8 +603,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd></dl>
+    <dd>Cos region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -499,8 +617,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileextensiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileextensiontype_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Extension<wbr>Type</a>
@@ -508,8 +625,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="filepath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepath_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Path</a>
@@ -517,8 +633,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -526,8 +641,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -535,8 +649,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd></dl>
+    <dd>Cos region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -550,8 +663,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="file_extension_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_extension_type_python" style="color: inherit; text-decoration: inherit;">file_<wbr>extension_<wbr>type</a>
@@ -559,8 +671,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="file_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_path_python" style="color: inherit; text-decoration: inherit;">file_<wbr>path</a>
@@ -568,8 +679,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -577,8 +687,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -586,8 +695,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd></dl>
+    <dd>Cos region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -601,8 +709,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileextensiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileextensiontype_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Extension<wbr>Type</a>
@@ -610,8 +717,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="filepath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepath_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Path</a>
@@ -619,8 +725,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -628,8 +733,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -637,8 +741,7 @@ The Script resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd></dl>
+    <dd>Cos region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -659,8 +762,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -668,8 +770,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -683,8 +784,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -692,8 +792,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -707,8 +828,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -716,8 +836,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,8 +850,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -740,8 +858,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -755,8 +872,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -764,8 +880,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -779,8 +894,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -788,8 +902,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -799,18 +912,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Script resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScriptState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Script</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScriptState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Script</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -820,104 +933,143 @@ Get an existing Script resource's state with the given name, ID, and optional ex
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Script</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScript<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScriptState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Script</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScript<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScriptState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Script</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Script</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScriptState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Script</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScriptState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Script</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScriptState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Script</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScriptState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingScript</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Wedata:Script</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_wedata_script</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScriptState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScriptState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -925,28 +1077,31 @@ Get an existing Script resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScriptState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -954,28 +1109,31 @@ Get an existing Script resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScriptState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -995,8 +1153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fileextensiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileextensiontype_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Extension<wbr>Type</a>
@@ -1004,8 +1161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filepath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filepath_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Path</a>
@@ -1013,8 +1169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1022,8 +1177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1031,8 +1185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd><dt class="property-optional"
+    <dd>Cos region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1040,8 +1193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1055,8 +1207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fileextensiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileextensiontype_go" style="color: inherit; text-decoration: inherit;">File<wbr>Extension<wbr>Type</a>
@@ -1064,8 +1215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filepath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filepath_go" style="color: inherit; text-decoration: inherit;">File<wbr>Path</a>
@@ -1073,8 +1223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1082,8 +1231,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1091,8 +1239,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd><dt class="property-optional"
+    <dd>Cos region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1100,8 +1247,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_bucket_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_name_hcl" style="color: inherit; text-decoration: inherit;">bucket_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos bucket name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_file_extension_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_extension_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>extension_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_file_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_path_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1115,8 +1315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fileextensiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileextensiontype_java" style="color: inherit; text-decoration: inherit;">file<wbr>Extension<wbr>Type</a>
@@ -1124,8 +1323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filepath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filepath_java" style="color: inherit; text-decoration: inherit;">file<wbr>Path</a>
@@ -1133,8 +1331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1142,8 +1339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1151,8 +1347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd><dt class="property-optional"
+    <dd>Cos region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1160,8 +1355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1175,8 +1369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fileextensiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileextensiontype_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Extension<wbr>Type</a>
@@ -1184,8 +1377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filepath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filepath_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Path</a>
@@ -1193,8 +1385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1202,8 +1393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1211,8 +1401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd><dt class="property-optional"
+    <dd>Cos region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1220,8 +1409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_file_extension_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_extension_type_python" style="color: inherit; text-decoration: inherit;">file_<wbr>extension_<wbr>type</a>
@@ -1244,8 +1431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_file_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_path_python" style="color: inherit; text-decoration: inherit;">file_<wbr>path</a>
@@ -1253,8 +1439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1262,8 +1447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1271,8 +1455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd><dt class="property-optional"
+    <dd>Cos region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -1280,8 +1463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1295,8 +1477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket name.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fileextensiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileextensiontype_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Extension<wbr>Type</a>
@@ -1304,8 +1485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</p>
-</dd><dt class="property-optional"
+    <dd>File Extension Type:jar, sql, zip, py, sh, txt, di, dg, pyspark, kjb, ktr, csv.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filepath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filepath_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Path</a>
@@ -1313,8 +1493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos file path:/datastudio/project/projectId/.</p>
-</dd><dt class="property-optional"
+    <dd>Cos file path:/datastudio/project/projectId/.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1322,8 +1501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1331,8 +1509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos region.</p>
-</dd><dt class="property-optional"
+    <dd>Cos region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1340,8 +1517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd></dl>
+    <dd>Resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1364,6 +1540,9 @@ $ pulumi import tencentcloud:Wedata/script:Script example 1470575647377821696#/d
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1373,7 +1552,6 @@ $ pulumi import tencentcloud:Wedata/script:Script example 1470575647377821696#/d
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

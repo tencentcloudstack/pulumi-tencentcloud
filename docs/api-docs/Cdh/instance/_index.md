@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Cdh.Instance"
-meta_desc: "Documentation for the tencentcloud.Cdh.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to manage CDH instance. NOTE: CHD instance not supported delete, please contact the work order for processing"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,84 +16,67 @@ no_edit_this_page: true
 
 Provides a resource to manage CDH instance.
 
+> **NOTE:** CHD instance not supported delete, please contact the work order for processing
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const config = new pulumi.Config();
-const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
-const foo = new tencentcloud.cdh.Instance("foo", {
-    availabilityZone: availabilityZone,
+const example = new tencentcloud.cdh.Instance("example", {
+    availabilityZone: "ap-guangzhou-6",
     hostType: "HC20",
     chargeType: "PREPAID",
     prepaidPeriod: 1,
-    hostName: "test",
+    hostName: "tf-example",
     prepaidRenewFlag: "NOTIFY_AND_MANUAL_RENEW",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-config = pulumi.Config()
-availability_zone = config.get("availabilityZone")
-if availability_zone is None:
-    availability_zone = "ap-guangzhou-3"
-foo = tencentcloud.cdh.Instance("foo",
-    availability_zone=availability_zone,
+example = tencentcloud.cdh.Instance("example",
+    availability_zone="ap-guangzhou-6",
     host_type="HC20",
     charge_type="PREPAID",
     prepaid_period=1,
-    host_name="test",
+    host_name="tf-example",
     prepaid_renew_flag="NOTIFY_AND_MANUAL_RENEW")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var foo = new Tencentcloud.Cdh.Instance("foo", new()
-    {
-        AvailabilityZone = availabilityZone,
-        HostType = "HC20",
-        ChargeType = "PREPAID",
-        PrepaidPeriod = 1,
-        HostName = "test",
-        PrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdh"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-3"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		_, err := Cdh.NewInstance(ctx, "foo", &Cdh.InstanceArgs{
-			AvailabilityZone: pulumi.String(availabilityZone),
+		_, err := cdh.NewInstance(ctx, "example", &cdh.InstanceArgs{
+			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 			HostType:         pulumi.String("HC20"),
 			ChargeType:       pulumi.String("PREPAID"),
 			PrepaidPeriod:    pulumi.Int(1),
-			HostName:         pulumi.String("test"),
+			HostName:         pulumi.String("tf-example"),
 			PrepaidRenewFlag: pulumi.String("NOTIFY_AND_MANUAL_RENEW"),
 		})
 		if err != nil {
@@ -101,6 +86,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cdh.Instance("example", new()
+    {
+        AvailabilityZone = "ap-guangzhou-6",
+        HostType = "HC20",
+        ChargeType = "PREPAID",
+        PrepaidPeriod = 1,
+        HostName = "tf-example",
+        PrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -109,8 +124,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cdh.Instance;
 import com.pulumi.tencentcloud.Cdh.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -122,55 +137,98 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var config = ctx.config();
-        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
-        var foo = new Instance("foo", InstanceArgs.builder()        
-            .availabilityZone(availabilityZone)
+        var example = new Instance("example", InstanceArgs.builder()
+            .availabilityZone("ap-guangzhou-6")
             .hostType("HC20")
             .chargeType("PREPAID")
             .prepaidPeriod(1)
-            .hostName("test")
+            .hostName("tf-example")
             .prepaidRenewFlag("NOTIFY_AND_MANUAL_RENEW")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
-configuration:
-  availabilityZone:
-    type: string
-    default: ap-guangzhou-3
 resources:
-  foo:
+  example:
     type: tencentcloud:Cdh:Instance
     properties:
-      availabilityZone: ${availabilityZone}
+      availabilityZone: ap-guangzhou-6
       hostType: HC20
       chargeType: PREPAID
       prepaidPeriod: 1
-      hostName: test
+      hostName: tf-example
       prepaidRenewFlag: NOTIFY_AND_MANUAL_RENEW
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cdh_instance" "example" {
+  availability_zone  = "ap-guangzhou-6"
+  host_type          = "HC20"
+  charge_type        = "PREPAID"
+  prepaid_period     = 1
+  host_name          = "tf-example"
+  prepaid_renew_flag = "NOTIFY_AND_MANUAL_RENEW"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AllocateHosts](https://www.tencentcloud.com/search/?wd=AllocateHosts&type=document&lang=en)
+  - [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
+  - [ModifyHostsAttribute](https://www.tencentcloud.com/search/?wd=ModifyHostsAttribute&type=document&lang=en)
+* Read: [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
+* Update: [ModifyHostsAttribute](https://www.tencentcloud.com/search/?wd=ModifyHostsAttribute&type=document&lang=en)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -179,44 +237,50 @@ resources:
              <span class="nx">host_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">prepaid_renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cdh:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cdh:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cdh_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -237,7 +301,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -354,11 +418,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -374,8 +446,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -383,8 +454,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -392,8 +462,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="hosttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Type</a>
@@ -401,8 +470,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -410,8 +478,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -419,8 +486,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -428,8 +494,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -443,8 +508,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -452,8 +516,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -461,8 +524,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="hosttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Type</a>
@@ -470,8 +532,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -479,8 +540,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -488,8 +548,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -497,8 +556,69 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="host_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_type_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -512,8 +632,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -521,8 +640,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -530,8 +648,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="hosttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_java" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -539,8 +656,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -548,8 +664,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -557,8 +672,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -566,8 +680,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -581,8 +694,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -590,8 +702,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -599,8 +710,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="hosttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -608,8 +718,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -617,8 +726,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -626,8 +734,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -635,8 +742,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -650,8 +756,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -659,8 +764,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
@@ -668,8 +772,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="host_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_type_python" style="color: inherit; text-decoration: inherit;">host_<wbr>type</a>
@@ -677,8 +780,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -686,8 +788,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
@@ -695,8 +796,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -704,8 +804,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -719,8 +818,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -728,8 +826,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -737,8 +834,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="hosttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosttype_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -746,8 +842,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -755,8 +850,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -764,8 +858,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -773,8 +866,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -795,8 +887,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="cvminstanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_csharp" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Ids</a>
@@ -804,8 +895,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -813,8 +903,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="hostresources_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Resources</a>
@@ -822,8 +911,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancehostresource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdh.<wbr>Outputs.<wbr>Instance<wbr>Host<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="hoststate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -831,8 +919,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -840,8 +927,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -855,8 +941,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="cvminstanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_go" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Ids</a>
@@ -864,8 +949,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -873,8 +957,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="hostresources_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Resources</a>
@@ -882,8 +965,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancehostresource">[]Instance<wbr>Host<wbr>Resource</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="hoststate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_go" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -891,8 +973,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -900,8 +981,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the instance.</dd><dt class="property-"
+            title="">
+        <span id="cvm_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-"
+            title="">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expired time of the instance.</dd><dt class="property-"
+            title="">
+        <span id="host_resources_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_resources_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>resources</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancehostresource">list(object)</a></span>
+    </dt>
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="host_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_state_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the CDH instance.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,8 +1049,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="cvminstanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_java" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -924,8 +1057,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -933,8 +1065,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="hostresources_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_java" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
@@ -942,8 +1073,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancehostresource">List&lt;Instance<wbr>Host<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="hoststate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_java" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -951,8 +1081,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -960,8 +1089,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -975,8 +1103,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="cvminstanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_nodejs" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -984,8 +1111,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -993,8 +1119,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="hostresources_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
@@ -1002,8 +1127,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancehostresource">Instance<wbr>Host<wbr>Resource[]</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="hoststate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1011,8 +1135,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1020,8 +1143,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1035,8 +1157,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="cvm_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_instance_ids_python" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>ids</a>
@@ -1044,8 +1165,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-"
             title="">
         <span id="expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -1053,17 +1173,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="host_resources_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_resources_python" style="color: inherit; text-decoration: inherit;">host_<wbr>resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancehostresource">Instance<wbr>Host<wbr>Resource]</a></span>
+        <span class="property-type"><a href="#instancehostresource">Sequence[Instance<wbr>Host<wbr>Resource]</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="host_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_state_python" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
@@ -1071,8 +1189,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1080,8 +1197,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1095,8 +1211,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="cvminstanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvminstanceids_yaml" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -1104,8 +1219,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1113,8 +1227,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="hostresources_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostresources_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
@@ -1122,8 +1235,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancehostresource">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="hoststate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hoststate_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1131,8 +1243,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-"
+    <dd>State of the CDH instance.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1140,8 +1251,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1151,18 +1261,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1172,110 +1282,149 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">cvm_instance_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">expired_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">host_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">host_resources</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cdh.InstanceHostResourceArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">host_resources</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceHostResourceArgs]]</span> = None<span class="p">,</span>
         <span class="nx">host_state</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">host_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">prepaid_renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cdh:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cdh_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1283,28 +1432,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1312,28 +1464,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1353,8 +1508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1362,8 +1516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1371,8 +1524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cvminstanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvminstanceids_csharp" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Ids</a>
@@ -1380,8 +1532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1389,8 +1540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -1398,17 +1548,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostresources_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostresources_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancehostresource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdh.<wbr>Inputs.<wbr>Instance<wbr>Host<wbr>Resource<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancehostresource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdh.<wbr>Inputs.<wbr>Instance<wbr>Host<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hoststate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hoststate_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -1416,8 +1564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the CDH instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_hosttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hosttype_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Type</a>
@@ -1425,8 +1572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -1434,8 +1580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1443,8 +1588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1452,8 +1596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1467,8 +1610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1476,8 +1618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1485,8 +1626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cvminstanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvminstanceids_go" style="color: inherit; text-decoration: inherit;">Cvm<wbr>Instance<wbr>Ids</a>
@@ -1494,8 +1634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1503,8 +1642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -1512,8 +1650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostresources_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostresources_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Resources</a>
@@ -1521,8 +1658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancehostresource">[]Instance<wbr>Host<wbr>Resource<wbr>Args</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hoststate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hoststate_go" style="color: inherit; text-decoration: inherit;">Host<wbr>State</a>
@@ -1530,8 +1666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the CDH instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_hosttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hosttype_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Type</a>
@@ -1539,8 +1674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -1548,8 +1682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1557,8 +1690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1566,8 +1698,109 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cvm_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvm_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_name_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_resources_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_resources_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>resources</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancehostresource">list(object)</a></span>
+    </dt>
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_state_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the CDH instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_host_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_type_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1581,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1590,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1599,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cvminstanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvminstanceids_java" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -1608,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1617,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -1626,17 +1854,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostresources_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostresources_java" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancehostresource">List&lt;Instance<wbr>Host<wbr>Resource<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancehostresource">List&lt;Instance<wbr>Host<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hoststate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hoststate_java" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1644,8 +1870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the CDH instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_hosttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hosttype_java" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -1653,8 +1878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1662,8 +1886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1671,8 +1894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1680,8 +1902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1695,8 +1916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1704,8 +1924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1713,8 +1932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cvminstanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvminstanceids_nodejs" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -1722,8 +1940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1731,8 +1948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -1740,17 +1956,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostresources_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostresources_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancehostresource">Instance<wbr>Host<wbr>Resource<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancehostresource">Instance<wbr>Host<wbr>Resource[]</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hoststate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hoststate_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1758,8 +1972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the CDH instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_hosttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hosttype_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -1767,8 +1980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1776,8 +1988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -1785,8 +1996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1794,8 +2004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1809,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1818,8 +2026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1827,8 +2034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cvm_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvm_instance_ids_python" style="color: inherit; text-decoration: inherit;">cvm_<wbr>instance_<wbr>ids</a>
@@ -1836,8 +2042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -1845,8 +2050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_name_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
@@ -1854,17 +2058,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_resources_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_resources_python" style="color: inherit; text-decoration: inherit;">host_<wbr>resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancehostresource">Instance<wbr>Host<wbr>Resource<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancehostresource">Sequence[Instance<wbr>Host<wbr>Resource<wbr>Args]</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_state_python" style="color: inherit; text-decoration: inherit;">host_<wbr>state</a>
@@ -1872,8 +2074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the CDH instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_host_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_type_python" style="color: inherit; text-decoration: inherit;">host_<wbr>type</a>
@@ -1881,8 +2082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -1890,8 +2090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
@@ -1899,8 +2098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1908,8 +2106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1923,8 +2120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone for the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1932,8 +2128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code>. The default is <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1941,8 +2136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cvminstanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvminstanceids_yaml" style="color: inherit; text-decoration: inherit;">cvm<wbr>Instance<wbr>Ids</a>
@@ -1950,8 +2144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Id of CVM instances that have been created on the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of CVM instances that have been created on the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1959,8 +2152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -1968,8 +2160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the CDH instance. The max length of host_name is 60.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the CDH instance. The max length of hostName is 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostresources_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostresources_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Resources</a>
@@ -1977,8 +2168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancehostresource">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of host resource. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of host resource. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hoststate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hoststate_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>State</a>
@@ -1986,8 +2176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the CDH instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the CDH instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_hosttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hosttype_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Type</a>
@@ -1995,8 +2184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the CDH instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the CDH instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2004,8 +2192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -2013,8 +2200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2022,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd></dl>
+    <dd>The project the instance belongs to, default to 0.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2038,7 +2223,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instancehostresource">Instance<wbr>Host<wbr>Resource</h4>
+<h4 id="instancehostresource">
+Instance<wbr>Host<wbr>Resource<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Host<wbr>Resource<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2050,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cputotalnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Total<wbr>Num</a>
@@ -2059,8 +2245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskavailablesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Available<wbr>Size</a>
@@ -2068,8 +2253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktotalsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Total<wbr>Size</a>
@@ -2077,8 +2261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -2086,8 +2269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="memoryavailablesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Available<wbr>Size</a>
@@ -2095,8 +2277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorytotalsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Total<wbr>Size</a>
@@ -2104,8 +2285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2119,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cputotalnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Total<wbr>Num</a>
@@ -2128,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskavailablesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Available<wbr>Size</a>
@@ -2137,8 +2315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktotalsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Total<wbr>Size</a>
@@ -2146,8 +2323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -2155,8 +2331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="memoryavailablesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Available<wbr>Size</a>
@@ -2164,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorytotalsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Total<wbr>Size</a>
@@ -2173,8 +2347,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_available_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_available_num_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>available_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_total_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_total_num_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>total_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_available_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_available_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>available_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_total_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_total_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>total_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="memory_available_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_available_size_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>available_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="memory_total_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_total_size_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>total_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2188,8 +2423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cputotalnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Total<wbr>Num</a>
@@ -2197,8 +2431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskavailablesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Available<wbr>Size</a>
@@ -2206,8 +2439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktotalsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Total<wbr>Size</a>
@@ -2215,8 +2447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2224,8 +2455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="memoryavailablesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Available<wbr>Size</a>
@@ -2233,8 +2463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorytotalsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Total<wbr>Size</a>
@@ -2242,8 +2471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2257,8 +2485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cputotalnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Total<wbr>Num</a>
@@ -2266,8 +2493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskavailablesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Available<wbr>Size</a>
@@ -2275,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktotalsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Total<wbr>Size</a>
@@ -2284,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2293,8 +2517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="memoryavailablesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Available<wbr>Size</a>
@@ -2302,8 +2525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorytotalsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Total<wbr>Size</a>
@@ -2311,8 +2533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2326,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_total_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_total_num_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>total_<wbr>num</a>
@@ -2335,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_available_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_available_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>available_<wbr>size</a>
@@ -2344,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_total_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_total_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>total_<wbr>size</a>
@@ -2353,8 +2571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -2362,8 +2579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="memory_available_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_available_size_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>available_<wbr>size</a>
@@ -2371,8 +2587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="memory_total_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_total_size_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>total_<wbr>size</a>
@@ -2380,8 +2595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2395,8 +2609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of available CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of available CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cputotalnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputotalnum_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Total<wbr>Num</a>
@@ -2404,8 +2617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of total CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of total CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskavailablesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskavailablesize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Available<wbr>Size</a>
@@ -2413,8 +2625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance disk available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktotalsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktotalsize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Total<wbr>Size</a>
@@ -2422,8 +2633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance disk total capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance disk total capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2431,8 +2641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the disk.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="memoryavailablesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryavailablesize_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Available<wbr>Size</a>
@@ -2440,8 +2649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory available capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory available capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorytotalsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorytotalsize_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Total<wbr>Size</a>
@@ -2449,8 +2657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory total capacity, unit in GB.</p>
-</dd></dl>
+    <dd>Instance memory total capacity, unit in GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2461,9 +2668,12 @@ The following state arguments are supported:
 CDH instance can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
+$ pulumi import tencentcloud:Cdh/instance:Instance example host-d6s7i5q4
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2475,7 +2685,6 @@ $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

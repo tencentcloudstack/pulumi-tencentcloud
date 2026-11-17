@@ -2,9 +2,11 @@
 ---
 title: "getDdosPolicyAttachments"
 title_tag: "tencentcloud.Dayu.getDdosPolicyAttachments"
-meta_desc: "Documentation for the tencentcloud.Dayu.getDdosPolicyAttachments function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dayu DDoS policy attachments"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,86 +18,74 @@ Use this data source to query detailed information of dayu DDoS policy attachmen
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooType = tencentcloud.Dayu.getDdosPolicyAttachments({
-    resourceType: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type,
+const fooType = tencentcloud.dayu.getDdosPolicyAttachments({
+    resourceType: dayuDdosPolicyAttachment.resourceType,
 });
-const fooResource = tencentcloud.Dayu.getDdosPolicyAttachments({
-    resourceId: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_id,
-    resourceType: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type,
+const fooResource = tencentcloud.dayu.getDdosPolicyAttachments({
+    resourceId: dayuDdosPolicyAttachment.resourceId,
+    resourceType: dayuDdosPolicyAttachment.resourceType,
 });
-const fooPolicy = tencentcloud.Dayu.getDdosPolicyAttachments({
-    resourceType: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type,
-    policyId: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.policy_id,
+const fooPolicy = tencentcloud.dayu.getDdosPolicyAttachments({
+    resourceType: dayuDdosPolicyAttachment.resourceType,
+    policyId: dayuDdosPolicyAttachment.policyId,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo_type = tencentcloud.Dayu.get_ddos_policy_attachments(resource_type=tencentcloud_dayu_ddos_policy_attachment["dayu_ddos_policy_attachment"]["resource_type"])
-foo_resource = tencentcloud.Dayu.get_ddos_policy_attachments(resource_id=tencentcloud_dayu_ddos_policy_attachment["dayu_ddos_policy_attachment"]["resource_id"],
-    resource_type=tencentcloud_dayu_ddos_policy_attachment["dayu_ddos_policy_attachment"]["resource_type"])
-foo_policy = tencentcloud.Dayu.get_ddos_policy_attachments(resource_type=tencentcloud_dayu_ddos_policy_attachment["dayu_ddos_policy_attachment"]["resource_type"],
-    policy_id=tencentcloud_dayu_ddos_policy_attachment["dayu_ddos_policy_attachment"]["policy_id"])
+foo_type = tencentcloud.dayu.get_ddos_policy_attachments(resource_type=dayu_ddos_policy_attachment["resourceType"])
+foo_resource = tencentcloud.dayu.get_ddos_policy_attachments(resource_id=dayu_ddos_policy_attachment["resourceId"],
+    resource_type=dayu_ddos_policy_attachment["resourceType"])
+foo_policy = tencentcloud.dayu.get_ddos_policy_attachments(resource_type=dayu_ddos_policy_attachment["resourceType"],
+    policy_id=dayu_ddos_policy_attachment["policyId"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var fooType = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
-    {
-        ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-    });
-
-    var fooResource = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
-    {
-        ResourceId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_id,
-        ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-    });
-
-    var fooPolicy = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
-    {
-        ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-        PolicyId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Policy_id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
-			ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+		_, err := dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
+			ResourceType: dayuDdosPolicyAttachment.ResourceType,
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
-			ResourceId:   pulumi.StringRef(tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_id),
-			ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+		_, err = dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
+			ResourceId:   pulumi.StringRef(dayuDdosPolicyAttachment.ResourceId),
+			ResourceType: dayuDdosPolicyAttachment.ResourceType,
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
-			ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-			PolicyId:     pulumi.StringRef(tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Policy_id),
+		_, err = dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
+			ResourceType: dayuDdosPolicyAttachment.ResourceType,
+			PolicyId:     pulumi.StringRef(dayuDdosPolicyAttachment.PolicyId),
 		}, nil)
 		if err != nil {
 			return err
@@ -104,6 +94,43 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var fooType = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
+    {
+        ResourceType = dayuDdosPolicyAttachment.ResourceType,
+    });
+
+    var fooResource = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
+    {
+        ResourceId = dayuDdosPolicyAttachment.ResourceId,
+        ResourceType = dayuDdosPolicyAttachment.ResourceType,
+    });
+
+    var fooPolicy = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
+    {
+        ResourceType = dayuDdosPolicyAttachment.ResourceType,
+        PolicyId = dayuDdosPolicyAttachment.PolicyId,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -112,8 +139,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.DayuFunctions;
 import com.pulumi.tencentcloud.Dayu.inputs.GetDdosPolicyAttachmentsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -126,44 +153,82 @@ public class App {
 
     public static void stack(Context ctx) {
         final var fooType = DayuFunctions.getDdosPolicyAttachments(GetDdosPolicyAttachmentsArgs.builder()
-            .resourceType(tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment().resource_type())
+            .resourceType(dayuDdosPolicyAttachment.resourceType())
             .build());
 
         final var fooResource = DayuFunctions.getDdosPolicyAttachments(GetDdosPolicyAttachmentsArgs.builder()
-            .resourceId(tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment().resource_id())
-            .resourceType(tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment().resource_type())
+            .resourceId(dayuDdosPolicyAttachment.resourceId())
+            .resourceType(dayuDdosPolicyAttachment.resourceType())
             .build());
 
         final var fooPolicy = DayuFunctions.getDdosPolicyAttachments(GetDdosPolicyAttachmentsArgs.builder()
-            .resourceType(tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment().resource_type())
-            .policyId(tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment().policy_id())
+            .resourceType(dayuDdosPolicyAttachment.resourceType())
+            .policyId(dayuDdosPolicyAttachment.policyId())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   fooType:
     fn::invoke:
-      Function: tencentcloud:Dayu:getDdosPolicyAttachments
-      Arguments:
-        resourceType: ${tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type}
+      function: tencentcloud:Dayu:getDdosPolicyAttachments
+      arguments:
+        resourceType: ${dayuDdosPolicyAttachment.resourceType}
   fooResource:
     fn::invoke:
-      Function: tencentcloud:Dayu:getDdosPolicyAttachments
-      Arguments:
-        resourceId: ${tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_id}
-        resourceType: ${tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type}
+      function: tencentcloud:Dayu:getDdosPolicyAttachments
+      arguments:
+        resourceId: ${dayuDdosPolicyAttachment.resourceId}
+        resourceType: ${dayuDdosPolicyAttachment.resourceType}
   fooPolicy:
     fn::invoke:
-      Function: tencentcloud:Dayu:getDdosPolicyAttachments
-      Arguments:
-        resourceType: ${tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type}
-        policyId: ${tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.policy_id}
+      function: tencentcloud:Dayu:getDdosPolicyAttachments
+      arguments:
+        resourceType: ${dayuDdosPolicyAttachment.resourceType}
+        policyId: ${dayuDdosPolicyAttachment.policyId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dayu_getddospolicyattachments" "fooType" {
+  resource_type = dayuDdosPolicyAttachment.resourceType
+}
+data "tencentcloud_dayu_getddospolicyattachments" "fooResource" {
+  resource_id   = dayuDdosPolicyAttachment.resourceId
+  resource_type = dayuDdosPolicyAttachment.resourceType
+}
+data "tencentcloud_dayu_getddospolicyattachments" "fooPolicy" {
+  resource_type = dayuDdosPolicyAttachment.resourceType
+  policy_id     = dayuDdosPolicyAttachment.policyId
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
 
 
 
@@ -175,7 +240,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -183,9 +248,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDdosPolicyAttachments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPolicyAttachmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>></span
+><span class="k">function </span>getDdosPolicyAttachments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPolicyAttachmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>></span
 ><span class="k">
-function </span>getDdosPolicyAttachmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPolicyAttachmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>></span
+function </span>getDdosPolicyAttachmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPolicyAttachmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,11 +265,11 @@ function </span>getDdosPolicyAttachmentsOutput<span class="p">(</span><span clas
                                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDdosPolicyAttachmentsResult</span
 ><span class="k">
-def </span>get_ddos_policy_attachments_output<span class="p">(</span><span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDdosPolicyAttachmentsResult]</span
+def </span>get_ddos_policy_attachments_output<span class="p">(</span><span class="nx">policy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDdosPolicyAttachmentsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -229,7 +294,8 @@ func </span>GetDdosPolicyAttachmentsOutput<span class="p">(</span><span class="n
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDdosPolicyAttachments </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDdosPolicyAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPolicyAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPolicyAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPolicyAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -238,7 +304,8 @@ func </span>GetDdosPolicyAttachmentsOutput<span class="p">(</span><span class="n
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>> </span>getDdosPolicyAttachments<span class="p">(</span><span class="nx">GetDdosPolicyAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>> </span>getDdosPolicyAttachments<span class="p">(</span><span class="nx">GetDdosPolicyAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDdosPolicyAttachmentsResult</a></span>> </span>getDdosPolicyAttachments<span class="p">(</span><span class="nx">GetDdosPolicyAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -250,6 +317,15 @@ func </span>GetDdosPolicyAttachmentsOutput<span class="p">(</span><span class="n
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dayu_get_ddos_policy_attachments&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -268,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -277,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -286,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -295,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -310,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -319,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -328,8 +398,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -337,8 +406,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the policy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -352,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -361,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -370,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -379,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -394,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -403,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -412,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -421,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -436,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -445,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -454,8 +550,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -463,8 +558,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -478,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -487,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -496,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -505,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -529,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicyattachmentsdayuddospolicyattachmentlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Outputs.<wbr>Get<wbr>Ddos<wbr>Policy<wbr>Attachments<wbr>Dayu<wbr>Ddos<wbr>Policy<wbr>Attachment<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of dayu DDoS policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of dayu DDoS policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -538,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -547,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy works for.</dd><dt class="property-"
             title="">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -556,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy.</dd><dt class="property-"
             title="">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -565,8 +651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource.</p>
-</dd><dt class="property-"
+    <dd>ID of the attached resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -588,8 +673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicyattachmentsdayuddospolicyattachmentlist">[]Get<wbr>Ddos<wbr>Policy<wbr>Attachments<wbr>Dayu<wbr>Ddos<wbr>Policy<wbr>Attachment<wbr>List</a></span>
     </dt>
-    <dd><p>A list of dayu DDoS policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of dayu DDoS policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -597,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -606,8 +689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy works for.</dd><dt class="property-"
             title="">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -615,8 +697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy.</dd><dt class="property-"
             title="">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -624,11 +705,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource.</p>
-</dd><dt class="property-"
+    <dd>ID of the attached resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="dayu_ddos_policy_attachment_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dayu_ddos_policy_attachment_lists_hcl" style="color: inherit; text-decoration: inherit;">dayu_<wbr>ddos_<wbr>policy_<wbr>attachment_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getddospolicyattachmentsdayuddospolicyattachmentlist">list(object)</a></span>
+    </dt>
+    <dd>A list of dayu DDoS policy attachments. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy works for.</dd><dt class="property-"
+            title="">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the policy.</dd><dt class="property-"
+            title="">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the attached resource.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -647,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicyattachmentsdayuddospolicyattachmentlist">List&lt;Get<wbr>Ddos<wbr>Policy<wbr>Attachments<wbr>Ddos<wbr>Policy<wbr>Attachment<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of dayu DDoS policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of dayu DDoS policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -656,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -665,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy works for.</dd><dt class="property-"
             title="">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -674,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy.</dd><dt class="property-"
             title="">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -683,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the attached resource.</p>
-</dd><dt class="property-"
+    <dd>ID of the attached resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -706,8 +835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicyattachmentsdayuddospolicyattachmentlist">Get<wbr>Ddos<wbr>Policy<wbr>Attachments<wbr>Dayu<wbr>Ddos<wbr>Policy<wbr>Attachment<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of dayu DDoS policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of dayu DDoS policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -715,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -724,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy works for.</dd><dt class="property-"
             title="">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -733,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy.</dd><dt class="property-"
             title="">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -742,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource.</p>
-</dd><dt class="property-"
+    <dd>ID of the attached resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -763,10 +887,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dayu_ddos_policy_attachment_lists_python" style="color: inherit; text-decoration: inherit;">dayu_<wbr>ddos_<wbr>policy_<wbr>attachment_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getddospolicyattachmentsdayuddospolicyattachmentlist">Get<wbr>Ddos<wbr>Policy<wbr>Attachments<wbr>Dayu<wbr>Ddos<wbr>Policy<wbr>Attachment<wbr>List]</a></span>
+        <span class="property-type"><a href="#getddospolicyattachmentsdayuddospolicyattachmentlist">Sequence[Get<wbr>Ddos<wbr>Policy<wbr>Attachments<wbr>Dayu<wbr>Ddos<wbr>Policy<wbr>Attachment<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of dayu DDoS policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of dayu DDoS policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -774,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -783,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy works for.</dd><dt class="property-"
             title="">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -792,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy.</dd><dt class="property-"
             title="">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -801,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the attached resource.</p>
-</dd><dt class="property-"
+    <dd>ID of the attached resource.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -824,8 +943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicyattachmentsdayuddospolicyattachmentlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of dayu DDoS policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of dayu DDoS policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -833,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -842,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy works for.</dd><dt class="property-"
             title="">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -851,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy.</dd><dt class="property-"
             title="">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -860,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the attached resource.</p>
-</dd><dt class="property-"
+    <dd>ID of the attached resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -893,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -902,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -911,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd></dl>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -926,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -935,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -944,8 +1053,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd></dl>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the policy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -959,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -968,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -977,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd></dl>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -992,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1001,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1010,8 +1143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd></dl>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1025,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -1034,8 +1165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1043,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd></dl>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1058,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1067,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the attached resource to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the attached resource to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1076,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd></dl>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1092,7 +1218,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

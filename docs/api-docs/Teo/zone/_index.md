@@ -2,9 +2,11 @@
 ---
 title: "Zone"
 title_tag: "tencentcloud.Teo.Zone"
-meta_desc: "Documentation for the tencentcloud.Teo.Zone resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a teo zone"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,38 +18,88 @@ Provides a resource to create a teo zone
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Basic Usage
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const zone = new tencentcloud.teo.Zone("zone", {
-    aliasZoneName: "teo-test",
+    zoneName: "tf-teo.com",
+    type: "partial",
     area: "overseas",
+    aliasZoneName: "teo-test",
     paused: false,
     planId: "edgeone-2kfv1h391n6w",
     tags: {
         createdBy: "terraform",
     },
-    type: "partial",
-    zoneName: "tf-teo.com",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 zone = tencentcloud.teo.Zone("zone",
-    alias_zone_name="teo-test",
+    zone_name="tf-teo.com",
+    type="partial",
     area="overseas",
+    alias_zone_name="teo-test",
     paused=False,
     plan_id="edgeone-2kfv1h391n6w",
     tags={
         "createdBy": "terraform",
-    },
-    type="partial",
-    zone_name="tf-teo.com")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := teo.NewZone(ctx, "zone", &teo.ZoneArgs{
+			ZoneName:      pulumi.String("tf-teo.com"),
+			Type:          pulumi.String("partial"),
+			Area:          pulumi.String("overseas"),
+			AliasZoneName: pulumi.String("teo-test"),
+			Paused:        pulumi.Bool(false),
+			PlanId:        pulumi.String("edgeone-2kfv1h391n6w"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -58,48 +110,25 @@ return await Deployment.RunAsync(() =>
 {
     var zone = new Tencentcloud.Teo.Zone("zone", new()
     {
-        AliasZoneName = "teo-test",
+        ZoneName = "tf-teo.com",
+        Type = "partial",
         Area = "overseas",
+        AliasZoneName = "teo-test",
         Paused = false,
         PlanId = "edgeone-2kfv1h391n6w",
         Tags = 
         {
             { "createdBy", "terraform" },
         },
-        Type = "partial",
-        ZoneName = "tf-teo.com",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Teo.NewZone(ctx, "zone", &Teo.ZoneArgs{
-			AliasZoneName: pulumi.String("teo-test"),
-			Area:          pulumi.String("overseas"),
-			Paused:        pulumi.Bool(false),
-			PlanId:        pulumi.String("edgeone-2kfv1h391n6w"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-			Type:     pulumi.String("partial"),
-			ZoneName: pulumi.String("tf-teo.com"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -108,8 +137,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Teo.Zone;
 import com.pulumi.tencentcloud.Teo.ZoneArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -121,98 +150,424 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var zone = new Zone("zone", ZoneArgs.builder()        
-            .aliasZoneName("teo-test")
+        var zone = new Zone("zone", ZoneArgs.builder()
+            .zoneName("tf-teo.com")
+            .type("partial")
             .area("overseas")
+            .aliasZoneName("teo-test")
             .paused(false)
             .planId("edgeone-2kfv1h391n6w")
             .tags(Map.of("createdBy", "terraform"))
-            .type("partial")
-            .zoneName("tf-teo.com")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   zone:
     type: tencentcloud:Teo:Zone
     properties:
-      aliasZoneName: teo-test
+      zoneName: tf-teo.com
+      type: partial
       area: overseas
+      aliasZoneName: teo-test
       paused: false
       planId: edgeone-2kfv1h391n6w
       tags:
         createdBy: terraform
-      type: partial
-      zoneName: tf-teo.com
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_teo_zone" "zone" {
+  zone_name       = "tf-teo.com"
+  type            = "partial"
+  area            = "overseas"
+  alias_zone_name = "teo-test"
+  paused          = false
+  plan_id         = "edgeone-2kfv1h391n6w"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Enable Version Control Mode
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const zoneWithVersionControl = new tencentcloud.teo.Zone("zone_with_version_control", {
+    zoneName: "tf-teo-version.com",
+    type: "partial",
+    area: "overseas",
+    aliasZoneName: "teo-version-test",
+    paused: false,
+    planId: "edgeone-2kfv1h391n6w",
+    workModeInfos: [
+        {
+            configGroupType: "l7_acceleration",
+            workMode: "immediate_effect",
+        },
+        {
+            configGroupType: "edge_functions",
+            workMode: "immediate_effect",
+        },
+    ],
+    tags: {
+        createdBy: "terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+zone_with_version_control = tencentcloud.teo.Zone("zone_with_version_control",
+    zone_name="tf-teo-version.com",
+    type="partial",
+    area="overseas",
+    alias_zone_name="teo-version-test",
+    paused=False,
+    plan_id="edgeone-2kfv1h391n6w",
+    work_mode_infos=[
+        {
+            "config_group_type": "l7_acceleration",
+            "work_mode": "immediate_effect",
+        },
+        {
+            "config_group_type": "edge_functions",
+            "work_mode": "immediate_effect",
+        },
+    ],
+    tags={
+        "createdBy": "terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := teo.NewZone(ctx, "zone_with_version_control", &teo.ZoneArgs{
+			ZoneName:      pulumi.String("tf-teo-version.com"),
+			Type:          pulumi.String("partial"),
+			Area:          pulumi.String("overseas"),
+			AliasZoneName: pulumi.String("teo-version-test"),
+			Paused:        pulumi.Bool(false),
+			PlanId:        pulumi.String("edgeone-2kfv1h391n6w"),
+			WorkModeInfos: teo.ZoneWorkModeInfoArray{
+				&teo.ZoneWorkModeInfoArgs{
+					ConfigGroupType: pulumi.String("l7_acceleration"),
+					WorkMode:        pulumi.String("immediate_effect"),
+				},
+				&teo.ZoneWorkModeInfoArgs{
+					ConfigGroupType: pulumi.String("edge_functions"),
+					WorkMode:        pulumi.String("immediate_effect"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zoneWithVersionControl = new Tencentcloud.Teo.Zone("zone_with_version_control", new()
+    {
+        ZoneName = "tf-teo-version.com",
+        Type = "partial",
+        Area = "overseas",
+        AliasZoneName = "teo-version-test",
+        Paused = false,
+        PlanId = "edgeone-2kfv1h391n6w",
+        WorkModeInfos = new[]
+        {
+            new Tencentcloud.Teo.Inputs.ZoneWorkModeInfoArgs
+            {
+                ConfigGroupType = "l7_acceleration",
+                WorkMode = "immediate_effect",
+            },
+            new Tencentcloud.Teo.Inputs.ZoneWorkModeInfoArgs
+            {
+                ConfigGroupType = "edge_functions",
+                WorkMode = "immediate_effect",
+            },
+        },
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Teo.Zone;
+import com.pulumi.tencentcloud.Teo.ZoneArgs;
+import com.pulumi.tencentcloud.Teo.inputs.ZoneWorkModeInfoArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var zoneWithVersionControl = new Zone("zoneWithVersionControl", ZoneArgs.builder()
+            .zoneName("tf-teo-version.com")
+            .type("partial")
+            .area("overseas")
+            .aliasZoneName("teo-version-test")
+            .paused(false)
+            .planId("edgeone-2kfv1h391n6w")
+            .workModeInfos(            
+                ZoneWorkModeInfoArgs.builder()
+                    .configGroupType("l7_acceleration")
+                    .workMode("immediate_effect")
+                    .build(),
+                ZoneWorkModeInfoArgs.builder()
+                    .configGroupType("edge_functions")
+                    .workMode("immediate_effect")
+                    .build())
+            .tags(Map.of("createdBy", "terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  zoneWithVersionControl:
+    type: tencentcloud:Teo:Zone
+    name: zone_with_version_control
+    properties:
+      zoneName: tf-teo-version.com
+      type: partial
+      area: overseas
+      aliasZoneName: teo-version-test
+      paused: false
+      planId: edgeone-2kfv1h391n6w
+      workModeInfos:
+        - configGroupType: l7_acceleration
+          workMode: immediate_effect
+        - configGroupType: edge_functions
+          workMode: immediate_effect
+      tags:
+        createdBy: terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_teo_zone" "zone_with_version_control" {
+  zone_name       = "tf-teo-version.com"
+  type            = "partial"
+  area            = "overseas"
+  alias_zone_name = "teo-version-test"
+  paused          = false
+  plan_id         = "edgeone-2kfv1h391n6w"
+  work_mode_infos {
+    config_group_type = "l7_acceleration"
+    work_mode         = "immediate_effect"
+  }
+  work_mode_infos {
+    config_group_type = "edge_functions"
+    work_mode         = "immediate_effect"
+  }
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateZone](https://www.tencentcloud.com/document/api/1145/50487)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+* Update:
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyZone](https://www.tencentcloud.com/document/api/1145/50477)
+  - [ModifyZoneStatus](https://www.tencentcloud.com/document/api/1145/50475)
+  - [ModifyZoneWorkMode](https://www.tencentcloud.com/document/api/1145/78821)
+* Delete: [DeleteZone](https://www.tencentcloud.com/document/api/1145/50485)
 
 
 ## Create Zone Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-         <span class="nx">alias_zone_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">paused</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-         <span class="nx">plan_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">zone_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+         <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">plan_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">zone_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">alias_zone_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">paused</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+         <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+         <span class="nx">work_mode_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneWorkModeInfoArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewZone</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Zone</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewZone</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Zone</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Teo:Zone</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Teo:Zone</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_teo_zone&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -233,7 +588,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -350,11 +705,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Zone Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -370,13 +733,12 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-required property-replacement"
+</ul></dd><dt class="property-required property-replacement"
             title="Required">
         <span id="planid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planid_csharp" style="color: inherit; text-decoration: inherit;">Plan<wbr>Id</a>
@@ -384,8 +746,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-required"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -393,8 +754,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -402,8 +762,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd><dt class="property-optional"
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="aliaszonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aliaszonename_csharp" style="color: inherit; text-decoration: inherit;">Alias<wbr>Zone<wbr>Name</a>
@@ -411,8 +770,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="paused_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paused_csharp" style="color: inherit; text-decoration: inherit;">Paused</a>
@@ -420,17 +778,23 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="workmodeinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmodeinfos_csharp" style="color: inherit; text-decoration: inherit;">Work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Zone<wbr>Work<wbr>Mode<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -444,13 +808,12 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-required property-replacement"
+</ul></dd><dt class="property-required property-replacement"
             title="Required">
         <span id="planid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planid_go" style="color: inherit; text-decoration: inherit;">Plan<wbr>Id</a>
@@ -458,8 +821,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-required"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -467,8 +829,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -476,8 +837,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd><dt class="property-optional"
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="aliaszonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aliaszonename_go" style="color: inherit; text-decoration: inherit;">Alias<wbr>Zone<wbr>Name</a>
@@ -485,8 +845,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="paused_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paused_go" style="color: inherit; text-decoration: inherit;">Paused</a>
@@ -494,17 +853,98 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="workmodeinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmodeinfos_go" style="color: inherit; text-decoration: inherit;">Work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">[]Zone<wbr>Work<wbr>Mode<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+<ul>
+<li>global: Global availability zone.</li>
+<li>mainland: Chinese mainland availability zone.</li>
+<li>overseas: Global availability zone (excluding Chinese mainland).</li>
+</ul></dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plan_id_hcl" style="color: inherit; text-decoration: inherit;">plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_zone_name_hcl" style="color: inherit; text-decoration: inherit;">alias_<wbr>zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="paused_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paused_hcl" style="color: inherit; text-decoration: inherit;">paused</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="work_mode_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_mode_infos_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>mode_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">list(object)</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -518,13 +958,12 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-required property-replacement"
+</ul></dd><dt class="property-required property-replacement"
             title="Required">
         <span id="planid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planid_java" style="color: inherit; text-decoration: inherit;">plan<wbr>Id</a>
@@ -532,8 +971,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-required"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -541,8 +979,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -550,8 +987,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd><dt class="property-optional"
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="aliaszonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aliaszonename_java" style="color: inherit; text-decoration: inherit;">alias<wbr>Zone<wbr>Name</a>
@@ -559,8 +995,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="paused_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paused_java" style="color: inherit; text-decoration: inherit;">paused</a>
@@ -568,17 +1003,23 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="workmodeinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmodeinfos_java" style="color: inherit; text-decoration: inherit;">work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">List&lt;Zone<wbr>Work<wbr>Mode<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -592,13 +1033,12 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-required property-replacement"
+</ul></dd><dt class="property-required property-replacement"
             title="Required">
         <span id="planid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planid_nodejs" style="color: inherit; text-decoration: inherit;">plan<wbr>Id</a>
@@ -606,8 +1046,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-required"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -615,8 +1054,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -624,8 +1062,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd><dt class="property-optional"
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="aliaszonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aliaszonename_nodejs" style="color: inherit; text-decoration: inherit;">alias<wbr>Zone<wbr>Name</a>
@@ -633,8 +1070,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="paused_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paused_nodejs" style="color: inherit; text-decoration: inherit;">paused</a>
@@ -642,17 +1078,23 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="workmodeinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmodeinfos_nodejs" style="color: inherit; text-decoration: inherit;">work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">Zone<wbr>Work<wbr>Mode<wbr>Info[]</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -666,13 +1108,12 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-required property-replacement"
+</ul></dd><dt class="property-required property-replacement"
             title="Required">
         <span id="plan_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plan_id_python" style="color: inherit; text-decoration: inherit;">plan_<wbr>id</a>
@@ -680,8 +1121,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-required"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -689,8 +1129,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
@@ -698,8 +1137,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd><dt class="property-optional"
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_zone_name_python" style="color: inherit; text-decoration: inherit;">alias_<wbr>zone_<wbr>name</a>
@@ -707,8 +1145,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="paused_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paused_python" style="color: inherit; text-decoration: inherit;">paused</a>
@@ -716,17 +1153,23 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="work_mode_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_mode_infos_python" style="color: inherit; text-decoration: inherit;">work_<wbr>mode_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">Sequence[Zone<wbr>Work<wbr>Mode<wbr>Info<wbr>Args]</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -740,13 +1183,12 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-required property-replacement"
+</ul></dd><dt class="property-required property-replacement"
             title="Required">
         <span id="planid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planid_yaml" style="color: inherit; text-decoration: inherit;">plan<wbr>Id</a>
@@ -754,8 +1196,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-required"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -763,8 +1204,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -772,8 +1212,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd><dt class="property-optional"
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="aliaszonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aliaszonename_yaml" style="color: inherit; text-decoration: inherit;">alias<wbr>Zone<wbr>Name</a>
@@ -781,8 +1220,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="paused_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paused_yaml" style="color: inherit; text-decoration: inherit;">paused</a>
@@ -790,17 +1228,23 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="workmodeinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmodeinfos_yaml" style="color: inherit; text-decoration: inherit;">work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -821,8 +1265,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nameservers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nameservers_csharp" style="color: inherit; text-decoration: inherit;">Name<wbr>Servers</a>
@@ -830,8 +1273,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-"
             title="">
         <span id="ownershipverifications_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ownershipverifications_csharp" style="color: inherit; text-decoration: inherit;">Ownership<wbr>Verifications</a>
@@ -839,8 +1281,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverification">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Outputs.<wbr>Zone<wbr>Ownership<wbr>Verification&gt;</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -848,8 +1289,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd></dl>
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-"
+            title="">
+        <span id="zoneid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -863,8 +1311,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nameservers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nameservers_go" style="color: inherit; text-decoration: inherit;">Name<wbr>Servers</a>
@@ -872,8 +1319,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-"
             title="">
         <span id="ownershipverifications_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ownershipverifications_go" style="color: inherit; text-decoration: inherit;">Ownership<wbr>Verifications</a>
@@ -881,8 +1327,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverification">[]Zone<wbr>Ownership<wbr>Verification</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -890,8 +1335,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd></dl>
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-"
+            title="">
+        <span id="zoneid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="name_servers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_servers_hcl" style="color: inherit; text-decoration: inherit;">name_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-"
+            title="">
+        <span id="ownership_verifications_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ownership_verifications_hcl" style="color: inherit; text-decoration: inherit;">ownership_<wbr>verifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneownershipverification">list(object)</a></span>
+    </dt>
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-"
+            title="">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -905,8 +1403,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nameservers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nameservers_java" style="color: inherit; text-decoration: inherit;">name<wbr>Servers</a>
@@ -914,8 +1411,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-"
             title="">
         <span id="ownershipverifications_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ownershipverifications_java" style="color: inherit; text-decoration: inherit;">ownership<wbr>Verifications</a>
@@ -923,8 +1419,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverification">List&lt;Zone<wbr>Ownership<wbr>Verification&gt;</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -932,8 +1427,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd></dl>
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-"
+            title="">
+        <span id="zoneid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1449,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nameservers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nameservers_nodejs" style="color: inherit; text-decoration: inherit;">name<wbr>Servers</a>
@@ -956,8 +1457,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-"
             title="">
         <span id="ownershipverifications_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ownershipverifications_nodejs" style="color: inherit; text-decoration: inherit;">ownership<wbr>Verifications</a>
@@ -965,8 +1465,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverification">Zone<wbr>Ownership<wbr>Verification[]</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -974,8 +1473,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd></dl>
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-"
+            title="">
+        <span id="zoneid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -989,8 +1495,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="name_servers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_servers_python" style="color: inherit; text-decoration: inherit;">name_<wbr>servers</a>
@@ -998,17 +1503,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-"
             title="">
         <span id="ownership_verifications_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ownership_verifications_python" style="color: inherit; text-decoration: inherit;">ownership_<wbr>verifications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneownershipverification">Zone<wbr>Ownership<wbr>Verification]</a></span>
+        <span class="property-type"><a href="#zoneownershipverification">Sequence[Zone<wbr>Ownership<wbr>Verification]</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1016,8 +1519,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd></dl>
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-"
+            title="">
+        <span id="zone_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1031,8 +1541,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nameservers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nameservers_yaml" style="color: inherit; text-decoration: inherit;">name<wbr>Servers</a>
@@ -1040,8 +1549,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-"
             title="">
         <span id="ownershipverifications_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ownershipverifications_yaml" style="color: inherit; text-decoration: inherit;">ownership<wbr>Verifications</a>
@@ -1049,8 +1557,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverification">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1058,8 +1565,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd></dl>
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-"
+            title="">
+        <span id="zoneid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1069,129 +1583,170 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Zone resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ZoneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Zone</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ZoneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Zone</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">alias_zone_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name_servers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">ownership_verifications</span><span class="p">:</span> <span class="nx">Optional[Sequence[_teo.ZoneOwnershipVerificationArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">ownership_verifications</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneOwnershipVerificationArgs]]</span> = None<span class="p">,</span>
         <span class="nx">paused</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">plan_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">work_mode_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneWorkModeInfoArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zone_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Zone</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetZone<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ZoneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Zone</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetZone<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ZoneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Zone</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Zone</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ZoneState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Zone</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ZoneState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Zone</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ZoneState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Zone</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ZoneState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingZone</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Teo:Zone</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_teo_zone</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ZoneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ZoneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1199,28 +1754,31 @@ Get an existing Zone resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ZoneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1228,28 +1786,31 @@ Get an existing Zone resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ZoneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1269,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_csharp" style="color: inherit; text-decoration: inherit;">Area</a>
@@ -1278,13 +1838,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_nameservers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nameservers_csharp" style="color: inherit; text-decoration: inherit;">Name<wbr>Servers</a>
@@ -1292,17 +1851,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ownershipverifications_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ownershipverifications_csharp" style="color: inherit; text-decoration: inherit;">Ownership<wbr>Verifications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneownershipverification">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Zone<wbr>Ownership<wbr>Verification<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zoneownershipverification">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Zone<wbr>Ownership<wbr>Verification&gt;</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paused_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paused_csharp" style="color: inherit; text-decoration: inherit;">Paused</a>
@@ -1310,8 +1867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_planid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_planid_csharp" style="color: inherit; text-decoration: inherit;">Plan<wbr>Id</a>
@@ -1319,8 +1875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-optional"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1328,17 +1883,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd><dt class="property-optional"
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1346,8 +1899,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_workmodeinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workmodeinfos_csharp" style="color: inherit; text-decoration: inherit;">Work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Zone<wbr>Work<wbr>Mode<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zoneid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zonename_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -1355,8 +1923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd></dl>
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1370,8 +1937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_go" style="color: inherit; text-decoration: inherit;">Area</a>
@@ -1379,13 +1945,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_nameservers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nameservers_go" style="color: inherit; text-decoration: inherit;">Name<wbr>Servers</a>
@@ -1393,8 +1958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ownershipverifications_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ownershipverifications_go" style="color: inherit; text-decoration: inherit;">Ownership<wbr>Verifications</a>
@@ -1402,8 +1966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverification">[]Zone<wbr>Ownership<wbr>Verification<wbr>Args</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paused_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paused_go" style="color: inherit; text-decoration: inherit;">Paused</a>
@@ -1411,8 +1974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_planid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_planid_go" style="color: inherit; text-decoration: inherit;">Plan<wbr>Id</a>
@@ -1420,8 +1982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-optional"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1429,17 +1990,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd><dt class="property-optional"
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1447,8 +2006,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_workmodeinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workmodeinfos_go" style="color: inherit; text-decoration: inherit;">Work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">[]Zone<wbr>Work<wbr>Mode<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zoneid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zonename_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -1456,8 +2030,114 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd></dl>
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_alias_zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alias_zone_name_hcl" style="color: inherit; text-decoration: inherit;">alias_<wbr>zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+<ul>
+<li>global: Global availability zone.</li>
+<li>mainland: Chinese mainland availability zone.</li>
+<li>overseas: Global availability zone (excluding Chinese mainland).</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_servers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_servers_hcl" style="color: inherit; text-decoration: inherit;">name_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ownership_verifications_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ownership_verifications_hcl" style="color: inherit; text-decoration: inherit;">ownership_<wbr>verifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneownershipverification">list(object)</a></span>
+    </dt>
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_paused_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paused_hcl" style="color: inherit; text-decoration: inherit;">paused</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plan_id_hcl" style="color: inherit; text-decoration: inherit;">plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_work_mode_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_work_mode_infos_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>mode_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">list(object)</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_name_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1471,8 +2151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_java" style="color: inherit; text-decoration: inherit;">area</a>
@@ -1480,13 +2159,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_nameservers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nameservers_java" style="color: inherit; text-decoration: inherit;">name<wbr>Servers</a>
@@ -1494,17 +2172,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ownershipverifications_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ownershipverifications_java" style="color: inherit; text-decoration: inherit;">ownership<wbr>Verifications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneownershipverification">List&lt;Zone<wbr>Ownership<wbr>Verification<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zoneownershipverification">List&lt;Zone<wbr>Ownership<wbr>Verification&gt;</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paused_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paused_java" style="color: inherit; text-decoration: inherit;">paused</a>
@@ -1512,8 +2188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_planid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_planid_java" style="color: inherit; text-decoration: inherit;">plan<wbr>Id</a>
@@ -1521,8 +2196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-optional"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1530,17 +2204,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd><dt class="property-optional"
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1548,8 +2220,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_workmodeinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workmodeinfos_java" style="color: inherit; text-decoration: inherit;">work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">List&lt;Zone<wbr>Work<wbr>Mode<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zoneid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Site ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zonename_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -1557,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd></dl>
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1572,8 +2258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_nodejs" style="color: inherit; text-decoration: inherit;">area</a>
@@ -1581,13 +2266,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_nameservers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nameservers_nodejs" style="color: inherit; text-decoration: inherit;">name<wbr>Servers</a>
@@ -1595,17 +2279,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ownershipverifications_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ownershipverifications_nodejs" style="color: inherit; text-decoration: inherit;">ownership<wbr>Verifications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneownershipverification">Zone<wbr>Ownership<wbr>Verification<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#zoneownershipverification">Zone<wbr>Ownership<wbr>Verification[]</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paused_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paused_nodejs" style="color: inherit; text-decoration: inherit;">paused</a>
@@ -1613,8 +2295,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_planid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_planid_nodejs" style="color: inherit; text-decoration: inherit;">plan<wbr>Id</a>
@@ -1622,8 +2303,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-optional"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1631,17 +2311,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd><dt class="property-optional"
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1649,8 +2327,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_workmodeinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workmodeinfos_nodejs" style="color: inherit; text-decoration: inherit;">work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">Zone<wbr>Work<wbr>Mode<wbr>Info[]</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zoneid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zonename_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -1658,8 +2351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd></dl>
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1673,8 +2365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_python" style="color: inherit; text-decoration: inherit;">area</a>
@@ -1682,13 +2373,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_servers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_servers_python" style="color: inherit; text-decoration: inherit;">name_<wbr>servers</a>
@@ -1696,17 +2386,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ownership_verifications_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ownership_verifications_python" style="color: inherit; text-decoration: inherit;">ownership_<wbr>verifications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneownershipverification">Zone<wbr>Ownership<wbr>Verification<wbr>Args]</a></span>
+        <span class="property-type"><a href="#zoneownershipverification">Sequence[Zone<wbr>Ownership<wbr>Verification<wbr>Args]</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paused_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paused_python" style="color: inherit; text-decoration: inherit;">paused</a>
@@ -1714,8 +2402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_plan_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plan_id_python" style="color: inherit; text-decoration: inherit;">plan_<wbr>id</a>
@@ -1723,8 +2410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-optional"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1732,17 +2418,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd><dt class="property-optional"
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1750,8 +2434,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_work_mode_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_work_mode_infos_python" style="color: inherit; text-decoration: inherit;">work_<wbr>mode_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">Sequence[Zone<wbr>Work<wbr>Mode<wbr>Info<wbr>Args]</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Site ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_name_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
@@ -1759,8 +2458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd></dl>
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1774,8 +2472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</p>
-</dd><dt class="property-optional"
+    <dd>Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_yaml" style="color: inherit; text-decoration: inherit;">area</a>
@@ -1783,13 +2480,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
+    <dd>When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:</p>
 <ul>
 <li>global: Global availability zone.</li>
 <li>mainland: Chinese mainland availability zone.</li>
 <li>overseas: Global availability zone (excluding Chinese mainland).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_nameservers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nameservers_yaml" style="color: inherit; text-decoration: inherit;">name<wbr>Servers</a>
@@ -1797,8 +2493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>NS list allocated by Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>NS list allocated by Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ownershipverifications_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ownershipverifications_yaml" style="color: inherit; text-decoration: inherit;">ownership<wbr>Verifications</a>
@@ -1806,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverification">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paused_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paused_yaml" style="color: inherit; text-decoration: inherit;">paused</a>
@@ -1815,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the site is disabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the site is disabled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_planid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_planid_yaml" style="color: inherit; text-decoration: inherit;">plan<wbr>Id</a>
@@ -1824,8 +2517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</p>
-</dd><dt class="property-optional"
+    <dd>The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1833,17 +2525,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</p>
-</dd><dt class="property-optional"
+    <dd>Site status. Valid values: <code>active</code>: NS is switched; <code>pending</code>: NS is not switched; <code>moved</code>: NS is moved; <code>deactivated</code>: this site is blocked.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1851,8 +2541,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is <code>partial</code>:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_workmodeinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workmodeinfos_yaml" style="color: inherit; text-decoration: inherit;">work<wbr>Mode<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneworkmodeinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/113690">Version Management</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zoneid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Site ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zonename_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -1860,8 +2565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</p>
-</dd></dl>
+    <dd>Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1876,7 +2580,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="zoneownershipverification">Zone<wbr>Ownership<wbr>Verification</h4>
+<h4 id="zoneownershipverification">
+Zone<wbr>Ownership<wbr>Verification<pulumi-choosable type="language" values="python,go" class="inline">, Zone<wbr>Ownership<wbr>Verification<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1888,8 +2594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverificationdnsverification">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification&gt;</a></span>
     </dt>
-    <dd><p>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1903,8 +2608,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverificationdnsverification">[]Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification</a></span>
     </dt>
-    <dd><p>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dns_verifications_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_verifications_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>verifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneownershipverificationdnsverification">list(object)</a></span>
+    </dt>
+    <dd>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1918,8 +2636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverificationdnsverification">List&lt;Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification&gt;</a></span>
     </dt>
-    <dd><p>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1933,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverificationdnsverification">Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification[]</a></span>
     </dt>
-    <dd><p>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1946,10 +2662,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_verifications_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>verifications</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneownershipverificationdnsverification">Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification]</a></span>
+        <span class="property-type"><a href="#zoneownershipverificationdnsverification">Sequence[Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification]</a></span>
     </dt>
-    <dd><p>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1963,12 +2678,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneownershipverificationdnsverification">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>CNAME access, using DNS to resolve the information required for authentication. For details, please refer to <a href="https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5">Site/Domain Name Ownership Verification </a>. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="zoneownershipverificationdnsverification">Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification</h4>
+<h4 id="zoneownershipverificationdnsverification">
+Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification<pulumi-choosable type="language" values="python,go" class="inline">, Zone<wbr>Ownership<wbr>Verification<wbr>Dns<wbr>Verification<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1980,8 +2696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type.</p>
-</dd><dt class="property-optional"
+    <dd>Record type.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Value</a>
@@ -1989,8 +2704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record the value.</p>
-</dd><dt class="property-optional"
+    <dd>Record the value.</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_csharp" style="color: inherit; text-decoration: inherit;">Subdomain</a>
@@ -1998,8 +2712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host record.</p>
-</dd></dl>
+    <dd>Host record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2013,8 +2726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type.</p>
-</dd><dt class="property-optional"
+    <dd>Record type.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Value</a>
@@ -2022,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record the value.</p>
-</dd><dt class="property-optional"
+    <dd>Record the value.</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_go" style="color: inherit; text-decoration: inherit;">Subdomain</a>
@@ -2031,8 +2742,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host record.</p>
-</dd></dl>
+    <dd>Host record.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="record_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_type_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_value_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record the value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subdomain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_hcl" style="color: inherit; text-decoration: inherit;">subdomain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2046,8 +2786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record type.</p>
-</dd><dt class="property-optional"
+    <dd>Record type.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_java" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -2055,8 +2794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record the value.</p>
-</dd><dt class="property-optional"
+    <dd>Record the value.</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_java" style="color: inherit; text-decoration: inherit;">subdomain</a>
@@ -2064,8 +2802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host record.</p>
-</dd></dl>
+    <dd>Host record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2079,8 +2816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type.</p>
-</dd><dt class="property-optional"
+    <dd>Record type.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -2088,8 +2824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record the value.</p>
-</dd><dt class="property-optional"
+    <dd>Record the value.</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_nodejs" style="color: inherit; text-decoration: inherit;">subdomain</a>
@@ -2097,8 +2832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host record.</p>
-</dd></dl>
+    <dd>Host record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2112,8 +2846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record type.</p>
-</dd><dt class="property-optional"
+    <dd>Record type.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_value_python" style="color: inherit; text-decoration: inherit;">record_<wbr>value</a>
@@ -2121,8 +2854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record the value.</p>
-</dd><dt class="property-optional"
+    <dd>Record the value.</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_python" style="color: inherit; text-decoration: inherit;">subdomain</a>
@@ -2130,8 +2862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host record.</p>
-</dd></dl>
+    <dd>Host record.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2145,8 +2876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record type.</p>
-</dd><dt class="property-optional"
+    <dd>Record type.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -2154,8 +2884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record the value.</p>
-</dd><dt class="property-optional"
+    <dd>Record the value.</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_yaml" style="color: inherit; text-decoration: inherit;">subdomain</a>
@@ -2163,8 +2892,165 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host record.</p>
-</dd></dl>
+    <dd>Host record.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="zoneworkmodeinfo">
+Zone<wbr>Work<wbr>Mode<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Zone<wbr>Work<wbr>Mode<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configgrouptype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configgrouptype_csharp" style="color: inherit; text-decoration: inherit;">Config<wbr>Group<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration group type. Options are as follows:<code>l7Acceleration</code>: layer-7 acceleration configuration group;<code>edgeFunctions</code>: edge function configuration group;<code>webSecurity</code>: web protection configuration group.</dd><dt class="property-required"
+            title="Required">
+        <span id="workmode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmode_csharp" style="color: inherit; text-decoration: inherit;">Work<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Working mode. options are as follows:<code>immediateEffect</code>: immediate effect mode;<code>versionControl</code>: version control mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configgrouptype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configgrouptype_go" style="color: inherit; text-decoration: inherit;">Config<wbr>Group<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration group type. Options are as follows:<code>l7Acceleration</code>: layer-7 acceleration configuration group;<code>edgeFunctions</code>: edge function configuration group;<code>webSecurity</code>: web protection configuration group.</dd><dt class="property-required"
+            title="Required">
+        <span id="workmode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmode_go" style="color: inherit; text-decoration: inherit;">Work<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Working mode. options are as follows:<code>immediateEffect</code>: immediate effect mode;<code>versionControl</code>: version control mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="config_group_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_group_type_hcl" style="color: inherit; text-decoration: inherit;">config_<wbr>group_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration group type. Options are as follows:<code>l7Acceleration</code>: layer-7 acceleration configuration group;<code>edgeFunctions</code>: edge function configuration group;<code>webSecurity</code>: web protection configuration group.</dd><dt class="property-required"
+            title="Required">
+        <span id="work_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_mode_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Working mode. options are as follows:<code>immediateEffect</code>: immediate effect mode;<code>versionControl</code>: version control mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configgrouptype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configgrouptype_java" style="color: inherit; text-decoration: inherit;">config<wbr>Group<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Configuration group type. Options are as follows:<code>l7Acceleration</code>: layer-7 acceleration configuration group;<code>edgeFunctions</code>: edge function configuration group;<code>webSecurity</code>: web protection configuration group.</dd><dt class="property-required"
+            title="Required">
+        <span id="workmode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmode_java" style="color: inherit; text-decoration: inherit;">work<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Working mode. options are as follows:<code>immediateEffect</code>: immediate effect mode;<code>versionControl</code>: version control mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configgrouptype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configgrouptype_nodejs" style="color: inherit; text-decoration: inherit;">config<wbr>Group<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration group type. Options are as follows:<code>l7Acceleration</code>: layer-7 acceleration configuration group;<code>edgeFunctions</code>: edge function configuration group;<code>webSecurity</code>: web protection configuration group.</dd><dt class="property-required"
+            title="Required">
+        <span id="workmode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmode_nodejs" style="color: inherit; text-decoration: inherit;">work<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Working mode. options are as follows:<code>immediateEffect</code>: immediate effect mode;<code>versionControl</code>: version control mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="config_group_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_group_type_python" style="color: inherit; text-decoration: inherit;">config_<wbr>group_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Configuration group type. Options are as follows:<code>l7Acceleration</code>: layer-7 acceleration configuration group;<code>edgeFunctions</code>: edge function configuration group;<code>webSecurity</code>: web protection configuration group.</dd><dt class="property-required"
+            title="Required">
+        <span id="work_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_mode_python" style="color: inherit; text-decoration: inherit;">work_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Working mode. options are as follows:<code>immediateEffect</code>: immediate effect mode;<code>versionControl</code>: version control mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configgrouptype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configgrouptype_yaml" style="color: inherit; text-decoration: inherit;">config<wbr>Group<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Configuration group type. Options are as follows:<code>l7Acceleration</code>: layer-7 acceleration configuration group;<code>edgeFunctions</code>: edge function configuration group;<code>webSecurity</code>: web protection configuration group.</dd><dt class="property-required"
+            title="Required">
+        <span id="workmode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workmode_yaml" style="color: inherit; text-decoration: inherit;">work<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Working mode. options are as follows:<code>immediateEffect</code>: immediate effect mode;<code>versionControl</code>: version control mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2173,11 +3059,13 @@ The following state arguments are supported:
 
 
 teo zone can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2189,7 +3077,6 @@ $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getApplication"
 title_tag: "tencentcloud.Tsf.getApplication"
-meta_desc: "Documentation for the tencentcloud.Tsf.getApplication function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tsf application"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,61 +18,56 @@ Use this data source to query detailed information of tsf application
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const application = tencentcloud.Tsf.getApplication({
-    applicationIdLists: ["application-a24x29xv"],
+const application = tencentcloud.tsf.getApplication({
     applicationType: "V",
     microserviceType: "N",
+    applicationIdLists: ["application-a24x29xv"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-application = tencentcloud.Tsf.get_application(application_id_lists=["application-a24x29xv"],
-    application_type="V",
-    microservice_type="N")
+application = tencentcloud.tsf.get_application(application_type="V",
+    microservice_type="N",
+    application_id_lists=["application-a24x29xv"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var application = Tencentcloud.Tsf.GetApplication.Invoke(new()
-    {
-        ApplicationIdLists = new[]
-        {
-            "application-a24x29xv",
-        },
-        ApplicationType = "V",
-        MicroserviceType = "N",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.GetApplication(ctx, &tsf.GetApplicationArgs{
+		_, err := tsf.GetApplication(ctx, &tsf.GetApplicationArgs{
+			ApplicationType:  pulumi.StringRef("V"),
+			MicroserviceType: pulumi.StringRef("N"),
 			ApplicationIdLists: []string{
 				"application-a24x29xv",
 			},
-			ApplicationType:  pulumi.StringRef("V"),
-			MicroserviceType: pulumi.StringRef("N"),
 		}, nil)
 		if err != nil {
 			return err
@@ -79,6 +76,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var application = Tencentcloud.Tsf.GetApplication.Invoke(new()
+    {
+        ApplicationType = "V",
+        MicroserviceType = "N",
+        ApplicationIdLists = new[]
+        {
+            "application-a24x29xv",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -87,8 +114,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.TsfFunctions;
 import com.pulumi.tencentcloud.Tsf.inputs.GetApplicationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -101,27 +128,59 @@ public class App {
 
     public static void stack(Context ctx) {
         final var application = TsfFunctions.getApplication(GetApplicationArgs.builder()
-            .applicationIdLists("application-a24x29xv")
             .applicationType("V")
             .microserviceType("N")
+            .applicationIdLists("application-a24x29xv")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   application:
     fn::invoke:
-      Function: tencentcloud:Tsf:getApplication
-      Arguments:
-        applicationIdLists:
-          - application-a24x29xv
+      function: tencentcloud:Tsf:getApplication
+      arguments:
         applicationType: V
         microserviceType: N
+        applicationIdLists:
+          - application-a24x29xv
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tsf_getapplication" "application" {
+  application_type     = "V"
+  microservice_type    = "N"
+  application_id_lists = ["application-a24x29xv"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeApplications](https://www.tencentcloud.com/search/?wd=DescribeApplications&type=document&lang=en)
 
 
 
@@ -133,7 +192,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +200,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getApplication<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApplicationArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>></span
+><span class="k">function </span>getApplication<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApplicationArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>></span
 ><span class="k">
-function </span>getApplicationOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApplicationOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>></span
+function </span>getApplicationOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetApplicationOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -159,12 +218,12 @@ function </span>getApplicationOutput<span class="p">(</span><span class="nx">arg
                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetApplicationResult</span
 ><span class="k">
-def </span>get_application_output<span class="p">(</span><span class="nx">application_id_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                    <span class="nx">application_resource_type_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                    <span class="nx">application_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">microservice_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetApplicationResult]</span
+def </span>get_application_output<span class="p">(</span><span class="nx">application_id_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                    <span class="nx">application_resource_type_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                    <span class="nx">application_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">microservice_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetApplicationResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,12 +232,12 @@ def </span>get_application_output<span class="p">(</span><span class="nx">applic
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetApplication<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetApplicationArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetApplicationResult</a></span>, error)</span
+><span class="k">func </span>LookupApplication<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupApplicationArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupApplicationResult</a></span>, error)</span
 ><span class="k">
-func </span>GetApplicationOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetApplicationOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetApplicationResultOutput</span
+func </span>LookupApplicationOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupApplicationOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupApplicationResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetApplication` in the Go SDK.
+&gt; Note: This function is named `LookupApplication` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -189,7 +248,8 @@ func </span>GetApplicationOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetApplication </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetApplicationArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApplicationInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApplicationInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetApplicationInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -198,7 +258,8 @@ func </span>GetApplicationOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>> </span>getApplication<span class="p">(</span><span class="nx">GetApplicationArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>> </span>getApplication<span class="p">(</span><span class="nx">GetApplicationArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetApplicationResult</a></span>> </span>getApplication<span class="p">(</span><span class="nx">GetApplicationArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -210,6 +271,15 @@ func </span>GetApplicationOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tsf/getApplication:getApplication
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tsf_get_application&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Id list.</p>
-</dd><dt class="property-optional"
+    <dd>Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetypelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetypelists_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -237,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>An array of application resource types.</p>
-</dd><dt class="property-optional"
+    <dd>An array of application resource types.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -246,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-optional"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -255,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-optional"
+    <dd>The microservice type of the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -264,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -279,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Id list.</p>
-</dd><dt class="property-optional"
+    <dd>Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetypelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetypelists_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -288,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>An array of application resource types.</p>
-</dd><dt class="property-optional"
+    <dd>An array of application resource types.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -297,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-optional"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -306,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-optional"
+    <dd>The microservice type of the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -315,8 +376,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="application_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_lists_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="application_resource_type_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_resource_type_lists_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>An array of application resource types.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="application_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="microservice_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The microservice type of the application.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +436,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Id list.</p>
-</dd><dt class="property-optional"
+    <dd>Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetypelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetypelists_java" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -339,8 +444,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An array of application resource types.</p>
-</dd><dt class="property-optional"
+    <dd>An array of application resource types.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -348,8 +452,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-optional"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -357,8 +460,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-optional"
+    <dd>The microservice type of the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -366,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -381,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Id list.</p>
-</dd><dt class="property-optional"
+    <dd>Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetypelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetypelists_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -390,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>An array of application resource types.</p>
-</dd><dt class="property-optional"
+    <dd>An array of application resource types.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -399,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-optional"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -408,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-optional"
+    <dd>The microservice type of the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -417,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -432,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Id list.</p>
-</dd><dt class="property-optional"
+    <dd>Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="application_resource_type_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_resource_type_lists_python" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type_<wbr>lists</a>
@@ -441,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>An array of application resource types.</p>
-</dd><dt class="property-optional"
+    <dd>An array of application resource types.</dd><dt class="property-optional"
             title="Optional">
         <span id="application_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
@@ -450,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-optional"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservice_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
@@ -459,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-optional"
+    <dd>The microservice type of the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -468,8 +560,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +574,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Id list.</p>
-</dd><dt class="property-optional"
+    <dd>Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetypelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetypelists_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -492,8 +582,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An array of application resource types.</p>
-</dd><dt class="property-optional"
+    <dd>An array of application resource types.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -501,8 +590,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-optional"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -510,8 +598,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-optional"
+    <dd>The microservice type of the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -519,8 +606,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -552,8 +637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Outputs.<wbr>Get<wbr>Application<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>The application paging list information.</p>
-</dd><dt class="property-"
+    <dd>The application paging list information.</dd><dt class="property-"
             title="">
         <span id="applicationidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationidlists_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Id<wbr>Lists</a>
@@ -577,8 +661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the application.</p>
-</dd><dt class="property-"
+    <dd>The type of the application.</dd><dt class="property-"
             title="">
         <span id="microservicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -586,8 +669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-"
+    <dd>The microservice type of the application.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -609,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -618,8 +699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresult">[]Get<wbr>Application<wbr>Result</a></span>
     </dt>
-    <dd><p>The application paging list information.</p>
-</dd><dt class="property-"
+    <dd>The application paging list information.</dd><dt class="property-"
             title="">
         <span id="applicationidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationidlists_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Id<wbr>Lists</a>
@@ -643,8 +723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the application.</p>
-</dd><dt class="property-"
+    <dd>The type of the application.</dd><dt class="property-"
             title="">
         <span id="microservicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -652,11 +731,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-"
+    <dd>The microservice type of the application.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapplicationresult">list(object)</a></span>
+    </dt>
+    <dd>The application paging list information.</dd><dt class="property-"
+            title="">
+        <span id="application_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_lists_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="application_resource_type_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_resource_type_lists_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="application_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of the application.</dd><dt class="property-"
+            title="">
+        <span id="microservice_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The microservice type of the application.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -675,8 +815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -684,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresult">List&lt;Get<wbr>Application<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>The application paging list information.</p>
-</dd><dt class="property-"
+    <dd>The application paging list information.</dd><dt class="property-"
             title="">
         <span id="applicationidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationidlists_java" style="color: inherit; text-decoration: inherit;">application<wbr>Id<wbr>Lists</a>
@@ -709,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the application.</p>
-</dd><dt class="property-"
+    <dd>The type of the application.</dd><dt class="property-"
             title="">
         <span id="microservicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -718,8 +855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-"
+    <dd>The microservice type of the application.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -741,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -750,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresult">Get<wbr>Application<wbr>Result[]</a></span>
     </dt>
-    <dd><p>The application paging list information.</p>
-</dd><dt class="property-"
+    <dd>The application paging list information.</dd><dt class="property-"
             title="">
         <span id="applicationidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationidlists_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Id<wbr>Lists</a>
@@ -775,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the application.</p>
-</dd><dt class="property-"
+    <dd>The type of the application.</dd><dt class="property-"
             title="">
         <span id="microservicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -784,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-"
+    <dd>The microservice type of the application.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -807,17 +939,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapplicationresult">Get<wbr>Application<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getapplicationresult">Sequence[Get<wbr>Application<wbr>Result]</a></span>
     </dt>
-    <dd><p>The application paging list information.</p>
-</dd><dt class="property-"
+    <dd>The application paging list information.</dd><dt class="property-"
             title="">
         <span id="application_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_lists_python" style="color: inherit; text-decoration: inherit;">application_<wbr>id_<wbr>lists</a>
@@ -841,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of the application.</p>
-</dd><dt class="property-"
+    <dd>The type of the application.</dd><dt class="property-"
             title="">
         <span id="microservice_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
@@ -850,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-"
+    <dd>The microservice type of the application.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -873,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -882,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The application paging list information.</p>
-</dd><dt class="property-"
+    <dd>The application paging list information.</dd><dt class="property-"
             title="">
         <span id="applicationidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationidlists_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Id<wbr>Lists</a>
@@ -907,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the application.</p>
-</dd><dt class="property-"
+    <dd>The type of the application.</dd><dt class="property-"
             title="">
         <span id="microservicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -916,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-"
+    <dd>The microservice type of the application.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -949,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontent">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Application<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>The list of application information.</p>
-</dd><dt class="property-required"
+    <dd>The list of application information.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -958,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total number of applications.</p>
-</dd></dl>
+    <dd>The total number of applications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -973,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontent">[]Get<wbr>Application<wbr>Result<wbr>Content</a></span>
     </dt>
-    <dd><p>The list of application information.</p>
-</dd><dt class="property-required"
+    <dd>The list of application information.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -982,8 +1103,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total number of applications.</p>
-</dd></dl>
+    <dd>The total number of applications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contents_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_hcl" style="color: inherit; text-decoration: inherit;">contents</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapplicationresultcontent">list(object)</a></span>
+    </dt>
+    <dd>The list of application information.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total number of applications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -997,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontent">List&lt;Get<wbr>Application<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>The list of application information.</p>
-</dd><dt class="property-required"
+    <dd>The list of application information.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_java" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1006,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total number of applications.</p>
-</dd></dl>
+    <dd>The total number of applications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1021,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontent">Get<wbr>Application<wbr>Result<wbr>Content[]</a></span>
     </dt>
-    <dd><p>The list of application information.</p>
-</dd><dt class="property-required"
+    <dd>The list of application information.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1030,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total number of applications.</p>
-</dd></dl>
+    <dd>The total number of applications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1043,10 +1181,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_python" style="color: inherit; text-decoration: inherit;">contents</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapplicationresultcontent">Get<wbr>Application<wbr>Result<wbr>Content]</a></span>
+        <span class="property-type"><a href="#getapplicationresultcontent">Sequence[Get<wbr>Application<wbr>Result<wbr>Content]</a></span>
     </dt>
-    <dd><p>The list of application information.</p>
-</dd><dt class="property-required"
+    <dd>The list of application information.</dd><dt class="property-required"
             title="Required">
         <span id="total_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_python" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
@@ -1054,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total number of applications.</p>
-</dd></dl>
+    <dd>The total number of applications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1069,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontent">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The list of application information.</p>
-</dd><dt class="property-required"
+    <dd>The list of application information.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1078,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total number of applications.</p>
-</dd></dl>
+    <dd>The total number of applications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1097,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway service id.</p>
-</dd><dt class="property-required"
+    <dd>gateway service id.</dd><dt class="property-required"
             title="Required">
         <span id="applicationdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Desc</a>
@@ -1106,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the application.</p>
-</dd><dt class="property-required"
+    <dd>The description of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Id</a>
@@ -1115,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the application.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Name</a>
@@ -1124,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the application.</p>
-</dd><dt class="property-required"
+    <dd>The name of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationremarkname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationremarkname_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Remark<wbr>Name</a>
@@ -1133,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>remark name.</p>
-</dd><dt class="property-required"
+    <dd>remark name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationresourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Resource<wbr>Type</a>
@@ -1142,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application resource type.</p>
-</dd><dt class="property-required"
+    <dd>application resource type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationruntimetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Runtime<wbr>Type</a>
@@ -1151,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application runtime type.</p>
-</dd><dt class="property-required"
+    <dd>application runtime type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -1160,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-required"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1169,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="ignorecreateimagerepository_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_csharp" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1178,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether ignore create image repository.</p>
-</dd><dt class="property-required"
+    <dd>whether ignore create image repository.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -1187,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-required"
+    <dd>The microservice type of the application.</dd><dt class="property-required"
             title="Required">
         <span id="proglang_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proglang_csharp" style="color: inherit; text-decoration: inherit;">Prog<wbr>Lang</a>
@@ -1196,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Programming language.</p>
-</dd><dt class="property-required"
+    <dd>Programming language.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfiglists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Lists</a>
@@ -1205,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>service config list.</p>
-</dd><dt class="property-required"
+    <dd>service config list.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1214,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway service id.</p>
-</dd><dt class="property-required"
+    <dd>gateway service id.</dd><dt class="property-required"
             title="Required">
         <span id="applicationdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Desc</a>
@@ -1238,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the application.</p>
-</dd><dt class="property-required"
+    <dd>The description of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Id</a>
@@ -1247,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the application.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Name</a>
@@ -1256,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the application.</p>
-</dd><dt class="property-required"
+    <dd>The name of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationremarkname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationremarkname_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Remark<wbr>Name</a>
@@ -1265,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>remark name.</p>
-</dd><dt class="property-required"
+    <dd>remark name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationresourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Resource<wbr>Type</a>
@@ -1274,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application resource type.</p>
-</dd><dt class="property-required"
+    <dd>application resource type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationruntimetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Runtime<wbr>Type</a>
@@ -1283,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application runtime type.</p>
-</dd><dt class="property-required"
+    <dd>application runtime type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -1292,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-required"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1301,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="ignorecreateimagerepository_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_go" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1310,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether ignore create image repository.</p>
-</dd><dt class="property-required"
+    <dd>whether ignore create image repository.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -1319,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-required"
+    <dd>The microservice type of the application.</dd><dt class="property-required"
             title="Required">
         <span id="proglang_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proglang_go" style="color: inherit; text-decoration: inherit;">Prog<wbr>Lang</a>
@@ -1328,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Programming language.</p>
-</dd><dt class="property-required"
+    <dd>Programming language.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfiglists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Lists</a>
@@ -1337,8 +1445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglist">[]Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List</a></span>
     </dt>
-    <dd><p>service config list.</p>
-</dd><dt class="property-required"
+    <dd>service config list.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1346,8 +1453,125 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="apigateway_service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apigateway_service_id_hcl" style="color: inherit; text-decoration: inherit;">apigateway_<wbr>service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>gateway service id.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_desc_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The description of the application.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the application.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_name_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the application.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_remark_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_remark_name_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>remark_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>remark name.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_resource_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application resource type.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_runtime_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_runtime_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>runtime_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application runtime type.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="ignore_create_image_repository_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_create_image_repository_hcl" style="color: inherit; text-decoration: inherit;">ignore_<wbr>create_<wbr>image_<wbr>repository</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>whether ignore create image repository.</dd><dt class="property-required"
+            title="Required">
+        <span id="microservice_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The microservice type of the application.</dd><dt class="property-required"
+            title="Required">
+        <span id="prog_lang_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prog_lang_hcl" style="color: inherit; text-decoration: inherit;">prog_<wbr>lang</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Programming language.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_config_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_lists_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglist">list(object)</a></span>
+    </dt>
+    <dd>service config list.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1361,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway service id.</p>
-</dd><dt class="property-required"
+    <dd>gateway service id.</dd><dt class="property-required"
             title="Required">
         <span id="applicationdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_java" style="color: inherit; text-decoration: inherit;">application<wbr>Desc</a>
@@ -1370,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the application.</p>
-</dd><dt class="property-required"
+    <dd>The description of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_java" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -1379,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the application.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_java" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -1388,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the application.</p>
-</dd><dt class="property-required"
+    <dd>The name of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationremarkname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationremarkname_java" style="color: inherit; text-decoration: inherit;">application<wbr>Remark<wbr>Name</a>
@@ -1397,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>remark name.</p>
-</dd><dt class="property-required"
+    <dd>remark name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationresourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -1406,8 +1625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application resource type.</p>
-</dd><dt class="property-required"
+    <dd>application resource type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationruntimetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -1415,8 +1633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application runtime type.</p>
-</dd><dt class="property-required"
+    <dd>application runtime type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -1424,8 +1641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-required"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1433,8 +1649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="ignorecreateimagerepository_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_java" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1442,8 +1657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether ignore create image repository.</p>
-</dd><dt class="property-required"
+    <dd>whether ignore create image repository.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -1451,8 +1665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-required"
+    <dd>The microservice type of the application.</dd><dt class="property-required"
             title="Required">
         <span id="proglang_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proglang_java" style="color: inherit; text-decoration: inherit;">prog<wbr>Lang</a>
@@ -1460,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Programming language.</p>
-</dd><dt class="property-required"
+    <dd>Programming language.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfiglists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
@@ -1469,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglist">List&lt;Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>service config list.</p>
-</dd><dt class="property-required"
+    <dd>service config list.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1478,8 +1689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1493,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway service id.</p>
-</dd><dt class="property-required"
+    <dd>gateway service id.</dd><dt class="property-required"
             title="Required">
         <span id="applicationdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Desc</a>
@@ -1502,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the application.</p>
-</dd><dt class="property-required"
+    <dd>The description of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -1511,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the application.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -1520,8 +1727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the application.</p>
-</dd><dt class="property-required"
+    <dd>The name of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationremarkname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationremarkname_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Remark<wbr>Name</a>
@@ -1529,8 +1735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>remark name.</p>
-</dd><dt class="property-required"
+    <dd>remark name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationresourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -1538,8 +1743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application resource type.</p>
-</dd><dt class="property-required"
+    <dd>application resource type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationruntimetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -1547,8 +1751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application runtime type.</p>
-</dd><dt class="property-required"
+    <dd>application runtime type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -1556,8 +1759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-required"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1565,8 +1767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="ignorecreateimagerepository_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_nodejs" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1574,8 +1775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>whether ignore create image repository.</p>
-</dd><dt class="property-required"
+    <dd>whether ignore create image repository.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -1583,8 +1783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-required"
+    <dd>The microservice type of the application.</dd><dt class="property-required"
             title="Required">
         <span id="proglang_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proglang_nodejs" style="color: inherit; text-decoration: inherit;">prog<wbr>Lang</a>
@@ -1592,8 +1791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Programming language.</p>
-</dd><dt class="property-required"
+    <dd>Programming language.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfiglists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
@@ -1601,8 +1799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglist">Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List[]</a></span>
     </dt>
-    <dd><p>service config list.</p>
-</dd><dt class="property-required"
+    <dd>service config list.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1610,8 +1807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1625,8 +1821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>gateway service id.</p>
-</dd><dt class="property-required"
+    <dd>gateway service id.</dd><dt class="property-required"
             title="Required">
         <span id="application_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_desc_python" style="color: inherit; text-decoration: inherit;">application_<wbr>desc</a>
@@ -1634,8 +1829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The description of the application.</p>
-</dd><dt class="property-required"
+    <dd>The description of the application.</dd><dt class="property-required"
             title="Required">
         <span id="application_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_python" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
@@ -1643,8 +1837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the application.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the application.</dd><dt class="property-required"
             title="Required">
         <span id="application_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_name_python" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
@@ -1652,8 +1845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the application.</p>
-</dd><dt class="property-required"
+    <dd>The name of the application.</dd><dt class="property-required"
             title="Required">
         <span id="application_remark_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_remark_name_python" style="color: inherit; text-decoration: inherit;">application_<wbr>remark_<wbr>name</a>
@@ -1661,8 +1853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>remark name.</p>
-</dd><dt class="property-required"
+    <dd>remark name.</dd><dt class="property-required"
             title="Required">
         <span id="application_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_resource_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type</a>
@@ -1670,8 +1861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application resource type.</p>
-</dd><dt class="property-required"
+    <dd>application resource type.</dd><dt class="property-required"
             title="Required">
         <span id="application_runtime_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_runtime_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>runtime_<wbr>type</a>
@@ -1679,8 +1869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application runtime type.</p>
-</dd><dt class="property-required"
+    <dd>application runtime type.</dd><dt class="property-required"
             title="Required">
         <span id="application_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
@@ -1688,8 +1877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-required"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1697,8 +1885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="ignore_create_image_repository_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_create_image_repository_python" style="color: inherit; text-decoration: inherit;">ignore_<wbr>create_<wbr>image_<wbr>repository</a>
@@ -1706,8 +1893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether ignore create image repository.</p>
-</dd><dt class="property-required"
+    <dd>whether ignore create image repository.</dd><dt class="property-required"
             title="Required">
         <span id="microservice_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
@@ -1715,8 +1901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-required"
+    <dd>The microservice type of the application.</dd><dt class="property-required"
             title="Required">
         <span id="prog_lang_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prog_lang_python" style="color: inherit; text-decoration: inherit;">prog_<wbr>lang</a>
@@ -1724,17 +1909,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Programming language.</p>
-</dd><dt class="property-required"
+    <dd>Programming language.</dd><dt class="property-required"
             title="Required">
         <span id="service_config_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_lists_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglist">Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List]</a></span>
+        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglist">Sequence[Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List]</a></span>
     </dt>
-    <dd><p>service config list.</p>
-</dd><dt class="property-required"
+    <dd>service config list.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1742,8 +1925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1757,8 +1939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway service id.</p>
-</dd><dt class="property-required"
+    <dd>gateway service id.</dd><dt class="property-required"
             title="Required">
         <span id="applicationdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Desc</a>
@@ -1766,8 +1947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the application.</p>
-</dd><dt class="property-required"
+    <dd>The description of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -1775,8 +1955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the application.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -1784,8 +1963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the application.</p>
-</dd><dt class="property-required"
+    <dd>The name of the application.</dd><dt class="property-required"
             title="Required">
         <span id="applicationremarkname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationremarkname_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Remark<wbr>Name</a>
@@ -1793,8 +1971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>remark name.</p>
-</dd><dt class="property-required"
+    <dd>remark name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationresourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -1802,8 +1979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application resource type.</p>
-</dd><dt class="property-required"
+    <dd>application resource type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationruntimetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -1811,8 +1987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application runtime type.</p>
-</dd><dt class="property-required"
+    <dd>application runtime type.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -1820,8 +1995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The application type. V OR C, V means VM, C means container.</p>
-</dd><dt class="property-required"
+    <dd>The application type. V OR C, V means VM, C means container.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1829,8 +2003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="ignorecreateimagerepository_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_yaml" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1838,8 +2011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether ignore create image repository.</p>
-</dd><dt class="property-required"
+    <dd>whether ignore create image repository.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -1847,8 +2019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The microservice type of the application.</p>
-</dd><dt class="property-required"
+    <dd>The microservice type of the application.</dd><dt class="property-required"
             title="Required">
         <span id="proglang_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proglang_yaml" style="color: inherit; text-decoration: inherit;">prog<wbr>Lang</a>
@@ -1856,8 +2027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Programming language.</p>
-</dd><dt class="property-required"
+    <dd>Programming language.</dd><dt class="property-required"
             title="Required">
         <span id="serviceconfiglists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
@@ -1865,8 +2035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>service config list.</p>
-</dd><dt class="property-required"
+    <dd>service config list.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1874,8 +2043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1893,8 +2061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglisthealthcheck">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check&gt;</a></span>
     </dt>
-    <dd><p>health check setting.</p>
-</dd><dt class="property-required"
+    <dd>health check setting.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1902,8 +2069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serviceName.</p>
-</dd><dt class="property-required"
+    <dd>serviceName.</dd><dt class="property-required"
             title="Required">
         <span id="ports_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_csharp" style="color: inherit; text-decoration: inherit;">Ports</a>
@@ -1911,8 +2077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglistport">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>port list.</p>
-</dd></dl>
+    <dd>port list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1926,8 +2091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglisthealthcheck">[]Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check</a></span>
     </dt>
-    <dd><p>health check setting.</p>
-</dd><dt class="property-required"
+    <dd>health check setting.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1935,8 +2099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serviceName.</p>
-</dd><dt class="property-required"
+    <dd>serviceName.</dd><dt class="property-required"
             title="Required">
         <span id="ports_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_go" style="color: inherit; text-decoration: inherit;">Ports</a>
@@ -1944,8 +2107,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglistport">[]Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Port</a></span>
     </dt>
-    <dd><p>port list.</p>
-</dd></dl>
+    <dd>port list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="health_checks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_checks_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>checks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglisthealthcheck">list(object)</a></span>
+    </dt>
+    <dd>health check setting.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>serviceName.</dd><dt class="property-required"
+            title="Required">
+        <span id="ports_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_hcl" style="color: inherit; text-decoration: inherit;">ports</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglistport">list(object)</a></span>
+    </dt>
+    <dd>port list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1959,8 +2151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglisthealthcheck">List&lt;Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check&gt;</a></span>
     </dt>
-    <dd><p>health check setting.</p>
-</dd><dt class="property-required"
+    <dd>health check setting.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1968,8 +2159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>serviceName.</p>
-</dd><dt class="property-required"
+    <dd>serviceName.</dd><dt class="property-required"
             title="Required">
         <span id="ports_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_java" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -1977,8 +2167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglistport">List&lt;Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>port list.</p>
-</dd></dl>
+    <dd>port list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1992,8 +2181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglisthealthcheck">Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check[]</a></span>
     </dt>
-    <dd><p>health check setting.</p>
-</dd><dt class="property-required"
+    <dd>health check setting.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2001,8 +2189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serviceName.</p>
-</dd><dt class="property-required"
+    <dd>serviceName.</dd><dt class="property-required"
             title="Required">
         <span id="ports_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_nodejs" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -2010,8 +2197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglistport">Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Port[]</a></span>
     </dt>
-    <dd><p>port list.</p>
-</dd></dl>
+    <dd>port list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2023,10 +2209,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_checks_python" style="color: inherit; text-decoration: inherit;">health_<wbr>checks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglisthealthcheck">Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check]</a></span>
+        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglisthealthcheck">Sequence[Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check]</a></span>
     </dt>
-    <dd><p>health check setting.</p>
-</dd><dt class="property-required"
+    <dd>health check setting.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2034,17 +2219,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>serviceName.</p>
-</dd><dt class="property-required"
+    <dd>serviceName.</dd><dt class="property-required"
             title="Required">
         <span id="ports_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_python" style="color: inherit; text-decoration: inherit;">ports</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglistport">Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Port]</a></span>
+        <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglistport">Sequence[Get<wbr>Application<wbr>Result<wbr>Content<wbr>Service<wbr>Config<wbr>List<wbr>Port]</a></span>
     </dt>
-    <dd><p>port list.</p>
-</dd></dl>
+    <dd>port list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2058,8 +2241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglisthealthcheck">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>health check setting.</p>
-</dd><dt class="property-required"
+    <dd>health check setting.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2067,8 +2249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>serviceName.</p>
-</dd><dt class="property-required"
+    <dd>serviceName.</dd><dt class="property-required"
             title="Required">
         <span id="ports_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_yaml" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -2076,8 +2257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getapplicationresultcontentserviceconfiglistport">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>port list.</p>
-</dd></dl>
+    <dd>port list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2095,8 +2275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>health check path.</p>
-</dd></dl>
+    <dd>health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2110,8 +2289,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>health check path.</p>
-</dd></dl>
+    <dd>health check path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2125,8 +2317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>health check path.</p>
-</dd></dl>
+    <dd>health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2140,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>health check path.</p>
-</dd></dl>
+    <dd>health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2155,8 +2345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>health check path.</p>
-</dd></dl>
+    <dd>health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2170,8 +2359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>health check path.</p>
-</dd></dl>
+    <dd>health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2189,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required"
+    <dd>protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Port</a>
@@ -2198,8 +2385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>service port.</p>
-</dd></dl>
+    <dd>service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2213,8 +2399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required"
+    <dd>protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Port</a>
@@ -2222,8 +2407,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>service port.</p>
-</dd></dl>
+    <dd>service port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_port_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2237,8 +2443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required"
+    <dd>protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_java" style="color: inherit; text-decoration: inherit;">target<wbr>Port</a>
@@ -2246,8 +2451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>service port.</p>
-</dd></dl>
+    <dd>service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2261,8 +2465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required"
+    <dd>protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Port</a>
@@ -2270,8 +2473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>service port.</p>
-</dd></dl>
+    <dd>service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2285,8 +2487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required"
+    <dd>protocol.</dd><dt class="property-required"
             title="Required">
         <span id="target_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_port_python" style="color: inherit; text-decoration: inherit;">target_<wbr>port</a>
@@ -2294,8 +2495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>service port.</p>
-</dd></dl>
+    <dd>service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2309,8 +2509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required"
+    <dd>protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Port</a>
@@ -2318,8 +2517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>service port.</p>
-</dd></dl>
+    <dd>service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2334,7 +2532,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

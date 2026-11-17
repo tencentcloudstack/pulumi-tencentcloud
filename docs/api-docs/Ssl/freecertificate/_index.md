@@ -2,9 +2,11 @@
 ---
 title: "FreeCertificate"
 title_tag: "tencentcloud.Ssl.FreeCertificate"
-meta_desc: "Documentation for the tencentcloud.Ssl.FreeCertificate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a Free Certificate. NOTE: Once certificat created, it cannot be removed within 1 hours."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -20,40 +22,89 @@ Provide a resource to create a Free Certificate.
 
 ### only support type 2. 2=TrustAsia TLS RSA CA.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.ssl.FreeCertificate("example", {
-    alias: "example_free_cert",
+    dvAuthMethod: "DNS_AUTO",
+    domain: "example.com",
+    packageType: "2",
     contactEmail: "test@example.com",
     contactPhone: "18352458901",
+    validityPeriod: "12",
     csrEncryptAlgo: "RSA",
     csrKeyParameter: "2048",
     csrKeyPassword: "csr_pwd",
-    domain: "example.com",
-    dvAuthMethod: "DNS_AUTO",
-    packageType: "2",
-    validityPeriod: "12",
+    alias: "example_free_cert",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.ssl.FreeCertificate("example",
-    alias="example_free_cert",
+    dv_auth_method="DNS_AUTO",
+    domain="example.com",
+    package_type="2",
     contact_email="test@example.com",
     contact_phone="18352458901",
+    validity_period="12",
     csr_encrypt_algo="RSA",
     csr_key_parameter="2048",
     csr_key_password="csr_pwd",
-    domain="example.com",
-    dv_auth_method="DNS_AUTO",
-    package_type="2",
-    validity_period="12")
+    alias="example_free_cert")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssl"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ssl.NewFreeCertificate(ctx, "example", &ssl.FreeCertificateArgs{
+			DvAuthMethod:    pulumi.String("DNS_AUTO"),
+			Domain:          pulumi.String("example.com"),
+			PackageType:     pulumi.String("2"),
+			ContactEmail:    pulumi.String("test@example.com"),
+			ContactPhone:    pulumi.String("18352458901"),
+			ValidityPeriod:  pulumi.String("12"),
+			CsrEncryptAlgo:  pulumi.String("RSA"),
+			CsrKeyParameter: pulumi.String("2048"),
+			CsrKeyPassword:  pulumi.String("csr_pwd"),
+			Alias:           pulumi.String("example_free_cert"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -64,49 +115,25 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Ssl.FreeCertificate("example", new()
     {
-        Alias = "example_free_cert",
+        DvAuthMethod = "DNS_AUTO",
+        Domain = "example.com",
+        PackageType = "2",
         ContactEmail = "test@example.com",
         ContactPhone = "18352458901",
+        ValidityPeriod = "12",
         CsrEncryptAlgo = "RSA",
         CsrKeyParameter = "2048",
         CsrKeyPassword = "csr_pwd",
-        Domain = "example.com",
-        DvAuthMethod = "DNS_AUTO",
-        PackageType = "2",
-        ValidityPeriod = "12",
+        Alias = "example_free_cert",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ssl.NewFreeCertificate(ctx, "example", &Ssl.FreeCertificateArgs{
-			Alias:           pulumi.String("example_free_cert"),
-			ContactEmail:    pulumi.String("test@example.com"),
-			ContactPhone:    pulumi.String("18352458901"),
-			CsrEncryptAlgo:  pulumi.String("RSA"),
-			CsrKeyParameter: pulumi.String("2048"),
-			CsrKeyPassword:  pulumi.String("csr_pwd"),
-			Domain:          pulumi.String("example.com"),
-			DvAuthMethod:    pulumi.String("DNS_AUTO"),
-			PackageType:     pulumi.String("2"),
-			ValidityPeriod:  pulumi.String("12"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -115,8 +142,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ssl.FreeCertificate;
 import com.pulumi.tencentcloud.Ssl.FreeCertificateArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -128,108 +155,167 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new FreeCertificate("example", FreeCertificateArgs.builder()        
-            .alias("example_free_cert")
+        var example = new FreeCertificate("example", FreeCertificateArgs.builder()
+            .dvAuthMethod("DNS_AUTO")
+            .domain("example.com")
+            .packageType("2")
             .contactEmail("test@example.com")
             .contactPhone("18352458901")
+            .validityPeriod("12")
             .csrEncryptAlgo("RSA")
             .csrKeyParameter("2048")
             .csrKeyPassword("csr_pwd")
-            .domain("example.com")
-            .dvAuthMethod("DNS_AUTO")
-            .packageType("2")
-            .validityPeriod(12)
+            .alias("example_free_cert")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Ssl:FreeCertificate
     properties:
-      alias: example_free_cert
+      dvAuthMethod: DNS_AUTO
+      domain: example.com
+      packageType: '2'
       contactEmail: test@example.com
       contactPhone: '18352458901'
+      validityPeriod: 12
       csrEncryptAlgo: RSA
       csrKeyParameter: '2048'
       csrKeyPassword: csr_pwd
-      domain: example.com
-      dvAuthMethod: DNS_AUTO
-      packageType: '2'
-      validityPeriod: 12
+      alias: example_free_cert
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ssl_freecertificate" "example" {
+  dv_auth_method    = "DNS_AUTO"
+  domain            = "example.com"
+  package_type      = "2"
+  contact_email     = "test@example.com"
+  contact_phone     = "18352458901"
+  validity_period   = 12
+  csr_encrypt_algo  = "RSA"
+  csr_key_parameter = "2048"
+  csr_key_password  = "csr_pwd"
+  alias             = "example_free_cert"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [ApplyCertificate](https://www.tencentcloud.com/document/api/1007/36592)
+* Read: [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+* Update:
+  - [ModifyCertificateAlias](https://www.tencentcloud.com/document/api/1007/36583)
+  - [ModifyCertificateProject](https://www.tencentcloud.com/document/api/1007/36582)
+* Delete: [DeleteCertificate](https://www.tencentcloud.com/document/api/1007/36589)
 
 
 ## Create FreeCertificate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                    <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">dv_auth_method</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">alias</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">contact_email</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">contact_phone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">csr_encrypt_algo</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">csr_key_parameter</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">csr_key_password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">dv_auth_method</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">old_certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                    <span class="nx">validity_period</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                    <span class="nx">validity_period</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewFreeCertificate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">FreeCertificate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewFreeCertificate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">FreeCertificate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">FreeCertificate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FreeCertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssl:FreeCertificate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssl:FreeCertificate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ssl_free_certificate&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -250,7 +336,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -367,11 +453,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## FreeCertificate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The FreeCertificate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -387,8 +481,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-required"
+    <dd>Specify domain name.</dd><dt class="property-required"
             title="Required">
         <span id="dvauthmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthmethod_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Method</a>
@@ -396,8 +489,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
@@ -405,8 +497,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactemail_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>Email</a>
@@ -414,8 +505,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactphone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactphone_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>Phone</a>
@@ -423,8 +513,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrencryptalgo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrencryptalgo_csharp" style="color: inherit; text-decoration: inherit;">Csr<wbr>Encrypt<wbr>Algo</a>
@@ -432,8 +521,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrkeyparameter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeyparameter_csharp" style="color: inherit; text-decoration: inherit;">Csr<wbr>Key<wbr>Parameter</a>
@@ -441,8 +529,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="csrkeypassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeypassword_csharp" style="color: inherit; text-decoration: inherit;">Csr<wbr>Key<wbr>Password</a>
@@ -450,8 +537,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify CSR key password.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="oldcertificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldcertificateid_csharp" style="color: inherit; text-decoration: inherit;">Old<wbr>Certificate<wbr>Id</a>
@@ -459,8 +545,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -468,8 +553,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -477,8 +561,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="validityperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validityperiod_csharp" style="color: inherit; text-decoration: inherit;">Validity<wbr>Period</a>
@@ -486,8 +569,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd></dl>
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -501,8 +583,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-required"
+    <dd>Specify domain name.</dd><dt class="property-required"
             title="Required">
         <span id="dvauthmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthmethod_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Method</a>
@@ -510,8 +591,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
@@ -519,8 +599,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactemail_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>Email</a>
@@ -528,8 +607,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactphone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactphone_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>Phone</a>
@@ -537,8 +615,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrencryptalgo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrencryptalgo_go" style="color: inherit; text-decoration: inherit;">Csr<wbr>Encrypt<wbr>Algo</a>
@@ -546,8 +623,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrkeyparameter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeyparameter_go" style="color: inherit; text-decoration: inherit;">Csr<wbr>Key<wbr>Parameter</a>
@@ -555,8 +631,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="csrkeypassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeypassword_go" style="color: inherit; text-decoration: inherit;">Csr<wbr>Key<wbr>Password</a>
@@ -564,8 +639,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify CSR key password.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="oldcertificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldcertificateid_go" style="color: inherit; text-decoration: inherit;">Old<wbr>Certificate<wbr>Id</a>
@@ -573,8 +647,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -582,8 +655,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -591,8 +663,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="validityperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validityperiod_go" style="color: inherit; text-decoration: inherit;">Validity<wbr>Period</a>
@@ -600,8 +671,109 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd></dl>
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="dv_auth_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_method_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contact_email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_email_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contact_phone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_phone_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>phone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Phone number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="csr_encrypt_algo_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_encrypt_algo_hcl" style="color: inherit; text-decoration: inherit;">csr_<wbr>encrypt_<wbr>algo</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="csr_key_parameter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_key_parameter_hcl" style="color: inherit; text-decoration: inherit;">csr_<wbr>key_<wbr>parameter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="csr_key_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_key_password_hcl" style="color: inherit; text-decoration: inherit;">csr_<wbr>key_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify CSR key password.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="old_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#old_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">old_<wbr>certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="validity_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validity_period_hcl" style="color: inherit; text-decoration: inherit;">validity_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -615,8 +787,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-required"
+    <dd>Specify domain name.</dd><dt class="property-required"
             title="Required">
         <span id="dvauthmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthmethod_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Method</a>
@@ -624,8 +795,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
@@ -633,8 +803,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactemail_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_java" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -642,8 +811,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactphone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactphone_java" style="color: inherit; text-decoration: inherit;">contact<wbr>Phone</a>
@@ -651,8 +819,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrencryptalgo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrencryptalgo_java" style="color: inherit; text-decoration: inherit;">csr<wbr>Encrypt<wbr>Algo</a>
@@ -660,8 +827,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrkeyparameter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeyparameter_java" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Parameter</a>
@@ -669,8 +835,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="csrkeypassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeypassword_java" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Password</a>
@@ -678,8 +843,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify CSR key password.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="oldcertificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldcertificateid_java" style="color: inherit; text-decoration: inherit;">old<wbr>Certificate<wbr>Id</a>
@@ -687,8 +851,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_java" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -696,8 +859,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -705,8 +867,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="validityperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validityperiod_java" style="color: inherit; text-decoration: inherit;">validity<wbr>Period</a>
@@ -714,8 +875,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd></dl>
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,8 +889,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-required"
+    <dd>Specify domain name.</dd><dt class="property-required"
             title="Required">
         <span id="dvauthmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthmethod_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Method</a>
@@ -738,8 +897,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
@@ -747,8 +905,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactemail_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -756,8 +913,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactphone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactphone_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>Phone</a>
@@ -765,8 +921,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrencryptalgo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrencryptalgo_nodejs" style="color: inherit; text-decoration: inherit;">csr<wbr>Encrypt<wbr>Algo</a>
@@ -774,8 +929,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrkeyparameter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeyparameter_nodejs" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Parameter</a>
@@ -783,8 +937,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="csrkeypassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeypassword_nodejs" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Password</a>
@@ -792,8 +945,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify CSR key password.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="oldcertificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldcertificateid_nodejs" style="color: inherit; text-decoration: inherit;">old<wbr>Certificate<wbr>Id</a>
@@ -801,8 +953,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -810,8 +961,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -819,8 +969,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="validityperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validityperiod_nodejs" style="color: inherit; text-decoration: inherit;">validity<wbr>Period</a>
@@ -828,8 +977,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd></dl>
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -843,8 +991,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-required"
+    <dd>Specify domain name.</dd><dt class="property-required"
             title="Required">
         <span id="dv_auth_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_method_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>method</a>
@@ -852,8 +999,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
@@ -861,8 +1007,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="contact_email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_email_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>email</a>
@@ -870,8 +1015,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="contact_phone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_phone_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>phone</a>
@@ -879,8 +1023,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="csr_encrypt_algo_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_encrypt_algo_python" style="color: inherit; text-decoration: inherit;">csr_<wbr>encrypt_<wbr>algo</a>
@@ -888,8 +1031,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="csr_key_parameter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_key_parameter_python" style="color: inherit; text-decoration: inherit;">csr_<wbr>key_<wbr>parameter</a>
@@ -897,8 +1039,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="csr_key_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_key_password_python" style="color: inherit; text-decoration: inherit;">csr_<wbr>key_<wbr>password</a>
@@ -906,8 +1047,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify CSR key password.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="old_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#old_certificate_id_python" style="color: inherit; text-decoration: inherit;">old_<wbr>certificate_<wbr>id</a>
@@ -915,8 +1055,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="package_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_python" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
@@ -924,8 +1063,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -933,8 +1071,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="validity_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validity_period_python" style="color: inherit; text-decoration: inherit;">validity_<wbr>period</a>
@@ -942,8 +1079,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd></dl>
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -957,8 +1093,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-required"
+    <dd>Specify domain name.</dd><dt class="property-required"
             title="Required">
         <span id="dvauthmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthmethod_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Method</a>
@@ -966,8 +1101,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
@@ -975,8 +1109,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactemail_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -984,8 +1117,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="contactphone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactphone_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>Phone</a>
@@ -993,8 +1125,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrencryptalgo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrencryptalgo_yaml" style="color: inherit; text-decoration: inherit;">csr<wbr>Encrypt<wbr>Algo</a>
@@ -1002,8 +1133,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrkeyparameter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeyparameter_yaml" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Parameter</a>
@@ -1011,8 +1141,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="csrkeypassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrkeypassword_yaml" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Password</a>
@@ -1020,8 +1149,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify CSR key password.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="oldcertificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldcertificateid_yaml" style="color: inherit; text-decoration: inherit;">old<wbr>Certificate<wbr>Id</a>
@@ -1029,8 +1157,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -1038,8 +1165,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1047,8 +1173,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="validityperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validityperiod_yaml" style="color: inherit; text-decoration: inherit;">validity<wbr>Period</a>
@@ -1056,8 +1181,7 @@ The FreeCertificate resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd></dl>
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1202,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-"
+    <dd>Certificate begin time.</dd><dt class="property-"
             title="">
         <span id="certendtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certendtime_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>End<wbr>Time</a>
@@ -1087,8 +1210,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-"
+    <dd>Certificate end time.</dd><dt class="property-"
             title="">
         <span id="certificateprivatekey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateprivatekey_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Private<wbr>Key</a>
@@ -1096,8 +1218,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-"
+    <dd>Certificate private key.</dd><dt class="property-"
             title="">
         <span id="certificatepublickey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatepublickey_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Public<wbr>Key</a>
@@ -1105,8 +1226,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-"
+    <dd>Certificate public key.</dd><dt class="property-"
             title="">
         <span id="deployable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployable_csharp" style="color: inherit; text-decoration: inherit;">Deployable</a>
@@ -1114,8 +1234,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-"
             title="">
         <span id="dvauths_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
@@ -1123,8 +1242,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#freecertificatedvauth">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Outputs.<wbr>Free<wbr>Certificate<wbr>Dv<wbr>Auth&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-"
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1132,8 +1250,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inserttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_csharp" style="color: inherit; text-decoration: inherit;">Insert<wbr>Time</a>
@@ -1141,8 +1258,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-"
+    <dd>Certificate insert time.</dd><dt class="property-"
             title="">
         <span id="productzhname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Zh<wbr>Name</a>
@@ -1150,8 +1266,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-"
+    <dd>Product zh name.</dd><dt class="property-"
             title="">
         <span id="renewable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewable_csharp" style="color: inherit; text-decoration: inherit;">Renewable</a>
@@ -1159,8 +1274,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1168,8 +1282,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-"
             title="">
         <span id="statusmsg_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusmsg_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Msg</a>
@@ -1177,8 +1290,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-"
+    <dd>Certificate status message.</dd><dt class="property-"
             title="">
         <span id="statusname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusname_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Name</a>
@@ -1186,8 +1298,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-"
+    <dd>Certificate status name.</dd><dt class="property-"
             title="">
         <span id="vulnerabilitystatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vulnerabilitystatus_csharp" style="color: inherit; text-decoration: inherit;">Vulnerability<wbr>Status</a>
@@ -1195,8 +1306,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1210,8 +1320,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-"
+    <dd>Certificate begin time.</dd><dt class="property-"
             title="">
         <span id="certendtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certendtime_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>End<wbr>Time</a>
@@ -1219,8 +1328,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-"
+    <dd>Certificate end time.</dd><dt class="property-"
             title="">
         <span id="certificateprivatekey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateprivatekey_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Private<wbr>Key</a>
@@ -1228,8 +1336,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-"
+    <dd>Certificate private key.</dd><dt class="property-"
             title="">
         <span id="certificatepublickey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatepublickey_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Public<wbr>Key</a>
@@ -1237,8 +1344,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-"
+    <dd>Certificate public key.</dd><dt class="property-"
             title="">
         <span id="deployable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployable_go" style="color: inherit; text-decoration: inherit;">Deployable</a>
@@ -1246,8 +1352,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-"
             title="">
         <span id="dvauths_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
@@ -1255,8 +1360,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#freecertificatedvauth">[]Free<wbr>Certificate<wbr>Dv<wbr>Auth</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-"
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1264,8 +1368,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inserttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_go" style="color: inherit; text-decoration: inherit;">Insert<wbr>Time</a>
@@ -1273,8 +1376,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-"
+    <dd>Certificate insert time.</dd><dt class="property-"
             title="">
         <span id="productzhname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Zh<wbr>Name</a>
@@ -1282,8 +1384,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-"
+    <dd>Product zh name.</dd><dt class="property-"
             title="">
         <span id="renewable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewable_go" style="color: inherit; text-decoration: inherit;">Renewable</a>
@@ -1291,8 +1392,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1300,8 +1400,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-"
             title="">
         <span id="statusmsg_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusmsg_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Msg</a>
@@ -1309,8 +1408,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-"
+    <dd>Certificate status message.</dd><dt class="property-"
             title="">
         <span id="statusname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusname_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Name</a>
@@ -1318,8 +1416,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-"
+    <dd>Certificate status name.</dd><dt class="property-"
             title="">
         <span id="vulnerabilitystatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vulnerabilitystatus_go" style="color: inherit; text-decoration: inherit;">Vulnerability<wbr>Status</a>
@@ -1327,8 +1424,125 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cert_begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_begin_time_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate begin time.</dd><dt class="property-"
+            title="">
+        <span id="cert_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_end_time_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate end time.</dd><dt class="property-"
+            title="">
+        <span id="certificate_private_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_private_key_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>private_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate private key.</dd><dt class="property-"
+            title="">
+        <span id="certificate_public_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_public_key_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>public_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate public key.</dd><dt class="property-"
+            title="">
+        <span id="deployable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployable_hcl" style="color: inherit; text-decoration: inherit;">deployable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-"
+            title="">
+        <span id="dv_auths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auths_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#freecertificatedvauth">list(object)</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="insert_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#insert_time_hcl" style="color: inherit; text-decoration: inherit;">insert_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate insert time.</dd><dt class="property-"
+            title="">
+        <span id="product_zh_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_zh_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>zh_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Product zh name.</dd><dt class="property-"
+            title="">
+        <span id="renewable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewable_hcl" style="color: inherit; text-decoration: inherit;">renewable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-"
+            title="">
+        <span id="status_msg_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_msg_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>msg</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate status message.</dd><dt class="property-"
+            title="">
+        <span id="status_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_name_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate status name.</dd><dt class="property-"
+            title="">
+        <span id="vulnerability_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vulnerability_status_hcl" style="color: inherit; text-decoration: inherit;">vulnerability_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1342,8 +1556,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-"
+    <dd>Certificate begin time.</dd><dt class="property-"
             title="">
         <span id="certendtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certendtime_java" style="color: inherit; text-decoration: inherit;">cert<wbr>End<wbr>Time</a>
@@ -1351,8 +1564,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-"
+    <dd>Certificate end time.</dd><dt class="property-"
             title="">
         <span id="certificateprivatekey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateprivatekey_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Private<wbr>Key</a>
@@ -1360,8 +1572,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-"
+    <dd>Certificate private key.</dd><dt class="property-"
             title="">
         <span id="certificatepublickey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatepublickey_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Public<wbr>Key</a>
@@ -1369,8 +1580,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-"
+    <dd>Certificate public key.</dd><dt class="property-"
             title="">
         <span id="deployable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployable_java" style="color: inherit; text-decoration: inherit;">deployable</a>
@@ -1378,8 +1588,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-"
             title="">
         <span id="dvauths_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
@@ -1387,8 +1596,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#freecertificatedvauth">List&lt;Free<wbr>Certificate<wbr>Dv<wbr>Auth&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-"
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1396,8 +1604,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inserttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_java" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -1405,8 +1612,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-"
+    <dd>Certificate insert time.</dd><dt class="property-"
             title="">
         <span id="productzhname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -1414,8 +1620,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-"
+    <dd>Product zh name.</dd><dt class="property-"
             title="">
         <span id="renewable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewable_java" style="color: inherit; text-decoration: inherit;">renewable</a>
@@ -1423,8 +1628,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1432,8 +1636,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-"
             title="">
         <span id="statusmsg_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusmsg_java" style="color: inherit; text-decoration: inherit;">status<wbr>Msg</a>
@@ -1441,8 +1644,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-"
+    <dd>Certificate status message.</dd><dt class="property-"
             title="">
         <span id="statusname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusname_java" style="color: inherit; text-decoration: inherit;">status<wbr>Name</a>
@@ -1450,8 +1652,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-"
+    <dd>Certificate status name.</dd><dt class="property-"
             title="">
         <span id="vulnerabilitystatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vulnerabilitystatus_java" style="color: inherit; text-decoration: inherit;">vulnerability<wbr>Status</a>
@@ -1459,8 +1660,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1474,8 +1674,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-"
+    <dd>Certificate begin time.</dd><dt class="property-"
             title="">
         <span id="certendtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certendtime_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>End<wbr>Time</a>
@@ -1483,8 +1682,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-"
+    <dd>Certificate end time.</dd><dt class="property-"
             title="">
         <span id="certificateprivatekey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateprivatekey_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Private<wbr>Key</a>
@@ -1492,8 +1690,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-"
+    <dd>Certificate private key.</dd><dt class="property-"
             title="">
         <span id="certificatepublickey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatepublickey_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Public<wbr>Key</a>
@@ -1501,8 +1698,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-"
+    <dd>Certificate public key.</dd><dt class="property-"
             title="">
         <span id="deployable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployable_nodejs" style="color: inherit; text-decoration: inherit;">deployable</a>
@@ -1510,8 +1706,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-"
             title="">
         <span id="dvauths_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
@@ -1519,8 +1714,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#freecertificatedvauth">Free<wbr>Certificate<wbr>Dv<wbr>Auth[]</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-"
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1528,8 +1722,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inserttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_nodejs" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -1537,8 +1730,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-"
+    <dd>Certificate insert time.</dd><dt class="property-"
             title="">
         <span id="productzhname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -1546,8 +1738,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-"
+    <dd>Product zh name.</dd><dt class="property-"
             title="">
         <span id="renewable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewable_nodejs" style="color: inherit; text-decoration: inherit;">renewable</a>
@@ -1555,8 +1746,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1564,8 +1754,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-"
             title="">
         <span id="statusmsg_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusmsg_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Msg</a>
@@ -1573,8 +1762,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-"
+    <dd>Certificate status message.</dd><dt class="property-"
             title="">
         <span id="statusname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusname_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Name</a>
@@ -1582,8 +1770,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-"
+    <dd>Certificate status name.</dd><dt class="property-"
             title="">
         <span id="vulnerabilitystatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vulnerabilitystatus_nodejs" style="color: inherit; text-decoration: inherit;">vulnerability<wbr>Status</a>
@@ -1591,8 +1778,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1606,8 +1792,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-"
+    <dd>Certificate begin time.</dd><dt class="property-"
             title="">
         <span id="cert_end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_end_time_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>end_<wbr>time</a>
@@ -1615,8 +1800,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-"
+    <dd>Certificate end time.</dd><dt class="property-"
             title="">
         <span id="certificate_private_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_private_key_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>private_<wbr>key</a>
@@ -1624,8 +1808,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-"
+    <dd>Certificate private key.</dd><dt class="property-"
             title="">
         <span id="certificate_public_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_public_key_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>public_<wbr>key</a>
@@ -1633,8 +1816,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-"
+    <dd>Certificate public key.</dd><dt class="property-"
             title="">
         <span id="deployable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployable_python" style="color: inherit; text-decoration: inherit;">deployable</a>
@@ -1642,17 +1824,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-"
             title="">
         <span id="dv_auths_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auths_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#freecertificatedvauth">Free<wbr>Certificate<wbr>Dv<wbr>Auth]</a></span>
+        <span class="property-type"><a href="#freecertificatedvauth">Sequence[Free<wbr>Certificate<wbr>Dv<wbr>Auth]</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-"
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1660,8 +1840,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="insert_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#insert_time_python" style="color: inherit; text-decoration: inherit;">insert_<wbr>time</a>
@@ -1669,8 +1848,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-"
+    <dd>Certificate insert time.</dd><dt class="property-"
             title="">
         <span id="product_zh_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_zh_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>zh_<wbr>name</a>
@@ -1678,8 +1856,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-"
+    <dd>Product zh name.</dd><dt class="property-"
             title="">
         <span id="renewable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewable_python" style="color: inherit; text-decoration: inherit;">renewable</a>
@@ -1687,8 +1864,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1696,8 +1872,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-"
             title="">
         <span id="status_msg_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_msg_python" style="color: inherit; text-decoration: inherit;">status_<wbr>msg</a>
@@ -1705,8 +1880,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-"
+    <dd>Certificate status message.</dd><dt class="property-"
             title="">
         <span id="status_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_name_python" style="color: inherit; text-decoration: inherit;">status_<wbr>name</a>
@@ -1714,8 +1888,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-"
+    <dd>Certificate status name.</dd><dt class="property-"
             title="">
         <span id="vulnerability_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vulnerability_status_python" style="color: inherit; text-decoration: inherit;">vulnerability_<wbr>status</a>
@@ -1723,8 +1896,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1738,8 +1910,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-"
+    <dd>Certificate begin time.</dd><dt class="property-"
             title="">
         <span id="certendtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certendtime_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>End<wbr>Time</a>
@@ -1747,8 +1918,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-"
+    <dd>Certificate end time.</dd><dt class="property-"
             title="">
         <span id="certificateprivatekey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateprivatekey_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Private<wbr>Key</a>
@@ -1756,8 +1926,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-"
+    <dd>Certificate private key.</dd><dt class="property-"
             title="">
         <span id="certificatepublickey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatepublickey_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Public<wbr>Key</a>
@@ -1765,8 +1934,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-"
+    <dd>Certificate public key.</dd><dt class="property-"
             title="">
         <span id="deployable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployable_yaml" style="color: inherit; text-decoration: inherit;">deployable</a>
@@ -1774,8 +1942,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-"
             title="">
         <span id="dvauths_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
@@ -1783,8 +1950,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#freecertificatedvauth">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-"
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1792,8 +1958,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inserttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_yaml" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -1801,8 +1966,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-"
+    <dd>Certificate insert time.</dd><dt class="property-"
             title="">
         <span id="productzhname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -1810,8 +1974,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-"
+    <dd>Product zh name.</dd><dt class="property-"
             title="">
         <span id="renewable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewable_yaml" style="color: inherit; text-decoration: inherit;">renewable</a>
@@ -1819,8 +1982,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1828,8 +1990,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-"
             title="">
         <span id="statusmsg_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusmsg_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Msg</a>
@@ -1837,8 +1998,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-"
+    <dd>Certificate status message.</dd><dt class="property-"
             title="">
         <span id="statusname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusname_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Name</a>
@@ -1846,8 +2006,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-"
+    <dd>Certificate status name.</dd><dt class="property-"
             title="">
         <span id="vulnerabilitystatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vulnerabilitystatus_yaml" style="color: inherit; text-decoration: inherit;">vulnerability<wbr>Status</a>
@@ -1855,8 +2014,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1866,18 +2024,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing FreeCertificate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">FreeCertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">FreeCertificate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">FreeCertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">FreeCertificate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1894,7 +2052,7 @@ Get an existing FreeCertificate resource's state with the given name, ID, and op
         <span class="nx">deployable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">dv_auth_method</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">dv_auths</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ssl.FreeCertificateDvAuthArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">dv_auths</span><span class="p">:</span> <span class="nx">Optional[Sequence[FreeCertificateDvAuthArgs]]</span> = None<span class="p">,</span>
         <span class="nx">insert_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">old_certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -1906,104 +2064,143 @@ Get an existing FreeCertificate resource's state with the given name, ID, and op
         <span class="nx">status_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">validity_period</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vulnerability_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> FreeCertificate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetFreeCertificate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">FreeCertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">FreeCertificate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetFreeCertificate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">FreeCertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">FreeCertificate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">FreeCertificate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FreeCertificateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">FreeCertificate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FreeCertificateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">FreeCertificate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FreeCertificateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">FreeCertificate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FreeCertificateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingFreeCertificate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ssl:FreeCertificate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ssl_free_certificate</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FreeCertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FreeCertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2011,28 +2208,31 @@ Get an existing FreeCertificate resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FreeCertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2040,28 +2240,31 @@ Get an existing FreeCertificate resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FreeCertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2081,8 +2284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certbegintime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certbegintime_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Begin<wbr>Time</a>
@@ -2090,8 +2292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certendtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certendtime_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>End<wbr>Time</a>
@@ -2099,8 +2300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateprivatekey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateprivatekey_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Private<wbr>Key</a>
@@ -2108,8 +2308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate private key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatepublickey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatepublickey_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Public<wbr>Key</a>
@@ -2117,8 +2316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate public key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactemail_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactemail_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>Email</a>
@@ -2126,8 +2324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactphone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactphone_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>Phone</a>
@@ -2135,8 +2332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrencryptalgo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrencryptalgo_csharp" style="color: inherit; text-decoration: inherit;">Csr<wbr>Encrypt<wbr>Algo</a>
@@ -2144,8 +2340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrkeyparameter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeyparameter_csharp" style="color: inherit; text-decoration: inherit;">Csr<wbr>Key<wbr>Parameter</a>
@@ -2153,8 +2348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_csrkeypassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeypassword_csharp" style="color: inherit; text-decoration: inherit;">Csr<wbr>Key<wbr>Password</a>
@@ -2162,8 +2356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployable_csharp" style="color: inherit; text-decoration: inherit;">Deployable</a>
@@ -2171,8 +2364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -2180,8 +2372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauthmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauthmethod_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Method</a>
@@ -2189,17 +2380,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#freecertificatedvauth">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Free<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#freecertificatedvauth">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Free<wbr>Certificate<wbr>Dv<wbr>Auth&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_inserttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inserttime_csharp" style="color: inherit; text-decoration: inherit;">Insert<wbr>Time</a>
@@ -2207,8 +2396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Certificate insert time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_oldcertificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldcertificateid_csharp" style="color: inherit; text-decoration: inherit;">Old<wbr>Certificate<wbr>Id</a>
@@ -2216,8 +2404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -2225,8 +2412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Zh<wbr>Name</a>
@@ -2234,8 +2420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-optional"
+    <dd>Product zh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2243,8 +2428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewable_csharp" style="color: inherit; text-decoration: inherit;">Renewable</a>
@@ -2252,8 +2436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2261,8 +2444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusmsg_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusmsg_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Msg</a>
@@ -2270,8 +2452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusname_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Name</a>
@@ -2279,8 +2460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validityperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validityperiod_csharp" style="color: inherit; text-decoration: inherit;">Validity<wbr>Period</a>
@@ -2288,8 +2468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vulnerabilitystatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vulnerabilitystatus_csharp" style="color: inherit; text-decoration: inherit;">Vulnerability<wbr>Status</a>
@@ -2297,8 +2476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2312,8 +2490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certbegintime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certbegintime_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Begin<wbr>Time</a>
@@ -2321,8 +2498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certendtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certendtime_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>End<wbr>Time</a>
@@ -2330,8 +2506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateprivatekey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateprivatekey_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Private<wbr>Key</a>
@@ -2339,8 +2514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate private key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatepublickey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatepublickey_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Public<wbr>Key</a>
@@ -2348,8 +2522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate public key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactemail_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactemail_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>Email</a>
@@ -2357,8 +2530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactphone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactphone_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>Phone</a>
@@ -2366,8 +2538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrencryptalgo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrencryptalgo_go" style="color: inherit; text-decoration: inherit;">Csr<wbr>Encrypt<wbr>Algo</a>
@@ -2375,8 +2546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrkeyparameter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeyparameter_go" style="color: inherit; text-decoration: inherit;">Csr<wbr>Key<wbr>Parameter</a>
@@ -2384,8 +2554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_csrkeypassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeypassword_go" style="color: inherit; text-decoration: inherit;">Csr<wbr>Key<wbr>Password</a>
@@ -2393,8 +2562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployable_go" style="color: inherit; text-decoration: inherit;">Deployable</a>
@@ -2402,8 +2570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -2411,8 +2578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauthmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauthmethod_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Method</a>
@@ -2420,8 +2586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
@@ -2429,8 +2594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#freecertificatedvauth">[]Free<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_inserttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inserttime_go" style="color: inherit; text-decoration: inherit;">Insert<wbr>Time</a>
@@ -2438,8 +2602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Certificate insert time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_oldcertificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldcertificateid_go" style="color: inherit; text-decoration: inherit;">Old<wbr>Certificate<wbr>Id</a>
@@ -2447,8 +2610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -2456,8 +2618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Zh<wbr>Name</a>
@@ -2465,8 +2626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-optional"
+    <dd>Product zh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2474,8 +2634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewable_go" style="color: inherit; text-decoration: inherit;">Renewable</a>
@@ -2483,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2492,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusmsg_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusmsg_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Msg</a>
@@ -2501,8 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusname_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Name</a>
@@ -2510,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validityperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validityperiod_go" style="color: inherit; text-decoration: inherit;">Validity<wbr>Period</a>
@@ -2519,8 +2674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vulnerabilitystatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vulnerabilitystatus_go" style="color: inherit; text-decoration: inherit;">Vulnerability<wbr>Status</a>
@@ -2528,8 +2682,213 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cert_begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_begin_time_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate begin time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cert_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_end_time_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate end time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_private_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_private_key_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>private_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate private key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_public_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_public_key_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>public_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate public key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_contact_email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contact_email_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_contact_phone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contact_phone_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>phone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Phone number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_csr_encrypt_algo_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csr_encrypt_algo_hcl" style="color: inherit; text-decoration: inherit;">csr_<wbr>encrypt_<wbr>algo</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_csr_key_parameter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csr_key_parameter_hcl" style="color: inherit; text-decoration: inherit;">csr_<wbr>key_<wbr>parameter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_csr_key_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csr_key_password_hcl" style="color: inherit; text-decoration: inherit;">csr_<wbr>key_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify CSR key password.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deployable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployable_hcl" style="color: inherit; text-decoration: inherit;">deployable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify domain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dv_auth_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dv_auth_method_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dv_auths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dv_auths_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#freecertificatedvauth">list(object)</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_insert_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_insert_time_hcl" style="color: inherit; text-decoration: inherit;">insert_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate insert time.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_old_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_old_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">old_<wbr>certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_product_zh_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_zh_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>zh_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Product zh name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_renewable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewable_hcl" style="color: inherit; text-decoration: inherit;">renewable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_msg_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_msg_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>msg</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate status message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_name_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate status name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_validity_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validity_period_hcl" style="color: inherit; text-decoration: inherit;">validity_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vulnerability_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vulnerability_status_hcl" style="color: inherit; text-decoration: inherit;">vulnerability_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2543,8 +2902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certbegintime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certbegintime_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Begin<wbr>Time</a>
@@ -2552,8 +2910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certendtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certendtime_java" style="color: inherit; text-decoration: inherit;">cert<wbr>End<wbr>Time</a>
@@ -2561,8 +2918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateprivatekey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateprivatekey_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Private<wbr>Key</a>
@@ -2570,8 +2926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate private key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatepublickey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatepublickey_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Public<wbr>Key</a>
@@ -2579,8 +2934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate public key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactemail_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactemail_java" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -2588,8 +2942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactphone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactphone_java" style="color: inherit; text-decoration: inherit;">contact<wbr>Phone</a>
@@ -2597,8 +2950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrencryptalgo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrencryptalgo_java" style="color: inherit; text-decoration: inherit;">csr<wbr>Encrypt<wbr>Algo</a>
@@ -2606,8 +2958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrkeyparameter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeyparameter_java" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Parameter</a>
@@ -2615,8 +2966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_csrkeypassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeypassword_java" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Password</a>
@@ -2624,8 +2974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployable_java" style="color: inherit; text-decoration: inherit;">deployable</a>
@@ -2633,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2642,8 +2990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauthmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauthmethod_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Method</a>
@@ -2651,17 +2998,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#freecertificatedvauth">List&lt;Free<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#freecertificatedvauth">List&lt;Free<wbr>Certificate<wbr>Dv<wbr>Auth&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_inserttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inserttime_java" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -2669,8 +3014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Certificate insert time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_oldcertificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldcertificateid_java" style="color: inherit; text-decoration: inherit;">old<wbr>Certificate<wbr>Id</a>
@@ -2678,8 +3022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_java" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -2687,8 +3030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -2696,8 +3038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-optional"
+    <dd>Product zh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2705,8 +3046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewable_java" style="color: inherit; text-decoration: inherit;">renewable</a>
@@ -2714,8 +3054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2723,8 +3062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusmsg_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusmsg_java" style="color: inherit; text-decoration: inherit;">status<wbr>Msg</a>
@@ -2732,8 +3070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusname_java" style="color: inherit; text-decoration: inherit;">status<wbr>Name</a>
@@ -2741,8 +3078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validityperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validityperiod_java" style="color: inherit; text-decoration: inherit;">validity<wbr>Period</a>
@@ -2750,8 +3086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vulnerabilitystatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vulnerabilitystatus_java" style="color: inherit; text-decoration: inherit;">vulnerability<wbr>Status</a>
@@ -2759,8 +3094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2774,8 +3108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certbegintime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certbegintime_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Begin<wbr>Time</a>
@@ -2783,8 +3116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certendtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certendtime_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>End<wbr>Time</a>
@@ -2792,8 +3124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateprivatekey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateprivatekey_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Private<wbr>Key</a>
@@ -2801,8 +3132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate private key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatepublickey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatepublickey_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Public<wbr>Key</a>
@@ -2810,8 +3140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate public key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactemail_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactemail_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -2819,8 +3148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactphone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactphone_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>Phone</a>
@@ -2828,8 +3156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrencryptalgo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrencryptalgo_nodejs" style="color: inherit; text-decoration: inherit;">csr<wbr>Encrypt<wbr>Algo</a>
@@ -2837,8 +3164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrkeyparameter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeyparameter_nodejs" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Parameter</a>
@@ -2846,8 +3172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_csrkeypassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeypassword_nodejs" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Password</a>
@@ -2855,8 +3180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployable_nodejs" style="color: inherit; text-decoration: inherit;">deployable</a>
@@ -2864,8 +3188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2873,8 +3196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauthmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauthmethod_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Method</a>
@@ -2882,17 +3204,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#freecertificatedvauth">Free<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#freecertificatedvauth">Free<wbr>Certificate<wbr>Dv<wbr>Auth[]</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_inserttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inserttime_nodejs" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -2900,8 +3220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Certificate insert time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_oldcertificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldcertificateid_nodejs" style="color: inherit; text-decoration: inherit;">old<wbr>Certificate<wbr>Id</a>
@@ -2909,8 +3228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -2918,8 +3236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -2927,8 +3244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-optional"
+    <dd>Product zh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2936,8 +3252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewable_nodejs" style="color: inherit; text-decoration: inherit;">renewable</a>
@@ -2945,8 +3260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2954,8 +3268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusmsg_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusmsg_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Msg</a>
@@ -2963,8 +3276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusname_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Name</a>
@@ -2972,8 +3284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validityperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validityperiod_nodejs" style="color: inherit; text-decoration: inherit;">validity<wbr>Period</a>
@@ -2981,8 +3292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vulnerabilitystatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vulnerabilitystatus_nodejs" style="color: inherit; text-decoration: inherit;">vulnerability<wbr>Status</a>
@@ -2990,8 +3300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3005,8 +3314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cert_begin_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_begin_time_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>begin_<wbr>time</a>
@@ -3014,8 +3322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cert_end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_end_time_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>end_<wbr>time</a>
@@ -3023,8 +3330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificate_private_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_private_key_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>private_<wbr>key</a>
@@ -3032,8 +3338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate private key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificate_public_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_public_key_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>public_<wbr>key</a>
@@ -3041,8 +3346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate public key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contact_email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contact_email_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>email</a>
@@ -3050,8 +3354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contact_phone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contact_phone_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>phone</a>
@@ -3059,8 +3362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csr_encrypt_algo_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csr_encrypt_algo_python" style="color: inherit; text-decoration: inherit;">csr_<wbr>encrypt_<wbr>algo</a>
@@ -3068,8 +3370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csr_key_parameter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csr_key_parameter_python" style="color: inherit; text-decoration: inherit;">csr_<wbr>key_<wbr>parameter</a>
@@ -3077,8 +3378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_csr_key_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csr_key_password_python" style="color: inherit; text-decoration: inherit;">csr_<wbr>key_<wbr>password</a>
@@ -3086,8 +3386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployable_python" style="color: inherit; text-decoration: inherit;">deployable</a>
@@ -3095,8 +3394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3104,8 +3402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dv_auth_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dv_auth_method_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>method</a>
@@ -3113,17 +3410,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dv_auths_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dv_auths_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#freecertificatedvauth">Free<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args]</a></span>
+        <span class="property-type"><a href="#freecertificatedvauth">Sequence[Free<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args]</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_insert_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_insert_time_python" style="color: inherit; text-decoration: inherit;">insert_<wbr>time</a>
@@ -3131,8 +3426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Certificate insert time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_old_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_old_certificate_id_python" style="color: inherit; text-decoration: inherit;">old_<wbr>certificate_<wbr>id</a>
@@ -3140,8 +3434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_type_python" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
@@ -3149,8 +3442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_zh_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_zh_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>zh_<wbr>name</a>
@@ -3158,8 +3450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-optional"
+    <dd>Product zh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3167,8 +3458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewable_python" style="color: inherit; text-decoration: inherit;">renewable</a>
@@ -3176,8 +3466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3185,8 +3474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_msg_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_msg_python" style="color: inherit; text-decoration: inherit;">status_<wbr>msg</a>
@@ -3194,8 +3482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_name_python" style="color: inherit; text-decoration: inherit;">status_<wbr>name</a>
@@ -3203,8 +3490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validity_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validity_period_python" style="color: inherit; text-decoration: inherit;">validity_<wbr>period</a>
@@ -3212,8 +3498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vulnerability_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vulnerability_status_python" style="color: inherit; text-decoration: inherit;">vulnerability_<wbr>status</a>
@@ -3221,8 +3506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3236,8 +3520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify alias for remark.</p>
-</dd><dt class="property-optional"
+    <dd>Specify alias for remark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certbegintime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certbegintime_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Begin<wbr>Time</a>
@@ -3245,8 +3528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certendtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certendtime_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>End<wbr>Time</a>
@@ -3254,8 +3536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate end time.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateprivatekey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateprivatekey_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Private<wbr>Key</a>
@@ -3263,8 +3544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate private key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate private key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatepublickey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatepublickey_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Public<wbr>Key</a>
@@ -3272,8 +3552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate public key.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate public key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactemail_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactemail_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -3281,8 +3560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email address.</p>
-</dd><dt class="property-optional"
+    <dd>Email address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_contactphone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contactphone_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>Phone</a>
@@ -3290,8 +3568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrencryptalgo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrencryptalgo_yaml" style="color: inherit; text-decoration: inherit;">csr<wbr>Encrypt<wbr>Algo</a>
@@ -3299,8 +3576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR encrypt algorithm, only support <code>RSA</code> for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csrkeyparameter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeyparameter_yaml" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Parameter</a>
@@ -3308,8 +3584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key parameter, only support <code>&quot;2048&quot;</code> for now.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_csrkeypassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csrkeypassword_yaml" style="color: inherit; text-decoration: inherit;">csr<wbr>Key<wbr>Password</a>
@@ -3317,8 +3592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify CSR key password.</p>
-</dd><dt class="property-optional"
+    <dd>Specify CSR key password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployable_yaml" style="color: inherit; text-decoration: inherit;">deployable</a>
@@ -3326,8 +3600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate deployable.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the certificate deployable.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3335,8 +3608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauthmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauthmethod_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Method</a>
@@ -3344,8 +3616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DV authorize method. Available values: <code>DNS_AUTO</code> - automatic DNS auth, <code>DNS</code> - manual DNS auth, <code>FILE</code> - auth by file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
@@ -3353,8 +3624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#freecertificatedvauth">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_inserttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inserttime_yaml" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -3362,8 +3632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate insert time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Certificate insert time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_oldcertificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldcertificateid_yaml" style="color: inherit; text-decoration: inherit;">old<wbr>Certificate<wbr>Id</a>
@@ -3371,8 +3640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify old certificate ID, used for re-apply.</p>
-</dd><dt class="property-optional"
+    <dd>Specify old certificate ID, used for re-apply.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -3380,8 +3648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</p>
-</dd><dt class="property-optional"
+    <dd>Type of package. Only support <code>&quot;83&quot;</code> (TrustAsia TLS RSA CA).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -3389,8 +3656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product zh name.</p>
-</dd><dt class="property-optional"
+    <dd>Product zh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3398,8 +3664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of projects which this certification belong to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of projects which this certification belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewable_yaml" style="color: inherit; text-decoration: inherit;">renewable</a>
@@ -3407,8 +3672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the certificate renewable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the certificate renewable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3416,8 +3680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusmsg_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusmsg_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Msg</a>
@@ -3425,8 +3688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate status message.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusname_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Name</a>
@@ -3434,8 +3696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate status name.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate status name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validityperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validityperiod_yaml" style="color: inherit; text-decoration: inherit;">validity<wbr>Period</a>
@@ -3443,8 +3704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify validity period in month, only support <code>&quot;3&quot;</code> months for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vulnerabilitystatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vulnerabilitystatus_yaml" style="color: inherit; text-decoration: inherit;">vulnerability<wbr>Status</a>
@@ -3452,8 +3712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vulnerability status.</p>
-</dd></dl>
+    <dd>Vulnerability status.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3468,7 +3727,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="freecertificatedvauth">Free<wbr>Certificate<wbr>Dv<wbr>Auth</h4>
+<h4 id="freecertificatedvauth">
+Free<wbr>Certificate<wbr>Dv<wbr>Auth<pulumi-choosable type="language" values="python,go" class="inline">, Free<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3480,8 +3741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Value</a>
@@ -3489,8 +3749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -3498,8 +3757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3513,8 +3771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Value</a>
@@ -3522,8 +3779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -3531,8 +3787,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dv_auth_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_key_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DV authentication key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dv_auth_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_value_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DV authentication value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dv_auth_verify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_verify_type_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>verify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3546,8 +3831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Value</a>
@@ -3555,8 +3839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -3564,8 +3847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3579,8 +3861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Value</a>
@@ -3588,8 +3869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -3597,8 +3877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3612,8 +3891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dv_auth_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_value_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>value</a>
@@ -3621,8 +3899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dv_auth_verify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_verify_type_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>verify_<wbr>type</a>
@@ -3630,8 +3907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3645,8 +3921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Value</a>
@@ -3654,8 +3929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -3663,8 +3937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3673,11 +3946,13 @@ The following state arguments are supported:
 
 
 FreeCertificate instance can be imported, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -3689,7 +3964,6 @@ $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certi
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Css.getDeliverLogDownList"
 meta_desc: "Documentation for the tencentcloud.Css.getDeliverLogDownList function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,7 +25,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -31,9 +33,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDeliverLogDownList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDeliverLogDownListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>></span
+><span class="k">function </span>getDeliverLogDownList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDeliverLogDownListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>></span
 ><span class="k">
-function </span>getDeliverLogDownListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDeliverLogDownListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>></span
+function </span>getDeliverLogDownListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDeliverLogDownListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -45,8 +47,8 @@ function </span>getDeliverLogDownListOutput<span class="p">(</span><span class="
 ><span class="k">def </span>get_deliver_log_down_list<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDeliverLogDownListResult</span
 ><span class="k">
-def </span>get_deliver_log_down_list_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDeliverLogDownListResult]</span
+def </span>get_deliver_log_down_list_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDeliverLogDownListResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -71,7 +73,8 @@ func </span>GetDeliverLogDownListOutput<span class="p">(</span><span class="nx">
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDeliverLogDownList </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDeliverLogDownListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDeliverLogDownListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDeliverLogDownListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDeliverLogDownListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -80,7 +83,8 @@ func </span>GetDeliverLogDownListOutput<span class="p">(</span><span class="nx">
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>> </span>getDeliverLogDownList<span class="p">(</span><span class="nx">GetDeliverLogDownListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>> </span>getDeliverLogDownList<span class="p">(</span><span class="nx">GetDeliverLogDownListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDeliverLogDownListResult</a></span>> </span>getDeliverLogDownList<span class="p">(</span><span class="nx">GetDeliverLogDownListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -92,6 +96,15 @@ func </span>GetDeliverLogDownListOutput<span class="p">(</span><span class="nx">
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Css/getDeliverLogDownList:getDeliverLogDownList
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_css_get_deliver_log_down_list&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -120,6 +133,20 @@ The following arguments are supported:
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -203,8 +230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="loginfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginfolists_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Info<wbr>Lists</a>
@@ -234,8 +260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="loginfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginfolists_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Info<wbr>Lists</a>
@@ -256,6 +281,36 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="log_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_info_lists_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdeliverlogdownlistloginfolist">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -265,8 +320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="loginfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginfolists_java" style="color: inherit; text-decoration: inherit;">log<wbr>Info<wbr>Lists</a>
@@ -296,8 +350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="loginfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginfolists_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Info<wbr>Lists</a>
@@ -327,14 +380,13 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="log_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_info_lists_python" style="color: inherit; text-decoration: inherit;">log_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdeliverlogdownlistloginfolist">Get<wbr>Deliver<wbr>Log<wbr>Down<wbr>List<wbr>Log<wbr>Info<wbr>List]</a></span>
+        <span class="property-type"><a href="#getdeliverlogdownlistloginfolist">Sequence[Get<wbr>Deliver<wbr>Log<wbr>Down<wbr>List<wbr>Log<wbr>Info<wbr>List]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -358,8 +410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="loginfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loginfolists_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Info<wbr>Lists</a>
@@ -399,8 +450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size, in bytes.</p>
-</dd><dt class="property-required"
+    <dd>File size, in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="logname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logname_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Name</a>
@@ -408,8 +458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log name.</p>
-</dd><dt class="property-required"
+    <dd>Log name.</dd><dt class="property-required"
             title="Required">
         <span id="logtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtime_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Time</a>
@@ -417,8 +466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</p>
-</dd><dt class="property-required"
+    <dd>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</dd><dt class="property-required"
             title="Required">
         <span id="logurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logurl_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Url</a>
@@ -426,8 +474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log download address.</p>
-</dd></dl>
+    <dd>Log download address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -441,8 +488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size, in bytes.</p>
-</dd><dt class="property-required"
+    <dd>File size, in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="logname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logname_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Name</a>
@@ -450,8 +496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log name.</p>
-</dd><dt class="property-required"
+    <dd>Log name.</dd><dt class="property-required"
             title="Required">
         <span id="logtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtime_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Time</a>
@@ -459,8 +504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</p>
-</dd><dt class="property-required"
+    <dd>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</dd><dt class="property-required"
             title="Required">
         <span id="logurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logurl_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Url</a>
@@ -468,8 +512,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log download address.</p>
-</dd></dl>
+    <dd>Log download address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="file_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_size_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File size, in bytes.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_name_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log name.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_time_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_url_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log download address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File size, in bytes.</p>
-</dd><dt class="property-required"
+    <dd>File size, in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="logname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logname_java" style="color: inherit; text-decoration: inherit;">log<wbr>Name</a>
@@ -492,8 +572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log name.</p>
-</dd><dt class="property-required"
+    <dd>Log name.</dd><dt class="property-required"
             title="Required">
         <span id="logtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtime_java" style="color: inherit; text-decoration: inherit;">log<wbr>Time</a>
@@ -501,8 +580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</p>
-</dd><dt class="property-required"
+    <dd>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</dd><dt class="property-required"
             title="Required">
         <span id="logurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logurl_java" style="color: inherit; text-decoration: inherit;">log<wbr>Url</a>
@@ -510,8 +588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log download address.</p>
-</dd></dl>
+    <dd>Log download address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File size, in bytes.</p>
-</dd><dt class="property-required"
+    <dd>File size, in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="logname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logname_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Name</a>
@@ -534,8 +610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log name.</p>
-</dd><dt class="property-required"
+    <dd>Log name.</dd><dt class="property-required"
             title="Required">
         <span id="logtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtime_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Time</a>
@@ -543,8 +618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</p>
-</dd><dt class="property-required"
+    <dd>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</dd><dt class="property-required"
             title="Required">
         <span id="logurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logurl_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Url</a>
@@ -552,8 +626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log download address.</p>
-</dd></dl>
+    <dd>Log download address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -567,8 +640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size, in bytes.</p>
-</dd><dt class="property-required"
+    <dd>File size, in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="log_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_name_python" style="color: inherit; text-decoration: inherit;">log_<wbr>name</a>
@@ -576,8 +648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log name.</p>
-</dd><dt class="property-required"
+    <dd>Log name.</dd><dt class="property-required"
             title="Required">
         <span id="log_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_time_python" style="color: inherit; text-decoration: inherit;">log_<wbr>time</a>
@@ -585,8 +656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</p>
-</dd><dt class="property-required"
+    <dd>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</dd><dt class="property-required"
             title="Required">
         <span id="log_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_url_python" style="color: inherit; text-decoration: inherit;">log_<wbr>url</a>
@@ -594,8 +664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log download address.</p>
-</dd></dl>
+    <dd>Log download address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File size, in bytes.</p>
-</dd><dt class="property-required"
+    <dd>File size, in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="logname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logname_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Name</a>
@@ -618,8 +686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log name.</p>
-</dd><dt class="property-required"
+    <dd>Log name.</dd><dt class="property-required"
             title="Required">
         <span id="logtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtime_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Time</a>
@@ -627,8 +694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</p>
-</dd><dt class="property-required"
+    <dd>Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.</dd><dt class="property-required"
             title="Required">
         <span id="logurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logurl_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Url</a>
@@ -636,8 +702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log download address.</p>
-</dd></dl>
+    <dd>Log download address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -652,7 +717,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

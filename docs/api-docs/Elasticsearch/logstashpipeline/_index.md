@@ -2,9 +2,11 @@
 ---
 title: "LogstashPipeline"
 title_tag: "tencentcloud.Elasticsearch.LogstashPipeline"
-meta_desc: "Documentation for the tencentcloud.Elasticsearch.LogstashPipeline resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a elasticsearch logstash pipeline"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,17 +18,21 @@ Provides a resource to create a elasticsearch logstash pipeline
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const logstashPipeline = new tencentcloud.elasticsearch.LogstashPipeline("logstashPipeline", {
+const logstashPipeline = new tencentcloud.elasticsearch.LogstashPipeline("logstash_pipeline", {
     instanceId: "ls-xxxxxx",
-    opType: 2,
     pipeline: {
-        batchDelay: 50,
-        batchSize: 125,
+        pipelineId: "logstash-pipeline-test",
+        pipelineDesc: "",
         config: `input{
 
 }
@@ -36,28 +42,32 @@ filter{
 output{
 
 }
-
 `,
-        pipelineDesc: "",
-        pipelineId: "logstash-pipeline-test",
+        queueType: "memory",
         queueCheckPointWrites: 0,
         queueMaxBytes: "",
-        queueType: "memory",
+        batchDelay: 50,
+        batchSize: 125,
         workers: 1,
     },
+    opType: 2,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-logstash_pipeline = tencentcloud.elasticsearch.LogstashPipeline("logstashPipeline",
+logstash_pipeline = tencentcloud.elasticsearch.LogstashPipeline("logstash_pipeline",
     instance_id="ls-xxxxxx",
-    op_type=2,
-    pipeline=tencentcloud.elasticsearch.LogstashPipelinePipelineArgs(
-        batch_delay=50,
-        batch_size=125,
-        config="""input{
+    pipeline={
+        "pipeline_id": "logstash-pipeline-test",
+        "pipeline_desc": "",
+        "config": """input{
 
 }
 filter{
@@ -66,16 +76,58 @@ filter{
 output{
 
 }
-
 """,
-        pipeline_desc="",
-        pipeline_id="logstash-pipeline-test",
-        queue_check_point_writes=0,
-        queue_max_bytes="",
-        queue_type="memory",
-        workers=1,
-    ))
+        "queue_type": "memory",
+        "queue_check_point_writes": 0,
+        "queue_max_bytes": "",
+        "batch_delay": 50,
+        "batch_size": 125,
+        "workers": 1,
+    },
+    op_type=2)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := elasticsearch.NewLogstashPipeline(ctx, "logstash_pipeline", &elasticsearch.LogstashPipelineArgs{
+			InstanceId: pulumi.String("ls-xxxxxx"),
+			Pipeline: &elasticsearch.LogstashPipelinePipelineArgs{
+				PipelineId:            pulumi.String("logstash-pipeline-test"),
+				PipelineDesc:          pulumi.String(""),
+				Config:                pulumi.String("input{\n\n}\nfilter{\n\n}\noutput{\n\n}\n"),
+				QueueType:             pulumi.String("memory"),
+				QueueCheckPointWrites: pulumi.Int(0),
+				QueueMaxBytes:         pulumi.String(""),
+				BatchDelay:            pulumi.Int(50),
+				BatchSize:             pulumi.Int(125),
+				Workers:               pulumi.Int(1),
+			},
+			OpType: pulumi.Int(2),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -84,14 +136,13 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var logstashPipeline = new Tencentcloud.Elasticsearch.LogstashPipeline("logstashPipeline", new()
+    var logstashPipeline = new Tencentcloud.Elasticsearch.LogstashPipeline("logstash_pipeline", new()
     {
         InstanceId = "ls-xxxxxx",
-        OpType = 2,
         Pipeline = new Tencentcloud.Elasticsearch.Inputs.LogstashPipelinePipelineArgs
         {
-            BatchDelay = 50,
-            BatchSize = 125,
+            PipelineId = "logstash-pipeline-test",
+            PipelineDesc = "",
             Config = @"input{
 
 }
@@ -101,51 +152,24 @@ filter{
 output{
 
 }
-
 ",
-            PipelineDesc = "",
-            PipelineId = "logstash-pipeline-test",
+            QueueType = "memory",
             QueueCheckPointWrites = 0,
             QueueMaxBytes = "",
-            QueueType = "memory",
+            BatchDelay = 50,
+            BatchSize = 125,
             Workers = 1,
         },
+        OpType = 2,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Elasticsearch.NewLogstashPipeline(ctx, "logstashPipeline", &Elasticsearch.LogstashPipelineArgs{
-			InstanceId: pulumi.String("ls-xxxxxx"),
-			OpType:     pulumi.Int(2),
-			Pipeline: &elasticsearch.LogstashPipelinePipelineArgs{
-				BatchDelay:            pulumi.Int(50),
-				BatchSize:             pulumi.Int(125),
-				Config:                pulumi.String("input{\n\n}\nfilter{\n\n}\noutput{\n\n}\n\n"),
-				PipelineDesc:          pulumi.String(""),
-				PipelineId:            pulumi.String("logstash-pipeline-test"),
-				QueueCheckPointWrites: pulumi.Int(0),
-				QueueMaxBytes:         pulumi.String(""),
-				QueueType:             pulumi.String("memory"),
-				Workers:               pulumi.Int(1),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -155,8 +179,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Elasticsearch.LogstashPipeline;
 import com.pulumi.tencentcloud.Elasticsearch.LogstashPipelineArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.LogstashPipelinePipelineArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -168,12 +192,11 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var logstashPipeline = new LogstashPipeline("logstashPipeline", LogstashPipelineArgs.builder()        
+        var logstashPipeline = new LogstashPipeline("logstashPipeline", LogstashPipelineArgs.builder()
             .instanceId("ls-xxxxxx")
-            .opType(2)
             .pipeline(LogstashPipelinePipelineArgs.builder()
-                .batchDelay(50)
-                .batchSize(125)
+                .pipelineId("logstash-pipeline-test")
+                .pipelineDesc("")
                 .config("""
 input{
 
@@ -184,31 +207,36 @@ filter{
 output{
 
 }
-
                 """)
-                .pipelineDesc("")
-                .pipelineId("logstash-pipeline-test")
+                .queueType("memory")
                 .queueCheckPointWrites(0)
                 .queueMaxBytes("")
-                .queueType("memory")
+                .batchDelay(50)
+                .batchSize(125)
                 .workers(1)
                 .build())
+            .opType(2)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   logstashPipeline:
     type: tencentcloud:Elasticsearch:LogstashPipeline
+    name: logstash_pipeline
     properties:
       instanceId: ls-xxxxxx
-      opType: 2
       pipeline:
-        batchDelay: 50
-        batchSize: 125
-        config: |+
+        pipelineId: logstash-pipeline-test
+        pipelineDesc: ""
+        config: |
           input{
 
           }
@@ -218,75 +246,136 @@ resources:
           output{
 
           }
-
-        pipelineDesc:
-        pipelineId: logstash-pipeline-test
-        queueCheckPointWrites: 0
-        queueMaxBytes:
         queueType: memory
+        queueCheckPointWrites: 0
+        queueMaxBytes: ""
+        batchDelay: 50
+        batchSize: 125
         workers: 1
+      opType: 2
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_elasticsearch_logstashpipeline" "logstash_pipeline" {
+  instance_id = "ls-xxxxxx"
+  pipeline = {
+    pipeline_id              = "logstash-pipeline-test"
+    pipeline_desc            = ""
+    config                   = "input{\n\n}\nfilter{\n\n}\noutput{\n\n}\n"
+    queue_type               = "memory"
+    queue_check_point_writes = 0
+    queue_max_bytes          = ""
+    batch_delay              = 50
+    batch_size               = 125
+    workers                  = 1
+  }
+  op_type = 2
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&type=document&lang=en)
+  - [SaveAndDeployLogstashPipeline](https://www.tencentcloud.com/search/?wd=SaveAndDeployLogstashPipeline&type=document&lang=en)
+* Read: [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&type=document&lang=en)
+* Update:
+  - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&type=document&lang=en)
+  - [SaveAndDeployLogstashPipeline](https://www.tencentcloud.com/search/?wd=SaveAndDeployLogstashPipeline&type=document&lang=en)
+* Delete:
+  - [DeleteLogstashPipelines](https://www.tencentcloud.com/search/?wd=DeleteLogstashPipelines&type=document&lang=en)
+  - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&type=document&lang=en)
 
 
 ## Create LogstashPipeline Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                      <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">op_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">pipeline</span><span class="p">:</span> <span class="nx">Optional[_elasticsearch.LogstashPipelinePipelineArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                     <span class="nx">pipeline</span><span class="p">:</span> <span class="nx">Optional[LogstashPipelinePipelineArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLogstashPipeline</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">LogstashPipeline</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLogstashPipeline</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">LogstashPipeline</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">LogstashPipeline</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LogstashPipelineArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Elasticsearch:LogstashPipeline</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Elasticsearch:LogstashPipeline</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_elasticsearch_logstash_pipeline&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -307,7 +396,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -424,11 +513,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## LogstashPipeline Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The LogstashPipeline resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -444,8 +541,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-required"
+    <dd>Logstash instance id.</dd><dt class="property-required"
             title="Required">
         <span id="optype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optype_csharp" style="color: inherit; text-decoration: inherit;">Op<wbr>Type</a>
@@ -453,17 +549,15 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-required"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-required"
             title="Required">
         <span id="pipeline_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_csharp" style="color: inherit; text-decoration: inherit;">Pipeline</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashpipelinepipeline">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashpipelinepipeline">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Pipeline<wbr>Pipeline</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -477,8 +571,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-required"
+    <dd>Logstash instance id.</dd><dt class="property-required"
             title="Required">
         <span id="optype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optype_go" style="color: inherit; text-decoration: inherit;">Op<wbr>Type</a>
@@ -486,8 +579,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-required"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-required"
             title="Required">
         <span id="pipeline_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_go" style="color: inherit; text-decoration: inherit;">Pipeline</a>
@@ -495,8 +587,37 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Logstash instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="op_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#op_type_hcl" style="color: inherit; text-decoration: inherit;">op_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-required"
+            title="Required">
+        <span id="pipeline_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_hcl" style="color: inherit; text-decoration: inherit;">pipeline</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashpipelinepipeline">object</a></span>
+    </dt>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -510,8 +631,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-required"
+    <dd>Logstash instance id.</dd><dt class="property-required"
             title="Required">
         <span id="optype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optype_java" style="color: inherit; text-decoration: inherit;">op<wbr>Type</a>
@@ -519,17 +639,15 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-required"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-required"
             title="Required">
         <span id="pipeline_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_java" style="color: inherit; text-decoration: inherit;">pipeline</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +661,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-required"
+    <dd>Logstash instance id.</dd><dt class="property-required"
             title="Required">
         <span id="optype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optype_nodejs" style="color: inherit; text-decoration: inherit;">op<wbr>Type</a>
@@ -552,17 +669,15 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-required"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-required"
             title="Required">
         <span id="pipeline_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_nodejs" style="color: inherit; text-decoration: inherit;">pipeline</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -576,8 +691,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-required"
+    <dd>Logstash instance id.</dd><dt class="property-required"
             title="Required">
         <span id="op_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#op_type_python" style="color: inherit; text-decoration: inherit;">op_<wbr>type</a>
@@ -585,8 +699,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-required"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-required"
             title="Required">
         <span id="pipeline_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_python" style="color: inherit; text-decoration: inherit;">pipeline</a>
@@ -594,8 +707,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +721,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-required"
+    <dd>Logstash instance id.</dd><dt class="property-required"
             title="Required">
         <span id="optype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optype_yaml" style="color: inherit; text-decoration: inherit;">op<wbr>Type</a>
@@ -618,8 +729,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-required"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-required"
             title="Required">
         <span id="pipeline_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_yaml" style="color: inherit; text-decoration: inherit;">pipeline</a>
@@ -627,8 +737,7 @@ The LogstashPipeline resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashpipelinepipeline">Property Map</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -649,8 +758,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -664,8 +772,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -679,8 +800,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -694,8 +814,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -709,8 +828,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -724,8 +842,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -735,122 +852,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing LogstashPipeline resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">LogstashPipelineState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">LogstashPipeline</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">LogstashPipelineState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">LogstashPipeline</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">op_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">pipeline</span><span class="p">:</span> <span class="nx">Optional[_elasticsearch.LogstashPipelinePipelineArgs]</span> = None<span class="p">) -&gt;</span> LogstashPipeline</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">pipeline</span><span class="p">:</span> <span class="nx">Optional[LogstashPipelinePipelineArgs]</span> = None<span class="p">) -&gt;</span> LogstashPipeline</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLogstashPipeline<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">LogstashPipelineState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">LogstashPipeline</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLogstashPipeline<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">LogstashPipelineState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">LogstashPipeline</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">LogstashPipeline</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LogstashPipelineState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">LogstashPipeline</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LogstashPipelineState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">LogstashPipeline</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LogstashPipelineState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">LogstashPipeline</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LogstashPipelineState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingLogstashPipeline</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Elasticsearch:LogstashPipeline</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_elasticsearch_logstash_pipeline</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LogstashPipelineState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LogstashPipelineState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -858,28 +1014,31 @@ Get an existing LogstashPipeline resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LogstashPipelineState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -887,28 +1046,31 @@ Get an existing LogstashPipeline resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LogstashPipelineState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -928,8 +1090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Logstash instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_optype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_optype_csharp" style="color: inherit; text-decoration: inherit;">Op<wbr>Type</a>
@@ -937,17 +1098,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-optional"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pipeline_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pipeline_csharp" style="color: inherit; text-decoration: inherit;">Pipeline</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashpipelinepipeline">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashpipelinepipeline">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Pipeline<wbr>Pipeline</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -961,8 +1120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Logstash instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_optype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_optype_go" style="color: inherit; text-decoration: inherit;">Op<wbr>Type</a>
@@ -970,8 +1128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-optional"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pipeline_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pipeline_go" style="color: inherit; text-decoration: inherit;">Pipeline</a>
@@ -979,8 +1136,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Logstash instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_op_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_op_type_hcl" style="color: inherit; text-decoration: inherit;">op_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pipeline_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pipeline_hcl" style="color: inherit; text-decoration: inherit;">pipeline</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashpipelinepipeline">object</a></span>
+    </dt>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -994,8 +1180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Logstash instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_optype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_optype_java" style="color: inherit; text-decoration: inherit;">op<wbr>Type</a>
@@ -1003,17 +1188,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-optional"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pipeline_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pipeline_java" style="color: inherit; text-decoration: inherit;">pipeline</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1027,8 +1210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Logstash instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_optype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_optype_nodejs" style="color: inherit; text-decoration: inherit;">op<wbr>Type</a>
@@ -1036,17 +1218,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-optional"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pipeline_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pipeline_nodejs" style="color: inherit; text-decoration: inherit;">pipeline</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1060,8 +1240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Logstash instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_op_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_op_type_python" style="color: inherit; text-decoration: inherit;">op_<wbr>type</a>
@@ -1069,8 +1248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-optional"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pipeline_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pipeline_python" style="color: inherit; text-decoration: inherit;">pipeline</a>
@@ -1078,8 +1256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1093,8 +1270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logstash instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Logstash instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_optype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_optype_yaml" style="color: inherit; text-decoration: inherit;">op<wbr>Type</a>
@@ -1102,8 +1278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Operation type. 1: save only; 2: save and deploy.</p>
-</dd><dt class="property-optional"
+    <dd>Operation type. 1: save only; 2: save and deploy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pipeline_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pipeline_yaml" style="color: inherit; text-decoration: inherit;">pipeline</a>
@@ -1111,8 +1286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashpipelinepipeline">Property Map</a></span>
     </dt>
-    <dd><p>Pipeline information.</p>
-</dd></dl>
+    <dd>Pipeline information.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1127,7 +1301,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="logstashpipelinepipeline">Logstash<wbr>Pipeline<wbr>Pipeline</h4>
+<h4 id="logstashpipelinepipeline">
+Logstash<wbr>Pipeline<wbr>Pipeline<pulumi-choosable type="language" values="python,go" class="inline">, Logstash<wbr>Pipeline<wbr>Pipeline<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1139,8 +1315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pipeline batch processing delay.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline batch processing delay.</dd><dt class="property-required"
             title="Required">
         <span id="batchsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchsize_csharp" style="color: inherit; text-decoration: inherit;">Batch<wbr>Size</a>
@@ -1148,8 +1323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pipe batch size.</p>
-</dd><dt class="property-required"
+    <dd>Pipe batch size.</dd><dt class="property-required"
             title="Required">
         <span id="config_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_csharp" style="color: inherit; text-decoration: inherit;">Config</a>
@@ -1157,8 +1331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline configuration content.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline configuration content.</dd><dt class="property-required"
             title="Required">
         <span id="pipelinedesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelinedesc_csharp" style="color: inherit; text-decoration: inherit;">Pipeline<wbr>Desc</a>
@@ -1166,8 +1339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline description information.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline description information.</dd><dt class="property-required"
             title="Required">
         <span id="pipelineid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelineid_csharp" style="color: inherit; text-decoration: inherit;">Pipeline<wbr>Id</a>
@@ -1175,8 +1347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline id.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline id.</dd><dt class="property-required"
             title="Required">
         <span id="queuecheckpointwrites_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuecheckpointwrites_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Check<wbr>Point<wbr>Writes</a>
@@ -1184,8 +1355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of pipeline buffer queue checkpoint writes.</p>
-</dd><dt class="property-required"
+    <dd>Number of pipeline buffer queue checkpoint writes.</dd><dt class="property-required"
             title="Required">
         <span id="queuemaxbytes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuemaxbytes_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Max<wbr>Bytes</a>
@@ -1193,8 +1363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline buffer queue size.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue size.</dd><dt class="property-required"
             title="Required">
         <span id="queuetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuetype_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Type</a>
@@ -1202,8 +1371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline buffer queue type.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue type.</dd><dt class="property-required"
             title="Required">
         <span id="workers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workers_csharp" style="color: inherit; text-decoration: inherit;">Workers</a>
@@ -1211,8 +1379,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Worker of pipe.</p>
-</dd></dl>
+    <dd>Number of Worker of pipe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1226,8 +1393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pipeline batch processing delay.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline batch processing delay.</dd><dt class="property-required"
             title="Required">
         <span id="batchsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchsize_go" style="color: inherit; text-decoration: inherit;">Batch<wbr>Size</a>
@@ -1235,8 +1401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pipe batch size.</p>
-</dd><dt class="property-required"
+    <dd>Pipe batch size.</dd><dt class="property-required"
             title="Required">
         <span id="config_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_go" style="color: inherit; text-decoration: inherit;">Config</a>
@@ -1244,8 +1409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline configuration content.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline configuration content.</dd><dt class="property-required"
             title="Required">
         <span id="pipelinedesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelinedesc_go" style="color: inherit; text-decoration: inherit;">Pipeline<wbr>Desc</a>
@@ -1253,8 +1417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline description information.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline description information.</dd><dt class="property-required"
             title="Required">
         <span id="pipelineid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelineid_go" style="color: inherit; text-decoration: inherit;">Pipeline<wbr>Id</a>
@@ -1262,8 +1425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline id.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline id.</dd><dt class="property-required"
             title="Required">
         <span id="queuecheckpointwrites_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuecheckpointwrites_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Check<wbr>Point<wbr>Writes</a>
@@ -1271,8 +1433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of pipeline buffer queue checkpoint writes.</p>
-</dd><dt class="property-required"
+    <dd>Number of pipeline buffer queue checkpoint writes.</dd><dt class="property-required"
             title="Required">
         <span id="queuemaxbytes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuemaxbytes_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Max<wbr>Bytes</a>
@@ -1280,8 +1441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline buffer queue size.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue size.</dd><dt class="property-required"
             title="Required">
         <span id="queuetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuetype_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Type</a>
@@ -1289,8 +1449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline buffer queue type.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue type.</dd><dt class="property-required"
             title="Required">
         <span id="workers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workers_go" style="color: inherit; text-decoration: inherit;">Workers</a>
@@ -1298,8 +1457,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Worker of pipe.</p>
-</dd></dl>
+    <dd>Number of Worker of pipe.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="batch_delay_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batch_delay_hcl" style="color: inherit; text-decoration: inherit;">batch_<wbr>delay</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Pipeline batch processing delay.</dd><dt class="property-required"
+            title="Required">
+        <span id="batch_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batch_size_hcl" style="color: inherit; text-decoration: inherit;">batch_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Pipe batch size.</dd><dt class="property-required"
+            title="Required">
+        <span id="config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pipeline configuration content.</dd><dt class="property-required"
+            title="Required">
+        <span id="pipeline_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_desc_hcl" style="color: inherit; text-decoration: inherit;">pipeline_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pipeline description information.</dd><dt class="property-required"
+            title="Required">
+        <span id="pipeline_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_id_hcl" style="color: inherit; text-decoration: inherit;">pipeline_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pipeline id.</dd><dt class="property-required"
+            title="Required">
+        <span id="queue_check_point_writes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_check_point_writes_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>check_<wbr>point_<wbr>writes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of pipeline buffer queue checkpoint writes.</dd><dt class="property-required"
+            title="Required">
+        <span id="queue_max_bytes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_max_bytes_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>max_<wbr>bytes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pipeline buffer queue size.</dd><dt class="property-required"
+            title="Required">
+        <span id="queue_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_type_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pipeline buffer queue type.</dd><dt class="property-required"
+            title="Required">
+        <span id="workers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workers_hcl" style="color: inherit; text-decoration: inherit;">workers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of Worker of pipe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1313,8 +1549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Pipeline batch processing delay.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline batch processing delay.</dd><dt class="property-required"
             title="Required">
         <span id="batchsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchsize_java" style="color: inherit; text-decoration: inherit;">batch<wbr>Size</a>
@@ -1322,8 +1557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Pipe batch size.</p>
-</dd><dt class="property-required"
+    <dd>Pipe batch size.</dd><dt class="property-required"
             title="Required">
         <span id="config_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_java" style="color: inherit; text-decoration: inherit;">config</a>
@@ -1331,8 +1565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline configuration content.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline configuration content.</dd><dt class="property-required"
             title="Required">
         <span id="pipelinedesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelinedesc_java" style="color: inherit; text-decoration: inherit;">pipeline<wbr>Desc</a>
@@ -1340,8 +1573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline description information.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline description information.</dd><dt class="property-required"
             title="Required">
         <span id="pipelineid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelineid_java" style="color: inherit; text-decoration: inherit;">pipeline<wbr>Id</a>
@@ -1349,8 +1581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline id.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline id.</dd><dt class="property-required"
             title="Required">
         <span id="queuecheckpointwrites_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuecheckpointwrites_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Check<wbr>Point<wbr>Writes</a>
@@ -1358,8 +1589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of pipeline buffer queue checkpoint writes.</p>
-</dd><dt class="property-required"
+    <dd>Number of pipeline buffer queue checkpoint writes.</dd><dt class="property-required"
             title="Required">
         <span id="queuemaxbytes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuemaxbytes_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Max<wbr>Bytes</a>
@@ -1367,8 +1597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline buffer queue size.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue size.</dd><dt class="property-required"
             title="Required">
         <span id="queuetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuetype_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Type</a>
@@ -1376,8 +1605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline buffer queue type.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue type.</dd><dt class="property-required"
             title="Required">
         <span id="workers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workers_java" style="color: inherit; text-decoration: inherit;">workers</a>
@@ -1385,8 +1613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of Worker of pipe.</p>
-</dd></dl>
+    <dd>Number of Worker of pipe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1400,8 +1627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Pipeline batch processing delay.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline batch processing delay.</dd><dt class="property-required"
             title="Required">
         <span id="batchsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchsize_nodejs" style="color: inherit; text-decoration: inherit;">batch<wbr>Size</a>
@@ -1409,8 +1635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Pipe batch size.</p>
-</dd><dt class="property-required"
+    <dd>Pipe batch size.</dd><dt class="property-required"
             title="Required">
         <span id="config_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_nodejs" style="color: inherit; text-decoration: inherit;">config</a>
@@ -1418,8 +1643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline configuration content.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline configuration content.</dd><dt class="property-required"
             title="Required">
         <span id="pipelinedesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelinedesc_nodejs" style="color: inherit; text-decoration: inherit;">pipeline<wbr>Desc</a>
@@ -1427,8 +1651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline description information.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline description information.</dd><dt class="property-required"
             title="Required">
         <span id="pipelineid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelineid_nodejs" style="color: inherit; text-decoration: inherit;">pipeline<wbr>Id</a>
@@ -1436,8 +1659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline id.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline id.</dd><dt class="property-required"
             title="Required">
         <span id="queuecheckpointwrites_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuecheckpointwrites_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Check<wbr>Point<wbr>Writes</a>
@@ -1445,8 +1667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of pipeline buffer queue checkpoint writes.</p>
-</dd><dt class="property-required"
+    <dd>Number of pipeline buffer queue checkpoint writes.</dd><dt class="property-required"
             title="Required">
         <span id="queuemaxbytes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuemaxbytes_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Max<wbr>Bytes</a>
@@ -1454,8 +1675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline buffer queue size.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue size.</dd><dt class="property-required"
             title="Required">
         <span id="queuetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuetype_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Type</a>
@@ -1463,8 +1683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pipeline buffer queue type.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue type.</dd><dt class="property-required"
             title="Required">
         <span id="workers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workers_nodejs" style="color: inherit; text-decoration: inherit;">workers</a>
@@ -1472,8 +1691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of Worker of pipe.</p>
-</dd></dl>
+    <dd>Number of Worker of pipe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1487,8 +1705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pipeline batch processing delay.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline batch processing delay.</dd><dt class="property-required"
             title="Required">
         <span id="batch_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batch_size_python" style="color: inherit; text-decoration: inherit;">batch_<wbr>size</a>
@@ -1496,8 +1713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pipe batch size.</p>
-</dd><dt class="property-required"
+    <dd>Pipe batch size.</dd><dt class="property-required"
             title="Required">
         <span id="config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_python" style="color: inherit; text-decoration: inherit;">config</a>
@@ -1505,8 +1721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pipeline configuration content.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline configuration content.</dd><dt class="property-required"
             title="Required">
         <span id="pipeline_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_desc_python" style="color: inherit; text-decoration: inherit;">pipeline_<wbr>desc</a>
@@ -1514,8 +1729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pipeline description information.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline description information.</dd><dt class="property-required"
             title="Required">
         <span id="pipeline_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipeline_id_python" style="color: inherit; text-decoration: inherit;">pipeline_<wbr>id</a>
@@ -1523,8 +1737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pipeline id.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline id.</dd><dt class="property-required"
             title="Required">
         <span id="queue_check_point_writes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_check_point_writes_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>check_<wbr>point_<wbr>writes</a>
@@ -1532,8 +1745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of pipeline buffer queue checkpoint writes.</p>
-</dd><dt class="property-required"
+    <dd>Number of pipeline buffer queue checkpoint writes.</dd><dt class="property-required"
             title="Required">
         <span id="queue_max_bytes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_max_bytes_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>max_<wbr>bytes</a>
@@ -1541,8 +1753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pipeline buffer queue size.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue size.</dd><dt class="property-required"
             title="Required">
         <span id="queue_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_type_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>type</a>
@@ -1550,8 +1761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pipeline buffer queue type.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue type.</dd><dt class="property-required"
             title="Required">
         <span id="workers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workers_python" style="color: inherit; text-decoration: inherit;">workers</a>
@@ -1559,8 +1769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Worker of pipe.</p>
-</dd></dl>
+    <dd>Number of Worker of pipe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1574,8 +1783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Pipeline batch processing delay.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline batch processing delay.</dd><dt class="property-required"
             title="Required">
         <span id="batchsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchsize_yaml" style="color: inherit; text-decoration: inherit;">batch<wbr>Size</a>
@@ -1583,8 +1791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Pipe batch size.</p>
-</dd><dt class="property-required"
+    <dd>Pipe batch size.</dd><dt class="property-required"
             title="Required">
         <span id="config_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_yaml" style="color: inherit; text-decoration: inherit;">config</a>
@@ -1592,8 +1799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline configuration content.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline configuration content.</dd><dt class="property-required"
             title="Required">
         <span id="pipelinedesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelinedesc_yaml" style="color: inherit; text-decoration: inherit;">pipeline<wbr>Desc</a>
@@ -1601,8 +1807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline description information.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline description information.</dd><dt class="property-required"
             title="Required">
         <span id="pipelineid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pipelineid_yaml" style="color: inherit; text-decoration: inherit;">pipeline<wbr>Id</a>
@@ -1610,8 +1815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline id.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline id.</dd><dt class="property-required"
             title="Required">
         <span id="queuecheckpointwrites_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuecheckpointwrites_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Check<wbr>Point<wbr>Writes</a>
@@ -1619,8 +1823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of pipeline buffer queue checkpoint writes.</p>
-</dd><dt class="property-required"
+    <dd>Number of pipeline buffer queue checkpoint writes.</dd><dt class="property-required"
             title="Required">
         <span id="queuemaxbytes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuemaxbytes_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Max<wbr>Bytes</a>
@@ -1628,8 +1831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline buffer queue size.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue size.</dd><dt class="property-required"
             title="Required">
         <span id="queuetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuetype_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Type</a>
@@ -1637,8 +1839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pipeline buffer queue type.</p>
-</dd><dt class="property-required"
+    <dd>Pipeline buffer queue type.</dd><dt class="property-required"
             title="Required">
         <span id="workers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workers_yaml" style="color: inherit; text-decoration: inherit;">workers</a>
@@ -1646,8 +1847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of Worker of pipe.</p>
-</dd></dl>
+    <dd>Number of Worker of pipe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1655,12 +1855,15 @@ The following state arguments are supported:
 
 
 
-elasticsearch logstash_pipeline can be imported using the id, e.g.
+elasticsearch logstashPipeline can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline logstash_pipeline ${instance_id}#${pipeline_id}
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1672,7 +1875,6 @@ $ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline log
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

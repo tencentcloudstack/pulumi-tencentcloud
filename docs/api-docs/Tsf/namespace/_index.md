@@ -2,9 +2,11 @@
 ---
 title: "Namespace"
 title_tag: "tencentcloud.Tsf.Namespace"
-meta_desc: "Documentation for the tencentcloud.Tsf.Namespace resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tsf namespace"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,71 @@ Provides a resource to create a tsf namespace
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const namespace = new tencentcloud.tsf.Namespace("namespace", {
-    isHaEnable: "0",
-    namespaceDesc: "namespace desc",
     namespaceName: "namespace-name",
+    namespaceDesc: "namespace desc",
     namespaceType: "DEF",
+    isHaEnable: "0",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 namespace = tencentcloud.tsf.Namespace("namespace",
-    is_ha_enable="0",
-    namespace_desc="namespace desc",
     namespace_name="namespace-name",
-    namespace_type="DEF")
+    namespace_desc="namespace desc",
+    namespace_type="DEF",
+    is_ha_enable="0")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tsf.NewNamespace(ctx, "namespace", &tsf.NamespaceArgs{
+			NamespaceName: pulumi.String("namespace-name"),
+			NamespaceDesc: pulumi.String("namespace desc"),
+			NamespaceType: pulumi.String("DEF"),
+			IsHaEnable:    pulumi.String("0"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -48,37 +93,19 @@ return await Deployment.RunAsync(() =>
 {
     var @namespace = new Tencentcloud.Tsf.Namespace("namespace", new()
     {
-        IsHaEnable = "0",
-        NamespaceDesc = "namespace desc",
         NamespaceName = "namespace-name",
+        NamespaceDesc = "namespace desc",
         NamespaceType = "DEF",
+        IsHaEnable = "0",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.NewNamespace(ctx, "namespace", &Tsf.NamespaceArgs{
-			IsHaEnable:    pulumi.String("0"),
-			NamespaceDesc: pulumi.String("namespace desc"),
-			NamespaceName: pulumi.String("namespace-name"),
-			NamespaceType: pulumi.String("DEF"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -87,8 +114,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.Namespace;
 import com.pulumi.tencentcloud.Tsf.NamespaceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -100,97 +127,145 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var namespace = new Namespace("namespace", NamespaceArgs.builder()        
-            .isHaEnable("0")
-            .namespaceDesc("namespace desc")
+        var namespace = new Namespace("namespace", NamespaceArgs.builder()
             .namespaceName("namespace-name")
+            .namespaceDesc("namespace desc")
             .namespaceType("DEF")
+            .isHaEnable("0")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   namespace:
     type: tencentcloud:Tsf:Namespace
     properties:
-      # namespace_id = ""
-      isHaEnable: '0'
-      # cluster_id = "cls-xxxx"
-      namespaceDesc: namespace desc
       namespaceName: namespace-name
-      # namespace_resource_type = ""
+      namespaceDesc: namespace desc
       namespaceType: DEF
+      isHaEnable: '0'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tsf_namespace" "namespace" {
+  namespace_name = "namespace-name"
+  namespace_desc = "namespace desc"
+  namespace_type = "DEF"
+  is_ha_enable   = "0"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateNamespace](https://www.tencentcloud.com/search/?wd=CreateNamespace&type=document&lang=en)
+* Read: [DescribeSimpleNamespaces](https://www.tencentcloud.com/search/?wd=DescribeSimpleNamespaces&type=document&lang=en)
+* Update: [ModifyNamespace](https://www.tencentcloud.com/search/?wd=ModifyNamespace&type=document&lang=en)
+* Delete: [DeleteNamespace](https://www.tencentcloud.com/search/?wd=DeleteNamespace&type=document&lang=en)
 
 
 
 ## Create Namespace Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+              <span class="nx">namespace_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">is_ha_enable</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">namespace_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">namespace_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">namespace_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">namespace_resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">namespace_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">program_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNamespace</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNamespace</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Namespace</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Namespace</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tsf_namespace&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -211,7 +286,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -328,11 +403,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Namespace Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Namespace resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -348,8 +431,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -357,8 +439,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ishaenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ishaenable_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Ha<wbr>Enable</a>
@@ -366,8 +447,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacedesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacedesc_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Desc</a>
@@ -375,8 +455,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -384,8 +463,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceresourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceresourcetype_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Resource<wbr>Type</a>
@@ -393,8 +471,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacetype_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Type</a>
@@ -402,8 +479,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -411,8 +487,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -420,8 +495,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -435,8 +509,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -444,8 +517,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ishaenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ishaenable_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Ha<wbr>Enable</a>
@@ -453,8 +525,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacedesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacedesc_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Desc</a>
@@ -462,8 +533,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -471,8 +541,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceresourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceresourcetype_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Resource<wbr>Type</a>
@@ -480,8 +549,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacetype_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Type</a>
@@ -489,8 +557,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -498,8 +565,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -507,8 +573,85 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_ha_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ha_enable_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>ha_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_desc_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_resource_type_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_type_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="program_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -522,8 +665,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -531,8 +673,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ishaenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ishaenable_java" style="color: inherit; text-decoration: inherit;">is<wbr>Ha<wbr>Enable</a>
@@ -540,8 +681,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacedesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacedesc_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Desc</a>
@@ -549,8 +689,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -558,8 +697,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceresourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceresourcetype_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Resource<wbr>Type</a>
@@ -567,8 +705,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacetype_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Type</a>
@@ -576,8 +713,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -585,8 +721,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -594,8 +729,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +743,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -618,8 +751,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ishaenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ishaenable_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Ha<wbr>Enable</a>
@@ -627,8 +759,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacedesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacedesc_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Desc</a>
@@ -636,8 +767,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -645,8 +775,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceresourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceresourcetype_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Resource<wbr>Type</a>
@@ -654,8 +783,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacetype_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Type</a>
@@ -663,8 +791,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -672,8 +799,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -681,8 +807,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -696,8 +821,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -705,8 +829,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_ha_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ha_enable_python" style="color: inherit; text-decoration: inherit;">is_<wbr>ha_<wbr>enable</a>
@@ -714,8 +837,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_desc_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>desc</a>
@@ -723,8 +845,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
@@ -732,8 +853,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_resource_type_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>resource_<wbr>type</a>
@@ -741,8 +861,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_type_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>type</a>
@@ -750,8 +869,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="program_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
@@ -759,8 +877,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -768,8 +885,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -783,8 +899,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -792,8 +907,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ishaenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ishaenable_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Ha<wbr>Enable</a>
@@ -801,8 +915,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacedesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacedesc_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Desc</a>
@@ -810,8 +923,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -819,8 +931,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceresourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceresourcetype_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Resource<wbr>Type</a>
@@ -828,8 +939,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacetype_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Type</a>
@@ -837,8 +947,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -846,8 +955,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -855,8 +963,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -877,8 +984,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -886,8 +992,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-"
+    <dd>Delete ID.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -895,8 +1000,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -904,8 +1008,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-"
+    <dd>default namespace.</dd><dt class="property-"
             title="">
         <span id="kubeinjectenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeinjectenable_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Inject<wbr>Enable</a>
@@ -913,8 +1016,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-"
+    <dd>KubeInjectEnable value.</dd><dt class="property-"
             title="">
         <span id="namespacecode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacecode_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Code</a>
@@ -922,8 +1024,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-"
+    <dd>Namespace encoding.</dd><dt class="property-"
             title="">
         <span id="namespacestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacestatus_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Status</a>
@@ -931,8 +1032,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-"
+    <dd>namespace status.</dd><dt class="property-"
             title="">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -940,8 +1040,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -955,8 +1054,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -964,8 +1062,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-"
+    <dd>Delete ID.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -973,8 +1070,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -982,8 +1078,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-"
+    <dd>default namespace.</dd><dt class="property-"
             title="">
         <span id="kubeinjectenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeinjectenable_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Inject<wbr>Enable</a>
@@ -991,8 +1086,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-"
+    <dd>KubeInjectEnable value.</dd><dt class="property-"
             title="">
         <span id="namespacecode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacecode_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Code</a>
@@ -1000,8 +1094,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-"
+    <dd>Namespace encoding.</dd><dt class="property-"
             title="">
         <span id="namespacestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacestatus_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Status</a>
@@ -1009,8 +1102,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-"
+    <dd>namespace status.</dd><dt class="property-"
             title="">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1018,8 +1110,77 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>creation time.</dd><dt class="property-"
+            title="">
+        <span id="delete_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Delete ID.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>default namespace.</dd><dt class="property-"
+            title="">
+        <span id="kube_inject_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_inject_enable_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>inject_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>KubeInjectEnable value.</dd><dt class="property-"
+            title="">
+        <span id="namespace_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_code_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace encoding.</dd><dt class="property-"
+            title="">
+        <span id="namespace_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_status_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace status.</dd><dt class="property-"
+            title="">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1033,8 +1194,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -1042,8 +1202,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-"
+    <dd>Delete ID.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1051,8 +1210,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1060,8 +1218,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-"
+    <dd>default namespace.</dd><dt class="property-"
             title="">
         <span id="kubeinjectenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeinjectenable_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Inject<wbr>Enable</a>
@@ -1069,8 +1226,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-"
+    <dd>KubeInjectEnable value.</dd><dt class="property-"
             title="">
         <span id="namespacecode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacecode_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Code</a>
@@ -1078,8 +1234,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-"
+    <dd>Namespace encoding.</dd><dt class="property-"
             title="">
         <span id="namespacestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacestatus_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Status</a>
@@ -1087,8 +1242,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-"
+    <dd>namespace status.</dd><dt class="property-"
             title="">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1096,8 +1250,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1111,8 +1264,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -1120,8 +1272,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-"
+    <dd>Delete ID.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1129,8 +1280,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1138,8 +1288,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-"
+    <dd>default namespace.</dd><dt class="property-"
             title="">
         <span id="kubeinjectenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeinjectenable_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Inject<wbr>Enable</a>
@@ -1147,8 +1296,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-"
+    <dd>KubeInjectEnable value.</dd><dt class="property-"
             title="">
         <span id="namespacecode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacecode_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Code</a>
@@ -1156,8 +1304,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-"
+    <dd>Namespace encoding.</dd><dt class="property-"
             title="">
         <span id="namespacestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacestatus_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Status</a>
@@ -1165,8 +1312,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-"
+    <dd>namespace status.</dd><dt class="property-"
             title="">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1174,8 +1320,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1189,8 +1334,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="delete_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
@@ -1198,8 +1342,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-"
+    <dd>Delete ID.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1207,8 +1350,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -1216,8 +1358,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-"
+    <dd>default namespace.</dd><dt class="property-"
             title="">
         <span id="kube_inject_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_inject_enable_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>inject_<wbr>enable</a>
@@ -1225,8 +1366,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-"
+    <dd>KubeInjectEnable value.</dd><dt class="property-"
             title="">
         <span id="namespace_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_code_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>code</a>
@@ -1234,8 +1374,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-"
+    <dd>Namespace encoding.</dd><dt class="property-"
             title="">
         <span id="namespace_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_status_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>status</a>
@@ -1243,8 +1382,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-"
+    <dd>namespace status.</dd><dt class="property-"
             title="">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1252,8 +1390,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1267,8 +1404,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -1276,8 +1412,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-"
+    <dd>Delete ID.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1285,8 +1420,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1294,8 +1428,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-"
+    <dd>default namespace.</dd><dt class="property-"
             title="">
         <span id="kubeinjectenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeinjectenable_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Inject<wbr>Enable</a>
@@ -1303,8 +1436,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-"
+    <dd>KubeInjectEnable value.</dd><dt class="property-"
             title="">
         <span id="namespacecode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacecode_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Code</a>
@@ -1312,8 +1444,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-"
+    <dd>Namespace encoding.</dd><dt class="property-"
             title="">
         <span id="namespacestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacestatus_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Status</a>
@@ -1321,8 +1452,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-"
+    <dd>namespace status.</dd><dt class="property-"
             title="">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1330,8 +1460,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1341,18 +1470,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Namespace resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Namespace</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Namespace</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1372,104 +1501,143 @@ Get an existing Namespace resource's state with the given name, ID, and optional
         <span class="nx">program_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">update_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Namespace</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNamespace<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNamespace<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingNamespace</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tsf:Namespace</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tsf_namespace</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1477,28 +1645,31 @@ Get an existing Namespace resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1506,28 +1677,31 @@ Get an existing Namespace resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1547,8 +1721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1556,8 +1729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -1565,8 +1737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-optional"
+    <dd>Delete ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1574,8 +1745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-optional"
+    <dd>default namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ishaenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ishaenable_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Ha<wbr>Enable</a>
@@ -1583,8 +1753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubeinjectenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubeinjectenable_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Inject<wbr>Enable</a>
@@ -1592,8 +1761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-optional"
+    <dd>KubeInjectEnable value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacecode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacecode_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Code</a>
@@ -1601,8 +1769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace encoding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacedesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacedesc_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Desc</a>
@@ -1610,8 +1777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceid_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -1619,8 +1785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1628,8 +1793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceresourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceresourcetype_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Resource<wbr>Type</a>
@@ -1637,8 +1801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacestatus_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Status</a>
@@ -1646,8 +1809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-optional"
+    <dd>namespace status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacetype_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Type</a>
@@ -1655,8 +1817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -1664,8 +1825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -1673,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1682,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1697,8 +1855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1706,8 +1863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -1715,8 +1871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-optional"
+    <dd>Delete ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1724,8 +1879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-optional"
+    <dd>default namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ishaenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ishaenable_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Ha<wbr>Enable</a>
@@ -1733,8 +1887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubeinjectenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubeinjectenable_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Inject<wbr>Enable</a>
@@ -1742,8 +1895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-optional"
+    <dd>KubeInjectEnable value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacecode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacecode_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Code</a>
@@ -1751,8 +1903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace encoding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacedesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacedesc_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Desc</a>
@@ -1760,8 +1911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceid_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -1769,8 +1919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1778,8 +1927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceresourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceresourcetype_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Resource<wbr>Type</a>
@@ -1787,8 +1935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacestatus_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Status</a>
@@ -1796,8 +1943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-optional"
+    <dd>namespace status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacetype_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Type</a>
@@ -1805,8 +1951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -1814,8 +1959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -1823,8 +1967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1832,8 +1975,141 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>creation time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_flag_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Delete ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>default namespace.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_ha_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_ha_enable_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>ha_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kube_inject_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kube_inject_enable_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>inject_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>KubeInjectEnable value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_namespace_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_code_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace encoding.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_namespace_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_desc_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_namespace_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_resource_type_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_namespace_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_status_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace status.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_namespace_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_type_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_program_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Program id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1847,8 +2123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1856,8 +2131,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -1865,8 +2139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-optional"
+    <dd>Delete ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1874,8 +2147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-optional"
+    <dd>default namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ishaenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ishaenable_java" style="color: inherit; text-decoration: inherit;">is<wbr>Ha<wbr>Enable</a>
@@ -1883,8 +2155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubeinjectenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubeinjectenable_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Inject<wbr>Enable</a>
@@ -1892,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-optional"
+    <dd>KubeInjectEnable value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacecode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacecode_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Code</a>
@@ -1901,8 +2171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace encoding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacedesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacedesc_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Desc</a>
@@ -1910,8 +2179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceid_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -1919,8 +2187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -1928,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceresourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceresourcetype_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Resource<wbr>Type</a>
@@ -1937,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacestatus_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Status</a>
@@ -1946,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-optional"
+    <dd>namespace status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacetype_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Type</a>
@@ -1955,8 +2219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -1964,8 +2227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1973,8 +2235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1982,8 +2243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1997,8 +2257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2006,8 +2265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -2015,8 +2273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-optional"
+    <dd>Delete ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -2024,8 +2281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-optional"
+    <dd>default namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ishaenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ishaenable_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Ha<wbr>Enable</a>
@@ -2033,8 +2289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubeinjectenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubeinjectenable_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Inject<wbr>Enable</a>
@@ -2042,8 +2297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-optional"
+    <dd>KubeInjectEnable value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacecode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacecode_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Code</a>
@@ -2051,8 +2305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace encoding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacedesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacedesc_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Desc</a>
@@ -2060,8 +2313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceid_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -2069,8 +2321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2078,8 +2329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceresourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceresourcetype_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Resource<wbr>Type</a>
@@ -2087,8 +2337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacestatus_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Status</a>
@@ -2096,8 +2345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-optional"
+    <dd>namespace status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacetype_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Type</a>
@@ -2105,8 +2353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -2114,8 +2361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -2123,8 +2369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2132,8 +2377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2147,8 +2391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2156,8 +2399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_delete_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_flag_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
@@ -2165,8 +2407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-optional"
+    <dd>Delete ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -2174,8 +2415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-optional"
+    <dd>default namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_ha_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_ha_enable_python" style="color: inherit; text-decoration: inherit;">is_<wbr>ha_<wbr>enable</a>
@@ -2183,8 +2423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kube_inject_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kube_inject_enable_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>inject_<wbr>enable</a>
@@ -2192,8 +2431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-optional"
+    <dd>KubeInjectEnable value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespace_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_code_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>code</a>
@@ -2201,8 +2439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace encoding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespace_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_desc_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>desc</a>
@@ -2210,8 +2447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespace_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_id_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
@@ -2219,8 +2455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -2228,8 +2463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespace_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_resource_type_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>resource_<wbr>type</a>
@@ -2237,8 +2471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespace_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_status_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>status</a>
@@ -2246,8 +2479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-optional"
+    <dd>namespace status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespace_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_type_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>type</a>
@@ -2255,8 +2487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_program_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
@@ -2264,8 +2495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -2273,8 +2503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2282,8 +2511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2297,8 +2525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2306,8 +2533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -2315,8 +2541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Delete ID.</p>
-</dd><dt class="property-optional"
+    <dd>Delete ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -2324,8 +2549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>default namespace.</p>
-</dd><dt class="property-optional"
+    <dd>default namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ishaenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ishaenable_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Ha<wbr>Enable</a>
@@ -2333,8 +2557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>whether to enable high availability.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable high availability.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubeinjectenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubeinjectenable_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Inject<wbr>Enable</a>
@@ -2342,8 +2565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>KubeInjectEnable value.</p>
-</dd><dt class="property-optional"
+    <dd>KubeInjectEnable value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacecode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacecode_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Code</a>
@@ -2351,8 +2573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace encoding.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace encoding.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacedesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacedesc_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Desc</a>
@@ -2360,8 +2581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace description.</p>
-</dd><dt class="property-optional"
+    <dd>namespace description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceid_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -2369,8 +2589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2378,8 +2597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceresourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceresourcetype_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Resource<wbr>Type</a>
@@ -2387,8 +2605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace resource type (default is DEF).</p>
-</dd><dt class="property-optional"
+    <dd>namespace resource type (default is DEF).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacestatus_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Status</a>
@@ -2396,8 +2613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace status.</p>
-</dd><dt class="property-optional"
+    <dd>namespace status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespacetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacetype_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Type</a>
@@ -2405,8 +2621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -2414,8 +2629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -2423,8 +2637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2432,8 +2645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2452,7 +2664,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

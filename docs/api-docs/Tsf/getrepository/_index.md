@@ -2,9 +2,11 @@
 ---
 title: "getRepository"
 title_tag: "tencentcloud.Tsf.getRepository"
-meta_desc: "Documentation for the tencentcloud.Tsf.getRepository function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tsf repository"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed information of tsf repository
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const repository = tencentcloud.Tsf.getRepository({
-    repositoryType: "default",
+const repository = tencentcloud.tsf.getRepository({
     searchWord: "test",
+    repositoryType: "default",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-repository = tencentcloud.Tsf.get_repository(repository_type="default",
-    search_word="test")
+repository = tencentcloud.tsf.get_repository(search_word="test",
+    repository_type="default")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var repository = Tencentcloud.Tsf.GetRepository.Invoke(new()
-    {
-        RepositoryType = "default",
-        SearchWord = "test",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.GetRepository(ctx, &tsf.GetRepositoryArgs{
-			RepositoryType: pulumi.StringRef("default"),
+		_, err := tsf.GetRepository(ctx, &tsf.GetRepositoryArgs{
 			SearchWord:     pulumi.StringRef("test"),
+			RepositoryType: pulumi.StringRef("default"),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var repository = Tencentcloud.Tsf.GetRepository.Invoke(new()
+    {
+        SearchWord = "test",
+        RepositoryType = "default",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.TsfFunctions;
 import com.pulumi.tencentcloud.Tsf.inputs.GetRepositoryArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var repository = TsfFunctions.getRepository(GetRepositoryArgs.builder()
-            .repositoryType("default")
             .searchWord("test")
+            .repositoryType("default")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   repository:
     fn::invoke:
-      Function: tencentcloud:Tsf:getRepository
-      Arguments:
-        repositoryType: default
+      function: tencentcloud:Tsf:getRepository
+      arguments:
         searchWord: test
+        repositoryType: default
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tsf_getrepository" "repository" {
+  search_word     = "test"
+  repository_type = "default"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRepositories](https://www.tencentcloud.com/search/?wd=DescribeRepositories&type=document&lang=en)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRepository<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRepositoryArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>></span
+><span class="k">function </span>getRepository<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRepositoryArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>></span
 ><span class="k">
-function </span>getRepositoryOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRepositoryOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>></span
+function </span>getRepositoryOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRepositoryOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getRepositoryOutput<span class="p">(</span><span class="nx">args
                    <span class="nx">search_word</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRepositoryResult</span
 ><span class="k">
-def </span>get_repository_output<span class="p">(</span><span class="nx">repository_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">search_word</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRepositoryResult]</span
+def </span>get_repository_output<span class="p">(</span><span class="nx">repository_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">search_word</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRepositoryResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -157,12 +215,12 @@ def </span>get_repository_output<span class="p">(</span><span class="nx">reposit
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetRepository<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRepositoryArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetRepositoryResult</a></span>, error)</span
+><span class="k">func </span>LookupRepository<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRepositoryArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupRepositoryResult</a></span>, error)</span
 ><span class="k">
-func </span>GetRepositoryOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRepositoryOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetRepositoryResultOutput</span
+func </span>LookupRepositoryOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRepositoryOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupRepositoryResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetRepository` in the Go SDK.
+&gt; Note: This function is named `LookupRepository` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetRepositoryOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRepository </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRepositoryArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRepositoryInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRepositoryInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRepositoryInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetRepositoryOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>> </span>getRepository<span class="p">(</span><span class="nx">GetRepositoryArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>> </span>getRepository<span class="p">(</span><span class="nx">GetRepositoryArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRepositoryResult</a></span>> </span>getRepository<span class="p">(</span><span class="nx">GetRepositoryArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetRepositoryOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tsf/getRepository:getRepository
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tsf_get_repository&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-optional"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_csharp" style="color: inherit; text-decoration: inherit;">Search<wbr>Word</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query keywords (search by Repository name).</p>
-</dd></dl>
+    <dd>Query keywords (search by Repository name).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-optional"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_go" style="color: inherit; text-decoration: inherit;">Search<wbr>Word</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query keywords (search by Repository name).</p>
-</dd></dl>
+    <dd>Query keywords (search by Repository name).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="repository_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_type_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="search_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Query keywords (search by Repository name).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-optional"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_java" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query keywords (search by Repository name).</p>
-</dd></dl>
+    <dd>Query keywords (search by Repository name).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-optional"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_nodejs" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query keywords (search by Repository name).</p>
-</dd></dl>
+    <dd>Query keywords (search by Repository name).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-optional"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="search_word_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_python" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Query keywords (search by Repository name).</p>
-</dd></dl>
+    <dd>Query keywords (search by Repository name).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-optional"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_yaml" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query keywords (search by Repository name).</p>
-</dd></dl>
+    <dd>Query keywords (search by Repository name).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Outputs.<wbr>Get<wbr>Repository<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>A list of Repository information that meets the query criteria.</p>
-</dd><dt class="property-"
+    <dd>A list of Repository information that meets the query criteria.</dd><dt class="property-"
             title="">
         <span id="repositorytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_csharp" style="color: inherit; text-decoration: inherit;">Repository<wbr>Type</a>
@@ -437,8 +516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -468,8 +546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -477,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresult">[]Get<wbr>Repository<wbr>Result</a></span>
     </dt>
-    <dd><p>A list of Repository information that meets the query criteria.</p>
-</dd><dt class="property-"
+    <dd>A list of Repository information that meets the query criteria.</dd><dt class="property-"
             title="">
         <span id="repositorytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_go" style="color: inherit; text-decoration: inherit;">Repository<wbr>Type</a>
@@ -486,8 +562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -508,6 +583,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrepositoryresult">list(object)</a></span>
+    </dt>
+    <dd>A list of Repository information that meets the query criteria.</dd><dt class="property-"
+            title="">
+        <span id="repository_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_type_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="search_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -517,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -526,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresult">List&lt;Get<wbr>Repository<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>A list of Repository information that meets the query criteria.</p>
-</dd><dt class="property-"
+    <dd>A list of Repository information that meets the query criteria.</dd><dt class="property-"
             title="">
         <span id="repositorytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_java" style="color: inherit; text-decoration: inherit;">repository<wbr>Type</a>
@@ -535,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -566,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -575,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresult">Get<wbr>Repository<wbr>Result[]</a></span>
     </dt>
-    <dd><p>A list of Repository information that meets the query criteria.</p>
-</dd><dt class="property-"
+    <dd>A list of Repository information that meets the query criteria.</dd><dt class="property-"
             title="">
         <span id="repositorytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_nodejs" style="color: inherit; text-decoration: inherit;">repository<wbr>Type</a>
@@ -584,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -615,17 +730,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrepositoryresult">Get<wbr>Repository<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getrepositoryresult">Sequence[Get<wbr>Repository<wbr>Result]</a></span>
     </dt>
-    <dd><p>A list of Repository information that meets the query criteria.</p>
-</dd><dt class="property-"
+    <dd>A list of Repository information that meets the query criteria.</dd><dt class="property-"
             title="">
         <span id="repository_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_type_python" style="color: inherit; text-decoration: inherit;">repository_<wbr>type</a>
@@ -633,8 +746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -664,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -673,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of Repository information that meets the query criteria.</p>
-</dd><dt class="property-"
+    <dd>A list of Repository information that meets the query criteria.</dd><dt class="property-"
             title="">
         <span id="repositorytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_yaml" style="color: inherit; text-decoration: inherit;">repository<wbr>Type</a>
@@ -682,8 +792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd><dt class="property-"
+    <dd>Repository type (default Repository: default, private Repository: private).</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -723,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresultcontent">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Repository<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -732,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total Repository.</p>
-</dd></dl>
+    <dd>Total Repository.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -747,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresultcontent">[]Get<wbr>Repository<wbr>Result<wbr>Content</a></span>
     </dt>
-    <dd><p>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -756,8 +862,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total Repository.</p>
-</dd></dl>
+    <dd>Total Repository.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contents_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_hcl" style="color: inherit; text-decoration: inherit;">contents</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrepositoryresultcontent">list(object)</a></span>
+    </dt>
+    <dd>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total Repository.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -771,8 +898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresultcontent">List&lt;Get<wbr>Repository<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_java" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -780,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total Repository.</p>
-</dd></dl>
+    <dd>Total Repository.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -795,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresultcontent">Get<wbr>Repository<wbr>Result<wbr>Content[]</a></span>
     </dt>
-    <dd><p>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -804,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total Repository.</p>
-</dd></dl>
+    <dd>Total Repository.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -817,10 +940,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_python" style="color: inherit; text-decoration: inherit;">contents</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrepositoryresultcontent">Get<wbr>Repository<wbr>Result<wbr>Content]</a></span>
+        <span class="property-type"><a href="#getrepositoryresultcontent">Sequence[Get<wbr>Repository<wbr>Result<wbr>Content]</a></span>
     </dt>
-    <dd><p>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="total_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_python" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
@@ -828,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total Repository.</p>
-</dd></dl>
+    <dd>Total Repository.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -843,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrepositoryresultcontent">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository information list. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -852,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total Repository.</p>
-</dd></dl>
+    <dd>Total Repository.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -871,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="bucketregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketregion_csharp" style="color: inherit; text-decoration: inherit;">Bucket<wbr>Region</a>
@@ -880,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -889,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="directory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#directory_csharp" style="color: inherit; text-decoration: inherit;">Directory</a>
@@ -898,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isused_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isused_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Used</a>
@@ -907,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="repositorydesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorydesc_csharp" style="color: inherit; text-decoration: inherit;">Repository<wbr>Desc</a>
@@ -916,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository description (default warehouse: default, private warehouse: private).</p>
-</dd><dt class="property-required"
+    <dd>Repository description (default warehouse: default, private warehouse: private).</dd><dt class="property-required"
             title="Required">
         <span id="repositoryid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryid_csharp" style="color: inherit; text-decoration: inherit;">Repository<wbr>Id</a>
@@ -925,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository Id.</p>
-</dd><dt class="property-required"
+    <dd>repository Id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_csharp" style="color: inherit; text-decoration: inherit;">Repository<wbr>Name</a>
@@ -934,8 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository Name.</p>
-</dd><dt class="property-required"
+    <dd>Repository Name.</dd><dt class="property-required"
             title="Required">
         <span id="repositorytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_csharp" style="color: inherit; text-decoration: inherit;">Repository<wbr>Type</a>
@@ -943,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd></dl>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -958,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="bucketregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketregion_go" style="color: inherit; text-decoration: inherit;">Bucket<wbr>Region</a>
@@ -967,8 +1076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -976,8 +1084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="directory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#directory_go" style="color: inherit; text-decoration: inherit;">Directory</a>
@@ -985,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isused_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isused_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Used</a>
@@ -994,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="repositorydesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorydesc_go" style="color: inherit; text-decoration: inherit;">Repository<wbr>Desc</a>
@@ -1003,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository description (default warehouse: default, private warehouse: private).</p>
-</dd><dt class="property-required"
+    <dd>Repository description (default warehouse: default, private warehouse: private).</dd><dt class="property-required"
             title="Required">
         <span id="repositoryid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryid_go" style="color: inherit; text-decoration: inherit;">Repository<wbr>Id</a>
@@ -1012,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository Id.</p>
-</dd><dt class="property-required"
+    <dd>repository Id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_go" style="color: inherit; text-decoration: inherit;">Repository<wbr>Name</a>
@@ -1021,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository Name.</p>
-</dd><dt class="property-required"
+    <dd>Repository Name.</dd><dt class="property-required"
             title="Required">
         <span id="repositorytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_go" style="color: inherit; text-decoration: inherit;">Repository<wbr>Type</a>
@@ -1030,8 +1132,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd></dl>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bucket_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_name_hcl" style="color: inherit; text-decoration: inherit;">bucket_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="bucket_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_region_hcl" style="color: inherit; text-decoration: inherit;">bucket_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="directory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#directory_hcl" style="color: inherit; text-decoration: inherit;">directory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_used_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_used_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>used</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="repository_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_desc_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repository description (default warehouse: default, private warehouse: private).</dd><dt class="property-required"
+            title="Required">
+        <span id="repository_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_id_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>repository Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="repository_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_name_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repository Name.</dd><dt class="property-required"
+            title="Required">
+        <span id="repository_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_type_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1045,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="bucketregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketregion_java" style="color: inherit; text-decoration: inherit;">bucket<wbr>Region</a>
@@ -1054,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1063,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="directory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#directory_java" style="color: inherit; text-decoration: inherit;">directory</a>
@@ -1072,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isused_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isused_java" style="color: inherit; text-decoration: inherit;">is<wbr>Used</a>
@@ -1081,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="repositorydesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorydesc_java" style="color: inherit; text-decoration: inherit;">repository<wbr>Desc</a>
@@ -1090,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository description (default warehouse: default, private warehouse: private).</p>
-</dd><dt class="property-required"
+    <dd>Repository description (default warehouse: default, private warehouse: private).</dd><dt class="property-required"
             title="Required">
         <span id="repositoryid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryid_java" style="color: inherit; text-decoration: inherit;">repository<wbr>Id</a>
@@ -1099,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository Id.</p>
-</dd><dt class="property-required"
+    <dd>repository Id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_java" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -1108,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository Name.</p>
-</dd><dt class="property-required"
+    <dd>Repository Name.</dd><dt class="property-required"
             title="Required">
         <span id="repositorytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_java" style="color: inherit; text-decoration: inherit;">repository<wbr>Type</a>
@@ -1117,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd></dl>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1132,8 +1302,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="bucketregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketregion_nodejs" style="color: inherit; text-decoration: inherit;">bucket<wbr>Region</a>
@@ -1141,8 +1310,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1150,8 +1318,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="directory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#directory_nodejs" style="color: inherit; text-decoration: inherit;">directory</a>
@@ -1159,8 +1326,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isused_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isused_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Used</a>
@@ -1168,8 +1334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="repositorydesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorydesc_nodejs" style="color: inherit; text-decoration: inherit;">repository<wbr>Desc</a>
@@ -1177,8 +1342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository description (default warehouse: default, private warehouse: private).</p>
-</dd><dt class="property-required"
+    <dd>Repository description (default warehouse: default, private warehouse: private).</dd><dt class="property-required"
             title="Required">
         <span id="repositoryid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryid_nodejs" style="color: inherit; text-decoration: inherit;">repository<wbr>Id</a>
@@ -1186,8 +1350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository Id.</p>
-</dd><dt class="property-required"
+    <dd>repository Id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_nodejs" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -1195,8 +1358,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository Name.</p>
-</dd><dt class="property-required"
+    <dd>Repository Name.</dd><dt class="property-required"
             title="Required">
         <span id="repositorytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_nodejs" style="color: inherit; text-decoration: inherit;">repository<wbr>Type</a>
@@ -1204,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd></dl>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1219,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_region_python" style="color: inherit; text-decoration: inherit;">bucket_<wbr>region</a>
@@ -1228,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1237,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="directory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#directory_python" style="color: inherit; text-decoration: inherit;">directory</a>
@@ -1246,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="is_used_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_used_python" style="color: inherit; text-decoration: inherit;">is_<wbr>used</a>
@@ -1255,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="repository_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_desc_python" style="color: inherit; text-decoration: inherit;">repository_<wbr>desc</a>
@@ -1264,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repository description (default warehouse: default, private warehouse: private).</p>
-</dd><dt class="property-required"
+    <dd>Repository description (default warehouse: default, private warehouse: private).</dd><dt class="property-required"
             title="Required">
         <span id="repository_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_id_python" style="color: inherit; text-decoration: inherit;">repository_<wbr>id</a>
@@ -1273,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>repository Id.</p>
-</dd><dt class="property-required"
+    <dd>repository Id.</dd><dt class="property-required"
             title="Required">
         <span id="repository_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_name_python" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
@@ -1282,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repository Name.</p>
-</dd><dt class="property-required"
+    <dd>Repository Name.</dd><dt class="property-required"
             title="Required">
         <span id="repository_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_type_python" style="color: inherit; text-decoration: inherit;">repository_<wbr>type</a>
@@ -1291,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd></dl>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1306,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="bucketregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucketregion_yaml" style="color: inherit; text-decoration: inherit;">bucket<wbr>Region</a>
@@ -1315,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository region. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1324,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="directory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#directory_yaml" style="color: inherit; text-decoration: inherit;">directory</a>
@@ -1333,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isused_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isused_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Used</a>
@@ -1342,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="repositorydesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorydesc_yaml" style="color: inherit; text-decoration: inherit;">repository<wbr>Desc</a>
@@ -1351,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository description (default warehouse: default, private warehouse: private).</p>
-</dd><dt class="property-required"
+    <dd>Repository description (default warehouse: default, private warehouse: private).</dd><dt class="property-required"
             title="Required">
         <span id="repositoryid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryid_yaml" style="color: inherit; text-decoration: inherit;">repository<wbr>Id</a>
@@ -1360,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository Id.</p>
-</dd><dt class="property-required"
+    <dd>repository Id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_yaml" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -1369,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository Name.</p>
-</dd><dt class="property-required"
+    <dd>Repository Name.</dd><dt class="property-required"
             title="Required">
         <span id="repositorytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositorytype_yaml" style="color: inherit; text-decoration: inherit;">repository<wbr>Type</a>
@@ -1378,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repository type (default Repository: default, private Repository: private).</p>
-</dd></dl>
+    <dd>Repository type (default Repository: default, private Repository: private).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1394,7 +1537,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

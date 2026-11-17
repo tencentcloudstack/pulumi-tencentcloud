@@ -2,9 +2,11 @@
 ---
 title: "Account"
 title_tag: "tencentcloud.Cynosdb.Account"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.Account resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cynosdb account"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,69 +18,66 @@ Provides a resource to create a cynosdb account
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### If host is %
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const account = new tencentcloud.cynosdb.Account("account", {
-    accountName: "terraform_test",
-    accountPassword: "Password@1234",
-    clusterId: "cynosdbmysql-bws8h88b",
-    description: "terraform test",
+const example = new tencentcloud.cynosdb.Account("example", {
+    clusterId: "cynosdbmysql-ddciqx2l",
+    accountName: "tf_example",
+    accountPassword: "Password@123",
     host: "%",
-    maxUserConnections: 2,
+    description: "remark.",
+    maxUserConnections: 10,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-account = tencentcloud.cynosdb.Account("account",
-    account_name="terraform_test",
-    account_password="Password@1234",
-    cluster_id="cynosdbmysql-bws8h88b",
-    description="terraform test",
+example = tencentcloud.cynosdb.Account("example",
+    cluster_id="cynosdbmysql-ddciqx2l",
+    account_name="tf_example",
+    account_password="Password@123",
     host="%",
-    max_user_connections=2)
+    description="remark.",
+    max_user_connections=10)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var account = new Tencentcloud.Cynosdb.Account("account", new()
-    {
-        AccountName = "terraform_test",
-        AccountPassword = "Password@1234",
-        ClusterId = "cynosdbmysql-bws8h88b",
-        Description = "terraform test",
-        Host = "%",
-        MaxUserConnections = 2,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.NewAccount(ctx, "account", &Cynosdb.AccountArgs{
-			AccountName:        pulumi.String("terraform_test"),
-			AccountPassword:    pulumi.String("Password@1234"),
-			ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
-			Description:        pulumi.String("terraform test"),
+		_, err := cynosdb.NewAccount(ctx, "example", &cynosdb.AccountArgs{
+			ClusterId:          pulumi.String("cynosdbmysql-ddciqx2l"),
+			AccountName:        pulumi.String("tf_example"),
+			AccountPassword:    pulumi.String("Password@123"),
 			Host:               pulumi.String("%"),
-			MaxUserConnections: pulumi.Int(2),
+			Description:        pulumi.String("remark."),
+			MaxUserConnections: pulumi.Int(10),
 		})
 		if err != nil {
 			return err
@@ -87,6 +86,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cynosdb.Account("example", new()
+    {
+        ClusterId = "cynosdbmysql-ddciqx2l",
+        AccountName = "tf_example",
+        AccountPassword = "Password@123",
+        Host = "%",
+        Description = "remark.",
+        MaxUserConnections = 10,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -95,8 +124,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.Account;
 import com.pulumi.tencentcloud.Cynosdb.AccountArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -108,94 +137,328 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var account = new Account("account", AccountArgs.builder()        
-            .accountName("terraform_test")
-            .accountPassword("Password@1234")
-            .clusterId("cynosdbmysql-bws8h88b")
-            .description("terraform test")
+        var example = new Account("example", AccountArgs.builder()
+            .clusterId("cynosdbmysql-ddciqx2l")
+            .accountName("tf_example")
+            .accountPassword("Password@123")
             .host("%")
-            .maxUserConnections(2)
+            .description("remark.")
+            .maxUserConnections(10)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  account:
+  example:
     type: tencentcloud:Cynosdb:Account
     properties:
-      accountName: terraform_test
-      accountPassword: Password@1234
-      clusterId: cynosdbmysql-bws8h88b
-      description: terraform test
+      clusterId: cynosdbmysql-ddciqx2l
+      accountName: tf_example
+      accountPassword: Password@123
       host: '%'
-      maxUserConnections: 2
+      description: remark.
+      maxUserConnections: 10
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cynosdb_account" "example" {
+  cluster_id           = "cynosdbmysql-ddciqx2l"
+  account_name         = "tf_example"
+  account_password     = "Password@123"
+  host                 = "%"
+  description          = "remark."
+  max_user_connections = 10
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### If host is ip
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cynosdb.Account("example", {
+    clusterId: "cynosdbmysql-ddciqx2l",
+    accountName: "tf_example",
+    accountPassword: "Password@123",
+    host: "1.1.1.1",
+    description: "remark.",
+    maxUserConnections: 0,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cynosdb.Account("example",
+    cluster_id="cynosdbmysql-ddciqx2l",
+    account_name="tf_example",
+    account_password="Password@123",
+    host="1.1.1.1",
+    description="remark.",
+    max_user_connections=0)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cynosdb.NewAccount(ctx, "example", &cynosdb.AccountArgs{
+			ClusterId:          pulumi.String("cynosdbmysql-ddciqx2l"),
+			AccountName:        pulumi.String("tf_example"),
+			AccountPassword:    pulumi.String("Password@123"),
+			Host:               pulumi.String("1.1.1.1"),
+			Description:        pulumi.String("remark."),
+			MaxUserConnections: pulumi.Int(0),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cynosdb.Account("example", new()
+    {
+        ClusterId = "cynosdbmysql-ddciqx2l",
+        AccountName = "tf_example",
+        AccountPassword = "Password@123",
+        Host = "1.1.1.1",
+        Description = "remark.",
+        MaxUserConnections = 0,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cynosdb.Account;
+import com.pulumi.tencentcloud.Cynosdb.AccountArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Account("example", AccountArgs.builder()
+            .clusterId("cynosdbmysql-ddciqx2l")
+            .accountName("tf_example")
+            .accountPassword("Password@123")
+            .host("1.1.1.1")
+            .description("remark.")
+            .maxUserConnections(0)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cynosdb:Account
+    properties:
+      clusterId: cynosdbmysql-ddciqx2l
+      accountName: tf_example
+      accountPassword: Password@123
+      host: 1.1.1.1
+      description: remark.
+      maxUserConnections: 0
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cynosdb_account" "example" {
+  cluster_id           = "cynosdbmysql-ddciqx2l"
+  account_name         = "tf_example"
+  account_password     = "Password@123"
+  host                 = "1.1.1.1"
+  description          = "remark."
+  max_user_connections = 0
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateAccounts](https://www.tencentcloud.com/document/api/1098/46319)
+  - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+* Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1098/40762)
+* Update:
+  - [ModifyAccountDescription](https://www.tencentcloud.com/document/api/1098/55925)
+  - [ModifyAccountHost](https://www.tencentcloud.com/document/api/1098/55924)
+  - [ModifyAccountParams](https://www.tencentcloud.com/search/?wd=ModifyAccountParams&type=document&lang=en)
+  - [ResetAccountPassword](https://www.tencentcloud.com/document/api/1098/52496)
+* Delete: [DeleteAccounts](https://www.tencentcloud.com/document/api/1098/55927)
 
 
 ## Create Account Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Account</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Account</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Account</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Account</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
             <span class="nx">account_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">account_password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">max_user_connections</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Account</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">max_user_connections</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAccount</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Account</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAccount</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Account</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Account</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Account</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Account</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Account</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:Account</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:Account</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cynosdb_account&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -216,7 +479,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -333,11 +596,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Account Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Account resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -353,8 +624,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-required"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Password</a>
@@ -362,8 +632,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -371,8 +640,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -380,8 +648,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -389,8 +656,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxuserconnections_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>User<wbr>Connections</a>
@@ -398,8 +664,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -413,8 +678,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-required"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Password</a>
@@ -422,8 +686,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -431,8 +694,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -440,8 +702,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -449,8 +710,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxuserconnections_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_go" style="color: inherit; text-decoration: inherit;">Max<wbr>User<wbr>Connections</a>
@@ -458,8 +718,61 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-required property-secret"
+            title="Required">
+        <span id="account_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_password_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>main engine.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>describe.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_user_connections_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_user_connections_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>user_<wbr>connections</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -473,8 +786,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-required"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_java" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -482,8 +794,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -491,8 +802,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -500,8 +810,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -509,8 +818,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxuserconnections_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_java" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -518,8 +826,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -533,8 +840,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-required"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -542,8 +848,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -551,8 +856,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -560,8 +864,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -569,8 +872,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxuserconnections_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -578,8 +880,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +894,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-required"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="account_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_password_python" style="color: inherit; text-decoration: inherit;">account_<wbr>password</a>
@@ -602,8 +902,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -611,8 +910,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -620,8 +918,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -629,8 +926,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_user_connections_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_user_connections_python" style="color: inherit; text-decoration: inherit;">max_<wbr>user_<wbr>connections</a>
@@ -638,8 +934,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -653,8 +948,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-required"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="accountpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountpassword_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -662,8 +956,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -671,8 +964,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -680,8 +972,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -689,8 +980,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxuserconnections_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -698,8 +988,7 @@ The Account resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -720,8 +1009,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -735,8 +1023,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -750,8 +1051,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -765,8 +1065,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -780,8 +1079,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -795,8 +1093,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -806,18 +1103,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Account resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Account</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Account</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -827,104 +1124,143 @@ Get an existing Account resource's state with the given name, ID, and optional e
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">max_user_connections</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Account</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAccount<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Account</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAccount<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Account</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Account</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccountState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Account</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccountState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Account</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccountState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Account</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccountState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAccount</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cynosdb:Account</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cynosdb_account</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -932,28 +1268,31 @@ Get an existing Account resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -961,28 +1300,31 @@ Get an existing Account resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1002,8 +1344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-optional"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Password</a>
@@ -1011,8 +1352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1020,8 +1360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1029,8 +1368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -1038,8 +1376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxuserconnections_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxuserconnections_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>User<wbr>Connections</a>
@@ -1047,8 +1384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1062,8 +1398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-optional"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Password</a>
@@ -1071,8 +1406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1080,8 +1414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1089,8 +1422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -1098,8 +1430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxuserconnections_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxuserconnections_go" style="color: inherit; text-decoration: inherit;">Max<wbr>User<wbr>Connections</a>
@@ -1107,8 +1438,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_account_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_password_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>describe.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>main engine.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_user_connections_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_user_connections_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>user_<wbr>connections</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1122,8 +1506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-optional"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_java" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -1131,8 +1514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1140,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1149,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1158,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxuserconnections_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxuserconnections_java" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -1167,8 +1546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1182,8 +1560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-optional"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -1191,8 +1568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1200,8 +1576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1209,8 +1584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1218,8 +1592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxuserconnections_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxuserconnections_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -1227,8 +1600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1242,8 +1614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-optional"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_account_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_password_python" style="color: inherit; text-decoration: inherit;">account_<wbr>password</a>
@@ -1251,8 +1622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1260,8 +1630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1269,8 +1638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1278,8 +1646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_user_connections_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_user_connections_python" style="color: inherit; text-decoration: inherit;">max_<wbr>user_<wbr>connections</a>
@@ -1287,8 +1654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1302,8 +1668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</p>
-</dd><dt class="property-optional"
+    <dd>Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_accountpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountpassword_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Password</a>
@@ -1311,8 +1676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password, with a length range of 8 to 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Password, with a length range of 8 to 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1320,8 +1684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1329,8 +1692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>describe.</p>
-</dd><dt class="property-optional"
+    <dd>describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1338,8 +1700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>main engine.</p>
-</dd><dt class="property-optional"
+    <dd>main engine.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxuserconnections_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxuserconnections_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -1347,8 +1708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of user connections cannot be greater than 10240.</p>
-</dd></dl>
+    <dd>The maximum number of user connections cannot be greater than 10240.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1363,12 +1723,19 @@ The following state arguments are supported:
 
 
 
-cynosdb account can be imported using the id, e.g.
+cynosdb account can be imported using the clusterId#accountName#host, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Cynosdb/account:Account account account_id
+$ pulumi import tencentcloud:Cynosdb/account:Account example cynosdbmysql-ddciqx2l#tf_example#%
+
+or
+
+$ pulumi import tencentcloud:Cynosdb/account:Account example cynosdbmysql-ddciqx2l#tf_example#1.1.1.1
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1380,7 +1747,6 @@ $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

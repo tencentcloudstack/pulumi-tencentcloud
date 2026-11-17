@@ -2,9 +2,11 @@
 ---
 title: "getPlugins"
 title_tag: "tencentcloud.ApiGateway.getPlugins"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.getPlugins function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of apigateway plugin"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,13 +18,17 @@ Use this data source to query detailed information of apigateway plugin
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleService = new tencentcloud.apigateway.Service("exampleService", {
+const exampleService = new tencentcloud.apigateway.Service("example", {
     serviceName: "tf_example",
     protocol: "http&https",
     serviceDesc: "desc.",
@@ -38,7 +44,7 @@ const exampleService = new tencentcloud.apigateway.Service("exampleService", {
     preLimit: 500,
     testLimit: 500,
 });
-const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
+const exampleApi = new tencentcloud.apigateway.Api("example", {
     serviceId: exampleService.id,
     apiName: "hello",
     apiDesc: "my hello api",
@@ -71,12 +77,12 @@ const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
         needConvert: true,
     }],
 });
-const exampleServiceRelease = new tencentcloud.apigateway.ServiceRelease("exampleServiceRelease", {
+const exampleServiceRelease = new tencentcloud.apigateway.ServiceRelease("example", {
     serviceId: exampleApi.serviceId,
     environmentName: "release",
     releaseDesc: "desc.",
 });
-const examplePlugin = new tencentcloud.apigateway.Plugin("examplePlugin", {
+const examplePlugin = new tencentcloud.apigateway.Plugin("example", {
     pluginName: "tf-example",
     pluginType: "IPControl",
     pluginData: JSON.stringify({
@@ -85,19 +91,24 @@ const examplePlugin = new tencentcloud.apigateway.Plugin("examplePlugin", {
     }),
     description: "desc.",
 });
-const examplePlugins = tencentcloud.ApiGateway.getPluginsOutput({
+const example = tencentcloud.apigateway.getPluginsOutput({
     serviceId: exampleServiceRelease.serviceId,
     pluginId: examplePlugin.id,
     environmentName: "release",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import json
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_service = tencentcloud.api_gateway.Service("exampleService",
+example_service = tencentcloud.apigateway.Service("example",
     service_name="tf_example",
     protocol="http&https",
     service_desc="desc.",
@@ -112,7 +123,7 @@ example_service = tencentcloud.api_gateway.Service("exampleService",
     release_limit=500,
     pre_limit=500,
     test_limit=500)
-example_api = tencentcloud.api_gateway.Api("exampleApi",
+example_api = tencentcloud.apigateway.Api("example",
     service_id=example_service.id,
     api_name="hello",
     api_desc="my hello api",
@@ -121,14 +132,14 @@ example_api = tencentcloud.api_gateway.Api("exampleApi",
     enable_cors=True,
     request_config_path="/user/info",
     request_config_method="GET",
-    request_parameters=[tencentcloud.api_gateway.ApiRequestParameterArgs(
-        name="name",
-        position="QUERY",
-        type="string",
-        desc="who are you?",
-        default_value="tom",
-        required=True,
-    )],
+    request_parameters=[{
+        "name": "name",
+        "position": "QUERY",
+        "type": "string",
+        "desc": "who are you?",
+        "default_value": "tom",
+        "required": True,
+    }],
     service_config_type="HTTP",
     service_config_timeout=15,
     service_config_url="http://www.qq.com",
@@ -137,18 +148,18 @@ example_api = tencentcloud.api_gateway.Api("exampleApi",
     response_type="HTML",
     response_success_example="success",
     response_fail_example="fail",
-    response_error_codes=[tencentcloud.api_gateway.ApiResponseErrorCodeArgs(
-        code=500,
-        msg="system error",
-        desc="system error code",
-        converted_code=5000,
-        need_convert=True,
-    )])
-example_service_release = tencentcloud.api_gateway.ServiceRelease("exampleServiceRelease",
+    response_error_codes=[{
+        "code": 500,
+        "msg": "system error",
+        "desc": "system error code",
+        "converted_code": 5000,
+        "need_convert": True,
+    }])
+example_service_release = tencentcloud.apigateway.ServiceRelease("example",
     service_id=example_api.service_id,
     environment_name="release",
     release_desc="desc.")
-example_plugin = tencentcloud.api_gateway.Plugin("examplePlugin",
+example_plugin = tencentcloud.apigateway.Plugin("example",
     plugin_name="tf-example",
     plugin_type="IPControl",
     plugin_data=json.dumps({
@@ -156,21 +167,135 @@ example_plugin = tencentcloud.api_gateway.Plugin("examplePlugin",
         "blocks": "1.1.1.1",
     }),
     description="desc.")
-example_plugins = tencentcloud.ApiGateway.get_plugins_output(service_id=example_service_release.service_id,
+example = tencentcloud.apigateway.get_plugins_output(service_id=example_service_release.service_id,
     plugin_id=example_plugin.id,
     environment_name="release")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"encoding/json"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		exampleService, err := apigateway.NewService(ctx, "example", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("tf_example"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("desc."),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+			Tags: pulumi.StringMap{
+				"testKey": pulumi.String("testValue"),
+			},
+			ReleaseLimit: pulumi.Int(500),
+			PreLimit:     pulumi.Int(500),
+			TestLimit:    pulumi.Int(500),
+		})
+		if err != nil {
+			return err
+		}
+		exampleApi, err := apigateway.NewApi(ctx, "example", &apigateway.ApiArgs{
+			ServiceId:           exampleService.ID().ToIDOutput().ToStringOutput(),
+			ApiName:             pulumi.String("hello"),
+			ApiDesc:             pulumi.String("my hello api"),
+			AuthType:            pulumi.String("NONE"),
+			Protocol:            pulumi.String("HTTP"),
+			EnableCors:          pulumi.Bool(true),
+			RequestConfigPath:   pulumi.String("/user/info"),
+			RequestConfigMethod: pulumi.String("GET"),
+			RequestParameters: apigateway.ApiRequestParameterArray{
+				&apigateway.ApiRequestParameterArgs{
+					Name:         pulumi.String("name"),
+					Position:     pulumi.String("QUERY"),
+					Type:         pulumi.String("string"),
+					Desc:         pulumi.String("who are you?"),
+					DefaultValue: pulumi.String("tom"),
+					Required:     pulumi.Bool(true),
+				},
+			},
+			ServiceConfigType:      pulumi.String("HTTP"),
+			ServiceConfigTimeout:   pulumi.Int(15),
+			ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
+			ServiceConfigPath:      pulumi.String("/user"),
+			ServiceConfigMethod:    pulumi.String("GET"),
+			ResponseType:           pulumi.String("HTML"),
+			ResponseSuccessExample: pulumi.String("success"),
+			ResponseFailExample:    pulumi.String("fail"),
+			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+				&apigateway.ApiResponseErrorCodeArgs{
+					Code:          pulumi.Int(500),
+					Msg:           pulumi.String("system error"),
+					Desc:          pulumi.String("system error code"),
+					ConvertedCode: pulumi.Int(5000),
+					NeedConvert:   pulumi.Bool(true),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleServiceRelease, err := apigateway.NewServiceRelease(ctx, "example", &apigateway.ServiceReleaseArgs{
+			ServiceId:       exampleApi.ServiceId,
+			EnvironmentName: pulumi.String("release"),
+			ReleaseDesc:     pulumi.String("desc."),
+		})
+		if err != nil {
+			return err
+		}
+		tmpJSON0, err := json.Marshal(map[string]string{
+			"type":   "white_list",
+			"blocks": "1.1.1.1",
+		})
+		if err != nil {
+			return err
+		}
+		json0 := string(tmpJSON0)
+		examplePlugin, err := apigateway.NewPlugin(ctx, "example", &apigateway.PluginArgs{
+			PluginName:  pulumi.String("tf-example"),
+			PluginType:  pulumi.String("IPControl"),
+			PluginData:  pulumi.String(json0),
+			Description: pulumi.String("desc."),
+		})
+		if err != nil {
+			return err
+		}
+		_ = apigateway.GetPluginsOutput(ctx, apigateway.GetPluginsOutputArgs{
+			ServiceId:       exampleServiceRelease.ServiceId,
+			PluginId:        examplePlugin.ID().ToIDOutput().ToStringOutput(),
+			EnvironmentName: pulumi.String("release"),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new()
+    var exampleService = new Tencentcloud.ApiGateway.Service("example", new()
     {
         ServiceName = "tf_example",
         Protocol = "http&https",
@@ -190,7 +315,7 @@ return await Deployment.RunAsync(() =>
         TestLimit = 500,
     });
 
-    var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new()
+    var exampleApi = new Tencentcloud.ApiGateway.Api("example", new()
     {
         ServiceId = exampleService.Id,
         ApiName = "hello",
@@ -233,14 +358,14 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleServiceRelease = new Tencentcloud.ApiGateway.ServiceRelease("exampleServiceRelease", new()
+    var exampleServiceRelease = new Tencentcloud.ApiGateway.ServiceRelease("example", new()
     {
         ServiceId = exampleApi.ServiceId,
         EnvironmentName = "release",
         ReleaseDesc = "desc.",
     });
 
-    var examplePlugin = new Tencentcloud.ApiGateway.Plugin("examplePlugin", new()
+    var examplePlugin = new Tencentcloud.ApiGateway.Plugin("example", new()
     {
         PluginName = "tf-example",
         PluginType = "IPControl",
@@ -252,7 +377,7 @@ return await Deployment.RunAsync(() =>
         Description = "desc.",
     });
 
-    var examplePlugins = Tencentcloud.ApiGateway.GetPlugins.Invoke(new()
+    var example = Tencentcloud.ApiGateway.GetPlugins.Invoke(new()
     {
         ServiceId = exampleServiceRelease.ServiceId,
         PluginId = examplePlugin.Id,
@@ -261,111 +386,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"encoding/json"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("tf_example"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("desc."),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion: pulumi.String("IPv4"),
-			Tags: pulumi.Map{
-				"testKey": pulumi.Any("testValue"),
-			},
-			ReleaseLimit: pulumi.Int(500),
-			PreLimit:     pulumi.Int(500),
-			TestLimit:    pulumi.Int(500),
-		})
-		if err != nil {
-			return err
-		}
-		exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
-			ServiceId:           exampleService.ID(),
-			ApiName:             pulumi.String("hello"),
-			ApiDesc:             pulumi.String("my hello api"),
-			AuthType:            pulumi.String("NONE"),
-			Protocol:            pulumi.String("HTTP"),
-			EnableCors:          pulumi.Bool(true),
-			RequestConfigPath:   pulumi.String("/user/info"),
-			RequestConfigMethod: pulumi.String("GET"),
-			RequestParameters: apigateway.ApiRequestParameterArray{
-				&apigateway.ApiRequestParameterArgs{
-					Name:         pulumi.String("name"),
-					Position:     pulumi.String("QUERY"),
-					Type:         pulumi.String("string"),
-					Desc:         pulumi.String("who are you?"),
-					DefaultValue: pulumi.String("tom"),
-					Required:     pulumi.Bool(true),
-				},
-			},
-			ServiceConfigType:      pulumi.String("HTTP"),
-			ServiceConfigTimeout:   pulumi.Int(15),
-			ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
-			ServiceConfigPath:      pulumi.String("/user"),
-			ServiceConfigMethod:    pulumi.String("GET"),
-			ResponseType:           pulumi.String("HTML"),
-			ResponseSuccessExample: pulumi.String("success"),
-			ResponseFailExample:    pulumi.String("fail"),
-			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-				&apigateway.ApiResponseErrorCodeArgs{
-					Code:          pulumi.Int(500),
-					Msg:           pulumi.String("system error"),
-					Desc:          pulumi.String("system error code"),
-					ConvertedCode: pulumi.Int(5000),
-					NeedConvert:   pulumi.Bool(true),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		exampleServiceRelease, err := ApiGateway.NewServiceRelease(ctx, "exampleServiceRelease", &ApiGateway.ServiceReleaseArgs{
-			ServiceId:       exampleApi.ServiceId,
-			EnvironmentName: pulumi.String("release"),
-			ReleaseDesc:     pulumi.String("desc."),
-		})
-		if err != nil {
-			return err
-		}
-		tmpJSON0, err := json.Marshal(map[string]interface{}{
-			"type":   "white_list",
-			"blocks": "1.1.1.1",
-		})
-		if err != nil {
-			return err
-		}
-		json0 := string(tmpJSON0)
-		examplePlugin, err := ApiGateway.NewPlugin(ctx, "examplePlugin", &ApiGateway.PluginArgs{
-			PluginName:  pulumi.String("tf-example"),
-			PluginType:  pulumi.String("IPControl"),
-			PluginData:  pulumi.String(json0),
-			Description: pulumi.String("desc."),
-		})
-		if err != nil {
-			return err
-		}
-		_ = ApiGateway.GetPluginsOutput(ctx, apigateway.GetPluginsOutputArgs{
-			ServiceId:       exampleServiceRelease.ServiceId,
-			PluginId:        examplePlugin.ID(),
-			EnvironmentName: pulumi.String("release"),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -385,8 +410,8 @@ import com.pulumi.tencentcloud.ApiGateway.PluginArgs;
 import com.pulumi.tencentcloud.ApiGateway.ApiGatewayFunctions;
 import com.pulumi.tencentcloud.ApiGateway.inputs.GetPluginsArgs;
 import static com.pulumi.codegen.internal.Serialization.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -398,7 +423,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleService = new Service("exampleService", ServiceArgs.builder()        
+        var exampleService = new Service("exampleService", ServiceArgs.builder()
             .serviceName("tf_example")
             .protocol("http&https")
             .serviceDesc("desc.")
@@ -412,7 +437,7 @@ public class App {
             .testLimit(500)
             .build());
 
-        var exampleApi = new Api("exampleApi", ApiArgs.builder()        
+        var exampleApi = new Api("exampleApi", ApiArgs.builder()
             .serviceId(exampleService.id())
             .apiName("hello")
             .apiDesc("my hello api")
@@ -446,13 +471,13 @@ public class App {
                 .build())
             .build());
 
-        var exampleServiceRelease = new ServiceRelease("exampleServiceRelease", ServiceReleaseArgs.builder()        
+        var exampleServiceRelease = new ServiceRelease("exampleServiceRelease", ServiceReleaseArgs.builder()
             .serviceId(exampleApi.serviceId())
             .environmentName("release")
             .releaseDesc("desc.")
             .build());
 
-        var examplePlugin = new Plugin("examplePlugin", PluginArgs.builder()        
+        var examplePlugin = new Plugin("examplePlugin", PluginArgs.builder()
             .pluginName("tf-example")
             .pluginType("IPControl")
             .pluginData(serializeJson(
@@ -463,7 +488,7 @@ public class App {
             .description("desc.")
             .build());
 
-        final var examplePlugins = ApiGatewayFunctions.getPlugins(GetPluginsArgs.builder()
+        final var example = ApiGatewayFunctions.getPlugins(GetPluginsArgs.builder()
             .serviceId(exampleServiceRelease.serviceId())
             .pluginId(examplePlugin.id())
             .environmentName("release")
@@ -472,10 +497,16 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   exampleService:
     type: tencentcloud:ApiGateway:Service
+    name: example
     properties:
       serviceName: tf_example
       protocol: http&https
@@ -491,6 +522,7 @@ resources:
       testLimit: 500
   exampleApi:
     type: tencentcloud:ApiGateway:Api
+    name: example
     properties:
       serviceId: ${exampleService.id}
       apiName: hello
@@ -523,12 +555,14 @@ resources:
           needConvert: true
   exampleServiceRelease:
     type: tencentcloud:ApiGateway:ServiceRelease
+    name: example
     properties:
       serviceId: ${exampleApi.serviceId}
       environmentName: release
       releaseDesc: desc.
   examplePlugin:
     type: tencentcloud:ApiGateway:Plugin
+    name: example
     properties:
       pluginName: tf-example
       pluginType: IPControl
@@ -538,16 +572,104 @@ resources:
           blocks: 1.1.1.1
       description: desc.
 variables:
-  examplePlugins:
+  example:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getPlugins
-      Arguments:
+      function: tencentcloud:ApiGateway:getPlugins
+      arguments:
         serviceId: ${exampleServiceRelease.serviceId}
         pluginId: ${examplePlugin.id}
         environmentName: release
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_apigateway_getplugins" "example" {
+  service_id       = tencentcloud_apigateway_servicerelease.example.service_id
+  plugin_id        = tencentcloud_apigateway_plugin.example.id
+  environment_name = "release"
+}
+
+resource "tencentcloud_apigateway_service" "example" {
+  service_name = "tf_example"
+  protocol     = "http&https"
+  service_desc = "desc."
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+  tags = {
+    "testKey" = "testValue"
+  }
+  release_limit = 500
+  pre_limit     = 500
+  test_limit    = 500
+}
+resource "tencentcloud_apigateway_api" "example" {
+  service_id            = tencentcloud_apigateway_service.example.id
+  api_name              = "hello"
+  api_desc              = "my hello api"
+  auth_type             = "NONE"
+  protocol              = "HTTP"
+  enable_cors           = true
+  request_config_path   = "/user/info"
+  request_config_method = "GET"
+  request_parameters {
+    name          = "name"
+    position      = "QUERY"
+    type          = "string"
+    desc          = "who are you?"
+    default_value = "tom"
+    required      = true
+  }
+  service_config_type      = "HTTP"
+  service_config_timeout   = 15
+  service_config_url       = "http://www.qq.com"
+  service_config_path      = "/user"
+  service_config_method    = "GET"
+  response_type            = "HTML"
+  response_success_example = "success"
+  response_fail_example    = "fail"
+  response_error_codes {
+    code           = 500
+    msg            = "system error"
+    desc           = "system error code"
+    converted_code = 5000
+    need_convert   = true
+  }
+}
+resource "tencentcloud_apigateway_servicerelease" "example" {
+  service_id       = tencentcloud_apigateway_api.example.service_id
+  environment_name = "release"
+  release_desc     = "desc."
+}
+resource "tencentcloud_apigateway_plugin" "example" {
+  plugin_name = "tf-example"
+  plugin_type = "IPControl"
+  plugin_data = jsonencode({
+    "type"   = "white_list"
+    "blocks" = "1.1.1.1"
+  })
+  description = "desc."
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAllPluginApis](https://www.tencentcloud.com/search/?wd=DescribeAllPluginApis&type=document&lang=en)
 
 
 
@@ -559,7 +681,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -567,9 +689,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPlugins<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPluginsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>></span
+><span class="k">function </span>getPlugins<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPluginsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>></span
 ><span class="k">
-function </span>getPluginsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPluginsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>></span
+function </span>getPluginsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPluginsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -584,11 +706,11 @@ function </span>getPluginsOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPluginsResult</span
 ><span class="k">
-def </span>get_plugins_output<span class="p">(</span><span class="nx">environment_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">plugin_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPluginsResult]</span
+def </span>get_plugins_output<span class="p">(</span><span class="nx">environment_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">plugin_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">service_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPluginsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -597,12 +719,12 @@ def </span>get_plugins_output<span class="p">(</span><span class="nx">environmen
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetPlugins<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetPluginsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetPluginsResult</a></span>, error)</span
+><span class="k">func </span>LookupPlugins<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupPluginsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupPluginsResult</a></span>, error)</span
 ><span class="k">
-func </span>GetPluginsOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetPluginsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetPluginsResultOutput</span
+func </span>LookupPluginsOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupPluginsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupPluginsResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetPlugins` in the Go SDK.
+&gt; Note: This function is named `LookupPlugins` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -613,7 +735,8 @@ func </span>GetPluginsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPlugins </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPluginsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPluginsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPluginsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPluginsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -622,7 +745,8 @@ func </span>GetPluginsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>> </span>getPlugins<span class="p">(</span><span class="nx">GetPluginsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>> </span>getPlugins<span class="p">(</span><span class="nx">GetPluginsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPluginsResult</a></span>> </span>getPlugins<span class="p">(</span><span class="nx">GetPluginsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -634,6 +758,15 @@ func </span>GetPluginsOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:ApiGateway/getPlugins:getPlugins
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_api_gateway_get_plugins&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -652,8 +785,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environmental information.</p>
-</dd><dt class="property-required"
+    <dd>Environmental information.</dd><dt class="property-required"
             title="Required">
         <span id="pluginid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_csharp" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Id</a>
@@ -661,8 +793,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The plugin ID to query.</p>
-</dd><dt class="property-required"
+    <dd>The plugin ID to query.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -670,8 +801,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID to query.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -679,8 +809,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -694,8 +823,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environmental information.</p>
-</dd><dt class="property-required"
+    <dd>Environmental information.</dd><dt class="property-required"
             title="Required">
         <span id="pluginid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_go" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Id</a>
@@ -703,8 +831,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The plugin ID to query.</p>
-</dd><dt class="property-required"
+    <dd>The plugin ID to query.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -712,8 +839,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID to query.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -721,8 +847,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Environmental information.</dd><dt class="property-required"
+            title="Required">
+        <span id="plugin_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_id_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The plugin ID to query.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The service ID to query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -736,8 +899,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environmental information.</p>
-</dd><dt class="property-required"
+    <dd>Environmental information.</dd><dt class="property-required"
             title="Required">
         <span id="pluginid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_java" style="color: inherit; text-decoration: inherit;">plugin<wbr>Id</a>
@@ -745,8 +907,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The plugin ID to query.</p>
-</dd><dt class="property-required"
+    <dd>The plugin ID to query.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -754,8 +915,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The service ID to query.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -763,8 +923,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,8 +937,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environmental information.</p>
-</dd><dt class="property-required"
+    <dd>Environmental information.</dd><dt class="property-required"
             title="Required">
         <span id="pluginid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_nodejs" style="color: inherit; text-decoration: inherit;">plugin<wbr>Id</a>
@@ -787,8 +945,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The plugin ID to query.</p>
-</dd><dt class="property-required"
+    <dd>The plugin ID to query.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -796,8 +953,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID to query.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -805,8 +961,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -820,8 +975,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Environmental information.</p>
-</dd><dt class="property-required"
+    <dd>Environmental information.</dd><dt class="property-required"
             title="Required">
         <span id="plugin_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_id_python" style="color: inherit; text-decoration: inherit;">plugin_<wbr>id</a>
@@ -829,8 +983,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The plugin ID to query.</p>
-</dd><dt class="property-required"
+    <dd>The plugin ID to query.</dd><dt class="property-required"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -838,8 +991,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The service ID to query.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -847,8 +999,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -862,8 +1013,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environmental information.</p>
-</dd><dt class="property-required"
+    <dd>Environmental information.</dd><dt class="property-required"
             title="Required">
         <span id="pluginid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_yaml" style="color: inherit; text-decoration: inherit;">plugin<wbr>Id</a>
@@ -871,8 +1021,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The plugin ID to query.</p>
-</dd><dt class="property-required"
+    <dd>The plugin ID to query.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -880,8 +1029,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The service ID to query.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -889,8 +1037,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -921,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pluginid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_csharp" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Id</a>
@@ -938,8 +1084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpluginsresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Get<wbr>Plugins<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>List of plugin related APIs.</p>
-</dd><dt class="property-"
+    <dd>List of plugin related APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -977,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pluginid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_go" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Id</a>
@@ -994,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpluginsresult">[]Get<wbr>Plugins<wbr>Result</a></span>
     </dt>
-    <dd><p>List of plugin related APIs.</p>
-</dd><dt class="property-"
+    <dd>List of plugin related APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1007,6 +1150,60 @@ The following output properties are available:
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="plugin_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_id_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpluginsresult">list(object)</a></span>
+    </dt>
+    <dd>List of plugin related APIs.</dd><dt class="property-"
+            title="">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -1033,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pluginid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_java" style="color: inherit; text-decoration: inherit;">plugin<wbr>Id</a>
@@ -1050,8 +1246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpluginsresult">List&lt;Get<wbr>Plugins<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>List of plugin related APIs.</p>
-</dd><dt class="property-"
+    <dd>List of plugin related APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1089,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pluginid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_nodejs" style="color: inherit; text-decoration: inherit;">plugin<wbr>Id</a>
@@ -1106,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpluginsresult">Get<wbr>Plugins<wbr>Result[]</a></span>
     </dt>
-    <dd><p>List of plugin related APIs.</p>
-</dd><dt class="property-"
+    <dd>List of plugin related APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1145,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="plugin_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_id_python" style="color: inherit; text-decoration: inherit;">plugin_<wbr>id</a>
@@ -1160,10 +1352,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpluginsresult">Get<wbr>Plugins<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getpluginsresult">Sequence[Get<wbr>Plugins<wbr>Result]</a></span>
     </dt>
-    <dd><p>List of plugin related APIs.</p>
-</dd><dt class="property-"
+    <dd>List of plugin related APIs.</dd><dt class="property-"
             title="">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -1201,8 +1392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pluginid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginid_yaml" style="color: inherit; text-decoration: inherit;">plugin<wbr>Id</a>
@@ -1218,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpluginsresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of plugin related APIs.</p>
-</dd><dt class="property-"
+    <dd>List of plugin related APIs.</dd><dt class="property-"
             title="">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1259,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API ID.</p>
-</dd><dt class="property-required"
+    <dd>API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -1268,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API name.</p>
-</dd><dt class="property-required"
+    <dd>API name.</dd><dt class="property-required"
             title="Required">
         <span id="apitype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apitype_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Type</a>
@@ -1277,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API type.</p>
-</dd><dt class="property-required"
+    <dd>API type.</dd><dt class="property-required"
             title="Required">
         <span id="attachedotherplugin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachedotherplugin_csharp" style="color: inherit; text-decoration: inherit;">Attached<wbr>Other<wbr>Plugin</a>
@@ -1286,8 +1472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isattached_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isattached_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Attached</a>
@@ -1295,8 +1480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="method_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_csharp" style="color: inherit; text-decoration: inherit;">Method</a>
@@ -1304,8 +1488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1313,8 +1496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API path.</p>
-</dd></dl>
+    <dd>API path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1328,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API ID.</p>
-</dd><dt class="property-required"
+    <dd>API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -1337,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API name.</p>
-</dd><dt class="property-required"
+    <dd>API name.</dd><dt class="property-required"
             title="Required">
         <span id="apitype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apitype_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Type</a>
@@ -1346,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API type.</p>
-</dd><dt class="property-required"
+    <dd>API type.</dd><dt class="property-required"
             title="Required">
         <span id="attachedotherplugin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachedotherplugin_go" style="color: inherit; text-decoration: inherit;">Attached<wbr>Other<wbr>Plugin</a>
@@ -1355,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isattached_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isattached_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Attached</a>
@@ -1364,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="method_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_go" style="color: inherit; text-decoration: inherit;">Method</a>
@@ -1373,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1382,8 +1558,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API path.</p>
-</dd></dl>
+    <dd>API path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="api_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API name.</dd><dt class="property-required"
+            title="Required">
+        <span id="api_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_type_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API type.</dd><dt class="property-required"
+            title="Required">
+        <span id="attached_other_plugin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attached_other_plugin_hcl" style="color: inherit; text-decoration: inherit;">attached_<wbr>other_<wbr>plugin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_attached_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_attached_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>attached</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_hcl" style="color: inherit; text-decoration: inherit;">method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API method.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1397,8 +1634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API ID.</p>
-</dd><dt class="property-required"
+    <dd>API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_java" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1406,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API name.</p>
-</dd><dt class="property-required"
+    <dd>API name.</dd><dt class="property-required"
             title="Required">
         <span id="apitype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apitype_java" style="color: inherit; text-decoration: inherit;">api<wbr>Type</a>
@@ -1415,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API type.</p>
-</dd><dt class="property-required"
+    <dd>API type.</dd><dt class="property-required"
             title="Required">
         <span id="attachedotherplugin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachedotherplugin_java" style="color: inherit; text-decoration: inherit;">attached<wbr>Other<wbr>Plugin</a>
@@ -1424,8 +1658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isattached_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isattached_java" style="color: inherit; text-decoration: inherit;">is<wbr>Attached</a>
@@ -1433,8 +1666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="method_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_java" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1442,8 +1674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1451,8 +1682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API path.</p>
-</dd></dl>
+    <dd>API path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1466,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API ID.</p>
-</dd><dt class="property-required"
+    <dd>API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1475,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API name.</p>
-</dd><dt class="property-required"
+    <dd>API name.</dd><dt class="property-required"
             title="Required">
         <span id="apitype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apitype_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Type</a>
@@ -1484,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API type.</p>
-</dd><dt class="property-required"
+    <dd>API type.</dd><dt class="property-required"
             title="Required">
         <span id="attachedotherplugin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachedotherplugin_nodejs" style="color: inherit; text-decoration: inherit;">attached<wbr>Other<wbr>Plugin</a>
@@ -1493,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isattached_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isattached_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Attached</a>
@@ -1502,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="method_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_nodejs" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1511,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1520,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API path.</p>
-</dd></dl>
+    <dd>API path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1535,8 +1758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API ID.</p>
-</dd><dt class="property-required"
+    <dd>API ID.</dd><dt class="property-required"
             title="Required">
         <span id="api_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_python" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
@@ -1544,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API name.</p>
-</dd><dt class="property-required"
+    <dd>API name.</dd><dt class="property-required"
             title="Required">
         <span id="api_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_type_python" style="color: inherit; text-decoration: inherit;">api_<wbr>type</a>
@@ -1553,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API type.</p>
-</dd><dt class="property-required"
+    <dd>API type.</dd><dt class="property-required"
             title="Required">
         <span id="attached_other_plugin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attached_other_plugin_python" style="color: inherit; text-decoration: inherit;">attached_<wbr>other_<wbr>plugin</a>
@@ -1562,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="is_attached_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_attached_python" style="color: inherit; text-decoration: inherit;">is_<wbr>attached</a>
@@ -1571,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_python" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1580,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1589,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API path.</p>
-</dd></dl>
+    <dd>API path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1604,8 +1820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API ID.</p>
-</dd><dt class="property-required"
+    <dd>API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1613,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API name.</p>
-</dd><dt class="property-required"
+    <dd>API name.</dd><dt class="property-required"
             title="Required">
         <span id="apitype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apitype_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Type</a>
@@ -1622,8 +1836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API type.</p>
-</dd><dt class="property-required"
+    <dd>API type.</dd><dt class="property-required"
             title="Required">
         <span id="attachedotherplugin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachedotherplugin_yaml" style="color: inherit; text-decoration: inherit;">attached<wbr>Other<wbr>Plugin</a>
@@ -1631,8 +1844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to other plugins.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isattached_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isattached_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Attached</a>
@@ -1640,8 +1852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether the API is bound to the current plugin.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="method_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_yaml" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1649,8 +1860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1658,8 +1868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API path.</p>
-</dd></dl>
+    <dd>API path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1674,7 +1883,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

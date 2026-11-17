@@ -2,9 +2,11 @@
 ---
 title: "LifecycleHook"
 title_tag: "tencentcloud.As.LifecycleHook"
-meta_desc: "Documentation for the tencentcloud.As.LifecycleHook resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource for an AS (Auto scaling) lifecycle hook."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,26 +20,34 @@ Provides a resource for an AS (Auto scaling) lifecycle hook.
 
 ### Create a basic LifecycleHook
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "as",
 });
-const image = tencentcloud.Images.getInstance({
+const image = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
     osName: "TencentOS Server 3.2 (Final)",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
+    name: "subnet-example",
     cidrBlock: "10.0.0.0/16",
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
 });
-const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+const example = new tencentcloud.as.ScalingConfig("example", {
     configurationName: "tf-example",
     imageId: image.then(image => image.images?.[0]?.imageId),
     instanceTypes: [
@@ -50,37 +60,46 @@ const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingCo
         instanceName: "test-ins-name",
     },
 });
-const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+const exampleScalingGroup = new tencentcloud.as.ScalingGroup("example", {
     scalingGroupName: "tf-example",
-    configurationId: exampleScalingConfig.id,
+    configurationId: example.id,
     maxSize: 1,
     minSize: 0,
     vpcId: vpc.id,
     subnetIds: [subnet.id],
 });
-const exampleLifecycleHook = new tencentcloud.as.LifecycleHook("exampleLifecycleHook", {
+const exampleLifecycleHook = new tencentcloud.as.LifecycleHook("example", {
     scalingGroupId: exampleScalingGroup.id,
     lifecycleHookName: "tf-as-lifecycle-hook",
     lifecycleTransition: "INSTANCE_LAUNCHING",
     defaultResult: "CONTINUE",
     heartbeatTimeout: 500,
+    lifecycleTransitionType: "NORMAL",
     notificationMetadata: "tf test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="as")
-image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+zones = tencentcloud.availability.get_zones_by_product(product="as")
+image = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
     os_name="TencentOS Server 3.2 (Final)")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
+    name="subnet-example",
     cidr_block="10.0.0.0/16",
     availability_zone=zones.zones[0].name)
-example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+example = tencentcloud.as_.ScalingConfig("example",
     configuration_name="tf-example",
     image_id=image.images[0].image_id,
     instance_types=[
@@ -89,29 +108,129 @@ example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
         "SA2.SMALL2",
         "SA2.SMALL4",
     ],
-    instance_name_settings=tencentcloud.as_.ScalingConfigInstanceNameSettingsArgs(
-        instance_name="test-ins-name",
-    ))
-example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+    instance_name_settings={
+        "instance_name": "test-ins-name",
+    })
+example_scaling_group = tencentcloud.as_.ScalingGroup("example",
     scaling_group_name="tf-example",
-    configuration_id=example_scaling_config.id,
+    configuration_id=example.id,
     max_size=1,
     min_size=0,
     vpc_id=vpc.id,
     subnet_ids=[subnet.id])
-example_lifecycle_hook = tencentcloud.as_.LifecycleHook("exampleLifecycleHook",
+example_lifecycle_hook = tencentcloud.as_.LifecycleHook("example",
     scaling_group_id=example_scaling_group.id,
     lifecycle_hook_name="tf-as-lifecycle-hook",
     lifecycle_transition="INSTANCE_LAUNCHING",
     default_result="CONTINUE",
     heartbeat_timeout=500,
+    lifecycle_transition_type="NORMAL",
     notification_metadata="tf test")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "as",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			Name:             pulumi.String("subnet-example"),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(image.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA1.SMALL1"),
+				pulumi.String("SA2.SMALL1"),
+				pulumi.String("SA2.SMALL2"),
+				pulumi.String("SA2.SMALL4"),
+			},
+			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+				InstanceName: pulumi.String("test-ins-name"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
+			ScalingGroupName: pulumi.String("tf-example"),
+			ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
+			MaxSize:          pulumi.Int(1),
+			MinSize:          pulumi.Int(0),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetIds: pulumi.StringArray{
+				subnet2.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = as.NewLifecycleHook(ctx, "example", &as.LifecycleHookArgs{
+			ScalingGroupId:          exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
+			LifecycleHookName:       pulumi.String("tf-as-lifecycle-hook"),
+			LifecycleTransition:     pulumi.String("INSTANCE_LAUNCHING"),
+			DefaultResult:           pulumi.String("CONTINUE"),
+			HeartbeatTimeout:        pulumi.Int(500),
+			LifecycleTransitionType: pulumi.String("NORMAL"),
+			NotificationMetadata:    pulumi.String("tf test"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -132,17 +251,19 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
+        Name = "subnet-example",
         CidrBlock = "10.0.0.0/16",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
     });
 
-    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    var example = new Tencentcloud.As.ScalingConfig("example", new()
     {
         ConfigurationName = "tf-example",
         ImageId = image.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
@@ -159,10 +280,10 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new()
+    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("example", new()
     {
         ScalingGroupName = "tf-example",
-        ConfigurationId = exampleScalingConfig.Id,
+        ConfigurationId = example.Id,
         MaxSize = 1,
         MinSize = 0,
         VpcId = vpc.Id,
@@ -172,105 +293,24 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleLifecycleHook = new Tencentcloud.As.LifecycleHook("exampleLifecycleHook", new()
+    var exampleLifecycleHook = new Tencentcloud.As.LifecycleHook("example", new()
     {
         ScalingGroupId = exampleScalingGroup.Id,
         LifecycleHookName = "tf-as-lifecycle-hook",
         LifecycleTransition = "INSTANCE_LAUNCHING",
         DefaultResult = "CONTINUE",
         HeartbeatTimeout = 500,
+        LifecycleTransitionType = "NORMAL",
         NotificationMetadata = "tf test",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "as",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingConfig, err := As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-			ConfigurationName: pulumi.String("tf-example"),
-			ImageId:           pulumi.String(image.Images[0].ImageId),
-			InstanceTypes: pulumi.StringArray{
-				pulumi.String("SA1.SMALL1"),
-				pulumi.String("SA2.SMALL1"),
-				pulumi.String("SA2.SMALL2"),
-				pulumi.String("SA2.SMALL4"),
-			},
-			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
-				InstanceName: pulumi.String("test-ins-name"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingGroup, err := As.NewScalingGroup(ctx, "exampleScalingGroup", &As.ScalingGroupArgs{
-			ScalingGroupName: pulumi.String("tf-example"),
-			ConfigurationId:  exampleScalingConfig.ID(),
-			MaxSize:          pulumi.Int(1),
-			MinSize:          pulumi.Int(0),
-			VpcId:            vpc.ID(),
-			SubnetIds: pulumi.StringArray{
-				subnet.ID(),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = As.NewLifecycleHook(ctx, "exampleLifecycleHook", &As.LifecycleHookArgs{
-			ScalingGroupId:       exampleScalingGroup.ID(),
-			LifecycleHookName:    pulumi.String("tf-as-lifecycle-hook"),
-			LifecycleTransition:  pulumi.String("INSTANCE_LAUNCHING"),
-			DefaultResult:        pulumi.String("CONTINUE"),
-			HeartbeatTimeout:     pulumi.Int(500),
-			NotificationMetadata: pulumi.String("tf test"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -281,10 +321,6 @@ import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.As.ScalingConfig;
 import com.pulumi.tencentcloud.As.ScalingConfigArgs;
 import com.pulumi.tencentcloud.As.inputs.ScalingConfigInstanceNameSettingsArgs;
@@ -292,8 +328,8 @@ import com.pulumi.tencentcloud.As.ScalingGroup;
 import com.pulumi.tencentcloud.As.ScalingGroupArgs;
 import com.pulumi.tencentcloud.As.LifecycleHook;
 import com.pulumi.tencentcloud.As.LifecycleHookArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -314,19 +350,21 @@ public class App {
             .osName("TencentOS Server 3.2 (Final)")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
+            .name("subnet-example")
             .cidrBlock("10.0.0.0/16")
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(zones.zones()[0].name())
             .build());
 
-        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()        
+        var example = new ScalingConfig("example", ScalingConfigArgs.builder()
             .configurationName("tf-example")
-            .imageId(image.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
+            .imageId(image.images()[0].imageId())
             .instanceTypes(            
                 "SA1.SMALL1",
                 "SA2.SMALL1",
@@ -337,40 +375,48 @@ public class App {
                 .build())
             .build());
 
-        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()        
+        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()
             .scalingGroupName("tf-example")
-            .configurationId(exampleScalingConfig.id())
+            .configurationId(example.id())
             .maxSize(1)
             .minSize(0)
             .vpcId(vpc.id())
             .subnetIds(subnet.id())
             .build());
 
-        var exampleLifecycleHook = new LifecycleHook("exampleLifecycleHook", LifecycleHookArgs.builder()        
+        var exampleLifecycleHook = new LifecycleHook("exampleLifecycleHook", LifecycleHookArgs.builder()
             .scalingGroupId(exampleScalingGroup.id())
             .lifecycleHookName("tf-as-lifecycle-hook")
             .lifecycleTransition("INSTANCE_LAUNCHING")
             .defaultResult("CONTINUE")
             .heartbeatTimeout(500)
+            .lifecycleTransitionType("NORMAL")
             .notificationMetadata("tf test")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
+      name: subnet-example
       cidrBlock: 10.0.0.0/16
       availabilityZone: ${zones.zones[0].name}
-  exampleScalingConfig:
+  example:
     type: tencentcloud:As:ScalingConfig
     properties:
       configurationName: tf-example
@@ -384,9 +430,10 @@ resources:
         instanceName: test-ins-name
   exampleScalingGroup:
     type: tencentcloud:As:ScalingGroup
+    name: example
     properties:
       scalingGroupName: tf-example
-      configurationId: ${exampleScalingConfig.id}
+      configurationId: ${example.id}
       maxSize: 1
       minSize: 0
       vpcId: ${vpc.id}
@@ -394,36 +441,105 @@ resources:
         - ${subnet.id}
   exampleLifecycleHook:
     type: tencentcloud:As:LifecycleHook
+    name: example
     properties:
       scalingGroupId: ${exampleScalingGroup.id}
       lifecycleHookName: tf-as-lifecycle-hook
       lifecycleTransition: INSTANCE_LAUNCHING
       defaultResult: CONTINUE
       heartbeatTimeout: 500
+      lifecycleTransitionType: NORMAL
       notificationMetadata: tf test
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: as
   image:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
         osName: TencentOS Server 3.2 (Final)
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-<!--Start PulumiCodeChooser -->
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "as"
+}
+data "tencentcloud_images_getinstance" "image" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 3.2 (Final)"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  name              = "subnet-example"
+  cidr_block        = "10.0.0.0/16"
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+}
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name = "tf-example"
+  image_id           = data.tencentcloud_images_getinstance.image.images[0].image_id
+  instance_types     = ["SA1.SMALL1", "SA2.SMALL1", "SA2.SMALL2", "SA2.SMALL4"]
+  instance_name_settings = {
+    instance_name = "test-ins-name"
+  }
+}
+resource "tencentcloud_as_scalinggroup" "example" {
+  scaling_group_name = "tf-example"
+  configuration_id   = tencentcloud_as_scalingconfig.example.id
+  max_size           = 1
+  min_size           = 0
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_ids         = [tencentcloud_subnet_instance.subnet.id]
+}
+resource "tencentcloud_as_lifecyclehook" "example" {
+  scaling_group_id          = tencentcloud_as_scalinggroup.example.id
+  lifecycle_hook_name       = "tf-as-lifecycle-hook"
+  lifecycle_transition      = "INSTANCE_LAUNCHING"
+  default_result            = "CONTINUE"
+  heartbeat_timeout         = 500
+  lifecycle_transition_type = "NORMAL"
+  notification_metadata     = "tf test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### If notificationTargetType is CMQ_QUEUE
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.as.LifecycleHook("example", {
-    scalingGroupId: tencentcloud_as_scaling_group.example.id,
+    scalingGroupId: exampleTencentcloudAsScalingGroup.id,
     lifecycleHookName: "tf-as-lifecycle-hook",
     lifecycleTransition: "INSTANCE_LAUNCHING",
     defaultResult: "CONTINUE",
@@ -433,12 +549,17 @@ const example = new tencentcloud.as.LifecycleHook("example", {
     notificationQueueName: "lifcyclehook",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.as_.LifecycleHook("example",
-    scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
+    scaling_group_id=example_tencentcloud_as_scaling_group["id"],
     lifecycle_hook_name="tf-as-lifecycle-hook",
     lifecycle_transition="INSTANCE_LAUNCHING",
     default_result="CONTINUE",
@@ -447,40 +568,23 @@ example = tencentcloud.as_.LifecycleHook("example",
     notification_target_type="CMQ_QUEUE",
     notification_queue_name="lifcyclehook")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = new Tencentcloud.As.LifecycleHook("example", new()
-    {
-        ScalingGroupId = tencentcloud_as_scaling_group.Example.Id,
-        LifecycleHookName = "tf-as-lifecycle-hook",
-        LifecycleTransition = "INSTANCE_LAUNCHING",
-        DefaultResult = "CONTINUE",
-        HeartbeatTimeout = 500,
-        NotificationMetadata = "tf test",
-        NotificationTargetType = "CMQ_QUEUE",
-        NotificationQueueName = "lifcyclehook",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := As.NewLifecycleHook(ctx, "example", &As.LifecycleHookArgs{
-			ScalingGroupId:         pulumi.Any(tencentcloud_as_scaling_group.Example.Id),
+		_, err := as.NewLifecycleHook(ctx, "example", &as.LifecycleHookArgs{
+			ScalingGroupId:         pulumi.Any(exampleTencentcloudAsScalingGroup.Id),
 			LifecycleHookName:      pulumi.String("tf-as-lifecycle-hook"),
 			LifecycleTransition:    pulumi.String("INSTANCE_LAUNCHING"),
 			DefaultResult:          pulumi.String("CONTINUE"),
@@ -496,6 +600,38 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.As.LifecycleHook("example", new()
+    {
+        ScalingGroupId = exampleTencentcloudAsScalingGroup.Id,
+        LifecycleHookName = "tf-as-lifecycle-hook",
+        LifecycleTransition = "INSTANCE_LAUNCHING",
+        DefaultResult = "CONTINUE",
+        HeartbeatTimeout = 500,
+        NotificationMetadata = "tf test",
+        NotificationTargetType = "CMQ_QUEUE",
+        NotificationQueueName = "lifcyclehook",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -504,8 +640,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.As.LifecycleHook;
 import com.pulumi.tencentcloud.As.LifecycleHookArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -517,8 +653,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new LifecycleHook("example", LifecycleHookArgs.builder()        
-            .scalingGroupId(tencentcloud_as_scaling_group.example().id())
+        var example = new LifecycleHook("example", LifecycleHookArgs.builder()
+            .scalingGroupId(exampleTencentcloudAsScalingGroup.id())
             .lifecycleHookName("tf-as-lifecycle-hook")
             .lifecycleTransition("INSTANCE_LAUNCHING")
             .defaultResult("CONTINUE")
@@ -531,12 +667,17 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:As:LifecycleHook
     properties:
-      scalingGroupId: ${tencentcloud_as_scaling_group.example.id}
+      scalingGroupId: ${exampleTencentcloudAsScalingGroup.id}
       lifecycleHookName: tf-as-lifecycle-hook
       lifecycleTransition: INSTANCE_LAUNCHING
       defaultResult: CONTINUE
@@ -545,15 +686,49 @@ resources:
       notificationTargetType: CMQ_QUEUE
       notificationQueueName: lifcyclehook
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-<!--Start PulumiCodeChooser -->
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_as_lifecyclehook" "example" {
+  scaling_group_id         = exampleTencentcloudAsScalingGroup.id
+  lifecycle_hook_name      = "tf-as-lifecycle-hook"
+  lifecycle_transition     = "INSTANCE_LAUNCHING"
+  default_result           = "CONTINUE"
+  heartbeat_timeout        = 500
+  notification_metadata    = "tf test"
+  notification_target_type = "CMQ_QUEUE"
+  notification_queue_name  = "lifcyclehook"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Or notificationTargetType is CMQ_TOPIC
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.as.LifecycleHook("example", {
-    scalingGroupId: tencentcloud_as_scaling_group.example.id,
+    scalingGroupId: exampleTencentcloudAsScalingGroup.id,
     lifecycleHookName: "tf-as-lifecycle-hook",
     lifecycleTransition: "INSTANCE_LAUNCHING",
     defaultResult: "CONTINUE",
@@ -563,12 +738,17 @@ const example = new tencentcloud.as.LifecycleHook("example", {
     notificationTopicName: "lifcyclehook",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.as_.LifecycleHook("example",
-    scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
+    scaling_group_id=example_tencentcloud_as_scaling_group["id"],
     lifecycle_hook_name="tf-as-lifecycle-hook",
     lifecycle_transition="INSTANCE_LAUNCHING",
     default_result="CONTINUE",
@@ -577,40 +757,23 @@ example = tencentcloud.as_.LifecycleHook("example",
     notification_target_type="CMQ_TOPIC",
     notification_topic_name="lifcyclehook")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = new Tencentcloud.As.LifecycleHook("example", new()
-    {
-        ScalingGroupId = tencentcloud_as_scaling_group.Example.Id,
-        LifecycleHookName = "tf-as-lifecycle-hook",
-        LifecycleTransition = "INSTANCE_LAUNCHING",
-        DefaultResult = "CONTINUE",
-        HeartbeatTimeout = 500,
-        NotificationMetadata = "tf test",
-        NotificationTargetType = "CMQ_TOPIC",
-        NotificationTopicName = "lifcyclehook",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := As.NewLifecycleHook(ctx, "example", &As.LifecycleHookArgs{
-			ScalingGroupId:         pulumi.Any(tencentcloud_as_scaling_group.Example.Id),
+		_, err := as.NewLifecycleHook(ctx, "example", &as.LifecycleHookArgs{
+			ScalingGroupId:         pulumi.Any(exampleTencentcloudAsScalingGroup.Id),
 			LifecycleHookName:      pulumi.String("tf-as-lifecycle-hook"),
 			LifecycleTransition:    pulumi.String("INSTANCE_LAUNCHING"),
 			DefaultResult:          pulumi.String("CONTINUE"),
@@ -626,6 +789,38 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.As.LifecycleHook("example", new()
+    {
+        ScalingGroupId = exampleTencentcloudAsScalingGroup.Id,
+        LifecycleHookName = "tf-as-lifecycle-hook",
+        LifecycleTransition = "INSTANCE_LAUNCHING",
+        DefaultResult = "CONTINUE",
+        HeartbeatTimeout = 500,
+        NotificationMetadata = "tf test",
+        NotificationTargetType = "CMQ_TOPIC",
+        NotificationTopicName = "lifcyclehook",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -634,8 +829,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.As.LifecycleHook;
 import com.pulumi.tencentcloud.As.LifecycleHookArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -647,8 +842,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new LifecycleHook("example", LifecycleHookArgs.builder()        
-            .scalingGroupId(tencentcloud_as_scaling_group.example().id())
+        var example = new LifecycleHook("example", LifecycleHookArgs.builder()
+            .scalingGroupId(exampleTencentcloudAsScalingGroup.id())
             .lifecycleHookName("tf-as-lifecycle-hook")
             .lifecycleTransition("INSTANCE_LAUNCHING")
             .defaultResult("CONTINUE")
@@ -661,12 +856,17 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:As:LifecycleHook
     properties:
-      scalingGroupId: ${tencentcloud_as_scaling_group.example.id}
+      scalingGroupId: ${exampleTencentcloudAsScalingGroup.id}
       lifecycleHookName: tf-as-lifecycle-hook
       lifecycleTransition: INSTANCE_LAUNCHING
       defaultResult: CONTINUE
@@ -675,74 +875,315 @@ resources:
       notificationTargetType: CMQ_TOPIC
       notificationTopicName: lifcyclehook
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_as_lifecyclehook" "example" {
+  scaling_group_id         = exampleTencentcloudAsScalingGroup.id
+  lifecycle_hook_name      = "tf-as-lifecycle-hook"
+  lifecycle_transition     = "INSTANCE_LAUNCHING"
+  default_result           = "CONTINUE"
+  heartbeat_timeout        = 500
+  notification_metadata    = "tf test"
+  notification_target_type = "CMQ_TOPIC"
+  notification_topic_name  = "lifcyclehook"
+}
+```
+</pulumi-choosable>
+</div>
 
 
+### Use TAT Command
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.as.LifecycleHook("example", {
+    defaultResult: "CONTINUE",
+    heartbeatTimeout: 300,
+    lifecycleHookName: "test",
+    lifecycleTransition: "INSTANCE_TERMINATING",
+    scalingGroupId: exampleTencentcloudAsScalingGroup.id,
+    lifecycleCommand: {
+        commandId: "cmd-xxxx",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.as_.LifecycleHook("example",
+    default_result="CONTINUE",
+    heartbeat_timeout=300,
+    lifecycle_hook_name="test",
+    lifecycle_transition="INSTANCE_TERMINATING",
+    scaling_group_id=example_tencentcloud_as_scaling_group["id"],
+    lifecycle_command={
+        "command_id": "cmd-xxxx",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := as.NewLifecycleHook(ctx, "example", &as.LifecycleHookArgs{
+			DefaultResult:       pulumi.String("CONTINUE"),
+			HeartbeatTimeout:    pulumi.Int(300),
+			LifecycleHookName:   pulumi.String("test"),
+			LifecycleTransition: pulumi.String("INSTANCE_TERMINATING"),
+			ScalingGroupId:      pulumi.Any(exampleTencentcloudAsScalingGroup.Id),
+			LifecycleCommand: &as.LifecycleHookLifecycleCommandArgs{
+				CommandId: pulumi.String("cmd-xxxx"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.As.LifecycleHook("example", new()
+    {
+        DefaultResult = "CONTINUE",
+        HeartbeatTimeout = 300,
+        LifecycleHookName = "test",
+        LifecycleTransition = "INSTANCE_TERMINATING",
+        ScalingGroupId = exampleTencentcloudAsScalingGroup.Id,
+        LifecycleCommand = new Tencentcloud.As.Inputs.LifecycleHookLifecycleCommandArgs
+        {
+            CommandId = "cmd-xxxx",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.As.LifecycleHook;
+import com.pulumi.tencentcloud.As.LifecycleHookArgs;
+import com.pulumi.tencentcloud.As.inputs.LifecycleHookLifecycleCommandArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new LifecycleHook("example", LifecycleHookArgs.builder()
+            .defaultResult("CONTINUE")
+            .heartbeatTimeout(300)
+            .lifecycleHookName("test")
+            .lifecycleTransition("INSTANCE_TERMINATING")
+            .scalingGroupId(exampleTencentcloudAsScalingGroup.id())
+            .lifecycleCommand(LifecycleHookLifecycleCommandArgs.builder()
+                .commandId("cmd-xxxx")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:As:LifecycleHook
+    properties:
+      defaultResult: CONTINUE
+      heartbeatTimeout: 300
+      lifecycleHookName: test
+      lifecycleTransition: INSTANCE_TERMINATING
+      scalingGroupId: ${exampleTencentcloudAsScalingGroup.id}
+      lifecycleCommand:
+        commandId: cmd-xxxx
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_as_lifecyclehook" "example" {
+  default_result       = "CONTINUE"
+  heartbeat_timeout    = 300
+  lifecycle_hook_name  = "test"
+  lifecycle_transition = "INSTANCE_TERMINATING"
+  scaling_group_id     = exampleTencentcloudAsScalingGroup.id
+  lifecycle_command = {
+    command_id = "cmd-xxxx"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateLifecycleHook](https://www.tencentcloud.com/document/api/377/33199)
+* Read: [DescribeLifecycleHooks](https://www.tencentcloud.com/document/api/377/33197)
+* Update: [UpgradeLifecycleHook](https://www.tencentcloud.com/document/api/377/33196)
+* Delete: [DeleteLifecycleHook](https://www.tencentcloud.com/document/api/377/33198)
 
 
 ## Create LifecycleHook Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                  <span class="nx">default_result</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">heartbeat_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">lifecycle_hook_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">lifecycle_transition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">default_result</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">heartbeat_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">lifecycle_command</span><span class="p">:</span> <span class="nx">Optional[LifecycleHookLifecycleCommandArgs]</span> = None<span class="p">,</span>
+                  <span class="nx">lifecycle_transition_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">notification_metadata</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">notification_queue_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">notification_target_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">notification_topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">notification_topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLifecycleHook</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">LifecycleHook</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLifecycleHook</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">LifecycleHook</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">LifecycleHook</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LifecycleHookArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:LifecycleHook</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:LifecycleHook</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_as_lifecycle_hook&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -763,7 +1204,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -880,11 +1321,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## LifecycleHook Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The LifecycleHook resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -900,8 +1349,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-required"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-required"
             title="Required">
         <span id="lifecycletransition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransition_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Transition</a>
@@ -909,8 +1357,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -918,8 +1365,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultresult_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultresult_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Result</a>
@@ -927,8 +1373,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="heartbeattimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#heartbeattimeout_csharp" style="color: inherit; text-decoration: inherit;">Heartbeat<wbr>Timeout</a>
@@ -936,8 +1381,23 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecyclecommand_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclecommand_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycletransitiontype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransitiontype_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationmetadata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationmetadata_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Metadata</a>
@@ -945,8 +1405,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationqueuename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationqueuename_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Queue<wbr>Name</a>
@@ -954,8 +1413,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtargettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtargettype_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Target<wbr>Type</a>
@@ -963,8 +1421,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtopicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtopicname_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Topic<wbr>Name</a>
@@ -972,8 +1429,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd></dl>
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -987,8 +1443,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-required"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-required"
             title="Required">
         <span id="lifecycletransition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransition_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Transition</a>
@@ -996,8 +1451,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1005,8 +1459,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultresult_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultresult_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Result</a>
@@ -1014,8 +1467,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="heartbeattimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#heartbeattimeout_go" style="color: inherit; text-decoration: inherit;">Heartbeat<wbr>Timeout</a>
@@ -1023,8 +1475,23 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecyclecommand_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclecommand_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command<wbr>Args</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycletransitiontype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransitiontype_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationmetadata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationmetadata_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Metadata</a>
@@ -1032,8 +1499,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationqueuename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationqueuename_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Queue<wbr>Name</a>
@@ -1041,8 +1507,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtargettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtargettype_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Target<wbr>Type</a>
@@ -1050,8 +1515,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtopicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtopicname_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Topic<wbr>Name</a>
@@ -1059,8 +1523,101 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd></dl>
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="lifecycle_hook_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_hook_name_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>hook_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the lifecycle hook.</dd><dt class="property-required"
+            title="Required">
+        <span id="lifecycle_transition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_transition_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>transition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="default_result_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_result_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="heartbeat_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#heartbeat_timeout_hcl" style="color: inherit; text-decoration: inherit;">heartbeat_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycle_command_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_command_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">object</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycle_transition_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_transition_type_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>transition_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notification_metadata_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_metadata_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>metadata</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notification_queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_queue_name_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notification_target_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_target_type_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>target_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notification_topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_topic_name_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1074,8 +1631,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-required"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-required"
             title="Required">
         <span id="lifecycletransition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransition_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition</a>
@@ -1083,8 +1639,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1092,8 +1647,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultresult_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultresult_java" style="color: inherit; text-decoration: inherit;">default<wbr>Result</a>
@@ -1101,8 +1655,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="heartbeattimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#heartbeattimeout_java" style="color: inherit; text-decoration: inherit;">heartbeat<wbr>Timeout</a>
@@ -1110,8 +1663,23 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecyclecommand_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclecommand_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycletransitiontype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransitiontype_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationmetadata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationmetadata_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Metadata</a>
@@ -1119,8 +1687,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationqueuename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationqueuename_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Queue<wbr>Name</a>
@@ -1128,8 +1695,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtargettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtargettype_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Target<wbr>Type</a>
@@ -1137,8 +1703,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtopicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtopicname_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Topic<wbr>Name</a>
@@ -1146,8 +1711,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd></dl>
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1161,8 +1725,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-required"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-required"
             title="Required">
         <span id="lifecycletransition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransition_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition</a>
@@ -1170,8 +1733,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1179,8 +1741,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultresult_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultresult_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Result</a>
@@ -1188,8 +1749,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="heartbeattimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#heartbeattimeout_nodejs" style="color: inherit; text-decoration: inherit;">heartbeat<wbr>Timeout</a>
@@ -1197,8 +1757,23 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecyclecommand_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclecommand_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycletransitiontype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransitiontype_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationmetadata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationmetadata_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Metadata</a>
@@ -1206,8 +1781,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationqueuename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationqueuename_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Queue<wbr>Name</a>
@@ -1215,8 +1789,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtargettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtargettype_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Target<wbr>Type</a>
@@ -1224,8 +1797,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtopicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtopicname_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Topic<wbr>Name</a>
@@ -1233,8 +1805,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd></dl>
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1248,8 +1819,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-required"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-required"
             title="Required">
         <span id="lifecycle_transition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_transition_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>transition</a>
@@ -1257,8 +1827,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -1266,8 +1835,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="default_result_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_result_python" style="color: inherit; text-decoration: inherit;">default_<wbr>result</a>
@@ -1275,8 +1843,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="heartbeat_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#heartbeat_timeout_python" style="color: inherit; text-decoration: inherit;">heartbeat_<wbr>timeout</a>
@@ -1284,8 +1851,23 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycle_command_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_command_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command<wbr>Args</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycle_transition_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycle_transition_type_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>transition_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_metadata_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_metadata_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>metadata</a>
@@ -1293,8 +1875,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_queue_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_queue_name_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>queue_<wbr>name</a>
@@ -1302,8 +1883,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_target_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_target_type_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>target_<wbr>type</a>
@@ -1311,8 +1891,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_topic_name_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>topic_<wbr>name</a>
@@ -1320,8 +1899,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd></dl>
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1335,8 +1913,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-required"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-required"
             title="Required">
         <span id="lifecycletransition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransition_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition</a>
@@ -1344,8 +1921,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1353,8 +1929,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultresult_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultresult_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Result</a>
@@ -1362,8 +1937,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="heartbeattimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#heartbeattimeout_yaml" style="color: inherit; text-decoration: inherit;">heartbeat<wbr>Timeout</a>
@@ -1371,8 +1945,23 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecyclecommand_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclecommand_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Property Map</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lifecycletransitiontype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecycletransitiontype_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationmetadata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationmetadata_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Metadata</a>
@@ -1380,8 +1969,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationqueuename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationqueuename_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Queue<wbr>Name</a>
@@ -1389,8 +1977,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtargettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtargettype_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Target<wbr>Type</a>
@@ -1398,8 +1985,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationtopicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationtopicname_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Topic<wbr>Name</a>
@@ -1407,8 +1993,7 @@ The LifecycleHook resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd></dl>
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1429,8 +2014,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1444,8 +2028,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1459,8 +2056,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1474,8 +2070,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1489,8 +2084,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1504,8 +2098,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1515,128 +2108,169 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing LifecycleHook resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">LifecycleHookState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">LifecycleHook</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">LifecycleHookState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">LifecycleHook</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">default_result</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">heartbeat_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">lifecycle_command</span><span class="p">:</span> <span class="nx">Optional[LifecycleHookLifecycleCommandArgs]</span> = None<span class="p">,</span>
         <span class="nx">lifecycle_hook_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">lifecycle_transition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">lifecycle_transition_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">notification_metadata</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">notification_queue_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">notification_target_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">notification_topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> LifecycleHook</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLifecycleHook<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">LifecycleHookState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">LifecycleHook</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLifecycleHook<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">LifecycleHookState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">LifecycleHook</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">LifecycleHook</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LifecycleHookState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">LifecycleHook</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LifecycleHookState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">LifecycleHook</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LifecycleHookState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">LifecycleHook</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LifecycleHookState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingLifecycleHook</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:As:LifecycleHook</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_as_lifecycle_hook</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LifecycleHookState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LifecycleHookState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1644,28 +2278,31 @@ Get an existing LifecycleHook resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LifecycleHookState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1673,28 +2310,31 @@ Get an existing LifecycleHook resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LifecycleHookState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1714,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_heartbeattimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_heartbeattimeout_csharp" style="color: inherit; text-decoration: inherit;">Heartbeat<wbr>Timeout</a>
@@ -1723,8 +2362,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecyclecommand_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclecommand_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclehookname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclehookname_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Hook<wbr>Name</a>
@@ -1732,8 +2378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecycletransition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransition_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Transition</a>
@@ -1741,8 +2386,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycletransitiontype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransitiontype_csharp" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationmetadata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationmetadata_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Metadata</a>
@@ -1750,8 +2402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationqueuename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationqueuename_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Queue<wbr>Name</a>
@@ -1759,8 +2410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtargettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtargettype_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Target<wbr>Type</a>
@@ -1768,8 +2418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtopicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtopicname_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>Topic<wbr>Name</a>
@@ -1777,8 +2426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1786,8 +2434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1801,8 +2448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_heartbeattimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_heartbeattimeout_go" style="color: inherit; text-decoration: inherit;">Heartbeat<wbr>Timeout</a>
@@ -1810,8 +2456,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecyclecommand_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclecommand_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command<wbr>Args</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclehookname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclehookname_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Hook<wbr>Name</a>
@@ -1819,8 +2472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecycletransition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransition_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Transition</a>
@@ -1828,8 +2480,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycletransitiontype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransitiontype_go" style="color: inherit; text-decoration: inherit;">Lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationmetadata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationmetadata_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Metadata</a>
@@ -1837,8 +2496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationqueuename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationqueuename_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Queue<wbr>Name</a>
@@ -1846,8 +2504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtargettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtargettype_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Target<wbr>Type</a>
@@ -1855,8 +2512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtopicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtopicname_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>Topic<wbr>Name</a>
@@ -1864,8 +2520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1873,8 +2528,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_default_result_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_result_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_heartbeat_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_heartbeat_timeout_hcl" style="color: inherit; text-decoration: inherit;">heartbeat_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycle_command_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_command_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">object</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycle_hook_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_hook_name_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>hook_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the lifecycle hook.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycle_transition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_transition_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>transition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycle_transition_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_transition_type_hcl" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>transition_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notification_metadata_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_metadata_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>metadata</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notification_queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_queue_name_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notification_target_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_target_type_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>target_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notification_topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_topic_name_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1888,8 +2636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_heartbeattimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_heartbeattimeout_java" style="color: inherit; text-decoration: inherit;">heartbeat<wbr>Timeout</a>
@@ -1897,8 +2644,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecyclecommand_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclecommand_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclehookname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclehookname_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Hook<wbr>Name</a>
@@ -1906,8 +2660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecycletransition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransition_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition</a>
@@ -1915,8 +2668,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycletransitiontype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransitiontype_java" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationmetadata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationmetadata_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Metadata</a>
@@ -1924,8 +2684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationqueuename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationqueuename_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Queue<wbr>Name</a>
@@ -1933,8 +2692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtargettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtargettype_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Target<wbr>Type</a>
@@ -1942,8 +2700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtopicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtopicname_java" style="color: inherit; text-decoration: inherit;">notification<wbr>Topic<wbr>Name</a>
@@ -1951,8 +2708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1960,8 +2716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1975,8 +2730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_heartbeattimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_heartbeattimeout_nodejs" style="color: inherit; text-decoration: inherit;">heartbeat<wbr>Timeout</a>
@@ -1984,8 +2738,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecyclecommand_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclecommand_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclehookname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclehookname_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Hook<wbr>Name</a>
@@ -1993,8 +2754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecycletransition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransition_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition</a>
@@ -2002,8 +2762,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycletransitiontype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransitiontype_nodejs" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationmetadata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationmetadata_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Metadata</a>
@@ -2011,8 +2778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationqueuename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationqueuename_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Queue<wbr>Name</a>
@@ -2020,8 +2786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtargettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtargettype_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Target<wbr>Type</a>
@@ -2029,8 +2794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtopicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtopicname_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>Topic<wbr>Name</a>
@@ -2038,8 +2802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -2047,8 +2810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2062,8 +2824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_heartbeat_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_heartbeat_timeout_python" style="color: inherit; text-decoration: inherit;">heartbeat_<wbr>timeout</a>
@@ -2071,8 +2832,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycle_command_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_command_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command<wbr>Args</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecycle_hook_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_hook_name_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>hook_<wbr>name</a>
@@ -2080,8 +2848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecycle_transition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_transition_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>transition</a>
@@ -2089,8 +2856,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycle_transition_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycle_transition_type_python" style="color: inherit; text-decoration: inherit;">lifecycle_<wbr>transition_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notification_metadata_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_metadata_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>metadata</a>
@@ -2098,8 +2872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notification_queue_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_queue_name_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>queue_<wbr>name</a>
@@ -2107,8 +2880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notification_target_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_target_type_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>target_<wbr>type</a>
@@ -2116,8 +2888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notification_topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_topic_name_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>topic_<wbr>name</a>
@@ -2125,8 +2896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -2134,8 +2904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2149,8 +2918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_heartbeattimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_heartbeattimeout_yaml" style="color: inherit; text-decoration: inherit;">heartbeat<wbr>Timeout</a>
@@ -2158,8 +2926,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecyclecommand_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclecommand_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lifecyclehooklifecyclecommand">Property Map</a></span>
+    </dt>
+    <dd>Remote command execution object. <code>NotificationTarget</code> and <code>LifecycleCommand</code> cannot be specified at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecyclehookname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecyclehookname_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Hook<wbr>Name</a>
@@ -2167,8 +2942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the lifecycle hook.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the lifecycle hook.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifecycletransition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransition_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition</a>
@@ -2176,8 +2950,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The instance state to which you want to attach the lifecycle hook. Valid values: <code>INSTANCE_LAUNCHING</code> and <code>INSTANCE_TERMINATING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lifecycletransitiontype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifecycletransitiontype_yaml" style="color: inherit; text-decoration: inherit;">lifecycle<wbr>Transition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The scenario where the lifecycle hook is applied. <code>EXTENSION</code>: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. <code>NORMAL</code>: the lifecycle hook is not triggered by the above APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationmetadata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationmetadata_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Metadata</a>
@@ -2185,8 +2966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contains additional information that you want to include any time AS sends a message to the notification target.</p>
-</dd><dt class="property-optional"
+    <dd>Contains additional information that you want to include any time AS sends a message to the notification target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationqueuename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationqueuename_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Queue<wbr>Name</a>
@@ -2194,8 +2974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For CMQ_QUEUE type, a name of queue must be set.</p>
-</dd><dt class="property-optional"
+    <dd>For CMQ_QUEUE type, a name of queue must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtargettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtargettype_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Target<wbr>Type</a>
@@ -2203,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Target type. Valid values: <code>CMQ_QUEUE</code>, <code>CMQ_TOPIC</code>, <code>TDMQ_CMQ_QUEUE</code>, <code>TDMQ_CMQ_TOPIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationtopicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationtopicname_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>Topic<wbr>Name</a>
@@ -2212,8 +2990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>For CMQ_TOPIC type, a name of topic must be set.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For CMQ_TOPIC type, a name of topic must be set.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -2221,8 +2998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2230,6 +3006,184 @@ The following state arguments are supported:
 
 
 
+
+
+
+## Supporting Types
+
+
+
+<h4 id="lifecyclehooklifecyclecommand">
+Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command<pulumi-choosable type="language" values="python,go" class="inline">, Lifecycle<wbr>Hook<wbr>Lifecycle<wbr>Command<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="commandid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_csharp" style="color: inherit; text-decoration: inherit;">Command<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote command ID. It is required to execute a command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parameters_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_csharp" style="color: inherit; text-decoration: inherit;">Parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom parameter. The field type is JSON encoded string. For example, {&quot;varA&quot;: &quot;222&quot;}.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="commandid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_go" style="color: inherit; text-decoration: inherit;">Command<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote command ID. It is required to execute a command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parameters_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_go" style="color: inherit; text-decoration: inherit;">Parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom parameter. The field type is JSON encoded string. For example, {&quot;varA&quot;: &quot;222&quot;}.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="command_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_id_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote command ID. It is required to execute a command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parameters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_hcl" style="color: inherit; text-decoration: inherit;">parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom parameter. The field type is JSON encoded string. For example, {&quot;varA&quot;: &quot;222&quot;}.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="commandid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_java" style="color: inherit; text-decoration: inherit;">command<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Remote command ID. It is required to execute a command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parameters_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_java" style="color: inherit; text-decoration: inherit;">parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Custom parameter. The field type is JSON encoded string. For example, {&quot;varA&quot;: &quot;222&quot;}.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="commandid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_nodejs" style="color: inherit; text-decoration: inherit;">command<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote command ID. It is required to execute a command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parameters_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_nodejs" style="color: inherit; text-decoration: inherit;">parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom parameter. The field type is JSON encoded string. For example, {&quot;varA&quot;: &quot;222&quot;}.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="command_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_id_python" style="color: inherit; text-decoration: inherit;">command_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Remote command ID. It is required to execute a command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parameters_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_python" style="color: inherit; text-decoration: inherit;">parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Custom parameter. The field type is JSON encoded string. For example, {&quot;varA&quot;: &quot;222&quot;}.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="commandid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_yaml" style="color: inherit; text-decoration: inherit;">command<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Remote command ID. It is required to execute a command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parameters_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_yaml" style="color: inherit; text-decoration: inherit;">parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Custom parameter. The field type is JSON encoded string. For example, {&quot;varA&quot;: &quot;222&quot;}.</dd></dl>
+</pulumi-choosable>
+</div>
+
+## Import
+
+
+
+lifecycle hook can be imported using the id, e.g.
+
+```sh
+$ pulumi import tencentcloud:As/lifecycleHook:LifecycleHook example ash-ahg67203
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2241,7 +3195,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

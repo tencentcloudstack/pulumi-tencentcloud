@@ -2,9 +2,11 @@
 ---
 title: "getBucketMultipartUploads"
 title_tag: "tencentcloud.Cos.getBucketMultipartUploads"
-meta_desc: "Documentation for the tencentcloud.Cos.getBucketMultipartUploads function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the COS bucket multipart uploads."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query the COS bucket multipart uploads.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const cosBucketMultipartUploads = tencentcloud.Cos.getBucketMultipartUploads({
+const cosBucketMultipartUploads = tencentcloud.cos.getBucketMultipartUploads({
     bucket: "xxxxxx",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-cos_bucket_multipart_uploads = tencentcloud.Cos.get_bucket_multipart_uploads(bucket="xxxxxx")
+cos_bucket_multipart_uploads = tencentcloud.cos.get_bucket_multipart_uploads(bucket="xxxxxx")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cos.GetBucketMultipartUploads(ctx, &cos.GetBucketMultipartUploadsArgs{
+			Bucket: "xxxxxx",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cos.GetBucketMultipartUploads(ctx, &cos.GetBucketMultipartUploadsArgs{
-			Bucket: "xxxxxx",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cos.CosFunctions;
 import com.pulumi.tencentcloud.Cos.inputs.GetBucketMultipartUploadsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,15 +121,39 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   cosBucketMultipartUploads:
     fn::invoke:
-      Function: tencentcloud:Cos:getBucketMultipartUploads
-      Arguments:
+      function: tencentcloud:Cos:getBucketMultipartUploads
+      arguments:
         bucket: xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cos_getbucketmultipartuploads" "cosBucketMultipartUploads" {
+  bucket = "xxxxxx"
+}
+```
+</pulumi-choosable>
+</div>
 
 
 
@@ -115,7 +166,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +174,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBucketMultipartUploads<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketMultipartUploadsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>></span
+><span class="k">function </span>getBucketMultipartUploads<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketMultipartUploadsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>></span
 ><span class="k">
-function </span>getBucketMultipartUploadsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketMultipartUploadsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>></span
+function </span>getBucketMultipartUploadsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketMultipartUploadsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -141,12 +192,12 @@ function </span>getBucketMultipartUploadsOutput<span class="p">(</span><span cla
                                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBucketMultipartUploadsResult</span
 ><span class="k">
-def </span>get_bucket_multipart_uploads_output<span class="p">(</span><span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                 <span class="nx">delimiter</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                 <span class="nx">encoding_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                 <span class="nx">prefix</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBucketMultipartUploadsResult]</span
+def </span>get_bucket_multipart_uploads_output<span class="p">(</span><span class="nx">bucket</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                 <span class="nx">delimiter</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                 <span class="nx">encoding_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                 <span class="nx">prefix</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBucketMultipartUploadsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +222,8 @@ func </span>GetBucketMultipartUploadsOutput<span class="p">(</span><span class="
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBucketMultipartUploads </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBucketMultipartUploadsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketMultipartUploadsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketMultipartUploadsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketMultipartUploadsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +232,8 @@ func </span>GetBucketMultipartUploadsOutput<span class="p">(</span><span class="
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>> </span>getBucketMultipartUploads<span class="p">(</span><span class="nx">GetBucketMultipartUploadsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>> </span>getBucketMultipartUploads<span class="p">(</span><span class="nx">GetBucketMultipartUploadsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBucketMultipartUploadsResult</a></span>> </span>getBucketMultipartUploads<span class="p">(</span><span class="nx">GetBucketMultipartUploadsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +245,15 @@ func </span>GetBucketMultipartUploadsOutput<span class="p">(</span><span class="
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cos/getBucketMultipartUploads:getBucketMultipartUploads
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cos_get_bucket_multipart_uploads&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_csharp" style="color: inherit; text-decoration: inherit;">Delimiter</a>
@@ -219,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</p>
-</dd><dt class="property-optional"
+    <dd>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodingtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodingtype_csharp" style="color: inherit; text-decoration: inherit;">Encoding<wbr>Type</a>
@@ -228,8 +288,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the encoding format of the return value. Legal value: url.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the encoding format of the return value. Legal value: url.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -237,8 +296,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</p>
-</dd><dt class="property-optional"
+    <dd>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -246,8 +304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -261,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_go" style="color: inherit; text-decoration: inherit;">Delimiter</a>
@@ -270,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</p>
-</dd><dt class="property-optional"
+    <dd>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodingtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodingtype_go" style="color: inherit; text-decoration: inherit;">Encoding<wbr>Type</a>
@@ -279,8 +334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the encoding format of the return value. Legal value: url.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the encoding format of the return value. Legal value: url.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -288,8 +342,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</p>
-</dd><dt class="property-optional"
+    <dd>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -297,8 +350,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delimiter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_hcl" style="color: inherit; text-decoration: inherit;">delimiter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encoding_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encoding_type_hcl" style="color: inherit; text-decoration: inherit;">encoding_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the encoding format of the return value. Legal value: url.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -312,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_java" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -321,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</p>
-</dd><dt class="property-optional"
+    <dd>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodingtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodingtype_java" style="color: inherit; text-decoration: inherit;">encoding<wbr>Type</a>
@@ -330,8 +426,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the encoding format of the return value. Legal value: url.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the encoding format of the return value. Legal value: url.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -339,8 +434,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</p>
-</dd><dt class="property-optional"
+    <dd>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -348,8 +442,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -363,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_nodejs" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -372,8 +464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</p>
-</dd><dt class="property-optional"
+    <dd>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodingtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodingtype_nodejs" style="color: inherit; text-decoration: inherit;">encoding<wbr>Type</a>
@@ -381,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the encoding format of the return value. Legal value: url.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the encoding format of the return value. Legal value: url.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -390,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</p>
-</dd><dt class="property-optional"
+    <dd>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -399,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -414,8 +502,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_python" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -423,8 +510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</p>
-</dd><dt class="property-optional"
+    <dd>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</dd><dt class="property-optional"
             title="Optional">
         <span id="encoding_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encoding_type_python" style="color: inherit; text-decoration: inherit;">encoding_<wbr>type</a>
@@ -432,8 +518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the encoding format of the return value. Legal value: url.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the encoding format of the return value. Legal value: url.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -441,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</p>
-</dd><dt class="property-optional"
+    <dd>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -450,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -465,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_yaml" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -474,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</p>
-</dd><dt class="property-optional"
+    <dd>The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodingtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodingtype_yaml" style="color: inherit; text-decoration: inherit;">encoding<wbr>Type</a>
@@ -483,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the encoding format of the return value. Legal value: url.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the encoding format of the return value. Legal value: url.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -492,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</p>
-</dd><dt class="property-optional"
+    <dd>The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -501,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -533,8 +611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="uploads_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploads_csharp" style="color: inherit; text-decoration: inherit;">Uploads</a>
@@ -542,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsupload">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Outputs.<wbr>Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload&gt;</a></span>
     </dt>
-    <dd><p>Information for each Upload.</p>
-</dd><dt class="property-"
+    <dd>Information for each Upload.</dd><dt class="property-"
             title="">
         <span id="delimiter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_csharp" style="color: inherit; text-decoration: inherit;">Delimiter</a>
@@ -597,8 +673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="uploads_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploads_go" style="color: inherit; text-decoration: inherit;">Uploads</a>
@@ -606,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsupload">[]Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload</a></span>
     </dt>
-    <dd><p>Information for each Upload.</p>
-</dd><dt class="property-"
+    <dd>Information for each Upload.</dd><dt class="property-"
             title="">
         <span id="delimiter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_go" style="color: inherit; text-decoration: inherit;">Delimiter</a>
@@ -644,6 +718,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="uploads_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploads_hcl" style="color: inherit; text-decoration: inherit;">uploads</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketmultipartuploadsupload">list(object)</a></span>
+    </dt>
+    <dd>Information for each Upload.</dd><dt class="property-"
+            title="">
+        <span id="delimiter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_hcl" style="color: inherit; text-decoration: inherit;">delimiter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="encoding_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encoding_type_hcl" style="color: inherit; text-decoration: inherit;">encoding_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -661,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="uploads_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploads_java" style="color: inherit; text-decoration: inherit;">uploads</a>
@@ -670,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsupload">List&lt;Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload&gt;</a></span>
     </dt>
-    <dd><p>Information for each Upload.</p>
-</dd><dt class="property-"
+    <dd>Information for each Upload.</dd><dt class="property-"
             title="">
         <span id="delimiter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_java" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -725,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="uploads_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploads_nodejs" style="color: inherit; text-decoration: inherit;">uploads</a>
@@ -734,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsupload">Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload[]</a></span>
     </dt>
-    <dd><p>Information for each Upload.</p>
-</dd><dt class="property-"
+    <dd>Information for each Upload.</dd><dt class="property-"
             title="">
         <span id="delimiter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_nodejs" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -789,17 +921,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="uploads_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploads_python" style="color: inherit; text-decoration: inherit;">uploads</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketmultipartuploadsupload">Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload]</a></span>
+        <span class="property-type"><a href="#getbucketmultipartuploadsupload">Sequence[Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload]</a></span>
     </dt>
-    <dd><p>Information for each Upload.</p>
-</dd><dt class="property-"
+    <dd>Information for each Upload.</dd><dt class="property-"
             title="">
         <span id="delimiter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_python" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -853,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="uploads_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploads_yaml" style="color: inherit; text-decoration: inherit;">uploads</a>
@@ -862,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsupload">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information for each Upload.</p>
-</dd><dt class="property-"
+    <dd>Information for each Upload.</dd><dt class="property-"
             title="">
         <span id="delimiter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_yaml" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -919,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The starting time of multipart upload.</p>
-</dd><dt class="property-required"
+    <dd>The starting time of multipart upload.</dd><dt class="property-required"
             title="Required">
         <span id="initiators_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initiators_csharp" style="color: inherit; text-decoration: inherit;">Initiators</a>
@@ -928,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadinitiator">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Initiator&gt;</a></span>
     </dt>
-    <dd><p>Used to represent the information of the initiator of this upload.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the information of the initiator of this upload.</dd><dt class="property-required"
             title="Required">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -937,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Object.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Object.</dd><dt class="property-required"
             title="Required">
         <span id="owners_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owners_csharp" style="color: inherit; text-decoration: inherit;">Owners</a>
@@ -946,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadowner">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Owner&gt;</a></span>
     </dt>
-    <dd><p>Information used to represent the owner of these chunks.</p>
-</dd><dt class="property-required"
+    <dd>Information used to represent the owner of these chunks.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -955,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</dd><dt class="property-required"
             title="Required">
         <span id="uploadid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadid_csharp" style="color: inherit; text-decoration: inherit;">Upload<wbr>Id</a>
@@ -964,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mark the ID of this multipart upload.</p>
-</dd></dl>
+    <dd>Mark the ID of this multipart upload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -979,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The starting time of multipart upload.</p>
-</dd><dt class="property-required"
+    <dd>The starting time of multipart upload.</dd><dt class="property-required"
             title="Required">
         <span id="initiators_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initiators_go" style="color: inherit; text-decoration: inherit;">Initiators</a>
@@ -988,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadinitiator">[]Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Initiator</a></span>
     </dt>
-    <dd><p>Used to represent the information of the initiator of this upload.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the information of the initiator of this upload.</dd><dt class="property-required"
             title="Required">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -997,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Object.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Object.</dd><dt class="property-required"
             title="Required">
         <span id="owners_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owners_go" style="color: inherit; text-decoration: inherit;">Owners</a>
@@ -1006,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadowner">[]Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Owner</a></span>
     </dt>
-    <dd><p>Information used to represent the owner of these chunks.</p>
-</dd><dt class="property-required"
+    <dd>Information used to represent the owner of these chunks.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -1015,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</dd><dt class="property-required"
             title="Required">
         <span id="uploadid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadid_go" style="color: inherit; text-decoration: inherit;">Upload<wbr>Id</a>
@@ -1024,8 +1141,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mark the ID of this multipart upload.</p>
-</dd></dl>
+    <dd>Mark the ID of this multipart upload.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="initiated_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initiated_hcl" style="color: inherit; text-decoration: inherit;">initiated</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The starting time of multipart upload.</dd><dt class="property-required"
+            title="Required">
+        <span id="initiators_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initiators_hcl" style="color: inherit; text-decoration: inherit;">initiators</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketmultipartuploadsuploadinitiator">list(object)</a></span>
+    </dt>
+    <dd>Used to represent the information of the initiator of this upload.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the Object.</dd><dt class="property-required"
+            title="Required">
+        <span id="owners_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owners_hcl" style="color: inherit; text-decoration: inherit;">owners</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketmultipartuploadsuploadowner">list(object)</a></span>
+    </dt>
+    <dd>Information used to represent the owner of these chunks.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</dd><dt class="property-required"
+            title="Required">
+        <span id="upload_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upload_id_hcl" style="color: inherit; text-decoration: inherit;">upload_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mark the ID of this multipart upload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1039,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The starting time of multipart upload.</p>
-</dd><dt class="property-required"
+    <dd>The starting time of multipart upload.</dd><dt class="property-required"
             title="Required">
         <span id="initiators_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initiators_java" style="color: inherit; text-decoration: inherit;">initiators</a>
@@ -1048,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadinitiator">List&lt;Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Initiator&gt;</a></span>
     </dt>
-    <dd><p>Used to represent the information of the initiator of this upload.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the information of the initiator of this upload.</dd><dt class="property-required"
             title="Required">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1057,8 +1225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Object.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Object.</dd><dt class="property-required"
             title="Required">
         <span id="owners_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owners_java" style="color: inherit; text-decoration: inherit;">owners</a>
@@ -1066,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadowner">List&lt;Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Owner&gt;</a></span>
     </dt>
-    <dd><p>Information used to represent the owner of these chunks.</p>
-</dd><dt class="property-required"
+    <dd>Information used to represent the owner of these chunks.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -1075,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</dd><dt class="property-required"
             title="Required">
         <span id="uploadid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadid_java" style="color: inherit; text-decoration: inherit;">upload<wbr>Id</a>
@@ -1084,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mark the ID of this multipart upload.</p>
-</dd></dl>
+    <dd>Mark the ID of this multipart upload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1099,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The starting time of multipart upload.</p>
-</dd><dt class="property-required"
+    <dd>The starting time of multipart upload.</dd><dt class="property-required"
             title="Required">
         <span id="initiators_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initiators_nodejs" style="color: inherit; text-decoration: inherit;">initiators</a>
@@ -1108,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadinitiator">Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Initiator[]</a></span>
     </dt>
-    <dd><p>Used to represent the information of the initiator of this upload.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the information of the initiator of this upload.</dd><dt class="property-required"
             title="Required">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1117,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Object.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Object.</dd><dt class="property-required"
             title="Required">
         <span id="owners_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owners_nodejs" style="color: inherit; text-decoration: inherit;">owners</a>
@@ -1126,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadowner">Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Owner[]</a></span>
     </dt>
-    <dd><p>Information used to represent the owner of these chunks.</p>
-</dd><dt class="property-required"
+    <dd>Information used to represent the owner of these chunks.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -1135,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</dd><dt class="property-required"
             title="Required">
         <span id="uploadid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadid_nodejs" style="color: inherit; text-decoration: inherit;">upload<wbr>Id</a>
@@ -1144,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mark the ID of this multipart upload.</p>
-</dd></dl>
+    <dd>Mark the ID of this multipart upload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1159,17 +1317,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The starting time of multipart upload.</p>
-</dd><dt class="property-required"
+    <dd>The starting time of multipart upload.</dd><dt class="property-required"
             title="Required">
         <span id="initiators_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initiators_python" style="color: inherit; text-decoration: inherit;">initiators</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketmultipartuploadsuploadinitiator">Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Initiator]</a></span>
+        <span class="property-type"><a href="#getbucketmultipartuploadsuploadinitiator">Sequence[Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Initiator]</a></span>
     </dt>
-    <dd><p>Used to represent the information of the initiator of this upload.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the information of the initiator of this upload.</dd><dt class="property-required"
             title="Required">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1177,17 +1333,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the Object.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Object.</dd><dt class="property-required"
             title="Required">
         <span id="owners_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owners_python" style="color: inherit; text-decoration: inherit;">owners</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketmultipartuploadsuploadowner">Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Owner]</a></span>
+        <span class="property-type"><a href="#getbucketmultipartuploadsuploadowner">Sequence[Get<wbr>Bucket<wbr>Multipart<wbr>Uploads<wbr>Upload<wbr>Owner]</a></span>
     </dt>
-    <dd><p>Information used to represent the owner of these chunks.</p>
-</dd><dt class="property-required"
+    <dd>Information used to represent the owner of these chunks.</dd><dt class="property-required"
             title="Required">
         <span id="storage_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
@@ -1195,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</dd><dt class="property-required"
             title="Required">
         <span id="upload_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upload_id_python" style="color: inherit; text-decoration: inherit;">upload_<wbr>id</a>
@@ -1204,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mark the ID of this multipart upload.</p>
-</dd></dl>
+    <dd>Mark the ID of this multipart upload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1219,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The starting time of multipart upload.</p>
-</dd><dt class="property-required"
+    <dd>The starting time of multipart upload.</dd><dt class="property-required"
             title="Required">
         <span id="initiators_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initiators_yaml" style="color: inherit; text-decoration: inherit;">initiators</a>
@@ -1228,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadinitiator">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Used to represent the information of the initiator of this upload.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the information of the initiator of this upload.</dd><dt class="property-required"
             title="Required">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1237,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Object.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Object.</dd><dt class="property-required"
             title="Required">
         <span id="owners_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owners_yaml" style="color: inherit; text-decoration: inherit;">owners</a>
@@ -1246,8 +1395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketmultipartuploadsuploadowner">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information used to represent the owner of these chunks.</p>
-</dd><dt class="property-required"
+    <dd>Information used to represent the owner of these chunks.</dd><dt class="property-required"
             title="Required">
         <span id="storageclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -1255,8 +1403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</p>
-</dd><dt class="property-required"
+    <dd>Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.</dd><dt class="property-required"
             title="Required">
         <span id="uploadid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uploadid_yaml" style="color: inherit; text-decoration: inherit;">upload<wbr>Id</a>
@@ -1264,8 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mark the ID of this multipart upload.</p>
-</dd></dl>
+    <dd>Mark the ID of this multipart upload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1283,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1292,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1307,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1316,8 +1459,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1331,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1340,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1355,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1364,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1379,8 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1388,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1412,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1431,8 +1587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1440,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1455,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1464,8 +1617,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1479,8 +1653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1488,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1503,8 +1675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1512,8 +1683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1527,8 +1697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1536,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1551,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Abbreviation for user identity ID (UIN).</p>
-</dd><dt class="property-required"
+    <dd>Abbreviation for user identity ID (UIN).</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1560,8 +1727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user's unique CAM identity ID.</p>
-</dd></dl>
+    <dd>The user's unique CAM identity ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1576,7 +1742,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

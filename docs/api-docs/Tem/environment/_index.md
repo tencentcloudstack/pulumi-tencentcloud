@@ -2,9 +2,11 @@
 ---
 title: "Environment"
 title_tag: "tencentcloud.Tem.Environment"
-meta_desc: "Documentation for the tencentcloud.Tem.Environment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tem environment"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,14 +18,20 @@ Provides a resource to create a tem environment
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const environment = new tencentcloud.tem.Environment("environment", {
-    description: "demo for test",
     environmentName: "demo",
+    description: "demo for test",
+    vpc: "vpc-2hfyray3",
     subnetIds: [
         "subnet-rdkj0agk",
         "subnet-r1c4pn5m",
@@ -32,16 +40,21 @@ const environment = new tencentcloud.tem.Environment("environment", {
     tags: {
         created: "terraform",
     },
-    vpc: "vpc-2hfyray3",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 environment = tencentcloud.tem.Environment("environment",
-    description="demo for test",
     environment_name="demo",
+    description="demo for test",
+    vpc="vpc-2hfyray3",
     subnet_ids=[
         "subnet-rdkj0agk",
         "subnet-r1c4pn5m",
@@ -49,9 +62,48 @@ environment = tencentcloud.tem.Environment("environment",
     ],
     tags={
         "created": "terraform",
-    },
-    vpc="vpc-2hfyray3")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tem"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tem.NewEnvironment(ctx, "environment", &tem.EnvironmentArgs{
+			EnvironmentName: pulumi.String("demo"),
+			Description:     pulumi.String("demo for test"),
+			Vpc:             pulumi.String("vpc-2hfyray3"),
+			SubnetIds: pulumi.StringArray{
+				pulumi.String("subnet-rdkj0agk"),
+				pulumi.String("subnet-r1c4pn5m"),
+				pulumi.String("subnet-02hcj95c"),
+			},
+			Tags: pulumi.StringMap{
+				"created": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -62,8 +114,9 @@ return await Deployment.RunAsync(() =>
 {
     var environment = new Tencentcloud.Tem.Environment("environment", new()
     {
-        Description = "demo for test",
         EnvironmentName = "demo",
+        Description = "demo for test",
+        Vpc = "vpc-2hfyray3",
         SubnetIds = new[]
         {
             "subnet-rdkj0agk",
@@ -74,41 +127,15 @@ return await Deployment.RunAsync(() =>
         {
             { "created", "terraform" },
         },
-        Vpc = "vpc-2hfyray3",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tem.NewEnvironment(ctx, "environment", &Tem.EnvironmentArgs{
-			Description:     pulumi.String("demo for test"),
-			EnvironmentName: pulumi.String("demo"),
-			SubnetIds: pulumi.StringArray{
-				pulumi.String("subnet-rdkj0agk"),
-				pulumi.String("subnet-r1c4pn5m"),
-				pulumi.String("subnet-02hcj95c"),
-			},
-			Tags: pulumi.Map{
-				"created": pulumi.Any("terraform"),
-			},
-			Vpc: pulumi.String("vpc-2hfyray3"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -117,8 +144,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tem.Environment;
 import com.pulumi.tencentcloud.Tem.EnvironmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -130,98 +157,159 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var environment = new Environment("environment", EnvironmentArgs.builder()        
-            .description("demo for test")
+        var environment = new Environment("environment", EnvironmentArgs.builder()
             .environmentName("demo")
+            .description("demo for test")
+            .vpc("vpc-2hfyray3")
             .subnetIds(            
                 "subnet-rdkj0agk",
                 "subnet-r1c4pn5m",
                 "subnet-02hcj95c")
             .tags(Map.of("created", "terraform"))
-            .vpc("vpc-2hfyray3")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   environment:
     type: tencentcloud:Tem:Environment
     properties:
-      description: demo for test
       environmentName: demo
+      description: demo for test
+      vpc: vpc-2hfyray3
       subnetIds:
         - subnet-rdkj0agk
         - subnet-r1c4pn5m
         - subnet-02hcj95c
       tags:
         created: terraform
-      vpc: vpc-2hfyray3
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tem_environment" "environment" {
+  environment_name = "demo"
+  description      = "demo for test"
+  vpc              = "vpc-2hfyray3"
+  subnet_ids       = ["subnet-rdkj0agk", "subnet-r1c4pn5m", "subnet-02hcj95c"]
+  tags = {
+    "created" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateEnvironment](https://www.tencentcloud.com/document/api/1094/42028)
+  - [DescribeEnvironmentStatus](https://www.tencentcloud.com/document/api/1094/52762)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeEnvironment](https://www.tencentcloud.com/document/api/1094/52763)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyEnvironment](https://www.tencentcloud.com/document/api/1094/42026)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete: [DestroyEnvironment](https://www.tencentcloud.com/document/api/1094/50347)
 
 
 ## Create Environment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">environment_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">subnet_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-                <span class="nx">vpc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                <span class="nx">environment_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">subnet_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                <span class="nx">vpc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewEnvironment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Environment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewEnvironment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Environment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Environment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">EnvironmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tem:Environment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tem:Environment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tem_environment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -242,7 +330,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -359,11 +447,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Environment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Environment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -379,8 +475,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-required"
+    <dd>environment name.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -388,8 +483,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_csharp" style="color: inherit; text-decoration: inherit;">Vpc</a>
@@ -397,8 +491,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd><dt class="property-optional"
+    <dd>vpc ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -406,17 +499,15 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd></dl>
+    <dd>environment tag list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -430,8 +521,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-required"
+    <dd>environment name.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -439,8 +529,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_go" style="color: inherit; text-decoration: inherit;">Vpc</a>
@@ -448,8 +537,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd><dt class="property-optional"
+    <dd>vpc ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -457,17 +545,61 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd></dl>
+    <dd>environment tag list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment name.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>subnet IDs.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_hcl" style="color: inherit; text-decoration: inherit;">vpc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>vpc ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>environment tag list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -481,8 +613,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-required"
+    <dd>environment name.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -490,8 +621,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_java" style="color: inherit; text-decoration: inherit;">vpc</a>
@@ -499,8 +629,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd><dt class="property-optional"
+    <dd>vpc ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -508,17 +637,15 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd></dl>
+    <dd>environment tag list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -532,8 +659,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-required"
+    <dd>environment name.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -541,8 +667,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_nodejs" style="color: inherit; text-decoration: inherit;">vpc</a>
@@ -550,8 +675,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd><dt class="property-optional"
+    <dd>vpc ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -559,17 +683,15 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd></dl>
+    <dd>environment tag list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -583,8 +705,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-required"
+    <dd>environment name.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -592,8 +713,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_python" style="color: inherit; text-decoration: inherit;">vpc</a>
@@ -601,8 +721,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd><dt class="property-optional"
+    <dd>vpc ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -610,17 +729,15 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd></dl>
+    <dd>environment tag list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -634,8 +751,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-required"
+    <dd>environment name.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -643,8 +759,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_yaml" style="color: inherit; text-decoration: inherit;">vpc</a>
@@ -652,8 +767,7 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd><dt class="property-optional"
+    <dd>vpc ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -661,17 +775,15 @@ The Environment resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd></dl>
+    <dd>environment tag list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -692,8 +804,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -707,8 +818,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -722,8 +846,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -737,8 +860,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -752,8 +874,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -767,8 +888,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,124 +898,163 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Environment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">EnvironmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Environment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">EnvironmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Environment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">environment_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">vpc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Environment</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetEnvironment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">EnvironmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Environment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetEnvironment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">EnvironmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Environment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Environment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">EnvironmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Environment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">EnvironmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Environment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">EnvironmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Environment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">EnvironmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingEnvironment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tem:Environment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tem_environment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">EnvironmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">EnvironmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -903,28 +1062,31 @@ Get an existing Environment resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">EnvironmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -932,28 +1094,31 @@ Get an existing Environment resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">EnvironmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -973,8 +1138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environmentname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Name</a>
@@ -982,8 +1146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-optional"
+    <dd>environment name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -991,17 +1154,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-optional"
+    <dd>subnet IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd><dt class="property-optional"
+    <dd>environment tag list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_csharp" style="color: inherit; text-decoration: inherit;">Vpc</a>
@@ -1009,8 +1170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd></dl>
+    <dd>vpc ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1024,8 +1184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environmentname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Name</a>
@@ -1033,8 +1192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-optional"
+    <dd>environment name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -1042,17 +1200,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-optional"
+    <dd>subnet IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd><dt class="property-optional"
+    <dd>environment tag list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_go" style="color: inherit; text-decoration: inherit;">Vpc</a>
@@ -1060,8 +1216,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd></dl>
+    <dd>vpc ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>subnet IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>environment tag list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_hcl" style="color: inherit; text-decoration: inherit;">vpc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>vpc ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1075,8 +1276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environmentname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -1084,8 +1284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-optional"
+    <dd>environment name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1093,17 +1292,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-optional"
+    <dd>subnet IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd><dt class="property-optional"
+    <dd>environment tag list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_java" style="color: inherit; text-decoration: inherit;">vpc</a>
@@ -1111,8 +1308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd></dl>
+    <dd>vpc ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1126,8 +1322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environmentname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -1135,8 +1330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-optional"
+    <dd>environment name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1144,17 +1338,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-optional"
+    <dd>subnet IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd><dt class="property-optional"
+    <dd>environment tag list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_nodejs" style="color: inherit; text-decoration: inherit;">vpc</a>
@@ -1162,8 +1354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd></dl>
+    <dd>vpc ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1177,8 +1368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_name_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
@@ -1186,8 +1376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-optional"
+    <dd>environment name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -1195,17 +1384,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-optional"
+    <dd>subnet IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd><dt class="property-optional"
+    <dd>environment tag list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_python" style="color: inherit; text-decoration: inherit;">vpc</a>
@@ -1213,8 +1400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd></dl>
+    <dd>vpc ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1228,8 +1414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment description.</p>
-</dd><dt class="property-optional"
+    <dd>environment description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environmentname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentname_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Name</a>
@@ -1237,8 +1422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment name.</p>
-</dd><dt class="property-optional"
+    <dd>environment name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1246,17 +1430,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>subnet IDs.</p>
-</dd><dt class="property-optional"
+    <dd>subnet IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>environment tag list.</p>
-</dd><dt class="property-optional"
+    <dd>environment tag list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_yaml" style="color: inherit; text-decoration: inherit;">vpc</a>
@@ -1264,8 +1446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc ID.</p>
-</dd></dl>
+    <dd>vpc ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1281,11 +1462,13 @@ The following state arguments are supported:
 
 
 tem environment can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1297,7 +1480,6 @@ $ pulumi import tencentcloud:Tem/environment:Environment environment environment
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

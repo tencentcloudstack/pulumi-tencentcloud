@@ -2,9 +2,11 @@
 ---
 title: "Proxy"
 title_tag: "tencentcloud.Gaap.Proxy"
-meta_desc: "Documentation for the tencentcloud.Gaap.Proxy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a GAAP proxy."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,34 +18,83 @@ Provides a resource to create a GAAP proxy.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.gaap.Proxy("foo", {
-    accessRegion: "SouthChina",
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
+    accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
     tags: {
         test: "test",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.gaap.Proxy("foo",
-    access_region="SouthChina",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
+    access_region="SouthChina",
     realserver_region="NorthChina",
     tags={
         "test": "test",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
+			Bandwidth:        pulumi.Int(10),
+			Concurrent:       pulumi.Int(2),
+			AccessRegion:     pulumi.String("SouthChina"),
+			RealserverRegion: pulumi.String("NorthChina"),
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -54,9 +105,10 @@ return await Deployment.RunAsync(() =>
 {
     var foo = new Tencentcloud.Gaap.Proxy("foo", new()
     {
-        AccessRegion = "SouthChina",
+        Name = "ci-test-gaap-proxy",
         Bandwidth = 10,
         Concurrent = 2,
+        AccessRegion = "SouthChina",
         RealserverRegion = "NorthChina",
         Tags = 
         {
@@ -66,32 +118,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.NewProxy(ctx, "foo", &Gaap.ProxyArgs{
-			AccessRegion:     pulumi.String("SouthChina"),
-			Bandwidth:        pulumi.Int(10),
-			Concurrent:       pulumi.Int(2),
-			RealserverRegion: pulumi.String("NorthChina"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -100,8 +131,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.Proxy;
 import com.pulumi.tencentcloud.Gaap.ProxyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -113,10 +144,11 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Proxy("foo", ProxyArgs.builder()        
-            .accessRegion("SouthChina")
+        var foo = new Proxy("foo", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
+            .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .tags(Map.of("test", "test"))
             .build());
@@ -124,85 +156,153 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Gaap:Proxy
     properties:
-      accessRegion: SouthChina
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
+      accessRegion: SouthChina
       realserverRegion: NorthChina
       tags:
         test: test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+  tags = {
+    "test" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CloseProxies](https://www.tencentcloud.com/document/api/608/33111)
+  - [CreateProxy](https://www.tencentcloud.com/document/api/608/33109)
+  - [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+* Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+* Update:
+  - [CloseProxies](https://www.tencentcloud.com/document/api/608/33111)
+  - [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+  - [ModifyProxiesAttribute](https://www.tencentcloud.com/document/api/608/33094)
+  - [ModifyProxiesProject](https://www.tencentcloud.com/document/api/608/33093)
+  - [ModifyProxyConfiguration](https://www.tencentcloud.com/document/api/608/33092)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [OpenProxies](https://www.tencentcloud.com/document/api/608/33090)
+* Delete:
+  - [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+  - [DestroyProxies](https://www.tencentcloud.com/document/api/608/33096)
 
 
 ## Create Proxy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
           <span class="nx">access_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">bandwidth</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">concurrent</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">realserver_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
           <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">realserver_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProxy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Proxy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProxy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Proxy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:Proxy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:Proxy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_gaap_proxy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -223,7 +323,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -340,11 +440,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Proxy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -360,8 +468,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -369,8 +476,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_csharp" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -378,8 +484,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -387,8 +492,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -396,8 +500,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -405,8 +508,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -414,8 +516,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -423,17 +524,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -447,8 +546,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -456,8 +554,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_go" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -465,8 +562,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -474,8 +570,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -483,8 +578,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -492,8 +586,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -501,8 +594,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -510,17 +602,93 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="access_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required"
+            title="Required">
+        <span id="concurrent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_hcl" style="color: inherit; text-decoration: inherit;">concurrent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="realserver_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_region_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -534,8 +702,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -543,8 +710,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_java" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -552,8 +718,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -561,8 +726,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -570,8 +734,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -579,8 +742,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -588,8 +750,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -597,17 +758,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -621,8 +780,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -630,8 +788,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_nodejs" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -639,8 +796,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -648,8 +804,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -657,8 +812,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -666,8 +820,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -675,8 +828,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -684,17 +836,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -708,8 +858,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -717,8 +866,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_python" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -726,8 +874,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realserver_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_region_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
@@ -735,8 +882,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -744,8 +890,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -753,8 +898,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -762,8 +906,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -771,17 +914,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -795,8 +936,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-required"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -804,8 +944,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_yaml" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -813,8 +952,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -822,8 +960,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -831,8 +968,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -840,8 +976,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -849,8 +984,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -858,17 +992,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -889,8 +1021,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -898,8 +1029,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="forwardip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Ip</a>
@@ -907,8 +1037,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -916,8 +1045,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -925,8 +1053,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="scalable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_csharp" style="color: inherit; text-decoration: inherit;">Scalable</a>
@@ -934,8 +1061,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -943,8 +1069,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="supportprotocols_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Protocols</a>
@@ -952,8 +1077,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Supported protocols of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -967,8 +1091,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -976,8 +1099,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="forwardip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Ip</a>
@@ -985,8 +1107,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -994,8 +1115,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1003,8 +1123,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="scalable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_go" style="color: inherit; text-decoration: inherit;">Scalable</a>
@@ -1012,8 +1131,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1021,8 +1139,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="supportprotocols_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Protocols</a>
@@ -1030,8 +1147,77 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Supported protocols of the GAAP proxy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-"
+            title="">
+        <span id="forward_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_ip_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-"
+            title="">
+        <span id="scalable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_hcl" style="color: inherit; text-decoration: inherit;">scalable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the GAAP proxy.</dd><dt class="property-"
+            title="">
+        <span id="support_protocols_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_protocols_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>protocols</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Supported protocols of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1045,8 +1231,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1054,8 +1239,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="forwardip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -1063,8 +1247,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1072,8 +1255,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1081,8 +1263,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="scalable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_java" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -1090,8 +1271,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1099,8 +1279,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="supportprotocols_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_java" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -1108,8 +1287,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Supported protocols of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1123,8 +1301,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1132,8 +1309,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="forwardip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -1141,8 +1317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1150,8 +1325,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1159,8 +1333,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="scalable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_nodejs" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -1168,8 +1341,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1177,8 +1349,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="supportprotocols_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -1186,8 +1357,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Supported protocols of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1201,8 +1371,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1210,8 +1379,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="forward_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_ip_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>ip</a>
@@ -1219,8 +1387,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1228,8 +1395,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1237,8 +1403,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="scalable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_python" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -1246,8 +1411,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1255,8 +1419,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="support_protocols_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_protocols_python" style="color: inherit; text-decoration: inherit;">support_<wbr>protocols</a>
@@ -1264,8 +1427,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Supported protocols of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1279,8 +1441,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1288,8 +1449,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="forwardip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardip_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -1297,8 +1457,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1306,8 +1465,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1315,8 +1473,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="scalable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalable_yaml" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -1324,8 +1481,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1333,8 +1489,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="supportprotocols_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportprotocols_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -1342,8 +1497,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd></dl>
+    <dd>Supported protocols of the GAAP proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1353,18 +1507,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Proxy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Proxy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Proxy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1383,105 +1537,144 @@ Get an existing Proxy resource's state with the given name, ID, and optional ext
         <span class="nx">scalable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">support_protocols</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> Proxy</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> Proxy</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetProxy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Proxy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetProxy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Proxy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Proxy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Proxy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Proxy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Proxy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingProxy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Gaap:Proxy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_gaap_proxy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1489,28 +1682,31 @@ Get an existing Proxy resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1518,28 +1714,31 @@ Get an existing Proxy resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1559,8 +1758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -1568,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_concurrent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_csharp" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -1577,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1586,8 +1782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1595,8 +1790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1604,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardip_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Ip</a>
@@ -1613,8 +1806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1622,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1631,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1640,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1649,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -1658,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalable_csharp" style="color: inherit; text-decoration: inherit;">Scalable</a>
@@ -1667,8 +1854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1676,8 +1862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_supportprotocols_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_supportprotocols_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Protocols</a>
@@ -1685,17 +1870,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1709,8 +1892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -1718,8 +1900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_concurrent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_go" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -1727,8 +1908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1736,8 +1916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1745,8 +1924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1754,8 +1932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardip_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Ip</a>
@@ -1763,8 +1940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1772,8 +1948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1781,8 +1956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1790,8 +1964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1799,8 +1972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Region</a>
@@ -1808,8 +1980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalable_go" style="color: inherit; text-decoration: inherit;">Scalable</a>
@@ -1817,8 +1988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1826,8 +1996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_supportprotocols_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_supportprotocols_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Protocols</a>
@@ -1835,17 +2004,149 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_access_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_region_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_concurrent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_hcl" style="color: inherit; text-decoration: inherit;">concurrent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forward_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_ip_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_realserver_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserver_region_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scalable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalable_hcl" style="color: inherit; text-decoration: inherit;">scalable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_support_protocols_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_support_protocols_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>protocols</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1859,8 +2160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1868,8 +2168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_concurrent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_java" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -1877,8 +2176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1886,8 +2184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1895,8 +2192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1904,8 +2200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardip_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -1913,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1922,8 +2216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1931,8 +2224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1940,8 +2232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1949,8 +2240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -1958,8 +2248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalable_java" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -1967,8 +2256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1976,8 +2264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_supportprotocols_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_supportprotocols_java" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -1985,17 +2272,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2009,8 +2294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -2018,8 +2302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_concurrent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_nodejs" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -2027,8 +2310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2036,8 +2318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2045,8 +2326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2054,8 +2334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardip_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -2063,8 +2342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2072,8 +2350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2081,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2090,8 +2366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2099,8 +2374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -2108,8 +2382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalable_nodejs" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -2117,8 +2390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2126,8 +2398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_supportprotocols_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_supportprotocols_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -2135,17 +2406,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2159,8 +2428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -2168,8 +2436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_concurrent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_python" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -2177,8 +2444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2186,8 +2452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2195,8 +2460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2204,8 +2468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forward_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_ip_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>ip</a>
@@ -2213,8 +2476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2222,8 +2484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2231,8 +2492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -2240,8 +2500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2249,8 +2508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realserver_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserver_region_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>region</a>
@@ -2258,8 +2516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalable_python" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -2267,8 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2276,8 +2532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_support_protocols_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_support_protocols_python" style="color: inherit; text-decoration: inherit;">support_<wbr>protocols</a>
@@ -2285,17 +2540,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2309,8 +2562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Access region of the GAAP proxy. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>, <code>Changsha</code>, <code>Xian</code>, <code>Wuhan</code>, <code>Fuzhou</code>, <code>Shenyang</code>, <code>Zhengzhou</code>, <code>Jinan</code>, <code>Hangzhou</code>, <code>Shijiazhuang</code>, <code>Hefei</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -2318,8 +2570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: <code>10</code>, <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code> and <code>10000</code>. To set <code>2000</code>, <code>5000</code> or <code>10000</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_concurrent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_yaml" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -2327,8 +2578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: <code>2</code>, <code>5</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>70</code>, <code>80</code>, <code>90</code>, <code>100</code>, <code>150</code>, <code>200</code>, <code>250</code> and <code>300</code>. To set <code>150</code>, <code>200</code>, <code>250</code> or <code>300</code>, you need to apply for a whitelist from Tencent Cloud.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2336,8 +2586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2345,8 +2594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access domain of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access domain of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2354,8 +2602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy is enabled, default value is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardip_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Ip</a>
@@ -2363,8 +2610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forwarding IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Forwarding IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2372,8 +2618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access IP of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Access IP of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2381,8 +2626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP proxy, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the GAAP proxy, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2390,8 +2634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</p>
-</dd><dt class="property-optional"
+    <dd>Network type. <code>normal</code>: regular BGP, <code>cn2</code>: boutique BGP, <code>triple</code>: triple play.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2399,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP proxy, <code>0</code> means is default project.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project within the GAAP proxy, <code>0</code> means is default project.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Region</a>
@@ -2408,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the GAAP realserver. Valid value: <code>Hongkong</code>, <code>SoutheastAsia</code>, <code>Korea</code>, <code>Europe</code>, <code>NorthAmerica</code>, <code>Canada</code>, <code>WestIndia</code>, <code>Thailand</code>, <code>Virginia</code>, <code>Japan</code>, <code>Taipei</code>, <code>SL_AZURE_NorthUAE</code>, <code>SL_AZURE_EastAUS</code>, <code>SL_AZURE_NorthCentralUSA</code>, <code>SL_AZURE_SouthIndia</code>, <code>SL_AZURE_SouthBrazil</code>, <code>SL_AZURE_NorthZAF</code>, <code>SL_AZURE_SoutheastAsia</code>, <code>SL_AZURE_CentralFrance</code>, <code>SL_AZURE_SouthEngland</code>, <code>SL_AZURE_EastUS</code>, <code>SL_AZURE_WestUS</code>, <code>SL_AZURE_SouthCentralUSA</code>, <code>Jakarta</code>, <code>Beijing</code>, <code>Shanghai</code>, <code>Guangzhou</code>, <code>Chengdu</code>, <code>SL_AZURE_NorwayEast</code>, <code>Chongqing</code>, <code>Nanjing</code>, <code>SaoPaulo</code>, <code>SL_AZURE_JapanEast</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalable_yaml" style="color: inherit; text-decoration: inherit;">scalable</a>
@@ -2417,8 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether GAAP proxy can scalable.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether GAAP proxy can scalable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2426,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_supportprotocols_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_supportprotocols_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Protocols</a>
@@ -2435,17 +2674,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Supported protocols of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Supported protocols of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy. Tags that do not exist are not created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2463,9 +2700,12 @@ The following state arguments are supported:
 GAAP proxy can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
+  $ pulumi import tencentcloud:Gaap/proxy:Proxy foo link-11112222
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2477,7 +2717,6 @@ $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-1
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

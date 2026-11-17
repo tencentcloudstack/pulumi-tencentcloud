@@ -2,9 +2,11 @@
 ---
 title: "Table"
 title_tag: "tencentcloud.Tcaplus.Table"
-meta_desc: "Documentation for the tencentcloud.Tcaplus.Table resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create TcaplusDB table."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -20,21 +22,25 @@ Use this resource to create TcaplusDB table.
 
 The tcaplus database table should be pre-defined in the idl file.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
-const vpc = tencentcloud.Vpc.getSubnets({
+const vpc = tencentcloud.vpc.getSubnets({
     isDefault: true,
     availabilityZone: availabilityZone,
 });
 const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
 const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
-const exampleCluster = new tencentcloud.tcaplus.Cluster("exampleCluster", {
+const example = new tencentcloud.tcaplus.Cluster("example", {
     idlType: "PROTO",
     clusterName: "tf_example_tcaplus_cluster",
     vpcId: vpcId,
@@ -42,21 +48,21 @@ const exampleCluster = new tencentcloud.tcaplus.Cluster("exampleCluster", {
     password: "your_pw_123111",
     oldPasswordExpireLast: 3600,
 });
-const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("exampleTablegroup", {
-    clusterId: exampleCluster.id,
+const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("example", {
+    clusterId: example.id,
     tablegroupName: "tf_example_group_name",
 });
-const exampleIdl = new tencentcloud.tcaplus.Idl("exampleIdl", {
-    clusterId: exampleCluster.id,
+const exampleIdl = new tencentcloud.tcaplus.Idl("example", {
+    clusterId: example.id,
     tablegroupId: exampleTablegroup.id,
     fileName: "tf_example_tcaplus_idl",
     fileType: "PROTO",
     fileExtType: "proto",
-    fileContent: `    syntax = "proto2";
+    fileContent: `    syntax = \\"proto2\\";
     package myTcaplusTable;
-    import "tcaplusservice.optionv1.proto";
+    import \\"tcaplusservice.optionv1.proto\\";
     message example_table { # refer the table name
-        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+        option(tcaplusservice.tcaplus_primary_key) = \\"uin,name,region\\";
         required int64 uin = 1;
         required string name = 2;
         required int32 region = 3;
@@ -79,8 +85,8 @@ const exampleIdl = new tencentcloud.tcaplus.Idl("exampleIdl", {
     }
 `,
 });
-const exampleTable = new tencentcloud.tcaplus.Table("exampleTable", {
-    clusterId: exampleCluster.id,
+const exampleTable = new tencentcloud.tcaplus.Table("example", {
+    clusterId: example.id,
     tablegroupId: exampleTablegroup.id,
     tableName: "example_table",
     tableType: "GENERIC",
@@ -92,6 +98,11 @@ const exampleTable = new tencentcloud.tcaplus.Table("exampleTable", {
     reservedVolume: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -101,31 +112,31 @@ config = pulumi.Config()
 availability_zone = config.get("availabilityZone")
 if availability_zone is None:
     availability_zone = "ap-guangzhou-3"
-vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+vpc = tencentcloud.vpc.get_subnets(is_default=True,
     availability_zone=availability_zone)
 vpc_id = vpc.instance_lists[0].vpc_id
 subnet_id = vpc.instance_lists[0].subnet_id
-example_cluster = tencentcloud.tcaplus.Cluster("exampleCluster",
+example = tencentcloud.tcaplus.Cluster("example",
     idl_type="PROTO",
     cluster_name="tf_example_tcaplus_cluster",
     vpc_id=vpc_id,
     subnet_id=subnet_id,
     password="your_pw_123111",
     old_password_expire_last=3600)
-example_tablegroup = tencentcloud.tcaplus.Tablegroup("exampleTablegroup",
-    cluster_id=example_cluster.id,
+example_tablegroup = tencentcloud.tcaplus.Tablegroup("example",
+    cluster_id=example.id,
     tablegroup_name="tf_example_group_name")
-example_idl = tencentcloud.tcaplus.Idl("exampleIdl",
-    cluster_id=example_cluster.id,
+example_idl = tencentcloud.tcaplus.Idl("example",
+    cluster_id=example.id,
     tablegroup_id=example_tablegroup.id,
     file_name="tf_example_tcaplus_idl",
     file_type="PROTO",
     file_ext_type="proto",
-    file_content="""    syntax = "proto2";
+    file_content="""    syntax = \"proto2\";
     package myTcaplusTable;
-    import "tcaplusservice.optionv1.proto";
+    import \"tcaplusservice.optionv1.proto\";
     message example_table { # refer the table name
-        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";
         required int64 uin = 1;
         required string name = 2;
         required int32 region = 3;
@@ -147,8 +158,8 @@ example_idl = tencentcloud.tcaplus.Idl("exampleIdl",
         }
     }
 """)
-example_table = tencentcloud.tcaplus.Table("exampleTable",
-    cluster_id=example_cluster.id,
+example_table = tencentcloud.tcaplus.Table("example",
+    cluster_id=example.id,
     tablegroup_id=example_tablegroup.id,
     table_name="example_table",
     table_type="GENERIC",
@@ -159,102 +170,19 @@ example_table = tencentcloud.tcaplus.Table("exampleTable",
     reserved_write_cu=20,
     reserved_volume=1)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    {
-        IsDefault = true,
-        AvailabilityZone = availabilityZone,
-    });
-
-    var vpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
-
-    var subnetId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
-
-    var exampleCluster = new Tencentcloud.Tcaplus.Cluster("exampleCluster", new()
-    {
-        IdlType = "PROTO",
-        ClusterName = "tf_example_tcaplus_cluster",
-        VpcId = vpcId,
-        SubnetId = subnetId,
-        Password = "your_pw_123111",
-        OldPasswordExpireLast = 3600,
-    });
-
-    var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("exampleTablegroup", new()
-    {
-        ClusterId = exampleCluster.Id,
-        TablegroupName = "tf_example_group_name",
-    });
-
-    var exampleIdl = new Tencentcloud.Tcaplus.Idl("exampleIdl", new()
-    {
-        ClusterId = exampleCluster.Id,
-        TablegroupId = exampleTablegroup.Id,
-        FileName = "tf_example_tcaplus_idl",
-        FileType = "PROTO",
-        FileExtType = "proto",
-        FileContent = @"    syntax = ""proto2"";
-    package myTcaplusTable;
-    import ""tcaplusservice.optionv1.proto"";
-    message example_table { # refer the table name
-        option(tcaplusservice.tcaplus_primary_key) = ""uin,name,region"";
-        required int64 uin = 1;
-        required string name = 2;
-        required int32 region = 3;
-        required int32 gamesvrid = 4;
-        optional int32 logintime = 5 [default = 1];
-        repeated int64 lockid = 6 [packed = true];
-        optional bool is_available = 7 [default = false];
-        optional pay_info pay = 8;
-    }
-
-    message pay_info {
-        required int64 pay_id = 1;
-        optional uint64 total_money = 2;
-        optional uint64 pay_times = 3;
-        optional pay_auth_info auth = 4;
-        message pay_auth_info {
-            required string pay_keys = 1;
-            optional int64 update_time = 2;
-        }
-    }
-",
-    });
-
-    var exampleTable = new Tencentcloud.Tcaplus.Table("exampleTable", new()
-    {
-        ClusterId = exampleCluster.Id,
-        TablegroupId = exampleTablegroup.Id,
-        TableName = "example_table",
-        TableType = "GENERIC",
-        Description = "test",
-        IdlId = exampleIdl.Id,
-        TableIdlType = "PROTO",
-        ReservedReadCu = 1000,
-        ReservedWriteCu = 20,
-        ReservedVolume = 1,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcaplus"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
@@ -264,16 +192,16 @@ func main() {
 		if param := cfg.Get("availabilityZone"); param != "" {
 			availabilityZone = param
 		}
-		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+		vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
 			IsDefault:        pulumi.BoolRef(true),
 			AvailabilityZone: pulumi.StringRef(availabilityZone),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		vpcId := vpc.InstanceLists[0].VpcId
-		subnetId := vpc.InstanceLists[0].SubnetId
-		exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
+		vpcId := vpc2.InstanceLists[0].VpcId
+		subnetId := vpc2.InstanceLists[0].SubnetId
+		example, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
 			IdlType:               pulumi.String("PROTO"),
 			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
 			VpcId:                 pulumi.String(vpcId),
@@ -284,24 +212,24 @@ func main() {
 		if err != nil {
 			return err
 		}
-		exampleTablegroup, err := Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
-			ClusterId:      exampleCluster.ID(),
+		exampleTablegroup, err := tcaplus.NewTablegroup(ctx, "example", &tcaplus.TablegroupArgs{
+			ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
 			TablegroupName: pulumi.String("tf_example_group_name"),
 		})
 		if err != nil {
 			return err
 		}
-		exampleIdl, err := Tcaplus.NewIdl(ctx, "exampleIdl", &Tcaplus.IdlArgs{
-			ClusterId:    exampleCluster.ID(),
-			TablegroupId: exampleTablegroup.ID(),
+		exampleIdl, err := tcaplus.NewIdl(ctx, "example", &tcaplus.IdlArgs{
+			ClusterId:    example.ID().ToIDOutput().ToStringOutput(),
+			TablegroupId: exampleTablegroup.ID().ToIDOutput().ToStringOutput(),
 			FileName:     pulumi.String("tf_example_tcaplus_idl"),
 			FileType:     pulumi.String("PROTO"),
 			FileExtType:  pulumi.String("proto"),
-			FileContent: pulumi.String(`    syntax = "proto2";
+			FileContent: pulumi.String(`    syntax = \"proto2\";
     package myTcaplusTable;
-    import "tcaplusservice.optionv1.proto";
+    import \"tcaplusservice.optionv1.proto\";
     message example_table { # refer the table name
-        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";
         required int64 uin = 1;
         required string name = 2;
         required int32 region = 3;
@@ -327,13 +255,13 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_, err = Tcaplus.NewTable(ctx, "exampleTable", &Tcaplus.TableArgs{
-			ClusterId:       exampleCluster.ID(),
-			TablegroupId:    exampleTablegroup.ID(),
+		_, err = tcaplus.NewTable(ctx, "example", &tcaplus.TableArgs{
+			ClusterId:       example.ID().ToIDOutput().ToStringOutput(),
+			TablegroupId:    exampleTablegroup.ID().ToIDOutput().ToStringOutput(),
 			TableName:       pulumi.String("example_table"),
 			TableType:       pulumi.String("GENERIC"),
 			Description:     pulumi.String("test"),
-			IdlId:           exampleIdl.ID(),
+			IdlId:           exampleIdl.ID().ToIDOutput().ToStringOutput(),
 			TableIdlType:    pulumi.String("PROTO"),
 			ReservedReadCu:  pulumi.Int(1000),
 			ReservedWriteCu: pulumi.Int(20),
@@ -346,6 +274,103 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    {
+        IsDefault = true,
+        AvailabilityZone = availabilityZone,
+    });
+
+    var vpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
+
+    var subnetId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
+
+    var example = new Tencentcloud.Tcaplus.Cluster("example", new()
+    {
+        IdlType = "PROTO",
+        ClusterName = "tf_example_tcaplus_cluster",
+        VpcId = vpcId,
+        SubnetId = subnetId,
+        Password = "your_pw_123111",
+        OldPasswordExpireLast = 3600,
+    });
+
+    var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("example", new()
+    {
+        ClusterId = example.Id,
+        TablegroupName = "tf_example_group_name",
+    });
+
+    var exampleIdl = new Tencentcloud.Tcaplus.Idl("example", new()
+    {
+        ClusterId = example.Id,
+        TablegroupId = exampleTablegroup.Id,
+        FileName = "tf_example_tcaplus_idl",
+        FileType = "PROTO",
+        FileExtType = "proto",
+        FileContent = @"    syntax = \""proto2\"";
+    package myTcaplusTable;
+    import \""tcaplusservice.optionv1.proto\"";
+    message example_table { # refer the table name
+        option(tcaplusservice.tcaplus_primary_key) = \""uin,name,region\"";
+        required int64 uin = 1;
+        required string name = 2;
+        required int32 region = 3;
+        required int32 gamesvrid = 4;
+        optional int32 logintime = 5 [default = 1];
+        repeated int64 lockid = 6 [packed = true];
+        optional bool is_available = 7 [default = false];
+        optional pay_info pay = 8;
+    }
+
+    message pay_info {
+        required int64 pay_id = 1;
+        optional uint64 total_money = 2;
+        optional uint64 pay_times = 3;
+        optional pay_auth_info auth = 4;
+        message pay_auth_info {
+            required string pay_keys = 1;
+            optional int64 update_time = 2;
+        }
+    }
+",
+    });
+
+    var exampleTable = new Tencentcloud.Tcaplus.Table("example", new()
+    {
+        ClusterId = example.Id,
+        TablegroupId = exampleTablegroup.Id,
+        TableName = "example_table",
+        TableType = "GENERIC",
+        Description = "test",
+        IdlId = exampleIdl.Id,
+        TableIdlType = "PROTO",
+        ReservedReadCu = 1000,
+        ReservedWriteCu = 20,
+        ReservedVolume = 1,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -362,8 +387,8 @@ import com.pulumi.tencentcloud.Tcaplus.Idl;
 import com.pulumi.tencentcloud.Tcaplus.IdlArgs;
 import com.pulumi.tencentcloud.Tcaplus.Table;
 import com.pulumi.tencentcloud.Tcaplus.TableArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -382,11 +407,11 @@ public class App {
             .availabilityZone(availabilityZone)
             .build());
 
-        final var vpcId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId());
+        final var vpcId = vpc.instanceLists()[0].vpcId();
 
-        final var subnetId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].subnetId());
+        final var subnetId = vpc.instanceLists()[0].subnetId();
 
-        var exampleCluster = new Cluster("exampleCluster", ClusterArgs.builder()        
+        var example = new Cluster("example", ClusterArgs.builder()
             .idlType("PROTO")
             .clusterName("tf_example_tcaplus_cluster")
             .vpcId(vpcId)
@@ -395,23 +420,23 @@ public class App {
             .oldPasswordExpireLast(3600)
             .build());
 
-        var exampleTablegroup = new Tablegroup("exampleTablegroup", TablegroupArgs.builder()        
-            .clusterId(exampleCluster.id())
+        var exampleTablegroup = new Tablegroup("exampleTablegroup", TablegroupArgs.builder()
+            .clusterId(example.id())
             .tablegroupName("tf_example_group_name")
             .build());
 
-        var exampleIdl = new Idl("exampleIdl", IdlArgs.builder()        
-            .clusterId(exampleCluster.id())
+        var exampleIdl = new Idl("exampleIdl", IdlArgs.builder()
+            .clusterId(example.id())
             .tablegroupId(exampleTablegroup.id())
             .fileName("tf_example_tcaplus_idl")
             .fileType("PROTO")
             .fileExtType("proto")
             .fileContent("""
-    syntax = "proto2";
+    syntax = \"proto2\";
     package myTcaplusTable;
-    import "tcaplusservice.optionv1.proto";
+    import \"tcaplusservice.optionv1.proto\";
     message example_table { # refer the table name
-        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";
         required int64 uin = 1;
         required string name = 2;
         required int32 region = 3;
@@ -435,8 +460,8 @@ public class App {
             """)
             .build());
 
-        var exampleTable = new Table("exampleTable", TableArgs.builder()        
-            .clusterId(exampleCluster.id())
+        var exampleTable = new Table("exampleTable", TableArgs.builder()
+            .clusterId(example.id())
             .tablegroupId(exampleTablegroup.id())
             .tableName("example_table")
             .tableType("GENERIC")
@@ -451,13 +476,18 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
     type: string
     default: ap-guangzhou-3
 resources:
-  exampleCluster:
+  example:
     type: tencentcloud:Tcaplus:Cluster
     properties:
       idlType: PROTO
@@ -468,23 +498,25 @@ resources:
       oldPasswordExpireLast: 3600
   exampleTablegroup:
     type: tencentcloud:Tcaplus:Tablegroup
+    name: example
     properties:
-      clusterId: ${exampleCluster.id}
+      clusterId: ${example.id}
       tablegroupName: tf_example_group_name
   exampleIdl:
     type: tencentcloud:Tcaplus:Idl
+    name: example
     properties:
-      clusterId: ${exampleCluster.id}
+      clusterId: ${example.id}
       tablegroupId: ${exampleTablegroup.id}
       fileName: tf_example_tcaplus_idl
       fileType: PROTO
       fileExtType: proto
       fileContent: |2
-            syntax = "proto2";
+            syntax = \"proto2\";
             package myTcaplusTable;
-            import "tcaplusservice.optionv1.proto";
+            import \"tcaplusservice.optionv1.proto\";
             message example_table { # refer the table name
-                option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+                option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";
                 required int64 uin = 1;
                 required string name = 2;
                 required int32 region = 3;
@@ -507,8 +539,9 @@ resources:
             }
   exampleTable:
     type: tencentcloud:Tcaplus:Table
+    name: example
     properties:
-      clusterId: ${exampleCluster.id}
+      clusterId: ${example.id}
       tablegroupId: ${exampleTablegroup.id}
       tableName: example_table
       tableType: GENERIC
@@ -523,35 +556,123 @@ variables:
   subnetId: ${vpc.instanceLists[0].subnetId}
   vpc:
     fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
         isDefault: true
         availabilityZone: ${availabilityZone}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getsubnets" "vpc" {
+  is_default        = true
+  availability_zone = var.availabilityZone
+}
+
+resource "tencentcloud_tcaplus_cluster" "example" {
+  idl_type                 = "PROTO"
+  cluster_name             = "tf_example_tcaplus_cluster"
+  vpc_id                   = local.vpcId
+  subnet_id                = local.subnetId
+  password                 = "your_pw_123111"
+  old_password_expire_last = 3600
+}
+resource "tencentcloud_tcaplus_tablegroup" "example" {
+  cluster_id      = tencentcloud_tcaplus_cluster.example.id
+  tablegroup_name = "tf_example_group_name"
+}
+resource "tencentcloud_tcaplus_idl" "example" {
+  cluster_id    = tencentcloud_tcaplus_cluster.example.id
+  tablegroup_id = tencentcloud_tcaplus_tablegroup.example.id
+  file_name     = "tf_example_tcaplus_idl"
+  file_type     = "PROTO"
+  file_ext_type = "proto"
+  file_content  = "    syntax = \\\"proto2\\\";\n    package myTcaplusTable;\n    import \\\"tcaplusservice.optionv1.proto\\\";\n    message example_table { # refer the table name\n        option(tcaplusservice.tcaplus_primary_key) = \\\"uin,name,region\\\";\n        required int64 uin = 1;\n        required string name = 2;\n        required int32 region = 3;\n        required int32 gamesvrid = 4;\n        optional int32 logintime = 5 [default = 1];\n        repeated int64 lockid = 6 [packed = true];\n        optional bool is_available = 7 [default = false];\n        optional pay_info pay = 8;\n    }\n\n    message pay_info {\n        required int64 pay_id = 1;\n        optional uint64 total_money = 2;\n        optional uint64 pay_times = 3;\n        optional pay_auth_info auth = 4;\n        message pay_auth_info {\n            required string pay_keys = 1;\n            optional int64 update_time = 2;\n        }\n    }\n"
+}
+resource "tencentcloud_tcaplus_table" "example" {
+  cluster_id        = tencentcloud_tcaplus_cluster.example.id
+  tablegroup_id     = tencentcloud_tcaplus_tablegroup.example.id
+  table_name        = "example_table"
+  table_type        = "GENERIC"
+  description       = "test"
+  idl_id            = tencentcloud_tcaplus_idl.example.id
+  table_idl_type    = "PROTO"
+  reserved_read_cu  = 1000
+  reserved_write_cu = 20
+  reserved_volume   = 1
+}
+locals {
+  vpcId = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].vpc_id
+}
+locals {
+  subnetId = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].subnet_id
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateTables](https://www.tencentcloud.com/document/api/1016/35039)
+  - [DescribeTasks](https://www.tencentcloud.com/document/api/1016/35045)
+* Read: [DescribeTables](https://www.tencentcloud.com/document/api/1016/35036)
+* Update:
+  - [DescribeTasks](https://www.tencentcloud.com/document/api/1016/35045)
+  - [ModifyTableMemos](https://www.tencentcloud.com/document/api/1016/35034)
+  - [ModifyTables](https://www.tencentcloud.com/document/api/1016/35032)
+* Delete:
+  - [DeleteTables](https://www.tencentcloud.com/document/api/1016/35038)
+  - [DescribeTables](https://www.tencentcloud.com/document/api/1016/35036)
+  - [DescribeTasks](https://www.tencentcloud.com/document/api/1016/35045)
 
 
 
 ## Create Table Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Table</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TableArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Table</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TableArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Table</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TableArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Table</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
           <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">idl_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">reserved_read_cu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">reserved_volume</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -559,44 +680,51 @@ variables:
           <span class="nx">table_idl_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">table_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">table_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Table</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TableArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTable</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TableArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Table</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTable</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TableArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Table</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Table</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TableArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Table</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TableArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Table</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TableArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Table</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TableArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcaplus:Table</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcaplus:Table</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcaplus_table&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -617,7 +745,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -734,11 +862,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Table Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Table resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -754,8 +890,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_csharp" style="color: inherit; text-decoration: inherit;">Idl<wbr>Id</a>
@@ -763,8 +898,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedreadcu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Read<wbr>Cu</a>
@@ -772,8 +906,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedvolume_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Volume</a>
@@ -781,8 +914,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedwritecu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Write<wbr>Cu</a>
@@ -790,8 +922,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Idl<wbr>Type</a>
@@ -799,8 +930,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -808,8 +938,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tabletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Type</a>
@@ -817,8 +946,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -826,8 +954,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the table group to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -835,8 +962,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Description of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -850,8 +976,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_go" style="color: inherit; text-decoration: inherit;">Idl<wbr>Id</a>
@@ -859,8 +984,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedreadcu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Read<wbr>Cu</a>
@@ -868,8 +992,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedvolume_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Volume</a>
@@ -877,8 +1000,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedwritecu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Write<wbr>Cu</a>
@@ -886,8 +1008,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Idl<wbr>Type</a>
@@ -895,8 +1016,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -904,8 +1024,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tabletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Type</a>
@@ -913,8 +1032,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -922,8 +1040,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the table group to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -931,8 +1048,93 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Description of the TcaplusDB table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="idl_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idl_id_hcl" style="color: inherit; text-decoration: inherit;">idl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the IDL File.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="reserved_read_cu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_read_cu_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>read_<wbr>cu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="reserved_volume_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_volume_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>volume</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="reserved_write_cu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_write_cu_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>write_<wbr>cu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_idl_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_idl_type_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>idl_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="table_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_type_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the table group to which the table belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -946,8 +1148,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_java" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -955,8 +1156,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedreadcu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -964,8 +1164,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedvolume_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -973,8 +1172,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedwritecu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -982,8 +1180,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_java" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -991,8 +1188,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_java" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -1000,8 +1196,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tabletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_java" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -1009,8 +1204,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1018,8 +1212,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the table group to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1027,8 +1220,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Description of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1042,8 +1234,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_nodejs" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -1051,8 +1242,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedreadcu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -1060,8 +1250,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedvolume_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -1069,8 +1258,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedwritecu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -1078,8 +1266,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -1087,8 +1274,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -1096,8 +1282,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tabletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -1105,8 +1290,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1114,8 +1298,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the table group to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1123,8 +1306,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Description of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1138,8 +1320,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-required"
             title="Required">
         <span id="idl_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idl_id_python" style="color: inherit; text-decoration: inherit;">idl_<wbr>id</a>
@@ -1147,8 +1328,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reserved_read_cu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_read_cu_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>read_<wbr>cu</a>
@@ -1156,8 +1336,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reserved_volume_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_volume_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>volume</a>
@@ -1165,8 +1344,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reserved_write_cu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_write_cu_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>write_<wbr>cu</a>
@@ -1174,8 +1352,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="table_idl_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_idl_type_python" style="color: inherit; text-decoration: inherit;">table_<wbr>idl_<wbr>type</a>
@@ -1183,8 +1360,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="table_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_python" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
@@ -1192,8 +1368,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="table_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_type_python" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
@@ -1201,8 +1376,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -1210,8 +1384,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the table group to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1219,8 +1392,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Description of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1234,8 +1406,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_yaml" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -1243,8 +1414,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedreadcu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -1252,8 +1422,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedvolume_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -1261,8 +1430,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="reservedwritecu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -1270,8 +1438,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -1279,8 +1446,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -1288,8 +1454,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tabletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -1297,8 +1462,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1306,8 +1470,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the table group to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1315,8 +1478,7 @@ The Table resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Description of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1337,8 +1499,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="error_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_csharp" style="color: inherit; text-decoration: inherit;">Error</a>
@@ -1346,8 +1507,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1355,8 +1515,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1364,8 +1523,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Size</a>
@@ -1373,8 +1531,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Size of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1388,8 +1545,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="error_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_go" style="color: inherit; text-decoration: inherit;">Error</a>
@@ -1397,8 +1553,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1406,8 +1561,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1415,8 +1569,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Size</a>
@@ -1424,8 +1577,53 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Size of the TcaplusDB table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-"
+            title="">
+        <span id="error_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_hcl" style="color: inherit; text-decoration: inherit;">error</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-"
+            title="">
+        <span id="table_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_size_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1439,8 +1637,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="error_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_java" style="color: inherit; text-decoration: inherit;">error</a>
@@ -1448,8 +1645,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1457,8 +1653,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1466,8 +1661,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_java" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -1475,8 +1669,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Size of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1490,8 +1683,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="error_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_nodejs" style="color: inherit; text-decoration: inherit;">error</a>
@@ -1499,8 +1691,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1508,8 +1699,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1517,8 +1707,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -1526,8 +1715,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Size of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1541,8 +1729,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="error_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_python" style="color: inherit; text-decoration: inherit;">error</a>
@@ -1550,8 +1737,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1559,8 +1745,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1568,8 +1753,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="table_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_size_python" style="color: inherit; text-decoration: inherit;">table_<wbr>size</a>
@@ -1577,8 +1761,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Size of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1592,8 +1775,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="error_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_yaml" style="color: inherit; text-decoration: inherit;">error</a>
@@ -1601,8 +1783,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1610,8 +1791,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1619,8 +1799,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -1628,8 +1807,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Size of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1639,18 +1817,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Table resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TableState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Table</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TableState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Table</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1668,104 +1846,143 @@ Get an existing Table resource's state with the given name, ID, and optional ext
         <span class="nx">table_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">table_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Table</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTable<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TableState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Table</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTable<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TableState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Table</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Table</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TableState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Table</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TableState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Table</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TableState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Table</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TableState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTable</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcaplus:Table</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcaplus_table</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TableState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TableState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1773,28 +1990,31 @@ Get an existing Table resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TableState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1802,28 +2022,31 @@ Get an existing Table resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TableState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1843,8 +2066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1852,8 +2074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1861,8 +2082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_error_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_csharp" style="color: inherit; text-decoration: inherit;">Error</a>
@@ -1870,8 +2090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_idlid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idlid_csharp" style="color: inherit; text-decoration: inherit;">Idl<wbr>Id</a>
@@ -1879,8 +2098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedreadcu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedreadcu_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Read<wbr>Cu</a>
@@ -1888,8 +2106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedvolume_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedvolume_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Volume</a>
@@ -1897,8 +2114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedwritecu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedwritecu_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Write<wbr>Cu</a>
@@ -1906,8 +2122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1915,8 +2130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableidltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableidltype_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Idl<wbr>Type</a>
@@ -1924,8 +2138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablename_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -1933,8 +2146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablesize_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Size</a>
@@ -1942,8 +2154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tabletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tabletype_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Type</a>
@@ -1951,8 +2162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -1960,8 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the table belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1975,8 +2184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1984,8 +2192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1993,8 +2200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_error_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_go" style="color: inherit; text-decoration: inherit;">Error</a>
@@ -2002,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_idlid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idlid_go" style="color: inherit; text-decoration: inherit;">Idl<wbr>Id</a>
@@ -2011,8 +2216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedreadcu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedreadcu_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Read<wbr>Cu</a>
@@ -2020,8 +2224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedvolume_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedvolume_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Volume</a>
@@ -2029,8 +2232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedwritecu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedwritecu_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Write<wbr>Cu</a>
@@ -2038,8 +2240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2047,8 +2248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableidltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableidltype_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Idl<wbr>Type</a>
@@ -2056,8 +2256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablename_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -2065,8 +2264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablesize_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Size</a>
@@ -2074,8 +2272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tabletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tabletype_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Type</a>
@@ -2083,8 +2280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -2092,8 +2288,125 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the table belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_error_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_hcl" style="color: inherit; text-decoration: inherit;">error</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_idl_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idl_id_hcl" style="color: inherit; text-decoration: inherit;">idl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the IDL File.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_reserved_read_cu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reserved_read_cu_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>read_<wbr>cu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_reserved_volume_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reserved_volume_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>volume</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_reserved_write_cu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reserved_write_cu_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>write_<wbr>cu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_table_idl_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_idl_type_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>idl_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_table_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_size_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_table_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_type_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the table group to which the table belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2107,8 +2420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2116,8 +2428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2125,8 +2436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_error_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_java" style="color: inherit; text-decoration: inherit;">error</a>
@@ -2134,8 +2444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_idlid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idlid_java" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -2143,8 +2452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedreadcu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedreadcu_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -2152,8 +2460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedvolume_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedvolume_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -2161,8 +2468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedwritecu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedwritecu_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -2170,8 +2476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2179,8 +2484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableidltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableidltype_java" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -2188,8 +2492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablename_java" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2197,8 +2500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablesize_java" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -2206,8 +2508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tabletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tabletype_java" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -2215,8 +2516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -2224,8 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the table belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2239,8 +2538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2248,8 +2546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2257,8 +2554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_error_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_nodejs" style="color: inherit; text-decoration: inherit;">error</a>
@@ -2266,8 +2562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_idlid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idlid_nodejs" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -2275,8 +2570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedreadcu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedreadcu_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -2284,8 +2578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedvolume_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedvolume_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -2293,8 +2586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedwritecu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedwritecu_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -2302,8 +2594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2311,8 +2602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableidltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableidltype_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -2320,8 +2610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablename_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2329,8 +2618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablesize_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -2338,8 +2626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tabletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tabletype_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -2347,8 +2634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -2356,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the table belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2371,8 +2656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2380,8 +2664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2389,8 +2672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_error_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_python" style="color: inherit; text-decoration: inherit;">error</a>
@@ -2398,8 +2680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_idl_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idl_id_python" style="color: inherit; text-decoration: inherit;">idl_<wbr>id</a>
@@ -2407,8 +2688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reserved_read_cu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reserved_read_cu_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>read_<wbr>cu</a>
@@ -2416,8 +2696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reserved_volume_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reserved_volume_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>volume</a>
@@ -2425,8 +2704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reserved_write_cu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reserved_write_cu_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>write_<wbr>cu</a>
@@ -2434,8 +2712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2443,8 +2720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_table_idl_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_idl_type_python" style="color: inherit; text-decoration: inherit;">table_<wbr>idl_<wbr>type</a>
@@ -2452,8 +2728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_table_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_name_python" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
@@ -2461,8 +2736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_table_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_size_python" style="color: inherit; text-decoration: inherit;">table_<wbr>size</a>
@@ -2470,8 +2744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_table_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_type_python" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
@@ -2479,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -2488,8 +2760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the table belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2503,8 +2774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2512,8 +2782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2521,8 +2790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_error_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_yaml" style="color: inherit; text-decoration: inherit;">error</a>
@@ -2530,8 +2798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Error messages for creating TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_idlid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idlid_yaml" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -2539,8 +2806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the IDL File.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the IDL File.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedreadcu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedreadcu_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -2548,8 +2814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedvolume_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedvolume_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -2557,8 +2822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit: GB).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit: GB).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_reservedwritecu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reservedwritecu_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -2566,8 +2830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2575,8 +2838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableidltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableidltype_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -2584,8 +2846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL type of the TcaplusDB table. Valid values: <code>PROTO</code> and <code>TDR</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablename_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2593,8 +2854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablesize_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -2602,8 +2862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tabletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tabletype_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -2611,8 +2870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the TcaplusDB table. Valid values are <code>GENERIC</code> and <code>LIST</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -2620,8 +2878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to which the table belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the table belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2640,7 +2897,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

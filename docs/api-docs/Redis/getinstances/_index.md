@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Redis.getInstances"
-meta_desc: "Documentation for the tencentcloud.Redis.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the detail information of redis instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,64 +18,60 @@ Use this data source to query the detail information of redis instance.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const redislab = tencentcloud.Redis.getInstances({
-    limit: 20,
-    projectId: 0,
-    resultOutputFile: "/tmp/redis_instances",
-    searchKey: "myredis",
+const redislab = tencentcloud.redis.getInstances({
     zone: "ap-hongkong-1",
+    searchKey: "myredis",
+    projectId: 0,
+    limit: 20,
+    resultOutputFile: "/tmp/redis_instances",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-redislab = tencentcloud.Redis.get_instances(limit=20,
-    project_id=0,
-    result_output_file="/tmp/redis_instances",
+redislab = tencentcloud.redis.get_instances(zone="ap-hongkong-1",
     search_key="myredis",
-    zone="ap-hongkong-1")
+    project_id=0,
+    limit=20,
+    result_output_file="/tmp/redis_instances")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var redislab = Tencentcloud.Redis.GetInstances.Invoke(new()
-    {
-        Limit = 20,
-        ProjectId = 0,
-        ResultOutputFile = "/tmp/redis_instances",
-        SearchKey = "myredis",
-        Zone = "ap-hongkong-1",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Redis.GetInstances(ctx, &redis.GetInstancesArgs{
-			Limit:            pulumi.IntRef(20),
-			ProjectId:        pulumi.IntRef(0),
-			ResultOutputFile: pulumi.StringRef("/tmp/redis_instances"),
-			SearchKey:        pulumi.StringRef("myredis"),
+		_, err := redis.GetInstances(ctx, &redis.GetInstancesArgs{
 			Zone:             pulumi.StringRef("ap-hongkong-1"),
+			SearchKey:        pulumi.StringRef("myredis"),
+			ProjectId:        pulumi.IntRef(0),
+			Limit:            pulumi.IntRef(20),
+			ResultOutputFile: pulumi.StringRef("/tmp/redis_instances"),
 		}, nil)
 		if err != nil {
 			return err
@@ -82,6 +80,35 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var redislab = Tencentcloud.Redis.GetInstances.Invoke(new()
+    {
+        Zone = "ap-hongkong-1",
+        SearchKey = "myredis",
+        ProjectId = 0,
+        Limit = 20,
+        ResultOutputFile = "/tmp/redis_instances",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -90,8 +117,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Redis.RedisFunctions;
 import com.pulumi.tencentcloud.Redis.inputs.GetInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,30 +131,66 @@ public class App {
 
     public static void stack(Context ctx) {
         final var redislab = RedisFunctions.getInstances(GetInstancesArgs.builder()
-            .limit(20)
-            .projectId(0)
-            .resultOutputFile("/tmp/redis_instances")
-            .searchKey("myredis")
             .zone("ap-hongkong-1")
+            .searchKey("myredis")
+            .projectId(0)
+            .limit(20)
+            .resultOutputFile("/tmp/redis_instances")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   redislab:
     fn::invoke:
-      Function: tencentcloud:Redis:getInstances
-      Arguments:
-        limit: 20
-        projectId: 0
-        resultOutputFile: /tmp/redis_instances
-        searchKey: myredis
+      function: tencentcloud:Redis:getInstances
+      arguments:
         zone: ap-hongkong-1
+        searchKey: myredis
+        projectId: 0
+        limit: 20
+        resultOutputFile: /tmp/redis_instances
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getinstances" "redislab" {
+  zone               = "ap-hongkong-1"
+  search_key         = "myredis"
+  project_id         = 0
+  limit              = 20
+  result_output_file = "/tmp/redis_instances"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+  - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
 
 
 
@@ -139,7 +202,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +210,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,17 +225,17 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">search_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                   <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">search_key</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                  <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">search_key</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -197,7 +260,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,7 +270,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -218,6 +283,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Redis/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_redis_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -236,8 +310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number limitation of results for a query.</p>
-</dd><dt class="property-optional"
+    <dd>The number limitation of results for a query.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -245,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -254,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_csharp" style="color: inherit; text-decoration: inherit;">Search<wbr>Key</a>
@@ -263,17 +334,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of redis instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -281,8 +350,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number limitation of results for a query.</p>
-</dd><dt class="property-optional"
+    <dd>The number limitation of results for a query.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -305,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -314,8 +380,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_go" style="color: inherit; text-decoration: inherit;">Search<wbr>Key</a>
@@ -323,17 +388,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of redis instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -341,8 +404,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number limitation of results for a query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="search_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of redis instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -356,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number limitation of results for a query.</p>
-</dd><dt class="property-optional"
+    <dd>The number limitation of results for a query.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -365,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -374,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_java" style="color: inherit; text-decoration: inherit;">search<wbr>Key</a>
@@ -383,17 +496,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of redis instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -401,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -416,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number limitation of results for a query.</p>
-</dd><dt class="property-optional"
+    <dd>The number limitation of results for a query.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -425,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -434,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_nodejs" style="color: inherit; text-decoration: inherit;">search<wbr>Key</a>
@@ -443,17 +550,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of redis instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -461,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number limitation of results for a query.</p>
-</dd><dt class="property-optional"
+    <dd>The number limitation of results for a query.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -485,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -494,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="search_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_python" style="color: inherit; text-decoration: inherit;">search_<wbr>key</a>
@@ -503,17 +604,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of redis instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -521,8 +620,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,8 +634,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number limitation of results for a query.</p>
-</dd><dt class="property-optional"
+    <dd>The number limitation of results for a query.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -545,8 +642,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -554,8 +650,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkey_yaml" style="color: inherit; text-decoration: inherit;">search<wbr>Key</a>
@@ -563,17 +658,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Key words used to match the results, and the key words can be: instance ID, instance name and IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of redis instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -581,8 +674,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -614,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of redis instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of redis instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -631,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which a redis instance belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the project to which a redis instance belongs.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -654,10 +743,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of an instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of an instance.</dd><dt class="property-"
             title="">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -665,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone to which a redis instance belongs.</p>
-</dd></dl>
+    <dd>Available zone to which a redis instance belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -680,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -689,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">[]Get<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>A list of redis instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of redis instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -706,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which a redis instance belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the project to which a redis instance belongs.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -729,10 +813,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of an instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of an instance.</dd><dt class="property-"
             title="">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -740,8 +823,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone to which a redis instance belongs.</p>
-</dd></dl>
+    <dd>Available zone to which a redis instance belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>A list of redis instance. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which a redis instance belongs.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="search_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of an instance.</dd><dt class="property-"
+            title="">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone to which a redis instance belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -755,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -764,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of redis instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of redis instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -781,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which a redis instance belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the project to which a redis instance belongs.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -804,10 +953,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of an instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of an instance.</dd><dt class="property-"
             title="">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -815,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone to which a redis instance belongs.</p>
-</dd></dl>
+    <dd>Available zone to which a redis instance belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -830,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -839,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of redis instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of redis instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -856,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which a redis instance belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the project to which a redis instance belongs.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -879,10 +1023,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of an instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of an instance.</dd><dt class="property-"
             title="">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -890,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone to which a redis instance belongs.</p>
-</dd></dl>
+    <dd>Available zone to which a redis instance belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -905,17 +1047,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of redis instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of redis instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -931,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which a redis instance belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the project to which a redis instance belongs.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -954,10 +1093,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of an instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of an instance.</dd><dt class="property-"
             title="">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -965,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available zone to which a redis instance belongs.</p>
-</dd></dl>
+    <dd>Available zone to which a redis instance belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -980,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -989,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of redis instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of redis instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1006,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which a redis instance belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the project to which a redis instance belongs.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1029,10 +1163,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of an instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of an instance.</dd><dt class="property-"
             title="">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1040,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone to which a redis instance belongs.</p>
-</dd></dl>
+    <dd>Available zone to which a redis instance belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1074,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1083,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance.</p>
-</dd><dt class="property-required"
+    <dd>IP address of an instance.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_csharp" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -1092,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in MB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in MB.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1101,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="nodeinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Infos</a>
@@ -1110,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistnodeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Node<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</p>
-</dd><dt class="property-required"
+    <dd>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1119,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>The port used to access a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1128,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="redisid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Id</a>
@@ -1137,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>ID of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Replicas<wbr>Num</a>
@@ -1146,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Shard<wbr>Num</a>
@@ -1155,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1164,8 +1285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</p>
-</dd><dt class="property-required"
+    <dd>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1173,17 +1293,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Tags of redis instance.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1191,9 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_csharp" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -1201,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1210,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1219,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1234,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1243,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1252,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance.</p>
-</dd><dt class="property-required"
+    <dd>IP address of an instance.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_go" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -1261,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in MB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in MB.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1270,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="nodeinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Infos</a>
@@ -1279,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistnodeinfo">[]Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Node<wbr>Info</a></span>
     </dt>
-    <dd><p>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</p>
-</dd><dt class="property-required"
+    <dd>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1288,8 +1395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>The port used to access a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1297,8 +1403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="redisid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Id</a>
@@ -1306,8 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>ID of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Replicas<wbr>Num</a>
@@ -1315,8 +1419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Shard<wbr>Num</a>
@@ -1324,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1333,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</p>
-</dd><dt class="property-required"
+    <dd>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1342,17 +1443,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Tags of redis instance.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1360,9 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_go" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -1370,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1379,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1388,8 +1483,157 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the instance is created.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address of an instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="mem_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_size_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size in MB.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a redis instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_infos_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelistnodeinfo">list(object)</a></span>
+    </dt>
+    <dd>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The port used to access a redis instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="redis_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_id_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a redis instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="redis_replicas_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_replicas_num_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>replicas_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instance copies.</dd><dt class="property-required"
+            title="Required">
+        <span id="redis_shard_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_shard_num_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>shard_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instance shard.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc subnet.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of redis instance.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="type_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_hcl" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1412,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1421,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of an instance.</p>
-</dd><dt class="property-required"
+    <dd>IP address of an instance.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_java" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1430,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size in MB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in MB.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1439,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="nodeinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_java" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
@@ -1448,8 +1687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistnodeinfo">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Node<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</p>
-</dd><dt class="property-required"
+    <dd>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1457,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The port used to access a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>The port used to access a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1466,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="redisid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -1475,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>ID of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -1484,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -1493,8 +1727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1502,8 +1735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</p>
-</dd><dt class="property-required"
+    <dd>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1511,17 +1743,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Tags of redis instance.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1529,9 +1759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_java" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -1539,8 +1767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1548,8 +1775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1557,8 +1783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1572,8 +1797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1581,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1590,8 +1813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance.</p>
-</dd><dt class="property-required"
+    <dd>IP address of an instance.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_nodejs" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1599,8 +1821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size in MB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in MB.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1608,8 +1829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="nodeinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
@@ -1617,8 +1837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistnodeinfo">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Node<wbr>Info[]</a></span>
     </dt>
-    <dd><p>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</p>
-</dd><dt class="property-required"
+    <dd>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1626,8 +1845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The port used to access a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>The port used to access a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1635,8 +1853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="redisid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -1644,8 +1861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>ID of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -1653,8 +1869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -1662,8 +1877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1671,8 +1885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</p>
-</dd><dt class="property-required"
+    <dd>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1680,17 +1893,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Tags of redis instance.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1698,9 +1909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_nodejs" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -1708,8 +1917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1717,8 +1925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1726,8 +1933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1741,8 +1947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1750,8 +1955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1759,8 +1963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address of an instance.</p>
-</dd><dt class="property-required"
+    <dd>IP address of an instance.</dd><dt class="property-required"
             title="Required">
         <span id="mem_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_size_python" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
@@ -1768,8 +1971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in MB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in MB.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1777,17 +1979,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="node_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_infos_python" style="color: inherit; text-decoration: inherit;">node_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelistnodeinfo">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Node<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelistnodeinfo">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Node<wbr>Info]</a></span>
     </dt>
-    <dd><p>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</p>
-</dd><dt class="property-required"
+    <dd>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1795,8 +1995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>The port used to access a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1804,8 +2003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="redis_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_id_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>id</a>
@@ -1813,8 +2011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>ID of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="redis_replicas_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_replicas_num_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>replicas_<wbr>num</a>
@@ -1822,8 +2019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redis_shard_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_shard_num_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>shard_<wbr>num</a>
@@ -1831,8 +2027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1840,8 +2035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</p>
-</dd><dt class="property-required"
+    <dd>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1849,17 +2043,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Tags of redis instance.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1867,9 +2059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="type_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_python" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
@@ -1877,8 +2067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1886,8 +2075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1895,8 +2083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1910,8 +2097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>POSTPAID</code> and <code>PREPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1919,8 +2105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1928,8 +2113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of an instance.</p>
-</dd><dt class="property-required"
+    <dd>IP address of an instance.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_yaml" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1937,8 +2121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size in MB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in MB.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1946,8 +2129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="nodeinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
@@ -1955,8 +2137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistnodeinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</p>
-</dd><dt class="property-required"
+    <dd>List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1964,8 +2145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The port used to access a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>The port used to access a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1973,8 +2153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which redis instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which redis instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="redisid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -1982,8 +2161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a redis instance.</p>
-</dd><dt class="property-required"
+    <dd>ID of a redis instance.</dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -1991,8 +2169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -2000,8 +2177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The number of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2009,8 +2185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</p>
-</dd><dt class="property-required"
+    <dd>Current status of an instance, maybe: <code>init</code>, <code>processing</code>, <code>online</code>, <code>isolate</code> and <code>todelete</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2018,17 +2193,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of redis instance.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Tags of redis instance.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2036,9 +2209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_yaml" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -2046,8 +2217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Refer to <code>data.tencentcloud_redis_zone_config.list.type_id</code> get available values.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2055,8 +2225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2064,8 +2233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of an available zone.</p>
-</dd></dl>
+    <dd>ID of an available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2083,8 +2251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-required"
+    <dd>ID of the master or replica node.</dd><dt class="property-required"
             title="Required">
         <span id="master_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_csharp" style="color: inherit; text-decoration: inherit;">Master</a>
@@ -2092,8 +2259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the node is master.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -2101,8 +2267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2116,8 +2281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-required"
+    <dd>ID of the master or replica node.</dd><dt class="property-required"
             title="Required">
         <span id="master_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_go" style="color: inherit; text-decoration: inherit;">Master</a>
@@ -2125,8 +2289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the node is master.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -2134,8 +2297,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the master or replica node.</dd><dt class="property-required"
+            title="Required">
+        <span id="master_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_hcl" style="color: inherit; text-decoration: inherit;">master</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the node is master.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2149,8 +2341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-required"
+    <dd>ID of the master or replica node.</dd><dt class="property-required"
             title="Required">
         <span id="master_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_java" style="color: inherit; text-decoration: inherit;">master</a>
@@ -2158,8 +2349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the node is master.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2167,8 +2357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2182,8 +2371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-required"
+    <dd>ID of the master or replica node.</dd><dt class="property-required"
             title="Required">
         <span id="master_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_nodejs" style="color: inherit; text-decoration: inherit;">master</a>
@@ -2191,8 +2379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the node is master.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2200,8 +2387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2215,8 +2401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-required"
+    <dd>ID of the master or replica node.</dd><dt class="property-required"
             title="Required">
         <span id="master_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_python" style="color: inherit; text-decoration: inherit;">master</a>
@@ -2224,8 +2409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the node is master.</dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -2233,8 +2417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2248,8 +2431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-required"
+    <dd>ID of the master or replica node.</dd><dt class="property-required"
             title="Required">
         <span id="master_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_yaml" style="color: inherit; text-decoration: inherit;">master</a>
@@ -2257,8 +2439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the node is master.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2266,8 +2447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2282,7 +2462,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

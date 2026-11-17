@@ -2,9 +2,11 @@
 ---
 title: "Logstash"
 title_tag: "tencentcloud.Elasticsearch.Logstash"
-meta_desc: "Documentation for the tencentcloud.Elasticsearch.Logstash resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a elasticsearch logstash"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,20 +18,28 @@ Provides a resource to create a elasticsearch logstash
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const logstash = new tencentcloud.elasticsearch.Logstash("logstash", {
-    chargeType: "POSTPAID_BY_HOUR",
-    diskSize: 20,
-    diskType: "CLOUD_SSD",
     instanceName: "logstash-test",
-    licenseType: "xpack",
+    zone: "ap-guangzhou-6",
     logstashVersion: "7.14.2",
+    vpcId: "vpc-4owdpnwr",
+    subnetId: "subnet-4o0zd840",
     nodeNum: 1,
+    chargeType: "POSTPAID_BY_HOUR",
     nodeType: "LOGSTASH.SA2.MEDIUM4",
+    diskType: "CLOUD_SSD",
+    diskSize: 20,
+    licenseType: "xpack",
     operationDuration: {
         periods: [
             1,
@@ -40,33 +50,38 @@ const logstash = new tencentcloud.elasticsearch.Logstash("logstash", {
             6,
             0,
         ],
-        timeEnd: "06:00",
         timeStart: "02:00",
+        timeEnd: "06:00",
         timeZone: "UTC+8",
     },
-    subnetId: "subnet-4o0zd840",
     tags: {
         tagKey: "tagValue",
     },
-    vpcId: "vpc-4owdpnwr",
-    zone: "ap-guangzhou-6",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 logstash = tencentcloud.elasticsearch.Logstash("logstash",
-    charge_type="POSTPAID_BY_HOUR",
-    disk_size=20,
-    disk_type="CLOUD_SSD",
     instance_name="logstash-test",
-    license_type="xpack",
+    zone="ap-guangzhou-6",
     logstash_version="7.14.2",
+    vpc_id="vpc-4owdpnwr",
+    subnet_id="subnet-4o0zd840",
     node_num=1,
+    charge_type="POSTPAID_BY_HOUR",
     node_type="LOGSTASH.SA2.MEDIUM4",
-    operation_duration=tencentcloud.elasticsearch.LogstashOperationDurationArgs(
-        periods=[
+    disk_type="CLOUD_SSD",
+    disk_size=20,
+    license_type="xpack",
+    operation_duration={
+        "periods": [
             1,
             2,
             3,
@@ -75,17 +90,71 @@ logstash = tencentcloud.elasticsearch.Logstash("logstash",
             6,
             0,
         ],
-        time_end="06:00",
-        time_start="02:00",
-        time_zone="UTC+8",
-    ),
-    subnet_id="subnet-4o0zd840",
+        "time_start": "02:00",
+        "time_end": "06:00",
+        "time_zone": "UTC+8",
+    },
     tags={
         "tagKey": "tagValue",
-    },
-    vpc_id="vpc-4owdpnwr",
-    zone="ap-guangzhou-6")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := elasticsearch.NewLogstash(ctx, "logstash", &elasticsearch.LogstashArgs{
+			InstanceName:    pulumi.String("logstash-test"),
+			Zone:            pulumi.String("ap-guangzhou-6"),
+			LogstashVersion: pulumi.String("7.14.2"),
+			VpcId:           pulumi.String("vpc-4owdpnwr"),
+			SubnetId:        pulumi.String("subnet-4o0zd840"),
+			NodeNum:         pulumi.Int(1),
+			ChargeType:      pulumi.String("POSTPAID_BY_HOUR"),
+			NodeType:        pulumi.String("LOGSTASH.SA2.MEDIUM4"),
+			DiskType:        pulumi.String("CLOUD_SSD"),
+			DiskSize:        pulumi.Int(20),
+			LicenseType:     pulumi.String("xpack"),
+			OperationDuration: &elasticsearch.LogstashOperationDurationArgs{
+				Periods: pulumi.IntArray{
+					pulumi.Int(1),
+					pulumi.Int(2),
+					pulumi.Int(3),
+					pulumi.Int(4),
+					pulumi.Int(5),
+					pulumi.Int(6),
+					pulumi.Int(0),
+				},
+				TimeStart: pulumi.String("02:00"),
+				TimeEnd:   pulumi.String("06:00"),
+				TimeZone:  pulumi.String("UTC+8"),
+			},
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -96,14 +165,17 @@ return await Deployment.RunAsync(() =>
 {
     var logstash = new Tencentcloud.Elasticsearch.Logstash("logstash", new()
     {
-        ChargeType = "POSTPAID_BY_HOUR",
-        DiskSize = 20,
-        DiskType = "CLOUD_SSD",
         InstanceName = "logstash-test",
-        LicenseType = "xpack",
+        Zone = "ap-guangzhou-6",
         LogstashVersion = "7.14.2",
+        VpcId = "vpc-4owdpnwr",
+        SubnetId = "subnet-4o0zd840",
         NodeNum = 1,
+        ChargeType = "POSTPAID_BY_HOUR",
         NodeType = "LOGSTASH.SA2.MEDIUM4",
+        DiskType = "CLOUD_SSD",
+        DiskSize = 20,
+        LicenseType = "xpack",
         OperationDuration = new Tencentcloud.Elasticsearch.Inputs.LogstashOperationDurationArgs
         {
             Periods = new[]
@@ -116,68 +188,23 @@ return await Deployment.RunAsync(() =>
                 6,
                 0,
             },
-            TimeEnd = "06:00",
             TimeStart = "02:00",
+            TimeEnd = "06:00",
             TimeZone = "UTC+8",
         },
-        SubnetId = "subnet-4o0zd840",
         Tags = 
         {
             { "tagKey", "tagValue" },
         },
-        VpcId = "vpc-4owdpnwr",
-        Zone = "ap-guangzhou-6",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Elasticsearch.NewLogstash(ctx, "logstash", &Elasticsearch.LogstashArgs{
-			ChargeType:      pulumi.String("POSTPAID_BY_HOUR"),
-			DiskSize:        pulumi.Int(20),
-			DiskType:        pulumi.String("CLOUD_SSD"),
-			InstanceName:    pulumi.String("logstash-test"),
-			LicenseType:     pulumi.String("xpack"),
-			LogstashVersion: pulumi.String("7.14.2"),
-			NodeNum:         pulumi.Int(1),
-			NodeType:        pulumi.String("LOGSTASH.SA2.MEDIUM4"),
-			OperationDuration: &elasticsearch.LogstashOperationDurationArgs{
-				Periods: pulumi.IntArray{
-					pulumi.Int(1),
-					pulumi.Int(2),
-					pulumi.Int(3),
-					pulumi.Int(4),
-					pulumi.Int(5),
-					pulumi.Int(6),
-					pulumi.Int(0),
-				},
-				TimeEnd:   pulumi.String("06:00"),
-				TimeStart: pulumi.String("02:00"),
-				TimeZone:  pulumi.String("UTC+8"),
-			},
-			SubnetId: pulumi.String("subnet-4o0zd840"),
-			Tags: pulumi.Map{
-				"tagKey": pulumi.Any("tagValue"),
-			},
-			VpcId: pulumi.String("vpc-4owdpnwr"),
-			Zone:  pulumi.String("ap-guangzhou-6"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -187,8 +214,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Elasticsearch.Logstash;
 import com.pulumi.tencentcloud.Elasticsearch.LogstashArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.LogstashOperationDurationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -200,15 +227,18 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var logstash = new Logstash("logstash", LogstashArgs.builder()        
-            .chargeType("POSTPAID_BY_HOUR")
-            .diskSize(20)
-            .diskType("CLOUD_SSD")
+        var logstash = new Logstash("logstash", LogstashArgs.builder()
             .instanceName("logstash-test")
-            .licenseType("xpack")
+            .zone("ap-guangzhou-6")
             .logstashVersion("7.14.2")
+            .vpcId("vpc-4owdpnwr")
+            .subnetId("subnet-4o0zd840")
             .nodeNum(1)
+            .chargeType("POSTPAID_BY_HOUR")
             .nodeType("LOGSTASH.SA2.MEDIUM4")
+            .diskType("CLOUD_SSD")
+            .diskSize(20)
+            .licenseType("xpack")
             .operationDuration(LogstashOperationDurationArgs.builder()
                 .periods(                
                     1,
@@ -218,32 +248,37 @@ public class App {
                     5,
                     6,
                     0)
-                .timeEnd("06:00")
                 .timeStart("02:00")
+                .timeEnd("06:00")
                 .timeZone("UTC+8")
                 .build())
-            .subnetId("subnet-4o0zd840")
             .tags(Map.of("tagKey", "tagValue"))
-            .vpcId("vpc-4owdpnwr")
-            .zone("ap-guangzhou-6")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   logstash:
     type: tencentcloud:Elasticsearch:Logstash
     properties:
-      chargeType: POSTPAID_BY_HOUR
-      diskSize: 20
-      diskType: CLOUD_SSD
       instanceName: logstash-test
-      licenseType: xpack
+      zone: ap-guangzhou-6
       logstashVersion: 7.14.2
+      vpcId: vpc-4owdpnwr
+      subnetId: subnet-4o0zd840
       nodeNum: 1
+      chargeType: POSTPAID_BY_HOUR
       nodeType: LOGSTASH.SA2.MEDIUM4
+      diskType: CLOUD_SSD
+      diskSize: 20
+      licenseType: xpack
       operationDuration:
         periods:
           - 1
@@ -253,91 +288,554 @@ resources:
           - 5
           - 6
           - 0
-        timeEnd: 06:00
         timeStart: 02:00
+        timeEnd: 06:00
         timeZone: UTC+8
-      subnetId: subnet-4o0zd840
       tags:
         tagKey: tagValue
-      vpcId: vpc-4owdpnwr
-      zone: ap-guangzhou-6
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_elasticsearch_logstash" "logstash" {
+  instance_name    = "logstash-test"
+  zone             = "ap-guangzhou-6"
+  logstash_version = "7.14.2"
+  vpc_id           = "vpc-4owdpnwr"
+  subnet_id        = "subnet-4o0zd840"
+  node_num         = 1
+  charge_type      = "POSTPAID_BY_HOUR"
+  node_type        = "LOGSTASH.SA2.MEDIUM4"
+  disk_type        = "CLOUD_SSD"
+  disk_size        = 20
+  license_type     = "xpack"
+  operation_duration = {
+    periods    = [1, 2, 3, 4, 5, 6, 0]
+    time_start = "02:00"
+    time_end   = "06:00"
+    time_zone  = "UTC+8"
+  }
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create Multi Zone Instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const logstash = new tencentcloud.elasticsearch.Logstash("logstash", {
+    instanceName: "logstash-test",
+    zone: "-",
+    logstashVersion: "7.14.2",
+    vpcId: "vpc-axrsmmrv",
+    subnetId: "-",
+    nodeNum: 2,
+    chargeType: "POSTPAID_BY_HOUR",
+    nodeType: "LOGSTASH.SA2.MEDIUM4",
+    diskType: "CLOUD_SSD",
+    diskSize: 20,
+    licenseType: "xpack",
+    operationDuration: {
+        periods: [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            0,
+        ],
+        timeStart: "02:00",
+        timeEnd: "06:00",
+        timeZone: "UTC+8",
+    },
+    tags: {
+        tagKey: "tagValue",
+    },
+    deployMode: 1,
+    multiZoneInfos: [
+        {
+            availabilityZone: "ap-guangzhou-3",
+            subnetId: "subnet-j5vja918",
+        },
+        {
+            availabilityZone: "ap-guangzhou-4",
+            subnetId: "subnet-oi7ya2j6",
+        },
+    ],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+logstash = tencentcloud.elasticsearch.Logstash("logstash",
+    instance_name="logstash-test",
+    zone="-",
+    logstash_version="7.14.2",
+    vpc_id="vpc-axrsmmrv",
+    subnet_id="-",
+    node_num=2,
+    charge_type="POSTPAID_BY_HOUR",
+    node_type="LOGSTASH.SA2.MEDIUM4",
+    disk_type="CLOUD_SSD",
+    disk_size=20,
+    license_type="xpack",
+    operation_duration={
+        "periods": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            0,
+        ],
+        "time_start": "02:00",
+        "time_end": "06:00",
+        "time_zone": "UTC+8",
+    },
+    tags={
+        "tagKey": "tagValue",
+    },
+    deploy_mode=1,
+    multi_zone_infos=[
+        {
+            "availability_zone": "ap-guangzhou-3",
+            "subnet_id": "subnet-j5vja918",
+        },
+        {
+            "availability_zone": "ap-guangzhou-4",
+            "subnet_id": "subnet-oi7ya2j6",
+        },
+    ])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := elasticsearch.NewLogstash(ctx, "logstash", &elasticsearch.LogstashArgs{
+			InstanceName:    pulumi.String("logstash-test"),
+			Zone:            pulumi.String("-"),
+			LogstashVersion: pulumi.String("7.14.2"),
+			VpcId:           pulumi.String("vpc-axrsmmrv"),
+			SubnetId:        pulumi.String("-"),
+			NodeNum:         pulumi.Int(2),
+			ChargeType:      pulumi.String("POSTPAID_BY_HOUR"),
+			NodeType:        pulumi.String("LOGSTASH.SA2.MEDIUM4"),
+			DiskType:        pulumi.String("CLOUD_SSD"),
+			DiskSize:        pulumi.Int(20),
+			LicenseType:     pulumi.String("xpack"),
+			OperationDuration: &elasticsearch.LogstashOperationDurationArgs{
+				Periods: pulumi.IntArray{
+					pulumi.Int(1),
+					pulumi.Int(2),
+					pulumi.Int(3),
+					pulumi.Int(4),
+					pulumi.Int(5),
+					pulumi.Int(6),
+					pulumi.Int(0),
+				},
+				TimeStart: pulumi.String("02:00"),
+				TimeEnd:   pulumi.String("06:00"),
+				TimeZone:  pulumi.String("UTC+8"),
+			},
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+			DeployMode: pulumi.Int(1),
+			MultiZoneInfos: elasticsearch.LogstashMultiZoneInfoArray{
+				&elasticsearch.LogstashMultiZoneInfoArgs{
+					AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+					SubnetId:         pulumi.String("subnet-j5vja918"),
+				},
+				&elasticsearch.LogstashMultiZoneInfoArgs{
+					AvailabilityZone: pulumi.String("ap-guangzhou-4"),
+					SubnetId:         pulumi.String("subnet-oi7ya2j6"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var logstash = new Tencentcloud.Elasticsearch.Logstash("logstash", new()
+    {
+        InstanceName = "logstash-test",
+        Zone = "-",
+        LogstashVersion = "7.14.2",
+        VpcId = "vpc-axrsmmrv",
+        SubnetId = "-",
+        NodeNum = 2,
+        ChargeType = "POSTPAID_BY_HOUR",
+        NodeType = "LOGSTASH.SA2.MEDIUM4",
+        DiskType = "CLOUD_SSD",
+        DiskSize = 20,
+        LicenseType = "xpack",
+        OperationDuration = new Tencentcloud.Elasticsearch.Inputs.LogstashOperationDurationArgs
+        {
+            Periods = new[]
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                0,
+            },
+            TimeStart = "02:00",
+            TimeEnd = "06:00",
+            TimeZone = "UTC+8",
+        },
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+        DeployMode = 1,
+        MultiZoneInfos = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.LogstashMultiZoneInfoArgs
+            {
+                AvailabilityZone = "ap-guangzhou-3",
+                SubnetId = "subnet-j5vja918",
+            },
+            new Tencentcloud.Elasticsearch.Inputs.LogstashMultiZoneInfoArgs
+            {
+                AvailabilityZone = "ap-guangzhou-4",
+                SubnetId = "subnet-oi7ya2j6",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Elasticsearch.Logstash;
+import com.pulumi.tencentcloud.Elasticsearch.LogstashArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.LogstashOperationDurationArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.LogstashMultiZoneInfoArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var logstash = new Logstash("logstash", LogstashArgs.builder()
+            .instanceName("logstash-test")
+            .zone("-")
+            .logstashVersion("7.14.2")
+            .vpcId("vpc-axrsmmrv")
+            .subnetId("-")
+            .nodeNum(2)
+            .chargeType("POSTPAID_BY_HOUR")
+            .nodeType("LOGSTASH.SA2.MEDIUM4")
+            .diskType("CLOUD_SSD")
+            .diskSize(20)
+            .licenseType("xpack")
+            .operationDuration(LogstashOperationDurationArgs.builder()
+                .periods(                
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    0)
+                .timeStart("02:00")
+                .timeEnd("06:00")
+                .timeZone("UTC+8")
+                .build())
+            .tags(Map.of("tagKey", "tagValue"))
+            .deployMode(1)
+            .multiZoneInfos(            
+                LogstashMultiZoneInfoArgs.builder()
+                    .availabilityZone("ap-guangzhou-3")
+                    .subnetId("subnet-j5vja918")
+                    .build(),
+                LogstashMultiZoneInfoArgs.builder()
+                    .availabilityZone("ap-guangzhou-4")
+                    .subnetId("subnet-oi7ya2j6")
+                    .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  logstash:
+    type: tencentcloud:Elasticsearch:Logstash
+    properties:
+      instanceName: logstash-test
+      zone: '-'
+      logstashVersion: 7.14.2
+      vpcId: vpc-axrsmmrv
+      subnetId: '-'
+      nodeNum: 2
+      chargeType: POSTPAID_BY_HOUR
+      nodeType: LOGSTASH.SA2.MEDIUM4
+      diskType: CLOUD_SSD
+      diskSize: 20
+      licenseType: xpack
+      operationDuration:
+        periods:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 0
+        timeStart: 02:00
+        timeEnd: 06:00
+        timeZone: UTC+8
+      tags:
+        tagKey: tagValue
+      deployMode: 1
+      multiZoneInfos:
+        - availabilityZone: ap-guangzhou-3
+          subnetId: subnet-j5vja918
+        - availabilityZone: ap-guangzhou-4
+          subnetId: subnet-oi7ya2j6
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_elasticsearch_logstash" "logstash" {
+  instance_name    = "logstash-test"
+  zone             = "-"
+  logstash_version = "7.14.2"
+  vpc_id           = "vpc-axrsmmrv"
+  subnet_id        = "-"
+  node_num         = 2
+  charge_type      = "POSTPAID_BY_HOUR"
+  node_type        = "LOGSTASH.SA2.MEDIUM4"
+  disk_type        = "CLOUD_SSD"
+  disk_size        = 20
+  license_type     = "xpack"
+  operation_duration = {
+    periods    = [1, 2, 3, 4, 5, 6, 0]
+    time_start = "02:00"
+    time_end   = "06:00"
+    time_zone  = "UTC+8"
+  }
+  tags = {
+    "tagKey" = "tagValue"
+  }
+  deploy_mode = 1
+  multi_zone_infos {
+    availability_zone = "ap-guangzhou-3"
+    subnet_id         = "subnet-j5vja918"
+  }
+  multi_zone_infos {
+    availability_zone = "ap-guangzhou-4"
+    subnet_id         = "subnet-oi7ya2j6"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateLogstashInstance](https://www.tencentcloud.com/search/?wd=CreateLogstashInstance&type=document&lang=en)
+  - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&type=document&lang=en)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpdateLogstashInstance](https://www.tencentcloud.com/search/?wd=UpdateLogstashInstance&type=document&lang=en)
+* Delete:
+  - [DeleteLogstashInstance](https://www.tencentcloud.com/search/?wd=DeleteLogstashInstance&type=document&lang=en)
+  - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&type=document&lang=en)
 
 
 ## Create Logstash Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">charge_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">license_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">logstash_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">node_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">node_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">operation_duration</span><span class="p">:</span> <span class="nx">Optional[_elasticsearch.LogstashOperationDurationArgs]</span> = None<span class="p">,</span>
-             <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-             <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">voucher_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">logstash_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">node_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">operation_duration</span><span class="p">:</span> <span class="nx">Optional[LogstashOperationDurationArgs]</span> = None<span class="p">,</span>
+             <span class="nx">license_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">multi_zone_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[LogstashMultiZoneInfoArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">node_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">deploy_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+             <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">voucher_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+             <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">charge_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLogstash</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Logstash</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLogstash</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Logstash</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Logstash</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LogstashArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Elasticsearch:Logstash</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Elasticsearch:Logstash</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_elasticsearch_logstash&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -358,7 +856,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -475,11 +973,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Logstash Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -495,8 +1001,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-required"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-required"
             title="Required">
         <span id="logstashversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstashversion_csharp" style="color: inherit; text-decoration: inherit;">Logstash<wbr>Version</a>
@@ -504,8 +1009,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-required"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -513,8 +1017,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -522,8 +1025,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-required"
+    <dd>VPC id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -531,8 +1033,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -540,8 +1041,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargeperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Period</a>
@@ -549,8 +1049,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -558,8 +1057,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploymode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -567,8 +1073,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -576,8 +1081,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_csharp" style="color: inherit; text-decoration: inherit;">License<wbr>Type</a>
@@ -585,8 +1089,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multizoneinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Multi<wbr>Zone<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenum_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Num</a>
@@ -594,8 +1105,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -603,7 +1113,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -612,17 +1122,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="operationduration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationduration_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Duration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashoperationduration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashoperationduration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Operation<wbr>Duration</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -630,17 +1138,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -648,8 +1154,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_csharp" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -657,8 +1162,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd></dl>
+    <dd>Voucher list(only can use one voucher by now).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -672,8 +1176,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-required"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-required"
             title="Required">
         <span id="logstashversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstashversion_go" style="color: inherit; text-decoration: inherit;">Logstash<wbr>Version</a>
@@ -681,8 +1184,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-required"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -690,8 +1192,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -699,8 +1200,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-required"
+    <dd>VPC id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -708,8 +1208,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -717,8 +1216,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargeperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Period</a>
@@ -726,8 +1224,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -735,8 +1232,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploymode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -744,8 +1248,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -753,8 +1256,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_go" style="color: inherit; text-decoration: inherit;">License<wbr>Type</a>
@@ -762,8 +1264,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multizoneinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">[]Logstash<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenum_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Num</a>
@@ -771,8 +1280,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -780,7 +1288,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -789,8 +1297,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="operationduration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationduration_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Duration</a>
@@ -798,8 +1305,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -807,17 +1313,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -825,8 +1329,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_go" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -834,8 +1337,182 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd></dl>
+    <dd>Voucher list(only can use one voucher by now).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-required"
+            title="Required">
+        <span id="logstash_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstash_version_hcl" style="color: inherit; text-decoration: inherit;">logstash_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC id.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="charge_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_period_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_mode_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="license_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#license_type_hcl" style="color: inherit; text-decoration: inherit;">license_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_zone_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_infos_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">list(object)</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_num_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node type. Valid values:</p>
+<ul>
+<li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
+<li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
+<li>LOGSTASH.S1.MEDIUM8:2 core 8G;</li>
+<li>LOGSTASH.S1.LARGE16:4 core 16G;</li>
+<li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
+<li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
+<li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="operation_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_duration_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashoperationduration">object</a></span>
+    </dt>
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="voucher_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucher_ids_hcl" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Voucher list(only can use one voucher by now).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -849,8 +1526,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-required"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-required"
             title="Required">
         <span id="logstashversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstashversion_java" style="color: inherit; text-decoration: inherit;">logstash<wbr>Version</a>
@@ -858,8 +1534,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-required"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -867,8 +1542,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -876,8 +1550,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-required"
+    <dd>VPC id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -885,8 +1558,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -894,8 +1566,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargeperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -903,8 +1574,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -912,8 +1582,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploymode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -921,8 +1598,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -930,8 +1606,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_java" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -939,8 +1614,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multizoneinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">List&lt;Logstash<wbr>Multi<wbr>Zone<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenum_java" style="color: inherit; text-decoration: inherit;">node<wbr>Num</a>
@@ -948,8 +1630,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -957,7 +1638,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -966,17 +1647,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="operationduration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationduration_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Duration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -984,17 +1663,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_java" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1002,8 +1679,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_java" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -1011,8 +1687,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd></dl>
+    <dd>Voucher list(only can use one voucher by now).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1026,8 +1701,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-required"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-required"
             title="Required">
         <span id="logstashversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstashversion_nodejs" style="color: inherit; text-decoration: inherit;">logstash<wbr>Version</a>
@@ -1035,8 +1709,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-required"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1044,8 +1717,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1053,8 +1725,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-required"
+    <dd>VPC id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1062,8 +1733,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -1071,8 +1741,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargeperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -1080,8 +1749,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1089,8 +1757,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploymode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1098,8 +1773,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1107,8 +1781,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_nodejs" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -1116,8 +1789,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multizoneinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">Logstash<wbr>Multi<wbr>Zone<wbr>Info[]</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenum_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Num</a>
@@ -1125,8 +1805,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -1134,7 +1813,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -1143,17 +1822,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="operationduration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationduration_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Duration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1161,17 +1838,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1179,8 +1854,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_nodejs" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -1188,8 +1862,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd></dl>
+    <dd>Voucher list(only can use one voucher by now).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1203,8 +1876,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-required"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-required"
             title="Required">
         <span id="logstash_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstash_version_python" style="color: inherit; text-decoration: inherit;">logstash_<wbr>version</a>
@@ -1212,8 +1884,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-required"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1221,8 +1892,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1230,8 +1900,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-required"
+    <dd>VPC id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1239,8 +1908,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_voucher_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
@@ -1248,8 +1916,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="charge_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_period_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>period</a>
@@ -1257,8 +1924,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1266,8 +1932,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploy_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_mode_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -1275,8 +1948,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -1284,8 +1956,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="license_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#license_type_python" style="color: inherit; text-decoration: inherit;">license_<wbr>type</a>
@@ -1293,8 +1964,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_zone_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_infos_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">Sequence[Logstash<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args]</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="node_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_num_python" style="color: inherit; text-decoration: inherit;">node_<wbr>num</a>
@@ -1302,8 +1980,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="node_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
@@ -1311,7 +1988,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -1320,8 +1997,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="operation_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_duration_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>duration</a>
@@ -1329,8 +2005,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -1338,17 +2013,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_python" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
@@ -1356,8 +2029,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="voucher_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucher_ids_python" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
@@ -1365,8 +2037,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd></dl>
+    <dd>Voucher list(only can use one voucher by now).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1380,8 +2051,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-required"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-required"
             title="Required">
         <span id="logstashversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstashversion_yaml" style="color: inherit; text-decoration: inherit;">logstash<wbr>Version</a>
@@ -1389,8 +2059,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-required"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1398,8 +2067,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1407,8 +2075,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-required"
+    <dd>VPC id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1416,8 +2083,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -1425,8 +2091,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargeperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -1434,8 +2099,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1443,8 +2107,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploymode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1452,8 +2123,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1461,8 +2131,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_yaml" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -1470,8 +2139,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multizoneinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenum_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Num</a>
@@ -1479,8 +2155,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -1488,7 +2163,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -1497,8 +2172,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="operationduration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationduration_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Duration</a>
@@ -1506,8 +2180,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashoperationduration">Property Map</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1515,17 +2188,15 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1533,8 +2204,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_yaml" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -1542,8 +2212,7 @@ The Logstash resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd></dl>
+    <dd>Voucher list(only can use one voucher by now).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1564,8 +2233,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1579,8 +2247,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1594,8 +2275,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1609,8 +2289,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1624,8 +2303,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1639,8 +2317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1650,137 +2327,178 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Logstash resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">LogstashState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Logstash</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">LogstashState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Logstash</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">charge_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">deploy_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">license_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">logstash_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">multi_zone_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[LogstashMultiZoneInfoArgs]]</span> = None<span class="p">,</span>
         <span class="nx">node_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">node_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">operation_duration</span><span class="p">:</span> <span class="nx">Optional[_elasticsearch.LogstashOperationDurationArgs]</span> = None<span class="p">,</span>
+        <span class="nx">operation_duration</span><span class="p">:</span> <span class="nx">Optional[LogstashOperationDurationArgs]</span> = None<span class="p">,</span>
         <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">voucher_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Logstash</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLogstash<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">LogstashState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Logstash</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLogstash<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">LogstashState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Logstash</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Logstash</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LogstashState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Logstash</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LogstashState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Logstash</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LogstashState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Logstash</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LogstashState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingLogstash</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Elasticsearch:Logstash</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_elasticsearch_logstash</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LogstashState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LogstashState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1788,28 +2506,31 @@ Get an existing Logstash resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LogstashState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1817,28 +2538,31 @@ Get an existing Logstash resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LogstashState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1858,8 +2582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Period</a>
@@ -1867,8 +2590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1876,8 +2598,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploymode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1885,8 +2614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1894,8 +2622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1903,8 +2630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-optional"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_csharp" style="color: inherit; text-decoration: inherit;">License<wbr>Type</a>
@@ -1912,8 +2638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logstashversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logstashversion_csharp" style="color: inherit; text-decoration: inherit;">Logstash<wbr>Version</a>
@@ -1921,8 +2646,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-optional"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multizoneinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Multi<wbr>Zone<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodenum_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Num</a>
@@ -1930,8 +2662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodetype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -1939,7 +2670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -1948,17 +2679,15 @@ The following state arguments are supported:
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationduration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationduration_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Duration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashoperationduration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashoperationduration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Logstash<wbr>Operation<wbr>Duration</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -1966,8 +2695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1975,17 +2703,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1993,8 +2719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_csharp" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -2002,8 +2727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd><dt class="property-optional"
+    <dd>Voucher list(only can use one voucher by now).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2011,8 +2735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-optional"
+    <dd>VPC id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2020,8 +2743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2035,8 +2757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Period</a>
@@ -2044,8 +2765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2053,8 +2773,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploymode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -2062,8 +2789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -2071,8 +2797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2080,8 +2805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-optional"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_go" style="color: inherit; text-decoration: inherit;">License<wbr>Type</a>
@@ -2089,8 +2813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logstashversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logstashversion_go" style="color: inherit; text-decoration: inherit;">Logstash<wbr>Version</a>
@@ -2098,8 +2821,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-optional"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multizoneinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">[]Logstash<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodenum_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Num</a>
@@ -2107,8 +2837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodetype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -2116,7 +2845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -2125,8 +2854,7 @@ The following state arguments are supported:
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationduration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationduration_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Duration</a>
@@ -2134,8 +2862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -2143,8 +2870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2152,17 +2878,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -2170,8 +2894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_go" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -2179,8 +2902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd><dt class="property-optional"
+    <dd>Voucher list(only can use one voucher by now).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2188,8 +2910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-optional"
+    <dd>VPC id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2197,8 +2918,182 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charge_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_period_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_mode_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_license_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_license_type_hcl" style="color: inherit; text-decoration: inherit;">license_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_logstash_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logstash_version_hcl" style="color: inherit; text-decoration: inherit;">logstash_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_zone_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_zone_infos_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">list(object)</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_node_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_num_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_node_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node type. Valid values:</p>
+<ul>
+<li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
+<li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
+<li>LOGSTASH.S1.MEDIUM8:2 core 8G;</li>
+<li>LOGSTASH.S1.LARGE16:4 core 16G;</li>
+<li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
+<li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
+<li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_operation_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_duration_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashoperationduration">object</a></span>
+    </dt>
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_unit_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_voucher_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucher_ids_hcl" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Voucher list(only can use one voucher by now).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2212,8 +3107,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -2221,8 +3115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2230,8 +3123,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploymode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2239,8 +3139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2248,8 +3147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2257,8 +3155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-optional"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_java" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -2266,8 +3163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logstashversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logstashversion_java" style="color: inherit; text-decoration: inherit;">logstash<wbr>Version</a>
@@ -2275,8 +3171,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-optional"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multizoneinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">List&lt;Logstash<wbr>Multi<wbr>Zone<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodenum_java" style="color: inherit; text-decoration: inherit;">node<wbr>Num</a>
@@ -2284,8 +3187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodetype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -2293,7 +3195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -2302,17 +3204,15 @@ The following state arguments are supported:
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationduration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationduration_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Duration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2320,8 +3220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2329,17 +3228,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_java" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2347,8 +3244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_java" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -2356,8 +3252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd><dt class="property-optional"
+    <dd>Voucher list(only can use one voucher by now).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2365,8 +3260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-optional"
+    <dd>VPC id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2374,8 +3268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2389,8 +3282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -2398,8 +3290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2407,8 +3298,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploymode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2416,8 +3314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2425,8 +3322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2434,8 +3330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-optional"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_nodejs" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -2443,8 +3338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logstashversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logstashversion_nodejs" style="color: inherit; text-decoration: inherit;">logstash<wbr>Version</a>
@@ -2452,8 +3346,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-optional"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multizoneinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">Logstash<wbr>Multi<wbr>Zone<wbr>Info[]</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodenum_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Num</a>
@@ -2461,8 +3362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodetype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -2470,7 +3370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -2479,17 +3379,15 @@ The following state arguments are supported:
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationduration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationduration_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Duration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
+        <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2497,8 +3395,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2506,17 +3403,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2524,8 +3419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_nodejs" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -2533,8 +3427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd><dt class="property-optional"
+    <dd>Voucher list(only can use one voucher by now).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2542,8 +3435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-optional"
+    <dd>VPC id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2551,8 +3443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2566,8 +3457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charge_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_period_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>period</a>
@@ -2575,8 +3465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -2584,8 +3473,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploy_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_mode_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -2593,8 +3489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -2602,8 +3497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -2611,8 +3505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-optional"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_license_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_license_type_python" style="color: inherit; text-decoration: inherit;">license_<wbr>type</a>
@@ -2620,8 +3513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logstash_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logstash_version_python" style="color: inherit; text-decoration: inherit;">logstash_<wbr>version</a>
@@ -2629,8 +3521,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-optional"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_zone_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_zone_infos_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">Sequence[Logstash<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args]</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_node_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_num_python" style="color: inherit; text-decoration: inherit;">node_<wbr>num</a>
@@ -2638,8 +3537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_node_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
@@ -2647,7 +3545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -2656,8 +3554,7 @@ The following state arguments are supported:
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_operation_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_duration_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>duration</a>
@@ -2665,8 +3562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashoperationduration">Logstash<wbr>Operation<wbr>Duration<wbr>Args</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -2674,8 +3570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2683,17 +3578,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_time_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_unit_python" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
@@ -2701,8 +3594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucher_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucher_ids_python" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
@@ -2710,8 +3602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd><dt class="property-optional"
+    <dd>Voucher list(only can use one voucher by now).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2719,8 +3610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-optional"
+    <dd>VPC id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2728,8 +3618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2743,8 +3632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>whether to use voucher auto, 1 when use, else 0.</p>
-</dd><dt class="property-optional"
+    <dd>whether to use voucher auto, 1 when use, else 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -2752,8 +3640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Period when charged by months or years(unit depends on TimeUnit).</p>
-</dd><dt class="property-optional"
+    <dd>Period when charged by months or years(unit depends on TimeUnit).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2761,8 +3648,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploymode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Deployment mode, 0: single availability zone, 1: multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2770,8 +3664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>node disk size (unit GB).</p>
-</dd><dt class="property-optional"
+    <dd>node disk size (unit GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2779,8 +3672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2788,8 +3680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name (compose of 1-50 letter, number, - or _).</p>
-</dd><dt class="property-optional"
+    <dd>Instance name (compose of 1-50 letter, number, - or _).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_yaml" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -2797,8 +3688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>License type. oss: open source version; xpack:xpack version; default: xpack.</p>
-</dd><dt class="property-optional"
+    <dd>License type. oss: open source version; xpack:xpack version; default: xpack.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logstashversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logstashversion_yaml" style="color: inherit; text-decoration: inherit;">logstash<wbr>Version</a>
@@ -2806,8 +3696,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance version(6.8.13, 7.10.1).</p>
-</dd><dt class="property-optional"
+    <dd>Instance version(6.8.13, 7.10.1).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multizoneinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#logstashmultizoneinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Details of availability zones when deploying multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodenum_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Num</a>
@@ -2815,8 +3712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node num(range 2-50).</p>
-</dd><dt class="property-optional"
+    <dd>Node num(range 2-50).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodetype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -2824,7 +3720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node type. Valid values:</p>
+    <dd>Node type. Valid values:</p>
 <ul>
 <li>LOGSTASH.S1.SMALL2: 1 core 2G;</li>
 <li>LOGSTASH.S1.MEDIUM4:2 core 4G;</li>
@@ -2833,8 +3729,7 @@ The following state arguments are supported:
 <li>LOGSTASH.S1.2XLARGE32:8 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE32:16 core 32G;</li>
 <li>LOGSTASH.S1.4XLARGE64:16 core 64G.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationduration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationduration_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Duration</a>
@@ -2842,8 +3737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#logstashoperationduration">Property Map</a></span>
     </dt>
-    <dd><p>operation time by tencent clound.</p>
-</dd><dt class="property-optional"
+    <dd>operation time by tencent clound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2851,8 +3745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2860,17 +3753,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2878,8 +3769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>charge time unit(set when ChargeType is PREPAID, default value: ms).</p>
-</dd><dt class="property-optional"
+    <dd>charge time unit(set when ChargeType is PREPAID, default value: ms).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_yaml" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -2887,8 +3777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Voucher list(only can use one voucher by now).</p>
-</dd><dt class="property-optional"
+    <dd>Voucher list(only can use one voucher by now).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2896,8 +3785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd><dt class="property-optional"
+    <dd>VPC id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2905,8 +3793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2921,7 +3808,223 @@ The following state arguments are supported:
 
 
 
-<h4 id="logstashoperationduration">Logstash<wbr>Operation<wbr>Duration</h4>
+<h4 id="logstashmultizoneinfo">
+Logstash<wbr>Multi<wbr>Zone<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Logstash<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availabilityzone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnetid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hidden_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hidden_csharp" style="color: inherit; text-decoration: inherit;">Hidden</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether it is a hidden availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availabilityzone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnetid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hidden_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hidden_go" style="color: inherit; text-decoration: inherit;">Hidden</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether it is a hidden availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hidden_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hidden_hcl" style="color: inherit; text-decoration: inherit;">hidden</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether it is a hidden availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availabilityzone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnetid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hidden_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hidden_java" style="color: inherit; text-decoration: inherit;">hidden</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether it is a hidden availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availabilityzone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnetid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hidden_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hidden_nodejs" style="color: inherit; text-decoration: inherit;">hidden</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether it is a hidden availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hidden_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hidden_python" style="color: inherit; text-decoration: inherit;">hidden</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether it is a hidden availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availabilityzone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnetid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hidden_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hidden_yaml" style="color: inherit; text-decoration: inherit;">hidden</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether it is a hidden availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="logstashoperationduration">
+Logstash<wbr>Operation<wbr>Duration<pulumi-choosable type="language" values="python,go" class="inline">, Logstash<wbr>Operation<wbr>Duration<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2933,8 +4036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</p>
-</dd><dt class="property-required"
+    <dd>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</dd><dt class="property-required"
             title="Required">
         <span id="timeend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeend_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>End</a>
@@ -2942,8 +4044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operation end time.</p>
-</dd><dt class="property-required"
+    <dd>operation end time.</dd><dt class="property-required"
             title="Required">
         <span id="timestart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestart_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Start</a>
@@ -2951,8 +4052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operation start time.</p>
-</dd><dt class="property-required"
+    <dd>operation start time.</dd><dt class="property-required"
             title="Required">
         <span id="timezone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
@@ -2960,8 +4060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>time zone, for example: UTC+8.</p>
-</dd></dl>
+    <dd>time zone, for example: UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2975,8 +4074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</p>
-</dd><dt class="property-required"
+    <dd>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</dd><dt class="property-required"
             title="Required">
         <span id="timeend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeend_go" style="color: inherit; text-decoration: inherit;">Time<wbr>End</a>
@@ -2984,8 +4082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operation end time.</p>
-</dd><dt class="property-required"
+    <dd>operation end time.</dd><dt class="property-required"
             title="Required">
         <span id="timestart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestart_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Start</a>
@@ -2993,8 +4090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operation start time.</p>
-</dd><dt class="property-required"
+    <dd>operation start time.</dd><dt class="property-required"
             title="Required">
         <span id="timezone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
@@ -3002,8 +4098,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>time zone, for example: UTC+8.</p>
-</dd></dl>
+    <dd>time zone, for example: UTC+8.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="periods_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periods_hcl" style="color: inherit; text-decoration: inherit;">periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</dd><dt class="property-required"
+            title="Required">
+        <span id="time_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_end_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>operation end time.</dd><dt class="property-required"
+            title="Required">
+        <span id="time_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_start_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>operation start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="time_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_zone_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>time zone, for example: UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3017,8 +4150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</p>
-</dd><dt class="property-required"
+    <dd>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</dd><dt class="property-required"
             title="Required">
         <span id="timeend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeend_java" style="color: inherit; text-decoration: inherit;">time<wbr>End</a>
@@ -3026,8 +4158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>operation end time.</p>
-</dd><dt class="property-required"
+    <dd>operation end time.</dd><dt class="property-required"
             title="Required">
         <span id="timestart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestart_java" style="color: inherit; text-decoration: inherit;">time<wbr>Start</a>
@@ -3035,8 +4166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>operation start time.</p>
-</dd><dt class="property-required"
+    <dd>operation start time.</dd><dt class="property-required"
             title="Required">
         <span id="timezone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_java" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
@@ -3044,8 +4174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>time zone, for example: UTC+8.</p>
-</dd></dl>
+    <dd>time zone, for example: UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3059,8 +4188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</p>
-</dd><dt class="property-required"
+    <dd>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</dd><dt class="property-required"
             title="Required">
         <span id="timeend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeend_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>End</a>
@@ -3068,8 +4196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operation end time.</p>
-</dd><dt class="property-required"
+    <dd>operation end time.</dd><dt class="property-required"
             title="Required">
         <span id="timestart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestart_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Start</a>
@@ -3077,8 +4204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operation start time.</p>
-</dd><dt class="property-required"
+    <dd>operation start time.</dd><dt class="property-required"
             title="Required">
         <span id="timezone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
@@ -3086,8 +4212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>time zone, for example: UTC+8.</p>
-</dd></dl>
+    <dd>time zone, for example: UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3101,8 +4226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</p>
-</dd><dt class="property-required"
+    <dd>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</dd><dt class="property-required"
             title="Required">
         <span id="time_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_end_python" style="color: inherit; text-decoration: inherit;">time_<wbr>end</a>
@@ -3110,8 +4234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>operation end time.</p>
-</dd><dt class="property-required"
+    <dd>operation end time.</dd><dt class="property-required"
             title="Required">
         <span id="time_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_start_python" style="color: inherit; text-decoration: inherit;">time_<wbr>start</a>
@@ -3119,8 +4242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>operation start time.</p>
-</dd><dt class="property-required"
+    <dd>operation start time.</dd><dt class="property-required"
             title="Required">
         <span id="time_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_zone_python" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
@@ -3128,8 +4250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>time zone, for example: UTC+8.</p>
-</dd></dl>
+    <dd>time zone, for example: UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3143,8 +4264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</p>
-</dd><dt class="property-required"
+    <dd>day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.</dd><dt class="property-required"
             title="Required">
         <span id="timeend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeend_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>End</a>
@@ -3152,8 +4272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>operation end time.</p>
-</dd><dt class="property-required"
+    <dd>operation end time.</dd><dt class="property-required"
             title="Required">
         <span id="timestart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestart_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Start</a>
@@ -3161,8 +4280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>operation start time.</p>
-</dd><dt class="property-required"
+    <dd>operation start time.</dd><dt class="property-required"
             title="Required">
         <span id="timezone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
@@ -3170,8 +4288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>time zone, for example: UTC+8.</p>
-</dd></dl>
+    <dd>time zone, for example: UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3187,6 +4304,9 @@ $ pulumi import tencentcloud:Elasticsearch/logstash:Logstash logstash logstash_i
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3196,7 +4316,6 @@ $ pulumi import tencentcloud:Elasticsearch/logstash:Logstash logstash logstash_i
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Mesh"
 title_tag: "tencentcloud.Tcm.Mesh"
-meta_desc: "Documentation for the tencentcloud.Tcm.Mesh resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tcm mesh"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,37 +18,53 @@ Provides a resource to create a tcm mesh
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const mesh = new tencentcloud.tcm.Mesh("mesh", {
+    displayName: "test_mesh",
+    meshVersion: "1.12.5",
+    type: "HOSTED",
     config: {
-        inject: {
-            excludeIpRanges: ["172.16.0.0/16"],
-            holdApplicationUntilProxyStarts: true,
-            holdProxyUntilApplicationEnds: true,
-        },
         istio: {
-            disableHttpRetry: true,
+            outboundTrafficPolicy: "ALLOW_ANY",
             disablePolicyChecks: true,
             enablePilotHttp: true,
-            outboundTrafficPolicy: "ALLOW_ANY",
+            disableHttpRetry: true,
             smartDns: {
-                istioMetaDnsAutoAllocate: true,
                 istioMetaDnsCapture: true,
+                istioMetaDnsAutoAllocate: true,
             },
             tracing: {
                 enable: false,
             },
         },
+        tracing: {
+            enable: true,
+            sampling: 1,
+            apm: {
+                enable: true,
+                region: "ap-guangzhou",
+            },
+        },
         prometheus: {
             customProm: {
-                authType: "none",
                 url: "https://10.0.0.1:1000",
+                authType: "none",
                 vpcId: "vpc-j9yhbzpn",
             },
+        },
+        inject: {
+            excludeIpRanges: ["172.16.0.0/16"],
+            holdApplicationUntilProxyStarts: true,
+            holdProxyUntilApplicationEnds: true,
         },
         sidecarResources: {
             limits: [
@@ -70,96 +88,188 @@ const mesh = new tencentcloud.tcm.Mesh("mesh", {
                 },
             ],
         },
-        tracing: {
-            apm: {
-                enable: true,
-                region: "ap-guangzhou",
-            },
-            enable: true,
-            sampling: 1,
-        },
     },
-    displayName: "test_mesh",
-    meshVersion: "1.12.5",
     tagLists: [{
         key: "key",
-        passthrough: false,
         value: "value",
+        passthrough: false,
     }],
-    type: "HOSTED",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 mesh = tencentcloud.tcm.Mesh("mesh",
-    config=tencentcloud.tcm.MeshConfigArgs(
-        inject=tencentcloud.tcm.MeshConfigInjectArgs(
-            exclude_ip_ranges=["172.16.0.0/16"],
-            hold_application_until_proxy_starts=True,
-            hold_proxy_until_application_ends=True,
-        ),
-        istio=tencentcloud.tcm.MeshConfigIstioArgs(
-            disable_http_retry=True,
-            disable_policy_checks=True,
-            enable_pilot_http=True,
-            outbound_traffic_policy="ALLOW_ANY",
-            smart_dns=tencentcloud.tcm.MeshConfigIstioSmartDnsArgs(
-                istio_meta_dns_auto_allocate=True,
-                istio_meta_dns_capture=True,
-            ),
-            tracing=tencentcloud.tcm.MeshConfigIstioTracingArgs(
-                enable=False,
-            ),
-        ),
-        prometheus=tencentcloud.tcm.MeshConfigPrometheusArgs(
-            custom_prom=tencentcloud.tcm.MeshConfigPrometheusCustomPromArgs(
-                auth_type="none",
-                url="https://10.0.0.1:1000",
-                vpc_id="vpc-j9yhbzpn",
-            ),
-        ),
-        sidecar_resources=tencentcloud.tcm.MeshConfigSidecarResourcesArgs(
-            limits=[
-                tencentcloud.tcm.MeshConfigSidecarResourcesLimitArgs(
-                    name="cpu",
-                    quantity="2",
-                ),
-                tencentcloud.tcm.MeshConfigSidecarResourcesLimitArgs(
-                    name="memory",
-                    quantity="1Gi",
-                ),
-            ],
-            requests=[
-                tencentcloud.tcm.MeshConfigSidecarResourcesRequestArgs(
-                    name="cpu",
-                    quantity="100m",
-                ),
-                tencentcloud.tcm.MeshConfigSidecarResourcesRequestArgs(
-                    name="memory",
-                    quantity="128Mi",
-                ),
-            ],
-        ),
-        tracing=tencentcloud.tcm.MeshConfigTracingArgs(
-            apm=tencentcloud.tcm.MeshConfigTracingApmArgs(
-                enable=True,
-                region="ap-guangzhou",
-            ),
-            enable=True,
-            sampling=1,
-        ),
-    ),
     display_name="test_mesh",
     mesh_version="1.12.5",
-    tag_lists=[tencentcloud.tcm.MeshTagListArgs(
-        key="key",
-        passthrough=False,
-        value="value",
-    )],
-    type="HOSTED")
+    type="HOSTED",
+    config={
+        "istio": {
+            "outbound_traffic_policy": "ALLOW_ANY",
+            "disable_policy_checks": True,
+            "enable_pilot_http": True,
+            "disable_http_retry": True,
+            "smart_dns": {
+                "istio_meta_dns_capture": True,
+                "istio_meta_dns_auto_allocate": True,
+            },
+            "tracing": {
+                "enable": False,
+            },
+        },
+        "tracing": {
+            "enable": True,
+            "sampling": float(1),
+            "apm": {
+                "enable": True,
+                "region": "ap-guangzhou",
+            },
+        },
+        "prometheus": {
+            "custom_prom": {
+                "url": "https://10.0.0.1:1000",
+                "auth_type": "none",
+                "vpc_id": "vpc-j9yhbzpn",
+            },
+        },
+        "inject": {
+            "exclude_ip_ranges": ["172.16.0.0/16"],
+            "hold_application_until_proxy_starts": True,
+            "hold_proxy_until_application_ends": True,
+        },
+        "sidecar_resources": {
+            "limits": [
+                {
+                    "name": "cpu",
+                    "quantity": "2",
+                },
+                {
+                    "name": "memory",
+                    "quantity": "1Gi",
+                },
+            ],
+            "requests": [
+                {
+                    "name": "cpu",
+                    "quantity": "100m",
+                },
+                {
+                    "name": "memory",
+                    "quantity": "128Mi",
+                },
+            ],
+        },
+    },
+    tag_lists=[{
+        "key": "key",
+        "value": "value",
+        "passthrough": False,
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcm.NewMesh(ctx, "mesh", &tcm.MeshArgs{
+			DisplayName: pulumi.String("test_mesh"),
+			MeshVersion: pulumi.String("1.12.5"),
+			Type:        pulumi.String("HOSTED"),
+			Config: &tcm.MeshConfigArgs{
+				Istio: &tcm.MeshConfigIstioArgs{
+					OutboundTrafficPolicy: pulumi.String("ALLOW_ANY"),
+					DisablePolicyChecks:   pulumi.Bool(true),
+					EnablePilotHttp:       pulumi.Bool(true),
+					DisableHttpRetry:      pulumi.Bool(true),
+					SmartDns: &tcm.MeshConfigIstioSmartDnsArgs{
+						IstioMetaDnsCapture:      pulumi.Bool(true),
+						IstioMetaDnsAutoAllocate: pulumi.Bool(true),
+					},
+					Tracing: &tcm.MeshConfigIstioTracingArgs{
+						Enable: pulumi.Bool(false),
+					},
+				},
+				Tracing: &tcm.MeshConfigTracingArgs{
+					Enable:   pulumi.Bool(true),
+					Sampling: pulumi.Float64(1),
+					Apm: &tcm.MeshConfigTracingApmArgs{
+						Enable: pulumi.Bool(true),
+						Region: pulumi.String("ap-guangzhou"),
+					},
+				},
+				Prometheus: &tcm.MeshConfigPrometheusArgs{
+					CustomProm: &tcm.MeshConfigPrometheusCustomPromArgs{
+						Url:      pulumi.String("https://10.0.0.1:1000"),
+						AuthType: pulumi.String("none"),
+						VpcId:    pulumi.String("vpc-j9yhbzpn"),
+					},
+				},
+				Inject: &tcm.MeshConfigInjectArgs{
+					ExcludeIpRanges: pulumi.StringArray{
+						pulumi.String("172.16.0.0/16"),
+					},
+					HoldApplicationUntilProxyStarts: pulumi.Bool(true),
+					HoldProxyUntilApplicationEnds:   pulumi.Bool(true),
+				},
+				SidecarResources: &tcm.MeshConfigSidecarResourcesArgs{
+					Limits: tcm.MeshConfigSidecarResourcesLimitArray{
+						&tcm.MeshConfigSidecarResourcesLimitArgs{
+							Name:     pulumi.String("cpu"),
+							Quantity: pulumi.String("2"),
+						},
+						&tcm.MeshConfigSidecarResourcesLimitArgs{
+							Name:     pulumi.String("memory"),
+							Quantity: pulumi.String("1Gi"),
+						},
+					},
+					Requests: tcm.MeshConfigSidecarResourcesRequestArray{
+						&tcm.MeshConfigSidecarResourcesRequestArgs{
+							Name:     pulumi.String("cpu"),
+							Quantity: pulumi.String("100m"),
+						},
+						&tcm.MeshConfigSidecarResourcesRequestArgs{
+							Name:     pulumi.String("memory"),
+							Quantity: pulumi.String("128Mi"),
+						},
+					},
+				},
+			},
+			TagLists: tcm.MeshTagListArray{
+				&tcm.MeshTagListArgs{
+					Key:         pulumi.String("key"),
+					Value:       pulumi.String("value"),
+					Passthrough: pulumi.Bool(false),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -170,8 +280,46 @@ return await Deployment.RunAsync(() =>
 {
     var mesh = new Tencentcloud.Tcm.Mesh("mesh", new()
     {
+        DisplayName = "test_mesh",
+        MeshVersion = "1.12.5",
+        Type = "HOSTED",
         Config = new Tencentcloud.Tcm.Inputs.MeshConfigArgs
         {
+            Istio = new Tencentcloud.Tcm.Inputs.MeshConfigIstioArgs
+            {
+                OutboundTrafficPolicy = "ALLOW_ANY",
+                DisablePolicyChecks = true,
+                EnablePilotHttp = true,
+                DisableHttpRetry = true,
+                SmartDns = new Tencentcloud.Tcm.Inputs.MeshConfigIstioSmartDnsArgs
+                {
+                    IstioMetaDnsCapture = true,
+                    IstioMetaDnsAutoAllocate = true,
+                },
+                Tracing = new Tencentcloud.Tcm.Inputs.MeshConfigIstioTracingArgs
+                {
+                    Enable = false,
+                },
+            },
+            Tracing = new Tencentcloud.Tcm.Inputs.MeshConfigTracingArgs
+            {
+                Enable = true,
+                Sampling = 1,
+                Apm = new Tencentcloud.Tcm.Inputs.MeshConfigTracingApmArgs
+                {
+                    Enable = true,
+                    Region = "ap-guangzhou",
+                },
+            },
+            Prometheus = new Tencentcloud.Tcm.Inputs.MeshConfigPrometheusArgs
+            {
+                CustomProm = new Tencentcloud.Tcm.Inputs.MeshConfigPrometheusCustomPromArgs
+                {
+                    Url = "https://10.0.0.1:1000",
+                    AuthType = "none",
+                    VpcId = "vpc-j9yhbzpn",
+                },
+            },
             Inject = new Tencentcloud.Tcm.Inputs.MeshConfigInjectArgs
             {
                 ExcludeIpRanges = new[]
@@ -180,31 +328,6 @@ return await Deployment.RunAsync(() =>
                 },
                 HoldApplicationUntilProxyStarts = true,
                 HoldProxyUntilApplicationEnds = true,
-            },
-            Istio = new Tencentcloud.Tcm.Inputs.MeshConfigIstioArgs
-            {
-                DisableHttpRetry = true,
-                DisablePolicyChecks = true,
-                EnablePilotHttp = true,
-                OutboundTrafficPolicy = "ALLOW_ANY",
-                SmartDns = new Tencentcloud.Tcm.Inputs.MeshConfigIstioSmartDnsArgs
-                {
-                    IstioMetaDnsAutoAllocate = true,
-                    IstioMetaDnsCapture = true,
-                },
-                Tracing = new Tencentcloud.Tcm.Inputs.MeshConfigIstioTracingArgs
-                {
-                    Enable = false,
-                },
-            },
-            Prometheus = new Tencentcloud.Tcm.Inputs.MeshConfigPrometheusArgs
-            {
-                CustomProm = new Tencentcloud.Tcm.Inputs.MeshConfigPrometheusCustomPromArgs
-                {
-                    AuthType = "none",
-                    Url = "https://10.0.0.1:1000",
-                    VpcId = "vpc-j9yhbzpn",
-                },
             },
             SidecarResources = new Tencentcloud.Tcm.Inputs.MeshConfigSidecarResourcesArgs
             {
@@ -235,121 +358,25 @@ return await Deployment.RunAsync(() =>
                     },
                 },
             },
-            Tracing = new Tencentcloud.Tcm.Inputs.MeshConfigTracingArgs
-            {
-                Apm = new Tencentcloud.Tcm.Inputs.MeshConfigTracingApmArgs
-                {
-                    Enable = true,
-                    Region = "ap-guangzhou",
-                },
-                Enable = true,
-                Sampling = 1,
-            },
         },
-        DisplayName = "test_mesh",
-        MeshVersion = "1.12.5",
         TagLists = new[]
         {
             new Tencentcloud.Tcm.Inputs.MeshTagListArgs
             {
                 Key = "key",
-                Passthrough = false,
                 Value = "value",
+                Passthrough = false,
             },
         },
-        Type = "HOSTED",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcm.NewMesh(ctx, "mesh", &Tcm.MeshArgs{
-			Config: &tcm.MeshConfigArgs{
-				Inject: &tcm.MeshConfigInjectArgs{
-					ExcludeIpRanges: pulumi.StringArray{
-						pulumi.String("172.16.0.0/16"),
-					},
-					HoldApplicationUntilProxyStarts: pulumi.Bool(true),
-					HoldProxyUntilApplicationEnds:   pulumi.Bool(true),
-				},
-				Istio: &tcm.MeshConfigIstioArgs{
-					DisableHttpRetry:      pulumi.Bool(true),
-					DisablePolicyChecks:   pulumi.Bool(true),
-					EnablePilotHttp:       pulumi.Bool(true),
-					OutboundTrafficPolicy: pulumi.String("ALLOW_ANY"),
-					SmartDns: &tcm.MeshConfigIstioSmartDnsArgs{
-						IstioMetaDnsAutoAllocate: pulumi.Bool(true),
-						IstioMetaDnsCapture:      pulumi.Bool(true),
-					},
-					Tracing: &tcm.MeshConfigIstioTracingArgs{
-						Enable: pulumi.Bool(false),
-					},
-				},
-				Prometheus: &tcm.MeshConfigPrometheusArgs{
-					CustomProm: &tcm.MeshConfigPrometheusCustomPromArgs{
-						AuthType: pulumi.String("none"),
-						Url:      pulumi.String("https://10.0.0.1:1000"),
-						VpcId:    pulumi.String("vpc-j9yhbzpn"),
-					},
-				},
-				SidecarResources: &tcm.MeshConfigSidecarResourcesArgs{
-					Limits: tcm.MeshConfigSidecarResourcesLimitArray{
-						&tcm.MeshConfigSidecarResourcesLimitArgs{
-							Name:     pulumi.String("cpu"),
-							Quantity: pulumi.String("2"),
-						},
-						&tcm.MeshConfigSidecarResourcesLimitArgs{
-							Name:     pulumi.String("memory"),
-							Quantity: pulumi.String("1Gi"),
-						},
-					},
-					Requests: tcm.MeshConfigSidecarResourcesRequestArray{
-						&tcm.MeshConfigSidecarResourcesRequestArgs{
-							Name:     pulumi.String("cpu"),
-							Quantity: pulumi.String("100m"),
-						},
-						&tcm.MeshConfigSidecarResourcesRequestArgs{
-							Name:     pulumi.String("memory"),
-							Quantity: pulumi.String("128Mi"),
-						},
-					},
-				},
-				Tracing: &tcm.MeshConfigTracingArgs{
-					Apm: &tcm.MeshConfigTracingApmArgs{
-						Enable: pulumi.Bool(true),
-						Region: pulumi.String("ap-guangzhou"),
-					},
-					Enable:   pulumi.Bool(true),
-					Sampling: pulumi.Float64(1),
-				},
-			},
-			DisplayName: pulumi.String("test_mesh"),
-			MeshVersion: pulumi.String("1.12.5"),
-			TagLists: tcm.MeshTagListArray{
-				&tcm.MeshTagListArgs{
-					Key:         pulumi.String("key"),
-					Passthrough: pulumi.Bool(false),
-					Value:       pulumi.String("value"),
-				},
-			},
-			Type: pulumi.String("HOSTED"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -359,18 +386,20 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcm.Mesh;
 import com.pulumi.tencentcloud.Tcm.MeshArgs;
 import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigArgs;
-import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigInjectArgs;
 import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigIstioArgs;
 import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigIstioSmartDnsArgs;
 import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigIstioTracingArgs;
-import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigPrometheusArgs;
-import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigPrometheusCustomPromArgs;
-import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigSidecarResourcesArgs;
 import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigTracingArgs;
 import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigTracingApmArgs;
+import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigPrometheusArgs;
+import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigPrometheusCustomPromArgs;
+import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigInjectArgs;
+import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigSidecarResourcesArgs;
+import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigSidecarResourcesLimitArgs;
+import com.pulumi.tencentcloud.Tcm.inputs.MeshConfigSidecarResourcesRequestArgs;
 import com.pulumi.tencentcloud.Tcm.inputs.MeshTagListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -382,32 +411,43 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var mesh = new Mesh("mesh", MeshArgs.builder()        
+        var mesh = new Mesh("mesh", MeshArgs.builder()
+            .displayName("test_mesh")
+            .meshVersion("1.12.5")
+            .type("HOSTED")
             .config(MeshConfigArgs.builder()
-                .inject(MeshConfigInjectArgs.builder()
-                    .excludeIpRanges("172.16.0.0/16")
-                    .holdApplicationUntilProxyStarts(true)
-                    .holdProxyUntilApplicationEnds(true)
-                    .build())
                 .istio(MeshConfigIstioArgs.builder()
-                    .disableHttpRetry(true)
+                    .outboundTrafficPolicy("ALLOW_ANY")
                     .disablePolicyChecks(true)
                     .enablePilotHttp(true)
-                    .outboundTrafficPolicy("ALLOW_ANY")
+                    .disableHttpRetry(true)
                     .smartDns(MeshConfigIstioSmartDnsArgs.builder()
-                        .istioMetaDnsAutoAllocate(true)
                         .istioMetaDnsCapture(true)
+                        .istioMetaDnsAutoAllocate(true)
                         .build())
                     .tracing(MeshConfigIstioTracingArgs.builder()
                         .enable(false)
                         .build())
                     .build())
+                .tracing(MeshConfigTracingArgs.builder()
+                    .enable(true)
+                    .sampling(1.0)
+                    .apm(MeshConfigTracingApmArgs.builder()
+                        .enable(true)
+                        .region("ap-guangzhou")
+                        .build())
+                    .build())
                 .prometheus(MeshConfigPrometheusArgs.builder()
                     .customProm(MeshConfigPrometheusCustomPromArgs.builder()
-                        .authType("none")
                         .url("https://10.0.0.1:1000")
+                        .authType("none")
                         .vpcId("vpc-j9yhbzpn")
                         .build())
+                    .build())
+                .inject(MeshConfigInjectArgs.builder()
+                    .excludeIpRanges("172.16.0.0/16")
+                    .holdApplicationUntilProxyStarts(true)
+                    .holdProxyUntilApplicationEnds(true)
                     .build())
                 .sidecarResources(MeshConfigSidecarResourcesArgs.builder()
                     .limits(                    
@@ -429,54 +469,57 @@ public class App {
                             .quantity("128Mi")
                             .build())
                     .build())
-                .tracing(MeshConfigTracingArgs.builder()
-                    .apm(MeshConfigTracingApmArgs.builder()
-                        .enable(true)
-                        .region("ap-guangzhou")
-                        .build())
-                    .enable(true)
-                    .sampling(1)
-                    .build())
                 .build())
-            .displayName("test_mesh")
-            .meshVersion("1.12.5")
             .tagLists(MeshTagListArgs.builder()
                 .key("key")
-                .passthrough(false)
                 .value("value")
+                .passthrough(false)
                 .build())
-            .type("HOSTED")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   mesh:
     type: tencentcloud:Tcm:Mesh
     properties:
+      displayName: test_mesh
+      meshVersion: 1.12.5
+      type: HOSTED
       config:
+        istio:
+          outboundTrafficPolicy: ALLOW_ANY
+          disablePolicyChecks: true
+          enablePilotHttp: true
+          disableHttpRetry: true
+          smartDns:
+            istioMetaDnsCapture: true
+            istioMetaDnsAutoAllocate: true
+          tracing:
+            enable: false
+        tracing:
+          enable: true
+          sampling: 1
+          apm:
+            enable: true
+            region: ap-guangzhou
+        prometheus:
+          customProm:
+            url: https://10.0.0.1:1000
+            authType: none
+            vpcId: vpc-j9yhbzpn
         inject:
           excludeIpRanges:
             - 172.16.0.0/16
           holdApplicationUntilProxyStarts: true
           holdProxyUntilApplicationEnds: true
-        istio:
-          disableHttpRetry: true
-          disablePolicyChecks: true
-          enablePilotHttp: true
-          outboundTrafficPolicy: ALLOW_ANY
-          smartDns:
-            istioMetaDnsAutoAllocate: true
-            istioMetaDnsCapture: true
-          tracing:
-            enable: false
-        prometheus:
-          customProm:
-            authType: none
-            url: https://10.0.0.1:1000
-            vpcId: vpc-j9yhbzpn
         sidecarResources:
           limits:
             - name: cpu
@@ -488,84 +531,180 @@ resources:
               quantity: 100m
             - name: memory
               quantity: 128Mi
-        tracing:
-          apm:
-            enable: true
-            region: ap-guangzhou
-          enable: true
-          sampling: 1
-      displayName: test_mesh
-      meshVersion: 1.12.5
       tagLists:
         - key: key
-          passthrough: false
           value: value
-      type: HOSTED
+          passthrough: false
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcm_mesh" "mesh" {
+  display_name = "test_mesh"
+  mesh_version = "1.12.5"
+  type         = "HOSTED"
+  config = {
+    istio = {
+      outbound_traffic_policy = "ALLOW_ANY"
+      disable_policy_checks   = true
+      enable_pilot_http       = true
+      disable_http_retry      = true
+      smart_dns = {
+        istio_meta_dns_capture       = true
+        istio_meta_dns_auto_allocate = true
+      }
+      tracing = {
+        enable = false
+      }
+    }
+    tracing = {
+      enable   = true
+      sampling = 1
+      apm = {
+        enable = true
+        region = "ap-guangzhou"
+      }
+    }
+    prometheus = {
+      custom_prom = {
+        url       = "https://10.0.0.1:1000"
+        auth_type = "none"
+        vpc_id    = "vpc-j9yhbzpn"
+      }
+    }
+    inject = {
+      exclude_ip_ranges                   = ["172.16.0.0/16"]
+      hold_application_until_proxy_starts = true
+      hold_proxy_until_application_ends   = true
+    }
+    sidecar_resources = {
+      limits = [{
+        "name"     = "cpu"
+        "quantity" = "2"
+        }, {
+        "name"     = "memory"
+        "quantity" = "1Gi"
+      }]
+      requests = [{
+        "name"     = "cpu"
+        "quantity" = "100m"
+        }, {
+        "name"     = "memory"
+        "quantity" = "128Mi"
+      }]
+    }
+  }
+  tag_lists {
+    key         = "key"
+    value       = "value"
+    passthrough = false
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateMesh](https://www.tencentcloud.com/search/?wd=CreateMesh&type=document&lang=en)
+  - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+* Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+* Update: [ModifyMesh](https://www.tencentcloud.com/search/?wd=ModifyMesh&type=document&lang=en)
+* Delete:
+  - [DeleteMesh](https://www.tencentcloud.com/search/?wd=DeleteMesh&type=document&lang=en)
+  - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
 
 
 ## Create Mesh Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-         <span class="nx">config</span><span class="p">:</span> <span class="nx">Optional[_tcm.MeshConfigArgs]</span> = None<span class="p">,</span>
-         <span class="nx">display_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">mesh_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">mesh_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">tag_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcm.MeshTagListArgs]]</span> = None<span class="p">,</span>
-         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+         <span class="nx">config</span><span class="p">:</span> <span class="nx">Optional[MeshConfigArgs]</span> = None<span class="p">,</span>
+         <span class="nx">display_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">mesh_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">mesh_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">tag_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[MeshTagListArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewMesh</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Mesh</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewMesh</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Mesh</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">MeshArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcm:Mesh</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcm:Mesh</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcm_mesh&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -586,7 +725,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -703,11 +842,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Mesh Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -721,10 +868,9 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_csharp" style="color: inherit; text-decoration: inherit;">Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#meshconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_csharp" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -732,8 +878,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshversion_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Version</a>
@@ -741,8 +886,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-required"
+    <dd>Mesh version.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -750,8 +894,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh type.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Id</a>
@@ -759,17 +902,15 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="taglists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshtaglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Tag<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#meshtaglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Tag<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd></dl>
+    <dd>A list of associated tags.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -783,8 +924,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_go" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -792,8 +932,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshversion_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Version</a>
@@ -801,8 +940,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-required"
+    <dd>Mesh version.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -810,8 +948,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh type.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Id</a>
@@ -819,8 +956,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="taglists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Lists</a>
@@ -828,8 +964,61 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshtaglist">[]Mesh<wbr>Tag<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd></dl>
+    <dd>A list of associated tags.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfig">object</a></span>
+    </dt>
+    <dd>Mesh configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh name.</dd><dt class="property-required"
+            title="Required">
+        <span id="mesh_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_version_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh version.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mesh_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_id_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_lists_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshtaglist">list(object)</a></span>
+    </dt>
+    <dd>A list of associated tags.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -841,10 +1030,9 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_java" style="color: inherit; text-decoration: inherit;">config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_java" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -852,8 +1040,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshversion_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Version</a>
@@ -861,8 +1048,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-required"
+    <dd>Mesh version.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -870,8 +1056,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh type.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -879,17 +1064,15 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="taglists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshtaglist">List&lt;Mesh<wbr>Tag<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#meshtaglist">List&lt;Mesh<wbr>Tag<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd></dl>
+    <dd>A list of associated tags.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -901,10 +1084,9 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_nodejs" style="color: inherit; text-decoration: inherit;">config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_nodejs" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -912,8 +1094,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshversion_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Version</a>
@@ -921,8 +1102,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-required"
+    <dd>Mesh version.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -930,8 +1110,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh type.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -939,17 +1118,15 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="taglists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshtaglist">Mesh<wbr>Tag<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#meshtaglist">Mesh<wbr>Tag<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd></dl>
+    <dd>A list of associated tags.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -963,8 +1140,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="display_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_python" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
@@ -972,8 +1148,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="mesh_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_version_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>version</a>
@@ -981,8 +1156,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-required"
+    <dd>Mesh version.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -990,8 +1164,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh type.</dd><dt class="property-optional"
             title="Optional">
         <span id="mesh_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mesh_id_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>id</a>
@@ -999,17 +1172,15 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_lists_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshtaglist">Mesh<wbr>Tag<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#meshtaglist">Sequence[Mesh<wbr>Tag<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd></dl>
+    <dd>A list of associated tags.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1023,8 +1194,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfig">Property Map</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-required"
+    <dd>Mesh configuration.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_yaml" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -1032,8 +1202,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-required"
+    <dd>Mesh name.</dd><dt class="property-required"
             title="Required">
         <span id="meshversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshversion_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Version</a>
@@ -1041,8 +1210,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-required"
+    <dd>Mesh version.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1050,8 +1218,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh type.</dd><dt class="property-optional"
             title="Optional">
         <span id="meshid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meshid_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -1059,8 +1226,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="taglists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taglists_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
@@ -1068,8 +1234,7 @@ The Mesh resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshtaglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd></dl>
+    <dd>A list of associated tags.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1090,8 +1255,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1105,8 +1269,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1120,8 +1297,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1135,8 +1311,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1150,8 +1325,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1165,8 +1339,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1176,125 +1349,164 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Mesh resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">MeshState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Mesh</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">MeshState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Mesh</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">config</span><span class="p">:</span> <span class="nx">Optional[_tcm.MeshConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">config</span><span class="p">:</span> <span class="nx">Optional[MeshConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">display_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">mesh_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">mesh_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tag_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcm.MeshTagListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">tag_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[MeshTagListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Mesh</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetMesh<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">MeshState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Mesh</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetMesh<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">MeshState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Mesh</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Mesh</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">MeshState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Mesh</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">MeshState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Mesh</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">MeshState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Mesh</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">MeshState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingMesh</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcm:Mesh</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcm_mesh</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">MeshState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">MeshState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1302,28 +1514,31 @@ Get an existing Mesh resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">MeshState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1331,28 +1546,31 @@ Get an existing Mesh resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">MeshState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1370,10 +1588,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_csharp" style="color: inherit; text-decoration: inherit;">Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#meshconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_csharp" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -1381,8 +1598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshid_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Id</a>
@@ -1390,8 +1606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshversion_csharp" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Version</a>
@@ -1399,17 +1614,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taglists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taglists_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshtaglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Tag<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#meshtaglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Tag<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-optional"
+    <dd>A list of associated tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1417,8 +1630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd></dl>
+    <dd>Mesh type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1432,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_go" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -1441,8 +1652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshid_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Id</a>
@@ -1450,8 +1660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshversion_go" style="color: inherit; text-decoration: inherit;">Mesh<wbr>Version</a>
@@ -1459,8 +1668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taglists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taglists_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Lists</a>
@@ -1468,8 +1676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshtaglist">[]Mesh<wbr>Tag<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-optional"
+    <dd>A list of associated tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1477,8 +1684,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd></dl>
+    <dd>Mesh type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfig">object</a></span>
+    </dt>
+    <dd>Mesh configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mesh_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mesh_id_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mesh_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mesh_version_hcl" style="color: inherit; text-decoration: inherit;">mesh_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tag_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tag_lists_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshtaglist">list(object)</a></span>
+    </dt>
+    <dd>A list of associated tags.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mesh type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1490,10 +1750,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_java" style="color: inherit; text-decoration: inherit;">config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_java" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -1501,8 +1760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshid_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -1510,8 +1768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshversion_java" style="color: inherit; text-decoration: inherit;">mesh<wbr>Version</a>
@@ -1519,17 +1776,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taglists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taglists_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshtaglist">List&lt;Mesh<wbr>Tag<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#meshtaglist">List&lt;Mesh<wbr>Tag<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-optional"
+    <dd>A list of associated tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1537,8 +1792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd></dl>
+    <dd>Mesh type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1550,10 +1804,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_nodejs" style="color: inherit; text-decoration: inherit;">config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_nodejs" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -1561,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshid_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -1570,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshversion_nodejs" style="color: inherit; text-decoration: inherit;">mesh<wbr>Version</a>
@@ -1579,17 +1830,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taglists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taglists_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshtaglist">Mesh<wbr>Tag<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#meshtaglist">Mesh<wbr>Tag<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-optional"
+    <dd>A list of associated tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1597,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd></dl>
+    <dd>Mesh type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1612,8 +1860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfig">Mesh<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_display_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_display_name_python" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
@@ -1621,8 +1868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mesh_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mesh_id_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>id</a>
@@ -1630,8 +1876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mesh_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mesh_version_python" style="color: inherit; text-decoration: inherit;">mesh_<wbr>version</a>
@@ -1639,17 +1884,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tag_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tag_lists_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshtaglist">Mesh<wbr>Tag<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#meshtaglist">Sequence[Mesh<wbr>Tag<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-optional"
+    <dd>A list of associated tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1657,8 +1900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd></dl>
+    <dd>Mesh type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1672,8 +1914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfig">Property Map</a></span>
     </dt>
-    <dd><p>Mesh configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_yaml" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -1681,8 +1922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh name.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshid_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Id</a>
@@ -1690,8 +1930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh ID.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meshversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meshversion_yaml" style="color: inherit; text-decoration: inherit;">mesh<wbr>Version</a>
@@ -1699,8 +1938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh version.</p>
-</dd><dt class="property-optional"
+    <dd>Mesh version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taglists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taglists_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Lists</a>
@@ -1708,8 +1946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshtaglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of associated tags.</p>
-</dd><dt class="property-optional"
+    <dd>A list of associated tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1717,8 +1954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mesh type.</p>
-</dd></dl>
+    <dd>Mesh type.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1733,7 +1969,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="meshconfig">Mesh<wbr>Config</h4>
+<h4 id="meshconfig">
+Mesh<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1745,8 +1983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfiginject">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Inject</a></span>
     </dt>
-    <dd><p>Sidecar inject configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar inject configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="istio_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_csharp" style="color: inherit; text-decoration: inherit;">Istio</a>
@@ -1754,8 +1991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistio">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Istio</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Istio configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="prometheus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prometheus_csharp" style="color: inherit; text-decoration: inherit;">Prometheus</a>
@@ -1763,8 +1999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheus">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Prometheus</a></span>
     </dt>
-    <dd><p>Prometheus configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Prometheus configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="sidecarresources_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sidecarresources_csharp" style="color: inherit; text-decoration: inherit;">Sidecar<wbr>Resources</a>
@@ -1772,8 +2007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresources">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Sidecar<wbr>Resources</a></span>
     </dt>
-    <dd><p>Default sidecar requests and limits.</p>
-</dd><dt class="property-optional"
+    <dd>Default sidecar requests and limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_csharp" style="color: inherit; text-decoration: inherit;">Tracing</a>
@@ -1781,8 +2015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracing">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config.</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1796,8 +2029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfiginject">Mesh<wbr>Config<wbr>Inject</a></span>
     </dt>
-    <dd><p>Sidecar inject configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar inject configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="istio_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_go" style="color: inherit; text-decoration: inherit;">Istio</a>
@@ -1805,8 +2037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistio">Mesh<wbr>Config<wbr>Istio</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Istio configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="prometheus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prometheus_go" style="color: inherit; text-decoration: inherit;">Prometheus</a>
@@ -1814,8 +2045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheus">Mesh<wbr>Config<wbr>Prometheus</a></span>
     </dt>
-    <dd><p>Prometheus configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Prometheus configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="sidecarresources_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sidecarresources_go" style="color: inherit; text-decoration: inherit;">Sidecar<wbr>Resources</a>
@@ -1823,8 +2053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresources">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources</a></span>
     </dt>
-    <dd><p>Default sidecar requests and limits.</p>
-</dd><dt class="property-optional"
+    <dd>Default sidecar requests and limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_go" style="color: inherit; text-decoration: inherit;">Tracing</a>
@@ -1832,8 +2061,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracing">Mesh<wbr>Config<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config.</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="inject_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inject_hcl" style="color: inherit; text-decoration: inherit;">inject</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfiginject">object</a></span>
+    </dt>
+    <dd>Sidecar inject configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="istio_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_hcl" style="color: inherit; text-decoration: inherit;">istio</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigistio">object</a></span>
+    </dt>
+    <dd>Istio configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prometheus_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prometheus_hcl" style="color: inherit; text-decoration: inherit;">prometheus</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigprometheus">object</a></span>
+    </dt>
+    <dd>Prometheus configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sidecar_resources_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sidecar_resources_hcl" style="color: inherit; text-decoration: inherit;">sidecar_<wbr>resources</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigsidecarresources">object</a></span>
+    </dt>
+    <dd>Default sidecar requests and limits.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tracing_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_hcl" style="color: inherit; text-decoration: inherit;">tracing</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigtracing">object</a></span>
+    </dt>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1847,8 +2121,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfiginject">Mesh<wbr>Config<wbr>Inject</a></span>
     </dt>
-    <dd><p>Sidecar inject configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar inject configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="istio_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_java" style="color: inherit; text-decoration: inherit;">istio</a>
@@ -1856,8 +2129,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistio">Mesh<wbr>Config<wbr>Istio</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Istio configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="prometheus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prometheus_java" style="color: inherit; text-decoration: inherit;">prometheus</a>
@@ -1865,8 +2137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheus">Mesh<wbr>Config<wbr>Prometheus</a></span>
     </dt>
-    <dd><p>Prometheus configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Prometheus configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="sidecarresources_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sidecarresources_java" style="color: inherit; text-decoration: inherit;">sidecar<wbr>Resources</a>
@@ -1874,8 +2145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresources">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources</a></span>
     </dt>
-    <dd><p>Default sidecar requests and limits.</p>
-</dd><dt class="property-optional"
+    <dd>Default sidecar requests and limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_java" style="color: inherit; text-decoration: inherit;">tracing</a>
@@ -1883,8 +2153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracing">Mesh<wbr>Config<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config.</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1898,8 +2167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfiginject">Mesh<wbr>Config<wbr>Inject</a></span>
     </dt>
-    <dd><p>Sidecar inject configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar inject configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="istio_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_nodejs" style="color: inherit; text-decoration: inherit;">istio</a>
@@ -1907,8 +2175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistio">Mesh<wbr>Config<wbr>Istio</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Istio configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="prometheus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prometheus_nodejs" style="color: inherit; text-decoration: inherit;">prometheus</a>
@@ -1916,8 +2183,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheus">Mesh<wbr>Config<wbr>Prometheus</a></span>
     </dt>
-    <dd><p>Prometheus configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Prometheus configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="sidecarresources_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sidecarresources_nodejs" style="color: inherit; text-decoration: inherit;">sidecar<wbr>Resources</a>
@@ -1925,8 +2191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresources">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources</a></span>
     </dt>
-    <dd><p>Default sidecar requests and limits.</p>
-</dd><dt class="property-optional"
+    <dd>Default sidecar requests and limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_nodejs" style="color: inherit; text-decoration: inherit;">tracing</a>
@@ -1934,8 +2199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracing">Mesh<wbr>Config<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config.</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1949,8 +2213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfiginject">Mesh<wbr>Config<wbr>Inject</a></span>
     </dt>
-    <dd><p>Sidecar inject configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar inject configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="istio_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_python" style="color: inherit; text-decoration: inherit;">istio</a>
@@ -1958,8 +2221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistio">Mesh<wbr>Config<wbr>Istio</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Istio configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="prometheus_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prometheus_python" style="color: inherit; text-decoration: inherit;">prometheus</a>
@@ -1967,8 +2229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheus">Mesh<wbr>Config<wbr>Prometheus</a></span>
     </dt>
-    <dd><p>Prometheus configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Prometheus configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="sidecar_resources_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sidecar_resources_python" style="color: inherit; text-decoration: inherit;">sidecar_<wbr>resources</a>
@@ -1976,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresources">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources</a></span>
     </dt>
-    <dd><p>Default sidecar requests and limits.</p>
-</dd><dt class="property-optional"
+    <dd>Default sidecar requests and limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_python" style="color: inherit; text-decoration: inherit;">tracing</a>
@@ -1985,8 +2245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracing">Mesh<wbr>Config<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config.</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2000,8 +2259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfiginject">Property Map</a></span>
     </dt>
-    <dd><p>Sidecar inject configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar inject configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="istio_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_yaml" style="color: inherit; text-decoration: inherit;">istio</a>
@@ -2009,8 +2267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistio">Property Map</a></span>
     </dt>
-    <dd><p>Istio configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Istio configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="prometheus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prometheus_yaml" style="color: inherit; text-decoration: inherit;">prometheus</a>
@@ -2018,8 +2275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheus">Property Map</a></span>
     </dt>
-    <dd><p>Prometheus configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Prometheus configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="sidecarresources_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sidecarresources_yaml" style="color: inherit; text-decoration: inherit;">sidecar<wbr>Resources</a>
@@ -2027,8 +2283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresources">Property Map</a></span>
     </dt>
-    <dd><p>Default sidecar requests and limits.</p>
-</dd><dt class="property-optional"
+    <dd>Default sidecar requests and limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_yaml" style="color: inherit; text-decoration: inherit;">tracing</a>
@@ -2036,12 +2291,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracing">Property Map</a></span>
     </dt>
-    <dd><p>Tracing config.</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfiginject">Mesh<wbr>Config<wbr>Inject</h4>
+<h4 id="meshconfiginject">
+Mesh<wbr>Config<wbr>Inject<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Inject<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2053,8 +2309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>IP ranges that should not be proxied.</p>
-</dd><dt class="property-optional"
+    <dd>IP ranges that should not be proxied.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdapplicationuntilproxystarts_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdapplicationuntilproxystarts_csharp" style="color: inherit; text-decoration: inherit;">Hold<wbr>Application<wbr>Until<wbr>Proxy<wbr>Starts</a>
@@ -2062,8 +2317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) start first, before app container.</p>
-</dd><dt class="property-optional"
+    <dd>Let istio-proxy(sidecar) start first, before app container.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdproxyuntilapplicationends_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdproxyuntilapplicationends_csharp" style="color: inherit; text-decoration: inherit;">Hold<wbr>Proxy<wbr>Until<wbr>Application<wbr>Ends</a>
@@ -2071,8 +2325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) stop last, after app container.</p>
-</dd></dl>
+    <dd>Let istio-proxy(sidecar) stop last, after app container.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2086,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>IP ranges that should not be proxied.</p>
-</dd><dt class="property-optional"
+    <dd>IP ranges that should not be proxied.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdapplicationuntilproxystarts_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdapplicationuntilproxystarts_go" style="color: inherit; text-decoration: inherit;">Hold<wbr>Application<wbr>Until<wbr>Proxy<wbr>Starts</a>
@@ -2095,8 +2347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) start first, before app container.</p>
-</dd><dt class="property-optional"
+    <dd>Let istio-proxy(sidecar) start first, before app container.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdproxyuntilapplicationends_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdproxyuntilapplicationends_go" style="color: inherit; text-decoration: inherit;">Hold<wbr>Proxy<wbr>Until<wbr>Application<wbr>Ends</a>
@@ -2104,8 +2355,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) stop last, after app container.</p>
-</dd></dl>
+    <dd>Let istio-proxy(sidecar) stop last, after app container.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="exclude_ip_ranges_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_ip_ranges_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>ip_<wbr>ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IP ranges that should not be proxied.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hold_application_until_proxy_starts_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hold_application_until_proxy_starts_hcl" style="color: inherit; text-decoration: inherit;">hold_<wbr>application_<wbr>until_<wbr>proxy_<wbr>starts</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Let istio-proxy(sidecar) start first, before app container.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hold_proxy_until_application_ends_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hold_proxy_until_application_ends_hcl" style="color: inherit; text-decoration: inherit;">hold_<wbr>proxy_<wbr>until_<wbr>application_<wbr>ends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Let istio-proxy(sidecar) stop last, after app container.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2119,8 +2399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IP ranges that should not be proxied.</p>
-</dd><dt class="property-optional"
+    <dd>IP ranges that should not be proxied.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdapplicationuntilproxystarts_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdapplicationuntilproxystarts_java" style="color: inherit; text-decoration: inherit;">hold<wbr>Application<wbr>Until<wbr>Proxy<wbr>Starts</a>
@@ -2128,8 +2407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) start first, before app container.</p>
-</dd><dt class="property-optional"
+    <dd>Let istio-proxy(sidecar) start first, before app container.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdproxyuntilapplicationends_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdproxyuntilapplicationends_java" style="color: inherit; text-decoration: inherit;">hold<wbr>Proxy<wbr>Until<wbr>Application<wbr>Ends</a>
@@ -2137,8 +2415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) stop last, after app container.</p>
-</dd></dl>
+    <dd>Let istio-proxy(sidecar) stop last, after app container.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2152,8 +2429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>IP ranges that should not be proxied.</p>
-</dd><dt class="property-optional"
+    <dd>IP ranges that should not be proxied.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdapplicationuntilproxystarts_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdapplicationuntilproxystarts_nodejs" style="color: inherit; text-decoration: inherit;">hold<wbr>Application<wbr>Until<wbr>Proxy<wbr>Starts</a>
@@ -2161,8 +2437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) start first, before app container.</p>
-</dd><dt class="property-optional"
+    <dd>Let istio-proxy(sidecar) start first, before app container.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdproxyuntilapplicationends_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdproxyuntilapplicationends_nodejs" style="color: inherit; text-decoration: inherit;">hold<wbr>Proxy<wbr>Until<wbr>Application<wbr>Ends</a>
@@ -2170,8 +2445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) stop last, after app container.</p>
-</dd></dl>
+    <dd>Let istio-proxy(sidecar) stop last, after app container.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2185,8 +2459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>IP ranges that should not be proxied.</p>
-</dd><dt class="property-optional"
+    <dd>IP ranges that should not be proxied.</dd><dt class="property-optional"
             title="Optional">
         <span id="hold_application_until_proxy_starts_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hold_application_until_proxy_starts_python" style="color: inherit; text-decoration: inherit;">hold_<wbr>application_<wbr>until_<wbr>proxy_<wbr>starts</a>
@@ -2194,8 +2467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) start first, before app container.</p>
-</dd><dt class="property-optional"
+    <dd>Let istio-proxy(sidecar) start first, before app container.</dd><dt class="property-optional"
             title="Optional">
         <span id="hold_proxy_until_application_ends_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hold_proxy_until_application_ends_python" style="color: inherit; text-decoration: inherit;">hold_<wbr>proxy_<wbr>until_<wbr>application_<wbr>ends</a>
@@ -2203,8 +2475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) stop last, after app container.</p>
-</dd></dl>
+    <dd>Let istio-proxy(sidecar) stop last, after app container.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2218,8 +2489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IP ranges that should not be proxied.</p>
-</dd><dt class="property-optional"
+    <dd>IP ranges that should not be proxied.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdapplicationuntilproxystarts_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdapplicationuntilproxystarts_yaml" style="color: inherit; text-decoration: inherit;">hold<wbr>Application<wbr>Until<wbr>Proxy<wbr>Starts</a>
@@ -2227,8 +2497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) start first, before app container.</p>
-</dd><dt class="property-optional"
+    <dd>Let istio-proxy(sidecar) start first, before app container.</dd><dt class="property-optional"
             title="Optional">
         <span id="holdproxyuntilapplicationends_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#holdproxyuntilapplicationends_yaml" style="color: inherit; text-decoration: inherit;">hold<wbr>Proxy<wbr>Until<wbr>Application<wbr>Ends</a>
@@ -2236,12 +2505,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Let istio-proxy(sidecar) stop last, after app container.</p>
-</dd></dl>
+    <dd>Let istio-proxy(sidecar) stop last, after app container.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigistio">Mesh<wbr>Config<wbr>Istio</h4>
+<h4 id="meshconfigistio">
+Mesh<wbr>Config<wbr>Istio<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Istio<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2253,8 +2523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</p>
-</dd><dt class="property-optional"
+    <dd>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablehttpretry_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablehttpretry_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Http<wbr>Retry</a>
@@ -2262,8 +2531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-optional"
+    <dd>Disable http retry.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablepolicychecks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Policy<wbr>Checks</a>
@@ -2271,8 +2539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-optional"
+    <dd>Disable policy checks.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepilothttp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Pilot<wbr>Http</a>
@@ -2280,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-optional"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-optional"
             title="Optional">
         <span id="smartdns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_csharp" style="color: inherit; text-decoration: inherit;">Smart<wbr>Dns</a>
@@ -2289,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiosmartdns">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dns</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>SmartDNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_csharp" style="color: inherit; text-decoration: inherit;">Tracing</a>
@@ -2298,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracing">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Istio<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2313,8 +2577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</p>
-</dd><dt class="property-optional"
+    <dd>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablehttpretry_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablehttpretry_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Http<wbr>Retry</a>
@@ -2322,8 +2585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-optional"
+    <dd>Disable http retry.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablepolicychecks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Policy<wbr>Checks</a>
@@ -2331,8 +2593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-optional"
+    <dd>Disable policy checks.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepilothttp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Pilot<wbr>Http</a>
@@ -2340,8 +2601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-optional"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-optional"
             title="Optional">
         <span id="smartdns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_go" style="color: inherit; text-decoration: inherit;">Smart<wbr>Dns</a>
@@ -2349,8 +2609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiosmartdns">Mesh<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dns</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>SmartDNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_go" style="color: inherit; text-decoration: inherit;">Tracing</a>
@@ -2358,8 +2617,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracing">Mesh<wbr>Config<wbr>Istio<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="outbound_traffic_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbound_traffic_policy_hcl" style="color: inherit; text-decoration: inherit;">outbound_<wbr>traffic_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_http_retry_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_http_retry_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>http_<wbr>retry</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disable http retry.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_policy_checks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_policy_checks_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>policy_<wbr>checks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disable policy checks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_pilot_http_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_pilot_http_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>pilot_<wbr>http</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="smart_dns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smart_dns_hcl" style="color: inherit; text-decoration: inherit;">smart_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigistiosmartdns">object</a></span>
+    </dt>
+    <dd>SmartDNS configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tracing_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_hcl" style="color: inherit; text-decoration: inherit;">tracing</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigistiotracing">object</a></span>
+    </dt>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2373,8 +2685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</p>
-</dd><dt class="property-optional"
+    <dd>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablehttpretry_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablehttpretry_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Http<wbr>Retry</a>
@@ -2382,8 +2693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-optional"
+    <dd>Disable http retry.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablepolicychecks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Policy<wbr>Checks</a>
@@ -2391,8 +2701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-optional"
+    <dd>Disable policy checks.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepilothttp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Pilot<wbr>Http</a>
@@ -2400,8 +2709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-optional"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-optional"
             title="Optional">
         <span id="smartdns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_java" style="color: inherit; text-decoration: inherit;">smart<wbr>Dns</a>
@@ -2409,8 +2717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiosmartdns">Mesh<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dns</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>SmartDNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_java" style="color: inherit; text-decoration: inherit;">tracing</a>
@@ -2418,8 +2725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracing">Mesh<wbr>Config<wbr>Istio<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2433,8 +2739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</p>
-</dd><dt class="property-optional"
+    <dd>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablehttpretry_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablehttpretry_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Http<wbr>Retry</a>
@@ -2442,8 +2747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-optional"
+    <dd>Disable http retry.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablepolicychecks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Policy<wbr>Checks</a>
@@ -2451,8 +2755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-optional"
+    <dd>Disable policy checks.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepilothttp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Pilot<wbr>Http</a>
@@ -2460,8 +2763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-optional"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-optional"
             title="Optional">
         <span id="smartdns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_nodejs" style="color: inherit; text-decoration: inherit;">smart<wbr>Dns</a>
@@ -2469,8 +2771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiosmartdns">Mesh<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dns</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>SmartDNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_nodejs" style="color: inherit; text-decoration: inherit;">tracing</a>
@@ -2478,8 +2779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracing">Mesh<wbr>Config<wbr>Istio<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2493,8 +2793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</p>
-</dd><dt class="property-optional"
+    <dd>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="disable_http_retry_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_http_retry_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>http_<wbr>retry</a>
@@ -2502,8 +2801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-optional"
+    <dd>Disable http retry.</dd><dt class="property-optional"
             title="Optional">
         <span id="disable_policy_checks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_policy_checks_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>policy_<wbr>checks</a>
@@ -2511,8 +2809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-optional"
+    <dd>Disable policy checks.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_pilot_http_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_pilot_http_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>pilot_<wbr>http</a>
@@ -2520,8 +2817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-optional"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-optional"
             title="Optional">
         <span id="smart_dns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smart_dns_python" style="color: inherit; text-decoration: inherit;">smart_<wbr>dns</a>
@@ -2529,8 +2825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiosmartdns">Mesh<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dns</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>SmartDNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_python" style="color: inherit; text-decoration: inherit;">tracing</a>
@@ -2538,8 +2833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracing">Mesh<wbr>Config<wbr>Istio<wbr>Tracing</a></span>
     </dt>
-    <dd><p>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2553,8 +2847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</p>
-</dd><dt class="property-optional"
+    <dd>Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablehttpretry_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablehttpretry_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Http<wbr>Retry</a>
@@ -2562,8 +2855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable http retry.</p>
-</dd><dt class="property-optional"
+    <dd>Disable http retry.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablepolicychecks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablepolicychecks_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Policy<wbr>Checks</a>
@@ -2571,8 +2863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable policy checks.</p>
-</dd><dt class="property-optional"
+    <dd>Disable policy checks.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepilothttp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepilothttp_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Pilot<wbr>Http</a>
@@ -2580,8 +2871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable HTTP/1.0 support.</p>
-</dd><dt class="property-optional"
+    <dd>Enable HTTP/1.0 support.</dd><dt class="property-optional"
             title="Optional">
         <span id="smartdns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smartdns_yaml" style="color: inherit; text-decoration: inherit;">smart<wbr>Dns</a>
@@ -2589,8 +2879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiosmartdns">Property Map</a></span>
     </dt>
-    <dd><p>SmartDNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>SmartDNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracing_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracing_yaml" style="color: inherit; text-decoration: inherit;">tracing</a>
@@ -2598,12 +2887,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracing">Property Map</a></span>
     </dt>
-    <dd><p>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</p>
-</dd></dl>
+    <dd>Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigistiosmartdns">Mesh<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dns</h4>
+<h4 id="meshconfigistiosmartdns">
+Mesh<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dns<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Istio<wbr>Smart<wbr>Dns<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2615,8 +2905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-optional"
+    <dd>Enable auto allocate address.</dd><dt class="property-optional"
             title="Optional">
         <span id="istiometadnscapture_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_csharp" style="color: inherit; text-decoration: inherit;">Istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -2624,8 +2913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2639,8 +2927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-optional"
+    <dd>Enable auto allocate address.</dd><dt class="property-optional"
             title="Optional">
         <span id="istiometadnscapture_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_go" style="color: inherit; text-decoration: inherit;">Istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -2648,8 +2935,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="istio_meta_dns_auto_allocate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_meta_dns_auto_allocate_hcl" style="color: inherit; text-decoration: inherit;">istio_<wbr>meta_<wbr>dns_<wbr>auto_<wbr>allocate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable auto allocate address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="istio_meta_dns_capture_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_meta_dns_capture_hcl" style="color: inherit; text-decoration: inherit;">istio_<wbr>meta_<wbr>dns_<wbr>capture</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2663,8 +2971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-optional"
+    <dd>Enable auto allocate address.</dd><dt class="property-optional"
             title="Optional">
         <span id="istiometadnscapture_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_java" style="color: inherit; text-decoration: inherit;">istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -2672,8 +2979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2687,8 +2993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-optional"
+    <dd>Enable auto allocate address.</dd><dt class="property-optional"
             title="Optional">
         <span id="istiometadnscapture_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_nodejs" style="color: inherit; text-decoration: inherit;">istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -2696,8 +3001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2711,8 +3015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-optional"
+    <dd>Enable auto allocate address.</dd><dt class="property-optional"
             title="Optional">
         <span id="istio_meta_dns_capture_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istio_meta_dns_capture_python" style="color: inherit; text-decoration: inherit;">istio_<wbr>meta_<wbr>dns_<wbr>capture</a>
@@ -2720,8 +3023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2735,8 +3037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable auto allocate address.</p>
-</dd><dt class="property-optional"
+    <dd>Enable auto allocate address.</dd><dt class="property-optional"
             title="Optional">
         <span id="istiometadnscapture_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istiometadnscapture_yaml" style="color: inherit; text-decoration: inherit;">istio<wbr>Meta<wbr>Dns<wbr>Capture</a>
@@ -2744,12 +3045,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable dns proxy.</p>
-</dd></dl>
+    <dd>Enable dns proxy.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigistiotracing">Mesh<wbr>Config<wbr>Istio<wbr>Tracing</h4>
+<h4 id="meshconfigistiotracing">
+Mesh<wbr>Config<wbr>Istio<wbr>Tracing<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2761,8 +3063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingapm">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -2770,8 +3071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_csharp" style="color: inherit; text-decoration: inherit;">Sampling</a>
@@ -2779,8 +3079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_csharp" style="color: inherit; text-decoration: inherit;">Zipkin</a>
@@ -2788,8 +3087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingzipkin">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2803,8 +3101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingapm">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -2812,8 +3109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_go" style="color: inherit; text-decoration: inherit;">Sampling</a>
@@ -2821,8 +3117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_go" style="color: inherit; text-decoration: inherit;">Zipkin</a>
@@ -2830,8 +3125,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingzipkin">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="apm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apm_hcl" style="color: inherit; text-decoration: inherit;">apm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigistiotracingapm">object</a></span>
+    </dt>
+    <dd>APM config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sampling_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_hcl" style="color: inherit; text-decoration: inherit;">sampling</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zipkin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_hcl" style="color: inherit; text-decoration: inherit;">zipkin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigistiotracingzipkin">object</a></span>
+    </dt>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2845,8 +3177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingapm">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2854,8 +3185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_java" style="color: inherit; text-decoration: inherit;">sampling</a>
@@ -2863,8 +3193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_java" style="color: inherit; text-decoration: inherit;">zipkin</a>
@@ -2872,8 +3201,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingzipkin">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2887,8 +3215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingapm">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2896,8 +3223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_nodejs" style="color: inherit; text-decoration: inherit;">sampling</a>
@@ -2905,8 +3231,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_nodejs" style="color: inherit; text-decoration: inherit;">zipkin</a>
@@ -2914,8 +3239,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingzipkin">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2929,8 +3253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingapm">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2938,8 +3261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_python" style="color: inherit; text-decoration: inherit;">sampling</a>
@@ -2947,8 +3269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_python" style="color: inherit; text-decoration: inherit;">zipkin</a>
@@ -2956,8 +3277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingzipkin">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2971,8 +3291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingapm">Property Map</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2980,8 +3299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_yaml" style="color: inherit; text-decoration: inherit;">sampling</a>
@@ -2989,8 +3307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_yaml" style="color: inherit; text-decoration: inherit;">zipkin</a>
@@ -2998,12 +3315,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigistiotracingzipkin">Property Map</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigistiotracingapm">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Apm</h4>
+<h4 id="meshconfigistiotracingapm">
+Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Apm<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Apm<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3015,8 +3333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3024,8 +3341,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -3033,8 +3349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3048,8 +3363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3057,8 +3371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -3066,8 +3379,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether enable APM.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3081,8 +3423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3090,8 +3431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3099,8 +3439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3114,8 +3453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3123,8 +3461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3132,8 +3469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3147,8 +3483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -3156,8 +3491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3165,8 +3499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3180,8 +3513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3189,8 +3521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3198,12 +3529,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigistiotracingzipkin">Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Zipkin</h4>
+<h4 id="meshconfigistiotracingzipkin">
+Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Zipkin<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Istio<wbr>Tracing<wbr>Zipkin<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3215,8 +3547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3230,8 +3561,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_hcl" style="color: inherit; text-decoration: inherit;">address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3245,8 +3589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3260,8 +3603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3275,8 +3617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3290,12 +3631,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigprometheus">Mesh<wbr>Config<wbr>Prometheus</h4>
+<h4 id="meshconfigprometheus">
+Mesh<wbr>Config<wbr>Prometheus<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Prometheus<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3307,8 +3649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheuscustomprom">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Prometheus<wbr>Custom<wbr>Prom</a></span>
     </dt>
-    <dd><p>Custom prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Custom prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3316,8 +3657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -3325,8 +3665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3334,8 +3673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3343,8 +3681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3358,8 +3695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheuscustomprom">Mesh<wbr>Config<wbr>Prometheus<wbr>Custom<wbr>Prom</a></span>
     </dt>
-    <dd><p>Custom prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Custom prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3367,8 +3703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -3376,8 +3711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3385,8 +3719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3394,8 +3727,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="custom_prom_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_prom_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>prom</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigprometheuscustomprom">object</a></span>
+    </dt>
+    <dd>Custom prometheus.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3409,8 +3787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheuscustomprom">Mesh<wbr>Config<wbr>Prometheus<wbr>Custom<wbr>Prom</a></span>
     </dt>
-    <dd><p>Custom prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Custom prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3418,8 +3795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3427,8 +3803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3436,8 +3811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3445,8 +3819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3460,8 +3833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheuscustomprom">Mesh<wbr>Config<wbr>Prometheus<wbr>Custom<wbr>Prom</a></span>
     </dt>
-    <dd><p>Custom prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Custom prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3469,8 +3841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3478,8 +3849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3487,8 +3857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3496,8 +3865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3511,8 +3879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheuscustomprom">Mesh<wbr>Config<wbr>Prometheus<wbr>Custom<wbr>Prom</a></span>
     </dt>
-    <dd><p>Custom prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Custom prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -3520,8 +3887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3529,8 +3895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -3538,8 +3903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3547,8 +3911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3562,8 +3925,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigprometheuscustomprom">Property Map</a></span>
     </dt>
-    <dd><p>Custom prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Custom prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3571,8 +3933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3580,8 +3941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3589,8 +3949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3598,12 +3957,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigprometheuscustomprom">Mesh<wbr>Config<wbr>Prometheus<wbr>Custom<wbr>Prom</h4>
+<h4 id="meshconfigprometheuscustomprom">
+Mesh<wbr>Config<wbr>Prometheus<wbr>Custom<wbr>Prom<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Prometheus<wbr>Custom<wbr>Prom<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3615,8 +3975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type of the prometheus.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the prometheus.</dd><dt class="property-required"
             title="Required">
         <span id="url_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -3624,8 +3983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Url of the prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublicaddr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublicaddr_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Public<wbr>Addr</a>
@@ -3633,8 +3991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is public address, default false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is public address, default false.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3642,8 +3999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -3651,8 +4007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Username of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3660,8 +4015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3675,8 +4029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type of the prometheus.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the prometheus.</dd><dt class="property-required"
             title="Required">
         <span id="url_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_go" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -3684,8 +4037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Url of the prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublicaddr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublicaddr_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Public<wbr>Addr</a>
@@ -3693,8 +4045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is public address, default false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is public address, default false.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3702,8 +4053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -3711,8 +4061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Username of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3720,8 +4069,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auth_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_type_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authentication type of the prometheus.</dd><dt class="property-required"
+            title="Required">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Url of the prometheus.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_public_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_public_addr_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>public_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether it is public address, default false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="username_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_hcl" style="color: inherit; text-decoration: inherit;">username</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Username of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3735,8 +4137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authentication type of the prometheus.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the prometheus.</dd><dt class="property-required"
             title="Required">
         <span id="url_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_java" style="color: inherit; text-decoration: inherit;">url</a>
@@ -3744,8 +4145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Url of the prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Url of the prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublicaddr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublicaddr_java" style="color: inherit; text-decoration: inherit;">is<wbr>Public<wbr>Addr</a>
@@ -3753,8 +4153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether it is public address, default false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is public address, default false.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3762,8 +4161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">username</a>
@@ -3771,8 +4169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Username of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Username of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3780,8 +4177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3795,8 +4191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type of the prometheus.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the prometheus.</dd><dt class="property-required"
             title="Required">
         <span id="url_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
@@ -3804,8 +4199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Url of the prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublicaddr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublicaddr_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Public<wbr>Addr</a>
@@ -3813,8 +4207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether it is public address, default false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is public address, default false.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3822,8 +4215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">username</a>
@@ -3831,8 +4223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Username of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3840,8 +4231,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3855,8 +4245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authentication type of the prometheus.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the prometheus.</dd><dt class="property-required"
             title="Required">
         <span id="url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_python" style="color: inherit; text-decoration: inherit;">url</a>
@@ -3864,8 +4253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Url of the prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Url of the prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_public_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_public_addr_python" style="color: inherit; text-decoration: inherit;">is_<wbr>public_<wbr>addr</a>
@@ -3873,8 +4261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is public address, default false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is public address, default false.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3882,8 +4269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_python" style="color: inherit; text-decoration: inherit;">username</a>
@@ -3891,8 +4277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Username of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Username of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3900,8 +4285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3915,8 +4299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authentication type of the prometheus.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the prometheus.</dd><dt class="property-required"
             title="Required">
         <span id="url_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
@@ -3924,8 +4307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Url of the prometheus.</p>
-</dd><dt class="property-optional"
+    <dd>Url of the prometheus.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublicaddr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublicaddr_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Public<wbr>Addr</a>
@@ -3933,8 +4315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether it is public address, default false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is public address, default false.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3942,8 +4323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Password of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">username</a>
@@ -3951,8 +4331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Username of the prometheus, used in basic authentication type.</p>
-</dd><dt class="property-optional"
+    <dd>Username of the prometheus, used in basic authentication type.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3960,12 +4339,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigsidecarresources">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources</h4>
+<h4 id="meshconfigsidecarresources">
+Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3977,8 +4357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourceslimit">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit&gt;</a></span>
     </dt>
-    <dd><p>Sidecar limits.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="requests_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_csharp" style="color: inherit; text-decoration: inherit;">Requests</a>
@@ -3986,8 +4365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourcesrequest">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request&gt;</a></span>
     </dt>
-    <dd><p>Sidecar requests.</p>
-</dd></dl>
+    <dd>Sidecar requests.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4001,8 +4379,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourceslimit">[]Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit</a></span>
     </dt>
-    <dd><p>Sidecar limits.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="requests_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_go" style="color: inherit; text-decoration: inherit;">Requests</a>
@@ -4010,8 +4387,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourcesrequest">[]Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request</a></span>
     </dt>
-    <dd><p>Sidecar requests.</p>
-</dd></dl>
+    <dd>Sidecar requests.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="limits_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_hcl" style="color: inherit; text-decoration: inherit;">limits</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigsidecarresourceslimit">list(object)</a></span>
+    </dt>
+    <dd>Sidecar limits.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="requests_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_hcl" style="color: inherit; text-decoration: inherit;">requests</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigsidecarresourcesrequest">list(object)</a></span>
+    </dt>
+    <dd>Sidecar requests.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4025,8 +4423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourceslimit">List&lt;Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit&gt;</a></span>
     </dt>
-    <dd><p>Sidecar limits.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="requests_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_java" style="color: inherit; text-decoration: inherit;">requests</a>
@@ -4034,8 +4431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourcesrequest">List&lt;Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request&gt;</a></span>
     </dt>
-    <dd><p>Sidecar requests.</p>
-</dd></dl>
+    <dd>Sidecar requests.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4049,8 +4445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourceslimit">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit[]</a></span>
     </dt>
-    <dd><p>Sidecar limits.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="requests_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_nodejs" style="color: inherit; text-decoration: inherit;">requests</a>
@@ -4058,8 +4453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourcesrequest">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request[]</a></span>
     </dt>
-    <dd><p>Sidecar requests.</p>
-</dd></dl>
+    <dd>Sidecar requests.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4071,19 +4465,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_python" style="color: inherit; text-decoration: inherit;">limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshconfigsidecarresourceslimit">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit]</a></span>
+        <span class="property-type"><a href="#meshconfigsidecarresourceslimit">Sequence[Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit]</a></span>
     </dt>
-    <dd><p>Sidecar limits.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="requests_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_python" style="color: inherit; text-decoration: inherit;">requests</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#meshconfigsidecarresourcesrequest">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request]</a></span>
+        <span class="property-type"><a href="#meshconfigsidecarresourcesrequest">Sequence[Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request]</a></span>
     </dt>
-    <dd><p>Sidecar requests.</p>
-</dd></dl>
+    <dd>Sidecar requests.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4097,8 +4489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourceslimit">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Sidecar limits.</p>
-</dd><dt class="property-optional"
+    <dd>Sidecar limits.</dd><dt class="property-optional"
             title="Optional">
         <span id="requests_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_yaml" style="color: inherit; text-decoration: inherit;">requests</a>
@@ -4106,12 +4497,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigsidecarresourcesrequest">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Sidecar requests.</p>
-</dd></dl>
+    <dd>Sidecar requests.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigsidecarresourceslimit">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit</h4>
+<h4 id="meshconfigsidecarresourceslimit">
+Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Limit<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4123,8 +4515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_csharp" style="color: inherit; text-decoration: inherit;">Quantity</a>
@@ -4132,8 +4523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4147,8 +4537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_go" style="color: inherit; text-decoration: inherit;">Quantity</a>
@@ -4156,8 +4545,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="quantity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_hcl" style="color: inherit; text-decoration: inherit;">quantity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4171,8 +4581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_java" style="color: inherit; text-decoration: inherit;">quantity</a>
@@ -4180,8 +4589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4195,8 +4603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_nodejs" style="color: inherit; text-decoration: inherit;">quantity</a>
@@ -4204,8 +4611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4219,8 +4625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_python" style="color: inherit; text-decoration: inherit;">quantity</a>
@@ -4228,8 +4633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4243,8 +4647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_yaml" style="color: inherit; text-decoration: inherit;">quantity</a>
@@ -4252,12 +4655,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigsidecarresourcesrequest">Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request</h4>
+<h4 id="meshconfigsidecarresourcesrequest">
+Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Sidecar<wbr>Resources<wbr>Request<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4269,8 +4673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_csharp" style="color: inherit; text-decoration: inherit;">Quantity</a>
@@ -4278,8 +4681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4293,8 +4695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_go" style="color: inherit; text-decoration: inherit;">Quantity</a>
@@ -4302,8 +4703,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="quantity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_hcl" style="color: inherit; text-decoration: inherit;">quantity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4317,8 +4739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_java" style="color: inherit; text-decoration: inherit;">quantity</a>
@@ -4326,8 +4747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4341,8 +4761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_nodejs" style="color: inherit; text-decoration: inherit;">quantity</a>
@@ -4350,8 +4769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4365,8 +4783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_python" style="color: inherit; text-decoration: inherit;">quantity</a>
@@ -4374,8 +4791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4389,8 +4805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type name, <code>cpu/memory</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type name, <code>cpu/memory</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="quantity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quantity_yaml" style="color: inherit; text-decoration: inherit;">quantity</a>
@@ -4398,12 +4813,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</p>
-</dd></dl>
+    <dd>Resource quantity, example: cpu-<code>100m</code>, memory-<code>1Gi</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigtracing">Mesh<wbr>Config<wbr>Tracing</h4>
+<h4 id="meshconfigtracing">
+Mesh<wbr>Config<wbr>Tracing<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Tracing<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4415,8 +4831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingapm">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -4424,8 +4839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_csharp" style="color: inherit; text-decoration: inherit;">Sampling</a>
@@ -4433,8 +4847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_csharp" style="color: inherit; text-decoration: inherit;">Zipkin</a>
@@ -4442,8 +4855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingzipkin">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcm.<wbr>Inputs.<wbr>Mesh<wbr>Config<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4457,8 +4869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingapm">Mesh<wbr>Config<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -4466,8 +4877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_go" style="color: inherit; text-decoration: inherit;">Sampling</a>
@@ -4475,8 +4885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_go" style="color: inherit; text-decoration: inherit;">Zipkin</a>
@@ -4484,8 +4893,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingzipkin">Mesh<wbr>Config<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="apm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apm_hcl" style="color: inherit; text-decoration: inherit;">apm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigtracingapm">object</a></span>
+    </dt>
+    <dd>APM config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sampling_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_hcl" style="color: inherit; text-decoration: inherit;">sampling</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zipkin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_hcl" style="color: inherit; text-decoration: inherit;">zipkin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#meshconfigtracingzipkin">object</a></span>
+    </dt>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4499,8 +4945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingapm">Mesh<wbr>Config<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -4508,8 +4953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_java" style="color: inherit; text-decoration: inherit;">sampling</a>
@@ -4517,8 +4961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_java" style="color: inherit; text-decoration: inherit;">zipkin</a>
@@ -4526,8 +4969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingzipkin">Mesh<wbr>Config<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4541,8 +4983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingapm">Mesh<wbr>Config<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -4550,8 +4991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_nodejs" style="color: inherit; text-decoration: inherit;">sampling</a>
@@ -4559,8 +4999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_nodejs" style="color: inherit; text-decoration: inherit;">zipkin</a>
@@ -4568,8 +5007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingzipkin">Mesh<wbr>Config<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4583,8 +5021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingapm">Mesh<wbr>Config<wbr>Tracing<wbr>Apm</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -4592,8 +5029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_python" style="color: inherit; text-decoration: inherit;">sampling</a>
@@ -4601,8 +5037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_python" style="color: inherit; text-decoration: inherit;">zipkin</a>
@@ -4610,8 +5045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingzipkin">Mesh<wbr>Config<wbr>Tracing<wbr>Zipkin</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4625,8 +5059,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingapm">Property Map</a></span>
     </dt>
-    <dd><p>APM config.</p>
-</dd><dt class="property-optional"
+    <dd>APM config.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -4634,8 +5067,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether enable tracing.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable tracing.</dd><dt class="property-optional"
             title="Optional">
         <span id="sampling_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampling_yaml" style="color: inherit; text-decoration: inherit;">sampling</a>
@@ -4643,8 +5075,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Tracing sampling, 0.0-1.0.</p>
-</dd><dt class="property-optional"
+    <dd>Tracing sampling, 0.0-1.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipkin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipkin_yaml" style="color: inherit; text-decoration: inherit;">zipkin</a>
@@ -4652,12 +5083,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#meshconfigtracingzipkin">Property Map</a></span>
     </dt>
-    <dd><p>Third party zipkin config.</p>
-</dd></dl>
+    <dd>Third party zipkin config.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigtracingapm">Mesh<wbr>Config<wbr>Tracing<wbr>Apm</h4>
+<h4 id="meshconfigtracingapm">
+Mesh<wbr>Config<wbr>Tracing<wbr>Apm<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Tracing<wbr>Apm<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4669,8 +5101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -4678,8 +5109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -4687,8 +5117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4702,8 +5131,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -4711,8 +5139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -4720,8 +5147,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether enable APM.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4735,8 +5191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -4744,8 +5199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -4753,8 +5207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4768,8 +5221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -4777,8 +5229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -4786,8 +5237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4801,8 +5251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -4810,8 +5259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -4819,8 +5267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4834,8 +5281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether enable APM.</p>
-</dd><dt class="property-optional"
+    <dd>Whether enable APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -4843,8 +5289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id of the APM.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id of the APM.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -4852,12 +5297,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshconfigtracingzipkin">Mesh<wbr>Config<wbr>Tracing<wbr>Zipkin</h4>
+<h4 id="meshconfigtracingzipkin">
+Mesh<wbr>Config<wbr>Tracing<wbr>Zipkin<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Config<wbr>Tracing<wbr>Zipkin<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4869,8 +5315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4884,8 +5329,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_hcl" style="color: inherit; text-decoration: inherit;">address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4899,8 +5357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4914,8 +5371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4929,8 +5385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4944,12 +5399,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zipkin address.</p>
-</dd></dl>
+    <dd>Zipkin address.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="meshtaglist">Mesh<wbr>Tag<wbr>List</h4>
+<h4 id="meshtaglist">
+Mesh<wbr>Tag<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Mesh<wbr>Tag<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4961,8 +5417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4970,8 +5425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="passthrough_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_csharp" style="color: inherit; text-decoration: inherit;">Passthrough</a>
@@ -4979,8 +5433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd></dl>
+    <dd>Passthrough to other related product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4994,8 +5447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -5003,8 +5455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="passthrough_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_go" style="color: inherit; text-decoration: inherit;">Passthrough</a>
@@ -5012,8 +5463,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd></dl>
+    <dd>Passthrough to other related product.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="passthrough_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_hcl" style="color: inherit; text-decoration: inherit;">passthrough</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Passthrough to other related product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5027,8 +5507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5036,8 +5515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="passthrough_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_java" style="color: inherit; text-decoration: inherit;">passthrough</a>
@@ -5045,8 +5523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd></dl>
+    <dd>Passthrough to other related product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5060,8 +5537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5069,8 +5545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="passthrough_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_nodejs" style="color: inherit; text-decoration: inherit;">passthrough</a>
@@ -5078,8 +5553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd></dl>
+    <dd>Passthrough to other related product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5093,8 +5567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5102,8 +5575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="passthrough_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_python" style="color: inherit; text-decoration: inherit;">passthrough</a>
@@ -5111,8 +5583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd></dl>
+    <dd>Passthrough to other related product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5126,8 +5597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5135,8 +5605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="passthrough_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passthrough_yaml" style="color: inherit; text-decoration: inherit;">passthrough</a>
@@ -5144,8 +5613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Passthrough to other related product.</p>
-</dd></dl>
+    <dd>Passthrough to other related product.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5154,11 +5622,13 @@ The following state arguments are supported:
 
 
 tcm mesh can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Tcm/mesh:Mesh mesh mesh_id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -5170,7 +5640,6 @@ $ pulumi import tencentcloud:Tcm/mesh:Mesh mesh mesh_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

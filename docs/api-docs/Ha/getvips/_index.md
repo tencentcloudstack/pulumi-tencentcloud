@@ -2,9 +2,11 @@
 ---
 title: "getVips"
 title_tag: "tencentcloud.Ha.getVips"
-meta_desc: "Documentation for the tencentcloud.Ha.getVips function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of HA VIPs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,65 +18,47 @@ Use this data source to query detailed information of HA VIPs.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all HA vips
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const havips = tencentcloud.Ha.getVips({
-    addressIp: "10.0.4.16",
-    id: "havip-kjqwe4ba",
-    name: "test",
-    subnetId: "subnet-4d4m4cd4",
-    vpcId: "vpc-gzea3dd7",
-});
+const haVips = tencentcloud.ha.getVips({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-havips = tencentcloud.Ha.get_vips(address_ip="10.0.4.16",
-    id="havip-kjqwe4ba",
-    name="test",
-    subnet_id="subnet-4d4m4cd4",
-    vpc_id="vpc-gzea3dd7")
+ha_vips = tencentcloud.ha.get_vips()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var havips = Tencentcloud.Ha.GetVips.Invoke(new()
-    {
-        AddressIp = "10.0.4.16",
-        Id = "havip-kjqwe4ba",
-        Name = "test",
-        SubnetId = "subnet-4d4m4cd4",
-        VpcId = "vpc-gzea3dd7",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ha"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ha.GetVips(ctx, &ha.GetVipsArgs{
-			AddressIp: pulumi.StringRef("10.0.4.16"),
-			Id:        pulumi.StringRef("havip-kjqwe4ba"),
-			Name:      pulumi.StringRef("test"),
-			SubnetId:  pulumi.StringRef("subnet-4d4m4cd4"),
-			VpcId:     pulumi.StringRef("vpc-gzea3dd7"),
-		}, nil)
+		_, err := ha.GetVips(ctx, &ha.GetVipsArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -82,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var haVips = Tencentcloud.Ha.GetVips.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -90,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ha.HaFunctions;
 import com.pulumi.tencentcloud.Ha.inputs.GetVipsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -103,30 +109,44 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var havips = HaFunctions.getVips(GetVipsArgs.builder()
-            .addressIp("10.0.4.16")
-            .id("havip-kjqwe4ba")
-            .name("test")
-            .subnetId("subnet-4d4m4cd4")
-            .vpcId("vpc-gzea3dd7")
+        final var haVips = HaFunctions.getVips(GetVipsArgs.builder()
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  havips:
+  haVips:
     fn::invoke:
-      Function: tencentcloud:Ha:getVips
-      Arguments:
-        addressIp: 10.0.4.16
-        id: havip-kjqwe4ba
-        name: test
-        subnetId: subnet-4d4m4cd4
-        vpcId: vpc-gzea3dd7
+      function: tencentcloud:Ha:getVips
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ha_getvips" "haVips" {
+}
+```
+</pulumi-choosable>
+</div>
+
 
 
 
@@ -139,7 +159,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +167,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getVips<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetVipsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>></span
+><span class="k">function </span>getVips<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetVipsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>></span
 ><span class="k">
-function </span>getVipsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetVipsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>></span
+function </span>getVipsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetVipsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -166,13 +186,13 @@ function </span>getVipsOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetVipsResult</span
 ><span class="k">
-def </span>get_vips_output<span class="p">(</span><span class="nx">address_ip</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetVipsResult]</span
+def </span>get_vips_output<span class="p">(</span><span class="nx">address_ip</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetVipsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -197,7 +217,8 @@ func </span>GetVipsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetVips </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetVipsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetVipsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetVipsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetVipsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,7 +227,8 @@ func </span>GetVipsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>> </span>getVips<span class="p">(</span><span class="nx">GetVipsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>> </span>getVips<span class="p">(</span><span class="nx">GetVipsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetVipsResult</a></span>> </span>getVips<span class="p">(</span><span class="nx">GetVipsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -218,6 +240,15 @@ func </span>GetVipsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ha/getVips:getVips
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ha_get_vips&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -236,8 +267,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -245,8 +275,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -254,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -272,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -281,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -305,8 +329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -314,8 +337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +345,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -332,8 +353,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -341,8 +361,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="address_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -356,8 +429,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -365,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -374,8 +445,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -383,8 +453,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -392,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -401,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -416,8 +483,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -425,8 +491,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -434,8 +499,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -443,8 +507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -452,8 +515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -461,8 +523,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +537,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -485,8 +545,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -494,8 +553,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -503,8 +561,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -512,8 +569,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -521,8 +577,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,8 +591,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -545,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -554,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -563,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -572,8 +623,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -581,8 +631,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipshaviplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ha.<wbr>Outputs.<wbr>Get<wbr>Vips<wbr>Ha<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated HA VIPs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated HA VIPs.</dd><dt class="property-"
             title="">
         <span id="addressip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressip_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Ip</a>
@@ -614,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -623,8 +670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -632,8 +678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -649,8 +694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-"
+    <dd>Subnet id.</dd><dt class="property-"
             title="">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -658,8 +702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd></dl>
+    <dd>VPC id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -673,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipshaviplist">[]Get<wbr>Vips<wbr>Ha<wbr>Vip<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the dedicated HA VIPs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated HA VIPs.</dd><dt class="property-"
             title="">
         <span id="addressip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressip_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Ip</a>
@@ -682,8 +724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -691,8 +732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -700,8 +740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -717,8 +756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-"
+    <dd>Subnet id.</dd><dt class="property-"
             title="">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -726,8 +764,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd></dl>
+    <dd>VPC id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="ha_vip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ha_vip_lists_hcl" style="color: inherit; text-decoration: inherit;">ha_<wbr>vip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getvipshaviplist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the dedicated HA VIPs.</dd><dt class="property-"
+            title="">
+        <span id="address_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>EIP that is associated.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the HA VIP.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the HA VIP.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -741,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipshaviplist">List&lt;Get<wbr>Vips<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated HA VIPs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated HA VIPs.</dd><dt class="property-"
             title="">
         <span id="addressip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressip_java" style="color: inherit; text-decoration: inherit;">address<wbr>Ip</a>
@@ -750,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -759,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -768,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -785,8 +880,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-"
+    <dd>Subnet id.</dd><dt class="property-"
             title="">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -794,8 +888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd></dl>
+    <dd>VPC id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -809,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipshaviplist">Get<wbr>Vips<wbr>Ha<wbr>Vip<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated HA VIPs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated HA VIPs.</dd><dt class="property-"
             title="">
         <span id="addressip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressip_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Ip</a>
@@ -818,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -827,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -836,8 +926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -853,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-"
+    <dd>Subnet id.</dd><dt class="property-"
             title="">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -862,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd></dl>
+    <dd>VPC id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -875,10 +962,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ha_vip_lists_python" style="color: inherit; text-decoration: inherit;">ha_<wbr>vip_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getvipshaviplist">Get<wbr>Vips<wbr>Ha<wbr>Vip<wbr>List]</a></span>
+        <span class="property-type"><a href="#getvipshaviplist">Sequence[Get<wbr>Vips<wbr>Ha<wbr>Vip<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated HA VIPs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated HA VIPs.</dd><dt class="property-"
             title="">
         <span id="address_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_python" style="color: inherit; text-decoration: inherit;">address_<wbr>ip</a>
@@ -886,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -895,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -904,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -921,8 +1004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-"
+    <dd>Subnet id.</dd><dt class="property-"
             title="">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -930,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd></dl>
+    <dd>VPC id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -945,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipshaviplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated HA VIPs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated HA VIPs.</dd><dt class="property-"
             title="">
         <span id="addressip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressip_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Ip</a>
@@ -954,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -963,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>ID of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -972,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Name of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -989,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-"
+    <dd>Subnet id.</dd><dt class="property-"
             title="">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -998,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id.</p>
-</dd></dl>
+    <dd>VPC id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1023,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1032,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the HA VIP.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1041,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1050,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Instance id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1059,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="networkinterfaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -1068,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Network interface id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1077,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1086,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1095,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1104,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1119,8 +1184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1128,8 +1192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the HA VIP.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1137,8 +1200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1146,8 +1208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Instance id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1155,8 +1216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="networkinterfaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -1164,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Network interface id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1173,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1182,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1191,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1200,8 +1256,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the HA VIP.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id that is associated.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_interface_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_interface_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network interface id that is associated.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1215,8 +1356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1224,8 +1364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the HA VIP.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1233,8 +1372,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1242,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Instance id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1251,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="networkinterfaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -1260,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network interface id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Network interface id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1269,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1278,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1287,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1296,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1311,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1320,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the HA VIP.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1329,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1338,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Instance id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1347,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="networkinterfaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -1356,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Network interface id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1365,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1374,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1383,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1392,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1407,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1416,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the HA VIP.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1425,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1434,8 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Instance id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1443,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="network_interface_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_interface_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
@@ -1452,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network interface id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Network interface id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1461,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1470,8 +1584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1479,8 +1592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1488,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1503,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>EIP of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1512,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the HA VIP.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1521,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1530,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Instance id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1539,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="networkinterfaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -1548,8 +1654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network interface id that is associated.</p>
-</dd><dt class="property-required"
+    <dd>Network interface id that is associated.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1557,8 +1662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the HA VIP. Valid values: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1566,8 +1670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id of the HA VIP to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id of the HA VIP to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1575,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1584,8 +1686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC id of the HA VIP to be queried.</p>
-</dd></dl>
+    <dd>VPC id of the HA VIP to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1600,7 +1701,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

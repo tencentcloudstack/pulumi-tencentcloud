@@ -2,9 +2,11 @@
 ---
 title: "Output"
 title_tag: "tencentcloud.Mps.Output"
-meta_desc: "Documentation for the tencentcloud.Mps.Output resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a mps output"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,7 +20,12 @@ Provides a resource to create a mps output
 
 ### Create a output group with RTP
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -26,10 +33,10 @@ import * as tencentcloud from "@tencentcloud_iac/pulumi";
 const output = new tencentcloud.mps.Output("output", {
     flowId: "your_flow_id",
     output: {
-        description: "tf mps output group",
         outputName: "your_output_name",
-        outputRegion: "ap-guangzhou",
+        description: "tf mps output group",
         protocol: "RTP",
+        outputRegion: "ap-guangzhou",
         rtpSettings: {
             destinations: [{
                 ip: "203.205.141.84",
@@ -41,79 +48,54 @@ const output = new tencentcloud.mps.Output("output", {
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 output = tencentcloud.mps.Output("output",
     flow_id="your_flow_id",
-    output=tencentcloud.mps.OutputOutputArgs(
-        description="tf mps output group",
-        output_name="your_output_name",
-        output_region="ap-guangzhou",
-        protocol="RTP",
-        rtp_settings=tencentcloud.mps.OutputOutputRtpSettingsArgs(
-            destinations=[tencentcloud.mps.OutputOutputRtpSettingsDestinationArgs(
-                ip="203.205.141.84",
-                port=65535,
-            )],
-            fec="none",
-            idle_timeout=1000,
-        ),
-    ))
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var output = new Tencentcloud.Mps.Output("output", new()
-    {
-        FlowId = "your_flow_id",
-        MpsOutput = new Tencentcloud.Mps.Inputs.OutputOutputArgs
-        {
-            Description = "tf mps output group",
-            OutputName = "your_output_name",
-            OutputRegion = "ap-guangzhou",
-            Protocol = "RTP",
-            RtpSettings = new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsArgs
-            {
-                Destinations = new[]
-                {
-                    new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsDestinationArgs
-                    {
-                        Ip = "203.205.141.84",
-                        Port = 65535,
-                    },
-                },
-                Fec = "none",
-                IdleTimeout = 1000,
-            },
+    output={
+        "output_name": "your_output_name",
+        "description": "tf mps output group",
+        "protocol": "RTP",
+        "output_region": "ap-guangzhou",
+        "rtp_settings": {
+            "destinations": [{
+                "ip": "203.205.141.84",
+                "port": 65535,
+            }],
+            "fec": "none",
+            "idle_timeout": 1000,
         },
-    });
-
-});
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mps"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mps.NewOutput(ctx, "output", &Mps.OutputArgs{
+		_, err := mps.NewOutput(ctx, "output", &mps.OutputArgs{
 			FlowId: pulumi.String("your_flow_id"),
 			Output: &mps.OutputOutputTypeArgs{
-				Description:  pulumi.String("tf mps output group"),
 				OutputName:   pulumi.String("your_output_name"),
-				OutputRegion: pulumi.String("ap-guangzhou"),
+				Description:  pulumi.String("tf mps output group"),
 				Protocol:     pulumi.String("RTP"),
+				OutputRegion: pulumi.String("ap-guangzhou"),
 				RtpSettings: &mps.OutputOutputRtpSettingsArgs{
 					Destinations: mps.OutputOutputRtpSettingsDestinationArray{
 						&mps.OutputOutputRtpSettingsDestinationArgs{
@@ -133,6 +115,51 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var output = new Tencentcloud.Mps.Output("output", new()
+    {
+        FlowId = "your_flow_id",
+        MpsOutput = new Tencentcloud.Mps.Inputs.OutputOutputArgs
+        {
+            OutputName = "your_output_name",
+            Description = "tf mps output group",
+            Protocol = "RTP",
+            OutputRegion = "ap-guangzhou",
+            RtpSettings = new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsArgs
+            {
+                Destinations = new[]
+                {
+                    new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsDestinationArgs
+                    {
+                        Ip = "203.205.141.84",
+                        Port = 65535,
+                    },
+                },
+                Fec = "none",
+                IdleTimeout = 1000,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -143,8 +170,9 @@ import com.pulumi.tencentcloud.Mps.Output;
 import com.pulumi.tencentcloud.Mps.OutputArgs;
 import com.pulumi.tencentcloud.Mps.inputs.OutputOutputArgs;
 import com.pulumi.tencentcloud.Mps.inputs.OutputOutputRtpSettingsArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Mps.inputs.OutputOutputRtpSettingsDestinationArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -156,13 +184,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var output = new Output("output", OutputArgs.builder()        
+        var output = new Output("output", OutputArgs.builder()
             .flowId("your_flow_id")
             .output(OutputOutputArgs.builder()
-                .description("tf mps output group")
                 .outputName("your_output_name")
-                .outputRegion("ap-guangzhou")
+                .description("tf mps output group")
                 .protocol("RTP")
+                .outputRegion("ap-guangzhou")
                 .rtpSettings(OutputOutputRtpSettingsArgs.builder()
                     .destinations(OutputOutputRtpSettingsDestinationArgs.builder()
                         .ip("203.205.141.84")
@@ -177,6 +205,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   output:
@@ -184,10 +217,10 @@ resources:
     properties:
       flowId: your_flow_id
       output:
-        description: tf mps output group
         outputName: your_output_name
-        outputRegion: ap-guangzhou
+        description: tf mps output group
         protocol: RTP
+        outputRegion: ap-guangzhou
         rtpSettings:
           destinations:
             - ip: 203.205.141.84
@@ -195,66 +228,123 @@ resources:
           fec: none
           idleTimeout: 1000
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_mps_output" "output" {
+  flow_id = "your_flow_id"
+  output = {
+    output_name   = "your_output_name"
+    description   = "tf mps output group"
+    protocol      = "RTP"
+    output_region = "ap-guangzhou"
+    rtp_settings = {
+      destinations = [{
+        "ip"   = "203.205.141.84"
+        "port" = 65535
+      }]
+      fec          = "none"
+      idle_timeout = 1000
+    }
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateStreamLinkOutputInfo](https://www.tencentcloud.com/search/?wd=CreateStreamLinkOutputInfo&type=document&lang=en)
+* Read: [DescribeStreamLinkFlow](https://www.tencentcloud.com/search/?wd=DescribeStreamLinkFlow&type=document&lang=en)
+* Update: [ModifyStreamLinkOutputInfo](https://www.tencentcloud.com/search/?wd=ModifyStreamLinkOutputInfo&type=document&lang=en)
+* Delete: [DeleteStreamLinkOutput](https://www.tencentcloud.com/search/?wd=DeleteStreamLinkOutput&type=document&lang=en)
 
 
 ## Create Output Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Output</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Output</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Output</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Output</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
            <span class="nx">flow_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">output</span><span class="p">:</span> <span class="nx">Optional[_mps.OutputOutputArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Output</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">output</span><span class="p">:</span> <span class="nx">Optional[OutputOutputArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewOutput</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Output</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewOutput</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Output</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Output</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Output</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Output</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Output</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">OutputArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mps:Output</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mps:Output</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mps_output&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -275,7 +365,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -392,11 +482,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Output Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Output resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -412,17 +510,15 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-required"
+    <dd>Flow ID.</dd><dt class="property-required"
             title="Required">
         <span id="mpsoutput_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mpsoutput_csharp" style="color: inherit; text-decoration: inherit;">Mps<wbr>Output</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutput">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output<wbr>Args</a></span>
+        <span class="property-type"><a href="#outputoutput">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -436,8 +532,7 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-required"
+    <dd>Flow ID.</dd><dt class="property-required"
             title="Required">
         <span id="output_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_go" style="color: inherit; text-decoration: inherit;">Output</a>
@@ -445,8 +540,29 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutput">Output<wbr>Output<wbr>Type<wbr>Args</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="flow_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flow_id_hcl" style="color: inherit; text-decoration: inherit;">flow_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Flow ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="output_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_hcl" style="color: inherit; text-decoration: inherit;">output</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#outputoutput">object</a></span>
+    </dt>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -460,17 +576,15 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-required"
+    <dd>Flow ID.</dd><dt class="property-required"
             title="Required">
         <span id="output_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_java" style="color: inherit; text-decoration: inherit;">output</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutput">Output<wbr>Output<wbr>Args</a></span>
+        <span class="property-type"><a href="#outputoutput">Output<wbr>Output</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -484,17 +598,15 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-required"
+    <dd>Flow ID.</dd><dt class="property-required"
             title="Required">
         <span id="output_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_nodejs" style="color: inherit; text-decoration: inherit;">output</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutput">Output<wbr>Output<wbr>Args</a></span>
+        <span class="property-type"><a href="#outputoutput">Output<wbr>Output</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -508,8 +620,7 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-required"
+    <dd>Flow ID.</dd><dt class="property-required"
             title="Required">
         <span id="output_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_python" style="color: inherit; text-decoration: inherit;">output</a>
@@ -517,8 +628,7 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutput">Output<wbr>Output<wbr>Args</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -532,8 +642,7 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-required"
+    <dd>Flow ID.</dd><dt class="property-required"
             title="Required">
         <span id="output_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_yaml" style="color: inherit; text-decoration: inherit;">output</a>
@@ -541,8 +650,7 @@ The Output resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutput">Property Map</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -563,8 +671,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -578,8 +685,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +713,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -608,8 +727,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -623,8 +741,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -638,8 +755,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -649,121 +765,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Output resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">OutputState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Output</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">OutputState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Output</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">flow_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">output</span><span class="p">:</span> <span class="nx">Optional[_mps.OutputOutputArgs]</span> = None<span class="p">) -&gt;</span> Output</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">output</span><span class="p">:</span> <span class="nx">Optional[OutputOutputArgs]</span> = None<span class="p">) -&gt;</span> Output</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">OutputState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Output</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">OutputState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Output</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Output</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">OutputState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Output</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">OutputState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Output</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">OutputState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Output</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">OutputState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingOutput</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mps:Output</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mps_output</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">OutputState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">OutputState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -771,28 +926,31 @@ Get an existing Output resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">OutputState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -800,28 +958,31 @@ Get an existing Output resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">OutputState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -841,17 +1002,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-optional"
+    <dd>Flow ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mpsoutput_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mpsoutput_csharp" style="color: inherit; text-decoration: inherit;">Mps<wbr>Output</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutput">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output<wbr>Args</a></span>
+        <span class="property-type"><a href="#outputoutput">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +1024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-optional"
+    <dd>Flow ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_output_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_output_go" style="color: inherit; text-decoration: inherit;">Output</a>
@@ -874,8 +1032,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutput">Output<wbr>Output<wbr>Type<wbr>Args</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_flow_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flow_id_hcl" style="color: inherit; text-decoration: inherit;">flow_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Flow ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_output_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_output_hcl" style="color: inherit; text-decoration: inherit;">output</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#outputoutput">object</a></span>
+    </dt>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -889,17 +1068,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-optional"
+    <dd>Flow ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_output_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_output_java" style="color: inherit; text-decoration: inherit;">output</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutput">Output<wbr>Output<wbr>Args</a></span>
+        <span class="property-type"><a href="#outputoutput">Output<wbr>Output</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -913,17 +1090,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-optional"
+    <dd>Flow ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_output_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_output_nodejs" style="color: inherit; text-decoration: inherit;">output</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutput">Output<wbr>Output<wbr>Args</a></span>
+        <span class="property-type"><a href="#outputoutput">Output<wbr>Output</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -937,8 +1112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-optional"
+    <dd>Flow ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_output_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_output_python" style="color: inherit; text-decoration: inherit;">output</a>
@@ -946,8 +1120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutput">Output<wbr>Output<wbr>Args</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -961,8 +1134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Flow ID.</p>
-</dd><dt class="property-optional"
+    <dd>Flow ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_output_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_output_yaml" style="color: inherit; text-decoration: inherit;">output</a>
@@ -970,8 +1142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutput">Property Map</a></span>
     </dt>
-    <dd><p>Output configuration of the transport stream.</p>
-</dd></dl>
+    <dd>Output configuration of the transport stream.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -986,7 +1157,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="outputoutput">Output<wbr>Output</h4>
+<h4 id="outputoutput">
+Output<wbr>Output<pulumi-choosable type="language" values="python,go" class="inline">, Output<wbr>Output<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -998,8 +1171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output description.</p>
-</dd><dt class="property-required"
+    <dd>Output description.</dd><dt class="property-required"
             title="Required">
         <span id="outputname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputname_csharp" style="color: inherit; text-decoration: inherit;">Output<wbr>Name</a>
@@ -1007,8 +1179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the output.</p>
-</dd><dt class="property-required"
+    <dd>The name of the output.</dd><dt class="property-required"
             title="Required">
         <span id="outputregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputregion_csharp" style="color: inherit; text-decoration: inherit;">Output<wbr>Region</a>
@@ -1016,8 +1187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output region.</p>
-</dd><dt class="property-required"
+    <dd>Output region.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1025,8 +1195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</p>
-</dd><dt class="property-optional"
+    <dd>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</dd><dt class="property-optional"
             title="Optional">
         <span id="allowiplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowiplists_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Ip<wbr>Lists</a>
@@ -1034,8 +1203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</p>
-</dd><dt class="property-optional"
+    <dd>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrent</a>
@@ -1043,8 +1211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtmpsettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtmpsettings_csharp" style="color: inherit; text-decoration: inherit;">Rtmp<wbr>Settings</a>
@@ -1052,8 +1219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output<wbr>Rtmp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTMP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTMP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtpsettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtpsettings_csharp" style="color: inherit; text-decoration: inherit;">Rtp<wbr>Settings</a>
@@ -1061,8 +1227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output<wbr>Rtp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="srtsettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srtsettings_csharp" style="color: inherit; text-decoration: inherit;">Srt<wbr>Settings</a>
@@ -1070,8 +1235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output<wbr>Srt<wbr>Settings</a></span>
     </dt>
-    <dd><p>configuration of the output SRT.</p>
-</dd></dl>
+    <dd>configuration of the output SRT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1085,8 +1249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output description.</p>
-</dd><dt class="property-required"
+    <dd>Output description.</dd><dt class="property-required"
             title="Required">
         <span id="outputname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputname_go" style="color: inherit; text-decoration: inherit;">Output<wbr>Name</a>
@@ -1094,8 +1257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the output.</p>
-</dd><dt class="property-required"
+    <dd>The name of the output.</dd><dt class="property-required"
             title="Required">
         <span id="outputregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputregion_go" style="color: inherit; text-decoration: inherit;">Output<wbr>Region</a>
@@ -1103,8 +1265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output region.</p>
-</dd><dt class="property-required"
+    <dd>Output region.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1112,8 +1273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</p>
-</dd><dt class="property-optional"
+    <dd>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</dd><dt class="property-optional"
             title="Optional">
         <span id="allowiplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowiplists_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Ip<wbr>Lists</a>
@@ -1121,8 +1281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</p>
-</dd><dt class="property-optional"
+    <dd>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrent</a>
@@ -1130,8 +1289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtmpsettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtmpsettings_go" style="color: inherit; text-decoration: inherit;">Rtmp<wbr>Settings</a>
@@ -1139,8 +1297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettings">Output<wbr>Output<wbr>Rtmp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTMP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTMP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtpsettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtpsettings_go" style="color: inherit; text-decoration: inherit;">Rtp<wbr>Settings</a>
@@ -1148,8 +1305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettings">Output<wbr>Output<wbr>Rtp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="srtsettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srtsettings_go" style="color: inherit; text-decoration: inherit;">Srt<wbr>Settings</a>
@@ -1157,8 +1313,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettings">Output<wbr>Output<wbr>Srt<wbr>Settings</a></span>
     </dt>
-    <dd><p>configuration of the output SRT.</p>
-</dd></dl>
+    <dd>configuration of the output SRT.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Output description.</dd><dt class="property-required"
+            title="Required">
+        <span id="output_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_name_hcl" style="color: inherit; text-decoration: inherit;">output_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the output.</dd><dt class="property-required"
+            title="Required">
+        <span id="output_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_region_hcl" style="color: inherit; text-decoration: inherit;">output_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Output region.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_ip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_ip_lists_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>ip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_concurrent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrent_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rtmp_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtmp_settings_hcl" style="color: inherit; text-decoration: inherit;">rtmp_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#outputoutputrtmpsettings">object</a></span>
+    </dt>
+    <dd>Output RTMP configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rtp_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtp_settings_hcl" style="color: inherit; text-decoration: inherit;">rtp_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#outputoutputrtpsettings">object</a></span>
+    </dt>
+    <dd>Output RTP configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="srt_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srt_settings_hcl" style="color: inherit; text-decoration: inherit;">srt_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#outputoutputsrtsettings">object</a></span>
+    </dt>
+    <dd>configuration of the output SRT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1172,8 +1405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output description.</p>
-</dd><dt class="property-required"
+    <dd>Output description.</dd><dt class="property-required"
             title="Required">
         <span id="outputname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputname_java" style="color: inherit; text-decoration: inherit;">output<wbr>Name</a>
@@ -1181,8 +1413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the output.</p>
-</dd><dt class="property-required"
+    <dd>The name of the output.</dd><dt class="property-required"
             title="Required">
         <span id="outputregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputregion_java" style="color: inherit; text-decoration: inherit;">output<wbr>Region</a>
@@ -1190,8 +1421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output region.</p>
-</dd><dt class="property-required"
+    <dd>Output region.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1199,8 +1429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</p>
-</dd><dt class="property-optional"
+    <dd>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</dd><dt class="property-optional"
             title="Optional">
         <span id="allowiplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowiplists_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Ip<wbr>Lists</a>
@@ -1208,8 +1437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</p>
-</dd><dt class="property-optional"
+    <dd>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_java" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -1217,8 +1445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtmpsettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtmpsettings_java" style="color: inherit; text-decoration: inherit;">rtmp<wbr>Settings</a>
@@ -1226,8 +1453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettings">Output<wbr>Output<wbr>Rtmp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTMP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTMP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtpsettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtpsettings_java" style="color: inherit; text-decoration: inherit;">rtp<wbr>Settings</a>
@@ -1235,8 +1461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettings">Output<wbr>Output<wbr>Rtp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="srtsettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srtsettings_java" style="color: inherit; text-decoration: inherit;">srt<wbr>Settings</a>
@@ -1244,8 +1469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettings">Output<wbr>Output<wbr>Srt<wbr>Settings</a></span>
     </dt>
-    <dd><p>configuration of the output SRT.</p>
-</dd></dl>
+    <dd>configuration of the output SRT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1259,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output description.</p>
-</dd><dt class="property-required"
+    <dd>Output description.</dd><dt class="property-required"
             title="Required">
         <span id="outputname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputname_nodejs" style="color: inherit; text-decoration: inherit;">output<wbr>Name</a>
@@ -1268,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the output.</p>
-</dd><dt class="property-required"
+    <dd>The name of the output.</dd><dt class="property-required"
             title="Required">
         <span id="outputregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputregion_nodejs" style="color: inherit; text-decoration: inherit;">output<wbr>Region</a>
@@ -1277,8 +1499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output region.</p>
-</dd><dt class="property-required"
+    <dd>Output region.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1286,8 +1507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</p>
-</dd><dt class="property-optional"
+    <dd>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</dd><dt class="property-optional"
             title="Optional">
         <span id="allowiplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowiplists_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Ip<wbr>Lists</a>
@@ -1295,8 +1515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</p>
-</dd><dt class="property-optional"
+    <dd>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -1304,8 +1523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtmpsettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtmpsettings_nodejs" style="color: inherit; text-decoration: inherit;">rtmp<wbr>Settings</a>
@@ -1313,8 +1531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettings">Output<wbr>Output<wbr>Rtmp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTMP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTMP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtpsettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtpsettings_nodejs" style="color: inherit; text-decoration: inherit;">rtp<wbr>Settings</a>
@@ -1322,8 +1539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettings">Output<wbr>Output<wbr>Rtp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="srtsettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srtsettings_nodejs" style="color: inherit; text-decoration: inherit;">srt<wbr>Settings</a>
@@ -1331,8 +1547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettings">Output<wbr>Output<wbr>Srt<wbr>Settings</a></span>
     </dt>
-    <dd><p>configuration of the output SRT.</p>
-</dd></dl>
+    <dd>configuration of the output SRT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1346,8 +1561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Output description.</p>
-</dd><dt class="property-required"
+    <dd>Output description.</dd><dt class="property-required"
             title="Required">
         <span id="output_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_name_python" style="color: inherit; text-decoration: inherit;">output_<wbr>name</a>
@@ -1355,8 +1569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the output.</p>
-</dd><dt class="property-required"
+    <dd>The name of the output.</dd><dt class="property-required"
             title="Required">
         <span id="output_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_region_python" style="color: inherit; text-decoration: inherit;">output_<wbr>region</a>
@@ -1364,8 +1577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Output region.</p>
-</dd><dt class="property-required"
+    <dd>Output region.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1373,8 +1585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</p>
-</dd><dt class="property-optional"
+    <dd>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_ip_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_ip_lists_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>ip_<wbr>lists</a>
@@ -1382,8 +1593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</p>
-</dd><dt class="property-optional"
+    <dd>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_concurrent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrent_python" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrent</a>
@@ -1391,8 +1601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtmp_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtmp_settings_python" style="color: inherit; text-decoration: inherit;">rtmp_<wbr>settings</a>
@@ -1400,8 +1609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettings">Output<wbr>Output<wbr>Rtmp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTMP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTMP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtp_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtp_settings_python" style="color: inherit; text-decoration: inherit;">rtp_<wbr>settings</a>
@@ -1409,8 +1617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettings">Output<wbr>Output<wbr>Rtp<wbr>Settings</a></span>
     </dt>
-    <dd><p>Output RTP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="srt_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srt_settings_python" style="color: inherit; text-decoration: inherit;">srt_<wbr>settings</a>
@@ -1418,8 +1625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettings">Output<wbr>Output<wbr>Srt<wbr>Settings</a></span>
     </dt>
-    <dd><p>configuration of the output SRT.</p>
-</dd></dl>
+    <dd>configuration of the output SRT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1433,8 +1639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output description.</p>
-</dd><dt class="property-required"
+    <dd>Output description.</dd><dt class="property-required"
             title="Required">
         <span id="outputname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputname_yaml" style="color: inherit; text-decoration: inherit;">output<wbr>Name</a>
@@ -1442,8 +1647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the output.</p>
-</dd><dt class="property-required"
+    <dd>The name of the output.</dd><dt class="property-required"
             title="Required">
         <span id="outputregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputregion_yaml" style="color: inherit; text-decoration: inherit;">output<wbr>Region</a>
@@ -1451,8 +1655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output region.</p>
-</dd><dt class="property-required"
+    <dd>Output region.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1460,8 +1663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</p>
-</dd><dt class="property-optional"
+    <dd>Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].</dd><dt class="property-optional"
             title="Optional">
         <span id="allowiplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowiplists_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Ip<wbr>Lists</a>
@@ -1469,8 +1671,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</p>
-</dd><dt class="property-optional"
+    <dd>IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -1478,8 +1679,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtmpsettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtmpsettings_yaml" style="color: inherit; text-decoration: inherit;">rtmp<wbr>Settings</a>
@@ -1487,8 +1687,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettings">Property Map</a></span>
     </dt>
-    <dd><p>Output RTMP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTMP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rtpsettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rtpsettings_yaml" style="color: inherit; text-decoration: inherit;">rtp<wbr>Settings</a>
@@ -1496,8 +1695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettings">Property Map</a></span>
     </dt>
-    <dd><p>Output RTP configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Output RTP configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="srtsettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srtsettings_yaml" style="color: inherit; text-decoration: inherit;">srt<wbr>Settings</a>
@@ -1505,12 +1703,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettings">Property Map</a></span>
     </dt>
-    <dd><p>configuration of the output SRT.</p>
-</dd></dl>
+    <dd>configuration of the output SRT.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="outputoutputrtmpsettings">Output<wbr>Output<wbr>Rtmp<wbr>Settings</h4>
+<h4 id="outputoutputrtmpsettings">
+Output<wbr>Output<wbr>Rtmp<wbr>Settings<pulumi-choosable type="language" values="python,go" class="inline">, Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1522,8 +1721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettingsdestination">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-optional"
             title="Optional">
         <span id="chunksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chunksize_csharp" style="color: inherit; text-decoration: inherit;">Chunk<wbr>Size</a>
@@ -1531,8 +1729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>RTMP Chunk size, range is [4096, 40960].</p>
-</dd></dl>
+    <dd>RTMP Chunk size, range is [4096, 40960].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1546,8 +1743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettingsdestination">[]Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-optional"
             title="Optional">
         <span id="chunksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chunksize_go" style="color: inherit; text-decoration: inherit;">Chunk<wbr>Size</a>
@@ -1555,8 +1751,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>RTMP Chunk size, range is [4096, 40960].</p>
-</dd></dl>
+    <dd>RTMP Chunk size, range is [4096, 40960].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="destinations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinations_hcl" style="color: inherit; text-decoration: inherit;">destinations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#outputoutputrtmpsettingsdestination">list(object)</a></span>
+    </dt>
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="chunk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chunk_size_hcl" style="color: inherit; text-decoration: inherit;">chunk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>RTMP Chunk size, range is [4096, 40960].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1570,8 +1787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettingsdestination">List&lt;Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-optional"
             title="Optional">
         <span id="chunksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chunksize_java" style="color: inherit; text-decoration: inherit;">chunk<wbr>Size</a>
@@ -1579,8 +1795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>RTMP Chunk size, range is [4096, 40960].</p>
-</dd></dl>
+    <dd>RTMP Chunk size, range is [4096, 40960].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1594,8 +1809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettingsdestination">Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination[]</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-optional"
             title="Optional">
         <span id="chunksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chunksize_nodejs" style="color: inherit; text-decoration: inherit;">chunk<wbr>Size</a>
@@ -1603,8 +1817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>RTMP Chunk size, range is [4096, 40960].</p>
-</dd></dl>
+    <dd>RTMP Chunk size, range is [4096, 40960].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1616,10 +1829,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinations_python" style="color: inherit; text-decoration: inherit;">destinations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutputrtmpsettingsdestination">Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination]</a></span>
+        <span class="property-type"><a href="#outputoutputrtmpsettingsdestination">Sequence[Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination]</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-optional"
             title="Optional">
         <span id="chunk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chunk_size_python" style="color: inherit; text-decoration: inherit;">chunk_<wbr>size</a>
@@ -1627,8 +1839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>RTMP Chunk size, range is [4096, 40960].</p>
-</dd></dl>
+    <dd>RTMP Chunk size, range is [4096, 40960].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1642,8 +1853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtmpsettingsdestination">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-optional"
             title="Optional">
         <span id="chunksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chunksize_yaml" style="color: inherit; text-decoration: inherit;">chunk<wbr>Size</a>
@@ -1651,12 +1861,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>RTMP Chunk size, range is [4096, 40960].</p>
-</dd></dl>
+    <dd>RTMP Chunk size, range is [4096, 40960].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="outputoutputrtmpsettingsdestination">Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination</h4>
+<h4 id="outputoutputrtmpsettingsdestination">
+Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination<pulumi-choosable type="language" values="python,go" class="inline">, Output<wbr>Output<wbr>Rtmp<wbr>Settings<wbr>Destination<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1668,8 +1879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relayed StreamKey, in the format: stream?key=value.</p>
-</dd><dt class="property-required"
+    <dd>relayed StreamKey, in the format: stream?key=value.</dd><dt class="property-required"
             title="Required">
         <span id="url_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -1677,8 +1887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relayed URL, the format is: rtmp://domain/live.</p>
-</dd></dl>
+    <dd>relayed URL, the format is: rtmp://domain/live.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1692,8 +1901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relayed StreamKey, in the format: stream?key=value.</p>
-</dd><dt class="property-required"
+    <dd>relayed StreamKey, in the format: stream?key=value.</dd><dt class="property-required"
             title="Required">
         <span id="url_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_go" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -1701,8 +1909,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relayed URL, the format is: rtmp://domain/live.</p>
-</dd></dl>
+    <dd>relayed URL, the format is: rtmp://domain/live.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="stream_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stream_key_hcl" style="color: inherit; text-decoration: inherit;">stream_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>relayed StreamKey, in the format: stream?key=value.</dd><dt class="property-required"
+            title="Required">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>relayed URL, the format is: rtmp://domain/live.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1716,8 +1945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>relayed StreamKey, in the format: stream?key=value.</p>
-</dd><dt class="property-required"
+    <dd>relayed StreamKey, in the format: stream?key=value.</dd><dt class="property-required"
             title="Required">
         <span id="url_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_java" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1725,8 +1953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>relayed URL, the format is: rtmp://domain/live.</p>
-</dd></dl>
+    <dd>relayed URL, the format is: rtmp://domain/live.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1740,8 +1967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relayed StreamKey, in the format: stream?key=value.</p>
-</dd><dt class="property-required"
+    <dd>relayed StreamKey, in the format: stream?key=value.</dd><dt class="property-required"
             title="Required">
         <span id="url_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1749,8 +1975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relayed URL, the format is: rtmp://domain/live.</p>
-</dd></dl>
+    <dd>relayed URL, the format is: rtmp://domain/live.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1764,8 +1989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>relayed StreamKey, in the format: stream?key=value.</p>
-</dd><dt class="property-required"
+    <dd>relayed StreamKey, in the format: stream?key=value.</dd><dt class="property-required"
             title="Required">
         <span id="url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_python" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1773,8 +1997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>relayed URL, the format is: rtmp://domain/live.</p>
-</dd></dl>
+    <dd>relayed URL, the format is: rtmp://domain/live.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1788,8 +2011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>relayed StreamKey, in the format: stream?key=value.</p>
-</dd><dt class="property-required"
+    <dd>relayed StreamKey, in the format: stream?key=value.</dd><dt class="property-required"
             title="Required">
         <span id="url_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1797,12 +2019,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>relayed URL, the format is: rtmp://domain/live.</p>
-</dd></dl>
+    <dd>relayed URL, the format is: rtmp://domain/live.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="outputoutputrtpsettings">Output<wbr>Output<wbr>Rtp<wbr>Settings</h4>
+<h4 id="outputoutputrtpsettings">
+Output<wbr>Output<wbr>Rtp<wbr>Settings<pulumi-choosable type="language" values="python,go" class="inline">, Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1814,8 +2037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettingsdestination">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-required"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-required"
             title="Required">
         <span id="fec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fec_csharp" style="color: inherit; text-decoration: inherit;">Fec</a>
@@ -1823,8 +2045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can only fill in none.</p>
-</dd><dt class="property-required"
+    <dd>You can only fill in none.</dd><dt class="property-required"
             title="Required">
         <span id="idletimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeout_csharp" style="color: inherit; text-decoration: inherit;">Idle<wbr>Timeout</a>
@@ -1832,8 +2053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Idle timeout, unit ms.</p>
-</dd></dl>
+    <dd>Idle timeout, unit ms.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1847,8 +2067,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettingsdestination">[]Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-required"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-required"
             title="Required">
         <span id="fec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fec_go" style="color: inherit; text-decoration: inherit;">Fec</a>
@@ -1856,8 +2075,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can only fill in none.</p>
-</dd><dt class="property-required"
+    <dd>You can only fill in none.</dd><dt class="property-required"
             title="Required">
         <span id="idletimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeout_go" style="color: inherit; text-decoration: inherit;">Idle<wbr>Timeout</a>
@@ -1865,8 +2083,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Idle timeout, unit ms.</p>
-</dd></dl>
+    <dd>Idle timeout, unit ms.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="destinations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinations_hcl" style="color: inherit; text-decoration: inherit;">destinations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#outputoutputrtpsettingsdestination">list(object)</a></span>
+    </dt>
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-required"
+            title="Required">
+        <span id="fec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fec_hcl" style="color: inherit; text-decoration: inherit;">fec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>You can only fill in none.</dd><dt class="property-required"
+            title="Required">
+        <span id="idle_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idle_timeout_hcl" style="color: inherit; text-decoration: inherit;">idle_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Idle timeout, unit ms.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1880,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettingsdestination">List&lt;Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-required"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-required"
             title="Required">
         <span id="fec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fec_java" style="color: inherit; text-decoration: inherit;">fec</a>
@@ -1889,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You can only fill in none.</p>
-</dd><dt class="property-required"
+    <dd>You can only fill in none.</dd><dt class="property-required"
             title="Required">
         <span id="idletimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeout_java" style="color: inherit; text-decoration: inherit;">idle<wbr>Timeout</a>
@@ -1898,8 +2143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Idle timeout, unit ms.</p>
-</dd></dl>
+    <dd>Idle timeout, unit ms.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1913,8 +2157,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettingsdestination">Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination[]</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-required"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-required"
             title="Required">
         <span id="fec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fec_nodejs" style="color: inherit; text-decoration: inherit;">fec</a>
@@ -1922,8 +2165,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can only fill in none.</p>
-</dd><dt class="property-required"
+    <dd>You can only fill in none.</dd><dt class="property-required"
             title="Required">
         <span id="idletimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeout_nodejs" style="color: inherit; text-decoration: inherit;">idle<wbr>Timeout</a>
@@ -1931,8 +2173,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Idle timeout, unit ms.</p>
-</dd></dl>
+    <dd>Idle timeout, unit ms.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1944,10 +2185,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinations_python" style="color: inherit; text-decoration: inherit;">destinations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutputrtpsettingsdestination">Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination]</a></span>
+        <span class="property-type"><a href="#outputoutputrtpsettingsdestination">Sequence[Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination]</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-required"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-required"
             title="Required">
         <span id="fec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fec_python" style="color: inherit; text-decoration: inherit;">fec</a>
@@ -1955,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>You can only fill in none.</p>
-</dd><dt class="property-required"
+    <dd>You can only fill in none.</dd><dt class="property-required"
             title="Required">
         <span id="idle_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idle_timeout_python" style="color: inherit; text-decoration: inherit;">idle_<wbr>timeout</a>
@@ -1964,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Idle timeout, unit ms.</p>
-</dd></dl>
+    <dd>Idle timeout, unit ms.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1979,8 +2217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputrtpsettingsdestination">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay can be filled in 1~2.</p>
-</dd><dt class="property-required"
+    <dd>The target address of the relay can be filled in 1~2.</dd><dt class="property-required"
             title="Required">
         <span id="fec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fec_yaml" style="color: inherit; text-decoration: inherit;">fec</a>
@@ -1988,8 +2225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You can only fill in none.</p>
-</dd><dt class="property-required"
+    <dd>You can only fill in none.</dd><dt class="property-required"
             title="Required">
         <span id="idletimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeout_yaml" style="color: inherit; text-decoration: inherit;">idle<wbr>Timeout</a>
@@ -1997,12 +2233,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Idle timeout, unit ms.</p>
-</dd></dl>
+    <dd>Idle timeout, unit ms.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="outputoutputrtpsettingsdestination">Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination</h4>
+<h4 id="outputoutputrtpsettingsdestination">
+Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination<pulumi-choosable type="language" values="python,go" class="inline">, Output<wbr>Output<wbr>Rtp<wbr>Settings<wbr>Destination<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2014,8 +2251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2023,8 +2259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2038,8 +2273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2047,8 +2281,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Output IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2062,8 +2317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2071,8 +2325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2086,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2095,8 +2347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2110,8 +2361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2119,8 +2369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2134,8 +2383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2143,12 +2391,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="outputoutputsrtsettings">Output<wbr>Output<wbr>Srt<wbr>Settings</h4>
+<h4 id="outputoutputsrtsettings">
+Output<wbr>Output<wbr>Srt<wbr>Settings<pulumi-choosable type="language" values="python,go" class="inline">, Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2160,8 +2409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettingsdestination">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mps.<wbr>Inputs.<wbr>Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="latency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latency_csharp" style="color: inherit; text-decoration: inherit;">Latency</a>
@@ -2169,8 +2417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_csharp" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -2178,8 +2425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SRT mode, optional [LISTENER|CALLER], default is CALLER.</p>
-</dd><dt class="property-optional"
+    <dd>SRT mode, optional [LISTENER|CALLER], default is CALLER.</dd><dt class="property-optional"
             title="Optional">
         <span id="passphrase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passphrase_csharp" style="color: inherit; text-decoration: inherit;">Passphrase</a>
@@ -2187,8 +2433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</p>
-</dd><dt class="property-optional"
+    <dd>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</dd><dt class="property-optional"
             title="Optional">
         <span id="pbkeylen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pbkeylen_csharp" style="color: inherit; text-decoration: inherit;">Pb<wbr>Key<wbr>Len</a>
@@ -2196,8 +2441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The key length of relay SRT, the default is 0, optional [0|16|24|32].</p>
-</dd><dt class="property-optional"
+    <dd>The key length of relay SRT, the default is 0, optional [0|16|24|32].</dd><dt class="property-optional"
             title="Optional">
         <span id="peeridletimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peeridletimeout_csharp" style="color: inherit; text-decoration: inherit;">Peer<wbr>Idle<wbr>Timeout</a>
@@ -2205,8 +2449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</dd><dt class="property-optional"
             title="Optional">
         <span id="peerlatency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerlatency_csharp" style="color: inherit; text-decoration: inherit;">Peer<wbr>Latency</a>
@@ -2214,8 +2457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="recvlatency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvlatency_csharp" style="color: inherit; text-decoration: inherit;">Recv<wbr>Latency</a>
@@ -2223,8 +2465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="streamid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#streamid_csharp" style="color: inherit; text-decoration: inherit;">Stream<wbr>Id</a>
@@ -2232,8 +2473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</p>
-</dd></dl>
+    <dd>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2247,8 +2487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettingsdestination">[]Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination</a></span>
     </dt>
-    <dd><p>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="latency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latency_go" style="color: inherit; text-decoration: inherit;">Latency</a>
@@ -2256,8 +2495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_go" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -2265,8 +2503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SRT mode, optional [LISTENER|CALLER], default is CALLER.</p>
-</dd><dt class="property-optional"
+    <dd>SRT mode, optional [LISTENER|CALLER], default is CALLER.</dd><dt class="property-optional"
             title="Optional">
         <span id="passphrase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passphrase_go" style="color: inherit; text-decoration: inherit;">Passphrase</a>
@@ -2274,8 +2511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</p>
-</dd><dt class="property-optional"
+    <dd>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</dd><dt class="property-optional"
             title="Optional">
         <span id="pbkeylen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pbkeylen_go" style="color: inherit; text-decoration: inherit;">Pb<wbr>Key<wbr>Len</a>
@@ -2283,8 +2519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The key length of relay SRT, the default is 0, optional [0|16|24|32].</p>
-</dd><dt class="property-optional"
+    <dd>The key length of relay SRT, the default is 0, optional [0|16|24|32].</dd><dt class="property-optional"
             title="Optional">
         <span id="peeridletimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peeridletimeout_go" style="color: inherit; text-decoration: inherit;">Peer<wbr>Idle<wbr>Timeout</a>
@@ -2292,8 +2527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</dd><dt class="property-optional"
             title="Optional">
         <span id="peerlatency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerlatency_go" style="color: inherit; text-decoration: inherit;">Peer<wbr>Latency</a>
@@ -2301,8 +2535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="recvlatency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvlatency_go" style="color: inherit; text-decoration: inherit;">Recv<wbr>Latency</a>
@@ -2310,8 +2543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="streamid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#streamid_go" style="color: inherit; text-decoration: inherit;">Stream<wbr>Id</a>
@@ -2319,8 +2551,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</p>
-</dd></dl>
+    <dd>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="destinations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinations_hcl" style="color: inherit; text-decoration: inherit;">destinations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#outputoutputsrtsettingsdestination">list(object)</a></span>
+    </dt>
+    <dd>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="latency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latency_hcl" style="color: inherit; text-decoration: inherit;">latency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_hcl" style="color: inherit; text-decoration: inherit;">mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SRT mode, optional [LISTENER|CALLER], default is CALLER.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="passphrase_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passphrase_hcl" style="color: inherit; text-decoration: inherit;">passphrase</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pb_key_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pb_key_len_hcl" style="color: inherit; text-decoration: inherit;">pb_<wbr>key_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The key length of relay SRT, the default is 0, optional [0|16|24|32].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="peer_idle_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_idle_timeout_hcl" style="color: inherit; text-decoration: inherit;">peer_<wbr>idle_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="peer_latency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_latency_hcl" style="color: inherit; text-decoration: inherit;">peer_<wbr>latency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recv_latency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recv_latency_hcl" style="color: inherit; text-decoration: inherit;">recv_<wbr>latency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="stream_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stream_id_hcl" style="color: inherit; text-decoration: inherit;">stream_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2334,8 +2643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettingsdestination">List&lt;Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="latency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latency_java" style="color: inherit; text-decoration: inherit;">latency</a>
@@ -2343,8 +2651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_java" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -2352,8 +2659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SRT mode, optional [LISTENER|CALLER], default is CALLER.</p>
-</dd><dt class="property-optional"
+    <dd>SRT mode, optional [LISTENER|CALLER], default is CALLER.</dd><dt class="property-optional"
             title="Optional">
         <span id="passphrase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passphrase_java" style="color: inherit; text-decoration: inherit;">passphrase</a>
@@ -2361,8 +2667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</p>
-</dd><dt class="property-optional"
+    <dd>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</dd><dt class="property-optional"
             title="Optional">
         <span id="pbkeylen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pbkeylen_java" style="color: inherit; text-decoration: inherit;">pb<wbr>Key<wbr>Len</a>
@@ -2370,8 +2675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The key length of relay SRT, the default is 0, optional [0|16|24|32].</p>
-</dd><dt class="property-optional"
+    <dd>The key length of relay SRT, the default is 0, optional [0|16|24|32].</dd><dt class="property-optional"
             title="Optional">
         <span id="peeridletimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peeridletimeout_java" style="color: inherit; text-decoration: inherit;">peer<wbr>Idle<wbr>Timeout</a>
@@ -2379,8 +2683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</dd><dt class="property-optional"
             title="Optional">
         <span id="peerlatency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerlatency_java" style="color: inherit; text-decoration: inherit;">peer<wbr>Latency</a>
@@ -2388,8 +2691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="recvlatency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvlatency_java" style="color: inherit; text-decoration: inherit;">recv<wbr>Latency</a>
@@ -2397,8 +2699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="streamid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#streamid_java" style="color: inherit; text-decoration: inherit;">stream<wbr>Id</a>
@@ -2406,8 +2707,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</p>
-</dd></dl>
+    <dd>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2421,8 +2721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettingsdestination">Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination[]</a></span>
     </dt>
-    <dd><p>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="latency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latency_nodejs" style="color: inherit; text-decoration: inherit;">latency</a>
@@ -2430,8 +2729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_nodejs" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -2439,8 +2737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SRT mode, optional [LISTENER|CALLER], default is CALLER.</p>
-</dd><dt class="property-optional"
+    <dd>SRT mode, optional [LISTENER|CALLER], default is CALLER.</dd><dt class="property-optional"
             title="Optional">
         <span id="passphrase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passphrase_nodejs" style="color: inherit; text-decoration: inherit;">passphrase</a>
@@ -2448,8 +2745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</p>
-</dd><dt class="property-optional"
+    <dd>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</dd><dt class="property-optional"
             title="Optional">
         <span id="pbkeylen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pbkeylen_nodejs" style="color: inherit; text-decoration: inherit;">pb<wbr>Key<wbr>Len</a>
@@ -2457,8 +2753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The key length of relay SRT, the default is 0, optional [0|16|24|32].</p>
-</dd><dt class="property-optional"
+    <dd>The key length of relay SRT, the default is 0, optional [0|16|24|32].</dd><dt class="property-optional"
             title="Optional">
         <span id="peeridletimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peeridletimeout_nodejs" style="color: inherit; text-decoration: inherit;">peer<wbr>Idle<wbr>Timeout</a>
@@ -2466,8 +2761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</dd><dt class="property-optional"
             title="Optional">
         <span id="peerlatency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerlatency_nodejs" style="color: inherit; text-decoration: inherit;">peer<wbr>Latency</a>
@@ -2475,8 +2769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="recvlatency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvlatency_nodejs" style="color: inherit; text-decoration: inherit;">recv<wbr>Latency</a>
@@ -2484,8 +2777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="streamid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#streamid_nodejs" style="color: inherit; text-decoration: inherit;">stream<wbr>Id</a>
@@ -2493,8 +2785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</p>
-</dd></dl>
+    <dd>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2506,10 +2797,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinations_python" style="color: inherit; text-decoration: inherit;">destinations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#outputoutputsrtsettingsdestination">Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination]</a></span>
+        <span class="property-type"><a href="#outputoutputsrtsettingsdestination">Sequence[Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination]</a></span>
     </dt>
-    <dd><p>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="latency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latency_python" style="color: inherit; text-decoration: inherit;">latency</a>
@@ -2517,8 +2807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_python" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -2526,8 +2815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SRT mode, optional [LISTENER|CALLER], default is CALLER.</p>
-</dd><dt class="property-optional"
+    <dd>SRT mode, optional [LISTENER|CALLER], default is CALLER.</dd><dt class="property-optional"
             title="Optional">
         <span id="passphrase_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passphrase_python" style="color: inherit; text-decoration: inherit;">passphrase</a>
@@ -2535,8 +2823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</p>
-</dd><dt class="property-optional"
+    <dd>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</dd><dt class="property-optional"
             title="Optional">
         <span id="pb_key_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pb_key_len_python" style="color: inherit; text-decoration: inherit;">pb_<wbr>key_<wbr>len</a>
@@ -2544,8 +2831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The key length of relay SRT, the default is 0, optional [0|16|24|32].</p>
-</dd><dt class="property-optional"
+    <dd>The key length of relay SRT, the default is 0, optional [0|16|24|32].</dd><dt class="property-optional"
             title="Optional">
         <span id="peer_idle_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_idle_timeout_python" style="color: inherit; text-decoration: inherit;">peer_<wbr>idle_<wbr>timeout</a>
@@ -2553,8 +2839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</dd><dt class="property-optional"
             title="Optional">
         <span id="peer_latency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_latency_python" style="color: inherit; text-decoration: inherit;">peer_<wbr>latency</a>
@@ -2562,8 +2847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="recv_latency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recv_latency_python" style="color: inherit; text-decoration: inherit;">recv_<wbr>latency</a>
@@ -2571,8 +2855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="stream_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stream_id_python" style="color: inherit; text-decoration: inherit;">stream_<wbr>id</a>
@@ -2580,8 +2863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</p>
-</dd></dl>
+    <dd>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2595,8 +2877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#outputoutputsrtsettingsdestination">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>The target address of the relay is required when Mode is CALLER, and only one group can be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="latency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#latency_yaml" style="color: inherit; text-decoration: inherit;">latency</a>
@@ -2604,8 +2885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_yaml" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -2613,8 +2893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SRT mode, optional [LISTENER|CALLER], default is CALLER.</p>
-</dd><dt class="property-optional"
+    <dd>SRT mode, optional [LISTENER|CALLER], default is CALLER.</dd><dt class="property-optional"
             title="Optional">
         <span id="passphrase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#passphrase_yaml" style="color: inherit; text-decoration: inherit;">passphrase</a>
@@ -2622,8 +2901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</p>
-</dd><dt class="property-optional"
+    <dd>The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].</dd><dt class="property-optional"
             title="Optional">
         <span id="pbkeylen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pbkeylen_yaml" style="color: inherit; text-decoration: inherit;">pb<wbr>Key<wbr>Len</a>
@@ -2631,8 +2909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The key length of relay SRT, the default is 0, optional [0|16|24|32].</p>
-</dd><dt class="property-optional"
+    <dd>The key length of relay SRT, the default is 0, optional [0|16|24|32].</dd><dt class="property-optional"
             title="Optional">
         <span id="peeridletimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peeridletimeout_yaml" style="color: inherit; text-decoration: inherit;">peer<wbr>Idle<wbr>Timeout</a>
@@ -2640,8 +2917,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].</dd><dt class="property-optional"
             title="Optional">
         <span id="peerlatency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerlatency_yaml" style="color: inherit; text-decoration: inherit;">peer<wbr>Latency</a>
@@ -2649,8 +2925,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="recvlatency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvlatency_yaml" style="color: inherit; text-decoration: inherit;">recv<wbr>Latency</a>
@@ -2658,8 +2933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</p>
-</dd><dt class="property-optional"
+    <dd>The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].</dd><dt class="property-optional"
             title="Optional">
         <span id="streamid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#streamid_yaml" style="color: inherit; text-decoration: inherit;">stream<wbr>Id</a>
@@ -2667,12 +2941,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</p>
-</dd></dl>
+    <dd>relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="outputoutputsrtsettingsdestination">Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination</h4>
+<h4 id="outputoutputsrtsettingsdestination">
+Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination<pulumi-choosable type="language" values="python,go" class="inline">, Output<wbr>Output<wbr>Srt<wbr>Settings<wbr>Destination<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2684,8 +2959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2693,8 +2967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2708,8 +2981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2717,8 +2989,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Output IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2732,8 +3025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2741,8 +3033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2756,8 +3047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2765,8 +3055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2780,8 +3069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2789,8 +3077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2804,8 +3091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Output IP.</p>
-</dd><dt class="property-required"
+    <dd>Output IP.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2813,8 +3099,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>output port.</p>
-</dd></dl>
+    <dd>output port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2830,6 +3115,9 @@ $ pulumi import tencentcloud:Mps/output:Output output flow_id#output_id
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2839,7 +3127,6 @@ $ pulumi import tencentcloud:Mps/output:Output output flow_id#output_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

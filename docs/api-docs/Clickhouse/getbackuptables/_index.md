@@ -2,9 +2,11 @@
 ---
 title: "getBackupTables"
 title_tag: "tencentcloud.Clickhouse.getBackupTables"
-meta_desc: "Documentation for the tencentcloud.Clickhouse.getBackupTables function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of clickhouse backup tables"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of clickhouse backup tables
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const backupTables = tencentcloud.Clickhouse.getBackupTables({
+const backupTables = tencentcloud.clickhouse.getBackupTables({
     instanceId: "cdwch-xxxxxx",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-backup_tables = tencentcloud.Clickhouse.get_backup_tables(instance_id="cdwch-xxxxxx")
+backup_tables = tencentcloud.clickhouse.get_backup_tables(instance_id="cdwch-xxxxxx")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clickhouse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clickhouse.GetBackupTables(ctx, &clickhouse.GetBackupTablesArgs{
+			InstanceId: "cdwch-xxxxxx",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clickhouse.GetBackupTables(ctx, &clickhouse.GetBackupTablesArgs{
-			InstanceId: "cdwch-xxxxxx",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clickhouse.ClickhouseFunctions;
 import com.pulumi.tencentcloud.Clickhouse.inputs.GetBackupTablesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   backupTables:
     fn::invoke:
-      Function: tencentcloud:Clickhouse:getBackupTables
-      Arguments:
+      function: tencentcloud:Clickhouse:getBackupTables
+      arguments:
         instanceId: cdwch-xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_clickhouse_getbackuptables" "backupTables" {
+  instance_id = "cdwch-xxxxxx"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&type=document&lang=en)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBackupTables<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupTablesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>></span
+><span class="k">function </span>getBackupTables<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupTablesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>></span
 ><span class="k">
-function </span>getBackupTablesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupTablesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>></span
+function </span>getBackupTablesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupTablesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getBackupTablesOutput<span class="p">(</span><span class="nx">ar
                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBackupTablesResult</span
 ><span class="k">
-def </span>get_backup_tables_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBackupTablesResult]</span
+def </span>get_backup_tables_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBackupTablesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetBackupTablesOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBackupTables </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBackupTablesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupTablesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupTablesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupTablesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetBackupTablesOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>> </span>getBackupTables<span class="p">(</span><span class="nx">GetBackupTablesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>> </span>getBackupTables<span class="p">(</span><span class="nx">GetBackupTablesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBackupTablesResult</a></span>> </span>getBackupTables<span class="p">(</span><span class="nx">GetBackupTablesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetBackupTablesOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Clickhouse/getBackupTables:getBackupTables
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_clickhouse_get_backup_tables&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuptablesavailabletable">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Outputs.<wbr>Get<wbr>Backup<wbr>Tables<wbr>Available<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Available tables.</p>
-</dd><dt class="property-"
+    <dd>Available tables.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -366,8 +443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -397,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuptablesavailabletable">[]Get<wbr>Backup<wbr>Tables<wbr>Available<wbr>Table</a></span>
     </dt>
-    <dd><p>Available tables.</p>
-</dd><dt class="property-"
+    <dd>Available tables.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -406,8 +481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -428,6 +502,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="available_tables_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_tables_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>tables</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbackuptablesavailabletable">list(object)</a></span>
+    </dt>
+    <dd>Available tables.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -437,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuptablesavailabletable">List&lt;Get<wbr>Backup<wbr>Tables<wbr>Available<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Available tables.</p>
-</dd><dt class="property-"
+    <dd>Available tables.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -446,8 +557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -477,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuptablesavailabletable">Get<wbr>Backup<wbr>Tables<wbr>Available<wbr>Table[]</a></span>
     </dt>
-    <dd><p>Available tables.</p>
-</dd><dt class="property-"
+    <dd>Available tables.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -486,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -515,10 +623,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_tables_python" style="color: inherit; text-decoration: inherit;">available_<wbr>tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbackuptablesavailabletable">Get<wbr>Backup<wbr>Tables<wbr>Available<wbr>Table]</a></span>
+        <span class="property-type"><a href="#getbackuptablesavailabletable">Sequence[Get<wbr>Backup<wbr>Tables<wbr>Available<wbr>Table]</a></span>
     </dt>
-    <dd><p>Available tables.</p>
-</dd><dt class="property-"
+    <dd>Available tables.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -526,8 +633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -557,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuptablesavailabletable">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Available tables.</p>
-</dd><dt class="property-"
+    <dd>Available tables.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -566,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -607,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="ips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_csharp" style="color: inherit; text-decoration: inherit;">Ips</a>
@@ -616,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ips.</p>
-</dd><dt class="property-required"
+    <dd>Table ips.</dd><dt class="property-required"
             title="Required">
         <span id="rip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_csharp" style="color: inherit; text-decoration: inherit;">Rip</a>
@@ -625,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-required"
+    <dd>Ip address of cvm.</dd><dt class="property-required"
             title="Required">
         <span id="table_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_csharp" style="color: inherit; text-decoration: inherit;">Table</a>
@@ -634,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Bytes</a>
@@ -643,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Table total bytes.</p>
-</dd><dt class="property-required"
+    <dd>Table total bytes.</dd><dt class="property-required"
             title="Required">
         <span id="vcluster_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_csharp" style="color: inherit; text-decoration: inherit;">VCluster</a>
@@ -652,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual cluster.</p>
-</dd><dt class="property-required"
+    <dd>Virtual cluster.</dd><dt class="property-required"
             title="Required">
         <span id="zoopath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_csharp" style="color: inherit; text-decoration: inherit;">Zoo<wbr>Path</a>
@@ -661,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zk path.</p>
-</dd></dl>
+    <dd>Zk path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -676,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="ips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_go" style="color: inherit; text-decoration: inherit;">Ips</a>
@@ -685,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ips.</p>
-</dd><dt class="property-required"
+    <dd>Table ips.</dd><dt class="property-required"
             title="Required">
         <span id="rip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_go" style="color: inherit; text-decoration: inherit;">Rip</a>
@@ -694,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-required"
+    <dd>Ip address of cvm.</dd><dt class="property-required"
             title="Required">
         <span id="table_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_go" style="color: inherit; text-decoration: inherit;">Table</a>
@@ -703,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Bytes</a>
@@ -712,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Table total bytes.</p>
-</dd><dt class="property-required"
+    <dd>Table total bytes.</dd><dt class="property-required"
             title="Required">
         <span id="vcluster_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_go" style="color: inherit; text-decoration: inherit;">VCluster</a>
@@ -721,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual cluster.</p>
-</dd><dt class="property-required"
+    <dd>Virtual cluster.</dd><dt class="property-required"
             title="Required">
         <span id="zoopath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_go" style="color: inherit; text-decoration: inherit;">Zoo<wbr>Path</a>
@@ -730,8 +821,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zk path.</p>
-</dd></dl>
+    <dd>Zk path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_hcl" style="color: inherit; text-decoration: inherit;">database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database.</dd><dt class="property-required"
+            title="Required">
+        <span id="ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_hcl" style="color: inherit; text-decoration: inherit;">ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table ips.</dd><dt class="property-required"
+            title="Required">
+        <span id="rip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_hcl" style="color: inherit; text-decoration: inherit;">rip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip address of cvm.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_hcl" style="color: inherit; text-decoration: inherit;">table</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_bytes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_bytes_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>bytes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Table total bytes.</dd><dt class="property-required"
+            title="Required">
+        <span id="v_cluster_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#v_cluster_hcl" style="color: inherit; text-decoration: inherit;">v_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoo_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoo_path_hcl" style="color: inherit; text-decoration: inherit;">zoo_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zk path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -745,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="ips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_java" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -754,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table ips.</p>
-</dd><dt class="property-required"
+    <dd>Table ips.</dd><dt class="property-required"
             title="Required">
         <span id="rip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_java" style="color: inherit; text-decoration: inherit;">rip</a>
@@ -763,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-required"
+    <dd>Ip address of cvm.</dd><dt class="property-required"
             title="Required">
         <span id="table_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_java" style="color: inherit; text-decoration: inherit;">table</a>
@@ -772,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_java" style="color: inherit; text-decoration: inherit;">total<wbr>Bytes</a>
@@ -781,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Table total bytes.</p>
-</dd><dt class="property-required"
+    <dd>Table total bytes.</dd><dt class="property-required"
             title="Required">
         <span id="vcluster_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_java" style="color: inherit; text-decoration: inherit;">v<wbr>Cluster</a>
@@ -790,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual cluster.</p>
-</dd><dt class="property-required"
+    <dd>Virtual cluster.</dd><dt class="property-required"
             title="Required">
         <span id="zoopath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_java" style="color: inherit; text-decoration: inherit;">zoo<wbr>Path</a>
@@ -799,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zk path.</p>
-</dd></dl>
+    <dd>Zk path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -814,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="ips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_nodejs" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -823,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ips.</p>
-</dd><dt class="property-required"
+    <dd>Table ips.</dd><dt class="property-required"
             title="Required">
         <span id="rip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_nodejs" style="color: inherit; text-decoration: inherit;">rip</a>
@@ -832,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-required"
+    <dd>Ip address of cvm.</dd><dt class="property-required"
             title="Required">
         <span id="table_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_nodejs" style="color: inherit; text-decoration: inherit;">table</a>
@@ -841,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Bytes</a>
@@ -850,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Table total bytes.</p>
-</dd><dt class="property-required"
+    <dd>Table total bytes.</dd><dt class="property-required"
             title="Required">
         <span id="vcluster_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_nodejs" style="color: inherit; text-decoration: inherit;">v<wbr>Cluster</a>
@@ -859,8 +999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual cluster.</p>
-</dd><dt class="property-required"
+    <dd>Virtual cluster.</dd><dt class="property-required"
             title="Required">
         <span id="zoopath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_nodejs" style="color: inherit; text-decoration: inherit;">zoo<wbr>Path</a>
@@ -868,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zk path.</p>
-</dd></dl>
+    <dd>Zk path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -883,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_python" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -892,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table ips.</p>
-</dd><dt class="property-required"
+    <dd>Table ips.</dd><dt class="property-required"
             title="Required">
         <span id="rip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_python" style="color: inherit; text-decoration: inherit;">rip</a>
@@ -901,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-required"
+    <dd>Ip address of cvm.</dd><dt class="property-required"
             title="Required">
         <span id="table_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_python" style="color: inherit; text-decoration: inherit;">table</a>
@@ -910,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="total_bytes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_bytes_python" style="color: inherit; text-decoration: inherit;">total_<wbr>bytes</a>
@@ -919,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Table total bytes.</p>
-</dd><dt class="property-required"
+    <dd>Table total bytes.</dd><dt class="property-required"
             title="Required">
         <span id="v_cluster_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#v_cluster_python" style="color: inherit; text-decoration: inherit;">v_<wbr>cluster</a>
@@ -928,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual cluster.</p>
-</dd><dt class="property-required"
+    <dd>Virtual cluster.</dd><dt class="property-required"
             title="Required">
         <span id="zoo_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoo_path_python" style="color: inherit; text-decoration: inherit;">zoo_<wbr>path</a>
@@ -937,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zk path.</p>
-</dd></dl>
+    <dd>Zk path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -952,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="ips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_yaml" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -961,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table ips.</p>
-</dd><dt class="property-required"
+    <dd>Table ips.</dd><dt class="property-required"
             title="Required">
         <span id="rip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_yaml" style="color: inherit; text-decoration: inherit;">rip</a>
@@ -970,8 +1099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-required"
+    <dd>Ip address of cvm.</dd><dt class="property-required"
             title="Required">
         <span id="table_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_yaml" style="color: inherit; text-decoration: inherit;">table</a>
@@ -979,8 +1107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Bytes</a>
@@ -988,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Table total bytes.</p>
-</dd><dt class="property-required"
+    <dd>Table total bytes.</dd><dt class="property-required"
             title="Required">
         <span id="vcluster_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_yaml" style="color: inherit; text-decoration: inherit;">v<wbr>Cluster</a>
@@ -997,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual cluster.</p>
-</dd><dt class="property-required"
+    <dd>Virtual cluster.</dd><dt class="property-required"
             title="Required">
         <span id="zoopath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_yaml" style="color: inherit; text-decoration: inherit;">zoo<wbr>Path</a>
@@ -1006,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zk path.</p>
-</dd></dl>
+    <dd>Zk path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1022,7 +1146,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

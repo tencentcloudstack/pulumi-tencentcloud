@@ -2,9 +2,11 @@
 ---
 title: "getKeys"
 title_tag: "tencentcloud.Kms.getKeys"
-meta_desc: "Documentation for the tencentcloud.Kms.getKeys function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of KMS key"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,60 +18,60 @@ Use this data source to query detailed information of KMS key
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Kms.getKeys({
-    keyState: 0,
-    keyUsage: "ALL",
-    origin: "TENCENT_KMS",
+const example = tencentcloud.kms.getKeys({
     searchKeyAlias: "tf_example",
+    keyState: 0,
+    origin: "TENCENT_KMS",
+    keyUsage: "ALL",
+    hsmClusterId: "cls-hsm-mwpd9cjm",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Kms.get_keys(key_state=0,
-    key_usage="ALL",
+example = tencentcloud.kms.get_keys(search_key_alias="tf_example",
+    key_state=0,
     origin="TENCENT_KMS",
-    search_key_alias="tf_example")
+    key_usage="ALL",
+    hsm_cluster_id="cls-hsm-mwpd9cjm")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Kms.GetKeys.Invoke(new()
-    {
-        KeyState = 0,
-        KeyUsage = "ALL",
-        Origin = "TENCENT_KMS",
-        SearchKeyAlias = "tf_example",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kms.GetKeys(ctx, &kms.GetKeysArgs{
-			KeyState:       pulumi.IntRef(0),
-			KeyUsage:       pulumi.StringRef("ALL"),
-			Origin:         pulumi.StringRef("TENCENT_KMS"),
+		_, err := kms.GetKeys(ctx, &kms.GetKeysArgs{
 			SearchKeyAlias: pulumi.StringRef("tf_example"),
+			KeyState:       pulumi.IntRef(0),
+			Origin:         pulumi.StringRef("TENCENT_KMS"),
+			KeyUsage:       pulumi.StringRef("ALL"),
+			HsmClusterId:   pulumi.StringRef("cls-hsm-mwpd9cjm"),
 		}, nil)
 		if err != nil {
 			return err
@@ -78,6 +80,35 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Kms.GetKeys.Invoke(new()
+    {
+        SearchKeyAlias = "tf_example",
+        KmsKeyState = 0,
+        Origin = "TENCENT_KMS",
+        KeyUsage = "ALL",
+        HsmClusterId = "cls-hsm-mwpd9cjm",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -86,8 +117,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Kms.KmsFunctions;
 import com.pulumi.tencentcloud.Kms.inputs.GetKeysArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -100,28 +131,64 @@ public class App {
 
     public static void stack(Context ctx) {
         final var example = KmsFunctions.getKeys(GetKeysArgs.builder()
-            .keyState(0)
-            .keyUsage("ALL")
-            .origin("TENCENT_KMS")
             .searchKeyAlias("tf_example")
+            .keyState(0)
+            .origin("TENCENT_KMS")
+            .keyUsage("ALL")
+            .hsmClusterId("cls-hsm-mwpd9cjm")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Kms:getKeys
-      Arguments:
-        keyState: 0
-        keyUsage: ALL
-        origin: TENCENT_KMS
+      function: tencentcloud:Kms:getKeys
+      arguments:
         searchKeyAlias: tf_example
+        keyState: 0
+        origin: TENCENT_KMS
+        keyUsage: ALL
+        hsmClusterId: cls-hsm-mwpd9cjm
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_kms_getkeys" "example" {
+  search_key_alias = "tf_example"
+  key_state        = 0
+  origin           = "TENCENT_KMS"
+  key_usage        = "ALL"
+  hsm_cluster_id   = "cls-hsm-mwpd9cjm"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListKeyDetail](https://www.tencentcloud.com/document/api/1030/32185)
 
 
 
@@ -133,7 +200,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +208,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getKeys<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetKeysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>></span
+><span class="k">function </span>getKeys<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetKeysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>></span
 ><span class="k">
-function </span>getKeysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetKeysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>></span
+function </span>getKeysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetKeysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -152,25 +219,27 @@ function </span>getKeysOutput<span class="p">(</span><span class="nx">args</span
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_keys<span class="p">(</span><span class="nx">key_state</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_keys<span class="p">(</span><span class="nx">hsm_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">key_state</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">key_usage</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">order_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">origin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">role</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">search_key_alias</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetKeysResult</span
 ><span class="k">
-def </span>get_keys_output<span class="p">(</span><span class="nx">key_state</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">key_usage</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">order_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">origin</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">role</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">search_key_alias</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetKeysResult]</span
+def </span>get_keys_output<span class="p">(</span><span class="nx">hsm_cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">key_state</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">key_usage</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">order_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">origin</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">role</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">search_key_alias</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetKeysResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -195,7 +264,8 @@ func </span>GetKeysOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetKeys </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetKeysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetKeysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetKeysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetKeysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -204,7 +274,8 @@ func </span>GetKeysOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>> </span>getKeys<span class="p">(</span><span class="nx">GetKeysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>> </span>getKeys<span class="p">(</span><span class="nx">GetKeysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetKeysResult</a></span>> </span>getKeys<span class="p">(</span><span class="nx">GetKeysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -220,6 +291,15 @@ func </span>GetKeysOutput<span class="p">(</span><span class="nx">ctx</span><spa
 </div>
 
 
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_kms_get_keys&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
 
 The following arguments are supported:
 
@@ -228,14 +308,21 @@ The following arguments are supported:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="hsmclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_csharp" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
         <span id="keyusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeystate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeystate_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>State</a>
@@ -243,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_csharp" style="color: inherit; text-decoration: inherit;">Origin</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -270,8 +354,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_csharp" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -279,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkeyalias_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkeyalias_csharp" style="color: inherit; text-decoration: inherit;">Search<wbr>Key<wbr>Alias</a>
@@ -288,17 +370,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Words used to match the results, and the words can be: key_id and alias.</p>
-</dd><dt class="property-optional"
+    <dd>Words used to match the results, and the words can be: keyId and alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags to filter CMK.</p>
-</dd></dl>
+    <dd>Tags to filter CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -306,14 +386,21 @@ The following arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="hsmclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_go" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
         <span id="keystate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_go" style="color: inherit; text-decoration: inherit;">Key<wbr>State</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -321,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
@@ -330,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_go" style="color: inherit; text-decoration: inherit;">Origin</a>
@@ -339,8 +424,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -348,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_go" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -357,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkeyalias_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkeyalias_go" style="color: inherit; text-decoration: inherit;">Search<wbr>Key<wbr>Alias</a>
@@ -366,17 +448,93 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Words used to match the results, and the words can be: key_id and alias.</p>
-</dd><dt class="property-optional"
+    <dd>Words used to match the results, and the words can be: keyId and alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags to filter CMK.</p>
-</dd></dl>
+    <dd>Tags to filter CMK.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="hsm_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsm_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_state_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_hcl" style="color: inherit; text-decoration: inherit;">origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_hcl" style="color: inherit; text-decoration: inherit;">role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="search_key_alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_alias_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>key_<wbr>alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Words used to match the results, and the words can be: keyId and alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags to filter CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -384,14 +542,21 @@ The following arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="hsmclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_java" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
         <span id="keystate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_java" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_java" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -399,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_java" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -408,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_java" style="color: inherit; text-decoration: inherit;">origin</a>
@@ -417,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -426,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_java" style="color: inherit; text-decoration: inherit;">role</a>
@@ -435,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkeyalias_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkeyalias_java" style="color: inherit; text-decoration: inherit;">search<wbr>Key<wbr>Alias</a>
@@ -444,17 +604,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Words used to match the results, and the words can be: key_id and alias.</p>
-</dd><dt class="property-optional"
+    <dd>Words used to match the results, and the words can be: keyId and alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags to filter CMK.</p>
-</dd></dl>
+    <dd>Tags to filter CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -462,14 +620,21 @@ The following arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="hsmclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_nodejs" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
         <span id="keystate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -477,8 +642,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -486,8 +650,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_nodejs" style="color: inherit; text-decoration: inherit;">origin</a>
@@ -495,8 +658,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -504,8 +666,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_nodejs" style="color: inherit; text-decoration: inherit;">role</a>
@@ -513,8 +674,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkeyalias_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkeyalias_nodejs" style="color: inherit; text-decoration: inherit;">search<wbr>Key<wbr>Alias</a>
@@ -522,17 +682,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Words used to match the results, and the words can be: key_id and alias.</p>
-</dd><dt class="property-optional"
+    <dd>Words used to match the results, and the words can be: keyId and alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags to filter CMK.</p>
-</dd></dl>
+    <dd>Tags to filter CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -540,14 +698,21 @@ The following arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="hsm_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsm_cluster_id_python" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
         <span id="key_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_state_python" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_python" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
@@ -555,8 +720,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_python" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
@@ -564,8 +728,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_python" style="color: inherit; text-decoration: inherit;">origin</a>
@@ -573,8 +736,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -582,8 +744,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_python" style="color: inherit; text-decoration: inherit;">role</a>
@@ -591,8 +752,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="search_key_alias_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_alias_python" style="color: inherit; text-decoration: inherit;">search_<wbr>key_<wbr>alias</a>
@@ -600,17 +760,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Words used to match the results, and the words can be: key_id and alias.</p>
-</dd><dt class="property-optional"
+    <dd>Words used to match the results, and the words can be: keyId and alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags to filter CMK.</p>
-</dd></dl>
+    <dd>Tags to filter CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -618,14 +776,21 @@ The following arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="hsmclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_yaml" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
         <span id="keystate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -633,8 +798,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -642,8 +806,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the CMK create time. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="origin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_yaml" style="color: inherit; text-decoration: inherit;">origin</a>
@@ -651,8 +814,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -660,8 +822,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_yaml" style="color: inherit; text-decoration: inherit;">role</a>
@@ -669,8 +830,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by role of the CMK creator. <code>0</code> - created by user, <code>1</code> - created by cloud product. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchkeyalias_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchkeyalias_yaml" style="color: inherit; text-decoration: inherit;">search<wbr>Key<wbr>Alias</a>
@@ -678,17 +838,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Words used to match the results, and the words can be: key_id and alias.</p>
-</dd><dt class="property-optional"
+    <dd>Words used to match the results, and the words can be: keyId and alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags to filter CMK.</p>
-</dd></dl>
+    <dd>Tags to filter CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -711,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keylists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keylists_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Lists</a>
@@ -720,8 +877,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getkeyskeylist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kms.<wbr>Outputs.<wbr>Get<wbr>Keys<wbr>Key<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of KMS keys.</p>
-</dd><dt class="property-"
+    <dd>A list of KMS keys.</dd><dt class="property-"
+            title="">
+        <span id="hsmclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_csharp" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-"
             title="">
         <span id="keyusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -729,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK.</p>
-</dd><dt class="property-"
+    <dd>Usage of CMK.</dd><dt class="property-"
             title="">
         <span id="kmskeystate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeystate_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>State</a>
@@ -738,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-"
+    <dd>State of CMK.</dd><dt class="property-"
             title="">
         <span id="ordertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
@@ -755,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</p>
-</dd><dt class="property-"
+    <dd>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -786,7 +947,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -802,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keylists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keylists_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Lists</a>
@@ -811,8 +971,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getkeyskeylist">[]Get<wbr>Keys<wbr>Key<wbr>List</a></span>
     </dt>
-    <dd><p>A list of KMS keys.</p>
-</dd><dt class="property-"
+    <dd>A list of KMS keys.</dd><dt class="property-"
+            title="">
+        <span id="hsmclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_go" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-"
             title="">
         <span id="keystate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_go" style="color: inherit; text-decoration: inherit;">Key<wbr>State</a>
@@ -820,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-"
+    <dd>State of CMK.</dd><dt class="property-"
             title="">
         <span id="keyusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -829,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK.</p>
-</dd><dt class="property-"
+    <dd>Usage of CMK.</dd><dt class="property-"
             title="">
         <span id="ordertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
@@ -846,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</p>
-</dd><dt class="property-"
+    <dd>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -877,7 +1041,101 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="key_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_lists_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getkeyskeylist">list(object)</a></span>
+    </dt>
+    <dd>A list of KMS keys.</dd><dt class="property-"
+            title="">
+        <span id="hsm_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsm_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-"
+            title="">
+        <span id="key_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_state_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>State of CMK.</dd><dt class="property-"
+            title="">
+        <span id="key_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Usage of CMK.</dd><dt class="property-"
+            title="">
+        <span id="order_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_hcl" style="color: inherit; text-decoration: inherit;">origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_hcl" style="color: inherit; text-decoration: inherit;">role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="search_key_alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_key_alias_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>key_<wbr>alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -893,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keylists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keylists_java" style="color: inherit; text-decoration: inherit;">key<wbr>Lists</a>
@@ -902,8 +1159,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getkeyskeylist">List&lt;Get<wbr>Keys<wbr>Key<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of KMS keys.</p>
-</dd><dt class="property-"
+    <dd>A list of KMS keys.</dd><dt class="property-"
+            title="">
+        <span id="hsmclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_java" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-"
             title="">
         <span id="keystate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_java" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -911,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-"
+    <dd>State of CMK.</dd><dt class="property-"
             title="">
         <span id="keyusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_java" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -920,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of CMK.</p>
-</dd><dt class="property-"
+    <dd>Usage of CMK.</dd><dt class="property-"
             title="">
         <span id="ordertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_java" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -937,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</p>
-</dd><dt class="property-"
+    <dd>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -968,7 +1229,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -984,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keylists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keylists_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Lists</a>
@@ -993,8 +1253,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getkeyskeylist">Get<wbr>Keys<wbr>Key<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of KMS keys.</p>
-</dd><dt class="property-"
+    <dd>A list of KMS keys.</dd><dt class="property-"
+            title="">
+        <span id="hsmclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_nodejs" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-"
             title="">
         <span id="keystate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1002,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-"
+    <dd>State of CMK.</dd><dt class="property-"
             title="">
         <span id="keyusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1011,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK.</p>
-</dd><dt class="property-"
+    <dd>Usage of CMK.</dd><dt class="property-"
             title="">
         <span id="ordertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -1028,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</p>
-</dd><dt class="property-"
+    <dd>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1059,7 +1323,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1075,17 +1339,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_lists_python" style="color: inherit; text-decoration: inherit;">key_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getkeyskeylist">Get<wbr>Keys<wbr>Key<wbr>List]</a></span>
+        <span class="property-type"><a href="#getkeyskeylist">Sequence[Get<wbr>Keys<wbr>Key<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of KMS keys.</p>
-</dd><dt class="property-"
+    <dd>A list of KMS keys.</dd><dt class="property-"
+            title="">
+        <span id="hsm_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsm_cluster_id_python" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-"
             title="">
         <span id="key_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_state_python" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
@@ -1093,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-"
+    <dd>State of CMK.</dd><dt class="property-"
             title="">
         <span id="key_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_python" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
@@ -1102,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Usage of CMK.</p>
-</dd><dt class="property-"
+    <dd>Usage of CMK.</dd><dt class="property-"
             title="">
         <span id="order_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_python" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
@@ -1119,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</p>
-</dd><dt class="property-"
+    <dd>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1150,7 +1417,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1166,8 +1433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keylists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keylists_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Lists</a>
@@ -1175,8 +1441,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getkeyskeylist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of KMS keys.</p>
-</dd><dt class="property-"
+    <dd>A list of KMS keys.</dd><dt class="property-"
+            title="">
+        <span id="hsmclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_yaml" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-"
             title="">
         <span id="keystate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1184,8 +1457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-"
+    <dd>State of CMK.</dd><dt class="property-"
             title="">
         <span id="keyusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1193,8 +1465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of CMK.</p>
-</dd><dt class="property-"
+    <dd>Usage of CMK.</dd><dt class="property-"
             title="">
         <span id="ordertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -1210,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</p>
-</dd><dt class="property-"
+    <dd>Origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1241,7 +1511,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1267,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Name of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1276,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Create time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_csharp" style="color: inherit; text-decoration: inherit;">Creator<wbr>Uin</a>
@@ -1285,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of CMK Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of CMK Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletiondate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletiondate_csharp" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Date</a>
@@ -1294,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1303,8 +1569,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Description of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="hsmclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_csharp" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-required"
             title="Required">
         <span id="keyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -1312,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CMK.</p>
-</dd><dt class="property-required"
+    <dd>ID of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="keyrotationenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Rotation<wbr>Enabled</a>
@@ -1321,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to enable key rotation.</dd><dt class="property-required"
             title="Required">
         <span id="keystate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>State</a>
@@ -1330,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-required"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -1339,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotatetime_csharp" style="color: inherit; text-decoration: inherit;">Next<wbr>Rotate<wbr>Time</a>
@@ -1348,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Next rotate time of CMK when key_rotation_enabled is true.</p>
-</dd><dt class="property-required"
+    <dd>Next rotate time of CMK when keyRotationEnabled is true.</dd><dt class="property-required"
             title="Required">
         <span id="origin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_csharp" style="color: inherit; text-decoration: inherit;">Origin</a>
@@ -1357,8 +1625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="owner_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_csharp" style="color: inherit; text-decoration: inherit;">Owner</a>
@@ -1366,8 +1633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Creator of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="validto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validto_csharp" style="color: inherit; text-decoration: inherit;">Valid<wbr>To</a>
@@ -1375,8 +1641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</p>
-</dd></dl>
+    <dd>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1390,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Name of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1399,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Create time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_go" style="color: inherit; text-decoration: inherit;">Creator<wbr>Uin</a>
@@ -1408,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of CMK Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of CMK Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletiondate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletiondate_go" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Date</a>
@@ -1417,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1426,8 +1687,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Description of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="hsmclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_go" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-required"
             title="Required">
         <span id="keyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -1435,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CMK.</p>
-</dd><dt class="property-required"
+    <dd>ID of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="keyrotationenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Rotation<wbr>Enabled</a>
@@ -1444,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to enable key rotation.</dd><dt class="property-required"
             title="Required">
         <span id="keystate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_go" style="color: inherit; text-decoration: inherit;">Key<wbr>State</a>
@@ -1453,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-required"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -1462,8 +1727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotatetime_go" style="color: inherit; text-decoration: inherit;">Next<wbr>Rotate<wbr>Time</a>
@@ -1471,8 +1735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Next rotate time of CMK when key_rotation_enabled is true.</p>
-</dd><dt class="property-required"
+    <dd>Next rotate time of CMK when keyRotationEnabled is true.</dd><dt class="property-required"
             title="Required">
         <span id="origin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_go" style="color: inherit; text-decoration: inherit;">Origin</a>
@@ -1480,8 +1743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="owner_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_go" style="color: inherit; text-decoration: inherit;">Owner</a>
@@ -1489,8 +1751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Creator of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="validto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validto_go" style="color: inherit; text-decoration: inherit;">Valid<wbr>To</a>
@@ -1498,8 +1759,125 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</p>
-</dd></dl>
+    <dd>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Create time of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="creator_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_uin_hcl" style="color: inherit; text-decoration: inherit;">creator_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uin of CMK Creator.</dd><dt class="property-required"
+            title="Required">
+        <span id="deletion_date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletion_date_hcl" style="color: inherit; text-decoration: inherit;">deletion_<wbr>date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Delete time of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="hsm_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsm_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-required"
+            title="Required">
+        <span id="key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_rotation_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_rotation_enabled_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>rotation_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to enable key rotation.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_state_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="next_rotate_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#next_rotate_time_hcl" style="color: inherit; text-decoration: inherit;">next_<wbr>rotate_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Next rotate time of CMK when keyRotationEnabled is true.</dd><dt class="property-required"
+            title="Required">
+        <span id="origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_hcl" style="color: inherit; text-decoration: inherit;">origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="owner_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_hcl" style="color: inherit; text-decoration: inherit;">owner</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creator of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="valid_to_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valid_to_hcl" style="color: inherit; text-decoration: inherit;">valid_<wbr>to</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1513,8 +1891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Name of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1522,8 +1899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Create time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Create time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_java" style="color: inherit; text-decoration: inherit;">creator<wbr>Uin</a>
@@ -1531,8 +1907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uin of CMK Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of CMK Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletiondate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletiondate_java" style="color: inherit; text-decoration: inherit;">deletion<wbr>Date</a>
@@ -1540,8 +1915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1549,8 +1923,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Description of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="hsmclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_java" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-required"
             title="Required">
         <span id="keyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_java" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1558,8 +1939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CMK.</p>
-</dd><dt class="property-required"
+    <dd>ID of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="keyrotationenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_java" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -1567,8 +1947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to enable key rotation.</dd><dt class="property-required"
             title="Required">
         <span id="keystate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_java" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1576,8 +1955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-required"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_java" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1585,8 +1963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotatetime_java" style="color: inherit; text-decoration: inherit;">next<wbr>Rotate<wbr>Time</a>
@@ -1594,8 +1971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Next rotate time of CMK when key_rotation_enabled is true.</p>
-</dd><dt class="property-required"
+    <dd>Next rotate time of CMK when keyRotationEnabled is true.</dd><dt class="property-required"
             title="Required">
         <span id="origin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_java" style="color: inherit; text-decoration: inherit;">origin</a>
@@ -1603,8 +1979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="owner_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_java" style="color: inherit; text-decoration: inherit;">owner</a>
@@ -1612,8 +1987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creator of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Creator of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="validto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validto_java" style="color: inherit; text-decoration: inherit;">valid<wbr>To</a>
@@ -1621,8 +1995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</p>
-</dd></dl>
+    <dd>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1636,8 +2009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Name of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1645,8 +2017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Create time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Create time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_nodejs" style="color: inherit; text-decoration: inherit;">creator<wbr>Uin</a>
@@ -1654,8 +2025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uin of CMK Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of CMK Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletiondate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletiondate_nodejs" style="color: inherit; text-decoration: inherit;">deletion<wbr>Date</a>
@@ -1663,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1672,8 +2041,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Description of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="hsmclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_nodejs" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-required"
             title="Required">
         <span id="keyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1681,8 +2057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CMK.</p>
-</dd><dt class="property-required"
+    <dd>ID of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="keyrotationenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -1690,8 +2065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to enable key rotation.</dd><dt class="property-required"
             title="Required">
         <span id="keystate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1699,8 +2073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-required"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1708,8 +2081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotatetime_nodejs" style="color: inherit; text-decoration: inherit;">next<wbr>Rotate<wbr>Time</a>
@@ -1717,8 +2089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Next rotate time of CMK when key_rotation_enabled is true.</p>
-</dd><dt class="property-required"
+    <dd>Next rotate time of CMK when keyRotationEnabled is true.</dd><dt class="property-required"
             title="Required">
         <span id="origin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_nodejs" style="color: inherit; text-decoration: inherit;">origin</a>
@@ -1726,8 +2097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="owner_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_nodejs" style="color: inherit; text-decoration: inherit;">owner</a>
@@ -1735,8 +2105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Creator of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="validto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validto_nodejs" style="color: inherit; text-decoration: inherit;">valid<wbr>To</a>
@@ -1744,8 +2113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</p>
-</dd></dl>
+    <dd>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1759,8 +2127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Name of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1768,8 +2135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Create time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="creator_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_uin_python" style="color: inherit; text-decoration: inherit;">creator_<wbr>uin</a>
@@ -1777,8 +2143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of CMK Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of CMK Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletion_date_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletion_date_python" style="color: inherit; text-decoration: inherit;">deletion_<wbr>date</a>
@@ -1786,8 +2151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1795,8 +2159,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Description of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="hsm_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsm_cluster_id_python" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-required"
             title="Required">
         <span id="key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_python" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
@@ -1804,8 +2175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CMK.</p>
-</dd><dt class="property-required"
+    <dd>ID of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="key_rotation_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_rotation_enabled_python" style="color: inherit; text-decoration: inherit;">key_<wbr>rotation_<wbr>enabled</a>
@@ -1813,8 +2183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to enable key rotation.</dd><dt class="property-required"
             title="Required">
         <span id="key_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_state_python" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
@@ -1822,8 +2191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-required"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-required"
             title="Required">
         <span id="key_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_python" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
@@ -1831,8 +2199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="next_rotate_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#next_rotate_time_python" style="color: inherit; text-decoration: inherit;">next_<wbr>rotate_<wbr>time</a>
@@ -1840,8 +2207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Next rotate time of CMK when key_rotation_enabled is true.</p>
-</dd><dt class="property-required"
+    <dd>Next rotate time of CMK when keyRotationEnabled is true.</dd><dt class="property-required"
             title="Required">
         <span id="origin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_python" style="color: inherit; text-decoration: inherit;">origin</a>
@@ -1849,8 +2215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="owner_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_python" style="color: inherit; text-decoration: inherit;">owner</a>
@@ -1858,8 +2223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creator of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Creator of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="valid_to_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valid_to_python" style="color: inherit; text-decoration: inherit;">valid_<wbr>to</a>
@@ -1867,8 +2231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</p>
-</dd></dl>
+    <dd>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1882,8 +2245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Name of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1891,8 +2253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Create time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Create time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_yaml" style="color: inherit; text-decoration: inherit;">creator<wbr>Uin</a>
@@ -1900,8 +2261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uin of CMK Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of CMK Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletiondate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletiondate_yaml" style="color: inherit; text-decoration: inherit;">deletion<wbr>Date</a>
@@ -1909,8 +2269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1918,8 +2277,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Description of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="hsmclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_yaml" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-required"
             title="Required">
         <span id="keyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1927,8 +2293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CMK.</p>
-</dd><dt class="property-required"
+    <dd>ID of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="keyrotationenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -1936,8 +2301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to enable key rotation.</dd><dt class="property-required"
             title="Required">
         <span id="keystate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1945,8 +2309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</p>
-</dd><dt class="property-required"
+    <dd>Filter by state of CMK. <code>0</code> - all CMKs are queried, <code>1</code> - only Enabled CMKs are queried, <code>2</code> - only Disabled CMKs are queried, <code>3</code> - only PendingDelete CMKs are queried, <code>4</code> - only PendingImport CMKs are queried, <code>5</code> - only Archived CMKs are queried.</dd><dt class="property-required"
             title="Required">
         <span id="keyusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1954,8 +2317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by usage of CMK. Available values include <code>ALL</code>, <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotatetime_yaml" style="color: inherit; text-decoration: inherit;">next<wbr>Rotate<wbr>Time</a>
@@ -1963,8 +2325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Next rotate time of CMK when key_rotation_enabled is true.</p>
-</dd><dt class="property-required"
+    <dd>Next rotate time of CMK when keyRotationEnabled is true.</dd><dt class="property-required"
             title="Required">
         <span id="origin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_yaml" style="color: inherit; text-decoration: inherit;">origin</a>
@@ -1972,8 +2333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Filter by origin of CMK. <code>TENCENT_KMS</code> - CMK created by KMS, <code>EXTERNAL</code> - CMK imported by user, <code>ALL</code> - all CMKs. Default value is <code>ALL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="owner_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_yaml" style="color: inherit; text-decoration: inherit;">owner</a>
@@ -1981,8 +2341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creator of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Creator of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="validto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validto_yaml" style="color: inherit; text-decoration: inherit;">valid<wbr>To</a>
@@ -1990,8 +2349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</p>
-</dd></dl>
+    <dd>Valid when origin is <code>EXTERNAL</code>, it means the effective date of the key material.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2006,7 +2364,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

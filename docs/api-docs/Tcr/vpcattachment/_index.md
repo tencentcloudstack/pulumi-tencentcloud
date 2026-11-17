@@ -2,9 +2,11 @@
 ---
 title: "VpcAttachment"
 title_tag: "tencentcloud.Tcr.VpcAttachment"
-meta_desc: "Documentation for the tencentcloud.Tcr.VpcAttachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to attach tcr instance with the vpc and subnet network."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,19 +20,24 @@ Use this resource to attach tcr instance with the vpc and subnet network.
 
 ### Attach a tcr instance with vpc resource
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vpc = tencentcloud.Vpc.getSubnets({
+const vpc = tencentcloud.vpc.getSubnets({
     isDefault: true,
-    availabilityZone: _var.availability_zone,
+    availabilityZone: availabilityZone,
 });
 const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
 const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
 const example = new tencentcloud.tcr.Instance("example", {
+    name: "tf-example-tcr",
     instanceType: "basic",
     deleteBucket: true,
     tags: {
@@ -38,7 +45,7 @@ const example = new tencentcloud.tcr.Instance("example", {
     },
 });
 const tcrId = example.id;
-const sg = tencentcloud.Security.getGroups({
+const sg = tencentcloud.security.getGroups({
     name: "default",
 });
 const foo = new tencentcloud.tcr.VpcAttachment("foo", {
@@ -47,33 +54,99 @@ const foo = new tencentcloud.tcr.VpcAttachment("foo", {
     subnetId: subnetId,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-vpc = tencentcloud.Vpc.get_subnets(is_default=True,
-    availability_zone=var["availability_zone"])
+vpc = tencentcloud.vpc.get_subnets(is_default=True,
+    availability_zone=availability_zone)
 vpc_id = vpc.instance_lists[0].vpc_id
 subnet_id = vpc.instance_lists[0].subnet_id
 example = tencentcloud.tcr.Instance("example",
+    name="tf-example-tcr",
     instance_type="basic",
     delete_bucket=True,
     tags={
         "createdBy": "terraform",
     })
 tcr_id = example.id
-sg = tencentcloud.Security.get_groups(name="default")
+sg = tencentcloud.security.get_groups(name="default")
 foo = tencentcloud.tcr.VpcAttachment("foo",
     instance_id=tcr_id,
     vpc_id=vpc_id,
     subnet_id=subnet_id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+			IsDefault:        pulumi.BoolRef(true),
+			AvailabilityZone: pulumi.StringRef(availabilityZone),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpcId := vpc2.InstanceLists[0].VpcId
+		subnetId := vpc2.InstanceLists[0].SubnetId
+		example, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
+			Name:         pulumi.String("tf-example-tcr"),
+			InstanceType: pulumi.String("basic"),
+			DeleteBucket: pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		tcrId := example.ID()
+		_, err = security.GetGroups(ctx, &security.GetGroupsArgs{
+			Name: pulumi.StringRef("default"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = tcr.NewVpcAttachment(ctx, "foo", &tcr.VpcAttachmentArgs{
+			InstanceId: tcrId.ToIDOutput().ToStringOutput(),
+			VpcId:      pulumi.String(vpcId),
+			SubnetId:   pulumi.String(subnetId),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -81,7 +154,7 @@ return await Deployment.RunAsync(() =>
     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     {
         IsDefault = true,
-        AvailabilityZone = @var.Availability_zone,
+        AvailabilityZone = availabilityZone,
     });
 
     var vpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
@@ -90,6 +163,7 @@ return await Deployment.RunAsync(() =>
 
     var example = new Tencentcloud.Tcr.Instance("example", new()
     {
+        Name = "tf-example-tcr",
         InstanceType = "basic",
         DeleteBucket = true,
         Tags = 
@@ -114,56 +188,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-			IsDefault:        pulumi.BoolRef(true),
-			AvailabilityZone: pulumi.StringRef(_var.Availability_zone),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpcId := vpc.InstanceLists[0].VpcId
-		subnetId := vpc.InstanceLists[0].SubnetId
-		example, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
-			InstanceType: pulumi.String("basic"),
-			DeleteBucket: pulumi.Bool(true),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		tcrId := example.ID()
-		_, err = Security.GetGroups(ctx, &security.GetGroupsArgs{
-			Name: pulumi.StringRef("default"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_, err = Tcr.NewVpcAttachment(ctx, "foo", &Tcr.VpcAttachmentArgs{
-			InstanceId: pulumi.String(tcrId),
-			VpcId:      pulumi.String(vpcId),
-			SubnetId:   pulumi.String(subnetId),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -178,8 +207,8 @@ import com.pulumi.tencentcloud.Security.SecurityFunctions;
 import com.pulumi.tencentcloud.Security.inputs.GetGroupsArgs;
 import com.pulumi.tencentcloud.Tcr.VpcAttachment;
 import com.pulumi.tencentcloud.Tcr.VpcAttachmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -193,14 +222,15 @@ public class App {
     public static void stack(Context ctx) {
         final var vpc = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
             .isDefault(true)
-            .availabilityZone(var_.availability_zone())
+            .availabilityZone(availabilityZone)
             .build());
 
-        final var vpcId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId());
+        final var vpcId = vpc.instanceLists()[0].vpcId();
 
-        final var subnetId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].subnetId());
+        final var subnetId = vpc.instanceLists()[0].subnetId();
 
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example-tcr")
             .instanceType("basic")
             .deleteBucket(true)
             .tags(Map.of("createdBy", "terraform"))
@@ -212,7 +242,7 @@ public class App {
             .name("default")
             .build());
 
-        var foo = new VpcAttachment("foo", VpcAttachmentArgs.builder()        
+        var foo = new VpcAttachment("foo", VpcAttachmentArgs.builder()
             .instanceId(tcrId)
             .vpcId(vpcId)
             .subnetId(subnetId)
@@ -221,11 +251,17 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Tcr:Instance
     properties:
+      name: tf-example-tcr
       instanceType: basic
       deleteBucket: true
       tags:
@@ -242,81 +278,158 @@ variables:
   tcrId: ${example.id}
   vpc:
     fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
         isDefault: true
-        availabilityZone: ${var.availability_zone}
+        availabilityZone: ${availabilityZone}
   sg:
     fn::invoke:
-      Function: tencentcloud:Security:getGroups
-      Arguments:
+      function: tencentcloud:Security:getGroups
+      arguments:
         name: default
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getsubnets" "vpc" {
+  is_default        = true
+  availability_zone = availabilityZone
+}
+data "tencentcloud_security_getgroups" "sg" {
+  name = "default"
+}
+
+resource "tencentcloud_tcr_instance" "example" {
+  name          = "tf-example-tcr"
+  instance_type = "basic"
+  delete_bucket = true
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_tcr_vpcattachment" "foo" {
+  instance_id = local.tcrId
+  vpc_id      = local.vpcId
+  subnet_id   = local.subnetId
+}
+locals {
+  vpcId = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].vpc_id
+}
+locals {
+  subnetId = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].subnet_id
+}
+locals {
+  tcrId = tencentcloud_tcr_instance.example.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+  - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
+  - [ManageInternalEndpoint](https://www.tencentcloud.com/document/api/1051/50732)
+* Read:
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+  - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
+* Delete:
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+  - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
+  - [ManageInternalEndpoint](https://www.tencentcloud.com/document/api/1051/50732)
 
 
 ## Create VpcAttachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                  <span class="nx">enable_public_domain_dns</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                  <span class="nx">enable_vpc_domain_dns</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">region_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">region_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                  <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">enable_public_domain_dns</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                  <span class="nx">enable_vpc_domain_dns</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                  <span class="nx">region_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">region_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewVpcAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">VpcAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewVpcAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">VpcAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">VpcAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">VpcAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcr:VpcAttachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcr:VpcAttachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcr_vpc_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -337,7 +450,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -454,11 +567,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## VpcAttachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The VpcAttachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -474,8 +595,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TCR instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -483,8 +603,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -492,8 +611,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicdomaindns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicdomaindns_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -501,8 +619,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablevpcdomaindns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablevpcdomaindns_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -510,8 +627,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="regionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -519,9 +635,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -529,8 +643,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd></dl>
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -544,8 +657,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TCR instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -553,8 +665,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -562,8 +673,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicdomaindns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicdomaindns_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -571,8 +681,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablevpcdomaindns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablevpcdomaindns_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -580,8 +689,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="regionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -589,9 +697,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -599,8 +705,69 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd></dl>
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TCR instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of subnet.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_public_domain_dns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_public_domain_dns_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>public_<wbr>domain_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_vpc_domain_dns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_vpc_domain_dns_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>vpc_<wbr>domain_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -614,8 +781,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TCR instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -623,8 +789,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -632,8 +797,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicdomaindns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicdomaindns_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -641,8 +805,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablevpcdomaindns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablevpcdomaindns_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -650,8 +813,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="regionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_java" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -659,9 +821,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_java" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -669,8 +829,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd></dl>
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -684,8 +843,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TCR instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -693,8 +851,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -702,8 +859,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicdomaindns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicdomaindns_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -711,8 +867,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablevpcdomaindns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablevpcdomaindns_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -720,8 +875,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="regionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -729,9 +883,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -739,8 +891,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd></dl>
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -754,8 +905,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TCR instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -763,8 +913,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -772,8 +921,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_public_domain_dns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_public_domain_dns_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>public_<wbr>domain_<wbr>dns</a>
@@ -781,8 +929,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_vpc_domain_dns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_vpc_domain_dns_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>vpc_<wbr>domain_<wbr>dns</a>
@@ -790,8 +937,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_python" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
@@ -799,9 +945,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_python" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
@@ -809,8 +953,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd></dl>
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -824,8 +967,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TCR instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -833,8 +975,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -842,8 +983,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicdomaindns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicdomaindns_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -851,8 +991,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablevpcdomaindns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablevpcdomaindns_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -860,8 +999,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="regionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -869,9 +1007,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="regionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -879,8 +1015,7 @@ The VpcAttachment resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd></dl>
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -901,8 +1036,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-"
+    <dd>IP address of the internal access.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -910,8 +1044,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -919,8 +1052,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd></dl>
+    <dd>Status of the internal access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -934,8 +1066,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-"
+    <dd>IP address of the internal access.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -943,8 +1074,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -952,8 +1082,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd></dl>
+    <dd>Status of the internal access.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="access_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_ip_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address of the internal access.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the internal access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -967,8 +1126,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-"
+    <dd>IP address of the internal access.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -976,8 +1134,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -985,8 +1142,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd></dl>
+    <dd>Status of the internal access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1000,8 +1156,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-"
+    <dd>IP address of the internal access.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1009,8 +1164,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1018,8 +1172,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd></dl>
+    <dd>Status of the internal access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1033,8 +1186,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-"
+    <dd>IP address of the internal access.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1042,8 +1194,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1051,8 +1202,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd></dl>
+    <dd>Status of the internal access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1066,8 +1216,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-"
+    <dd>IP address of the internal access.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1075,8 +1224,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1084,8 +1232,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd></dl>
+    <dd>Status of the internal access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1095,18 +1242,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing VpcAttachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">VpcAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">VpcAttachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">VpcAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">VpcAttachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1119,104 +1266,143 @@ Get an existing VpcAttachment resource's state with the given name, ID, and opti
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> VpcAttachment</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetVpcAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">VpcAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">VpcAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetVpcAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">VpcAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">VpcAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">VpcAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">VpcAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">VpcAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">VpcAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">VpcAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">VpcAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">VpcAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">VpcAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingVpcAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcr:VpcAttachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcr_vpc_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">VpcAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">VpcAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1224,28 +1410,31 @@ Get an existing VpcAttachment resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">VpcAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1253,28 +1442,31 @@ Get an existing VpcAttachment resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">VpcAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1294,8 +1486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of the internal access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicdomaindns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicdomaindns_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -1303,8 +1494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablevpcdomaindns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablevpcdomaindns_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -1312,8 +1502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1321,8 +1510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_regionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionid_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -1330,9 +1518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_regionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionname_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -1340,8 +1526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1349,8 +1534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the internal access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1358,8 +1542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1367,8 +1550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1382,8 +1564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of the internal access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicdomaindns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicdomaindns_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -1391,8 +1572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablevpcdomaindns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablevpcdomaindns_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -1400,8 +1580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1409,8 +1588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_regionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionid_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -1418,9 +1596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_regionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionname_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -1428,8 +1604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1437,8 +1612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the internal access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1446,8 +1620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1455,8 +1628,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_access_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_ip_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address of the internal access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_public_domain_dns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_public_domain_dns_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>public_<wbr>domain_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_vpc_domain_dns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_vpc_domain_dns_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>vpc_<wbr>domain_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TCR instance.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_name_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the internal access.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of subnet.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1470,8 +1720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of the internal access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicdomaindns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicdomaindns_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -1479,8 +1728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablevpcdomaindns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablevpcdomaindns_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -1488,8 +1736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1497,8 +1744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_regionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionid_java" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1506,9 +1752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_regionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionname_java" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -1516,8 +1760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1525,8 +1768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the internal access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1534,8 +1776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1543,8 +1784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1558,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of the internal access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicdomaindns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicdomaindns_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -1567,8 +1806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablevpcdomaindns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablevpcdomaindns_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -1576,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1585,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_regionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionid_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1594,9 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_regionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionname_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -1604,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1613,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the internal access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1622,8 +1854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1631,8 +1862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1646,8 +1876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of the internal access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_public_domain_dns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_public_domain_dns_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>public_<wbr>domain_<wbr>dns</a>
@@ -1655,8 +1884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_vpc_domain_dns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_vpc_domain_dns_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>vpc_<wbr>domain_<wbr>dns</a>
@@ -1664,8 +1892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1673,8 +1900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_id_python" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
@@ -1682,9 +1908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_region_name_python" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
@@ -1692,8 +1916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1701,8 +1924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the internal access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1710,8 +1932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1719,8 +1940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1734,8 +1954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of the internal access.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of the internal access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicdomaindns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicdomaindns_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Domain<wbr>Dns</a>
@@ -1743,8 +1962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable public domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable public domain dns. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablevpcdomaindns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablevpcdomaindns_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Vpc<wbr>Domain<wbr>Dns</a>
@@ -1752,8 +1970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable vpc domain dns. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable vpc domain dns. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1761,8 +1978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_regionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionid_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1770,9 +1986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>this argument was deprecated, use <code>region_name</code> instead. ID of region. Conflict with region_name, can not be set at the same time.</p>
-<p class="property-message">Deprecated:<p>this argument was deprecated, use <code>region_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>this argument was deprecated, use <code>regionName</code> instead. ID of region. Conflict with region_name, can not be set at the same time.<p class="property-message">Deprecated: this argument was deprecated, use <code>regionName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_regionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_regionname_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -1780,8 +1994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of region. Conflict with region_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of region. Conflict with region_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1789,8 +2002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the internal access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the internal access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1798,8 +2010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of subnet.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1807,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1831,6 +2041,9 @@ $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1840,7 +2053,6 @@ $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

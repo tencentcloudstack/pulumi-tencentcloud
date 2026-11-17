@@ -2,9 +2,11 @@
 ---
 title: "GlobalDomainDns"
 title_tag: "tencentcloud.Gaap.GlobalDomainDns"
-meta_desc: "Documentation for the tencentcloud.Gaap.GlobalDomainDns resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a gaap global domain dns"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,66 +18,58 @@ Provides a resource to create a gaap global domain dns
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const globalDomainDns = new tencentcloud.gaap.GlobalDomainDns("globalDomainDns", {
+const globalDomainDns = new tencentcloud.gaap.GlobalDomainDns("global_domain_dns", {
     domainId: "dm-xxxxxx",
-    nationCountryInnerCodes: ["101001"],
     proxyIdLists: ["link-xxxxxx"],
+    nationCountryInnerCodes: ["101001"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-global_domain_dns = tencentcloud.gaap.GlobalDomainDns("globalDomainDns",
+global_domain_dns = tencentcloud.gaap.GlobalDomainDns("global_domain_dns",
     domain_id="dm-xxxxxx",
-    nation_country_inner_codes=["101001"],
-    proxy_id_lists=["link-xxxxxx"])
+    proxy_id_lists=["link-xxxxxx"],
+    nation_country_inner_codes=["101001"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var globalDomainDns = new Tencentcloud.Gaap.GlobalDomainDns("globalDomainDns", new()
-    {
-        DomainId = "dm-xxxxxx",
-        NationCountryInnerCodes = new[]
-        {
-            "101001",
-        },
-        ProxyIdLists = new[]
-        {
-            "link-xxxxxx",
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.NewGlobalDomainDns(ctx, "globalDomainDns", &Gaap.GlobalDomainDnsArgs{
+		_, err := gaap.NewGlobalDomainDns(ctx, "global_domain_dns", &gaap.GlobalDomainDnsArgs{
 			DomainId: pulumi.String("dm-xxxxxx"),
-			NationCountryInnerCodes: pulumi.StringArray{
-				pulumi.String("101001"),
-			},
 			ProxyIdLists: pulumi.StringArray{
 				pulumi.String("link-xxxxxx"),
+			},
+			NationCountryInnerCodes: pulumi.StringArray{
+				pulumi.String("101001"),
 			},
 		})
 		if err != nil {
@@ -85,6 +79,39 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var globalDomainDns = new Tencentcloud.Gaap.GlobalDomainDns("global_domain_dns", new()
+    {
+        DomainId = "dm-xxxxxx",
+        ProxyIdLists = new[]
+        {
+            "link-xxxxxx",
+        },
+        NationCountryInnerCodes = new[]
+        {
+            "101001",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -93,8 +120,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GlobalDomainDns;
 import com.pulumi.tencentcloud.Gaap.GlobalDomainDnsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -106,87 +133,142 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var globalDomainDns = new GlobalDomainDns("globalDomainDns", GlobalDomainDnsArgs.builder()        
+        var globalDomainDns = new GlobalDomainDns("globalDomainDns", GlobalDomainDnsArgs.builder()
             .domainId("dm-xxxxxx")
-            .nationCountryInnerCodes("101001")
             .proxyIdLists("link-xxxxxx")
+            .nationCountryInnerCodes("101001")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   globalDomainDns:
     type: tencentcloud:Gaap:GlobalDomainDns
+    name: global_domain_dns
     properties:
       domainId: dm-xxxxxx
-      nationCountryInnerCodes:
-        - '101001'
       proxyIdLists:
         - link-xxxxxx
+      nationCountryInnerCodes:
+        - '101001'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_gaap_globaldomaindns" "global_domain_dns" {
+  domain_id                  = "dm-xxxxxx"
+  proxy_id_lists             = ["link-xxxxxx"]
+  nation_country_inner_codes = ["101001"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateGlobalDomainDns](https://www.tencentcloud.com/search/?wd=CreateGlobalDomainDns&type=document&lang=en)
+  - [DescribeGlobalDomainDns](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomainDns&type=document&lang=en)
+* Read: [DescribeGlobalDomainDns](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomainDns&type=document&lang=en)
+* Update:
+  - [DescribeGlobalDomainDns](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomainDns&type=document&lang=en)
+  - [ModifyGlobalDomainDns](https://www.tencentcloud.com/search/?wd=ModifyGlobalDomainDns&type=document&lang=en)
+* Delete: [DeleteGlobalDomainDns](https://www.tencentcloud.com/search/?wd=DeleteGlobalDomainDns&type=document&lang=en)
 
 
 ## Create GlobalDomainDns Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                     <span class="nx">domain_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">nation_country_inner_codes</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">proxy_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                    <span class="nx">proxy_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGlobalDomainDns</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GlobalDomainDns</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGlobalDomainDns</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GlobalDomainDns</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">GlobalDomainDns</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GlobalDomainDnsArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:GlobalDomainDns</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:GlobalDomainDns</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_gaap_global_domain_dns&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -207,7 +289,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -324,11 +406,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## GlobalDomainDns Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -344,8 +434,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-required"
+    <dd>Domain Id.</dd><dt class="property-required"
             title="Required">
         <span id="nationcountryinnercodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nationcountryinnercodes_csharp" style="color: inherit; text-decoration: inherit;">Nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -353,8 +442,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-required"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-required"
             title="Required">
         <span id="proxyidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyidlists_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id<wbr>Lists</a>
@@ -362,8 +450,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +464,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-required"
+    <dd>Domain Id.</dd><dt class="property-required"
             title="Required">
         <span id="nationcountryinnercodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nationcountryinnercodes_go" style="color: inherit; text-decoration: inherit;">Nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -386,8 +472,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-required"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-required"
             title="Required">
         <span id="proxyidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyidlists_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id<wbr>Lists</a>
@@ -395,8 +480,37 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_id_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="nation_country_inner_codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nation_country_inner_codes_hcl" style="color: inherit; text-decoration: inherit;">nation_<wbr>country_<wbr>inner_<wbr>codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Nation Country Inner Codes.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_lists_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -410,8 +524,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-required"
+    <dd>Domain Id.</dd><dt class="property-required"
             title="Required">
         <span id="nationcountryinnercodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nationcountryinnercodes_java" style="color: inherit; text-decoration: inherit;">nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -419,8 +532,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-required"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-required"
             title="Required">
         <span id="proxyidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyidlists_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id<wbr>Lists</a>
@@ -428,8 +540,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -443,8 +554,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-required"
+    <dd>Domain Id.</dd><dt class="property-required"
             title="Required">
         <span id="nationcountryinnercodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nationcountryinnercodes_nodejs" style="color: inherit; text-decoration: inherit;">nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -452,8 +562,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-required"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-required"
             title="Required">
         <span id="proxyidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyidlists_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id<wbr>Lists</a>
@@ -461,8 +570,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +584,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-required"
+    <dd>Domain Id.</dd><dt class="property-required"
             title="Required">
         <span id="nation_country_inner_codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nation_country_inner_codes_python" style="color: inherit; text-decoration: inherit;">nation_<wbr>country_<wbr>inner_<wbr>codes</a>
@@ -485,8 +592,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-required"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_lists_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id_<wbr>lists</a>
@@ -494,8 +600,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -509,8 +614,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-required"
+    <dd>Domain Id.</dd><dt class="property-required"
             title="Required">
         <span id="nationcountryinnercodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nationcountryinnercodes_yaml" style="color: inherit; text-decoration: inherit;">nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -518,8 +622,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-required"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-required"
             title="Required">
         <span id="proxyidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyidlists_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id<wbr>Lists</a>
@@ -527,8 +630,7 @@ The GlobalDomainDns resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -549,8 +651,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -564,8 +665,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -579,8 +693,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -594,8 +707,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +721,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -624,8 +735,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -635,122 +745,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing GlobalDomainDns resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GlobalDomainDnsState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">GlobalDomainDns</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GlobalDomainDnsState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">GlobalDomainDns</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">domain_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">nation_country_inner_codes</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">proxy_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">) -&gt;</span> GlobalDomainDns</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGlobalDomainDns<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GlobalDomainDnsState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GlobalDomainDns</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGlobalDomainDns<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GlobalDomainDnsState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GlobalDomainDns</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">GlobalDomainDns</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GlobalDomainDnsState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">GlobalDomainDns</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GlobalDomainDnsState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">GlobalDomainDns</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GlobalDomainDnsState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">GlobalDomainDns</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GlobalDomainDnsState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingGlobalDomainDns</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Gaap:GlobalDomainDns</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_gaap_global_domain_dns</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GlobalDomainDnsState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GlobalDomainDnsState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -758,28 +907,31 @@ Get an existing GlobalDomainDns resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GlobalDomainDnsState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -787,28 +939,31 @@ Get an existing GlobalDomainDns resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GlobalDomainDnsState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -828,8 +983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-optional"
+    <dd>Domain Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nationcountryinnercodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nationcountryinnercodes_csharp" style="color: inherit; text-decoration: inherit;">Nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -837,8 +991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-optional"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyidlists_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id<wbr>Lists</a>
@@ -846,8 +999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -861,8 +1013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-optional"
+    <dd>Domain Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nationcountryinnercodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nationcountryinnercodes_go" style="color: inherit; text-decoration: inherit;">Nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -870,8 +1021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-optional"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyidlists_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id<wbr>Lists</a>
@@ -879,8 +1029,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_domain_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_id_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_nation_country_inner_codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nation_country_inner_codes_hcl" style="color: inherit; text-decoration: inherit;">nation_<wbr>country_<wbr>inner_<wbr>codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Nation Country Inner Codes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_id_lists_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -894,8 +1073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-optional"
+    <dd>Domain Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nationcountryinnercodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nationcountryinnercodes_java" style="color: inherit; text-decoration: inherit;">nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -903,8 +1081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-optional"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyidlists_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id<wbr>Lists</a>
@@ -912,8 +1089,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -927,8 +1103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-optional"
+    <dd>Domain Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nationcountryinnercodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nationcountryinnercodes_nodejs" style="color: inherit; text-decoration: inherit;">nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -936,8 +1111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-optional"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyidlists_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id<wbr>Lists</a>
@@ -945,8 +1119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -960,8 +1133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-optional"
+    <dd>Domain Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nation_country_inner_codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nation_country_inner_codes_python" style="color: inherit; text-decoration: inherit;">nation_<wbr>country_<wbr>inner_<wbr>codes</a>
@@ -969,8 +1141,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-optional"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxy_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_id_lists_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id_<wbr>lists</a>
@@ -978,8 +1149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -993,8 +1163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain Id.</p>
-</dd><dt class="property-optional"
+    <dd>Domain Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nationcountryinnercodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nationcountryinnercodes_yaml" style="color: inherit; text-decoration: inherit;">nation<wbr>Country<wbr>Inner<wbr>Codes</a>
@@ -1002,8 +1171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Nation Country Inner Codes.</p>
-</dd><dt class="property-optional"
+    <dd>Nation Country Inner Codes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyidlists_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id<wbr>Lists</a>
@@ -1011,8 +1179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Proxy Id List.</p>
-</dd></dl>
+    <dd>Proxy Id List.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1027,12 +1194,15 @@ The following state arguments are supported:
 
 
 
-gaap global_domain_dns can be imported using the id, e.g.
+gaap globalDomainDns can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_dns ${domainId}#${dnsRecordId}
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1044,7 +1214,6 @@ $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

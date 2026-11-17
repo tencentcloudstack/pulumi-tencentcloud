@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Dcx.getInstances"
-meta_desc: "Documentation for the tencentcloud.Dcx.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dedicated tunnels instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,30 +18,76 @@ Use this data source to query detailed information of dedicated tunnels instance
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const nameSelect = tencentcloud.Dcx.getInstances({
+const nameSelect = tencentcloud.dcx.getInstances({
     name: "main",
 });
-const id = tencentcloud.Dcx.getInstances({
+const id = tencentcloud.dcx.getInstances({
     dcxId: "dcx-3ikuw30k",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-name_select = tencentcloud.Dcx.get_instances(name="main")
-id = tencentcloud.Dcx.get_instances(dcx_id="dcx-3ikuw30k")
+name_select = tencentcloud.dcx.get_instances(name="main")
+id = tencentcloud.dcx.get_instances(dcx_id="dcx-3ikuw30k")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcx"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dcx.GetInstances(ctx, &dcx.GetInstancesArgs{
+			Name: pulumi.StringRef("main"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = dcx.GetInstances(ctx, &dcx.GetInstancesArgs{
+			DcxId: pulumi.StringRef("dcx-3ikuw30k"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -55,32 +103,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcx"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dcx.GetInstances(ctx, &dcx.GetInstancesArgs{
-			Name: pulumi.StringRef("main"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_, err = Dcx.GetInstances(ctx, &dcx.GetInstancesArgs{
-			DcxId: pulumi.StringRef("dcx-3ikuw30k"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -89,8 +116,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dcx.DcxFunctions;
 import com.pulumi.tencentcloud.Dcx.inputs.GetInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -113,21 +140,54 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   nameSelect:
     fn::invoke:
-      Function: tencentcloud:Dcx:getInstances
-      Arguments:
+      function: tencentcloud:Dcx:getInstances
+      arguments:
         name: main
   id:
     fn::invoke:
-      Function: tencentcloud:Dcx:getInstances
-      Arguments:
+      function: tencentcloud:Dcx:getInstances
+      arguments:
         dcxId: dcx-3ikuw30k
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dcx_getinstances" "nameSelect" {
+  name = "main"
+}
+data "tencentcloud_dcx_getinstances" "id" {
+  dcx_id = "dcx-3ikuw30k"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
 
 
 
@@ -139,7 +199,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +207,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -163,10 +223,10 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">dcx_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">dcx_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -191,7 +251,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,7 +261,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,6 +274,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dcx/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dcx_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -230,8 +301,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -239,8 +309,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -248,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -263,8 +331,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -272,8 +339,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -281,8 +347,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dcx_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcx_id_hcl" style="color: inherit; text-decoration: inherit;">dcx_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +391,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -305,8 +399,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -314,8 +407,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -329,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -338,8 +429,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -347,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -362,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -371,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -380,8 +467,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -395,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -404,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -413,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -437,8 +520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -446,8 +528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcx.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated tunnels.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated tunnels.</dd><dt class="property-"
             title="">
         <span id="dcxid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_csharp" style="color: inherit; text-decoration: inherit;">Dcx<wbr>Id</a>
@@ -455,8 +536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>ID of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -464,8 +544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -487,8 +566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -496,8 +574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">[]Get<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the dedicated tunnels.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated tunnels.</dd><dt class="property-"
             title="">
         <span id="dcxid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_go" style="color: inherit; text-decoration: inherit;">Dcx<wbr>Id</a>
@@ -505,8 +582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>ID of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -514,11 +590,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the dedicated tunnels.</dd><dt class="property-"
+            title="">
+        <span id="dcx_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcx_id_hcl" style="color: inherit; text-decoration: inherit;">dcx_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated tunnel.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -537,8 +658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -546,8 +666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated tunnels.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated tunnels.</dd><dt class="property-"
             title="">
         <span id="dcxid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_java" style="color: inherit; text-decoration: inherit;">dcx<wbr>Id</a>
@@ -555,8 +674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>ID of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -564,8 +682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -587,8 +704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -596,8 +712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated tunnels.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated tunnels.</dd><dt class="property-"
             title="">
         <span id="dcxid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_nodejs" style="color: inherit; text-decoration: inherit;">dcx<wbr>Id</a>
@@ -605,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>ID of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -614,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -637,17 +750,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated tunnels.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated tunnels.</dd><dt class="property-"
             title="">
         <span id="dcx_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcx_id_python" style="color: inherit; text-decoration: inherit;">dcx_<wbr>id</a>
@@ -655,8 +766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>ID of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -664,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -687,8 +796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -696,8 +804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated tunnels.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated tunnels.</dd><dt class="property-"
             title="">
         <span id="dcxid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_yaml" style="color: inherit; text-decoration: inherit;">dcx<wbr>Id</a>
@@ -705,8 +812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>ID of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -714,8 +820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnel.</p>
-</dd><dt class="property-"
+    <dd>Name of the dedicated tunnel.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -747,8 +852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="bgpasn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_csharp" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Asn</a>
@@ -756,8 +860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP ASN of the user.</dd><dt class="property-required"
             title="Required">
         <span id="bgpauthkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_csharp" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Auth<wbr>Key</a>
@@ -765,8 +868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP key of the user.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -774,8 +876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Address</a>
@@ -783,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_csharp" style="color: inherit; text-decoration: inherit;">Dc<wbr>Id</a>
@@ -792,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_csharp" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -801,8 +900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-required"
             title="Required">
         <span id="dcxid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_csharp" style="color: inherit; text-decoration: inherit;">Dcx<wbr>Id</a>
@@ -810,8 +908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -819,8 +916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Region</a>
@@ -828,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region of the dedicated tunnel.</p>
-</dd><dt class="property-required"
+    <dd>The region of the dedicated tunnel.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -837,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="routefilterprefixes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Filter<wbr>Prefixes</a>
@@ -846,8 +940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC.</p>
-</dd><dt class="property-required"
+    <dd>Static route, the network address of the user IDC.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -855,8 +948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -864,8 +956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_csharp" style="color: inherit; text-decoration: inherit;">Tencent<wbr>Address</a>
@@ -873,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-required"
             title="Required">
         <span id="vlan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_csharp" style="color: inherit; text-decoration: inherit;">Vlan</a>
@@ -882,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-required"
+    <dd>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -891,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -906,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="bgpasn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_go" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Asn</a>
@@ -915,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP ASN of the user.</dd><dt class="property-required"
             title="Required">
         <span id="bgpauthkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_go" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Auth<wbr>Key</a>
@@ -924,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP key of the user.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -933,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Address</a>
@@ -942,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_go" style="color: inherit; text-decoration: inherit;">Dc<wbr>Id</a>
@@ -951,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_go" style="color: inherit; text-decoration: inherit;">Dcg<wbr>Id</a>
@@ -960,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-required"
             title="Required">
         <span id="dcxid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_go" style="color: inherit; text-decoration: inherit;">Dcx<wbr>Id</a>
@@ -969,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -978,8 +1058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Region</a>
@@ -987,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region of the dedicated tunnel.</p>
-</dd><dt class="property-required"
+    <dd>The region of the dedicated tunnel.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -996,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="routefilterprefixes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Filter<wbr>Prefixes</a>
@@ -1005,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC.</p>
-</dd><dt class="property-required"
+    <dd>Static route, the network address of the user IDC.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -1014,8 +1090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1023,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_go" style="color: inherit; text-decoration: inherit;">Tencent<wbr>Address</a>
@@ -1032,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-required"
             title="Required">
         <span id="vlan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_go" style="color: inherit; text-decoration: inherit;">Vlan</a>
@@ -1041,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-required"
+    <dd>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1050,8 +1122,149 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
+            title="Required">
+        <span id="bgp_asn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_asn_hcl" style="color: inherit; text-decoration: inherit;">bgp_<wbr>asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>BGP ASN of the user.</dd><dt class="property-required"
+            title="Required">
+        <span id="bgp_auth_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_auth_key_hcl" style="color: inherit; text-decoration: inherit;">bgp_<wbr>auth_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>BGP key of the user.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="customer_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_address_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-required"
+            title="Required">
+        <span id="dc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_id_hcl" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC.</dd><dt class="property-required"
+            title="Required">
+        <span id="dcg_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_hcl" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-required"
+            title="Required">
+        <span id="dcx_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcx_id_hcl" style="color: inherit; text-decoration: inherit;">dcx_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_region_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region of the dedicated tunnel.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="route_filter_prefixes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_filter_prefixes_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>filter_<wbr>prefixes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Static route, the network address of the user IDC.</dd><dt class="property-required"
+            title="Required">
+        <span id="route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_type_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tencent_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencent_address_hcl" style="color: inherit; text-decoration: inherit;">tencent_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-required"
+            title="Required">
+        <span id="vlan_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_hcl" style="color: inherit; text-decoration: inherit;">vlan</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="bgpasn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_java" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -1074,8 +1286,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>BGP ASN of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP ASN of the user.</dd><dt class="property-required"
             title="Required">
         <span id="bgpauthkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_java" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -1083,8 +1294,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP key of the user.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1092,8 +1302,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -1101,8 +1310,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_java" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -1110,8 +1318,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_java" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -1119,8 +1326,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-required"
             title="Required">
         <span id="dcxid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_java" style="color: inherit; text-decoration: inherit;">dcx<wbr>Id</a>
@@ -1128,8 +1334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1137,8 +1342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_java" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -1146,8 +1350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region of the dedicated tunnel.</p>
-</dd><dt class="property-required"
+    <dd>The region of the dedicated tunnel.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1155,8 +1358,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="routefilterprefixes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_java" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -1164,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC.</p>
-</dd><dt class="property-required"
+    <dd>Static route, the network address of the user IDC.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_java" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -1173,8 +1374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1182,8 +1382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_java" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -1191,8 +1390,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-required"
             title="Required">
         <span id="vlan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_java" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -1200,8 +1398,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-required"
+    <dd>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1209,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1224,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="bgpasn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_nodejs" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -1233,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>BGP ASN of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP ASN of the user.</dd><dt class="property-required"
             title="Required">
         <span id="bgpauthkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_nodejs" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -1242,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP key of the user.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1251,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -1260,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_nodejs" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -1269,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_nodejs" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -1278,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-required"
             title="Required">
         <span id="dcxid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_nodejs" style="color: inherit; text-decoration: inherit;">dcx<wbr>Id</a>
@@ -1287,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1296,8 +1484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -1305,8 +1492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region of the dedicated tunnel.</p>
-</dd><dt class="property-required"
+    <dd>The region of the dedicated tunnel.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1314,8 +1500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="routefilterprefixes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -1323,8 +1508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC.</p>
-</dd><dt class="property-required"
+    <dd>Static route, the network address of the user IDC.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -1332,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1341,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_nodejs" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -1350,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-required"
             title="Required">
         <span id="vlan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_nodejs" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -1359,8 +1540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-required"
+    <dd>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1368,8 +1548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1383,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="bgp_asn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_asn_python" style="color: inherit; text-decoration: inherit;">bgp_<wbr>asn</a>
@@ -1392,8 +1570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BGP ASN of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP ASN of the user.</dd><dt class="property-required"
             title="Required">
         <span id="bgp_auth_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_auth_key_python" style="color: inherit; text-decoration: inherit;">bgp_<wbr>auth_<wbr>key</a>
@@ -1401,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP key of the user.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1410,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customer_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_address_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>address</a>
@@ -1419,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-required"
             title="Required">
         <span id="dc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dc_id_python" style="color: inherit; text-decoration: inherit;">dc_<wbr>id</a>
@@ -1428,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="dcg_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcg_id_python" style="color: inherit; text-decoration: inherit;">dcg_<wbr>id</a>
@@ -1437,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-required"
             title="Required">
         <span id="dcx_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcx_id_python" style="color: inherit; text-decoration: inherit;">dcx_<wbr>id</a>
@@ -1446,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1455,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="network_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_region_python" style="color: inherit; text-decoration: inherit;">network_<wbr>region</a>
@@ -1464,8 +1634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The region of the dedicated tunnel.</p>
-</dd><dt class="property-required"
+    <dd>The region of the dedicated tunnel.</dd><dt class="property-required"
             title="Required">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -1473,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="route_filter_prefixes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_filter_prefixes_python" style="color: inherit; text-decoration: inherit;">route_<wbr>filter_<wbr>prefixes</a>
@@ -1482,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC.</p>
-</dd><dt class="property-required"
+    <dd>Static route, the network address of the user IDC.</dd><dt class="property-required"
             title="Required">
         <span id="route_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_type_python" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
@@ -1491,8 +1658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1500,8 +1666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencent_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencent_address_python" style="color: inherit; text-decoration: inherit;">tencent_<wbr>address</a>
@@ -1509,8 +1674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-required"
             title="Required">
         <span id="vlan_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_python" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -1518,8 +1682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-required"
+    <dd>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1527,8 +1690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1542,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bandwidth of the DC.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="bgpasn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpasn_yaml" style="color: inherit; text-decoration: inherit;">bgp<wbr>Asn</a>
@@ -1551,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>BGP ASN of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP ASN of the user.</dd><dt class="property-required"
             title="Required">
         <span id="bgpauthkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpauthkey_yaml" style="color: inherit; text-decoration: inherit;">bgp<wbr>Auth<wbr>Key</a>
@@ -1560,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>BGP key of the user.</p>
-</dd><dt class="property-required"
+    <dd>BGP key of the user.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1569,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="customeraddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customeraddress_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Address</a>
@@ -1578,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within client.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within client.</dd><dt class="property-required"
             title="Required">
         <span id="dcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcid_yaml" style="color: inherit; text-decoration: inherit;">dc<wbr>Id</a>
@@ -1587,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC.</dd><dt class="property-required"
             title="Required">
         <span id="dcgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcgid_yaml" style="color: inherit; text-decoration: inherit;">dcg<wbr>Id</a>
@@ -1596,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DC Gateway. Currently only new in the console.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DC Gateway. Currently only new in the console.</dd><dt class="property-required"
             title="Required">
         <span id="dcxid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dcxid_yaml" style="color: inherit; text-decoration: inherit;">dcx<wbr>Id</a>
@@ -1605,8 +1760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1614,8 +1768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the dedicated tunnels to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the dedicated tunnels to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="networkregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkregion_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Region</a>
@@ -1623,8 +1776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region of the dedicated tunnel.</p>
-</dd><dt class="property-required"
+    <dd>The region of the dedicated tunnel.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1632,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network. Valid values: <code>VPC</code>, <code>BMVPC</code> and <code>CCN</code>. The default value is <code>VPC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="routefilterprefixes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routefilterprefixes_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Filter<wbr>Prefixes</a>
@@ -1641,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Static route, the network address of the user IDC.</p>
-</dd><dt class="property-required"
+    <dd>Static route, the network address of the user IDC.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -1650,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the route. Valid values: <code>BGP</code> and <code>STATIC</code>. The default value is <code>BGP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1659,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</p>
-</dd><dt class="property-required"
+    <dd>State of the dedicated tunnels. Valid values: <code>PENDING</code>, <code>ALLOCATING</code>, <code>ALLOCATED</code>, <code>ALTERING</code>, <code>DELETING</code>, <code>DELETED</code>, <code>COMFIRMING</code> and <code>REJECTED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tencentaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tencentaddress_yaml" style="color: inherit; text-decoration: inherit;">tencent<wbr>Address</a>
@@ -1668,8 +1816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Interconnect IP of the DC within Tencent.</p>
-</dd><dt class="property-required"
+    <dd>Interconnect IP of the DC within Tencent.</dd><dt class="property-required"
             title="Required">
         <span id="vlan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vlan_yaml" style="color: inherit; text-decoration: inherit;">vlan</a>
@@ -1677,8 +1824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</p>
-</dd><dt class="property-required"
+    <dd>Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. <code>0</code> means that only one tunnel can be created for the physical connect.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1686,8 +1832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC or BMVPC.</p>
-</dd></dl>
+    <dd>ID of the VPC or BMVPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1702,7 +1847,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

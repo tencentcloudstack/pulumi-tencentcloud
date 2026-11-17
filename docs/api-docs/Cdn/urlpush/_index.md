@@ -2,9 +2,11 @@
 ---
 title: "UrlPush"
 title_tag: "tencentcloud.Cdn.UrlPush"
-meta_desc: "Documentation for the tencentcloud.Cdn.UrlPush resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to invoke a Url Push request."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,19 +18,61 @@ Provide a resource to invoke a Url Push request.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.cdn.UrlPush("foo", {urls: ["https://www.example.com/b"]});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.cdn.UrlPush("foo", urls=["https://www.example.com/b"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cdn.NewUrlPush(ctx, "foo", &cdn.UrlPushArgs{
+			Urls: pulumi.StringArray{
+				pulumi.String("https://www.example.com/b"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -47,28 +91,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cdn.NewUrlPush(ctx, "foo", &Cdn.UrlPushArgs{
-			Urls: pulumi.StringArray{
-				pulumi.String("https://www.example.com/b"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -77,8 +104,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cdn.UrlPush;
 import com.pulumi.tencentcloud.Cdn.UrlPushArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -90,13 +117,18 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new UrlPush("foo", UrlPushArgs.builder()        
+        var foo = new UrlPush("foo", UrlPushArgs.builder()
             .urls("https://www.example.com/b")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
@@ -105,28 +137,91 @@ resources:
       urls:
         - https://www.example.com/b
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cdn_urlpush" "foo" {
+  urls = ["https://www.example.com/b"]
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### argument to request new push task with same urls
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.cdn.UrlPush("foo", {
-    redo: 1,
     urls: ["https://www.example.com/a"],
+    redo: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.cdn.UrlPush("foo",
-    redo=1,
-    urls=["https://www.example.com/a"])
+    urls=["https://www.example.com/a"],
+    redo=1)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cdn.NewUrlPush(ctx, "foo", &cdn.UrlPushArgs{
+			Urls: pulumi.StringArray{
+				pulumi.String("https://www.example.com/a"),
+			},
+			Redo: pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -137,38 +232,20 @@ return await Deployment.RunAsync(() =>
 {
     var foo = new Tencentcloud.Cdn.UrlPush("foo", new()
     {
-        Redo = 1,
         Urls = new[]
         {
             "https://www.example.com/a",
         },
+        Redo = 1,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cdn.NewUrlPush(ctx, "foo", &Cdn.UrlPushArgs{
-			Redo: pulumi.Int(1),
-			Urls: pulumi.StringArray{
-				pulumi.String("https://www.example.com/a"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -177,8 +254,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cdn.UrlPush;
 import com.pulumi.tencentcloud.Cdn.UrlPushArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -190,88 +267,134 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new UrlPush("foo", UrlPushArgs.builder()        
-            .redo(1)
+        var foo = new UrlPush("foo", UrlPushArgs.builder()
             .urls("https://www.example.com/a")
+            .redo(1)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Cdn:UrlPush
     properties:
-      redo: 1
       urls:
         - https://www.example.com/a
+      redo: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cdn_urlpush" "foo" {
+  urls = ["https://www.example.com/a"]
+  redo = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Read: [DescribePushTasks](https://www.tencentcloud.com/document/api/228/33603)
 
 
 
 ## Create UrlPush Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+            <span class="nx">urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
             <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">layer</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">parse_m3u8</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
             <span class="nx">redo</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-            <span class="nx">urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-            <span class="nx">user_agent</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">user_agent</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUrlPush</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UrlPush</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUrlPush</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UrlPush</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">UrlPush</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UrlPushArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cdn:UrlPush</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cdn:UrlPush</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cdn_url_push&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -292,7 +415,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -409,11 +532,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## UrlPush Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -429,8 +560,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_csharp" style="color: inherit; text-decoration: inherit;">Area</a>
@@ -438,8 +568,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="layer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_csharp" style="color: inherit; text-decoration: inherit;">Layer</a>
@@ -447,8 +576,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="parsem3u8_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parsem3u8_csharp" style="color: inherit; text-decoration: inherit;">Parse<wbr>M3u8</a>
@@ -456,8 +584,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_csharp" style="color: inherit; text-decoration: inherit;">Redo</a>
@@ -465,8 +592,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Agent</a>
@@ -474,8 +600,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -489,8 +614,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_go" style="color: inherit; text-decoration: inherit;">Area</a>
@@ -498,8 +622,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="layer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_go" style="color: inherit; text-decoration: inherit;">Layer</a>
@@ -507,8 +630,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="parsem3u8_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parsem3u8_go" style="color: inherit; text-decoration: inherit;">Parse<wbr>M3u8</a>
@@ -516,8 +638,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_go" style="color: inherit; text-decoration: inherit;">Redo</a>
@@ -525,8 +646,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_go" style="color: inherit; text-decoration: inherit;">User<wbr>Agent</a>
@@ -534,8 +654,61 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="urls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_hcl" style="color: inherit; text-decoration: inherit;">urls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="layer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_hcl" style="color: inherit; text-decoration: inherit;">layer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Layer to push.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parse_m3u8_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parse_m3u8_hcl" style="color: inherit; text-decoration: inherit;">parse_<wbr>m3u8</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redo_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_hcl" style="color: inherit; text-decoration: inherit;">redo</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_agent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_agent_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>agent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -549,8 +722,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_java" style="color: inherit; text-decoration: inherit;">area</a>
@@ -558,8 +730,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="layer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_java" style="color: inherit; text-decoration: inherit;">layer</a>
@@ -567,8 +738,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="parsem3u8_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parsem3u8_java" style="color: inherit; text-decoration: inherit;">parse<wbr>M3u8</a>
@@ -576,8 +746,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_java" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -585,8 +754,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_java" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -594,8 +762,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +776,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_nodejs" style="color: inherit; text-decoration: inherit;">area</a>
@@ -618,8 +784,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="layer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_nodejs" style="color: inherit; text-decoration: inherit;">layer</a>
@@ -627,8 +792,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="parsem3u8_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parsem3u8_nodejs" style="color: inherit; text-decoration: inherit;">parse<wbr>M3u8</a>
@@ -636,8 +800,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_nodejs" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -645,8 +808,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -654,8 +816,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -669,8 +830,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_python" style="color: inherit; text-decoration: inherit;">area</a>
@@ -678,8 +838,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="layer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_python" style="color: inherit; text-decoration: inherit;">layer</a>
@@ -687,8 +846,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="parse_m3u8_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parse_m3u8_python" style="color: inherit; text-decoration: inherit;">parse_<wbr>m3u8</a>
@@ -696,8 +854,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_python" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -705,8 +862,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_agent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_agent_python" style="color: inherit; text-decoration: inherit;">user_<wbr>agent</a>
@@ -714,8 +870,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,8 +884,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_yaml" style="color: inherit; text-decoration: inherit;">area</a>
@@ -738,8 +892,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="layer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_yaml" style="color: inherit; text-decoration: inherit;">layer</a>
@@ -747,8 +900,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="parsem3u8_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parsem3u8_yaml" style="color: inherit; text-decoration: inherit;">parse<wbr>M3u8</a>
@@ -756,8 +908,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_yaml" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -765,8 +916,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -774,8 +924,7 @@ The UrlPush resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -796,8 +945,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pushhistories_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pushhistories_csharp" style="color: inherit; text-decoration: inherit;">Push<wbr>Histories</a>
@@ -805,8 +953,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpushpushhistory">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Outputs.<wbr>Url<wbr>Push<wbr>Push<wbr>History&gt;</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest push task.</dd><dt class="property-"
             title="">
         <span id="taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -814,8 +961,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd></dl>
+    <dd>Push task id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -829,8 +975,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pushhistories_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pushhistories_go" style="color: inherit; text-decoration: inherit;">Push<wbr>Histories</a>
@@ -838,8 +983,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpushpushhistory">[]Url<wbr>Push<wbr>Push<wbr>History</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest push task.</dd><dt class="property-"
             title="">
         <span id="taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -847,8 +991,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd></dl>
+    <dd>Push task id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="push_histories_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#push_histories_hcl" style="color: inherit; text-decoration: inherit;">push_<wbr>histories</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#urlpushpushhistory">list(object)</a></span>
+    </dt>
+    <dd>logs of latest push task.</dd><dt class="property-"
+            title="">
+        <span id="task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push task id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -862,8 +1035,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pushhistories_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pushhistories_java" style="color: inherit; text-decoration: inherit;">push<wbr>Histories</a>
@@ -871,8 +1043,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpushpushhistory">List&lt;Url<wbr>Push<wbr>Push<wbr>History&gt;</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest push task.</dd><dt class="property-"
             title="">
         <span id="taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -880,8 +1051,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd></dl>
+    <dd>Push task id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -895,8 +1065,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pushhistories_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pushhistories_nodejs" style="color: inherit; text-decoration: inherit;">push<wbr>Histories</a>
@@ -904,8 +1073,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpushpushhistory">Url<wbr>Push<wbr>Push<wbr>History[]</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest push task.</dd><dt class="property-"
             title="">
         <span id="taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -913,8 +1081,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd></dl>
+    <dd>Push task id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -928,17 +1095,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="push_histories_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#push_histories_python" style="color: inherit; text-decoration: inherit;">push_<wbr>histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpushpushhistory">Url<wbr>Push<wbr>Push<wbr>History]</a></span>
+        <span class="property-type"><a href="#urlpushpushhistory">Sequence[Url<wbr>Push<wbr>Push<wbr>History]</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest push task.</dd><dt class="property-"
             title="">
         <span id="task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -946,8 +1111,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd></dl>
+    <dd>Push task id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -961,8 +1125,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="pushhistories_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pushhistories_yaml" style="color: inherit; text-decoration: inherit;">push<wbr>Histories</a>
@@ -970,8 +1133,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpushpushhistory">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest push task.</dd><dt class="property-"
             title="">
         <span id="taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -979,8 +1141,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd></dl>
+    <dd>Push task id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -990,127 +1151,166 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing UrlPush resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UrlPushState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">UrlPush</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UrlPushState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">UrlPush</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">layer</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">parse_m3u8</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">push_histories</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cdn.UrlPushPushHistoryArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">push_histories</span><span class="p">:</span> <span class="nx">Optional[Sequence[UrlPushPushHistoryArgs]]</span> = None<span class="p">,</span>
         <span class="nx">redo</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">task_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">user_agent</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> UrlPush</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUrlPush<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UrlPushState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UrlPush</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUrlPush<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UrlPushState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UrlPush</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">UrlPush</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UrlPushState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">UrlPush</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UrlPushState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">UrlPush</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UrlPushState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">UrlPush</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UrlPushState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingUrlPush</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cdn:UrlPush</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cdn_url_push</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UrlPushState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UrlPushState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1118,28 +1318,31 @@ Get an existing UrlPush resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UrlPushState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1147,28 +1350,31 @@ Get an existing UrlPush resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UrlPushState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1188,8 +1394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layer_csharp" style="color: inherit; text-decoration: inherit;">Layer</a>
@@ -1197,8 +1402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parsem3u8_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parsem3u8_csharp" style="color: inherit; text-decoration: inherit;">Parse<wbr>M3u8</a>
@@ -1206,17 +1410,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pushhistories_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pushhistories_csharp" style="color: inherit; text-decoration: inherit;">Push<wbr>Histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpushpushhistory">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Url<wbr>Push<wbr>Push<wbr>History<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#urlpushpushhistory">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Url<wbr>Push<wbr>Push<wbr>History&gt;</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest push task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_csharp" style="color: inherit; text-decoration: inherit;">Redo</a>
@@ -1224,8 +1426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1233,8 +1434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Push task id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_csharp" style="color: inherit; text-decoration: inherit;">Urls</a>
@@ -1242,8 +1442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useragent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useragent_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Agent</a>
@@ -1251,8 +1450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1266,8 +1464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layer_go" style="color: inherit; text-decoration: inherit;">Layer</a>
@@ -1275,8 +1472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parsem3u8_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parsem3u8_go" style="color: inherit; text-decoration: inherit;">Parse<wbr>M3u8</a>
@@ -1284,8 +1480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pushhistories_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pushhistories_go" style="color: inherit; text-decoration: inherit;">Push<wbr>Histories</a>
@@ -1293,8 +1488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpushpushhistory">[]Url<wbr>Push<wbr>Push<wbr>History<wbr>Args</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest push task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_go" style="color: inherit; text-decoration: inherit;">Redo</a>
@@ -1302,8 +1496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1311,8 +1504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Push task id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_go" style="color: inherit; text-decoration: inherit;">Urls</a>
@@ -1320,8 +1512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useragent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useragent_go" style="color: inherit; text-decoration: inherit;">User<wbr>Agent</a>
@@ -1329,8 +1520,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_layer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layer_hcl" style="color: inherit; text-decoration: inherit;">layer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Layer to push.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_parse_m3u8_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parse_m3u8_hcl" style="color: inherit; text-decoration: inherit;">parse_<wbr>m3u8</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_push_histories_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_push_histories_hcl" style="color: inherit; text-decoration: inherit;">push_<wbr>histories</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#urlpushpushhistory">list(object)</a></span>
+    </dt>
+    <dd>logs of latest push task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redo_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_hcl" style="color: inherit; text-decoration: inherit;">redo</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push task id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_urls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_hcl" style="color: inherit; text-decoration: inherit;">urls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_agent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_agent_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>agent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1344,8 +1604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layer_java" style="color: inherit; text-decoration: inherit;">layer</a>
@@ -1353,8 +1612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parsem3u8_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parsem3u8_java" style="color: inherit; text-decoration: inherit;">parse<wbr>M3u8</a>
@@ -1362,17 +1620,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pushhistories_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pushhistories_java" style="color: inherit; text-decoration: inherit;">push<wbr>Histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpushpushhistory">List&lt;Url<wbr>Push<wbr>Push<wbr>History<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#urlpushpushhistory">List&lt;Url<wbr>Push<wbr>Push<wbr>History&gt;</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest push task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_java" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -1380,8 +1636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1389,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Push task id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_java" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -1398,8 +1652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useragent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useragent_java" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -1407,8 +1660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1422,8 +1674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layer_nodejs" style="color: inherit; text-decoration: inherit;">layer</a>
@@ -1431,8 +1682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parsem3u8_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parsem3u8_nodejs" style="color: inherit; text-decoration: inherit;">parse<wbr>M3u8</a>
@@ -1440,17 +1690,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pushhistories_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pushhistories_nodejs" style="color: inherit; text-decoration: inherit;">push<wbr>Histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpushpushhistory">Url<wbr>Push<wbr>Push<wbr>History<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#urlpushpushhistory">Url<wbr>Push<wbr>Push<wbr>History[]</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest push task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_nodejs" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -1458,8 +1706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1467,8 +1714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Push task id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_nodejs" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -1476,8 +1722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useragent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useragent_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -1485,8 +1730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1500,8 +1744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layer_python" style="color: inherit; text-decoration: inherit;">layer</a>
@@ -1509,8 +1752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parse_m3u8_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parse_m3u8_python" style="color: inherit; text-decoration: inherit;">parse_<wbr>m3u8</a>
@@ -1518,17 +1760,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_push_histories_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_push_histories_python" style="color: inherit; text-decoration: inherit;">push_<wbr>histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpushpushhistory">Url<wbr>Push<wbr>Push<wbr>History<wbr>Args]</a></span>
+        <span class="property-type"><a href="#urlpushpushhistory">Sequence[Url<wbr>Push<wbr>Push<wbr>History<wbr>Args]</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest push task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_python" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -1536,8 +1776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -1545,8 +1784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Push task id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_python" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -1554,8 +1792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_agent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_agent_python" style="color: inherit; text-decoration: inherit;">user_<wbr>agent</a>
@@ -1563,8 +1800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1578,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layer_yaml" style="color: inherit; text-decoration: inherit;">layer</a>
@@ -1587,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Layer to push.</p>
-</dd><dt class="property-optional"
+    <dd>Layer to push.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parsem3u8_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parsem3u8_yaml" style="color: inherit; text-decoration: inherit;">parse<wbr>M3u8</a>
@@ -1596,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to recursive parse m3u8 files.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to recursive parse m3u8 files.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pushhistories_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pushhistories_yaml" style="color: inherit; text-decoration: inherit;">push<wbr>Histories</a>
@@ -1605,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpushpushhistory">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>logs of latest push task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest push task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_yaml" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -1614,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to push again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1623,8 +1854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Push task id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_yaml" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -1632,8 +1862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to push. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useragent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useragent_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -1641,8 +1870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</p>
-</dd></dl>
+    <dd>Specify <code>User-Agent</code> HTTP header, default: <code>TencentCdn</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1657,7 +1885,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="urlpushpushhistory">Url<wbr>Push<wbr>Push<wbr>History</h4>
+<h4 id="urlpushpushhistory">
+Url<wbr>Push<wbr>Push<wbr>History<pulumi-choosable type="language" values="python,go" class="inline">, Url<wbr>Push<wbr>Push<wbr>History<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1669,8 +1899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1678,8 +1907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_csharp" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -1687,8 +1915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Push progress in percent.</p>
-</dd><dt class="property-optional"
+    <dd>Push progress in percent.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1696,8 +1923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</p>
-</dd><dt class="property-optional"
+    <dd>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1705,8 +1931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional"
+    <dd>Push task id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1714,8 +1939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task update time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -1723,8 +1947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push url.</p>
-</dd></dl>
+    <dd>Push url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1738,8 +1961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1747,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_go" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -1756,8 +1977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Push progress in percent.</p>
-</dd><dt class="property-optional"
+    <dd>Push progress in percent.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1765,8 +1985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</p>
-</dd><dt class="property-optional"
+    <dd>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1774,8 +1993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional"
+    <dd>Push task id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1783,8 +2001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task update time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_go" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -1792,8 +2009,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push url.</p>
-</dd></dl>
+    <dd>Push url.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push task create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="percent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_hcl" style="color: inherit; text-decoration: inherit;">percent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Push progress in percent.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push task id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push task update time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1807,8 +2085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1816,8 +2093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_java" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1825,8 +2101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Push progress in percent.</p>
-</dd><dt class="property-optional"
+    <dd>Push progress in percent.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1834,8 +2109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</p>
-</dd><dt class="property-optional"
+    <dd>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1843,8 +2117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional"
+    <dd>Push task id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1852,8 +2125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task update time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_java" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1861,8 +2133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push url.</p>
-</dd></dl>
+    <dd>Push url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1876,8 +2147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1885,8 +2155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_nodejs" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1894,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Push progress in percent.</p>
-</dd><dt class="property-optional"
+    <dd>Push progress in percent.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1903,8 +2171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</p>
-</dd><dt class="property-optional"
+    <dd>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1912,8 +2179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional"
+    <dd>Push task id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1921,8 +2187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push task update time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1930,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push url.</p>
-</dd></dl>
+    <dd>Push url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1945,8 +2209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1954,8 +2217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_python" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1963,8 +2225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Push progress in percent.</p>
-</dd><dt class="property-optional"
+    <dd>Push progress in percent.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1972,8 +2233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</p>
-</dd><dt class="property-optional"
+    <dd>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</dd><dt class="property-optional"
             title="Optional">
         <span id="task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -1981,8 +2241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional"
+    <dd>Push task id.</dd><dt class="property-optional"
             title="Optional">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1990,8 +2249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push task update time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_python" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1999,8 +2257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push url.</p>
-</dd></dl>
+    <dd>Push url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2014,8 +2271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify push area. NOTE: only push same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify push area. NOTE: only push same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2023,8 +2279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_yaml" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -2032,8 +2287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Push progress in percent.</p>
-</dd><dt class="property-optional"
+    <dd>Push progress in percent.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2041,8 +2295,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</p>
-</dd><dt class="property-optional"
+    <dd>Push status of <code>fail</code>, <code>done</code>, <code>process</code> or <code>invalid</code> (4xx, 5xx response).</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -2050,8 +2303,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task id.</p>
-</dd><dt class="property-optional"
+    <dd>Push task id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2059,8 +2311,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push task update time.</p>
-</dd><dt class="property-optional"
+    <dd>Push task update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
@@ -2068,8 +2319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push url.</p>
-</dd></dl>
+    <dd>Push url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2081,7 +2331,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

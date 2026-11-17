@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Vpc.Instance"
-meta_desc: "Documentation for the tencentcloud.Vpc.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a VPC. NOTE: In accordance with VPC business requirements, the default value for isMulticast has been updated to."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,16 +16,24 @@ no_edit_this_page: true
 
 Provide a resource to create a VPC.
 
+> **NOTE:** In accordance with VPC business requirements, the default value for `isMulticast` has been updated to `false`(previously `true`) in version `v1.82.93` of the provider. If you wish to utilize this feature, you must first contact the VPC product team to have your account added to the whitelist, and then set the `isMulticast` field to `true`.
+
 ## Example Usage
 
 ### Create a basic VPC
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "tf-example",
     cidrBlock: "10.0.0.0/16",
     dnsServers: [
         "119.29.29.29",
@@ -31,15 +41,21 @@ const vpc = new tencentcloud.vpc.Instance("vpc", {
     ],
     isMulticast: false,
     tags: {
-        test: "test",
+        createBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 vpc = tencentcloud.vpc.Instance("vpc",
+    name="tf-example",
     cidr_block="10.0.0.0/16",
     dns_servers=[
         "119.29.29.29",
@@ -47,9 +63,48 @@ vpc = tencentcloud.vpc.Instance("vpc",
     ],
     is_multicast=False,
     tags={
-        "test": "test",
+        "createBy": "Terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("tf-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			DnsServers: pulumi.StringArray{
+				pulumi.String("119.29.29.29"),
+				pulumi.String("8.8.8.8"),
+			},
+			IsMulticast: pulumi.Bool(false),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +115,7 @@ return await Deployment.RunAsync(() =>
 {
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "tf-example",
         CidrBlock = "10.0.0.0/16",
         DnsServers = new[]
         {
@@ -69,40 +125,17 @@ return await Deployment.RunAsync(() =>
         IsMulticast = false,
         Tags = 
         {
-            { "test", "test" },
+            { "createBy", "Terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-			DnsServers: pulumi.StringArray{
-				pulumi.String("119.29.29.29"),
-				pulumi.String("8.8.8.8"),
-			},
-			IsMulticast: pulumi.Bool(false),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -111,8 +144,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Vpc.Instance;
 import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -124,61 +157,144 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new Instance("vpc", InstanceArgs.builder()
+            .name("tf-example")
             .cidrBlock("10.0.0.0/16")
             .dnsServers(            
                 "119.29.29.29",
                 "8.8.8.8")
             .isMulticast(false)
-            .tags(Map.of("test", "test"))
+            .tags(Map.of("createBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: tf-example
       cidrBlock: 10.0.0.0/16
       dnsServers:
         - 119.29.29.29
         - 8.8.8.8
       isMulticast: false
       tags:
-        test: test
+        createBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name         = "tf-example"
+  cidr_block   = "10.0.0.0/16"
+  dns_servers  = ["119.29.29.29", "8.8.8.8"]
+  is_multicast = false
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Using Assistant CIDR
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const vpc = new tencentcloud.vpc.Instance("vpc", {
-    assistantCidrs: ["172.16.0.0/24"],
+    name: "tf-example",
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
+    assistantCidrs: ["172.16.0.0/24"],
     tags: {
-        test: "test",
+        createBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 vpc = tencentcloud.vpc.Instance("vpc",
-    assistant_cidrs=["172.16.0.0/24"],
+    name="tf-example",
     cidr_block="10.0.0.0/16",
     is_multicast=False,
+    assistant_cidrs=["172.16.0.0/24"],
     tags={
-        "test": "test",
+        "createBy": "Terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:        pulumi.String("tf-example"),
+			CidrBlock:   pulumi.String("10.0.0.0/16"),
+			IsMulticast: pulumi.Bool(false),
+			AssistantCidrs: pulumi.StringArray{
+				pulumi.String("172.16.0.0/24"),
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -189,47 +305,26 @@ return await Deployment.RunAsync(() =>
 {
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "tf-example",
+        CidrBlock = "10.0.0.0/16",
+        IsMulticast = false,
         AssistantCidrs = new[]
         {
             "172.16.0.0/24",
         },
-        CidrBlock = "10.0.0.0/16",
-        IsMulticast = false,
         Tags = 
         {
-            { "test", "test" },
+            { "createBy", "Terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			AssistantCidrs: pulumi.StringArray{
-				pulumi.String("172.16.0.0/24"),
-			},
-			CidrBlock:   pulumi.String("10.0.0.0/16"),
-			IsMulticast: pulumi.Bool(false),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -238,8 +333,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Vpc.Instance;
 import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -251,92 +346,361 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
-            .assistantCidrs("172.16.0.0/24")
+        var vpc = new Instance("vpc", InstanceArgs.builder()
+            .name("tf-example")
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
-            .tags(Map.of("test", "test"))
+            .assistantCidrs("172.16.0.0/24")
+            .tags(Map.of("createBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
-      assistantCidrs:
-        - 172.16.0.0/24
+      name: tf-example
       cidrBlock: 10.0.0.0/16
       isMulticast: false
+      assistantCidrs:
+        - 172.16.0.0/24
       tags:
-        test: test
+        createBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name            = "tf-example"
+  cidr_block      = "10.0.0.0/16"
+  is_multicast    = false
+  assistant_cidrs = ["172.16.0.0/24"]
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Enable route vpc publish
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "tf-example",
+    cidrBlock: "10.0.0.0/16",
+    dnsServers: [
+        "119.29.29.29",
+        "8.8.8.8",
+    ],
+    isMulticast: false,
+    enableRouteVpcPublish: true,
+    tags: {
+        createBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="tf-example",
+    cidr_block="10.0.0.0/16",
+    dns_servers=[
+        "119.29.29.29",
+        "8.8.8.8",
+    ],
+    is_multicast=False,
+    enable_route_vpc_publish=True,
+    tags={
+        "createBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("tf-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			DnsServers: pulumi.StringArray{
+				pulumi.String("119.29.29.29"),
+				pulumi.String("8.8.8.8"),
+			},
+			IsMulticast:           pulumi.Bool(false),
+			EnableRouteVpcPublish: pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "tf-example",
+        CidrBlock = "10.0.0.0/16",
+        DnsServers = new[]
+        {
+            "119.29.29.29",
+            "8.8.8.8",
+        },
+        IsMulticast = false,
+        EnableRouteVpcPublish = true,
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpc.Instance;
+import com.pulumi.tencentcloud.Vpc.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var vpc = new Instance("vpc", InstanceArgs.builder()
+            .name("tf-example")
+            .cidrBlock("10.0.0.0/16")
+            .dnsServers(            
+                "119.29.29.29",
+                "8.8.8.8")
+            .isMulticast(false)
+            .enableRouteVpcPublish(true)
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      name: tf-example
+      cidrBlock: 10.0.0.0/16
+      dnsServers:
+        - 119.29.29.29
+        - 8.8.8.8
+      isMulticast: false
+      enableRouteVpcPublish: true
+      tags:
+        createBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name                     = "tf-example"
+  cidr_block               = "10.0.0.0/16"
+  dns_servers              = ["119.29.29.29", "8.8.8.8"]
+  is_multicast             = false
+  enable_route_vpc_publish = true
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateAssistantCidr](https://www.tencentcloud.com/document/api/215/36081)
+  - [CreateVpc](https://www.tencentcloud.com/document/api/215/15774)
+* Read:
+  - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+  - [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778)
+* Update:
+  - [ModifyAssistantCidr](https://www.tencentcloud.com/document/api/215/36077)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyVpcAttribute](https://www.tencentcloud.com/document/api/215/15773)
+* Delete: [DeleteVpc](https://www.tencentcloud.com/document/api/215/15775)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">assistant_cidrs</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-             <span class="nx">cidr_block</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">dns_servers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-             <span class="nx">is_multicast</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">cidr_block</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">assistant_cidrs</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+             <span class="nx">dns_servers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+             <span class="nx">enable_route_vpc_publish</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">enable_route_vpc_publish_ipv6</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">is_multicast</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpc:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpc:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vpc_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -357,7 +721,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -474,11 +838,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -494,8 +866,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="assistantcidrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assistantcidrs_csharp" style="color: inherit; text-decoration: inherit;">Assistant<wbr>Cidrs</a>
@@ -503,8 +874,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsservers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
@@ -512,8 +882,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublish_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublish_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublishipv6_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublishipv6_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ismulticast_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Multicast</a>
@@ -521,8 +906,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -530,17 +914,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -554,8 +936,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="assistantcidrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assistantcidrs_go" style="color: inherit; text-decoration: inherit;">Assistant<wbr>Cidrs</a>
@@ -563,8 +944,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsservers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
@@ -572,8 +952,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublish_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublish_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublishipv6_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublishipv6_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ismulticast_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Multicast</a>
@@ -581,8 +976,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -590,17 +984,85 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assistant_cidrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assistant_cidrs_hcl" style="color: inherit; text-decoration: inherit;">assistant_<wbr>cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dns_servers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_servers_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_route_vpc_publish_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_route_vpc_publish_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>route_<wbr>vpc_<wbr>publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_route_vpc_publish_ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_route_vpc_publish_ipv6_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>route_<wbr>vpc_<wbr>publish_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_multicast_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multicast_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>multicast</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -614,8 +1076,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="assistantcidrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assistantcidrs_java" style="color: inherit; text-decoration: inherit;">assistant<wbr>Cidrs</a>
@@ -623,8 +1084,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsservers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -632,8 +1092,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublish_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublish_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublishipv6_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublishipv6_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ismulticast_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_java" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -641,8 +1116,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -650,17 +1124,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -674,8 +1146,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="assistantcidrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assistantcidrs_nodejs" style="color: inherit; text-decoration: inherit;">assistant<wbr>Cidrs</a>
@@ -683,8 +1154,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsservers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -692,8 +1162,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublish_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublish_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublishipv6_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublishipv6_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ismulticast_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -701,8 +1186,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -710,17 +1194,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -734,8 +1216,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="assistant_cidrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assistant_cidrs_python" style="color: inherit; text-decoration: inherit;">assistant_<wbr>cidrs</a>
@@ -743,8 +1224,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dns_servers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_servers_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
@@ -752,8 +1232,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_route_vpc_publish_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_route_vpc_publish_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>route_<wbr>vpc_<wbr>publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_route_vpc_publish_ipv6_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_route_vpc_publish_ipv6_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>route_<wbr>vpc_<wbr>publish_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_multicast_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multicast_python" style="color: inherit; text-decoration: inherit;">is_<wbr>multicast</a>
@@ -761,8 +1256,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -770,17 +1264,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -794,8 +1286,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="assistantcidrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assistantcidrs_yaml" style="color: inherit; text-decoration: inherit;">assistant<wbr>Cidrs</a>
@@ -803,8 +1294,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsservers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -812,8 +1302,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublish_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublish_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enableroutevpcpublishipv6_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableroutevpcpublishipv6_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ismulticast_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -821,8 +1326,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -830,17 +1334,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -861,8 +1363,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-"
+    <dd>Creation time of VPC.</dd><dt class="property-"
             title="">
         <span id="defaultroutetableid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultroutetableid_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -870,8 +1371,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-"
             title="">
         <span id="dockerassistantcidrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockerassistantcidrs_csharp" style="color: inherit; text-decoration: inherit;">Docker<wbr>Assistant<wbr>Cidrs</a>
@@ -879,8 +1379,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -888,8 +1387,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -897,8 +1395,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd></dl>
+    <dd>Indicates whether it is the default VPC for this region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -912,8 +1409,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-"
+    <dd>Creation time of VPC.</dd><dt class="property-"
             title="">
         <span id="defaultroutetableid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultroutetableid_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -921,8 +1417,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-"
             title="">
         <span id="dockerassistantcidrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockerassistantcidrs_go" style="color: inherit; text-decoration: inherit;">Docker<wbr>Assistant<wbr>Cidrs</a>
@@ -930,8 +1425,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -939,8 +1433,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -948,8 +1441,53 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd></dl>
+    <dd>Indicates whether it is the default VPC for this region.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of VPC.</dd><dt class="property-"
+            title="">
+        <span id="default_route_table_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_route_table_id_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>route_<wbr>table_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-"
+            title="">
+        <span id="docker_assistant_cidrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#docker_assistant_cidrs_hcl" style="color: inherit; text-decoration: inherit;">docker_<wbr>assistant_<wbr>cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether it is the default VPC for this region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -963,8 +1501,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-"
+    <dd>Creation time of VPC.</dd><dt class="property-"
             title="">
         <span id="defaultroutetableid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultroutetableid_java" style="color: inherit; text-decoration: inherit;">default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -972,8 +1509,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-"
             title="">
         <span id="dockerassistantcidrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockerassistantcidrs_java" style="color: inherit; text-decoration: inherit;">docker<wbr>Assistant<wbr>Cidrs</a>
@@ -981,8 +1517,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -990,8 +1525,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -999,8 +1533,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd></dl>
+    <dd>Indicates whether it is the default VPC for this region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1014,8 +1547,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-"
+    <dd>Creation time of VPC.</dd><dt class="property-"
             title="">
         <span id="defaultroutetableid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultroutetableid_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -1023,8 +1555,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-"
             title="">
         <span id="dockerassistantcidrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockerassistantcidrs_nodejs" style="color: inherit; text-decoration: inherit;">docker<wbr>Assistant<wbr>Cidrs</a>
@@ -1032,8 +1563,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1041,8 +1571,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1050,8 +1579,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd></dl>
+    <dd>Indicates whether it is the default VPC for this region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1593,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-"
+    <dd>Creation time of VPC.</dd><dt class="property-"
             title="">
         <span id="default_route_table_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_route_table_id_python" style="color: inherit; text-decoration: inherit;">default_<wbr>route_<wbr>table_<wbr>id</a>
@@ -1074,8 +1601,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-"
             title="">
         <span id="docker_assistant_cidrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#docker_assistant_cidrs_python" style="color: inherit; text-decoration: inherit;">docker_<wbr>assistant_<wbr>cidrs</a>
@@ -1083,8 +1609,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1092,8 +1617,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -1101,8 +1625,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd></dl>
+    <dd>Indicates whether it is the default VPC for this region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1116,8 +1639,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-"
+    <dd>Creation time of VPC.</dd><dt class="property-"
             title="">
         <span id="defaultroutetableid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultroutetableid_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -1125,8 +1647,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-"
             title="">
         <span id="dockerassistantcidrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockerassistantcidrs_yaml" style="color: inherit; text-decoration: inherit;">docker<wbr>Assistant<wbr>Cidrs</a>
@@ -1134,8 +1655,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1143,8 +1663,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1152,8 +1671,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd></dl>
+    <dd>Indicates whether it is the default VPC for this region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1163,18 +1681,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1184,108 +1702,149 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">default_route_table_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">dns_servers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">docker_assistant_cidrs</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+        <span class="nx">enable_route_vpc_publish</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">enable_route_vpc_publish_ipv6</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">is_default</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">is_multicast</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vpc:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vpc_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1293,28 +1852,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1322,28 +1884,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1363,8 +1928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1372,8 +1936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1381,8 +1944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultroutetableid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultroutetableid_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -1390,8 +1952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-optional"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsservers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
@@ -1399,8 +1960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dockerassistantcidrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dockerassistantcidrs_csharp" style="color: inherit; text-decoration: inherit;">Docker<wbr>Assistant<wbr>Cidrs</a>
@@ -1408,8 +1968,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublish_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublish_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublishipv6_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublishipv6_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1417,8 +1992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismulticast_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismulticast_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Multicast</a>
@@ -1426,8 +2000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1435,17 +2008,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1459,8 +2030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1468,8 +2038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1477,8 +2046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultroutetableid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultroutetableid_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -1486,8 +2054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-optional"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsservers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
@@ -1495,8 +2062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dockerassistantcidrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dockerassistantcidrs_go" style="color: inherit; text-decoration: inherit;">Docker<wbr>Assistant<wbr>Cidrs</a>
@@ -1504,8 +2070,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublish_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublish_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublishipv6_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublishipv6_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1513,8 +2094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismulticast_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismulticast_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Multicast</a>
@@ -1522,8 +2102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1531,17 +2110,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_assistant_cidrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_assistant_cidrs_hcl" style="color: inherit; text-decoration: inherit;">assistant_<wbr>cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_default_route_table_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_route_table_id_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>route_<wbr>table_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dns_servers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_servers_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_docker_assistant_cidrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_docker_assistant_cidrs_hcl" style="color: inherit; text-decoration: inherit;">docker_<wbr>assistant_<wbr>cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_route_vpc_publish_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_route_vpc_publish_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>route_<wbr>vpc_<wbr>publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_route_vpc_publish_ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_route_vpc_publish_ipv6_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>route_<wbr>vpc_<wbr>publish_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_multicast_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_multicast_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>multicast</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1555,8 +2234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1564,8 +2242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1573,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultroutetableid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultroutetableid_java" style="color: inherit; text-decoration: inherit;">default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -1582,8 +2258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-optional"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsservers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -1591,8 +2266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dockerassistantcidrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dockerassistantcidrs_java" style="color: inherit; text-decoration: inherit;">docker<wbr>Assistant<wbr>Cidrs</a>
@@ -1600,8 +2274,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublish_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublish_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublishipv6_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublishipv6_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1609,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismulticast_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismulticast_java" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -1618,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1627,17 +2314,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1651,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1660,8 +2344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1669,8 +2352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultroutetableid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultroutetableid_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -1678,8 +2360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-optional"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsservers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -1687,8 +2368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dockerassistantcidrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dockerassistantcidrs_nodejs" style="color: inherit; text-decoration: inherit;">docker<wbr>Assistant<wbr>Cidrs</a>
@@ -1696,8 +2376,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublish_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublish_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublishipv6_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublishipv6_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1705,8 +2400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismulticast_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismulticast_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -1714,8 +2408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1723,17 +2416,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1747,8 +2438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -1756,8 +2446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1765,8 +2454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_default_route_table_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_route_table_id_python" style="color: inherit; text-decoration: inherit;">default_<wbr>route_<wbr>table_<wbr>id</a>
@@ -1774,8 +2462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-optional"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dns_servers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_servers_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
@@ -1783,8 +2470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_docker_assistant_cidrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_docker_assistant_cidrs_python" style="color: inherit; text-decoration: inherit;">docker_<wbr>assistant_<wbr>cidrs</a>
@@ -1792,8 +2478,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_route_vpc_publish_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_route_vpc_publish_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>route_<wbr>vpc_<wbr>publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_route_vpc_publish_ipv6_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_route_vpc_publish_ipv6_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>route_<wbr>vpc_<wbr>publish_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -1801,8 +2502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_multicast_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_multicast_python" style="color: inherit; text-decoration: inherit;">is_<wbr>multicast</a>
@@ -1810,8 +2510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1819,17 +2518,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1843,8 +2540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistant_docker_cidrs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of Assistant CIDR, NOTE: Only <code>NORMAL</code> typed CIDRs included, check the Docker CIDR by readonly <code>assistantDockerCidrs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1852,8 +2548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</p>
-</dd><dt class="property-optional"
+    <dd>A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1861,8 +2556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultroutetableid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultroutetableid_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Route<wbr>Table<wbr>Id</a>
@@ -1870,8 +2564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default route table id, which created automatically after VPC create.</p>
-</dd><dt class="property-optional"
+    <dd>Default route table id, which created automatically after VPC create.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsservers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -1879,8 +2572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</p>
-</dd><dt class="property-optional"
+    <dd>The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dockerassistantcidrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dockerassistantcidrs_yaml" style="color: inherit; text-decoration: inherit;">docker<wbr>Assistant<wbr>Cidrs</a>
@@ -1888,8 +2580,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Docker Assistant CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of Docker Assistant CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublish_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublish_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enableroutevpcpublishipv6_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableroutevpcpublishipv6_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Route<wbr>Vpc<wbr>Publish<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1897,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ismulticast_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ismulticast_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -1906,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled. The default value is 'true'.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether VPC multicast is enabled. The default value is <code>false</code>. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1915,17 +2620,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd></dl>
+    <dd>Tags of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1943,9 +2646,12 @@ The following state arguments are supported:
 Vpc instance can be imported, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+$ pulumi import tencentcloud:Vpc/instance:Instance vpc vpc-8vazrwjv
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1957,7 +2663,6 @@ $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

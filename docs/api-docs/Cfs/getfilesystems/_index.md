@@ -2,9 +2,11 @@
 ---
 title: "getFileSystems"
 title_tag: "tencentcloud.Cfs.getFileSystems"
-meta_desc: "Documentation for the tencentcloud.Cfs.getFileSystems function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the detail information of cloud file systems(CFS)."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,56 +18,54 @@ Use this data source to query the detail information of cloud file systems(CFS).
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fileSystems = tencentcloud.Cfs.getFileSystems({
-    availabilityZone: "ap-guangzhou-3",
+const fileSystems = tencentcloud.cfs.getFileSystems({
     fileSystemId: "cfs-6hgquxmj",
     name: "test",
+    availabilityZone: "ap-guangzhou-3",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-file_systems = tencentcloud.Cfs.get_file_systems(availability_zone="ap-guangzhou-3",
-    file_system_id="cfs-6hgquxmj",
-    name="test")
+file_systems = tencentcloud.cfs.get_file_systems(file_system_id="cfs-6hgquxmj",
+    name="test",
+    availability_zone="ap-guangzhou-3")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var fileSystems = Tencentcloud.Cfs.GetFileSystems.Invoke(new()
-    {
-        AvailabilityZone = "ap-guangzhou-3",
-        FileSystemId = "cfs-6hgquxmj",
-        Name = "test",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cfs"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cfs.GetFileSystems(ctx, &cfs.GetFileSystemsArgs{
-			AvailabilityZone: pulumi.StringRef("ap-guangzhou-3"),
+		_, err := cfs.GetFileSystems(ctx, &cfs.GetFileSystemsArgs{
 			FileSystemId:     pulumi.StringRef("cfs-6hgquxmj"),
 			Name:             pulumi.StringRef("test"),
+			AvailabilityZone: pulumi.StringRef("ap-guangzhou-3"),
 		}, nil)
 		if err != nil {
 			return err
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var fileSystems = Tencentcloud.Cfs.GetFileSystems.Invoke(new()
+    {
+        FileSystemId = "cfs-6hgquxmj",
+        Name = "test",
+        AvailabilityZone = "ap-guangzhou-3",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cfs.CfsFunctions;
 import com.pulumi.tencentcloud.Cfs.inputs.GetFileSystemsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,26 +123,60 @@ public class App {
 
     public static void stack(Context ctx) {
         final var fileSystems = CfsFunctions.getFileSystems(GetFileSystemsArgs.builder()
-            .availabilityZone("ap-guangzhou-3")
             .fileSystemId("cfs-6hgquxmj")
             .name("test")
+            .availabilityZone("ap-guangzhou-3")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   fileSystems:
     fn::invoke:
-      Function: tencentcloud:Cfs:getFileSystems
-      Arguments:
-        availabilityZone: ap-guangzhou-3
+      function: tencentcloud:Cfs:getFileSystems
+      arguments:
         fileSystemId: cfs-6hgquxmj
         name: test
+        availabilityZone: ap-guangzhou-3
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cfs_getfilesystems" "fileSystems" {
+  file_system_id    = "cfs-6hgquxmj"
+  name              = "test"
+  availability_zone = "ap-guangzhou-3"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+  - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
 
 
 
@@ -127,7 +188,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +196,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getFileSystems<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetFileSystemsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>></span
+><span class="k">function </span>getFileSystems<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetFileSystemsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>></span
 ><span class="k">
-function </span>getFileSystemsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetFileSystemsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>></span
+function </span>getFileSystemsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetFileSystemsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -154,13 +215,13 @@ function </span>getFileSystemsOutput<span class="p">(</span><span class="nx">arg
                      <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetFileSystemsResult</span
 ><span class="k">
-def </span>get_file_systems_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">file_system_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetFileSystemsResult]</span
+def </span>get_file_systems_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">file_system_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetFileSystemsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -185,7 +246,8 @@ func </span>GetFileSystemsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetFileSystems </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetFileSystemsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetFileSystemsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetFileSystemsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetFileSystemsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,7 +256,8 @@ func </span>GetFileSystemsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>> </span>getFileSystems<span class="p">(</span><span class="nx">GetFileSystemsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>> </span>getFileSystems<span class="p">(</span><span class="nx">GetFileSystemsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetFileSystemsResult</a></span>> </span>getFileSystems<span class="p">(</span><span class="nx">GetFileSystemsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,6 +269,15 @@ func </span>GetFileSystemsOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cfs/getFileSystems:getFileSystems
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cfs_get_file_systems&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -224,8 +296,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>System<wbr>Id</a>
@@ -233,8 +304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified file system ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -242,8 +312,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A file system name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -251,8 +320,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -260,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -269,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -284,8 +350,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_go" style="color: inherit; text-decoration: inherit;">File<wbr>System<wbr>Id</a>
@@ -293,8 +358,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified file system ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -302,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A file system name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -311,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -320,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -329,8 +390,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the file system locates at.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="file_system_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_id_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A specified file system ID used to query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A file system name used to query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a vpc subnet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_java" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -353,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified file system ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -362,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A file system name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -371,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -380,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a vpc subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -389,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -404,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -413,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified file system ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -422,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A file system name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -431,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -440,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -449,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="file_system_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_id_python" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>id</a>
@@ -473,8 +574,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified file system ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -482,8 +582,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A file system name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -491,8 +590,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -500,8 +598,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a vpc subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -509,8 +606,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -524,8 +620,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -533,8 +628,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified file system ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -542,8 +636,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A file system name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -551,8 +644,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -560,8 +652,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a vpc subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -569,8 +660,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getfilesystemsfilesystemlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cfs.<wbr>Outputs.<wbr>Get<wbr>File<wbr>Systems<wbr>File<wbr>System<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cloud file system. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cloud file system. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -602,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -611,8 +699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-"
             title="">
         <span id="filesystemid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>System<wbr>Id</a>
@@ -620,8 +707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the file system.</p>
-</dd><dt class="property-"
+    <dd>ID of the file system.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -629,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the file system.</p>
-</dd><dt class="property-"
+    <dd>Name of the file system.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -668,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getfilesystemsfilesystemlist">[]Get<wbr>File<wbr>Systems<wbr>File<wbr>System<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of cloud file system. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cloud file system. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -677,8 +761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -686,8 +769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-"
             title="">
         <span id="filesystemid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_go" style="color: inherit; text-decoration: inherit;">File<wbr>System<wbr>Id</a>
@@ -695,8 +777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the file system.</p>
-</dd><dt class="property-"
+    <dd>ID of the file system.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -704,8 +785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the file system.</p>
-</dd><dt class="property-"
+    <dd>Name of the file system.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -734,6 +814,76 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="file_system_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_lists_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getfilesystemsfilesystemlist">list(object)</a></span>
+    </dt>
+    <dd>An information list of cloud file system. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the file system locates at.</dd><dt class="property-"
+            title="">
+        <span id="file_system_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_id_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the file system.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the file system.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -743,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getfilesystemsfilesystemlist">List&lt;Get<wbr>File<wbr>Systems<wbr>File<wbr>System<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cloud file system. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cloud file system. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -752,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -761,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-"
             title="">
         <span id="filesystemid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_java" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -770,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the file system.</p>
-</dd><dt class="property-"
+    <dd>ID of the file system.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -779,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the file system.</p>
-</dd><dt class="property-"
+    <dd>Name of the file system.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -818,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getfilesystemsfilesystemlist">Get<wbr>File<wbr>Systems<wbr>File<wbr>System<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of cloud file system. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cloud file system. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -827,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -836,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-"
             title="">
         <span id="filesystemid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -845,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the file system.</p>
-</dd><dt class="property-"
+    <dd>ID of the file system.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -854,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the file system.</p>
-</dd><dt class="property-"
+    <dd>Name of the file system.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -891,10 +1031,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_lists_python" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getfilesystemsfilesystemlist">Get<wbr>File<wbr>Systems<wbr>File<wbr>System<wbr>List]</a></span>
+        <span class="property-type"><a href="#getfilesystemsfilesystemlist">Sequence[Get<wbr>File<wbr>Systems<wbr>File<wbr>System<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of cloud file system. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cloud file system. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -902,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -911,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-"
             title="">
         <span id="file_system_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_id_python" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>id</a>
@@ -920,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the file system.</p>
-</dd><dt class="property-"
+    <dd>ID of the file system.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -929,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the file system.</p>
-</dd><dt class="property-"
+    <dd>Name of the file system.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -968,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getfilesystemsfilesystemlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of cloud file system. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cloud file system. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -977,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -986,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-"
             title="">
         <span id="filesystemid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -995,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the file system.</p>
-</dd><dt class="property-"
+    <dd>ID of the file system.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1004,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the file system.</p>
-</dd><dt class="property-"
+    <dd>Name of the file system.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1053,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the access group.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1062,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1071,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="filesystemid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>System<wbr>Id</a>
@@ -1080,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified file system ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="fsid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fsid_csharp" style="color: inherit; text-decoration: inherit;">Fs<wbr>Id</a>
@@ -1089,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount root-directory.</p>
-</dd><dt class="property-required"
+    <dd>Mount root-directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountip_csharp" style="color: inherit; text-decoration: inherit;">Mount<wbr>Ip</a>
@@ -1098,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the file system.</p>
-</dd><dt class="property-required"
+    <dd>IP of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1107,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A file system name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1116,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizelimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizelimit_csharp" style="color: inherit; text-decoration: inherit;">Size<wbr>Limit</a>
@@ -1125,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size limit of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size limit of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizeused_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizeused_csharp" style="color: inherit; text-decoration: inherit;">Size<wbr>Used</a>
@@ -1134,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size used of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size used of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1143,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Status of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1152,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage type of the file system.</p>
-</dd></dl>
+    <dd>Storage type of the file system.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1167,8 +1285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the access group.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1176,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1185,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="filesystemid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_go" style="color: inherit; text-decoration: inherit;">File<wbr>System<wbr>Id</a>
@@ -1194,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified file system ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="fsid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fsid_go" style="color: inherit; text-decoration: inherit;">Fs<wbr>Id</a>
@@ -1203,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount root-directory.</p>
-</dd><dt class="property-required"
+    <dd>Mount root-directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountip_go" style="color: inherit; text-decoration: inherit;">Mount<wbr>Ip</a>
@@ -1212,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the file system.</p>
-</dd><dt class="property-required"
+    <dd>IP of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1221,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A file system name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1230,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizelimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizelimit_go" style="color: inherit; text-decoration: inherit;">Size<wbr>Limit</a>
@@ -1239,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size limit of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size limit of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizeused_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizeused_go" style="color: inherit; text-decoration: inherit;">Size<wbr>Used</a>
@@ -1248,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size used of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size used of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1257,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Status of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1266,8 +1373,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage type of the file system.</p>
-</dd></dl>
+    <dd>Storage type of the file system.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_group_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the access group.</dd><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the file system locates at.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the file system.</dd><dt class="property-required"
+            title="Required">
+        <span id="file_system_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_id_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A specified file system ID used to query.</dd><dt class="property-required"
+            title="Required">
+        <span id="fs_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fs_id_hcl" style="color: inherit; text-decoration: inherit;">fs_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mount root-directory.</dd><dt class="property-required"
+            title="Required">
+        <span id="mount_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_ip_hcl" style="color: inherit; text-decoration: inherit;">mount_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the file system.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A file system name used to query.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the file system.</dd><dt class="property-required"
+            title="Required">
+        <span id="size_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_limit_hcl" style="color: inherit; text-decoration: inherit;">size_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size limit of the file system.</dd><dt class="property-required"
+            title="Required">
+        <span id="size_used_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_used_hcl" style="color: inherit; text-decoration: inherit;">size_<wbr>used</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size used of the file system.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the file system.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the file system.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1281,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the access group.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1290,8 +1497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1299,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="filesystemid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_java" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -1308,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified file system ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="fsid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fsid_java" style="color: inherit; text-decoration: inherit;">fs<wbr>Id</a>
@@ -1317,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mount root-directory.</p>
-</dd><dt class="property-required"
+    <dd>Mount root-directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountip_java" style="color: inherit; text-decoration: inherit;">mount<wbr>Ip</a>
@@ -1326,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the file system.</p>
-</dd><dt class="property-required"
+    <dd>IP of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1335,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A file system name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1344,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizelimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizelimit_java" style="color: inherit; text-decoration: inherit;">size<wbr>Limit</a>
@@ -1353,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size limit of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size limit of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizeused_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizeused_java" style="color: inherit; text-decoration: inherit;">size<wbr>Used</a>
@@ -1362,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size used of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size used of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1371,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Status of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1380,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Storage type of the file system.</p>
-</dd></dl>
+    <dd>Storage type of the file system.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1395,8 +1591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the access group.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1404,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1413,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="filesystemid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -1422,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified file system ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="fsid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fsid_nodejs" style="color: inherit; text-decoration: inherit;">fs<wbr>Id</a>
@@ -1431,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount root-directory.</p>
-</dd><dt class="property-required"
+    <dd>Mount root-directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountip_nodejs" style="color: inherit; text-decoration: inherit;">mount<wbr>Ip</a>
@@ -1440,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the file system.</p>
-</dd><dt class="property-required"
+    <dd>IP of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1449,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A file system name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1458,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizelimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizelimit_nodejs" style="color: inherit; text-decoration: inherit;">size<wbr>Limit</a>
@@ -1467,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size limit of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size limit of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizeused_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizeused_nodejs" style="color: inherit; text-decoration: inherit;">size<wbr>Used</a>
@@ -1476,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size used of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size used of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1485,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Status of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1494,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage type of the file system.</p>
-</dd></dl>
+    <dd>Storage type of the file system.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1509,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the access group.</dd><dt class="property-required"
             title="Required">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1518,8 +1701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1527,8 +1709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="file_system_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_id_python" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>id</a>
@@ -1536,8 +1717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified file system ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="fs_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fs_id_python" style="color: inherit; text-decoration: inherit;">fs_<wbr>id</a>
@@ -1545,8 +1725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mount root-directory.</p>
-</dd><dt class="property-required"
+    <dd>Mount root-directory.</dd><dt class="property-required"
             title="Required">
         <span id="mount_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_ip_python" style="color: inherit; text-decoration: inherit;">mount_<wbr>ip</a>
@@ -1554,8 +1733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the file system.</p>
-</dd><dt class="property-required"
+    <dd>IP of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1563,8 +1741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A file system name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1572,8 +1749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="size_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_limit_python" style="color: inherit; text-decoration: inherit;">size_<wbr>limit</a>
@@ -1581,8 +1757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size limit of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size limit of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="size_used_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_used_python" style="color: inherit; text-decoration: inherit;">size_<wbr>used</a>
@@ -1590,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size used of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size used of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1599,8 +1773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Status of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -1608,8 +1781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Storage type of the file system.</p>
-</dd></dl>
+    <dd>Storage type of the file system.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1623,8 +1795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the access group.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1632,8 +1803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the file system locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the file system locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1641,8 +1811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="filesystemid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemid_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Id</a>
@@ -1650,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified file system ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified file system ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="fsid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fsid_yaml" style="color: inherit; text-decoration: inherit;">fs<wbr>Id</a>
@@ -1659,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mount root-directory.</p>
-</dd><dt class="property-required"
+    <dd>Mount root-directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountip_yaml" style="color: inherit; text-decoration: inherit;">mount<wbr>Ip</a>
@@ -1668,8 +1835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the file system.</p>
-</dd><dt class="property-required"
+    <dd>IP of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1677,8 +1843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A file system name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A file system name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1686,8 +1851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizelimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizelimit_yaml" style="color: inherit; text-decoration: inherit;">size<wbr>Limit</a>
@@ -1695,8 +1859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size limit of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size limit of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="sizeused_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sizeused_yaml" style="color: inherit; text-decoration: inherit;">size<wbr>Used</a>
@@ -1704,8 +1867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size used of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Size used of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1713,8 +1875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the file system.</p>
-</dd><dt class="property-required"
+    <dd>Status of the file system.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1722,8 +1883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Storage type of the file system.</p>
-</dd></dl>
+    <dd>Storage type of the file system.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1738,7 +1898,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

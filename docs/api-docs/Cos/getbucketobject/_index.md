@@ -2,9 +2,11 @@
 ---
 title: "getBucketObject"
 title_tag: "tencentcloud.Cos.getBucketObject"
-meta_desc: "Documentation for the tencentcloud.Cos.getBucketObject function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the metadata of an object stored inside a bucket."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,30 +18,72 @@ Use this data source to query the metadata of an object stored inside a bucket.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const mycos = tencentcloud.Cos.getBucketObject({
+const mycos = tencentcloud.cos.getBucketObject({
     bucket: "mycos-test-1258798060",
     key: "hello-world.py",
     resultOutputFile: "TFresults",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-mycos = tencentcloud.Cos.get_bucket_object(bucket="mycos-test-1258798060",
+mycos = tencentcloud.cos.get_bucket_object(bucket="mycos-test-1258798060",
     key="hello-world.py",
     result_output_file="TFresults")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
+			Bucket:           "mycos-test-1258798060",
+			Key:              "hello-world.py",
+			ResultOutputFile: pulumi.StringRef("TFresults"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -52,28 +96,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
-			Bucket:           "mycos-test-1258798060",
-			Key:              "hello-world.py",
-			ResultOutputFile: pulumi.StringRef("TFresults"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cos.CosFunctions;
 import com.pulumi.tencentcloud.Cos.inputs.GetBucketObjectArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,17 +131,43 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   mycos:
     fn::invoke:
-      Function: tencentcloud:Cos:getBucketObject
-      Arguments:
+      function: tencentcloud:Cos:getBucketObject
+      arguments:
         bucket: mycos-test-1258798060
         key: hello-world.py
         resultOutputFile: TFresults
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cos_getbucketobject" "mycos" {
+  bucket             = "mycos-test-1258798060"
+  key                = "hello-world.py"
+  result_output_file = "TFresults"
+}
+```
+</pulumi-choosable>
+</div>
 
 
 
@@ -127,7 +180,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +188,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBucketObject<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketObjectArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>></span
+><span class="k">function </span>getBucketObject<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketObjectArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>></span
 ><span class="k">
-function </span>getBucketObjectOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketObjectOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>></span
+function </span>getBucketObjectOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketObjectOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -151,10 +204,10 @@ function </span>getBucketObjectOutput<span class="p">(</span><span class="nx">ar
                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBucketObjectResult</span
 ><span class="k">
-def </span>get_bucket_object_output<span class="p">(</span><span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">key</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBucketObjectResult]</span
+def </span>get_bucket_object_output<span class="p">(</span><span class="nx">bucket</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">key</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBucketObjectResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -163,12 +216,12 @@ def </span>get_bucket_object_output<span class="p">(</span><span class="nx">buck
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetBucketObject<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetBucketObjectArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetBucketObjectResult</a></span>, error)</span
+><span class="k">func </span>LookupBucketObject<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupBucketObjectArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupBucketObjectResult</a></span>, error)</span
 ><span class="k">
-func </span>GetBucketObjectOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetBucketObjectOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetBucketObjectResultOutput</span
+func </span>LookupBucketObjectOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupBucketObjectOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupBucketObjectResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetBucketObject` in the Go SDK.
+&gt; Note: This function is named `LookupBucketObject` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -179,7 +232,8 @@ func </span>GetBucketObjectOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBucketObject </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBucketObjectArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketObjectInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketObjectInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketObjectInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -188,7 +242,8 @@ func </span>GetBucketObjectOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>> </span>getBucketObject<span class="p">(</span><span class="nx">GetBucketObjectArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>> </span>getBucketObject<span class="p">(</span><span class="nx">GetBucketObjectArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBucketObjectResult</a></span>> </span>getBucketObject<span class="p">(</span><span class="nx">GetBucketObjectArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,6 +255,15 @@ func </span>GetBucketObjectOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cos/getBucketObject:getBucketObject
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cos_get_bucket_object&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -218,8 +282,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the bucket that contains the objects to query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the bucket that contains the objects to query.</dd><dt class="property-required"
             title="Required">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -227,8 +290,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The full path to the object inside the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The full path to the object inside the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -236,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -251,8 +312,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the bucket that contains the objects to query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the bucket that contains the objects to query.</dd><dt class="property-required"
             title="Required">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -260,8 +320,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The full path to the object inside the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The full path to the object inside the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -269,8 +328,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the bucket that contains the objects to query.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The full path to the object inside the bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -284,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the bucket that contains the objects to query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the bucket that contains the objects to query.</dd><dt class="property-required"
             title="Required">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -293,8 +380,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The full path to the object inside the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The full path to the object inside the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -302,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -317,8 +402,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the bucket that contains the objects to query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the bucket that contains the objects to query.</dd><dt class="property-required"
             title="Required">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -326,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The full path to the object inside the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The full path to the object inside the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -335,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -350,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the bucket that contains the objects to query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the bucket that contains the objects to query.</dd><dt class="property-required"
             title="Required">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -359,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The full path to the object inside the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The full path to the object inside the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -368,8 +448,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -383,8 +462,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the bucket that contains the objects to query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the bucket that contains the objects to query.</dd><dt class="property-required"
             title="Required">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -392,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The full path to the object inside the bucket.</p>
-</dd><dt class="property-optional"
+    <dd>The full path to the object inside the bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -401,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -433,8 +509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain.</p>
-</dd><dt class="property-"
+    <dd>Specifies caching behavior along the request/reply chain.</dd><dt class="property-"
             title="">
         <span id="contentdisposition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Disposition</a>
@@ -442,8 +517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-"
             title="">
         <span id="contentencoding_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Encoding</a>
@@ -451,8 +525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-"
             title="">
         <span id="contenttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Type</a>
@@ -460,8 +533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-"
             title="">
         <span id="etag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_csharp" style="color: inherit; text-decoration: inherit;">Etag</a>
@@ -469,8 +541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ETag generated for the object, which is may not equal to MD5 value.</p>
-</dd><dt class="property-"
+    <dd>ETag generated for the object, which is may not equal to MD5 value.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -478,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -495,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified date of the object.</p>
-</dd><dt class="property-"
+    <dd>Last modified date of the object.</dd><dt class="property-"
             title="">
         <span id="storageclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -504,8 +573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type such as STANDARD.</p>
-</dd><dt class="property-"
+    <dd>Object storage type such as STANDARD.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -535,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain.</p>
-</dd><dt class="property-"
+    <dd>Specifies caching behavior along the request/reply chain.</dd><dt class="property-"
             title="">
         <span id="contentdisposition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Disposition</a>
@@ -544,8 +611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-"
             title="">
         <span id="contentencoding_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Encoding</a>
@@ -553,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-"
             title="">
         <span id="contenttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Type</a>
@@ -562,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-"
             title="">
         <span id="etag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_go" style="color: inherit; text-decoration: inherit;">Etag</a>
@@ -571,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ETag generated for the object, which is may not equal to MD5 value.</p>
-</dd><dt class="property-"
+    <dd>ETag generated for the object, which is may not equal to MD5 value.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -580,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -597,8 +659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified date of the object.</p>
-</dd><dt class="property-"
+    <dd>Last modified date of the object.</dd><dt class="property-"
             title="">
         <span id="storageclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -606,11 +667,104 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type such as STANDARD.</p>
-</dd><dt class="property-"
+    <dd>Object storage type such as STANDARD.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="cache_control_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cache_control_hcl" style="color: inherit; text-decoration: inherit;">cache_<wbr>control</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies caching behavior along the request/reply chain.</dd><dt class="property-"
+            title="">
+        <span id="content_disposition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_disposition_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>disposition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies presentational information for the object.</dd><dt class="property-"
+            title="">
+        <span id="content_encoding_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_encoding_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>encoding</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-"
+            title="">
+        <span id="content_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_type_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-"
+            title="">
+        <span id="etag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_hcl" style="color: inherit; text-decoration: inherit;">etag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ETag generated for the object, which is may not equal to MD5 value.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="last_modified_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_modified_hcl" style="color: inherit; text-decoration: inherit;">last_<wbr>modified</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified date of the object.</dd><dt class="property-"
+            title="">
+        <span id="storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object storage type such as STANDARD.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -637,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain.</p>
-</dd><dt class="property-"
+    <dd>Specifies caching behavior along the request/reply chain.</dd><dt class="property-"
             title="">
         <span id="contentdisposition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_java" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -646,8 +799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-"
             title="">
         <span id="contentencoding_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_java" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -655,8 +807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-"
             title="">
         <span id="contenttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_java" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -664,8 +815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-"
             title="">
         <span id="etag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_java" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -673,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ETag generated for the object, which is may not equal to MD5 value.</p>
-</dd><dt class="property-"
+    <dd>ETag generated for the object, which is may not equal to MD5 value.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -682,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -699,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified date of the object.</p>
-</dd><dt class="property-"
+    <dd>Last modified date of the object.</dd><dt class="property-"
             title="">
         <span id="storageclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -708,8 +855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object storage type such as STANDARD.</p>
-</dd><dt class="property-"
+    <dd>Object storage type such as STANDARD.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -739,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain.</p>
-</dd><dt class="property-"
+    <dd>Specifies caching behavior along the request/reply chain.</dd><dt class="property-"
             title="">
         <span id="contentdisposition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -748,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-"
             title="">
         <span id="contentencoding_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -757,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-"
             title="">
         <span id="contenttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -766,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-"
             title="">
         <span id="etag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_nodejs" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -775,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ETag generated for the object, which is may not equal to MD5 value.</p>
-</dd><dt class="property-"
+    <dd>ETag generated for the object, which is may not equal to MD5 value.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -784,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -801,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified date of the object.</p>
-</dd><dt class="property-"
+    <dd>Last modified date of the object.</dd><dt class="property-"
             title="">
         <span id="storageclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -810,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object storage type such as STANDARD.</p>
-</dd><dt class="property-"
+    <dd>Object storage type such as STANDARD.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -841,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain.</p>
-</dd><dt class="property-"
+    <dd>Specifies caching behavior along the request/reply chain.</dd><dt class="property-"
             title="">
         <span id="content_disposition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_disposition_python" style="color: inherit; text-decoration: inherit;">content_<wbr>disposition</a>
@@ -850,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-"
             title="">
         <span id="content_encoding_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_encoding_python" style="color: inherit; text-decoration: inherit;">content_<wbr>encoding</a>
@@ -859,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-"
             title="">
         <span id="content_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_type_python" style="color: inherit; text-decoration: inherit;">content_<wbr>type</a>
@@ -868,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-"
             title="">
         <span id="etag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_python" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -877,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ETag generated for the object, which is may not equal to MD5 value.</p>
-</dd><dt class="property-"
+    <dd>ETag generated for the object, which is may not equal to MD5 value.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -886,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -903,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified date of the object.</p>
-</dd><dt class="property-"
+    <dd>Last modified date of the object.</dd><dt class="property-"
             title="">
         <span id="storage_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
@@ -912,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Object storage type such as STANDARD.</p>
-</dd><dt class="property-"
+    <dd>Object storage type such as STANDARD.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -943,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies caching behavior along the request/reply chain.</p>
-</dd><dt class="property-"
+    <dd>Specifies caching behavior along the request/reply chain.</dd><dt class="property-"
             title="">
         <span id="contentdisposition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -952,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies presentational information for the object.</p>
-</dd><dt class="property-"
+    <dd>Specifies presentational information for the object.</dd><dt class="property-"
             title="">
         <span id="contentencoding_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -961,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</p>
-</dd><dt class="property-"
+    <dd>Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.</dd><dt class="property-"
             title="">
         <span id="contenttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -970,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A standard MIME type describing the format of the object data.</p>
-</dd><dt class="property-"
+    <dd>A standard MIME type describing the format of the object data.</dd><dt class="property-"
             title="">
         <span id="etag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_yaml" style="color: inherit; text-decoration: inherit;">etag</a>
@@ -979,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ETag generated for the object, which is may not equal to MD5 value.</p>
-</dd><dt class="property-"
+    <dd>ETag generated for the object, which is may not equal to MD5 value.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -988,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1005,8 +1129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified date of the object.</p>
-</dd><dt class="property-"
+    <dd>Last modified date of the object.</dd><dt class="property-"
             title="">
         <span id="storageclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -1014,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object storage type such as STANDARD.</p>
-</dd><dt class="property-"
+    <dd>Object storage type such as STANDARD.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1038,7 +1160,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

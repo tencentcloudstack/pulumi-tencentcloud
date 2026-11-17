@@ -2,9 +2,11 @@
 ---
 title: "getAccessRules"
 title_tag: "tencentcloud.Cfs.getAccessRules"
-meta_desc: "Documentation for the tencentcloud.Cfs.getAccessRules function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the detail information of CFS access rule."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query the detail information of CFS access rule.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const accessRules = tencentcloud.Cfs.getAccessRules({
+const accessRules = tencentcloud.cfs.getAccessRules({
     accessGroupId: "pgroup-7nx89k7l",
     accessRuleId: "rule-qcndbqzj",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-access_rules = tencentcloud.Cfs.get_access_rules(access_group_id="pgroup-7nx89k7l",
+access_rules = tencentcloud.cfs.get_access_rules(access_group_id="pgroup-7nx89k7l",
     access_rule_id="rule-qcndbqzj")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cfs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cfs.GetAccessRules(ctx, &cfs.GetAccessRulesArgs{
+			AccessGroupId: "pgroup-7nx89k7l",
+			AccessRuleId:  pulumi.StringRef("rule-qcndbqzj"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cfs.GetAccessRules(ctx, &cfs.GetAccessRulesArgs{
-			AccessGroupId: "pgroup-7nx89k7l",
-			AccessRuleId:  pulumi.StringRef("rule-qcndbqzj"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cfs.CfsFunctions;
 import com.pulumi.tencentcloud.Cfs.inputs.GetAccessRulesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   accessRules:
     fn::invoke:
-      Function: tencentcloud:Cfs:getAccessRules
-      Arguments:
+      function: tencentcloud:Cfs:getAccessRules
+      arguments:
         accessGroupId: pgroup-7nx89k7l
         accessRuleId: rule-qcndbqzj
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cfs_getaccessrules" "accessRules" {
+  access_group_id = "pgroup-7nx89k7l"
+  access_rule_id  = "rule-qcndbqzj"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCfsRules](https://www.tencentcloud.com/document/api/582/34504)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAccessRules<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccessRulesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>></span
+><span class="k">function </span>getAccessRules<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccessRulesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>></span
 ><span class="k">
-function </span>getAccessRulesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccessRulesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>></span
+function </span>getAccessRulesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccessRulesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getAccessRulesOutput<span class="p">(</span><span class="nx">arg
                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAccessRulesResult</span
 ><span class="k">
-def </span>get_access_rules_output<span class="p">(</span><span class="nx">access_group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">access_rule_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccessRulesResult]</span
+def </span>get_access_rules_output<span class="p">(</span><span class="nx">access_group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">access_rule_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccessRulesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetAccessRulesOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAccessRules </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAccessRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccessRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccessRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccessRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetAccessRulesOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>> </span>getAccessRules<span class="p">(</span><span class="nx">GetAccessRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>> </span>getAccessRules<span class="p">(</span><span class="nx">GetAccessRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccessRulesResult</a></span>> </span>getAccessRules<span class="p">(</span><span class="nx">GetAccessRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetAccessRulesOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cfs/getAccessRules:getAccessRules
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cfs_get_access_rules&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="accessruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Rule<wbr>Id</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="accessruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Rule<wbr>Id</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_group_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A specified access group ID used to query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="access_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_rule_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A specified access rule ID used to query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified access group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="accessruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_java" style="color: inherit; text-decoration: inherit;">access<wbr>Rule<wbr>Id</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="accessruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Rule<wbr>Id</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A specified access group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="access_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_rule_id_python" style="color: inherit; text-decoration: inherit;">access_<wbr>rule_<wbr>id</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified access group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="accessruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Rule<wbr>Id</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -427,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessrulesaccessrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cfs.<wbr>Outputs.<wbr>Get<wbr>Access<wbr>Rules<wbr>Access<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of CFS access rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of CFS access rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -436,8 +516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accessruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Rule<wbr>Id</a>
@@ -445,8 +524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the access rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the access rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -476,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessrulesaccessrulelist">[]Get<wbr>Access<wbr>Rules<wbr>Access<wbr>Rule<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of CFS access rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of CFS access rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -485,8 +562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accessruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Rule<wbr>Id</a>
@@ -494,11 +570,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the access rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the access rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="access_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_group_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="access_rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_rule_lists_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getaccessrulesaccessrulelist">list(object)</a></span>
+    </dt>
+    <dd>An information list of CFS access rule. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="access_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_rule_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the access rule.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -525,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessrulesaccessrulelist">List&lt;Get<wbr>Access<wbr>Rules<wbr>Access<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of CFS access rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of CFS access rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -534,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accessruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_java" style="color: inherit; text-decoration: inherit;">access<wbr>Rule<wbr>Id</a>
@@ -543,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the access rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the access rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -574,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessrulesaccessrulelist">Get<wbr>Access<wbr>Rules<wbr>Access<wbr>Rule<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of CFS access rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of CFS access rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -583,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accessruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Rule<wbr>Id</a>
@@ -592,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the access rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the access rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -621,10 +736,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_rule_lists_python" style="color: inherit; text-decoration: inherit;">access_<wbr>rule_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getaccessrulesaccessrulelist">Get<wbr>Access<wbr>Rules<wbr>Access<wbr>Rule<wbr>List]</a></span>
+        <span class="property-type"><a href="#getaccessrulesaccessrulelist">Sequence[Get<wbr>Access<wbr>Rules<wbr>Access<wbr>Rule<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of CFS access rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of CFS access rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -632,8 +746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="access_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_rule_id_python" style="color: inherit; text-decoration: inherit;">access_<wbr>rule_<wbr>id</a>
@@ -641,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the access rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the access rule.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -672,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessrulesaccessrulelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of CFS access rule. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of CFS access rule. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -681,8 +792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accessruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accessruleid_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Rule<wbr>Id</a>
@@ -690,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the access rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the access rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -723,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Client<wbr>Ip</a>
@@ -732,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allowed IP of the access rule.</p>
-</dd><dt class="property-required"
+    <dd>Allowed IP of the access rule.</dd><dt class="property-required"
             title="Required">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -741,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of access rule.</p>
-</dd><dt class="property-required"
+    <dd>The priority level of access rule.</dd><dt class="property-required"
             title="Required">
         <span id="rwpermission_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Permission</a>
@@ -750,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions.</p>
-</dd><dt class="property-required"
+    <dd>Read and write permissions.</dd><dt class="property-required"
             title="Required">
         <span id="userpermission_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Permission</a>
@@ -759,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users.</p>
-</dd></dl>
+    <dd>The permissions of accessing users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -774,8 +878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Client<wbr>Ip</a>
@@ -783,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allowed IP of the access rule.</p>
-</dd><dt class="property-required"
+    <dd>Allowed IP of the access rule.</dd><dt class="property-required"
             title="Required">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -792,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of access rule.</p>
-</dd><dt class="property-required"
+    <dd>The priority level of access rule.</dd><dt class="property-required"
             title="Required">
         <span id="rwpermission_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Permission</a>
@@ -801,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions.</p>
-</dd><dt class="property-required"
+    <dd>Read and write permissions.</dd><dt class="property-required"
             title="Required">
         <span id="userpermission_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_go" style="color: inherit; text-decoration: inherit;">User<wbr>Permission</a>
@@ -810,8 +910,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users.</p>
-</dd></dl>
+    <dd>The permissions of accessing users.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_rule_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A specified access rule ID used to query.</dd><dt class="property-required"
+            title="Required">
+        <span id="auth_client_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_client_ip_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>client_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allowed IP of the access rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The priority level of access rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="rw_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_permission_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read and write permissions.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_permission_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The permissions of accessing users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -825,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -834,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Allowed IP of the access rule.</p>
-</dd><dt class="property-required"
+    <dd>Allowed IP of the access rule.</dd><dt class="property-required"
             title="Required">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -843,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The priority level of access rule.</p>
-</dd><dt class="property-required"
+    <dd>The priority level of access rule.</dd><dt class="property-required"
             title="Required">
         <span id="rwpermission_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -852,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write permissions.</p>
-</dd><dt class="property-required"
+    <dd>Read and write permissions.</dd><dt class="property-required"
             title="Required">
         <span id="userpermission_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_java" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -861,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The permissions of accessing users.</p>
-</dd></dl>
+    <dd>The permissions of accessing users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -876,8 +1016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -885,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Allowed IP of the access rule.</p>
-</dd><dt class="property-required"
+    <dd>Allowed IP of the access rule.</dd><dt class="property-required"
             title="Required">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -894,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The priority level of access rule.</p>
-</dd><dt class="property-required"
+    <dd>The priority level of access rule.</dd><dt class="property-required"
             title="Required">
         <span id="rwpermission_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -903,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions.</p>
-</dd><dt class="property-required"
+    <dd>Read and write permissions.</dd><dt class="property-required"
             title="Required">
         <span id="userpermission_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -912,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users.</p>
-</dd></dl>
+    <dd>The permissions of accessing users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -927,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="auth_client_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_client_ip_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>client_<wbr>ip</a>
@@ -936,8 +1070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Allowed IP of the access rule.</p>
-</dd><dt class="property-required"
+    <dd>Allowed IP of the access rule.</dd><dt class="property-required"
             title="Required">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -945,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of access rule.</p>
-</dd><dt class="property-required"
+    <dd>The priority level of access rule.</dd><dt class="property-required"
             title="Required">
         <span id="rw_permission_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_permission_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>permission</a>
@@ -954,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Read and write permissions.</p>
-</dd><dt class="property-required"
+    <dd>Read and write permissions.</dd><dt class="property-required"
             title="Required">
         <span id="user_permission_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_permission_python" style="color: inherit; text-decoration: inherit;">user_<wbr>permission</a>
@@ -963,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The permissions of accessing users.</p>
-</dd></dl>
+    <dd>The permissions of accessing users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -978,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified access rule ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified access rule ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -987,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Allowed IP of the access rule.</p>
-</dd><dt class="property-required"
+    <dd>Allowed IP of the access rule.</dd><dt class="property-required"
             title="Required">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -996,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The priority level of access rule.</p>
-</dd><dt class="property-required"
+    <dd>The priority level of access rule.</dd><dt class="property-required"
             title="Required">
         <span id="rwpermission_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -1005,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write permissions.</p>
-</dd><dt class="property-required"
+    <dd>Read and write permissions.</dd><dt class="property-required"
             title="Required">
         <span id="userpermission_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -1014,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The permissions of accessing users.</p>
-</dd></dl>
+    <dd>The permissions of accessing users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1030,7 +1155,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getUsers"
 title_tag: "tencentcloud.Ckafka.getUsers"
-meta_desc: "Documentation for the tencentcloud.Ckafka.getUsers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed user information of Ckafka"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed user information of Ckafka
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Ckafka.getUsers({
-    accountName: "test",
+const foo = tencentcloud.ckafka.getUsers({
     instanceId: "ckafka-f9ife4zz",
+    accountName: "test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Ckafka.get_users(account_name="test",
-    instance_id="ckafka-f9ife4zz")
+foo = tencentcloud.ckafka.get_users(instance_id="ckafka-f9ife4zz",
+    account_name="test")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Ckafka.GetUsers.Invoke(new()
-    {
-        AccountName = "test",
-        InstanceId = "ckafka-f9ife4zz",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ckafka.GetUsers(ctx, &ckafka.GetUsersArgs{
-			AccountName: pulumi.StringRef("test"),
+		_, err := ckafka.GetUsers(ctx, &ckafka.GetUsersArgs{
 			InstanceId:  "ckafka-f9ife4zz",
+			AccountName: pulumi.StringRef("test"),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Ckafka.GetUsers.Invoke(new()
+    {
+        InstanceId = "ckafka-f9ife4zz",
+        AccountName = "test",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ckafka.CkafkaFunctions;
 import com.pulumi.tencentcloud.Ckafka.inputs.GetUsersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,57 @@ public class App {
 
     public static void stack(Context ctx) {
         final var foo = CkafkaFunctions.getUsers(GetUsersArgs.builder()
-            .accountName("test")
             .instanceId("ckafka-f9ife4zz")
+            .accountName("test")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Ckafka:getUsers
-      Arguments:
-        accountName: test
+      function: tencentcloud:Ckafka:getUsers
+      arguments:
         instanceId: ckafka-f9ife4zz
+        accountName: test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ckafka_getusers" "foo" {
+  instance_id  = "ckafka-f9ife4zz"
+  account_name = "test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+  - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
 
 
 
@@ -121,7 +181,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +189,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getUsers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>></span
+><span class="k">function </span>getUsers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>></span
 ><span class="k">
-function </span>getUsersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>></span
+function </span>getUsersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +205,10 @@ function </span>getUsersOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetUsersResult</span
 ><span class="k">
-def </span>get_users_output<span class="p">(</span><span class="nx">account_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUsersResult]</span
+def </span>get_users_output<span class="p">(</span><span class="nx">account_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUsersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +233,8 @@ func </span>GetUsersOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetUsers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetUsersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +243,8 @@ func </span>GetUsersOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> </span>getUsers<span class="p">(</span><span class="nx">GetUsersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> </span>getUsers<span class="p">(</span><span class="nx">GetUsersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> </span>getUsers<span class="p">(</span><span class="nx">GetUsersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +256,15 @@ func </span>GetUsersOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ckafka/getUsers:getUsers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ckafka_get_users&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the ckafka instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -221,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-optional"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +313,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the ckafka instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -254,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-optional"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +329,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the ckafka instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +373,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the ckafka instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_java" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -287,8 +381,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-optional"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +389,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the ckafka instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -320,8 +411,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-optional"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +433,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the ckafka instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="account_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_python" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
@@ -353,8 +441,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-optional"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +463,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the ckafka instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -386,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-optional"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -436,8 +518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Outputs.<wbr>Get<wbr>Users<wbr>User<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -445,8 +526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name of user.</p>
-</dd><dt class="property-"
+    <dd>Account name of user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -468,8 +548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -485,8 +564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">[]Get<wbr>Users<wbr>User<wbr>List</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -494,11 +572,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name of user.</p>
-</dd><dt class="property-"
+    <dd>Account name of user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="user_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_lists_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getusersuserlist">list(object)</a></span>
+    </dt>
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account name of user.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -517,8 +640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -534,8 +656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">List&lt;Get<wbr>Users<wbr>User<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_java" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -543,8 +664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name of user.</p>
-</dd><dt class="property-"
+    <dd>Account name of user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -566,8 +686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -583,8 +702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">Get<wbr>Users<wbr>User<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -592,8 +710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name of user.</p>
-</dd><dt class="property-"
+    <dd>Account name of user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -615,8 +732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -630,10 +746,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_lists_python" style="color: inherit; text-decoration: inherit;">user_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getusersuserlist">Get<wbr>Users<wbr>User<wbr>List]</a></span>
+        <span class="property-type"><a href="#getusersuserlist">Sequence[Get<wbr>Users<wbr>User<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="account_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_python" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
@@ -641,8 +756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account name of user.</p>
-</dd><dt class="property-"
+    <dd>Account name of user.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -664,8 +778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -681,8 +794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -690,8 +802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name of user.</p>
-</dd><dt class="property-"
+    <dd>Account name of user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -723,8 +834,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-required"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -732,8 +842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the account.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the account.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -741,8 +850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last update time of the account.</p>
-</dd></dl>
+    <dd>The last update time of the account.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -756,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-required"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -765,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the account.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the account.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -774,8 +880,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last update time of the account.</p>
-</dd></dl>
+    <dd>The last update time of the account.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the account.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The last update time of the account.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -789,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-required"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -798,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the account.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the account.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -807,8 +940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The last update time of the account.</p>
-</dd></dl>
+    <dd>The last update time of the account.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -822,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-required"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -831,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the account.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the account.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -840,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last update time of the account.</p>
-</dd></dl>
+    <dd>The last update time of the account.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -855,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-required"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -864,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the account.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the account.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -873,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The last update time of the account.</p>
-</dd></dl>
+    <dd>The last update time of the account.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -888,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name used when query ckafka users' infos. Could be a substr of user name.</p>
-</dd><dt class="property-required"
+    <dd>Account name used when query ckafka users' infos. Could be a substr of user name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -897,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the account.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the account.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -906,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The last update time of the account.</p>
-</dd></dl>
+    <dd>The last update time of the account.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -922,7 +1045,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getRealServersStatus"
 title_tag: "tencentcloud.Gaap.getRealServersStatus"
-meta_desc: "Documentation for the tencentcloud.Gaap.getRealServersStatus function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap real servers status"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,68 @@ Use this data source to query detailed information of gaap real servers status
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const realServersStatus = tencentcloud.Gaap.getRealServersStatus({
+const realServersStatus = tencentcloud.gaap.getRealServersStatus({
     realServerIds: ["rs-3mlpbuut"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-real_servers_status = tencentcloud.Gaap.get_real_servers_status(real_server_ids=["rs-3mlpbuut"])
+real_servers_status = tencentcloud.gaap.get_real_servers_status(real_server_ids=["rs-3mlpbuut"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetRealServersStatus(ctx, &gaap.GetRealServersStatusArgs{
+			RealServerIds: []string{
+				"rs-3mlpbuut",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,28 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetRealServersStatus(ctx, &gaap.GetRealServersStatusArgs{
-			RealServerIds: []string{
-				"rs-3mlpbuut",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetRealServersStatusArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,47 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   realServersStatus:
     fn::invoke:
-      Function: tencentcloud:Gaap:getRealServersStatus
-      Arguments:
+      function: tencentcloud:Gaap:getRealServersStatus
+      arguments:
         realServerIds:
           - rs-3mlpbuut
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getrealserversstatus" "realServersStatus" {
+  real_server_ids = ["rs-3mlpbuut"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
 
 
 
@@ -121,7 +178,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +186,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRealServersStatus<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRealServersStatusArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>></span
+><span class="k">function </span>getRealServersStatus<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRealServersStatusArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>></span
 ><span class="k">
-function </span>getRealServersStatusOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRealServersStatusOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>></span
+function </span>getRealServersStatusOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRealServersStatusOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -144,9 +201,9 @@ function </span>getRealServersStatusOutput<span class="p">(</span><span class="n
                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRealServersStatusResult</span
 ><span class="k">
-def </span>get_real_servers_status_output<span class="p">(</span><span class="nx">real_server_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRealServersStatusResult]</span
+def </span>get_real_servers_status_output<span class="p">(</span><span class="nx">real_server_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRealServersStatusResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +228,8 @@ func </span>GetRealServersStatusOutput<span class="p">(</span><span class="nx">c
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRealServersStatus </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRealServersStatusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRealServersStatusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRealServersStatusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRealServersStatusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +238,8 @@ func </span>GetRealServersStatusOutput<span class="p">(</span><span class="nx">c
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>> </span>getRealServersStatus<span class="p">(</span><span class="nx">GetRealServersStatusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>> </span>getRealServersStatus<span class="p">(</span><span class="nx">GetRealServersStatusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRealServersStatusResult</a></span>> </span>getRealServersStatus<span class="p">(</span><span class="nx">GetRealServersStatusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +251,15 @@ func </span>GetRealServersStatusOutput<span class="p">(</span><span class="nx">c
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getRealServersStatus:getRealServersStatus
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_real_servers_status&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +278,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Real Server Ids.</p>
-</dd><dt class="property-optional"
+    <dd>Real Server Ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -219,8 +286,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -234,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Real Server Ids.</p>
-</dd><dt class="property-optional"
+    <dd>Real Server Ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -243,8 +308,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="real_server_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_ids_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Real Server Ids.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -258,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Real Server Ids.</p>
-</dd><dt class="property-optional"
+    <dd>Real Server Ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -267,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -282,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Real Server Ids.</p>
-</dd><dt class="property-optional"
+    <dd>Real Server Ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -291,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -306,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Real Server Ids.</p>
-</dd><dt class="property-optional"
+    <dd>Real Server Ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -315,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Real Server Ids.</p>
-</dd><dt class="property-optional"
+    <dd>Real Server Ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -339,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -363,8 +441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverids_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Ids</a>
@@ -380,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversstatusrealserverstatusset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Real<wbr>Servers<wbr>Status<wbr>Real<wbr>Server<wbr>Status<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Real Server Status Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Status Set.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -403,8 +479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverids_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Ids</a>
@@ -420,11 +495,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversstatusrealserverstatusset">[]Get<wbr>Real<wbr>Servers<wbr>Status<wbr>Real<wbr>Server<wbr>Status<wbr>Set</a></span>
     </dt>
-    <dd><p>Real Server Status Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Status Set.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="real_server_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_ids_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="real_server_status_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_status_sets_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>status_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrealserversstatusrealserverstatusset">list(object)</a></span>
+    </dt>
+    <dd>Real Server Status Set.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -443,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverids_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ids</a>
@@ -460,8 +571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversstatusrealserverstatusset">List&lt;Get<wbr>Real<wbr>Servers<wbr>Status<wbr>Real<wbr>Server<wbr>Status<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Real Server Status Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Status Set.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -483,8 +593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverids_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ids</a>
@@ -500,8 +609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversstatusrealserverstatusset">Get<wbr>Real<wbr>Servers<wbr>Status<wbr>Real<wbr>Server<wbr>Status<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Real Server Status Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Status Set.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -523,8 +631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="real_server_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_ids_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>ids</a>
@@ -538,10 +645,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_status_sets_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>status_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrealserversstatusrealserverstatusset">Get<wbr>Real<wbr>Servers<wbr>Status<wbr>Real<wbr>Server<wbr>Status<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getrealserversstatusrealserverstatusset">Sequence[Get<wbr>Real<wbr>Servers<wbr>Status<wbr>Real<wbr>Server<wbr>Status<wbr>Set]</a></span>
     </dt>
-    <dd><p>Real Server Status Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Status Set.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -563,8 +669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverids_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ids</a>
@@ -580,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversstatusrealserverstatusset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Real Server Status Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Status Set.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</p>
-</dd><dt class="property-required"
+    <dd>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -622,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -631,8 +733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the proxy ID of this real server, which is an empty string when not bound.</p>
-</dd><dt class="property-required"
+    <dd>Bind the proxy ID of this real server, which is an empty string when not bound.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Id</a>
@@ -640,8 +741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd></dl>
+    <dd>Real Server Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -655,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</p>
-</dd><dt class="property-required"
+    <dd>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -664,8 +763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -673,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the proxy ID of this real server, which is an empty string when not bound.</p>
-</dd><dt class="property-required"
+    <dd>Bind the proxy ID of this real server, which is an empty string when not bound.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Id</a>
@@ -682,8 +779,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd></dl>
+    <dd>Real Server Id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bind_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_status_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bind the proxy ID of this real server, which is an empty string when not bound.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_id_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Real Server Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -697,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</p>
-</dd><dt class="property-required"
+    <dd>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -706,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -715,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the proxy ID of this real server, which is an empty string when not bound.</p>
-</dd><dt class="property-required"
+    <dd>Bind the proxy ID of this real server, which is an empty string when not bound.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -724,8 +855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd></dl>
+    <dd>Real Server Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -739,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</p>
-</dd><dt class="property-required"
+    <dd>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -748,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -757,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the proxy ID of this real server, which is an empty string when not bound.</p>
-</dd><dt class="property-required"
+    <dd>Bind the proxy ID of this real server, which is an empty string when not bound.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -766,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd></dl>
+    <dd>Real Server Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -781,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</p>
-</dd><dt class="property-required"
+    <dd>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</dd><dt class="property-required"
             title="Required">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -790,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -799,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bind the proxy ID of this real server, which is an empty string when not bound.</p>
-</dd><dt class="property-required"
+    <dd>Bind the proxy ID of this real server, which is an empty string when not bound.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_id_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>id</a>
@@ -808,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd></dl>
+    <dd>Real Server Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -823,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</p>
-</dd><dt class="property-required"
+    <dd>Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -832,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -841,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the proxy ID of this real server, which is an empty string when not bound.</p>
-</dd><dt class="property-required"
+    <dd>Bind the proxy ID of this real server, which is an empty string when not bound.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -850,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd></dl>
+    <dd>Real Server Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -866,7 +984,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

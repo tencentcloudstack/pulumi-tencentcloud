@@ -2,9 +2,11 @@
 ---
 title: "getShards"
 title_tag: "tencentcloud.Dcdb.getShards"
-meta_desc: "Documentation for the tencentcloud.Dcdb.getShards function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dcdb shards"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,71 @@ Use this data source to query detailed information of dcdb shards
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const shards = tencentcloud.Dcdb.getShards({
+const shards = tencentcloud.dcdb.getShards({
     instanceId: "your_instance_id",
     shardInstanceIds: ["shard1_id"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-shards = tencentcloud.Dcdb.get_shards(instance_id="your_instance_id",
+shards = tencentcloud.dcdb.get_shards(instance_id="your_instance_id",
     shard_instance_ids=["shard1_id"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dcdb.GetShards(ctx, &dcdb.GetShardsArgs{
+			InstanceId: "your_instance_id",
+			ShardInstanceIds: []string{
+				"shard1_id",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -52,29 +97,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dcdb.GetShards(ctx, &dcdb.GetShardsArgs{
-			InstanceId: "your_instance_id",
-			ShardInstanceIds: []string{
-				"shard1_id",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -83,8 +110,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dcdb.DcdbFunctions;
 import com.pulumi.tencentcloud.Dcdb.inputs.GetShardsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,18 +131,49 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   shards:
     fn::invoke:
-      Function: tencentcloud:Dcdb:getShards
-      Arguments:
+      function: tencentcloud:Dcdb:getShards
+      arguments:
         instanceId: your_instance_id
         shardInstanceIds:
           - shard1_id
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dcdb_getshards" "shards" {
+  instance_id        = "your_instance_id"
+  shard_instance_ids = ["shard1_id"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDCDBShards](https://www.tencentcloud.com/document/api/1042/34441)
 
 
 
@@ -127,7 +185,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +193,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getShards<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetShardsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>></span
+><span class="k">function </span>getShards<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetShardsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>></span
 ><span class="k">
-function </span>getShardsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetShardsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>></span
+function </span>getShardsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetShardsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -151,10 +209,10 @@ function </span>getShardsOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">shard_instance_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetShardsResult</span
 ><span class="k">
-def </span>get_shards_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">shard_instance_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetShardsResult]</span
+def </span>get_shards_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">shard_instance_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetShardsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -179,7 +237,8 @@ func </span>GetShardsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetShards </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetShardsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetShardsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetShardsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetShardsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -188,7 +247,8 @@ func </span>GetShardsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>> </span>getShards<span class="p">(</span><span class="nx">GetShardsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>> </span>getShards<span class="p">(</span><span class="nx">GetShardsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetShardsResult</a></span>> </span>getShards<span class="p">(</span><span class="nx">GetShardsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,6 +260,15 @@ func </span>GetShardsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dcdb/getShards:getShards
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dcdb_get_shards&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -218,8 +287,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -227,8 +295,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardinstanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceids_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Instance<wbr>Ids</a>
@@ -236,8 +303,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>shard instance ids.</p>
-</dd></dl>
+    <dd>shard instance ids.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -251,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -260,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardinstanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceids_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Instance<wbr>Ids</a>
@@ -269,8 +333,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>shard instance ids.</p>
-</dd></dl>
+    <dd>shard instance ids.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="shard_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>shard instance ids.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -284,8 +377,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -293,8 +385,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardinstanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceids_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Instance<wbr>Ids</a>
@@ -302,8 +393,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>shard instance ids.</p>
-</dd></dl>
+    <dd>shard instance ids.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -317,8 +407,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -326,8 +415,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardinstanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceids_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Instance<wbr>Ids</a>
@@ -335,8 +423,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>shard instance ids.</p>
-</dd></dl>
+    <dd>shard instance ids.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -350,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -359,8 +445,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="shard_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_instance_ids_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>instance_<wbr>ids</a>
@@ -368,8 +453,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>shard instance ids.</p>
-</dd></dl>
+    <dd>shard instance ids.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -383,8 +467,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -392,8 +475,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardinstanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceids_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Instance<wbr>Ids</a>
@@ -401,8 +483,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>shard instance ids.</p>
-</dd></dl>
+    <dd>shard instance ids.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -425,8 +506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -434,8 +514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-"
+    <dd>instance id.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -443,8 +522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getshardslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Outputs.<wbr>Get<wbr>Shards<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>shard list.</p>
-</dd><dt class="property-"
+    <dd>shard list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -474,8 +552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -483,8 +560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-"
+    <dd>instance id.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -492,8 +568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getshardslist">[]Get<wbr>Shards<wbr>List</a></span>
     </dt>
-    <dd><p>shard list.</p>
-</dd><dt class="property-"
+    <dd>shard list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -514,6 +589,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getshardslist">list(object)</a></span>
+    </dt>
+    <dd>shard list.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="shard_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -523,8 +644,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -532,8 +652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-"
+    <dd>instance id.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -541,8 +660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getshardslist">List&lt;Get<wbr>Shards<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>shard list.</p>
-</dd><dt class="property-"
+    <dd>shard list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -572,8 +690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -581,8 +698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-"
+    <dd>instance id.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -590,8 +706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getshardslist">Get<wbr>Shards<wbr>List[]</a></span>
     </dt>
-    <dd><p>shard list.</p>
-</dd><dt class="property-"
+    <dd>shard list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -621,8 +736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -630,17 +744,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-"
+    <dd>instance id.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getshardslist">Get<wbr>Shards<wbr>List]</a></span>
+        <span class="property-type"><a href="#getshardslist">Sequence[Get<wbr>Shards<wbr>List]</a></span>
     </dt>
-    <dd><p>shard list.</p>
-</dd><dt class="property-"
+    <dd>shard list.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -670,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -679,8 +790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-"
+    <dd>instance id.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -688,8 +798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getshardslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>shard list.</p>
-</dd><dt class="property-"
+    <dd>shard list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -729,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>cpu cores.</p>
-</dd><dt class="property-required"
+    <dd>cpu cores.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -738,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -747,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -756,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="memoryusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryusage_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Usage</a>
@@ -765,8 +870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory usage.</p>
-</dd><dt class="property-required"
+    <dd>memory usage.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -774,8 +878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node count.</p>
-</dd><dt class="property-required"
+    <dd>node count.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_csharp" style="color: inherit; text-decoration: inherit;">Paymode</a>
@@ -783,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>pay mode.</p>
-</dd><dt class="property-required"
+    <dd>pay mode.</dd><dt class="property-required"
             title="Required">
         <span id="periodendtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodendtime_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>End<wbr>Time</a>
@@ -792,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -801,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Version</a>
@@ -810,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy version.</p>
-</dd><dt class="property-required"
+    <dd>proxy version.</dd><dt class="property-required"
             title="Required">
         <span id="range_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_csharp" style="color: inherit; text-decoration: inherit;">Range</a>
@@ -819,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the range of shard key.</p>
-</dd><dt class="property-required"
+    <dd>the range of shard key.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -828,8 +926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="shardinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Instance<wbr>Id</a>
@@ -837,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard instance id.</p>
-</dd><dt class="property-required"
+    <dd>shard instance id.</dd><dt class="property-required"
             title="Required">
         <span id="shardmasterzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmasterzone_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Master<wbr>Zone</a>
@@ -846,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard master zone.</p>
-</dd><dt class="property-required"
+    <dd>shard master zone.</dd><dt class="property-required"
             title="Required">
         <span id="shardserialid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardserialid_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Serial<wbr>Id</a>
@@ -855,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard serial id.</p>
-</dd><dt class="property-required"
+    <dd>shard serial id.</dd><dt class="property-required"
             title="Required">
         <span id="shardslavezones_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardslavezones_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Slave<wbr>Zones</a>
@@ -864,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>shard slave zones.</p>
-</dd><dt class="property-required"
+    <dd>shard slave zones.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -873,8 +966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="statusdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Desc</a>
@@ -882,8 +974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status description.</p>
-</dd><dt class="property-required"
+    <dd>status description.</dd><dt class="property-required"
             title="Required">
         <span id="storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -891,8 +982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -900,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>storage usage.</p>
-</dd><dt class="property-required"
+    <dd>storage usage.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -909,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -918,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd><dt class="property-required"
+    <dd>vpc id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -927,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone.</p>
-</dd></dl>
+    <dd>zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -942,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>cpu cores.</p>
-</dd><dt class="property-required"
+    <dd>cpu cores.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -951,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -960,8 +1044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -969,8 +1052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="memoryusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryusage_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Usage</a>
@@ -978,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory usage.</p>
-</dd><dt class="property-required"
+    <dd>memory usage.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -987,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node count.</p>
-</dd><dt class="property-required"
+    <dd>node count.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_go" style="color: inherit; text-decoration: inherit;">Paymode</a>
@@ -996,8 +1076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>pay mode.</p>
-</dd><dt class="property-required"
+    <dd>pay mode.</dd><dt class="property-required"
             title="Required">
         <span id="periodendtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodendtime_go" style="color: inherit; text-decoration: inherit;">Period<wbr>End<wbr>Time</a>
@@ -1005,8 +1084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1014,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Version</a>
@@ -1023,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy version.</p>
-</dd><dt class="property-required"
+    <dd>proxy version.</dd><dt class="property-required"
             title="Required">
         <span id="range_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_go" style="color: inherit; text-decoration: inherit;">Range</a>
@@ -1032,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the range of shard key.</p>
-</dd><dt class="property-required"
+    <dd>the range of shard key.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1041,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="shardinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceid_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Instance<wbr>Id</a>
@@ -1050,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard instance id.</p>
-</dd><dt class="property-required"
+    <dd>shard instance id.</dd><dt class="property-required"
             title="Required">
         <span id="shardmasterzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmasterzone_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Master<wbr>Zone</a>
@@ -1059,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard master zone.</p>
-</dd><dt class="property-required"
+    <dd>shard master zone.</dd><dt class="property-required"
             title="Required">
         <span id="shardserialid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardserialid_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Serial<wbr>Id</a>
@@ -1068,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard serial id.</p>
-</dd><dt class="property-required"
+    <dd>shard serial id.</dd><dt class="property-required"
             title="Required">
         <span id="shardslavezones_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardslavezones_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Slave<wbr>Zones</a>
@@ -1077,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>shard slave zones.</p>
-</dd><dt class="property-required"
+    <dd>shard slave zones.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1086,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="statusdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Desc</a>
@@ -1095,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status description.</p>
-</dd><dt class="property-required"
+    <dd>status description.</dd><dt class="property-required"
             title="Required">
         <span id="storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -1104,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -1113,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>storage usage.</p>
-</dd><dt class="property-required"
+    <dd>storage usage.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1122,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1131,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd><dt class="property-required"
+    <dd>vpc id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1140,8 +1204,197 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone.</p>
-</dd></dl>
+    <dd>zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>cpu cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_usage_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>memory usage.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>node count.</dd><dt class="property-required"
+            title="Required">
+        <span id="paymode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_hcl" style="color: inherit; text-decoration: inherit;">paymode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>pay mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_end_time_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>expired time.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>project id.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_version_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>proxy version.</dd><dt class="property-required"
+            title="Required">
+        <span id="range_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_hcl" style="color: inherit; text-decoration: inherit;">range</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>the range of shard key.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>region.</dd><dt class="property-required"
+            title="Required">
+        <span id="shard_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_instance_id_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>shard instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="shard_master_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_master_zone_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>master_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>shard master zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="shard_serial_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_serial_id_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>serial_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>shard serial id.</dd><dt class="property-required"
+            title="Required">
+        <span id="shard_slave_zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_slave_zones_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>slave_<wbr>zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>shard slave zones.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>status.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_desc_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>status description.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>storage usage.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet id.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>vpc id.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1155,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>cpu cores.</p>
-</dd><dt class="property-required"
+    <dd>cpu cores.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1164,8 +1416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1173,8 +1424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1182,8 +1432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="memoryusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryusage_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Usage</a>
@@ -1191,8 +1440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>memory usage.</p>
-</dd><dt class="property-required"
+    <dd>memory usage.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_java" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -1200,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>node count.</p>
-</dd><dt class="property-required"
+    <dd>node count.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_java" style="color: inherit; text-decoration: inherit;">paymode</a>
@@ -1209,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>pay mode.</p>
-</dd><dt class="property-required"
+    <dd>pay mode.</dd><dt class="property-required"
             title="Required">
         <span id="periodendtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodendtime_java" style="color: inherit; text-decoration: inherit;">period<wbr>End<wbr>Time</a>
@@ -1218,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1227,8 +1472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -1236,8 +1480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy version.</p>
-</dd><dt class="property-required"
+    <dd>proxy version.</dd><dt class="property-required"
             title="Required">
         <span id="range_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_java" style="color: inherit; text-decoration: inherit;">range</a>
@@ -1245,8 +1488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the range of shard key.</p>
-</dd><dt class="property-required"
+    <dd>the range of shard key.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1254,8 +1496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="shardinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceid_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Instance<wbr>Id</a>
@@ -1263,8 +1504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>shard instance id.</p>
-</dd><dt class="property-required"
+    <dd>shard instance id.</dd><dt class="property-required"
             title="Required">
         <span id="shardmasterzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmasterzone_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Master<wbr>Zone</a>
@@ -1272,8 +1512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>shard master zone.</p>
-</dd><dt class="property-required"
+    <dd>shard master zone.</dd><dt class="property-required"
             title="Required">
         <span id="shardserialid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardserialid_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Serial<wbr>Id</a>
@@ -1281,8 +1520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>shard serial id.</p>
-</dd><dt class="property-required"
+    <dd>shard serial id.</dd><dt class="property-required"
             title="Required">
         <span id="shardslavezones_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardslavezones_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Slave<wbr>Zones</a>
@@ -1290,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>shard slave zones.</p>
-</dd><dt class="property-required"
+    <dd>shard slave zones.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1299,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="statusdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_java" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -1308,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>status description.</p>
-</dd><dt class="property-required"
+    <dd>status description.</dd><dt class="property-required"
             title="Required">
         <span id="storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1317,8 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1326,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>storage usage.</p>
-</dd><dt class="property-required"
+    <dd>storage usage.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1335,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1344,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd><dt class="property-required"
+    <dd>vpc id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1353,8 +1584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>zone.</p>
-</dd></dl>
+    <dd>zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1368,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>cpu cores.</p>
-</dd><dt class="property-required"
+    <dd>cpu cores.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1377,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1386,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1395,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="memoryusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryusage_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Usage</a>
@@ -1404,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>memory usage.</p>
-</dd><dt class="property-required"
+    <dd>memory usage.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -1413,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>node count.</p>
-</dd><dt class="property-required"
+    <dd>node count.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_nodejs" style="color: inherit; text-decoration: inherit;">paymode</a>
@@ -1422,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>pay mode.</p>
-</dd><dt class="property-required"
+    <dd>pay mode.</dd><dt class="property-required"
             title="Required">
         <span id="periodendtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodendtime_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>End<wbr>Time</a>
@@ -1431,8 +1654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1440,8 +1662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -1449,8 +1670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy version.</p>
-</dd><dt class="property-required"
+    <dd>proxy version.</dd><dt class="property-required"
             title="Required">
         <span id="range_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_nodejs" style="color: inherit; text-decoration: inherit;">range</a>
@@ -1458,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the range of shard key.</p>
-</dd><dt class="property-required"
+    <dd>the range of shard key.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1467,8 +1686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="shardinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Instance<wbr>Id</a>
@@ -1476,8 +1694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard instance id.</p>
-</dd><dt class="property-required"
+    <dd>shard instance id.</dd><dt class="property-required"
             title="Required">
         <span id="shardmasterzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmasterzone_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Master<wbr>Zone</a>
@@ -1485,8 +1702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard master zone.</p>
-</dd><dt class="property-required"
+    <dd>shard master zone.</dd><dt class="property-required"
             title="Required">
         <span id="shardserialid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardserialid_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Serial<wbr>Id</a>
@@ -1494,8 +1710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>shard serial id.</p>
-</dd><dt class="property-required"
+    <dd>shard serial id.</dd><dt class="property-required"
             title="Required">
         <span id="shardslavezones_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardslavezones_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Slave<wbr>Zones</a>
@@ -1503,8 +1718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>shard slave zones.</p>
-</dd><dt class="property-required"
+    <dd>shard slave zones.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1512,8 +1726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="statusdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -1521,8 +1734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status description.</p>
-</dd><dt class="property-required"
+    <dd>status description.</dd><dt class="property-required"
             title="Required">
         <span id="storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1530,8 +1742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1539,8 +1750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>storage usage.</p>
-</dd><dt class="property-required"
+    <dd>storage usage.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1548,8 +1758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1557,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd><dt class="property-required"
+    <dd>vpc id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1566,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone.</p>
-</dd></dl>
+    <dd>zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1581,8 +1788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>cpu cores.</p>
-</dd><dt class="property-required"
+    <dd>cpu cores.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1590,8 +1796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1599,8 +1804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1608,8 +1812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_usage_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>usage</a>
@@ -1617,8 +1820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory usage.</p>
-</dd><dt class="property-required"
+    <dd>memory usage.</dd><dt class="property-required"
             title="Required">
         <span id="node_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_python" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
@@ -1626,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node count.</p>
-</dd><dt class="property-required"
+    <dd>node count.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_python" style="color: inherit; text-decoration: inherit;">paymode</a>
@@ -1635,8 +1836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>pay mode.</p>
-</dd><dt class="property-required"
+    <dd>pay mode.</dd><dt class="property-required"
             title="Required">
         <span id="period_end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_end_time_python" style="color: inherit; text-decoration: inherit;">period_<wbr>end_<wbr>time</a>
@@ -1644,8 +1844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1653,8 +1852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_version_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>version</a>
@@ -1662,8 +1860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>proxy version.</p>
-</dd><dt class="property-required"
+    <dd>proxy version.</dd><dt class="property-required"
             title="Required">
         <span id="range_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_python" style="color: inherit; text-decoration: inherit;">range</a>
@@ -1671,8 +1868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>the range of shard key.</p>
-</dd><dt class="property-required"
+    <dd>the range of shard key.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1680,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="shard_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_instance_id_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>instance_<wbr>id</a>
@@ -1689,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>shard instance id.</p>
-</dd><dt class="property-required"
+    <dd>shard instance id.</dd><dt class="property-required"
             title="Required">
         <span id="shard_master_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_master_zone_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>master_<wbr>zone</a>
@@ -1698,8 +1892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>shard master zone.</p>
-</dd><dt class="property-required"
+    <dd>shard master zone.</dd><dt class="property-required"
             title="Required">
         <span id="shard_serial_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_serial_id_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>serial_<wbr>id</a>
@@ -1707,8 +1900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>shard serial id.</p>
-</dd><dt class="property-required"
+    <dd>shard serial id.</dd><dt class="property-required"
             title="Required">
         <span id="shard_slave_zones_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_slave_zones_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>slave_<wbr>zones</a>
@@ -1716,8 +1908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>shard slave zones.</p>
-</dd><dt class="property-required"
+    <dd>shard slave zones.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1725,8 +1916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="status_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_desc_python" style="color: inherit; text-decoration: inherit;">status_<wbr>desc</a>
@@ -1734,8 +1924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>status description.</p>
-</dd><dt class="property-required"
+    <dd>status description.</dd><dt class="property-required"
             title="Required">
         <span id="storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1743,8 +1932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="storage_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
@@ -1752,8 +1940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>storage usage.</p>
-</dd><dt class="property-required"
+    <dd>storage usage.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1761,8 +1948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1770,8 +1956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd><dt class="property-required"
+    <dd>vpc id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1779,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>zone.</p>
-</dd></dl>
+    <dd>zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1794,8 +1978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>cpu cores.</p>
-</dd><dt class="property-required"
+    <dd>cpu cores.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1803,8 +1986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1812,8 +1994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1821,8 +2002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="memoryusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryusage_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Usage</a>
@@ -1830,8 +2010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>memory usage.</p>
-</dd><dt class="property-required"
+    <dd>memory usage.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -1839,8 +2018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>node count.</p>
-</dd><dt class="property-required"
+    <dd>node count.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_yaml" style="color: inherit; text-decoration: inherit;">paymode</a>
@@ -1848,8 +2026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>pay mode.</p>
-</dd><dt class="property-required"
+    <dd>pay mode.</dd><dt class="property-required"
             title="Required">
         <span id="periodendtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodendtime_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>End<wbr>Time</a>
@@ -1857,8 +2034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expired time.</p>
-</dd><dt class="property-required"
+    <dd>expired time.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1866,8 +2042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -1875,8 +2050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy version.</p>
-</dd><dt class="property-required"
+    <dd>proxy version.</dd><dt class="property-required"
             title="Required">
         <span id="range_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#range_yaml" style="color: inherit; text-decoration: inherit;">range</a>
@@ -1884,8 +2058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the range of shard key.</p>
-</dd><dt class="property-required"
+    <dd>the range of shard key.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1893,8 +2066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region.</p>
-</dd><dt class="property-required"
+    <dd>region.</dd><dt class="property-required"
             title="Required">
         <span id="shardinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardinstanceid_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Instance<wbr>Id</a>
@@ -1902,8 +2074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>shard instance id.</p>
-</dd><dt class="property-required"
+    <dd>shard instance id.</dd><dt class="property-required"
             title="Required">
         <span id="shardmasterzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmasterzone_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Master<wbr>Zone</a>
@@ -1911,8 +2082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>shard master zone.</p>
-</dd><dt class="property-required"
+    <dd>shard master zone.</dd><dt class="property-required"
             title="Required">
         <span id="shardserialid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardserialid_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Serial<wbr>Id</a>
@@ -1920,8 +2090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>shard serial id.</p>
-</dd><dt class="property-required"
+    <dd>shard serial id.</dd><dt class="property-required"
             title="Required">
         <span id="shardslavezones_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardslavezones_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Slave<wbr>Zones</a>
@@ -1929,8 +2098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>shard slave zones.</p>
-</dd><dt class="property-required"
+    <dd>shard slave zones.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1938,8 +2106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="statusdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -1947,8 +2114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>status description.</p>
-</dd><dt class="property-required"
+    <dd>status description.</dd><dt class="property-required"
             title="Required">
         <span id="storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1956,8 +2122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>memory, the unit is GB.</p>
-</dd><dt class="property-required"
+    <dd>memory, the unit is GB.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1965,8 +2130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>storage usage.</p>
-</dd><dt class="property-required"
+    <dd>storage usage.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1974,8 +2138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet id.</p>
-</dd><dt class="property-required"
+    <dd>subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1983,8 +2146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>vpc id.</p>
-</dd><dt class="property-required"
+    <dd>vpc id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1992,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>zone.</p>
-</dd></dl>
+    <dd>zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2008,7 +2169,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

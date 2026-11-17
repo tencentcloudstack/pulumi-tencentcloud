@@ -2,9 +2,11 @@
 ---
 title: "getDomainVerifier"
 title_tag: "tencentcloud.Cdn.getDomainVerifier"
-meta_desc: "Documentation for the tencentcloud.Cdn.getDomainVerifier function with examples, input properties, output properties, and supporting types."
+meta_desc: "Provides a resource to check or create a cdn Domain Verify Record NOTE:"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,34 +20,78 @@ Provides a resource to check or create a cdn Domain Verify Record
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vr = tencentcloud.Cdn.getDomainVerifier({
+const vr = tencentcloud.cdn.getDomainVerifier({
     domain: "www.examplexxx123.com",
     autoVerify: true,
     freezeRecord: true,
 });
-const recordValue = data.tencentcloud_cdn_domain_verifier.record;
-const recordType = data.tencentcloud_cdn_domain_verifier.record_type;
+const recordValue = record;
+const recordType = recordTypeTencentcloudCdnDomainVerifier;
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-vr = tencentcloud.Cdn.get_domain_verifier(domain="www.examplexxx123.com",
+vr = tencentcloud.cdn.get_domain_verifier(domain="www.examplexxx123.com",
     auto_verify=True,
     freeze_record=True)
-record_value = data["tencentcloud_cdn_domain_verifier"]["record"]
-record_type = data["tencentcloud_cdn_domain_verifier"]["record_type"]
+record_value = record
+record_type = record_type_tencentcloud_cdn_domain_verifier
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cdn.GetDomainVerifier(ctx, &cdn.GetDomainVerifierArgs{
+			Domain:       "www.examplexxx123.com",
+			AutoVerify:   pulumi.BoolRef(true),
+			FreezeRecord: pulumi.BoolRef(true),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_ := record
+		_ := recordTypeTencentcloudCdnDomainVerifier
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -56,36 +102,17 @@ return await Deployment.RunAsync(() =>
         FreezeRecord = true,
     });
 
-    var recordValue = data.Tencentcloud_cdn_domain_verifier.Record;
+    var recordValue = record;
 
-    var recordType = data.Tencentcloud_cdn_domain_verifier.Record_type;
+    var recordType = recordTypeTencentcloudCdnDomainVerifier;
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cdn.GetDomainVerifier(ctx, &cdn.GetDomainVerifierArgs{
-			Domain:       "www.examplexxx123.com",
-			AutoVerify:   pulumi.BoolRef(true),
-			FreezeRecord: pulumi.BoolRef(true),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_ := data.Tencentcloud_cdn_domain_verifier.Record
-		_ := data.Tencentcloud_cdn_domain_verifier.Record_type
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -94,8 +121,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cdn.CdnFunctions;
 import com.pulumi.tencentcloud.Cdn.inputs.GetDomainVerifierArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -113,27 +140,71 @@ public class App {
             .freezeRecord(true)
             .build());
 
-        final var recordValue = data.tencentcloud_cdn_domain_verifier().record();
+        final var recordValue = record;
 
-        final var recordType = data.tencentcloud_cdn_domain_verifier().record_type();
+        final var recordType = recordTypeTencentcloudCdnDomainVerifier;
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   vr:
     fn::invoke:
-      Function: tencentcloud:Cdn:getDomainVerifier
-      Arguments:
+      function: tencentcloud:Cdn:getDomainVerifier
+      arguments:
         domain: www.examplexxx123.com
         autoVerify: true
         freezeRecord: true
-  recordValue: ${data.tencentcloud_cdn_domain_verifier.record}
-  recordType: ${data.tencentcloud_cdn_domain_verifier.record_type}
+  recordValue: ${record}
+  recordType: ${recordTypeTencentcloudCdnDomainVerifier}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cdn_getdomainverifier" "vr" {
+  domain        = "www.examplexxx123.com"
+  auto_verify   = true
+  freeze_record = true
+}
+
+# auto create record if not verified
+# auto create record if not verified
+# once been freeze and verified, it will never be changed again
+locals {
+  recordValue = record
+}
+locals {
+  recordType = recordTypeTencentcloudCdnDomainVerifier
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&type=document&lang=en)
+  - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&type=document&lang=en)
 
 
 
@@ -145,7 +216,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -153,9 +224,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDomainVerifier<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainVerifierArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>></span
+><span class="k">function </span>getDomainVerifier<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainVerifierArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>></span
 ><span class="k">
-function </span>getDomainVerifierOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainVerifierOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>></span
+function </span>getDomainVerifierOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainVerifierOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -172,13 +243,13 @@ function </span>getDomainVerifierOutput<span class="p">(</span><span class="nx">
                         <span class="nx">verify_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDomainVerifierResult</span
 ><span class="k">
-def </span>get_domain_verifier_output<span class="p">(</span><span class="nx">auto_verify</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                        <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">failed_reason</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">freeze_record</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">verify_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainVerifierResult]</span
+def </span>get_domain_verifier_output<span class="p">(</span><span class="nx">auto_verify</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                        <span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">failed_reason</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">freeze_record</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">verify_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainVerifierResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -203,7 +274,8 @@ func </span>GetDomainVerifierOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDomainVerifier </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDomainVerifierArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainVerifierInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainVerifierInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainVerifierInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,7 +284,8 @@ func </span>GetDomainVerifierOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>> </span>getDomainVerifier<span class="p">(</span><span class="nx">GetDomainVerifierArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>> </span>getDomainVerifier<span class="p">(</span><span class="nx">GetDomainVerifierArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainVerifierResult</a></span>> </span>getDomainVerifier<span class="p">(</span><span class="nx">GetDomainVerifierArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,6 +297,15 @@ func </span>GetDomainVerifierOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cdn/getDomainVerifier:getDomainVerifier
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cdn_get_domain_verifier&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -242,8 +324,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoverify_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Verify</a>
@@ -251,8 +332,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep first create result instead of re-create again.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep first create result instead of re-create again.</dd><dt class="property-optional"
             title="Optional">
         <span id="failedreason_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failedreason_csharp" style="color: inherit; text-decoration: inherit;">Failed<wbr>Reason</a>
@@ -260,8 +340,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates failed reason of verification.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates failed reason of verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="freezerecord_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#freezerecord_csharp" style="color: inherit; text-decoration: inherit;">Freeze<wbr>Record</a>
@@ -269,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -278,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save result json.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save result json.</dd><dt class="property-optional"
             title="Optional">
         <span id="verifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_csharp" style="color: inherit; text-decoration: inherit;">Verify<wbr>Type</a>
@@ -287,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</p>
-</dd></dl>
+    <dd>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -302,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoverify_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Verify</a>
@@ -311,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep first create result instead of re-create again.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep first create result instead of re-create again.</dd><dt class="property-optional"
             title="Optional">
         <span id="failedreason_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failedreason_go" style="color: inherit; text-decoration: inherit;">Failed<wbr>Reason</a>
@@ -320,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates failed reason of verification.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates failed reason of verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="freezerecord_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#freezerecord_go" style="color: inherit; text-decoration: inherit;">Freeze<wbr>Record</a>
@@ -329,8 +402,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -338,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save result json.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save result json.</dd><dt class="property-optional"
             title="Optional">
         <span id="verifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_go" style="color: inherit; text-decoration: inherit;">Verify<wbr>Type</a>
@@ -347,8 +418,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</p>
-</dd></dl>
+    <dd>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_verify_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_verify_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>verify</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to keep first create result instead of re-create again.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="failed_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failed_reason_hcl" style="color: inherit; text-decoration: inherit;">failed_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates failed reason of verification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="freeze_record_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#freeze_record_hcl" style="color: inherit; text-decoration: inherit;">freeze_<wbr>record</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used for save result json.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="verify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_type_hcl" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -362,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoverify_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Verify</a>
@@ -371,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to keep first create result instead of re-create again.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep first create result instead of re-create again.</dd><dt class="property-optional"
             title="Optional">
         <span id="failedreason_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failedreason_java" style="color: inherit; text-decoration: inherit;">failed<wbr>Reason</a>
@@ -380,8 +502,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates failed reason of verification.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates failed reason of verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="freezerecord_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#freezerecord_java" style="color: inherit; text-decoration: inherit;">freeze<wbr>Record</a>
@@ -389,8 +510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -398,8 +518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for save result json.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save result json.</dd><dt class="property-optional"
             title="Optional">
         <span id="verifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_java" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -407,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</p>
-</dd></dl>
+    <dd>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -422,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoverify_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Verify</a>
@@ -431,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to keep first create result instead of re-create again.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep first create result instead of re-create again.</dd><dt class="property-optional"
             title="Optional">
         <span id="failedreason_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failedreason_nodejs" style="color: inherit; text-decoration: inherit;">failed<wbr>Reason</a>
@@ -440,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates failed reason of verification.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates failed reason of verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="freezerecord_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#freezerecord_nodejs" style="color: inherit; text-decoration: inherit;">freeze<wbr>Record</a>
@@ -449,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -458,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save result json.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save result json.</dd><dt class="property-optional"
             title="Optional">
         <span id="verifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_nodejs" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -467,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</p>
-</dd></dl>
+    <dd>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -482,8 +594,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_verify_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_verify_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>verify</a>
@@ -491,8 +602,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep first create result instead of re-create again.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep first create result instead of re-create again.</dd><dt class="property-optional"
             title="Optional">
         <span id="failed_reason_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failed_reason_python" style="color: inherit; text-decoration: inherit;">failed_<wbr>reason</a>
@@ -500,8 +610,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates failed reason of verification.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates failed reason of verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="freeze_record_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#freeze_record_python" style="color: inherit; text-decoration: inherit;">freeze_<wbr>record</a>
@@ -509,8 +618,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -518,8 +626,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used for save result json.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save result json.</dd><dt class="property-optional"
             title="Optional">
         <span id="verify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_type_python" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
@@ -527,8 +634,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</p>
-</dd></dl>
+    <dd>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -542,8 +648,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify domain name, e.g. <code>www.examplexxx123.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoverify_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Verify</a>
@@ -551,8 +656,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to keep first create result instead of re-create again.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep first create result instead of re-create again.</dd><dt class="property-optional"
             title="Optional">
         <span id="failedreason_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failedreason_yaml" style="color: inherit; text-decoration: inherit;">failed<wbr>Reason</a>
@@ -560,8 +664,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates failed reason of verification.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates failed reason of verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="freezerecord_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#freezerecord_yaml" style="color: inherit; text-decoration: inherit;">freeze<wbr>Record</a>
@@ -569,8 +672,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -578,8 +680,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for save result json.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save result json.</dd><dt class="property-optional"
             title="Optional">
         <span id="verifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_yaml" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -587,8 +688,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</p>
-</dd></dl>
+    <dd>Specify verify type, values: <code>dns</code> (default), <code>file</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -619,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of file verified domains.</p>
-</dd><dt class="property-"
+    <dd>List of file verified domains.</dd><dt class="property-"
             title="">
         <span id="fileverifyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyname_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Verify<wbr>Name</a>
@@ -628,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of file verifications.</p>
-</dd><dt class="property-"
+    <dd>Name of file verifications.</dd><dt class="property-"
             title="">
         <span id="fileverifyurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyurl_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Verify<wbr>Url</a>
@@ -637,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File verify URL guidance.</p>
-</dd><dt class="property-"
+    <dd>File verify URL guidance.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -646,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="record_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_csharp" style="color: inherit; text-decoration: inherit;">Record</a>
@@ -655,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resolution record value.</p>
-</dd><dt class="property-"
+    <dd>Resolution record value.</dd><dt class="property-"
             title="">
         <span id="recordtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Type</a>
@@ -664,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of resolution.</p>
-</dd><dt class="property-"
+    <dd>Type of resolution.</dd><dt class="property-"
             title="">
         <span id="subdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -673,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sub-domain resolution.</p>
-</dd><dt class="property-"
+    <dd>Sub-domain resolution.</dd><dt class="property-"
             title="">
         <span id="verifyresult_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyresult_csharp" style="color: inherit; text-decoration: inherit;">Verify<wbr>Result</a>
@@ -682,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Verify result.</p>
-</dd><dt class="property-"
+    <dd>Verify result.</dd><dt class="property-"
             title="">
         <span id="autoverify_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Verify</a>
@@ -745,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of file verified domains.</p>
-</dd><dt class="property-"
+    <dd>List of file verified domains.</dd><dt class="property-"
             title="">
         <span id="fileverifyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyname_go" style="color: inherit; text-decoration: inherit;">File<wbr>Verify<wbr>Name</a>
@@ -754,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of file verifications.</p>
-</dd><dt class="property-"
+    <dd>Name of file verifications.</dd><dt class="property-"
             title="">
         <span id="fileverifyurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyurl_go" style="color: inherit; text-decoration: inherit;">File<wbr>Verify<wbr>Url</a>
@@ -763,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File verify URL guidance.</p>
-</dd><dt class="property-"
+    <dd>File verify URL guidance.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -772,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="record_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_go" style="color: inherit; text-decoration: inherit;">Record</a>
@@ -781,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resolution record value.</p>
-</dd><dt class="property-"
+    <dd>Resolution record value.</dd><dt class="property-"
             title="">
         <span id="recordtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Type</a>
@@ -790,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of resolution.</p>
-</dd><dt class="property-"
+    <dd>Type of resolution.</dd><dt class="property-"
             title="">
         <span id="subdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -799,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sub-domain resolution.</p>
-</dd><dt class="property-"
+    <dd>Sub-domain resolution.</dd><dt class="property-"
             title="">
         <span id="verifyresult_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyresult_go" style="color: inherit; text-decoration: inherit;">Verify<wbr>Result</a>
@@ -808,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Verify result.</p>
-</dd><dt class="property-"
+    <dd>Verify result.</dd><dt class="property-"
             title="">
         <span id="autoverify_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Verify</a>
@@ -854,6 +938,124 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="file_verify_domains_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_verify_domains_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>verify_<wbr>domains</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of file verified domains.</dd><dt class="property-"
+            title="">
+        <span id="file_verify_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_verify_name_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>verify_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of file verifications.</dd><dt class="property-"
+            title="">
+        <span id="file_verify_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_verify_url_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>verify_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File verify URL guidance.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="record_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_hcl" style="color: inherit; text-decoration: inherit;">record</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resolution record value.</dd><dt class="property-"
+            title="">
+        <span id="record_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_type_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of resolution.</dd><dt class="property-"
+            title="">
+        <span id="sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_domain_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-domain resolution.</dd><dt class="property-"
+            title="">
+        <span id="verify_result_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_result_hcl" style="color: inherit; text-decoration: inherit;">verify_<wbr>result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Verify result.</dd><dt class="property-"
+            title="">
+        <span id="auto_verify_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_verify_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>verify</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="failed_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failed_reason_hcl" style="color: inherit; text-decoration: inherit;">failed_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="freeze_record_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#freeze_record_hcl" style="color: inherit; text-decoration: inherit;">freeze_<wbr>record</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="verify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_type_hcl" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -871,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of file verified domains.</p>
-</dd><dt class="property-"
+    <dd>List of file verified domains.</dd><dt class="property-"
             title="">
         <span id="fileverifyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyname_java" style="color: inherit; text-decoration: inherit;">file<wbr>Verify<wbr>Name</a>
@@ -880,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of file verifications.</p>
-</dd><dt class="property-"
+    <dd>Name of file verifications.</dd><dt class="property-"
             title="">
         <span id="fileverifyurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyurl_java" style="color: inherit; text-decoration: inherit;">file<wbr>Verify<wbr>Url</a>
@@ -889,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File verify URL guidance.</p>
-</dd><dt class="property-"
+    <dd>File verify URL guidance.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -898,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="record_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_java" style="color: inherit; text-decoration: inherit;">record</a>
@@ -907,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resolution record value.</p>
-</dd><dt class="property-"
+    <dd>Resolution record value.</dd><dt class="property-"
             title="">
         <span id="recordtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_java" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -916,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of resolution.</p>
-</dd><dt class="property-"
+    <dd>Type of resolution.</dd><dt class="property-"
             title="">
         <span id="subdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -925,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sub-domain resolution.</p>
-</dd><dt class="property-"
+    <dd>Sub-domain resolution.</dd><dt class="property-"
             title="">
         <span id="verifyresult_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyresult_java" style="color: inherit; text-decoration: inherit;">verify<wbr>Result</a>
@@ -934,8 +1129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Verify result.</p>
-</dd><dt class="property-"
+    <dd>Verify result.</dd><dt class="property-"
             title="">
         <span id="autoverify_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Verify</a>
@@ -997,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of file verified domains.</p>
-</dd><dt class="property-"
+    <dd>List of file verified domains.</dd><dt class="property-"
             title="">
         <span id="fileverifyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyname_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Verify<wbr>Name</a>
@@ -1006,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of file verifications.</p>
-</dd><dt class="property-"
+    <dd>Name of file verifications.</dd><dt class="property-"
             title="">
         <span id="fileverifyurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyurl_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Verify<wbr>Url</a>
@@ -1015,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File verify URL guidance.</p>
-</dd><dt class="property-"
+    <dd>File verify URL guidance.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1024,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="record_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_nodejs" style="color: inherit; text-decoration: inherit;">record</a>
@@ -1033,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resolution record value.</p>
-</dd><dt class="property-"
+    <dd>Resolution record value.</dd><dt class="property-"
             title="">
         <span id="recordtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -1042,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of resolution.</p>
-</dd><dt class="property-"
+    <dd>Type of resolution.</dd><dt class="property-"
             title="">
         <span id="subdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -1051,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sub-domain resolution.</p>
-</dd><dt class="property-"
+    <dd>Sub-domain resolution.</dd><dt class="property-"
             title="">
         <span id="verifyresult_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyresult_nodejs" style="color: inherit; text-decoration: inherit;">verify<wbr>Result</a>
@@ -1060,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Verify result.</p>
-</dd><dt class="property-"
+    <dd>Verify result.</dd><dt class="property-"
             title="">
         <span id="autoverify_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Verify</a>
@@ -1123,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of file verified domains.</p>
-</dd><dt class="property-"
+    <dd>List of file verified domains.</dd><dt class="property-"
             title="">
         <span id="file_verify_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_verify_name_python" style="color: inherit; text-decoration: inherit;">file_<wbr>verify_<wbr>name</a>
@@ -1132,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of file verifications.</p>
-</dd><dt class="property-"
+    <dd>Name of file verifications.</dd><dt class="property-"
             title="">
         <span id="file_verify_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_verify_url_python" style="color: inherit; text-decoration: inherit;">file_<wbr>verify_<wbr>url</a>
@@ -1141,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File verify URL guidance.</p>
-</dd><dt class="property-"
+    <dd>File verify URL guidance.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1150,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="record_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_python" style="color: inherit; text-decoration: inherit;">record</a>
@@ -1159,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resolution record value.</p>
-</dd><dt class="property-"
+    <dd>Resolution record value.</dd><dt class="property-"
             title="">
         <span id="record_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_type_python" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
@@ -1168,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of resolution.</p>
-</dd><dt class="property-"
+    <dd>Type of resolution.</dd><dt class="property-"
             title="">
         <span id="sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_domain_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
@@ -1177,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sub-domain resolution.</p>
-</dd><dt class="property-"
+    <dd>Sub-domain resolution.</dd><dt class="property-"
             title="">
         <span id="verify_result_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_result_python" style="color: inherit; text-decoration: inherit;">verify_<wbr>result</a>
@@ -1186,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Verify result.</p>
-</dd><dt class="property-"
+    <dd>Verify result.</dd><dt class="property-"
             title="">
         <span id="auto_verify_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_verify_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>verify</a>
@@ -1249,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of file verified domains.</p>
-</dd><dt class="property-"
+    <dd>List of file verified domains.</dd><dt class="property-"
             title="">
         <span id="fileverifyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyname_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Verify<wbr>Name</a>
@@ -1258,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of file verifications.</p>
-</dd><dt class="property-"
+    <dd>Name of file verifications.</dd><dt class="property-"
             title="">
         <span id="fileverifyurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileverifyurl_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Verify<wbr>Url</a>
@@ -1267,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File verify URL guidance.</p>
-</dd><dt class="property-"
+    <dd>File verify URL guidance.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1276,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="record_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_yaml" style="color: inherit; text-decoration: inherit;">record</a>
@@ -1285,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resolution record value.</p>
-</dd><dt class="property-"
+    <dd>Resolution record value.</dd><dt class="property-"
             title="">
         <span id="recordtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -1294,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of resolution.</p>
-</dd><dt class="property-"
+    <dd>Type of resolution.</dd><dt class="property-"
             title="">
         <span id="subdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -1303,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sub-domain resolution.</p>
-</dd><dt class="property-"
+    <dd>Sub-domain resolution.</dd><dt class="property-"
             title="">
         <span id="verifyresult_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifyresult_yaml" style="color: inherit; text-decoration: inherit;">verify<wbr>Result</a>
@@ -1312,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Verify result.</p>
-</dd><dt class="property-"
+    <dd>Verify result.</dd><dt class="property-"
             title="">
         <span id="autoverify_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoverify_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Verify</a>
@@ -1368,7 +1538,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

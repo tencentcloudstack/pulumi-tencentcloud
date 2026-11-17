@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Elasticsearch.Instance"
-meta_desc: "Documentation for the tencentcloud.Elasticsearch.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides an elasticsearch instance resource. NOTE: After executing terraform destroy, the resource instance will be isolated in the recycle bin(reserved."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,23 +16,37 @@ no_edit_this_page: true
 
 Provides an elasticsearch instance resource.
 
+> **NOTE:** After executing `terraform destroy`, the resource instance will be isolated in the recycle bin(reserved for 24 hours by default). If you need to completely destroy the instance, you can set `forceDelete` to `true`.
+
+> **NOTE:** Currently, Once the `enableCerebro` field is `true`, it cannot be `false`.
+
+> **NOTE:** `subProductCode` specifies the sub-product of the instance (e.g. `spEsEnterprise` for enterprise edition). It can only be set at creation time. If omitted, the backend maps it from `licenseType`.
+
 ## Example Usage
 
 ### Create a basic version of elasticsearch instance paid by the hour
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const availabilityZone = tencentcloud.Availability.getZonesByProduct({
+const availabilityZone = tencentcloud.availability.getZonesByProduct({
     product: "es",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_es_vpc",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+    name: "tf_es_subnet",
     cidrBlock: "10.0.1.0/24",
 });
 const example = new tencentcloud.elasticsearch.Instance("example", {
@@ -54,21 +70,33 @@ const example = new tencentcloud.elasticsearch.Instance("example", {
     esAcl: {
         whiteLists: ["127.0.0.1"],
     },
+    cosBackup: {
+        isAutoBackup: true,
+        backupTime: "22:00",
+    },
     tags: {
         test: "test",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-availability_zone = tencentcloud.Availability.get_zones_by_product(product="es")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+availability_zone = tencentcloud.availability.get_zones_by_product(product="es")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_es_vpc")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
     availability_zone=availability_zone.zones[0].name,
+    name="tf_es_subnet",
     cidr_block="10.0.1.0/24")
 example = tencentcloud.elasticsearch.Instance("example",
     instance_name="tf_example_es",
@@ -79,27 +107,117 @@ example = tencentcloud.elasticsearch.Instance("example",
     password="Test12345",
     license_type="basic",
     basic_security_type=2,
-    web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
-        node_num=1,
-        node_type="ES.S1.MEDIUM4",
-    )],
-    node_info_lists=[tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
-        node_num=2,
-        node_type="ES.S1.MEDIUM8",
-        encrypt=False,
-    )],
-    es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
-        white_lists=["127.0.0.1"],
-    ),
+    web_node_type_infos=[{
+        "node_num": 1,
+        "node_type": "ES.S1.MEDIUM4",
+    }],
+    node_info_lists=[{
+        "node_num": 2,
+        "node_type": "ES.S1.MEDIUM8",
+        "encrypt": False,
+    }],
+    es_acl={
+        "white_lists": ["127.0.0.1"],
+    },
+    cos_backup={
+        "is_auto_backup": True,
+        "backup_time": "22:00",
+    },
     tags={
         "test": "test",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		availabilityZone, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "es",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_es_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+			Name:             pulumi.String("tf_es_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = elasticsearch.NewInstance(ctx, "example", &elasticsearch.InstanceArgs{
+			InstanceName:      pulumi.String("tf_example_es"),
+			AvailabilityZone:  pulumi.String(availabilityZone.Zones[0].Name),
+			Version:           pulumi.String("7.10.1"),
+			VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:          subnet2.ID().ToIDOutput().ToStringOutput(),
+			Password:          pulumi.String("Test12345"),
+			LicenseType:       pulumi.String("basic"),
+			BasicSecurityType: pulumi.Int(2),
+			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+					NodeNum:  pulumi.Int(1),
+					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+				},
+			},
+			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+				&elasticsearch.InstanceNodeInfoListArgs{
+					NodeNum:  pulumi.Int(2),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					Encrypt:  pulumi.Bool(false),
+				},
+			},
+			EsAcl: &elasticsearch.InstanceEsAclArgs{
+				WhiteLists: pulumi.StringArray{
+					pulumi.String("127.0.0.1"),
+				},
+			},
+			CosBackup: &elasticsearch.InstanceCosBackupArgs{
+				IsAutoBackup: pulumi.Bool(true),
+				BackupTime:   pulumi.String("22:00"),
+			},
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -112,12 +230,14 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_es_vpc",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "tf_es_subnet",
         CidrBlock = "10.0.1.0/24",
     });
 
@@ -155,6 +275,11 @@ return await Deployment.RunAsync(() =>
                 "127.0.0.1",
             },
         },
+        CosBackup = new Tencentcloud.Elasticsearch.Inputs.InstanceCosBackupArgs
+        {
+            IsAutoBackup = true,
+            BackupTime = "22:00",
+        },
         Tags = 
         {
             { "test", "test" },
@@ -163,77 +288,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		availabilityZone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "es",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
-			CidrBlock:        pulumi.String("10.0.1.0/24"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Elasticsearch.NewInstance(ctx, "example", &Elasticsearch.InstanceArgs{
-			InstanceName:      pulumi.String("tf_example_es"),
-			AvailabilityZone:  pulumi.String(availabilityZone.Zones[0].Name),
-			Version:           pulumi.String("7.10.1"),
-			VpcId:             vpc.ID(),
-			SubnetId:          subnet.ID(),
-			Password:          pulumi.String("Test12345"),
-			LicenseType:       pulumi.String("basic"),
-			BasicSecurityType: pulumi.Int(2),
-			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
-				&elasticsearch.InstanceWebNodeTypeInfoArgs{
-					NodeNum:  pulumi.Int(1),
-					NodeType: pulumi.String("ES.S1.MEDIUM4"),
-				},
-			},
-			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
-				&elasticsearch.InstanceNodeInfoListArgs{
-					NodeNum:  pulumi.Int(2),
-					NodeType: pulumi.String("ES.S1.MEDIUM8"),
-					Encrypt:  pulumi.Bool(false),
-				},
-			},
-			EsAcl: &elasticsearch.InstanceEsAclArgs{
-				WhiteLists: pulumi.StringArray{
-					pulumi.String("127.0.0.1"),
-				},
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -242,17 +301,12 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Elasticsearch.Instance;
-import com.pulumi.tencentcloud.Elasticsearch.InstanceArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceWebNodeTypeInfoArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceNodeInfoListArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceEsAclArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceCosBackupArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -268,19 +322,21 @@ public class App {
             .product("es")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_es_vpc")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
-            .availabilityZone(availabilityZone.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(availabilityZone.zones()[0].name())
+            .name("tf_es_subnet")
             .cidrBlock("10.0.1.0/24")
             .build());
 
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Elasticsearch.Instance("example", com.pulumi.tencentcloud.Elasticsearch.InstanceArgs.builder()
             .instanceName("tf_example_es")
-            .availabilityZone(availabilityZone.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(availabilityZone.zones()[0].name())
             .version("7.10.1")
             .vpcId(vpc.id())
             .subnetId(subnet.id())
@@ -299,23 +355,34 @@ public class App {
             .esAcl(InstanceEsAclArgs.builder()
                 .whiteLists("127.0.0.1")
                 .build())
+            .cosBackup(InstanceCosBackupArgs.builder()
+                .isAutoBackup(true)
+                .backupTime("22:00")
+                .build())
             .tags(Map.of("test", "test"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_es_vpc
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${availabilityZone.zones[0].name}
+      name: tf_es_subnet
       cidrBlock: 10.0.1.0/24
   example:
     type: tencentcloud:Elasticsearch:Instance
@@ -338,40 +405,1272 @@ resources:
       esAcl:
         whiteLists:
           - 127.0.0.1
+      cosBackup:
+        isAutoBackup: true
+        backupTime: 22:00
       tags:
         test: test
 variables:
   availabilityZone:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: es
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Create a basic version of elasticsearch instance for multi-availability zone deployment
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+data "tencentcloud_availability_getzonesbyproduct" "availabilityZone" {
+  product = "es"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_es_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[0].name
+  name              = "tf_es_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_elasticsearch_instance" "example" {
+  instance_name       = "tf_example_es"
+  availability_zone   = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[0].name
+  version             = "7.10.1"
+  vpc_id              = tencentcloud_vpc_instance.vpc.id
+  subnet_id           = tencentcloud_subnet_instance.subnet.id
+  password            = "Test12345"
+  license_type        = "basic"
+  basic_security_type = 2
+  web_node_type_infos {
+    node_num  = 1
+    node_type = "ES.S1.MEDIUM4"
+  }
+  node_info_lists {
+    node_num  = 2
+    node_type = "ES.S1.MEDIUM8"
+    encrypt   = false
+  }
+  es_acl = {
+    white_lists = ["127.0.0.1"]
+  }
+  # black_list = [
+  #   "9.9.9.9",
+  #   "8.8.8.8",
+  # ]
+  cos_backup = {
+    is_auto_backup = true
+    backup_time    = "22:00"
+  }
+  tags = {
+    "test" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a basic version of elasticsearch instance with destroy protection enabled
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const availabilityZone = tencentcloud.Availability.getZonesByProduct({
+const availabilityZone = tencentcloud.availability.getZonesByProduct({
     product: "es",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_es_vpc",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+    name: "tf_es_subnet",
     cidrBlock: "10.0.1.0/24",
 });
-const subnetMultiZone = new tencentcloud.subnet.Instance("subnetMultiZone", {
+const example = new tencentcloud.elasticsearch.Instance("example", {
+    instanceName: "tf_example_es",
+    availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+    version: "7.10.1",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    password: "Test12345",
+    licenseType: "basic",
+    basicSecurityType: 2,
+    enableDestroyProtection: "OPEN",
+    webNodeTypeInfos: [{
+        nodeNum: 1,
+        nodeType: "ES.S1.MEDIUM4",
+    }],
+    nodeInfoLists: [{
+        nodeNum: 2,
+        nodeType: "ES.S1.MEDIUM8",
+        encrypt: false,
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+availability_zone = tencentcloud.availability.get_zones_by_product(product="es")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_es_vpc")
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone.zones[0].name,
+    name="tf_es_subnet",
+    cidr_block="10.0.1.0/24")
+example = tencentcloud.elasticsearch.Instance("example",
+    instance_name="tf_example_es",
+    availability_zone=availability_zone.zones[0].name,
+    version="7.10.1",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    password="Test12345",
+    license_type="basic",
+    basic_security_type=2,
+    enable_destroy_protection="OPEN",
+    web_node_type_infos=[{
+        "node_num": 1,
+        "node_type": "ES.S1.MEDIUM4",
+    }],
+    node_info_lists=[{
+        "node_num": 2,
+        "node_type": "ES.S1.MEDIUM8",
+        "encrypt": False,
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		availabilityZone, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "es",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_es_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+			Name:             pulumi.String("tf_es_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = elasticsearch.NewInstance(ctx, "example", &elasticsearch.InstanceArgs{
+			InstanceName:            pulumi.String("tf_example_es"),
+			AvailabilityZone:        pulumi.String(availabilityZone.Zones[0].Name),
+			Version:                 pulumi.String("7.10.1"),
+			VpcId:                   vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:                subnet2.ID().ToIDOutput().ToStringOutput(),
+			Password:                pulumi.String("Test12345"),
+			LicenseType:             pulumi.String("basic"),
+			BasicSecurityType:       pulumi.Int(2),
+			EnableDestroyProtection: pulumi.String("OPEN"),
+			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+					NodeNum:  pulumi.Int(1),
+					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+				},
+			},
+			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+				&elasticsearch.InstanceNodeInfoListArgs{
+					NodeNum:  pulumi.Int(2),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					Encrypt:  pulumi.Bool(false),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var availabilityZone = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    {
+        Product = "es",
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "tf_es_vpc",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "tf_es_subnet",
+        CidrBlock = "10.0.1.0/24",
+    });
+
+    var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    {
+        InstanceName = "tf_example_es",
+        AvailabilityZone = availabilityZone.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Version = "7.10.1",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Password = "Test12345",
+        LicenseType = "basic",
+        BasicSecurityType = 2,
+        EnableDestroyProtection = "OPEN",
+        WebNodeTypeInfos = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+            {
+                NodeNum = 1,
+                NodeType = "ES.S1.MEDIUM4",
+            },
+        },
+        NodeInfoLists = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+            {
+                NodeNum = 2,
+                NodeType = "ES.S1.MEDIUM8",
+                Encrypt = false,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
+import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceWebNodeTypeInfoArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceNodeInfoListArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var availabilityZone = AvailabilityFunctions.getZonesByProduct(GetZonesByProductArgs.builder()
+            .product("es")
+            .build());
+
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("tf_es_vpc")
+            .build());
+
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone.zones()[0].name())
+            .name("tf_es_subnet")
+            .cidrBlock("10.0.1.0/24")
+            .build());
+
+        var example = new com.pulumi.tencentcloud.Elasticsearch.Instance("example", com.pulumi.tencentcloud.Elasticsearch.InstanceArgs.builder()
+            .instanceName("tf_example_es")
+            .availabilityZone(availabilityZone.zones()[0].name())
+            .version("7.10.1")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .password("Test12345")
+            .licenseType("basic")
+            .basicSecurityType(2)
+            .enableDestroyProtection("OPEN")
+            .webNodeTypeInfos(InstanceWebNodeTypeInfoArgs.builder()
+                .nodeNum(1)
+                .nodeType("ES.S1.MEDIUM4")
+                .build())
+            .nodeInfoLists(InstanceNodeInfoListArgs.builder()
+                .nodeNum(2)
+                .nodeType("ES.S1.MEDIUM8")
+                .encrypt(false)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: tf_es_vpc
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone.zones[0].name}
+      name: tf_es_subnet
+      cidrBlock: 10.0.1.0/24
+  example:
+    type: tencentcloud:Elasticsearch:Instance
+    properties:
+      instanceName: tf_example_es
+      availabilityZone: ${availabilityZone.zones[0].name}
+      version: 7.10.1
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      password: Test12345
+      licenseType: basic
+      basicSecurityType: 2
+      enableDestroyProtection: OPEN
+      webNodeTypeInfos:
+        - nodeNum: 1
+          nodeType: ES.S1.MEDIUM4
+      nodeInfoLists:
+        - nodeNum: 2
+          nodeType: ES.S1.MEDIUM8
+          encrypt: false
+variables:
+  availabilityZone:
+    fn::invoke:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
+        product: es
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "availabilityZone" {
+  product = "es"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_es_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[0].name
+  name              = "tf_es_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_elasticsearch_instance" "example" {
+  instance_name             = "tf_example_es"
+  availability_zone         = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[0].name
+  version                   = "7.10.1"
+  vpc_id                    = tencentcloud_vpc_instance.vpc.id
+  subnet_id                 = tencentcloud_subnet_instance.subnet.id
+  password                  = "Test12345"
+  license_type              = "basic"
+  basic_security_type       = 2
+  enable_destroy_protection = "OPEN"
+  web_node_type_infos {
+    node_num  = 1
+    node_type = "ES.S1.MEDIUM4"
+  }
+  node_info_lists {
+    node_num  = 2
+    node_type = "ES.S1.MEDIUM8"
+    encrypt   = false
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a elasticsearch instance with Cerebro public access enabled
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.elasticsearch.Instance("example", {
+    instanceName: "tf_example",
+    availabilityZone: "ap-guangzhou-6",
+    version: "7.14.2",
+    vpcId: "vpc-i5yyodl9",
+    subnetId: "subnet-hhi88a58",
+    password: "Password@2026",
+    licenseType: "platinum",
+    basicSecurityType: 2,
+    enableCerebro: true,
+    forceDelete: true,
+    webNodeTypeInfos: [{
+        nodeNum: 1,
+        nodeType: "ES.S1.MEDIUM4",
+    }],
+    nodeInfoLists: [
+        {
+            type: "dedicatedMaster",
+            nodeNum: 3,
+            nodeType: "ES.S1.MEDIUM8",
+            encrypt: false,
+        },
+        {
+            type: "hotData",
+            nodeNum: 2,
+            nodeType: "ES.S1.MEDIUM8",
+            encrypt: false,
+        },
+    ],
+    esAcl: {
+        whiteLists: ["127.0.0.1"],
+    },
+    tags: {
+        createBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.elasticsearch.Instance("example",
+    instance_name="tf_example",
+    availability_zone="ap-guangzhou-6",
+    version="7.14.2",
+    vpc_id="vpc-i5yyodl9",
+    subnet_id="subnet-hhi88a58",
+    password="Password@2026",
+    license_type="platinum",
+    basic_security_type=2,
+    enable_cerebro=True,
+    force_delete=True,
+    web_node_type_infos=[{
+        "node_num": 1,
+        "node_type": "ES.S1.MEDIUM4",
+    }],
+    node_info_lists=[
+        {
+            "type": "dedicatedMaster",
+            "node_num": 3,
+            "node_type": "ES.S1.MEDIUM8",
+            "encrypt": False,
+        },
+        {
+            "type": "hotData",
+            "node_num": 2,
+            "node_type": "ES.S1.MEDIUM8",
+            "encrypt": False,
+        },
+    ],
+    es_acl={
+        "white_lists": ["127.0.0.1"],
+    },
+    tags={
+        "createBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := elasticsearch.NewInstance(ctx, "example", &elasticsearch.InstanceArgs{
+			InstanceName:      pulumi.String("tf_example"),
+			AvailabilityZone:  pulumi.String("ap-guangzhou-6"),
+			Version:           pulumi.String("7.14.2"),
+			VpcId:             pulumi.String("vpc-i5yyodl9"),
+			SubnetId:          pulumi.String("subnet-hhi88a58"),
+			Password:          pulumi.String("Password@2026"),
+			LicenseType:       pulumi.String("platinum"),
+			BasicSecurityType: pulumi.Int(2),
+			EnableCerebro:     pulumi.Bool(true),
+			ForceDelete:       pulumi.Bool(true),
+			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+					NodeNum:  pulumi.Int(1),
+					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+				},
+			},
+			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("dedicatedMaster"),
+					NodeNum:  pulumi.Int(3),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					Encrypt:  pulumi.Bool(false),
+				},
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("hotData"),
+					NodeNum:  pulumi.Int(2),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					Encrypt:  pulumi.Bool(false),
+				},
+			},
+			EsAcl: &elasticsearch.InstanceEsAclArgs{
+				WhiteLists: pulumi.StringArray{
+					pulumi.String("127.0.0.1"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    {
+        InstanceName = "tf_example",
+        AvailabilityZone = "ap-guangzhou-6",
+        Version = "7.14.2",
+        VpcId = "vpc-i5yyodl9",
+        SubnetId = "subnet-hhi88a58",
+        Password = "Password@2026",
+        LicenseType = "platinum",
+        BasicSecurityType = 2,
+        EnableCerebro = true,
+        ForceDelete = true,
+        WebNodeTypeInfos = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+            {
+                NodeNum = 1,
+                NodeType = "ES.S1.MEDIUM4",
+            },
+        },
+        NodeInfoLists = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+            {
+                Type = "dedicatedMaster",
+                NodeNum = 3,
+                NodeType = "ES.S1.MEDIUM8",
+                Encrypt = false,
+            },
+            new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+            {
+                Type = "hotData",
+                NodeNum = 2,
+                NodeType = "ES.S1.MEDIUM8",
+                Encrypt = false,
+            },
+        },
+        EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
+        {
+            WhiteLists = new[]
+            {
+                "127.0.0.1",
+            },
+        },
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Elasticsearch.Instance;
+import com.pulumi.tencentcloud.Elasticsearch.InstanceArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceWebNodeTypeInfoArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceNodeInfoListArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceEsAclArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Instance("example", InstanceArgs.builder()
+            .instanceName("tf_example")
+            .availabilityZone("ap-guangzhou-6")
+            .version("7.14.2")
+            .vpcId("vpc-i5yyodl9")
+            .subnetId("subnet-hhi88a58")
+            .password("Password@2026")
+            .licenseType("platinum")
+            .basicSecurityType(2)
+            .enableCerebro(true)
+            .forceDelete(true)
+            .webNodeTypeInfos(InstanceWebNodeTypeInfoArgs.builder()
+                .nodeNum(1)
+                .nodeType("ES.S1.MEDIUM4")
+                .build())
+            .nodeInfoLists(            
+                InstanceNodeInfoListArgs.builder()
+                    .type("dedicatedMaster")
+                    .nodeNum(3)
+                    .nodeType("ES.S1.MEDIUM8")
+                    .encrypt(false)
+                    .build(),
+                InstanceNodeInfoListArgs.builder()
+                    .type("hotData")
+                    .nodeNum(2)
+                    .nodeType("ES.S1.MEDIUM8")
+                    .encrypt(false)
+                    .build())
+            .esAcl(InstanceEsAclArgs.builder()
+                .whiteLists("127.0.0.1")
+                .build())
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Elasticsearch:Instance
+    properties:
+      instanceName: tf_example
+      availabilityZone: ap-guangzhou-6
+      version: 7.14.2
+      vpcId: vpc-i5yyodl9
+      subnetId: subnet-hhi88a58
+      password: Password@2026
+      licenseType: platinum
+      basicSecurityType: 2
+      enableCerebro: true
+      forceDelete: true
+      webNodeTypeInfos:
+        - nodeNum: 1
+          nodeType: ES.S1.MEDIUM4
+      nodeInfoLists:
+        - type: dedicatedMaster
+          nodeNum: 3
+          nodeType: ES.S1.MEDIUM8
+          encrypt: false
+        - type: hotData
+          nodeNum: 2
+          nodeType: ES.S1.MEDIUM8
+          encrypt: false
+      esAcl:
+        whiteLists:
+          - 127.0.0.1
+      tags:
+        createBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_elasticsearch_instance" "example" {
+  instance_name       = "tf_example"
+  availability_zone   = "ap-guangzhou-6"
+  version             = "7.14.2"
+  vpc_id              = "vpc-i5yyodl9"
+  subnet_id           = "subnet-hhi88a58"
+  password            = "Password@2026"
+  license_type        = "platinum"
+  basic_security_type = 2
+  enable_cerebro      = true
+  force_delete        = true
+  web_node_type_infos {
+    node_num  = 1
+    node_type = "ES.S1.MEDIUM4"
+  }
+  node_info_lists {
+    type      = "dedicatedMaster"
+    node_num  = 3
+    node_type = "ES.S1.MEDIUM8"
+    encrypt   = false
+  }
+  node_info_lists {
+    type      = "hotData"
+    node_num  = 2
+    node_type = "ES.S1.MEDIUM8"
+    encrypt   = false
+  }
+  es_acl = {
+    white_lists = ["127.0.0.1"]
+  }
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a elasticsearch instance with Cerebro private access enabled
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.elasticsearch.Instance("example", {
+    instanceName: "tf_example",
+    availabilityZone: "ap-guangzhou-6",
+    version: "7.14.2",
+    vpcId: "vpc-i5yyodl9",
+    subnetId: "subnet-hhi88a58",
+    password: "Password@2026",
+    licenseType: "platinum",
+    basicSecurityType: 2,
+    enableCerebro: true,
+    cerebroPrivateAccess: "OPEN",
+    cerebroPrivateDomain: "http://10.0.30.56:9000",
+    forceDelete: true,
+    webNodeTypeInfos: [{
+        nodeNum: 1,
+        nodeType: "ES.S1.MEDIUM4",
+    }],
+    nodeInfoLists: [
+        {
+            type: "dedicatedMaster",
+            nodeNum: 3,
+            nodeType: "ES.S1.MEDIUM8",
+            encrypt: false,
+        },
+        {
+            type: "hotData",
+            nodeNum: 2,
+            nodeType: "ES.S1.MEDIUM8",
+            encrypt: false,
+        },
+    ],
+    esAcl: {
+        whiteLists: ["127.0.0.1"],
+    },
+    tags: {
+        createBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.elasticsearch.Instance("example",
+    instance_name="tf_example",
+    availability_zone="ap-guangzhou-6",
+    version="7.14.2",
+    vpc_id="vpc-i5yyodl9",
+    subnet_id="subnet-hhi88a58",
+    password="Password@2026",
+    license_type="platinum",
+    basic_security_type=2,
+    enable_cerebro=True,
+    cerebro_private_access="OPEN",
+    cerebro_private_domain="http://10.0.30.56:9000",
+    force_delete=True,
+    web_node_type_infos=[{
+        "node_num": 1,
+        "node_type": "ES.S1.MEDIUM4",
+    }],
+    node_info_lists=[
+        {
+            "type": "dedicatedMaster",
+            "node_num": 3,
+            "node_type": "ES.S1.MEDIUM8",
+            "encrypt": False,
+        },
+        {
+            "type": "hotData",
+            "node_num": 2,
+            "node_type": "ES.S1.MEDIUM8",
+            "encrypt": False,
+        },
+    ],
+    es_acl={
+        "white_lists": ["127.0.0.1"],
+    },
+    tags={
+        "createBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := elasticsearch.NewInstance(ctx, "example", &elasticsearch.InstanceArgs{
+			InstanceName:         pulumi.String("tf_example"),
+			AvailabilityZone:     pulumi.String("ap-guangzhou-6"),
+			Version:              pulumi.String("7.14.2"),
+			VpcId:                pulumi.String("vpc-i5yyodl9"),
+			SubnetId:             pulumi.String("subnet-hhi88a58"),
+			Password:             pulumi.String("Password@2026"),
+			LicenseType:          pulumi.String("platinum"),
+			BasicSecurityType:    pulumi.Int(2),
+			EnableCerebro:        pulumi.Bool(true),
+			CerebroPrivateAccess: pulumi.String("OPEN"),
+			CerebroPrivateDomain: pulumi.String("http://10.0.30.56:9000"),
+			ForceDelete:          pulumi.Bool(true),
+			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+					NodeNum:  pulumi.Int(1),
+					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+				},
+			},
+			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("dedicatedMaster"),
+					NodeNum:  pulumi.Int(3),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					Encrypt:  pulumi.Bool(false),
+				},
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("hotData"),
+					NodeNum:  pulumi.Int(2),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					Encrypt:  pulumi.Bool(false),
+				},
+			},
+			EsAcl: &elasticsearch.InstanceEsAclArgs{
+				WhiteLists: pulumi.StringArray{
+					pulumi.String("127.0.0.1"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    {
+        InstanceName = "tf_example",
+        AvailabilityZone = "ap-guangzhou-6",
+        Version = "7.14.2",
+        VpcId = "vpc-i5yyodl9",
+        SubnetId = "subnet-hhi88a58",
+        Password = "Password@2026",
+        LicenseType = "platinum",
+        BasicSecurityType = 2,
+        EnableCerebro = true,
+        CerebroPrivateAccess = "OPEN",
+        CerebroPrivateDomain = "http://10.0.30.56:9000",
+        ForceDelete = true,
+        WebNodeTypeInfos = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+            {
+                NodeNum = 1,
+                NodeType = "ES.S1.MEDIUM4",
+            },
+        },
+        NodeInfoLists = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+            {
+                Type = "dedicatedMaster",
+                NodeNum = 3,
+                NodeType = "ES.S1.MEDIUM8",
+                Encrypt = false,
+            },
+            new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+            {
+                Type = "hotData",
+                NodeNum = 2,
+                NodeType = "ES.S1.MEDIUM8",
+                Encrypt = false,
+            },
+        },
+        EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
+        {
+            WhiteLists = new[]
+            {
+                "127.0.0.1",
+            },
+        },
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Elasticsearch.Instance;
+import com.pulumi.tencentcloud.Elasticsearch.InstanceArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceWebNodeTypeInfoArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceNodeInfoListArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceEsAclArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Instance("example", InstanceArgs.builder()
+            .instanceName("tf_example")
+            .availabilityZone("ap-guangzhou-6")
+            .version("7.14.2")
+            .vpcId("vpc-i5yyodl9")
+            .subnetId("subnet-hhi88a58")
+            .password("Password@2026")
+            .licenseType("platinum")
+            .basicSecurityType(2)
+            .enableCerebro(true)
+            .cerebroPrivateAccess("OPEN")
+            .cerebroPrivateDomain("http://10.0.30.56:9000")
+            .forceDelete(true)
+            .webNodeTypeInfos(InstanceWebNodeTypeInfoArgs.builder()
+                .nodeNum(1)
+                .nodeType("ES.S1.MEDIUM4")
+                .build())
+            .nodeInfoLists(            
+                InstanceNodeInfoListArgs.builder()
+                    .type("dedicatedMaster")
+                    .nodeNum(3)
+                    .nodeType("ES.S1.MEDIUM8")
+                    .encrypt(false)
+                    .build(),
+                InstanceNodeInfoListArgs.builder()
+                    .type("hotData")
+                    .nodeNum(2)
+                    .nodeType("ES.S1.MEDIUM8")
+                    .encrypt(false)
+                    .build())
+            .esAcl(InstanceEsAclArgs.builder()
+                .whiteLists("127.0.0.1")
+                .build())
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Elasticsearch:Instance
+    properties:
+      instanceName: tf_example
+      availabilityZone: ap-guangzhou-6
+      version: 7.14.2
+      vpcId: vpc-i5yyodl9
+      subnetId: subnet-hhi88a58
+      password: Password@2026
+      licenseType: platinum
+      basicSecurityType: 2
+      enableCerebro: true
+      cerebroPrivateAccess: OPEN
+      cerebroPrivateDomain: http://10.0.30.56:9000
+      forceDelete: true
+      webNodeTypeInfos:
+        - nodeNum: 1
+          nodeType: ES.S1.MEDIUM4
+      nodeInfoLists:
+        - type: dedicatedMaster
+          nodeNum: 3
+          nodeType: ES.S1.MEDIUM8
+          encrypt: false
+        - type: hotData
+          nodeNum: 2
+          nodeType: ES.S1.MEDIUM8
+          encrypt: false
+      esAcl:
+        whiteLists:
+          - 127.0.0.1
+      tags:
+        createBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_elasticsearch_instance" "example" {
+  instance_name          = "tf_example"
+  availability_zone      = "ap-guangzhou-6"
+  version                = "7.14.2"
+  vpc_id                 = "vpc-i5yyodl9"
+  subnet_id              = "subnet-hhi88a58"
+  password               = "Password@2026"
+  license_type           = "platinum"
+  basic_security_type    = 2
+  enable_cerebro         = true
+  cerebro_private_access = "OPEN"
+  cerebro_private_domain = "http://10.0.30.56:9000"
+  force_delete           = true
+  web_node_type_infos {
+    node_num  = 1
+    node_type = "ES.S1.MEDIUM4"
+  }
+  node_info_lists {
+    type      = "dedicatedMaster"
+    node_num  = 3
+    node_type = "ES.S1.MEDIUM8"
+    encrypt   = false
+  }
+  node_info_lists {
+    type      = "hotData"
+    node_num  = 2
+    node_type = "ES.S1.MEDIUM8"
+    encrypt   = false
+  }
+  es_acl = {
+    white_lists = ["127.0.0.1"]
+  }
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a basic version of elasticsearch instance for multi-availability zone deployment
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const availabilityZone = tencentcloud.availability.getZonesByProduct({
+    product: "es",
+});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_es_vpc",
+});
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+    name: "tf_es_subnet",
+    cidrBlock: "10.0.1.0/24",
+});
+const subnetMultiZone = new tencentcloud.subnet.Instance("subnet_multi_zone", {
     vpcId: vpc.id,
     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[1]?.name),
+    name: "tf_es_subnet",
     cidrBlock: "10.0.2.0/24",
 });
-const exampleMultiZone = new tencentcloud.elasticsearch.Instance("exampleMultiZone", {
+const exampleMultiZone = new tencentcloud.elasticsearch.Instance("example_multi_zone", {
     instanceName: "tf_example_es",
     availabilityZone: "-",
     version: "7.10.1",
@@ -417,22 +1716,31 @@ const exampleMultiZone = new tencentcloud.elasticsearch.Instance("exampleMultiZo
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-availability_zone = tencentcloud.Availability.get_zones_by_product(product="es")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+availability_zone = tencentcloud.availability.get_zones_by_product(product="es")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_es_vpc")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
     availability_zone=availability_zone.zones[0].name,
+    name="tf_es_subnet",
     cidr_block="10.0.1.0/24")
-subnet_multi_zone = tencentcloud.subnet.Instance("subnetMultiZone",
+subnet_multi_zone = tencentcloud.subnet.Instance("subnet_multi_zone",
     vpc_id=vpc.id,
     availability_zone=availability_zone.zones[1].name,
+    name="tf_es_subnet",
     cidr_block="10.0.2.0/24")
-example_multi_zone = tencentcloud.elasticsearch.Instance("exampleMultiZone",
+example_multi_zone = tencentcloud.elasticsearch.Instance("example_multi_zone",
     instance_name="tf_example_es",
     availability_zone="-",
     version="7.10.1",
@@ -443,45 +1751,154 @@ example_multi_zone = tencentcloud.elasticsearch.Instance("exampleMultiZone",
     basic_security_type=2,
     deploy_mode=1,
     multi_zone_infos=[
-        tencentcloud.elasticsearch.InstanceMultiZoneInfoArgs(
-            availability_zone=availability_zone.zones[0].name,
-            subnet_id=subnet.id,
-        ),
-        tencentcloud.elasticsearch.InstanceMultiZoneInfoArgs(
-            availability_zone=availability_zone.zones[1].name,
-            subnet_id=subnet_multi_zone.id,
-        ),
+        {
+            "availability_zone": availability_zone.zones[0].name,
+            "subnet_id": subnet.id,
+        },
+        {
+            "availability_zone": availability_zone.zones[1].name,
+            "subnet_id": subnet_multi_zone.id,
+        },
     ],
-    web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
-        node_num=1,
-        node_type="ES.S1.MEDIUM4",
-    )],
+    web_node_type_infos=[{
+        "node_num": 1,
+        "node_type": "ES.S1.MEDIUM4",
+    }],
     node_info_lists=[
-        tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
-            type="dedicatedMaster",
-            node_num=3,
-            node_type="ES.S1.MEDIUM8",
-            encrypt=False,
-        ),
-        tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
-            type="hotData",
-            node_num=2,
-            node_type="ES.S1.MEDIUM8",
-            encrypt=False,
-        ),
+        {
+            "type": "dedicatedMaster",
+            "node_num": 3,
+            "node_type": "ES.S1.MEDIUM8",
+            "encrypt": False,
+        },
+        {
+            "type": "hotData",
+            "node_num": 2,
+            "node_type": "ES.S1.MEDIUM8",
+            "encrypt": False,
+        },
     ],
-    es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
-        white_lists=["127.0.0.1"],
-    ),
+    es_acl={
+        "white_lists": ["127.0.0.1"],
+    },
     tags={
         "test": "test",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		availabilityZone, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "es",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_es_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+			Name:             pulumi.String("tf_es_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		subnetMultiZone, err := subnet.NewInstance(ctx, "subnet_multi_zone", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
+			Name:             pulumi.String("tf_es_subnet"),
+			CidrBlock:        pulumi.String("10.0.2.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = elasticsearch.NewInstance(ctx, "example_multi_zone", &elasticsearch.InstanceArgs{
+			InstanceName:      pulumi.String("tf_example_es"),
+			AvailabilityZone:  pulumi.String("-"),
+			Version:           pulumi.String("7.10.1"),
+			VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:          pulumi.String("-"),
+			Password:          pulumi.String("Test12345"),
+			LicenseType:       pulumi.String("basic"),
+			BasicSecurityType: pulumi.Int(2),
+			DeployMode:        pulumi.Int(1),
+			MultiZoneInfos: elasticsearch.InstanceMultiZoneInfoArray{
+				&elasticsearch.InstanceMultiZoneInfoArgs{
+					AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+					SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+				},
+				&elasticsearch.InstanceMultiZoneInfoArgs{
+					AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
+					SubnetId:         subnetMultiZone.ID().ToIDOutput().ToStringOutput(),
+				},
+			},
+			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+					NodeNum:  pulumi.Int(1),
+					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+				},
+			},
+			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("dedicatedMaster"),
+					NodeNum:  pulumi.Int(3),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					Encrypt:  pulumi.Bool(false),
+				},
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("hotData"),
+					NodeNum:  pulumi.Int(2),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					Encrypt:  pulumi.Bool(false),
+				},
+			},
+			EsAcl: &elasticsearch.InstanceEsAclArgs{
+				WhiteLists: pulumi.StringArray{
+					pulumi.String("127.0.0.1"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -494,23 +1911,26 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_es_vpc",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "tf_es_subnet",
         CidrBlock = "10.0.1.0/24",
     });
 
-    var subnetMultiZone = new Tencentcloud.Subnet.Instance("subnetMultiZone", new()
+    var subnetMultiZone = new Tencentcloud.Subnet.Instance("subnet_multi_zone", new()
     {
         VpcId = vpc.Id,
         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult => getZonesByProductResult.Zones[1]?.Name),
+        Name = "tf_es_subnet",
         CidrBlock = "10.0.2.0/24",
     });
 
-    var exampleMultiZone = new Tencentcloud.Elasticsearch.Instance("exampleMultiZone", new()
+    var exampleMultiZone = new Tencentcloud.Elasticsearch.Instance("example_multi_zone", new()
     {
         InstanceName = "tf_example_es",
         AvailabilityZone = "-",
@@ -574,103 +1994,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		availabilityZone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "es",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
-			CidrBlock:        pulumi.String("10.0.1.0/24"),
-		})
-		if err != nil {
-			return err
-		}
-		subnetMultiZone, err := Subnet.NewInstance(ctx, "subnetMultiZone", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
-			CidrBlock:        pulumi.String("10.0.2.0/24"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Elasticsearch.NewInstance(ctx, "exampleMultiZone", &Elasticsearch.InstanceArgs{
-			InstanceName:      pulumi.String("tf_example_es"),
-			AvailabilityZone:  pulumi.String("-"),
-			Version:           pulumi.String("7.10.1"),
-			VpcId:             vpc.ID(),
-			SubnetId:          pulumi.String("-"),
-			Password:          pulumi.String("Test12345"),
-			LicenseType:       pulumi.String("basic"),
-			BasicSecurityType: pulumi.Int(2),
-			DeployMode:        pulumi.Int(1),
-			MultiZoneInfos: elasticsearch.InstanceMultiZoneInfoArray{
-				&elasticsearch.InstanceMultiZoneInfoArgs{
-					AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
-					SubnetId:         subnet.ID(),
-				},
-				&elasticsearch.InstanceMultiZoneInfoArgs{
-					AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
-					SubnetId:         subnetMultiZone.ID(),
-				},
-			},
-			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
-				&elasticsearch.InstanceWebNodeTypeInfoArgs{
-					NodeNum:  pulumi.Int(1),
-					NodeType: pulumi.String("ES.S1.MEDIUM4"),
-				},
-			},
-			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
-				&elasticsearch.InstanceNodeInfoListArgs{
-					Type:     pulumi.String("dedicatedMaster"),
-					NodeNum:  pulumi.Int(3),
-					NodeType: pulumi.String("ES.S1.MEDIUM8"),
-					Encrypt:  pulumi.Bool(false),
-				},
-				&elasticsearch.InstanceNodeInfoListArgs{
-					Type:     pulumi.String("hotData"),
-					NodeNum:  pulumi.Int(2),
-					NodeType: pulumi.String("ES.S1.MEDIUM8"),
-					Encrypt:  pulumi.Bool(false),
-				},
-			},
-			EsAcl: &elasticsearch.InstanceEsAclArgs{
-				WhiteLists: pulumi.StringArray{
-					pulumi.String("127.0.0.1"),
-				},
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -679,18 +2007,12 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Elasticsearch.Instance;
-import com.pulumi.tencentcloud.Elasticsearch.InstanceArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceMultiZoneInfoArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceWebNodeTypeInfoArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceNodeInfoListArgs;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceEsAclArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -706,23 +2028,26 @@ public class App {
             .product("es")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_es_vpc")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
-            .availabilityZone(availabilityZone.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(availabilityZone.zones()[0].name())
+            .name("tf_es_subnet")
             .cidrBlock("10.0.1.0/24")
             .build());
 
-        var subnetMultiZone = new Instance("subnetMultiZone", InstanceArgs.builder()        
+        var subnetMultiZone = new com.pulumi.tencentcloud.Subnet.Instance("subnetMultiZone", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
-            .availabilityZone(availabilityZone.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[1].name()))
+            .availabilityZone(availabilityZone.zones()[1].name())
+            .name("tf_es_subnet")
             .cidrBlock("10.0.2.0/24")
             .build());
 
-        var exampleMultiZone = new Instance("exampleMultiZone", InstanceArgs.builder()        
+        var exampleMultiZone = new com.pulumi.tencentcloud.Elasticsearch.Instance("exampleMultiZone", com.pulumi.tencentcloud.Elasticsearch.InstanceArgs.builder()
             .instanceName("tf_example_es")
             .availabilityZone("-")
             .version("7.10.1")
@@ -734,11 +2059,11 @@ public class App {
             .deployMode(1)
             .multiZoneInfos(            
                 InstanceMultiZoneInfoArgs.builder()
-                    .availabilityZone(availabilityZone.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+                    .availabilityZone(availabilityZone.zones()[0].name())
                     .subnetId(subnet.id())
                     .build(),
                 InstanceMultiZoneInfoArgs.builder()
-                    .availabilityZone(availabilityZone.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[1].name()))
+                    .availabilityZone(availabilityZone.zones()[1].name())
                     .subnetId(subnetMultiZone.id())
                     .build())
             .webNodeTypeInfos(InstanceWebNodeTypeInfoArgs.builder()
@@ -767,26 +2092,36 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_es_vpc
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${availabilityZone.zones[0].name}
+      name: tf_es_subnet
       cidrBlock: 10.0.1.0/24
   subnetMultiZone:
     type: tencentcloud:Subnet:Instance
+    name: subnet_multi_zone
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${availabilityZone.zones[1].name}
+      name: tf_es_subnet
       cidrBlock: 10.0.2.0/24
   exampleMultiZone:
     type: tencentcloud:Elasticsearch:Instance
+    name: example_multi_zone
     properties:
       instanceName: tf_example_es
       availabilityZone: '-'
@@ -822,85 +2157,728 @@ resources:
 variables:
   availabilityZone:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: es
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "availabilityZone" {
+  product = "es"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_es_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[0].name
+  name              = "tf_es_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_subnet_instance" "subnet_multi_zone" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[1].name
+  name              = "tf_es_subnet"
+  cidr_block        = "10.0.2.0/24"
+}
+resource "tencentcloud_elasticsearch_instance" "example_multi_zone" {
+  instance_name       = "tf_example_es"
+  availability_zone   = "-"
+  version             = "7.10.1"
+  vpc_id              = tencentcloud_vpc_instance.vpc.id
+  subnet_id           = "-"
+  password            = "Test12345"
+  license_type        = "basic"
+  basic_security_type = 2
+  deploy_mode         = 1
+  multi_zone_infos {
+    availability_zone = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[0].name
+    subnet_id         = tencentcloud_subnet_instance.subnet.id
+  }
+  multi_zone_infos {
+    availability_zone = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[1].name
+    subnet_id         = tencentcloud_subnet_instance.subnet_multi_zone.id
+  }
+  web_node_type_infos {
+    node_num  = 1
+    node_type = "ES.S1.MEDIUM4"
+  }
+  node_info_lists {
+    type      = "dedicatedMaster"
+    node_num  = 3
+    node_type = "ES.S1.MEDIUM8"
+    encrypt   = false
+  }
+  node_info_lists {
+    type      = "hotData"
+    node_num  = 2
+    node_type = "ES.S1.MEDIUM8"
+    encrypt   = false
+  }
+  es_acl = {
+    white_lists = ["127.0.0.1"]
+  }
+  # black_list = [
+  #   "9.9.9.9",
+  #   "8.8.8.8",
+  # ]
+  tags = {
+    "test" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a basic version of elasticsearch instance with dedicated coordinating node
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const availabilityZone = tencentcloud.availability.getZonesByProduct({
+    product: "es",
+});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_es_vpc",
+});
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+    name: "tf_es_subnet",
+    cidrBlock: "10.0.1.0/24",
+});
+const example = new tencentcloud.elasticsearch.Instance("example", {
+    instanceName: "tf_example_es",
+    availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+    version: "7.10.1",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    password: "Test12345",
+    licenseType: "basic",
+    basicSecurityType: 2,
+    webNodeTypeInfos: [{
+        nodeNum: 1,
+        nodeType: "ES.S1.MEDIUM4",
+    }],
+    nodeInfoLists: [
+        {
+            type: "hotData",
+            nodeNum: 2,
+            nodeType: "ES.S1.MEDIUM8",
+            diskType: "CLOUD_SSD",
+            diskSize: 100,
+            encrypt: false,
+        },
+        {
+            type: "dedicatedMaster",
+            nodeNum: 3,
+            nodeType: "ES.S1.MEDIUM4",
+            diskType: "CLOUD_SSD",
+            diskSize: 50,
+            encrypt: false,
+        },
+        {
+            type: "dedicatedCoordinating",
+            nodeNum: 2,
+            nodeType: "ES.S1.MEDIUM4",
+            diskType: "CLOUD_SSD",
+            diskSize: 50,
+            encrypt: false,
+        },
+    ],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+availability_zone = tencentcloud.availability.get_zones_by_product(product="es")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_es_vpc")
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone.zones[0].name,
+    name="tf_es_subnet",
+    cidr_block="10.0.1.0/24")
+example = tencentcloud.elasticsearch.Instance("example",
+    instance_name="tf_example_es",
+    availability_zone=availability_zone.zones[0].name,
+    version="7.10.1",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    password="Test12345",
+    license_type="basic",
+    basic_security_type=2,
+    web_node_type_infos=[{
+        "node_num": 1,
+        "node_type": "ES.S1.MEDIUM4",
+    }],
+    node_info_lists=[
+        {
+            "type": "hotData",
+            "node_num": 2,
+            "node_type": "ES.S1.MEDIUM8",
+            "disk_type": "CLOUD_SSD",
+            "disk_size": 100,
+            "encrypt": False,
+        },
+        {
+            "type": "dedicatedMaster",
+            "node_num": 3,
+            "node_type": "ES.S1.MEDIUM4",
+            "disk_type": "CLOUD_SSD",
+            "disk_size": 50,
+            "encrypt": False,
+        },
+        {
+            "type": "dedicatedCoordinating",
+            "node_num": 2,
+            "node_type": "ES.S1.MEDIUM4",
+            "disk_type": "CLOUD_SSD",
+            "disk_size": 50,
+            "encrypt": False,
+        },
+    ])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		availabilityZone, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "es",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_es_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+			Name:             pulumi.String("tf_es_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = elasticsearch.NewInstance(ctx, "example", &elasticsearch.InstanceArgs{
+			InstanceName:      pulumi.String("tf_example_es"),
+			AvailabilityZone:  pulumi.String(availabilityZone.Zones[0].Name),
+			Version:           pulumi.String("7.10.1"),
+			VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:          subnet2.ID().ToIDOutput().ToStringOutput(),
+			Password:          pulumi.String("Test12345"),
+			LicenseType:       pulumi.String("basic"),
+			BasicSecurityType: pulumi.Int(2),
+			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+					NodeNum:  pulumi.Int(1),
+					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+				},
+			},
+			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("hotData"),
+					NodeNum:  pulumi.Int(2),
+					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+					DiskType: pulumi.String("CLOUD_SSD"),
+					DiskSize: pulumi.Int(100),
+					Encrypt:  pulumi.Bool(false),
+				},
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("dedicatedMaster"),
+					NodeNum:  pulumi.Int(3),
+					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+					DiskType: pulumi.String("CLOUD_SSD"),
+					DiskSize: pulumi.Int(50),
+					Encrypt:  pulumi.Bool(false),
+				},
+				&elasticsearch.InstanceNodeInfoListArgs{
+					Type:     pulumi.String("dedicatedCoordinating"),
+					NodeNum:  pulumi.Int(2),
+					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+					DiskType: pulumi.String("CLOUD_SSD"),
+					DiskSize: pulumi.Int(50),
+					Encrypt:  pulumi.Bool(false),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var availabilityZone = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    {
+        Product = "es",
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "tf_es_vpc",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "tf_es_subnet",
+        CidrBlock = "10.0.1.0/24",
+    });
+
+    var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    {
+        InstanceName = "tf_example_es",
+        AvailabilityZone = availabilityZone.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Version = "7.10.1",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Password = "Test12345",
+        LicenseType = "basic",
+        BasicSecurityType = 2,
+        WebNodeTypeInfos = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+            {
+                NodeNum = 1,
+                NodeType = "ES.S1.MEDIUM4",
+            },
+        },
+        NodeInfoLists = new[]
+        {
+            new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+            {
+                Type = "hotData",
+                NodeNum = 2,
+                NodeType = "ES.S1.MEDIUM8",
+                DiskType = "CLOUD_SSD",
+                DiskSize = 100,
+                Encrypt = false,
+            },
+            new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+            {
+                Type = "dedicatedMaster",
+                NodeNum = 3,
+                NodeType = "ES.S1.MEDIUM4",
+                DiskType = "CLOUD_SSD",
+                DiskSize = 50,
+                Encrypt = false,
+            },
+            new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+            {
+                Type = "dedicatedCoordinating",
+                NodeNum = 2,
+                NodeType = "ES.S1.MEDIUM4",
+                DiskType = "CLOUD_SSD",
+                DiskSize = 50,
+                Encrypt = false,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
+import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceWebNodeTypeInfoArgs;
+import com.pulumi.tencentcloud.Elasticsearch.inputs.InstanceNodeInfoListArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var availabilityZone = AvailabilityFunctions.getZonesByProduct(GetZonesByProductArgs.builder()
+            .product("es")
+            .build());
+
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("tf_es_vpc")
+            .build());
+
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone.zones()[0].name())
+            .name("tf_es_subnet")
+            .cidrBlock("10.0.1.0/24")
+            .build());
+
+        var example = new com.pulumi.tencentcloud.Elasticsearch.Instance("example", com.pulumi.tencentcloud.Elasticsearch.InstanceArgs.builder()
+            .instanceName("tf_example_es")
+            .availabilityZone(availabilityZone.zones()[0].name())
+            .version("7.10.1")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .password("Test12345")
+            .licenseType("basic")
+            .basicSecurityType(2)
+            .webNodeTypeInfos(InstanceWebNodeTypeInfoArgs.builder()
+                .nodeNum(1)
+                .nodeType("ES.S1.MEDIUM4")
+                .build())
+            .nodeInfoLists(            
+                InstanceNodeInfoListArgs.builder()
+                    .type("hotData")
+                    .nodeNum(2)
+                    .nodeType("ES.S1.MEDIUM8")
+                    .diskType("CLOUD_SSD")
+                    .diskSize(100)
+                    .encrypt(false)
+                    .build(),
+                InstanceNodeInfoListArgs.builder()
+                    .type("dedicatedMaster")
+                    .nodeNum(3)
+                    .nodeType("ES.S1.MEDIUM4")
+                    .diskType("CLOUD_SSD")
+                    .diskSize(50)
+                    .encrypt(false)
+                    .build(),
+                InstanceNodeInfoListArgs.builder()
+                    .type("dedicatedCoordinating")
+                    .nodeNum(2)
+                    .nodeType("ES.S1.MEDIUM4")
+                    .diskType("CLOUD_SSD")
+                    .diskSize(50)
+                    .encrypt(false)
+                    .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: tf_es_vpc
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone.zones[0].name}
+      name: tf_es_subnet
+      cidrBlock: 10.0.1.0/24
+  example:
+    type: tencentcloud:Elasticsearch:Instance
+    properties:
+      instanceName: tf_example_es
+      availabilityZone: ${availabilityZone.zones[0].name}
+      version: 7.10.1
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      password: Test12345
+      licenseType: basic
+      basicSecurityType: 2
+      webNodeTypeInfos:
+        - nodeNum: 1
+          nodeType: ES.S1.MEDIUM4
+      nodeInfoLists:
+        - type: hotData
+          nodeNum: 2
+          nodeType: ES.S1.MEDIUM8
+          diskType: CLOUD_SSD
+          diskSize: 100
+          encrypt: false
+        - type: dedicatedMaster
+          nodeNum: 3
+          nodeType: ES.S1.MEDIUM4
+          diskType: CLOUD_SSD
+          diskSize: 50
+          encrypt: false
+        - type: dedicatedCoordinating
+          nodeNum: 2
+          nodeType: ES.S1.MEDIUM4
+          diskType: CLOUD_SSD
+          diskSize: 50
+          encrypt: false
+variables:
+  availabilityZone:
+    fn::invoke:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
+        product: es
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "availabilityZone" {
+  product = "es"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_es_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[0].name
+  name              = "tf_es_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_elasticsearch_instance" "example" {
+  instance_name       = "tf_example_es"
+  availability_zone   = data.tencentcloud_availability_getzonesbyproduct.availabilityZone.zones[0].name
+  version             = "7.10.1"
+  vpc_id              = tencentcloud_vpc_instance.vpc.id
+  subnet_id           = tencentcloud_subnet_instance.subnet.id
+  password            = "Test12345"
+  license_type        = "basic"
+  basic_security_type = 2
+  web_node_type_infos {
+    node_num  = 1
+    node_type = "ES.S1.MEDIUM4"
+  }
+  node_info_lists {
+    type      = "hotData"
+    node_num  = 2
+    node_type = "ES.S1.MEDIUM8"
+    disk_type = "CLOUD_SSD"
+    disk_size = 100
+    encrypt   = false
+  }
+  node_info_lists {
+    type      = "dedicatedMaster"
+    node_num  = 3
+    node_type = "ES.S1.MEDIUM4"
+    disk_type = "CLOUD_SSD"
+    disk_size = 50
+    encrypt   = false
+  }
+  node_info_lists {
+    type      = "dedicatedCoordinating"
+    node_num  = 2
+    node_type = "ES.S1.MEDIUM4"
+    disk_type = "CLOUD_SSD"
+    disk_size = 50
+    encrypt   = false
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateInstance](https://www.tencentcloud.com/document/api/845/32218)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+  - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+* Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+* Update:
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+  - [UpgradeInstance](https://www.tencentcloud.com/document/api/845/34396)
+  - [UpgradeLicense](https://www.tencentcloud.com/document/api/845/34395)
+* Delete:
+  - [DeleteInstance](https://www.tencentcloud.com/document/api/845/32217)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">basic_security_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">charge_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">deploy_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">es_acl</span><span class="p">:</span> <span class="nx">Optional[_elasticsearch.InstanceEsAclArgs]</span> = None<span class="p">,</span>
-             <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">license_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">multi_zone_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_elasticsearch.InstanceMultiZoneInfoArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">node_info_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_elasticsearch.InstanceNodeInfoListArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-             <span class="nx">version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">web_node_type_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_elasticsearch.InstanceWebNodeTypeInfoArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">kibana_public_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">charge_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">cos_backup</span><span class="p">:</span> <span class="nx">Optional[InstanceCosBackupArgs]</span> = None<span class="p">,</span>
+             <span class="nx">deploy_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">enable_cerebro</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">enable_destroy_protection</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">es_acl</span><span class="p">:</span> <span class="nx">Optional[InstanceEsAclArgs]</span> = None<span class="p">,</span>
+             <span class="nx">es_public_acl</span><span class="p">:</span> <span class="nx">Optional[InstanceEsPublicAclArgs]</span> = None<span class="p">,</span>
+             <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">kibana_private_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">cerebro_public_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">license_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">multi_zone_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceMultiZoneInfoArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">node_info_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceNodeInfoListArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">cerebro_private_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">public_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">scene_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">sub_product_code</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+             <span class="nx">cerebro_private_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">basic_security_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">web_node_type_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceWebNodeTypeInfoArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Elasticsearch:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Elasticsearch:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_elasticsearch_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -921,7 +2899,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1038,11 +3016,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1050,16 +3036,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
-        <span id="nodeinfolists_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Info<wbr>Lists</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args&gt;</a></span>
-    </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -1067,8 +3044,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-required"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-required"
             title="Required">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1076,8 +3052,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1085,8 +3060,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1094,8 +3068,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="basicsecuritytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicsecuritytype_csharp" style="color: inherit; text-decoration: inherit;">Basic<wbr>Security<wbr>Type</a>
@@ -1103,8 +3076,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivateaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivateaccess_csharp" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivatedomain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivatedomain_csharp" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebropublicaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebropublicaccess_csharp" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargeperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Period</a>
@@ -1112,8 +3108,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1121,8 +3116,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosbackup_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbackup_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Cos<wbr>Backup</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
@@ -1130,17 +3132,47 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablecerebro_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecerebro_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enabledestroyprotection_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledestroyprotection_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="esacl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#esacl_csharp" style="color: inherit; text-decoration: inherit;">Es<wbr>Acl</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceesacl">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceesacl">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Es<wbr>Acl</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="espublicacl_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicacl_csharp" style="color: inherit; text-decoration: inherit;">Es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Es<wbr>Public<wbr>Acl</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcedelete_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1148,8 +3180,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanaprivateaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateaccess_csharp" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanapublicaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanapublicaccess_csharp" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_csharp" style="color: inherit; text-decoration: inherit;">License<wbr>Type</a>
@@ -1157,17 +3204,39 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizoneinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Multi<wbr>Zone<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeinfolists_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Info<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Node<wbr>Info<wbr>List&gt;</a></span>
+    </dt>
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publicaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccess_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -1175,8 +3244,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scenetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenetype_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subproductcode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subproductcode_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1184,41 +3268,29 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="webnodetypeinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webnodetypeinfos_csharp" style="color: inherit; text-decoration: inherit;">Web<wbr>Node<wbr>Type<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
-        <span id="nodeinfolists_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Info<wbr>Lists</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">[]Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args</a></span>
-    </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -1226,8 +3298,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-required"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-required"
             title="Required">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1235,8 +3306,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1244,8 +3314,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1253,8 +3322,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="basicsecuritytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicsecuritytype_go" style="color: inherit; text-decoration: inherit;">Basic<wbr>Security<wbr>Type</a>
@@ -1262,8 +3330,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivateaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivateaccess_go" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivatedomain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivatedomain_go" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebropublicaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebropublicaccess_go" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargeperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Period</a>
@@ -1271,8 +3362,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1280,8 +3370,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosbackup_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbackup_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Instance<wbr>Cos<wbr>Backup<wbr>Args</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
@@ -1289,8 +3386,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablecerebro_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecerebro_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enabledestroyprotection_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledestroyprotection_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="esacl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#esacl_go" style="color: inherit; text-decoration: inherit;">Es<wbr>Acl</a>
@@ -1298,8 +3410,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="espublicacl_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicacl_go" style="color: inherit; text-decoration: inherit;">Es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Instance<wbr>Es<wbr>Public<wbr>Acl<wbr>Args</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcedelete_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1307,8 +3434,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanaprivateaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateaccess_go" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanapublicaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanapublicaccess_go" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_go" style="color: inherit; text-decoration: inherit;">License<wbr>Type</a>
@@ -1316,8 +3458,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizoneinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Infos</a>
@@ -1325,8 +3466,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancemultizoneinfo">[]Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeinfolists_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Info<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfolist">[]Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args</a></span>
+    </dt>
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publicaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccess_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -1334,8 +3498,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scenetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenetype_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subproductcode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subproductcode_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1343,17 +3522,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="webnodetypeinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webnodetypeinfos_go" style="color: inherit; text-decoration: inherit;">Web<wbr>Node<wbr>Type<wbr>Infos</a>
@@ -1361,23 +3538,267 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancewebnodetypeinfo">[]Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-secret"
+            title="Required">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC network.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="basic_security_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basic_security_type_hcl" style="color: inherit; text-decoration: inherit;">basic_<wbr>security_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebro_private_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebro_private_access_hcl" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebro_private_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebro_private_domain_hcl" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>private_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebro_public_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebro_public_access_hcl" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charge_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_period_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_backup_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_backup_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">object</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_mode_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_cerebro_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cerebro_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_destroy_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_destroy_protection_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>destroy_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="es_acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#es_acl_hcl" style="color: inherit; text-decoration: inherit;">es_<wbr>acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceesacl">object</a></span>
+    </dt>
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="es_public_acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#es_public_acl_hcl" style="color: inherit; text-decoration: inherit;">es_<wbr>public_<wbr>acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">object</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibana_private_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibana_private_access_hcl" style="color: inherit; text-decoration: inherit;">kibana_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibana_public_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibana_public_access_hcl" style="color: inherit; text-decoration: inherit;">kibana_<wbr>public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="license_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#license_type_hcl" style="color: inherit; text-decoration: inherit;">license_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_zone_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_infos_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">list(object)</a></span>
+    </dt>
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_info_lists_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfolist">list(object)</a></span>
+    </dt>
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_access_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scene_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_type_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="sub_product_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_product_code_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>product_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="web_node_type_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_node_type_infos_hcl" style="color: inherit; text-decoration: inherit;">web_<wbr>node_<wbr>type_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">list(object)</a></span>
+    </dt>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
-        <span id="nodeinfolists_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_java" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args&gt;</a></span>
-    </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1385,8 +3806,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-required"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-required"
             title="Required">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1394,8 +3814,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1403,8 +3822,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1412,8 +3830,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="basicsecuritytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicsecuritytype_java" style="color: inherit; text-decoration: inherit;">basic<wbr>Security<wbr>Type</a>
@@ -1421,8 +3838,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivateaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivateaccess_java" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivatedomain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivatedomain_java" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebropublicaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebropublicaccess_java" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargeperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -1430,8 +3870,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1439,8 +3878,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosbackup_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbackup_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Instance<wbr>Cos<wbr>Backup</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -1448,17 +3894,47 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablecerebro_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecerebro_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enabledestroyprotection_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledestroyprotection_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="esacl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#esacl_java" style="color: inherit; text-decoration: inherit;">es<wbr>Acl</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="espublicacl_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicacl_java" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Instance<wbr>Es<wbr>Public<wbr>Acl</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcedelete_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1466,8 +3942,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanaprivateaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateaccess_java" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanapublicaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanapublicaccess_java" style="color: inherit; text-decoration: inherit;">kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_java" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -1475,17 +3966,39 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizoneinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Instance<wbr>Multi<wbr>Zone<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeinfolists_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_java" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Instance<wbr>Node<wbr>Info<wbr>List&gt;</a></span>
+    </dt>
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publicaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccess_java" style="color: inherit; text-decoration: inherit;">public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1493,8 +4006,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scenetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenetype_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subproductcode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subproductcode_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1502,41 +4030,29 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="webnodetypeinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webnodetypeinfos_java" style="color: inherit; text-decoration: inherit;">web<wbr>Node<wbr>Type<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
-        <span id="nodeinfolists_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args[]</a></span>
-    </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1544,8 +4060,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-required"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-required"
             title="Required">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1553,8 +4068,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1562,8 +4076,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1571,8 +4084,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="basicsecuritytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicsecuritytype_nodejs" style="color: inherit; text-decoration: inherit;">basic<wbr>Security<wbr>Type</a>
@@ -1580,8 +4092,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivateaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivateaccess_nodejs" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivatedomain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivatedomain_nodejs" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebropublicaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebropublicaccess_nodejs" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargeperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -1589,8 +4124,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1598,8 +4132,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosbackup_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbackup_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Instance<wbr>Cos<wbr>Backup</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -1607,17 +4148,47 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablecerebro_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecerebro_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enabledestroyprotection_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledestroyprotection_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="esacl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#esacl_nodejs" style="color: inherit; text-decoration: inherit;">es<wbr>Acl</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="espublicacl_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicacl_nodejs" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Instance<wbr>Es<wbr>Public<wbr>Acl</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcedelete_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1625,8 +4196,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanaprivateaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateaccess_nodejs" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanapublicaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanapublicaccess_nodejs" style="color: inherit; text-decoration: inherit;">kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_nodejs" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -1634,17 +4220,39 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizoneinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancemultizoneinfo">Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">Instance<wbr>Multi<wbr>Zone<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeinfolists_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfolist">Instance<wbr>Node<wbr>Info<wbr>List[]</a></span>
+    </dt>
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publicaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccess_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1652,8 +4260,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scenetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenetype_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subproductcode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subproductcode_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1661,41 +4284,29 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="webnodetypeinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webnodetypeinfos_nodejs" style="color: inherit; text-decoration: inherit;">web<wbr>Node<wbr>Type<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancewebnodetypeinfo">Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
-        <span id="node_info_lists_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_info_lists_python" style="color: inherit; text-decoration: inherit;">node_<wbr>info_<wbr>lists</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args]</a></span>
-    </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1703,8 +4314,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-required"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-required"
             title="Required">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1712,8 +4322,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1721,8 +4330,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1730,8 +4338,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="basic_security_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basic_security_type_python" style="color: inherit; text-decoration: inherit;">basic_<wbr>security_<wbr>type</a>
@@ -1739,8 +4346,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebro_private_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebro_private_access_python" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebro_private_domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebro_private_domain_python" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>private_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebro_public_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebro_public_access_python" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charge_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_period_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>period</a>
@@ -1748,8 +4378,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1757,8 +4386,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_backup_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_backup_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Instance<wbr>Cos<wbr>Backup<wbr>Args</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploy_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_mode_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
@@ -1766,8 +4402,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_cerebro_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cerebro_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_destroy_protection_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_destroy_protection_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>destroy_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="es_acl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#es_acl_python" style="color: inherit; text-decoration: inherit;">es_<wbr>acl</a>
@@ -1775,8 +4426,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="es_public_acl_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#es_public_acl_python" style="color: inherit; text-decoration: inherit;">es_<wbr>public_<wbr>acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Instance<wbr>Es<wbr>Public<wbr>Acl<wbr>Args</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_delete_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1784,8 +4450,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibana_private_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibana_private_access_python" style="color: inherit; text-decoration: inherit;">kibana_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibana_public_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibana_public_access_python" style="color: inherit; text-decoration: inherit;">kibana_<wbr>public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="license_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#license_type_python" style="color: inherit; text-decoration: inherit;">license_<wbr>type</a>
@@ -1793,17 +4474,39 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="multi_zone_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_infos_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancemultizoneinfo">Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">Sequence[Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_info_lists_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_info_lists_python" style="color: inherit; text-decoration: inherit;">node_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfolist">Sequence[Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args]</a></span>
+    </dt>
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_access_python" style="color: inherit; text-decoration: inherit;">public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -1811,8 +4514,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scene_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_type_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="sub_product_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_product_code_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>product_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1820,41 +4538,29 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="web_node_type_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_node_type_infos_python" style="color: inherit; text-decoration: inherit;">web_<wbr>node_<wbr>type_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancewebnodetypeinfo">Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">Sequence[Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-required"
-            title="Required">
-        <span id="nodeinfolists_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Property Map&gt;</a></span>
-    </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1862,8 +4568,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-required"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-required"
             title="Required">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1871,8 +4576,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1880,8 +4584,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1889,8 +4592,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="basicsecuritytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basicsecuritytype_yaml" style="color: inherit; text-decoration: inherit;">basic<wbr>Security<wbr>Type</a>
@@ -1898,8 +4600,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivateaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivateaccess_yaml" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebroprivatedomain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebroprivatedomain_yaml" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cerebropublicaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cerebropublicaccess_yaml" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargeperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeperiod_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -1907,8 +4632,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1916,8 +4640,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosbackup_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbackup_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Property Map</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -1925,8 +4656,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablecerebro_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecerebro_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enabledestroyprotection_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabledestroyprotection_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="esacl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#esacl_yaml" style="color: inherit; text-decoration: inherit;">es<wbr>Acl</a>
@@ -1934,8 +4680,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceesacl">Property Map</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="espublicacl_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicacl_yaml" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Property Map</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcedelete_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1943,8 +4704,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanaprivateaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateaccess_yaml" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kibanapublicaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanapublicaccess_yaml" style="color: inherit; text-decoration: inherit;">kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="licensetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#licensetype_yaml" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -1952,8 +4728,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizoneinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizoneinfos_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
@@ -1961,8 +4736,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeinfolists_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfolists_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publicaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccess_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -1970,8 +4768,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scenetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenetype_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subproductcode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subproductcode_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1979,17 +4792,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="webnodetypeinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webnodetypeinfos_yaml" style="color: inherit; text-decoration: inherit;">web<wbr>Node<wbr>Type<wbr>Infos</a>
@@ -1997,8 +4808,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2019,8 +4829,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-"
+    <dd>Instance creation time.</dd><dt class="property-"
             title="">
         <span id="elasticsearchdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchdomain_csharp" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Domain</a>
@@ -2028,8 +4837,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch domain name.</dd><dt class="property-"
             title="">
         <span id="elasticsearchport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchport_csharp" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Port</a>
@@ -2037,8 +4845,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch port.</dd><dt class="property-"
             title="">
         <span id="elasticsearchvip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchvip_csharp" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Vip</a>
@@ -2046,8 +4853,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch VIP.</dd><dt class="property-"
+            title="">
+        <span id="espublicurl_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicurl_csharp" style="color: inherit; text-decoration: inherit;">Es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2055,8 +4869,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="kibanaprivateurl_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateurl_csharp" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-"
             title="">
         <span id="kibanaurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaurl_csharp" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Url</a>
@@ -2064,8 +4885,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd></dl>
+    <dd>Kibana access URL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2079,8 +4899,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-"
+    <dd>Instance creation time.</dd><dt class="property-"
             title="">
         <span id="elasticsearchdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchdomain_go" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Domain</a>
@@ -2088,8 +4907,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch domain name.</dd><dt class="property-"
             title="">
         <span id="elasticsearchport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchport_go" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Port</a>
@@ -2097,8 +4915,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch port.</dd><dt class="property-"
             title="">
         <span id="elasticsearchvip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchvip_go" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Vip</a>
@@ -2106,8 +4923,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch VIP.</dd><dt class="property-"
+            title="">
+        <span id="espublicurl_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicurl_go" style="color: inherit; text-decoration: inherit;">Es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2115,8 +4939,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="kibanaprivateurl_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateurl_go" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-"
             title="">
         <span id="kibanaurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaurl_go" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Url</a>
@@ -2124,8 +4955,77 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd></dl>
+    <dd>Kibana access URL.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance creation time.</dd><dt class="property-"
+            title="">
+        <span id="elasticsearch_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearch_domain_hcl" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Elasticsearch domain name.</dd><dt class="property-"
+            title="">
+        <span id="elasticsearch_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearch_port_hcl" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Elasticsearch port.</dd><dt class="property-"
+            title="">
+        <span id="elasticsearch_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearch_vip_hcl" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Elasticsearch VIP.</dd><dt class="property-"
+            title="">
+        <span id="es_public_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#es_public_url_hcl" style="color: inherit; text-decoration: inherit;">es_<wbr>public_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="kibana_private_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibana_private_url_hcl" style="color: inherit; text-decoration: inherit;">kibana_<wbr>private_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-"
+            title="">
+        <span id="kibana_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibana_url_hcl" style="color: inherit; text-decoration: inherit;">kibana_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana access URL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2139,8 +5039,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-"
+    <dd>Instance creation time.</dd><dt class="property-"
             title="">
         <span id="elasticsearchdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchdomain_java" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Domain</a>
@@ -2148,8 +5047,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch domain name.</dd><dt class="property-"
             title="">
         <span id="elasticsearchport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchport_java" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Port</a>
@@ -2157,8 +5055,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch port.</dd><dt class="property-"
             title="">
         <span id="elasticsearchvip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchvip_java" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Vip</a>
@@ -2166,8 +5063,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch VIP.</dd><dt class="property-"
+            title="">
+        <span id="espublicurl_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicurl_java" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2175,8 +5079,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="kibanaprivateurl_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateurl_java" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-"
             title="">
         <span id="kibanaurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaurl_java" style="color: inherit; text-decoration: inherit;">kibana<wbr>Url</a>
@@ -2184,8 +5095,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd></dl>
+    <dd>Kibana access URL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2199,8 +5109,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-"
+    <dd>Instance creation time.</dd><dt class="property-"
             title="">
         <span id="elasticsearchdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchdomain_nodejs" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Domain</a>
@@ -2208,8 +5117,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch domain name.</dd><dt class="property-"
             title="">
         <span id="elasticsearchport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchport_nodejs" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Port</a>
@@ -2217,8 +5125,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch port.</dd><dt class="property-"
             title="">
         <span id="elasticsearchvip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchvip_nodejs" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Vip</a>
@@ -2226,8 +5133,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch VIP.</dd><dt class="property-"
+            title="">
+        <span id="espublicurl_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicurl_nodejs" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2235,8 +5149,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="kibanaprivateurl_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateurl_nodejs" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-"
             title="">
         <span id="kibanaurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaurl_nodejs" style="color: inherit; text-decoration: inherit;">kibana<wbr>Url</a>
@@ -2244,8 +5165,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd></dl>
+    <dd>Kibana access URL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2259,8 +5179,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-"
+    <dd>Instance creation time.</dd><dt class="property-"
             title="">
         <span id="elasticsearch_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearch_domain_python" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>domain</a>
@@ -2268,8 +5187,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch domain name.</dd><dt class="property-"
             title="">
         <span id="elasticsearch_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearch_port_python" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>port</a>
@@ -2277,8 +5195,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch port.</dd><dt class="property-"
             title="">
         <span id="elasticsearch_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearch_vip_python" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>vip</a>
@@ -2286,8 +5203,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch VIP.</dd><dt class="property-"
+            title="">
+        <span id="es_public_url_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#es_public_url_python" style="color: inherit; text-decoration: inherit;">es_<wbr>public_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2295,8 +5219,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="kibana_private_url_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibana_private_url_python" style="color: inherit; text-decoration: inherit;">kibana_<wbr>private_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-"
             title="">
         <span id="kibana_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibana_url_python" style="color: inherit; text-decoration: inherit;">kibana_<wbr>url</a>
@@ -2304,8 +5235,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd></dl>
+    <dd>Kibana access URL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2319,8 +5249,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-"
+    <dd>Instance creation time.</dd><dt class="property-"
             title="">
         <span id="elasticsearchdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchdomain_yaml" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Domain</a>
@@ -2328,8 +5257,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch domain name.</dd><dt class="property-"
             title="">
         <span id="elasticsearchport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchport_yaml" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Port</a>
@@ -2337,8 +5265,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch port.</dd><dt class="property-"
             title="">
         <span id="elasticsearchvip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticsearchvip_yaml" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Vip</a>
@@ -2346,8 +5273,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-"
+    <dd>Elasticsearch VIP.</dd><dt class="property-"
+            title="">
+        <span id="espublicurl_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#espublicurl_yaml" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2355,8 +5289,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="kibanaprivateurl_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaprivateurl_yaml" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-"
             title="">
         <span id="kibanaurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kibanaurl_yaml" style="color: inherit; text-decoration: inherit;">kibana<wbr>Url</a>
@@ -2364,8 +5305,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd></dl>
+    <dd>Kibana access URL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2375,141 +5315,196 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">basic_security_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">cerebro_private_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cerebro_private_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cerebro_public_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">charge_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cos_backup</span><span class="p">:</span> <span class="nx">Optional[InstanceCosBackupArgs]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">deploy_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">elasticsearch_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">elasticsearch_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">elasticsearch_vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">es_acl</span><span class="p">:</span> <span class="nx">Optional[_elasticsearch.InstanceEsAclArgs]</span> = None<span class="p">,</span>
+        <span class="nx">enable_cerebro</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">enable_destroy_protection</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">es_acl</span><span class="p">:</span> <span class="nx">Optional[InstanceEsAclArgs]</span> = None<span class="p">,</span>
+        <span class="nx">es_public_acl</span><span class="p">:</span> <span class="nx">Optional[InstanceEsPublicAclArgs]</span> = None<span class="p">,</span>
+        <span class="nx">es_public_url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">kibana_private_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">kibana_private_url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">kibana_public_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">kibana_url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">license_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">multi_zone_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_elasticsearch.InstanceMultiZoneInfoArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">node_info_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_elasticsearch.InstanceNodeInfoListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">multi_zone_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceMultiZoneInfoArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">node_info_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceNodeInfoListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">public_access</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">scene_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">sub_product_code</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">web_node_type_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_elasticsearch.InstanceWebNodeTypeInfoArgs]]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">web_node_type_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceWebNodeTypeInfoArgs]]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Elasticsearch:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_elasticsearch_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2517,28 +5512,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2546,28 +5544,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2587,8 +5588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_basicsecuritytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_basicsecuritytype_csharp" style="color: inherit; text-decoration: inherit;">Basic<wbr>Security<wbr>Type</a>
@@ -2596,8 +5596,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivateaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivateaccess_csharp" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivatedomain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivatedomain_csharp" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebropublicaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebropublicaccess_csharp" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargeperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Period</a>
@@ -2605,8 +5628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2614,8 +5636,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cosbackup_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbackup_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Cos<wbr>Backup</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2623,8 +5652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
@@ -2632,8 +5660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchdomain_csharp" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Domain</a>
@@ -2641,8 +5668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchport_csharp" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Port</a>
@@ -2650,8 +5676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchvip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchvip_csharp" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Vip</a>
@@ -2659,17 +5684,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch VIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enablecerebro_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecerebro_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enabledestroyprotection_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enabledestroyprotection_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_esacl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_esacl_csharp" style="color: inherit; text-decoration: inherit;">Es<wbr>Acl</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceesacl">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceesacl">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Es<wbr>Acl</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicacl_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicacl_csharp" style="color: inherit; text-decoration: inherit;">Es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Es<wbr>Public<wbr>Acl</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicurl_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicurl_csharp" style="color: inherit; text-decoration: inherit;">Es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcedelete_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2677,8 +5740,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateaccess_csharp" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateurl_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateurl_csharp" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanapublicaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanapublicaccess_csharp" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kibanaurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaurl_csharp" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Url</a>
@@ -2686,8 +5772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana access URL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_csharp" style="color: inherit; text-decoration: inherit;">License<wbr>Type</a>
@@ -2695,26 +5780,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizoneinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Multi<wbr>Zone<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfolists_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Node<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-optional"
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2722,8 +5804,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_publicaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccess_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -2731,8 +5828,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scenetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenetype_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subproductcode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subproductcode_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2740,17 +5852,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -2758,8 +5868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2767,17 +5876,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webnodetypeinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webnodetypeinfos_csharp" style="color: inherit; text-decoration: inherit;">Web<wbr>Node<wbr>Type<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2791,8 +5898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_basicsecuritytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_basicsecuritytype_go" style="color: inherit; text-decoration: inherit;">Basic<wbr>Security<wbr>Type</a>
@@ -2800,8 +5906,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivateaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivateaccess_go" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivatedomain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivatedomain_go" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebropublicaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebropublicaccess_go" style="color: inherit; text-decoration: inherit;">Cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargeperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Period</a>
@@ -2809,8 +5938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2818,8 +5946,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cosbackup_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbackup_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Instance<wbr>Cos<wbr>Backup<wbr>Args</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2827,8 +5962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
@@ -2836,8 +5970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchdomain_go" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Domain</a>
@@ -2845,8 +5978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchport_go" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Port</a>
@@ -2854,8 +5986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchvip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchvip_go" style="color: inherit; text-decoration: inherit;">Elasticsearch<wbr>Vip</a>
@@ -2863,8 +5994,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch VIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enablecerebro_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecerebro_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enabledestroyprotection_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enabledestroyprotection_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_esacl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_esacl_go" style="color: inherit; text-decoration: inherit;">Es<wbr>Acl</a>
@@ -2872,8 +6018,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicacl_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicacl_go" style="color: inherit; text-decoration: inherit;">Es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Instance<wbr>Es<wbr>Public<wbr>Acl<wbr>Args</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicurl_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicurl_go" style="color: inherit; text-decoration: inherit;">Es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcedelete_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2881,8 +6050,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateaccess_go" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateurl_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateurl_go" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanapublicaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanapublicaccess_go" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kibanaurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaurl_go" style="color: inherit; text-decoration: inherit;">Kibana<wbr>Url</a>
@@ -2890,8 +6082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana access URL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_go" style="color: inherit; text-decoration: inherit;">License<wbr>Type</a>
@@ -2899,8 +6090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizoneinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Infos</a>
@@ -2908,8 +6098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancemultizoneinfo">[]Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfolists_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Info<wbr>Lists</a>
@@ -2917,8 +6106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfolist">[]Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-optional"
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2926,8 +6114,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_publicaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccess_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -2935,8 +6138,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scenetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenetype_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subproductcode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subproductcode_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2944,17 +6162,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -2962,8 +6178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2971,8 +6186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webnodetypeinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webnodetypeinfos_go" style="color: inherit; text-decoration: inherit;">Web<wbr>Node<wbr>Type<wbr>Infos</a>
@@ -2980,8 +6194,317 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancewebnodetypeinfo">[]Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_basic_security_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_basic_security_type_hcl" style="color: inherit; text-decoration: inherit;">basic_<wbr>security_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebro_private_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebro_private_access_hcl" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebro_private_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebro_private_domain_hcl" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>private_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebro_public_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebro_public_access_hcl" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charge_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_period_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cos_backup_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_backup_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">object</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance creation time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_mode_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_elasticsearch_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearch_domain_hcl" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Elasticsearch domain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_elasticsearch_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearch_port_hcl" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Elasticsearch port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_elasticsearch_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearch_vip_hcl" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Elasticsearch VIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_cerebro_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_cerebro_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_destroy_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_destroy_protection_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>destroy_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_es_acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_es_acl_hcl" style="color: inherit; text-decoration: inherit;">es_<wbr>acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceesacl">object</a></span>
+    </dt>
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_es_public_acl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_es_public_acl_hcl" style="color: inherit; text-decoration: inherit;">es_<wbr>public_<wbr>acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">object</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_es_public_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_es_public_url_hcl" style="color: inherit; text-decoration: inherit;">es_<wbr>public_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibana_private_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibana_private_access_hcl" style="color: inherit; text-decoration: inherit;">kibana_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibana_private_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibana_private_url_hcl" style="color: inherit; text-decoration: inherit;">kibana_<wbr>private_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibana_public_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibana_public_access_hcl" style="color: inherit; text-decoration: inherit;">kibana_<wbr>public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibana_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibana_url_hcl" style="color: inherit; text-decoration: inherit;">kibana_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana access URL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_license_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_license_type_hcl" style="color: inherit; text-decoration: inherit;">license_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_zone_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_zone_infos_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">list(object)</a></span>
+    </dt>
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_node_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_info_lists_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfolist">list(object)</a></span>
+    </dt>
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_access_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scene_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scene_type_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_sub_product_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_product_code_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>product_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_web_node_type_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_web_node_type_infos_hcl" style="color: inherit; text-decoration: inherit;">web_<wbr>node_<wbr>type_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">list(object)</a></span>
+    </dt>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2995,8 +6518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_basicsecuritytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_basicsecuritytype_java" style="color: inherit; text-decoration: inherit;">basic<wbr>Security<wbr>Type</a>
@@ -3004,8 +6526,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivateaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivateaccess_java" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivatedomain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivatedomain_java" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebropublicaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebropublicaccess_java" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargeperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -3013,8 +6558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3022,8 +6566,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cosbackup_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbackup_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Instance<wbr>Cos<wbr>Backup</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3031,8 +6582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -3040,8 +6590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchdomain_java" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Domain</a>
@@ -3049,8 +6598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchport_java" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Port</a>
@@ -3058,8 +6606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchvip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchvip_java" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Vip</a>
@@ -3067,17 +6614,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch VIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enablecerebro_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecerebro_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enabledestroyprotection_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enabledestroyprotection_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_esacl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_esacl_java" style="color: inherit; text-decoration: inherit;">es<wbr>Acl</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicacl_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicacl_java" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Instance<wbr>Es<wbr>Public<wbr>Acl</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicurl_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicurl_java" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcedelete_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3085,8 +6670,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateaccess_java" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateurl_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateurl_java" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanapublicaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanapublicaccess_java" style="color: inherit; text-decoration: inherit;">kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kibanaurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaurl_java" style="color: inherit; text-decoration: inherit;">kibana<wbr>Url</a>
@@ -3094,8 +6702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana access URL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_java" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -3103,26 +6710,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizoneinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Instance<wbr>Multi<wbr>Zone<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfolists_java" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancenodeinfolist">List&lt;Instance<wbr>Node<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-optional"
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3130,8 +6734,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_publicaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccess_java" style="color: inherit; text-decoration: inherit;">public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -3139,8 +6758,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scenetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenetype_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subproductcode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subproductcode_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3148,17 +6782,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -3166,8 +6798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3175,17 +6806,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webnodetypeinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webnodetypeinfos_java" style="color: inherit; text-decoration: inherit;">web<wbr>Node<wbr>Type<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3199,8 +6828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_basicsecuritytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_basicsecuritytype_nodejs" style="color: inherit; text-decoration: inherit;">basic<wbr>Security<wbr>Type</a>
@@ -3208,8 +6836,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivateaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivateaccess_nodejs" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivatedomain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivatedomain_nodejs" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebropublicaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebropublicaccess_nodejs" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargeperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -3217,8 +6868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3226,8 +6876,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cosbackup_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbackup_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Instance<wbr>Cos<wbr>Backup</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3235,8 +6892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -3244,8 +6900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchdomain_nodejs" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Domain</a>
@@ -3253,8 +6908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchport_nodejs" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Port</a>
@@ -3262,8 +6916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchvip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchvip_nodejs" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Vip</a>
@@ -3271,17 +6924,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch VIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enablecerebro_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecerebro_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enabledestroyprotection_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enabledestroyprotection_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_esacl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_esacl_nodejs" style="color: inherit; text-decoration: inherit;">es<wbr>Acl</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
+        <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicacl_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicacl_nodejs" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Instance<wbr>Es<wbr>Public<wbr>Acl</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicurl_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicurl_nodejs" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcedelete_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3289,8 +6980,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateaccess_nodejs" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateurl_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateurl_nodejs" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanapublicaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanapublicaccess_nodejs" style="color: inherit; text-decoration: inherit;">kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kibanaurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaurl_nodejs" style="color: inherit; text-decoration: inherit;">kibana<wbr>Url</a>
@@ -3298,8 +7012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana access URL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_nodejs" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -3307,26 +7020,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizoneinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancemultizoneinfo">Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">Instance<wbr>Multi<wbr>Zone<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfolists_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancenodeinfolist">Instance<wbr>Node<wbr>Info<wbr>List[]</a></span>
     </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-optional"
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3334,8 +7044,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_publicaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccess_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -3343,8 +7068,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scenetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenetype_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subproductcode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subproductcode_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3352,17 +7092,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -3370,8 +7108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3379,17 +7116,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webnodetypeinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webnodetypeinfos_nodejs" style="color: inherit; text-decoration: inherit;">web<wbr>Node<wbr>Type<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancewebnodetypeinfo">Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3403,8 +7138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_basic_security_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_basic_security_type_python" style="color: inherit; text-decoration: inherit;">basic_<wbr>security_<wbr>type</a>
@@ -3412,8 +7146,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebro_private_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebro_private_access_python" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebro_private_domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebro_private_domain_python" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>private_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebro_public_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebro_public_access_python" style="color: inherit; text-decoration: inherit;">cerebro_<wbr>public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charge_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_period_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>period</a>
@@ -3421,8 +7178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -3430,8 +7186,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cos_backup_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_backup_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Instance<wbr>Cos<wbr>Backup<wbr>Args</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3439,8 +7202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploy_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_mode_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
@@ -3448,8 +7210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearch_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearch_domain_python" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>domain</a>
@@ -3457,8 +7218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearch_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearch_port_python" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>port</a>
@@ -3466,8 +7226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearch_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearch_vip_python" style="color: inherit; text-decoration: inherit;">elasticsearch_<wbr>vip</a>
@@ -3475,8 +7234,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch VIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_cerebro_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_cerebro_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_destroy_protection_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_destroy_protection_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>destroy_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_es_acl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_es_acl_python" style="color: inherit; text-decoration: inherit;">es_<wbr>acl</a>
@@ -3484,8 +7258,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceesacl">Instance<wbr>Es<wbr>Acl<wbr>Args</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_es_public_acl_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_es_public_acl_python" style="color: inherit; text-decoration: inherit;">es_<wbr>public_<wbr>acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Instance<wbr>Es<wbr>Public<wbr>Acl<wbr>Args</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_es_public_url_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_es_public_url_python" style="color: inherit; text-decoration: inherit;">es_<wbr>public_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_delete_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -3493,8 +7290,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibana_private_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibana_private_access_python" style="color: inherit; text-decoration: inherit;">kibana_<wbr>private_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibana_private_url_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibana_private_url_python" style="color: inherit; text-decoration: inherit;">kibana_<wbr>private_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibana_public_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibana_public_access_python" style="color: inherit; text-decoration: inherit;">kibana_<wbr>public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kibana_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibana_url_python" style="color: inherit; text-decoration: inherit;">kibana_<wbr>url</a>
@@ -3502,8 +7322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana access URL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_license_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_license_type_python" style="color: inherit; text-decoration: inherit;">license_<wbr>type</a>
@@ -3511,26 +7330,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multi_zone_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_zone_infos_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancemultizoneinfo">Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancemultizoneinfo">Sequence[Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_node_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_info_lists_python" style="color: inherit; text-decoration: inherit;">node_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfolist">Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancenodeinfolist">Sequence[Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-optional"
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3538,8 +7354,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_access_python" style="color: inherit; text-decoration: inherit;">public_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -3547,8 +7378,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scene_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scene_type_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_sub_product_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_product_code_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>product_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -3556,17 +7402,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -3574,8 +7418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3583,17 +7426,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_web_node_type_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_web_node_type_infos_python" style="color: inherit; text-decoration: inherit;">web_<wbr>node_<wbr>type_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancewebnodetypeinfo">Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancewebnodetypeinfo">Sequence[Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3607,8 +7448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone. When create multi-az es, this parameter must be the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_basicsecuritytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_basicsecuritytype_yaml" style="color: inherit; text-decoration: inherit;">basic<wbr>Security<wbr>Type</a>
@@ -3616,8 +7456,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are <code>1</code> and <code>2</code>. <code>1</code> is disabled, <code>2</code> is enabled, and default value is <code>1</code>. Notice: this parameter is only take effect on <code>basic</code> license.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivateaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivateaccess_yaml" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebroprivatedomain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebroprivatedomain_yaml" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Private<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cerebropublicaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cerebropublicaccess_yaml" style="color: inherit; text-decoration: inherit;">cerebro<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cerebro public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargeperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeperiod_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Period</a>
@@ -3625,8 +7488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3634,8 +7496,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cosbackup_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbackup_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancecosbackup">Property Map</a></span>
+    </dt>
+    <dd>COS automatic backup information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3643,8 +7512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -3652,8 +7520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster deployment mode. Valid values are <code>0</code> and <code>1</code>. <code>0</code> is single-AZ deployment, and <code>1</code> is multi-AZ deployment. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchdomain_yaml" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Domain</a>
@@ -3661,8 +7528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elasticsearch domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchport_yaml" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Port</a>
@@ -3670,8 +7536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Elasticsearch port.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticsearchvip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticsearchvip_yaml" style="color: inherit; text-decoration: inherit;">elasticsearch<wbr>Vip</a>
@@ -3679,8 +7544,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elasticsearch VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Elasticsearch VIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enablecerebro_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablecerebro_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Cerebro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enabledestroyprotection_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enabledestroyprotection_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Destroy<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster destroy protection status. Valid values are <code>OPEN</code> (enable protection) and <code>CLOSE</code> (disable protection). NOTE: when destroy protection is <code>OPEN</code>, <code>terraform destroy</code> will fail at the cloud API <code>DeleteInstance</code> call until this field is set to <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_esacl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_esacl_yaml" style="color: inherit; text-decoration: inherit;">es<wbr>Acl</a>
@@ -3688,8 +7568,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceesacl">Property Map</a></span>
     </dt>
-    <dd><p>Kibana Access Control Configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana Access Control Configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicacl_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicacl_yaml" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Acl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceespublicacl">Property Map</a></span>
+    </dt>
+    <dd>Public network access control list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_espublicurl_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_espublicurl_yaml" style="color: inherit; text-decoration: inherit;">es<wbr>Public<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Es public network address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcedelete_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to force delete the instance. Default is <code>false</code>. Set it to <code>true</code> while deleting the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3697,8 +7600,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateaccess_yaml" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana private network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanaprivateurl_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaprivateurl_yaml" style="color: inherit; text-decoration: inherit;">kibana<wbr>Private<wbr>Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana private URL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kibanapublicaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanapublicaccess_yaml" style="color: inherit; text-decoration: inherit;">kibana<wbr>Public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kibana public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kibanaurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kibanaurl_yaml" style="color: inherit; text-decoration: inherit;">kibana<wbr>Url</a>
@@ -3706,8 +7632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kibana access URL.</p>
-</dd><dt class="property-optional"
+    <dd>Kibana access URL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_licensetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_licensetype_yaml" style="color: inherit; text-decoration: inherit;">license<wbr>Type</a>
@@ -3715,8 +7640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>License type. Valid values are <code>oss</code>, <code>basic</code> and <code>platinum</code>. The default value is <code>platinum</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizoneinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizoneinfos_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Infos</a>
@@ -3724,8 +7648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancemultizoneinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is <code>1</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Details of AZs in multi-AZ deployment mode (which is required when deployMode is <code>1</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfolists_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Info<wbr>Lists</a>
@@ -3733,8 +7656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</p>
-</dd><dt class="property-optional"
+    <dd>Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3742,8 +7664,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Create an https cluster, default is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_publicaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccess_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ES cluster public network access status. Valid values are <code>OPEN</code> and <code>CLOSE</code>. Cannot be changed at the same time as <code>esAcl</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -3751,8 +7688,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are <code>RENEW_FLAG_AUTO</code> and <code>RENEW_FLAG_MANUAL</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scenetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenetype_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subproductcode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subproductcode_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Product<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Sub-product code of the instance. Valid values: <code>spEsIo2</code> (open source), <code>spEsBasic</code> (basic), <code>spEsPlatinum</code> (platinum), <code>spEsEnterprise</code> (enterprise), <code>spEsCdcPlatinum</code> (CDC platinum), <code>spEsEnlogging</code> (logging enhanced), <code>spEsAisearch</code> (AI search enhanced), <code>spTsearchIo2</code> (tsearch), <code>spEsLogstash</code> (logstash). If omitted, the value is mapped from <code>licenseType</code> by the backend. NOTE: this field can only be set when creating the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3760,17 +7712,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or <code>-</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</p>
-</dd><dt class="property-optional"
+    <dd>A mapping of tags to assign to the instance. For tag limits, please refer to <a href="https://intl.cloud.tencent.com/document/product/651/13354">Use Limits</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -3778,8 +7728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the instance. Valid values are <code>5.6.4</code>, <code>6.4.3</code>, <code>6.8.2</code>, <code>7.5.1</code> and <code>7.10.1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3787,8 +7736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webnodetypeinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webnodetypeinfos_yaml" style="color: inherit; text-decoration: inherit;">web<wbr>Node<wbr>Type<wbr>Infos</a>
@@ -3796,8 +7744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancewebnodetypeinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Visual node configuration.</p>
-</dd></dl>
+    <dd>Visual node configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3812,7 +7759,167 @@ The following state arguments are supported:
 
 
 
-<h4 id="instanceesacl">Instance<wbr>Es<wbr>Acl</h4>
+<h4 id="instancecosbackup">
+Instance<wbr>Cos<wbr>Backup<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Cos<wbr>Backup<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backuptime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Automatic backup execution time (accurate to the hour), e.g. <code>22:00</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautobackup_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautobackup_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable automatic backup of cos.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backuptime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Automatic backup execution time (accurate to the hour), e.g. <code>22:00</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautobackup_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautobackup_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable automatic backup of cos.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backup_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_time_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Automatic backup execution time (accurate to the hour), e.g. <code>22:00</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_auto_backup_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auto_backup_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable automatic backup of cos.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backuptime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Automatic backup execution time (accurate to the hour), e.g. <code>22:00</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautobackup_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautobackup_java" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable automatic backup of cos.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backuptime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Automatic backup execution time (accurate to the hour), e.g. <code>22:00</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautobackup_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautobackup_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable automatic backup of cos.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backup_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_time_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Automatic backup execution time (accurate to the hour), e.g. <code>22:00</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_auto_backup_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auto_backup_python" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable automatic backup of cos.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backuptime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Automatic backup execution time (accurate to the hour), e.g. <code>22:00</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="isautobackup_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautobackup_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Backup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable automatic backup of cos.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="instanceesacl">
+Instance<wbr>Es<wbr>Acl<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Es<wbr>Acl<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3824,8 +7931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Blacklist of kibana access.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist of kibana access.</dd><dt class="property-optional"
             title="Optional">
         <span id="whitelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelists_csharp" style="color: inherit; text-decoration: inherit;">White<wbr>Lists</a>
@@ -3833,8 +7939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Whitelist of kibana access.</p>
-</dd></dl>
+    <dd>Whitelist of kibana access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3848,8 +7953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Blacklist of kibana access.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist of kibana access.</dd><dt class="property-optional"
             title="Optional">
         <span id="whitelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelists_go" style="color: inherit; text-decoration: inherit;">White<wbr>Lists</a>
@@ -3857,8 +7961,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Whitelist of kibana access.</p>
-</dd></dl>
+    <dd>Whitelist of kibana access.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="black_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#black_lists_hcl" style="color: inherit; text-decoration: inherit;">black_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Blacklist of kibana access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="white_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#white_lists_hcl" style="color: inherit; text-decoration: inherit;">white_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Whitelist of kibana access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3872,8 +7997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Blacklist of kibana access.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist of kibana access.</dd><dt class="property-optional"
             title="Optional">
         <span id="whitelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelists_java" style="color: inherit; text-decoration: inherit;">white<wbr>Lists</a>
@@ -3881,8 +8005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Whitelist of kibana access.</p>
-</dd></dl>
+    <dd>Whitelist of kibana access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3896,8 +8019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Blacklist of kibana access.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist of kibana access.</dd><dt class="property-optional"
             title="Optional">
         <span id="whitelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelists_nodejs" style="color: inherit; text-decoration: inherit;">white<wbr>Lists</a>
@@ -3905,8 +8027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Whitelist of kibana access.</p>
-</dd></dl>
+    <dd>Whitelist of kibana access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3920,8 +8041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Blacklist of kibana access.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist of kibana access.</dd><dt class="property-optional"
             title="Optional">
         <span id="white_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#white_lists_python" style="color: inherit; text-decoration: inherit;">white_<wbr>lists</a>
@@ -3929,8 +8049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Whitelist of kibana access.</p>
-</dd></dl>
+    <dd>Whitelist of kibana access.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3944,8 +8063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Blacklist of kibana access.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist of kibana access.</dd><dt class="property-optional"
             title="Optional">
         <span id="whitelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelists_yaml" style="color: inherit; text-decoration: inherit;">white<wbr>Lists</a>
@@ -3953,12 +8071,115 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Whitelist of kibana access.</p>
-</dd></dl>
+    <dd>Whitelist of kibana access.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instancemultizoneinfo">Instance<wbr>Multi<wbr>Zone<wbr>Info</h4>
+<h4 id="instanceespublicacl">
+Instance<wbr>Es<wbr>Public<wbr>Acl<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Es<wbr>Public<wbr>Acl<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="whiteiplists_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteiplists_csharp" style="color: inherit; text-decoration: inherit;">White<wbr>Ip<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Access Whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="whiteiplists_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteiplists_go" style="color: inherit; text-decoration: inherit;">White<wbr>Ip<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Access Whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="white_ip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#white_ip_lists_hcl" style="color: inherit; text-decoration: inherit;">white_<wbr>ip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Access Whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="whiteiplists_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteiplists_java" style="color: inherit; text-decoration: inherit;">white<wbr>Ip<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Access Whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="whiteiplists_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteiplists_nodejs" style="color: inherit; text-decoration: inherit;">white<wbr>Ip<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Access Whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="white_ip_lists_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#white_ip_lists_python" style="color: inherit; text-decoration: inherit;">white_<wbr>ip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Access Whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="whiteiplists_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteiplists_yaml" style="color: inherit; text-decoration: inherit;">white<wbr>Ip<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Access Whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="instancemultizoneinfo">
+Instance<wbr>Multi<wbr>Zone<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Multi<wbr>Zone<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3970,8 +8191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3979,8 +8199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork.</p>
-</dd></dl>
+    <dd>The ID of a VPC subnetwork.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3994,8 +8213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -4003,8 +8221,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork.</p>
-</dd></dl>
+    <dd>The ID of a VPC subnetwork.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC subnetwork.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4018,8 +8257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4027,8 +8265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork.</p>
-</dd></dl>
+    <dd>The ID of a VPC subnetwork.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4042,8 +8279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4051,8 +8287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork.</p>
-</dd></dl>
+    <dd>The ID of a VPC subnetwork.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4066,8 +8301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -4075,8 +8309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork.</p>
-</dd></dl>
+    <dd>The ID of a VPC subnetwork.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4090,8 +8323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4099,12 +8331,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnetwork.</p>
-</dd></dl>
+    <dd>The ID of a VPC subnetwork.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instancenodeinfolist">Instance<wbr>Node<wbr>Info<wbr>List</h4>
+<h4 id="instancenodeinfolist">
+Instance<wbr>Node<wbr>Info<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Node<wbr>Info<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4116,8 +8349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -4125,8 +8357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -4134,8 +8365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node disk size. Unit is GB, and default value is <code>100</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk size. Unit is GB, and default value is <code>100</code>. Big Data and High IO models do not support the specified disk size and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -4143,8 +8373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node disk type. Valid values are <code>CLOUD_SSD</code> and <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>. The default value is <code>CLOUD_SSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk type. Valid values are <code>CLOUD_SSD</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_BSSD</code>, <code>CLOUD_BIGDATA</code> and <code>CLOUD_HIGHIO</code>. The default value is <code>CLOUD_SSD</code>. Big Data and High IO models do not support the specified disk type and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_csharp" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -4152,8 +8381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Decides to encrypt this disk or not.</p>
-</dd><dt class="property-optional"
+    <dd>Decides to encrypt this disk or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -4161,8 +8389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values are <code>hotData</code>, <code>warmData</code> and <code>dedicatedMaster</code>. The default value is 'hotData`.</p>
-</dd></dl>
+    <dd>Node type. Valid values are <code>hotData</code>, <code>warmData</code>, <code>dedicatedMaster</code>, <code>dedicatedCoordinating</code> and <code>dedicatedMl</code>. The default value is <code>hotData</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4176,8 +8403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -4185,8 +8411,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -4194,8 +8419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node disk size. Unit is GB, and default value is <code>100</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk size. Unit is GB, and default value is <code>100</code>. Big Data and High IO models do not support the specified disk size and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -4203,8 +8427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node disk type. Valid values are <code>CLOUD_SSD</code> and <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>. The default value is <code>CLOUD_SSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk type. Valid values are <code>CLOUD_SSD</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_BSSD</code>, <code>CLOUD_BIGDATA</code> and <code>CLOUD_HIGHIO</code>. The default value is <code>CLOUD_SSD</code>. Big Data and High IO models do not support the specified disk type and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_go" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -4212,8 +8435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Decides to encrypt this disk or not.</p>
-</dd><dt class="property-optional"
+    <dd>Decides to encrypt this disk or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -4221,8 +8443,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values are <code>hotData</code>, <code>warmData</code> and <code>dedicatedMaster</code>. The default value is 'hotData`.</p>
-</dd></dl>
+    <dd>Node type. Valid values are <code>hotData</code>, <code>warmData</code>, <code>dedicatedMaster</code>, <code>dedicatedCoordinating</code> and <code>dedicatedMl</code>. The default value is <code>hotData</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="node_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_num_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of nodes.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node disk size. Unit is GB, and default value is <code>100</code>. Big Data and High IO models do not support the specified disk size and have no default values.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node disk type. Valid values are <code>CLOUD_SSD</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_BSSD</code>, <code>CLOUD_BIGDATA</code> and <code>CLOUD_HIGHIO</code>. The default value is <code>CLOUD_SSD</code>. Big Data and High IO models do not support the specified disk type and have no default values.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypt_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_hcl" style="color: inherit; text-decoration: inherit;">encrypt</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Decides to encrypt this disk or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node type. Valid values are <code>hotData</code>, <code>warmData</code>, <code>dedicatedMaster</code>, <code>dedicatedCoordinating</code> and <code>dedicatedMl</code>. The default value is <code>hotData</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4236,8 +8511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4245,8 +8519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -4254,8 +8527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node disk size. Unit is GB, and default value is <code>100</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk size. Unit is GB, and default value is <code>100</code>. Big Data and High IO models do not support the specified disk size and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -4263,8 +8535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node disk type. Valid values are <code>CLOUD_SSD</code> and <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>. The default value is <code>CLOUD_SSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk type. Valid values are <code>CLOUD_SSD</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_BSSD</code>, <code>CLOUD_BIGDATA</code> and <code>CLOUD_HIGHIO</code>. The default value is <code>CLOUD_SSD</code>. Big Data and High IO models do not support the specified disk type and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_java" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -4272,8 +8543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Decides to encrypt this disk or not.</p>
-</dd><dt class="property-optional"
+    <dd>Decides to encrypt this disk or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4281,8 +8551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node type. Valid values are <code>hotData</code>, <code>warmData</code> and <code>dedicatedMaster</code>. The default value is 'hotData`.</p>
-</dd></dl>
+    <dd>Node type. Valid values are <code>hotData</code>, <code>warmData</code>, <code>dedicatedMaster</code>, <code>dedicatedCoordinating</code> and <code>dedicatedMl</code>. The default value is <code>hotData</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4296,8 +8565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4305,8 +8573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -4314,8 +8581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node disk size. Unit is GB, and default value is <code>100</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk size. Unit is GB, and default value is <code>100</code>. Big Data and High IO models do not support the specified disk size and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -4323,8 +8589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node disk type. Valid values are <code>CLOUD_SSD</code> and <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>. The default value is <code>CLOUD_SSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk type. Valid values are <code>CLOUD_SSD</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_BSSD</code>, <code>CLOUD_BIGDATA</code> and <code>CLOUD_HIGHIO</code>. The default value is <code>CLOUD_SSD</code>. Big Data and High IO models do not support the specified disk type and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_nodejs" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -4332,8 +8597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Decides to encrypt this disk or not.</p>
-</dd><dt class="property-optional"
+    <dd>Decides to encrypt this disk or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4341,8 +8605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node type. Valid values are <code>hotData</code>, <code>warmData</code> and <code>dedicatedMaster</code>. The default value is 'hotData`.</p>
-</dd></dl>
+    <dd>Node type. Valid values are <code>hotData</code>, <code>warmData</code>, <code>dedicatedMaster</code>, <code>dedicatedCoordinating</code> and <code>dedicatedMl</code>. The default value is <code>hotData</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4356,8 +8619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="node_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
@@ -4365,8 +8627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -4374,8 +8635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node disk size. Unit is GB, and default value is <code>100</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk size. Unit is GB, and default value is <code>100</code>. Big Data and High IO models do not support the specified disk size and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -4383,8 +8643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node disk type. Valid values are <code>CLOUD_SSD</code> and <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>. The default value is <code>CLOUD_SSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk type. Valid values are <code>CLOUD_SSD</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_BSSD</code>, <code>CLOUD_BIGDATA</code> and <code>CLOUD_HIGHIO</code>. The default value is <code>CLOUD_SSD</code>. Big Data and High IO models do not support the specified disk type and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_python" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -4392,8 +8651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Decides to encrypt this disk or not.</p>
-</dd><dt class="property-optional"
+    <dd>Decides to encrypt this disk or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4401,8 +8659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node type. Valid values are <code>hotData</code>, <code>warmData</code> and <code>dedicatedMaster</code>. The default value is 'hotData`.</p>
-</dd></dl>
+    <dd>Node type. Valid values are <code>hotData</code>, <code>warmData</code>, <code>dedicatedMaster</code>, <code>dedicatedCoordinating</code> and <code>dedicatedMl</code>. The default value is <code>hotData</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4416,8 +8673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4425,8 +8681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification, and valid values refer to <a href="https://intl.cloud.tencent.com/document/product/845/18376">document of tencentcloud</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -4434,8 +8689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node disk size. Unit is GB, and default value is <code>100</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk size. Unit is GB, and default value is <code>100</code>. Big Data and High IO models do not support the specified disk size and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -4443,8 +8697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node disk type. Valid values are <code>CLOUD_SSD</code> and <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>. The default value is <code>CLOUD_SSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Node disk type. Valid values are <code>CLOUD_SSD</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_BSSD</code>, <code>CLOUD_BIGDATA</code> and <code>CLOUD_HIGHIO</code>. The default value is <code>CLOUD_SSD</code>. Big Data and High IO models do not support the specified disk type and have no default values.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_yaml" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -4452,8 +8705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Decides to encrypt this disk or not.</p>
-</dd><dt class="property-optional"
+    <dd>Decides to encrypt this disk or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4461,12 +8713,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node type. Valid values are <code>hotData</code>, <code>warmData</code> and <code>dedicatedMaster</code>. The default value is 'hotData`.</p>
-</dd></dl>
+    <dd>Node type. Valid values are <code>hotData</code>, <code>warmData</code>, <code>dedicatedMaster</code>, <code>dedicatedCoordinating</code> and <code>dedicatedMl</code>. The default value is <code>hotData</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instancewebnodetypeinfo">Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info</h4>
+<h4 id="instancewebnodetypeinfo">
+Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Web<wbr>Node<wbr>Type<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4478,8 +8731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Visual node number.</p>
-</dd><dt class="property-required"
+    <dd>Visual node number.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -4487,8 +8739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Visual node specifications.</p>
-</dd></dl>
+    <dd>Visual node specifications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4502,8 +8753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Visual node number.</p>
-</dd><dt class="property-required"
+    <dd>Visual node number.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -4511,8 +8761,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Visual node specifications.</p>
-</dd></dl>
+    <dd>Visual node specifications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="node_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_num_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Visual node number.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Visual node specifications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4526,8 +8797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Visual node number.</p>
-</dd><dt class="property-required"
+    <dd>Visual node number.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4535,8 +8805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Visual node specifications.</p>
-</dd></dl>
+    <dd>Visual node specifications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4550,8 +8819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Visual node number.</p>
-</dd><dt class="property-required"
+    <dd>Visual node number.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4559,8 +8827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Visual node specifications.</p>
-</dd></dl>
+    <dd>Visual node specifications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4574,8 +8841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Visual node number.</p>
-</dd><dt class="property-required"
+    <dd>Visual node number.</dd><dt class="property-required"
             title="Required">
         <span id="node_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
@@ -4583,8 +8849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Visual node specifications.</p>
-</dd></dl>
+    <dd>Visual node specifications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4598,8 +8863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Visual node number.</p>
-</dd><dt class="property-required"
+    <dd>Visual node number.</dd><dt class="property-required"
             title="Required">
         <span id="nodetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -4607,8 +8871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Visual node specifications.</p>
-</dd></dl>
+    <dd>Visual node specifications.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4624,6 +8887,9 @@ $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -4633,7 +8899,6 @@ $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

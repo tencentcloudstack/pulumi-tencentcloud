@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Ccn.getInstances"
-meta_desc: "Documentation for the tencentcloud.Ccn.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CCN instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,45 +18,94 @@ Use this data source to query detailed information of CCN instances.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const main = new tencentcloud.ccn.Instance("main", {
+    name: "ci-temp-test-ccn",
     description: "ci-temp-test-ccn-des",
     qos: "AG",
 });
-const idInstances = tencentcloud.Ccn.getInstancesOutput({
+const idInstances = tencentcloud.ccn.getInstancesOutput({
     ccnId: main.id,
 });
-const nameInstances = tencentcloud.Ccn.getInstancesOutput({
+const nameInstances = tencentcloud.ccn.getInstancesOutput({
     name: main.name,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
 main = tencentcloud.ccn.Instance("main",
+    name="ci-temp-test-ccn",
     description="ci-temp-test-ccn-des",
     qos="AG")
-id_instances = tencentcloud.Ccn.get_instances_output(ccn_id=main.id)
-name_instances = tencentcloud.Ccn.get_instances_output(name=main.name)
+id_instances = tencentcloud.ccn.get_instances_output(ccn_id=main.id)
+name_instances = tencentcloud.ccn.get_instances_output(name=main.name)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		main, err := ccn.NewInstance(ctx, "main", &ccn.InstanceArgs{
+			Name:        pulumi.String("ci-temp-test-ccn"),
+			Description: pulumi.String("ci-temp-test-ccn-des"),
+			Qos:         pulumi.String("AG"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
+			CcnId: main.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		_ = ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
+			Name: main.Name,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var main = new Tencentcloud.Ccn.Instance("main", new()
     {
+        Name = "ci-temp-test-ccn",
         Description = "ci-temp-test-ccn-des",
         Qos = "AG",
     });
@@ -71,33 +122,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-			Description: pulumi.String("ci-temp-test-ccn-des"),
-			Qos:         pulumi.String("AG"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
-			CcnId: main.ID(),
-		}, nil)
-		_ = Ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
-			Name: main.Name,
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -108,8 +137,8 @@ import com.pulumi.tencentcloud.Ccn.Instance;
 import com.pulumi.tencentcloud.Ccn.InstanceArgs;
 import com.pulumi.tencentcloud.Ccn.CcnFunctions;
 import com.pulumi.tencentcloud.Ccn.inputs.GetInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -121,7 +150,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var main = new Instance("main", InstanceArgs.builder()        
+        var main = new Instance("main", InstanceArgs.builder()
+            .name("ci-temp-test-ccn")
             .description("ci-temp-test-ccn-des")
             .qos("AG")
             .build());
@@ -137,27 +167,69 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   main:
     type: tencentcloud:Ccn:Instance
     properties:
+      name: ci-temp-test-ccn
       description: ci-temp-test-ccn-des
       qos: AG
 variables:
   idInstances:
     fn::invoke:
-      Function: tencentcloud:Ccn:getInstances
-      Arguments:
+      function: tencentcloud:Ccn:getInstances
+      arguments:
         ccnId: ${main.id}
   nameInstances:
     fn::invoke:
-      Function: tencentcloud:Ccn:getInstances
-      Arguments:
+      function: tencentcloud:Ccn:getInstances
+      arguments:
         name: ${main.name}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ccn_getinstances" "idInstances" {
+  ccn_id = tencentcloud_ccn_instance.main.id
+}
+data "tencentcloud_ccn_getinstances" "nameInstances" {
+  name = tencentcloud_ccn_instance.main.name
+}
+
+resource "tencentcloud_ccn_instance" "main" {
+  name        = "ci-temp-test-ccn"
+  description = "ci-temp-test-ccn-des"
+  qos         = "AG"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeCcnAttachedInstances](https://www.tencentcloud.com/document/api/215/34789)
+  - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
 
 
 
@@ -169,7 +241,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -177,9 +249,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -193,10 +265,10 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">ccn_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">ccn_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -221,7 +293,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -230,7 +303,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -242,6 +316,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ccn/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ccn_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -260,8 +343,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -269,8 +351,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -278,8 +359,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -293,8 +373,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -302,8 +381,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -311,8 +389,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ccn_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CCN to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -326,8 +433,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -335,8 +441,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -344,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -359,8 +463,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -368,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -377,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -392,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -401,8 +501,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -410,8 +509,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -425,8 +523,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -434,8 +531,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -443,8 +539,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -467,8 +562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -476,8 +570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ccn.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of CCN.</p>
-</dd><dt class="property-"
+    <dd>Information list of CCN.</dd><dt class="property-"
             title="">
         <span id="ccnid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_csharp" style="color: inherit; text-decoration: inherit;">Ccn<wbr>Id</a>
@@ -485,8 +578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN.</p>
-</dd><dt class="property-"
+    <dd>ID of the CCN.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -494,8 +586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN.</p>
-</dd><dt class="property-"
+    <dd>Name of the CCN.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -517,8 +608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -526,8 +616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">[]Get<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of CCN.</p>
-</dd><dt class="property-"
+    <dd>Information list of CCN.</dd><dt class="property-"
             title="">
         <span id="ccnid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_go" style="color: inherit; text-decoration: inherit;">Ccn<wbr>Id</a>
@@ -535,8 +624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN.</p>
-</dd><dt class="property-"
+    <dd>ID of the CCN.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -544,11 +632,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN.</p>
-</dd><dt class="property-"
+    <dd>Name of the CCN.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>Information list of CCN.</dd><dt class="property-"
+            title="">
+        <span id="ccn_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CCN.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CCN.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -567,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -576,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of CCN.</p>
-</dd><dt class="property-"
+    <dd>Information list of CCN.</dd><dt class="property-"
             title="">
         <span id="ccnid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_java" style="color: inherit; text-decoration: inherit;">ccn<wbr>Id</a>
@@ -585,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CCN.</p>
-</dd><dt class="property-"
+    <dd>ID of the CCN.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -594,8 +724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN.</p>
-</dd><dt class="property-"
+    <dd>Name of the CCN.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -617,8 +746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -626,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of CCN.</p>
-</dd><dt class="property-"
+    <dd>Information list of CCN.</dd><dt class="property-"
             title="">
         <span id="ccnid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_nodejs" style="color: inherit; text-decoration: inherit;">ccn<wbr>Id</a>
@@ -635,8 +762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN.</p>
-</dd><dt class="property-"
+    <dd>ID of the CCN.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -644,8 +770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN.</p>
-</dd><dt class="property-"
+    <dd>Name of the CCN.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -667,17 +792,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of CCN.</p>
-</dd><dt class="property-"
+    <dd>Information list of CCN.</dd><dt class="property-"
             title="">
         <span id="ccn_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_id_python" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
@@ -685,8 +808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CCN.</p>
-</dd><dt class="property-"
+    <dd>ID of the CCN.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -694,8 +816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CCN.</p>
-</dd><dt class="property-"
+    <dd>Name of the CCN.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -717,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -726,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of CCN.</p>
-</dd><dt class="property-"
+    <dd>Information list of CCN.</dd><dt class="property-"
             title="">
         <span id="ccnid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_yaml" style="color: inherit; text-decoration: inherit;">ccn<wbr>Id</a>
@@ -735,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CCN.</p>
-</dd><dt class="property-"
+    <dd>ID of the CCN.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -744,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN.</p>
-</dd><dt class="property-"
+    <dd>Name of the CCN.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -777,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistattachmentlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ccn.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Attachment<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>Information list of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidthlimittype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthlimittype_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Limit<wbr>Type</a>
@@ -786,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type.</p>
-</dd><dt class="property-required"
+    <dd>The speed limit type.</dd><dt class="property-required"
             title="Required">
         <span id="ccnid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_csharp" style="color: inherit; text-decoration: inherit;">Ccn<wbr>Id</a>
@@ -795,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -804,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -813,8 +926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -822,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the CCN.</p>
-</dd><dt class="property-required"
+    <dd>Description of the CCN.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -831,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="qos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_csharp" style="color: inherit; text-decoration: inherit;">Qos</a>
@@ -840,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</p>
-</dd><dt class="property-required"
+    <dd>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -849,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -864,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistattachmentlist">[]Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Attachment<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>Information list of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidthlimittype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthlimittype_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Limit<wbr>Type</a>
@@ -873,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type.</p>
-</dd><dt class="property-required"
+    <dd>The speed limit type.</dd><dt class="property-required"
             title="Required">
         <span id="ccnid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_go" style="color: inherit; text-decoration: inherit;">Ccn<wbr>Id</a>
@@ -882,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -891,8 +996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -900,8 +1004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -909,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the CCN.</p>
-</dd><dt class="property-required"
+    <dd>Description of the CCN.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -918,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="qos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_go" style="color: inherit; text-decoration: inherit;">Qos</a>
@@ -927,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</p>
-</dd><dt class="property-required"
+    <dd>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -936,8 +1036,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="attachment_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachment_lists_hcl" style="color: inherit; text-decoration: inherit;">attachment_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelistattachmentlist">list(object)</a></span>
+    </dt>
+    <dd>Information list of instance is attached.</dd><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_limit_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_limit_type_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>limit_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The speed limit type.</dd><dt class="property-required"
+            title="Required">
+        <span id="ccn_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CCN to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the CCN.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CCN to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="qos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_hcl" style="color: inherit; text-decoration: inherit;">qos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -951,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistattachmentlist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Attachment<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>Information list of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidthlimittype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthlimittype_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Limit<wbr>Type</a>
@@ -960,8 +1136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The speed limit type.</p>
-</dd><dt class="property-required"
+    <dd>The speed limit type.</dd><dt class="property-required"
             title="Required">
         <span id="ccnid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_java" style="color: inherit; text-decoration: inherit;">ccn<wbr>Id</a>
@@ -969,8 +1144,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -978,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -987,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -996,8 +1168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the CCN.</p>
-</dd><dt class="property-required"
+    <dd>Description of the CCN.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1005,8 +1176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="qos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_java" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -1014,8 +1184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</p>
-</dd><dt class="property-required"
+    <dd>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1023,8 +1192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistattachmentlist">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Attachment<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>Information list of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidthlimittype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthlimittype_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Limit<wbr>Type</a>
@@ -1047,8 +1214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type.</p>
-</dd><dt class="property-required"
+    <dd>The speed limit type.</dd><dt class="property-required"
             title="Required">
         <span id="ccnid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_nodejs" style="color: inherit; text-decoration: inherit;">ccn<wbr>Id</a>
@@ -1056,8 +1222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1065,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1074,8 +1238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1083,8 +1246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the CCN.</p>
-</dd><dt class="property-required"
+    <dd>Description of the CCN.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1092,8 +1254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="qos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_nodejs" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -1101,8 +1262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</p>
-</dd><dt class="property-required"
+    <dd>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1110,8 +1270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1123,10 +1282,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachment_lists_python" style="color: inherit; text-decoration: inherit;">attachment_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelistattachmentlist">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Attachment<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelistattachmentlist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Attachment<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>Information list of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_limit_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_limit_type_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>limit_<wbr>type</a>
@@ -1134,8 +1292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The speed limit type.</p>
-</dd><dt class="property-required"
+    <dd>The speed limit type.</dd><dt class="property-required"
             title="Required">
         <span id="ccn_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_id_python" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
@@ -1143,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1152,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1161,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1170,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the CCN.</p>
-</dd><dt class="property-required"
+    <dd>Description of the CCN.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1179,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="qos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_python" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -1188,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</p>
-</dd><dt class="property-required"
+    <dd>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1197,8 +1348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1212,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistattachmentlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>Information list of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidthlimittype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthlimittype_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Limit<wbr>Type</a>
@@ -1221,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The speed limit type.</p>
-</dd><dt class="property-required"
+    <dd>The speed limit type.</dd><dt class="property-required"
             title="Required">
         <span id="ccnid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccnid_yaml" style="color: inherit; text-decoration: inherit;">ccn<wbr>Id</a>
@@ -1230,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1239,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1248,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of resource.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1257,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the CCN.</p>
-</dd><dt class="property-required"
+    <dd>Description of the CCN.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1266,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CCN to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="qos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_yaml" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -1275,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</p>
-</dd><dt class="property-required"
+    <dd>Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1284,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1303,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time of attaching.</p>
-</dd><dt class="property-required"
+    <dd>Time of attaching.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblocks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblocks_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Blocks</a>
@@ -1312,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A network address block of the instance that is attached.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the instance that is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1321,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>ID of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Region</a>
@@ -1330,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region that the instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The region that the instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1339,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</p>
-</dd><dt class="property-required"
+    <dd>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1348,8 +1484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1363,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time of attaching.</p>
-</dd><dt class="property-required"
+    <dd>Time of attaching.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblocks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblocks_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Blocks</a>
@@ -1372,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A network address block of the instance that is attached.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the instance that is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1381,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>ID of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Region</a>
@@ -1390,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region that the instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The region that the instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1399,8 +1530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</p>
-</dd><dt class="property-required"
+    <dd>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1408,8 +1538,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="attached_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attached_time_hcl" style="color: inherit; text-decoration: inherit;">attached_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time of attaching.</dd><dt class="property-required"
+            title="Required">
+        <span id="cidr_blocks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_blocks_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>blocks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A network address block of the instance that is attached.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of instance is attached.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_region_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region that the instance locates at.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1423,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time of attaching.</p>
-</dd><dt class="property-required"
+    <dd>Time of attaching.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblocks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblocks_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Blocks</a>
@@ -1432,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A network address block of the instance that is attached.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the instance that is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1441,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>ID of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Region</a>
@@ -1450,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region that the instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The region that the instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1459,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</p>
-</dd><dt class="property-required"
+    <dd>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1468,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1483,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time of attaching.</p>
-</dd><dt class="property-required"
+    <dd>Time of attaching.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblocks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblocks_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Blocks</a>
@@ -1492,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A network address block of the instance that is attached.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the instance that is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1501,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>ID of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Region</a>
@@ -1510,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region that the instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The region that the instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1519,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</p>
-</dd><dt class="property-required"
+    <dd>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1528,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1543,8 +1714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time of attaching.</p>
-</dd><dt class="property-required"
+    <dd>Time of attaching.</dd><dt class="property-required"
             title="Required">
         <span id="cidr_blocks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_blocks_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>blocks</a>
@@ -1552,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A network address block of the instance that is attached.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the instance that is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1561,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>ID of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instance_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_region_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>region</a>
@@ -1570,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The region that the instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The region that the instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1579,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</p>
-</dd><dt class="property-required"
+    <dd>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1588,8 +1754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1603,8 +1768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time of attaching.</p>
-</dd><dt class="property-required"
+    <dd>Time of attaching.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblocks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblocks_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Blocks</a>
@@ -1612,8 +1776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A network address block of the instance that is attached.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the instance that is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1621,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance is attached.</p>
-</dd><dt class="property-required"
+    <dd>ID of instance is attached.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Region</a>
@@ -1630,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region that the instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The region that the instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1639,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</p>
-</dd><dt class="property-required"
+    <dd>Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1648,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</p>
-</dd></dl>
+    <dd>States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1664,7 +1823,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

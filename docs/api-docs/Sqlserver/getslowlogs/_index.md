@@ -2,9 +2,11 @@
 ---
 title: "getSlowlogs"
 title_tag: "tencentcloud.Sqlserver.getSlowlogs"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.getSlowlogs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of sqlserver slowlogs"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,56 +18,54 @@ Use this data source to query detailed information of sqlserver slowlogs
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Sqlserver.getSlowlogs({
-    endTime: "2023-08-07 00:00:00",
+const example = tencentcloud.sqlserver.getSlowlogs({
     instanceId: "mssql-qelbzgwf",
     startTime: "2023-08-01 00:00:00",
+    endTime: "2023-08-07 00:00:00",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Sqlserver.get_slowlogs(end_time="2023-08-07 00:00:00",
-    instance_id="mssql-qelbzgwf",
-    start_time="2023-08-01 00:00:00")
+example = tencentcloud.sqlserver.get_slowlogs(instance_id="mssql-qelbzgwf",
+    start_time="2023-08-01 00:00:00",
+    end_time="2023-08-07 00:00:00")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Sqlserver.GetSlowlogs.Invoke(new()
-    {
-        EndTime = "2023-08-07 00:00:00",
-        InstanceId = "mssql-qelbzgwf",
-        StartTime = "2023-08-01 00:00:00",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Sqlserver.GetSlowlogs(ctx, &sqlserver.GetSlowlogsArgs{
-			EndTime:    "2023-08-07 00:00:00",
+		_, err := sqlserver.GetSlowlogs(ctx, &sqlserver.GetSlowlogsArgs{
 			InstanceId: "mssql-qelbzgwf",
 			StartTime:  "2023-08-01 00:00:00",
+			EndTime:    "2023-08-07 00:00:00",
 		}, nil)
 		if err != nil {
 			return err
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Sqlserver.GetSlowlogs.Invoke(new()
+    {
+        InstanceId = "mssql-qelbzgwf",
+        StartTime = "2023-08-01 00:00:00",
+        EndTime = "2023-08-07 00:00:00",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Sqlserver.SqlserverFunctions;
 import com.pulumi.tencentcloud.Sqlserver.inputs.GetSlowlogsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,26 +123,58 @@ public class App {
 
     public static void stack(Context ctx) {
         final var example = SqlserverFunctions.getSlowlogs(GetSlowlogsArgs.builder()
-            .endTime("2023-08-07 00:00:00")
             .instanceId("mssql-qelbzgwf")
             .startTime("2023-08-01 00:00:00")
+            .endTime("2023-08-07 00:00:00")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Sqlserver:getSlowlogs
-      Arguments:
-        endTime: 2023-08-07 00:00:00
+      function: tencentcloud:Sqlserver:getSlowlogs
+      arguments:
         instanceId: mssql-qelbzgwf
         startTime: 2023-08-01 00:00:00
+        endTime: 2023-08-07 00:00:00
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_sqlserver_getslowlogs" "example" {
+  instance_id = "mssql-qelbzgwf"
+  start_time  = "2023-08-01 00:00:00"
+  end_time    = "2023-08-07 00:00:00"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeSlowlogs](https://www.tencentcloud.com/document/api/238/32133)
 
 
 
@@ -127,7 +186,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +194,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSlowlogs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSlowlogsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>></span
+><span class="k">function </span>getSlowlogs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSlowlogsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>></span
 ><span class="k">
-function </span>getSlowlogsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSlowlogsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>></span
+function </span>getSlowlogsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSlowlogsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -152,11 +211,11 @@ function </span>getSlowlogsOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSlowlogsResult</span
 ><span class="k">
-def </span>get_slowlogs_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSlowlogsResult]</span
+def </span>get_slowlogs_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">start_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSlowlogsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -181,7 +240,8 @@ func </span>GetSlowlogsOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSlowlogs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSlowlogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSlowlogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSlowlogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSlowlogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,7 +250,8 @@ func </span>GetSlowlogsOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>> </span>getSlowlogs<span class="p">(</span><span class="nx">GetSlowlogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>> </span>getSlowlogs<span class="p">(</span><span class="nx">GetSlowlogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSlowlogsResult</a></span>> </span>getSlowlogs<span class="p">(</span><span class="nx">GetSlowlogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,6 +263,15 @@ func </span>GetSlowlogsOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Sqlserver/getSlowlogs:getSlowlogs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_sqlserver_get_slowlogs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -220,8 +290,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -229,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -238,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-optional"
+    <dd>Query start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -247,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -262,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -271,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -280,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-optional"
+    <dd>Query start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -289,8 +352,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Query end time.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Query start time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -304,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -313,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -322,8 +420,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-optional"
+    <dd>Query start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -331,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -346,8 +442,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -355,8 +450,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -364,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-optional"
+    <dd>Query start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -373,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -388,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -397,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -406,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-optional"
+    <dd>Query start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -415,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -430,8 +518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -439,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -448,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-optional"
+    <dd>Query start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -457,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -481,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File generation end time.</p>
-</dd><dt class="property-"
+    <dd>File generation end time.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -490,8 +573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -507,8 +589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getslowlogsslowlog">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Outputs.<wbr>Get<wbr>Slowlogs<wbr>Slowlog&gt;</a></span>
     </dt>
-    <dd><p>Information list of slow query logs.</p>
-</dd><dt class="property-"
+    <dd>Information list of slow query logs.</dd><dt class="property-"
             title="">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -516,8 +597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File generation start time.</p>
-</dd><dt class="property-"
+    <dd>File generation start time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -539,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File generation end time.</p>
-</dd><dt class="property-"
+    <dd>File generation end time.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -548,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -565,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getslowlogsslowlog">[]Get<wbr>Slowlogs<wbr>Slowlog</a></span>
     </dt>
-    <dd><p>Information list of slow query logs.</p>
-</dd><dt class="property-"
+    <dd>Information list of slow query logs.</dd><dt class="property-"
             title="">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -574,11 +651,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File generation start time.</p>
-</dd><dt class="property-"
+    <dd>File generation start time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File generation end time.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="slowlogs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slowlogs_hcl" style="color: inherit; text-decoration: inherit;">slowlogs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getslowlogsslowlog">list(object)</a></span>
+    </dt>
+    <dd>Information list of slow query logs.</dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File generation start time.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -597,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File generation end time.</p>
-</dd><dt class="property-"
+    <dd>File generation end time.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -606,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -623,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getslowlogsslowlog">List&lt;Get<wbr>Slowlogs<wbr>Slowlog&gt;</a></span>
     </dt>
-    <dd><p>Information list of slow query logs.</p>
-</dd><dt class="property-"
+    <dd>Information list of slow query logs.</dd><dt class="property-"
             title="">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -632,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File generation start time.</p>
-</dd><dt class="property-"
+    <dd>File generation start time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -655,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File generation end time.</p>
-</dd><dt class="property-"
+    <dd>File generation end time.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -664,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -681,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getslowlogsslowlog">Get<wbr>Slowlogs<wbr>Slowlog[]</a></span>
     </dt>
-    <dd><p>Information list of slow query logs.</p>
-</dd><dt class="property-"
+    <dd>Information list of slow query logs.</dd><dt class="property-"
             title="">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -690,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File generation start time.</p>
-</dd><dt class="property-"
+    <dd>File generation start time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -713,8 +835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File generation end time.</p>
-</dd><dt class="property-"
+    <dd>File generation end time.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -722,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -737,10 +857,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slowlogs_python" style="color: inherit; text-decoration: inherit;">slowlogs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getslowlogsslowlog">Get<wbr>Slowlogs<wbr>Slowlog]</a></span>
+        <span class="property-type"><a href="#getslowlogsslowlog">Sequence[Get<wbr>Slowlogs<wbr>Slowlog]</a></span>
     </dt>
-    <dd><p>Information list of slow query logs.</p>
-</dd><dt class="property-"
+    <dd>Information list of slow query logs.</dd><dt class="property-"
             title="">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -748,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File generation start time.</p>
-</dd><dt class="property-"
+    <dd>File generation start time.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -771,8 +889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File generation end time.</p>
-</dd><dt class="property-"
+    <dd>File generation end time.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -780,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -797,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getslowlogsslowlog">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of slow query logs.</p>
-</dd><dt class="property-"
+    <dd>Information list of slow query logs.</dd><dt class="property-"
             title="">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -806,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File generation start time.</p>
-</dd><dt class="property-"
+    <dd>File generation start time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -839,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of logs in file.</p>
-</dd><dt class="property-required"
+    <dd>Number of logs in file.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -848,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_csharp" style="color: inherit; text-decoration: inherit;">External<wbr>Addr</a>
@@ -857,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Download address for public network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for public network.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -866,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unique ID of slow query log file.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of slow query log file.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_csharp" style="color: inherit; text-decoration: inherit;">Internal<wbr>Addr</a>
@@ -875,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Download address for private network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for private network.</dd><dt class="property-required"
             title="Required">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -884,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size in KB.</p>
-</dd><dt class="property-required"
+    <dd>File size in KB.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -893,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-required"
+    <dd>Query start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -902,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -917,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of logs in file.</p>
-</dd><dt class="property-required"
+    <dd>Number of logs in file.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -926,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_go" style="color: inherit; text-decoration: inherit;">External<wbr>Addr</a>
@@ -935,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Download address for public network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for public network.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -944,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unique ID of slow query log file.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of slow query log file.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_go" style="color: inherit; text-decoration: inherit;">Internal<wbr>Addr</a>
@@ -953,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Download address for private network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for private network.</dd><dt class="property-required"
             title="Required">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -962,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size in KB.</p>
-</dd><dt class="property-required"
+    <dd>File size in KB.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -971,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-required"
+    <dd>Query start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -980,8 +1079,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_hcl" style="color: inherit; text-decoration: inherit;">count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of logs in file.</dd><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Query end time.</dd><dt class="property-required"
+            title="Required">
+        <span id="external_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#external_addr_hcl" style="color: inherit; text-decoration: inherit;">external_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Download address for public network.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unique ID of slow query log file.</dd><dt class="property-required"
+            title="Required">
+        <span id="internal_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internal_addr_hcl" style="color: inherit; text-decoration: inherit;">internal_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Download address for private network.</dd><dt class="property-required"
+            title="Required">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File size in KB.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Query start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -995,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of logs in file.</p>
-</dd><dt class="property-required"
+    <dd>Number of logs in file.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1004,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_java" style="color: inherit; text-decoration: inherit;">external<wbr>Addr</a>
@@ -1013,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Download address for public network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for public network.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1022,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Unique ID of slow query log file.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of slow query log file.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_java" style="color: inherit; text-decoration: inherit;">internal<wbr>Addr</a>
@@ -1031,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Download address for private network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for private network.</dd><dt class="property-required"
             title="Required">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1040,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File size in KB.</p>
-</dd><dt class="property-required"
+    <dd>File size in KB.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1049,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-required"
+    <dd>Query start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1058,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1073,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of logs in file.</p>
-</dd><dt class="property-required"
+    <dd>Number of logs in file.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1082,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_nodejs" style="color: inherit; text-decoration: inherit;">external<wbr>Addr</a>
@@ -1091,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Download address for public network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for public network.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1100,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Unique ID of slow query log file.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of slow query log file.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_nodejs" style="color: inherit; text-decoration: inherit;">internal<wbr>Addr</a>
@@ -1109,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Download address for private network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for private network.</dd><dt class="property-required"
             title="Required">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1118,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File size in KB.</p>
-</dd><dt class="property-required"
+    <dd>File size in KB.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1127,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-required"
+    <dd>Query start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1136,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1151,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of logs in file.</p>
-</dd><dt class="property-required"
+    <dd>Number of logs in file.</dd><dt class="property-required"
             title="Required">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1160,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="external_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#external_addr_python" style="color: inherit; text-decoration: inherit;">external_<wbr>addr</a>
@@ -1169,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Download address for public network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for public network.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1178,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unique ID of slow query log file.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of slow query log file.</dd><dt class="property-required"
             title="Required">
         <span id="internal_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internal_addr_python" style="color: inherit; text-decoration: inherit;">internal_<wbr>addr</a>
@@ -1187,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Download address for private network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for private network.</dd><dt class="property-required"
             title="Required">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1196,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size in KB.</p>
-</dd><dt class="property-required"
+    <dd>File size in KB.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1205,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-required"
+    <dd>Query start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1214,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of logs in file.</p>
-</dd><dt class="property-required"
+    <dd>Number of logs in file.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1238,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query end time.</p>
-</dd><dt class="property-required"
+    <dd>Query end time.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_yaml" style="color: inherit; text-decoration: inherit;">external<wbr>Addr</a>
@@ -1247,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Download address for public network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for public network.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1256,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Unique ID of slow query log file.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of slow query log file.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_yaml" style="color: inherit; text-decoration: inherit;">internal<wbr>Addr</a>
@@ -1265,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Download address for private network.</p>
-</dd><dt class="property-required"
+    <dd>Download address for private network.</dd><dt class="property-required"
             title="Required">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1274,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File size in KB.</p>
-</dd><dt class="property-required"
+    <dd>File size in KB.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1283,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Query start time.</p>
-</dd><dt class="property-required"
+    <dd>Query start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1292,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1308,7 +1444,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getSubnets"
 title_tag: "tencentcloud.Vpc.getSubnets"
-meta_desc: "Documentation for the tencentcloud.Vpc.getSubnets function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query vpc subnets information."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,109 +18,89 @@ Use this data source to query vpc subnets information.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Create subnet resource
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
-const foo = new tencentcloud.vpc.Instance("foo", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: availabilityZone,
-    vpcId: foo.id,
+    name: "subnet1",
+    vpcId: vpc.id,
     cidrBlock: "10.0.20.0/28",
     isMulticast: false,
     tags: {
         test: "test",
     },
 });
-const idInstances = tencentcloud.Vpc.getSubnetsOutput({
-    subnetId: subnet.id,
+const subnetCDC = new tencentcloud.subnet.Instance("subnetCDC", {
+    vpcId: vpc.id,
+    name: "subnet2",
+    cidrBlock: "10.0.0.0/16",
+    cdcId: "cluster-lchwgxhs",
+    availabilityZone: zones.zones[0].name,
+    isMulticast: false,
 });
-const nameInstances = tencentcloud.Vpc.getSubnetsOutput({
-    name: subnet.name,
-});
-const tagsInstances = subnet.tags.apply(tags => tencentcloud.Vpc.getSubnetsOutput({
-    tags: tags,
-}));
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
-import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
 config = pulumi.Config()
 availability_zone = config.get("availabilityZone")
 if availability_zone is None:
     availability_zone = "ap-guangzhou-3"
-foo = tencentcloud.vpc.Instance("foo", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=availability_zone,
-    vpc_id=foo.id,
+    name="subnet1",
+    vpc_id=vpc.id,
     cidr_block="10.0.20.0/28",
     is_multicast=False,
     tags={
         "test": "test",
     })
-id_instances = tencentcloud.Vpc.get_subnets_output(subnet_id=subnet.id)
-name_instances = tencentcloud.Vpc.get_subnets_output(name=subnet.name)
-tags_instances = subnet.tags.apply(lambda tags: tencentcloud.Vpc.get_subnets_output(tags=tags))
+subnet_cdc = tencentcloud.subnet.Instance("subnetCDC",
+    vpc_id=vpc.id,
+    name="subnet2",
+    cidr_block="10.0.0.0/16",
+    cdc_id="cluster-lchwgxhs",
+    availability_zone=zones["zones"][0]["name"],
+    is_multicast=False)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var foo = new Tencentcloud.Vpc.Instance("foo", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
-    {
-        AvailabilityZone = availabilityZone,
-        VpcId = foo.Id,
-        CidrBlock = "10.0.20.0/28",
-        IsMulticast = false,
-        Tags = 
-        {
-            { "test", "test" },
-        },
-    });
-
-    var idInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    {
-        SubnetId = subnet.Id,
-    });
-
-    var nameInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    {
-        Name = subnet.Name,
-    });
-
-    var tagsInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    {
-        Tags = subnet.Tags,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
@@ -128,53 +110,100 @@ func main() {
 		if param := cfg.Get("availabilityZone"); param != "" {
 			availabilityZone = param
 		}
-		foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc"),
 			CidrBlock: pulumi.String("10.0.0.0/16"),
 		})
 		if err != nil {
 			return err
 		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+		_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 			AvailabilityZone: pulumi.String(availabilityZone),
-			VpcId:            foo.ID(),
+			Name:             pulumi.String("subnet1"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 			CidrBlock:        pulumi.String("10.0.20.0/28"),
 			IsMulticast:      pulumi.Bool(false),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
 			},
 		})
 		if err != nil {
 			return err
 		}
-		_ = Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
-			SubnetId: subnet.ID(),
-		}, nil)
-		_ = Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
-			Name: subnet.Name,
-		}, nil)
-		_ = subnet.Tags.ApplyT(func(tags interface{}) (vpc.GetSubnetsResult, error) {
-			return Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
-				Tags: tags,
-			}, nil), nil
-		}).(vpc.GetSubnetsResultOutput)
+		_, err = subnet.NewInstance(ctx, "subnetCDC", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			Name:             pulumi.String("subnet2"),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			CdcId:            pulumi.String("cluster-lchwgxhs"),
+			AvailabilityZone: pulumi.Any(zones.Zones[0].Name),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        AvailabilityZone = availabilityZone,
+        Name = "subnet1",
+        VpcId = vpc.Id,
+        CidrBlock = "10.0.20.0/28",
+        IsMulticast = false,
+        Tags = 
+        {
+            { "test", "test" },
+        },
+    });
+
+    var subnetCDC = new Tencentcloud.Subnet.Instance("subnetCDC", new()
+    {
+        VpcId = vpc.Id,
+        Name = "subnet2",
+        CidrBlock = "10.0.0.0/16",
+        CdcId = "cluster-lchwgxhs",
+        AvailabilityZone = zones.Zones[0].Name,
+        IsMulticast = false,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Vpc.VpcFunctions;
-import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -188,70 +217,242 @@ public class App {
     public static void stack(Context ctx) {
         final var config = ctx.config();
         final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
-        var foo = new Instance("foo", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .availabilityZone(availabilityZone)
-            .vpcId(foo.id())
+            .name("subnet1")
+            .vpcId(vpc.id())
             .cidrBlock("10.0.20.0/28")
             .isMulticast(false)
             .tags(Map.of("test", "test"))
             .build());
 
-        final var idInstances = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
-            .subnetId(subnet.id())
-            .build());
-
-        final var nameInstances = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
-            .name(subnet.name())
-            .build());
-
-        final var tagsInstances = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
-            .tags(subnet.tags())
+        var subnetCDC = new com.pulumi.tencentcloud.Subnet.Instance("subnetCDC", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .name("subnet2")
+            .cidrBlock("10.0.0.0/16")
+            .cdcId("cluster-lchwgxhs")
+            .availabilityZone(zones.zones()[0].name())
+            .isMulticast(false)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
     type: string
     default: ap-guangzhou-3
 resources:
-  foo:
+  vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${availabilityZone}
-      vpcId: ${foo.id}
+      name: subnet1
+      vpcId: ${vpc.id}
       cidrBlock: 10.0.20.0/28
       isMulticast: false
       tags:
         test: test
-variables:
-  idInstances:
-    fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
-        subnetId: ${subnet.id}
-  nameInstances:
-    fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
-        name: ${subnet.name}
-  tagsInstances:
-    fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
-        tags: ${subnet.tags}
+  subnetCDC:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      name: subnet2
+      cidrBlock: 10.0.0.0/16
+      cdcId: cluster-lchwgxhs
+      availabilityZone: ${zones.zones[0].name}
+      isMulticast: false
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = var.availabilityZone
+  name              = "subnet1"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.20.0/28"
+  is_multicast      = false
+  tags = {
+    "test" = "test"
+  }
+}
+resource "tencentcloud_subnet_instance" "subnetCDC" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  name              = "subnet2"
+  cidr_block        = "10.0.0.0/16"
+  cdc_id            = "cluster-lchwgxhs"
+  availability_zone = zones.zones[0].name
+  is_multicast      = false
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query all subnets
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const subnets = tencentcloud.vpc.getSubnets({});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+subnets = tencentcloud.vpc.get_subnets()
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var subnets = Tencentcloud.Vpc.GetSubnets.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpc.VpcFunctions;
+import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var subnets = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  subnets:
+    fn::invoke:
+      function: tencentcloud:Vpc:getSubnets
+      arguments: {}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getsubnets" "subnets" {
+}
+```
+</pulumi-choosable>
+</div>
+
 
 
 
@@ -264,7 +465,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -272,9 +473,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSubnets<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSubnetsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>></span
+><span class="k">function </span>getSubnets<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSubnetsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>></span
 ><span class="k">
-function </span>getSubnetsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSubnetsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>></span
+function </span>getSubnetsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSubnetsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -284,6 +485,7 @@ function </span>getSubnetsOutput<span class="p">(</span><span class="nx">args</s
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_subnets<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">cidr_block</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">is_default</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                 <span class="nx">is_remote_vpc_snat</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
@@ -291,21 +493,22 @@ function </span>getSubnetsOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSubnetsResult</span
 ><span class="k">
-def </span>get_subnets_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">cidr_block</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">is_default</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                <span class="nx">is_remote_vpc_snat</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSubnetsResult]</span
+def </span>get_subnets_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">cidr_block</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">is_default</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                <span class="nx">is_remote_vpc_snat</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSubnetsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -330,7 +533,8 @@ func </span>GetSubnetsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSubnets </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSubnetsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSubnetsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSubnetsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSubnetsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -339,7 +543,8 @@ func </span>GetSubnetsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>> </span>getSubnets<span class="p">(</span><span class="nx">GetSubnetsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>> </span>getSubnets<span class="p">(</span><span class="nx">GetSubnetsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSubnetsResult</a></span>> </span>getSubnets<span class="p">(</span><span class="nx">GetSubnetsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -351,6 +556,15 @@ func </span>GetSubnetsOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Vpc/getSubnets:getSubnets
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_vpc_get_subnets&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -369,8 +583,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -378,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -387,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default subnets.</dd><dt class="property-optional"
             title="Optional">
         <span id="isremotevpcsnat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -396,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter the VPC SNAT address pool subnet.</p>
-</dd><dt class="property-optional"
+    <dd>Filter the VPC SNAT address pool subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -405,8 +623,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -414,8 +631,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -423,8 +639,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -432,17 +647,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter if subnet has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if subnet has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -450,8 +663,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -465,8 +677,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -474,8 +693,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -483,8 +701,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default subnets.</dd><dt class="property-optional"
             title="Optional">
         <span id="isremotevpcsnat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -492,8 +709,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter the VPC SNAT address pool subnet.</p>
-</dd><dt class="property-optional"
+    <dd>Filter the VPC SNAT address pool subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -501,8 +717,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -510,8 +725,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -519,8 +733,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -528,17 +741,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter if subnet has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if subnet has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -546,8 +757,101 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Filter default or no default subnets.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_remote_vpc_snat_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_remote_vpc_snat_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>remote_<wbr>vpc_<wbr>snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Filter the VPC SNAT address pool subnet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter if subnet has this tag.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -561,8 +865,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -570,8 +881,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -579,8 +889,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default subnets.</dd><dt class="property-optional"
             title="Optional">
         <span id="isremotevpcsnat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_java" style="color: inherit; text-decoration: inherit;">is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -588,8 +897,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter the VPC SNAT address pool subnet.</p>
-</dd><dt class="property-optional"
+    <dd>Filter the VPC SNAT address pool subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -597,8 +905,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -606,8 +913,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -615,8 +921,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -624,17 +929,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter if subnet has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if subnet has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -642,8 +945,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -657,8 +959,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -666,8 +975,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -675,8 +983,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default subnets.</dd><dt class="property-optional"
             title="Optional">
         <span id="isremotevpcsnat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -684,8 +991,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Filter the VPC SNAT address pool subnet.</p>
-</dd><dt class="property-optional"
+    <dd>Filter the VPC SNAT address pool subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -693,8 +999,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -702,8 +1007,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -711,8 +1015,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -720,17 +1023,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter if subnet has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if subnet has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -738,8 +1039,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -753,8 +1053,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -762,8 +1069,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -771,8 +1077,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default subnets.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_remote_vpc_snat_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_remote_vpc_snat_python" style="color: inherit; text-decoration: inherit;">is_<wbr>remote_<wbr>vpc_<wbr>snat</a>
@@ -780,8 +1085,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter the VPC SNAT address pool subnet.</p>
-</dd><dt class="property-optional"
+    <dd>Filter the VPC SNAT address pool subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -789,8 +1093,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -798,8 +1101,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -807,8 +1109,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
@@ -816,17 +1117,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter if subnet has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if subnet has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -834,8 +1133,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -849,8 +1147,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -858,8 +1163,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -867,8 +1171,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default subnets.</dd><dt class="property-optional"
             title="Optional">
         <span id="isremotevpcsnat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -876,8 +1179,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter the VPC SNAT address pool subnet.</p>
-</dd><dt class="property-optional"
+    <dd>Filter the VPC SNAT address pool subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -885,8 +1187,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -894,8 +1195,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -903,8 +1203,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -912,17 +1211,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter if subnet has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if subnet has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -930,8 +1227,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -954,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -963,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubnetsinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpc.<wbr>Outputs.<wbr>Get<wbr>Subnets<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of subnets.</p>
-</dd><dt class="property-"
+    <dd>List of subnets.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -972,8 +1266,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone of the subnet.</p>
-</dd><dt class="property-"
+    <dd>The availability zone of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-"
             title="">
         <span id="cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -981,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the subnet.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the subnet.</dd><dt class="property-"
             title="">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -990,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default subnet of the VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default subnet of the VPC for this region.</dd><dt class="property-"
             title="">
         <span id="isremotevpcsnat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -1007,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet.</p>
-</dd><dt class="property-"
+    <dd>Name of the subnet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1024,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet.</dd><dt class="property-"
             title="">
         <span id="tagkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -1039,10 +1336,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet resource.</p>
-</dd><dt class="property-"
+    <dd>Tags of the subnet resource.</dd><dt class="property-"
             title="">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1050,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -1074,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubnetsinstancelist">[]Get<wbr>Subnets<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>List of subnets.</p>
-</dd><dt class="property-"
+    <dd>List of subnets.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1083,8 +1376,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone of the subnet.</p>
-</dd><dt class="property-"
+    <dd>The availability zone of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-"
             title="">
         <span id="cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1092,8 +1392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the subnet.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the subnet.</dd><dt class="property-"
             title="">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1101,8 +1400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default subnet of the VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default subnet of the VPC for this region.</dd><dt class="property-"
             title="">
         <span id="isremotevpcsnat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -1118,8 +1416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet.</p>
-</dd><dt class="property-"
+    <dd>Name of the subnet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1135,8 +1432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet.</dd><dt class="property-"
             title="">
         <span id="tagkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -1150,10 +1446,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the subnet resource.</p>
-</dd><dt class="property-"
+    <dd>Tags of the subnet resource.</dd><dt class="property-"
             title="">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1161,8 +1456,117 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsubnetsinstancelist">list(object)</a></span>
+    </dt>
+    <dd>List of subnets.</dd><dt class="property-"
+            title="">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-"
+            title="">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A network address block of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether it is the default subnet of the VPC for this region.</dd><dt class="property-"
+            title="">
+        <span id="is_remote_vpc_snat_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_remote_vpc_snat_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>remote_<wbr>vpc_<wbr>snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the subnet resource.</dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1176,8 +1580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1185,8 +1588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubnetsinstancelist">List&lt;Get<wbr>Subnets<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of subnets.</p>
-</dd><dt class="property-"
+    <dd>List of subnets.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1194,8 +1596,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The availability zone of the subnet.</p>
-</dd><dt class="property-"
+    <dd>The availability zone of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-"
             title="">
         <span id="cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1203,8 +1612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the subnet.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the subnet.</dd><dt class="property-"
             title="">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1212,8 +1620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default subnet of the VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default subnet of the VPC for this region.</dd><dt class="property-"
             title="">
         <span id="isremotevpcsnat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_java" style="color: inherit; text-decoration: inherit;">is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -1229,8 +1636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the subnet.</p>
-</dd><dt class="property-"
+    <dd>Name of the subnet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1246,8 +1652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet.</dd><dt class="property-"
             title="">
         <span id="tagkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -1261,10 +1666,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet resource.</p>
-</dd><dt class="property-"
+    <dd>Tags of the subnet resource.</dd><dt class="property-"
             title="">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1272,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1287,8 +1690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1296,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubnetsinstancelist">Get<wbr>Subnets<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of subnets.</p>
-</dd><dt class="property-"
+    <dd>List of subnets.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1305,8 +1706,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone of the subnet.</p>
-</dd><dt class="property-"
+    <dd>The availability zone of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-"
             title="">
         <span id="cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1314,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the subnet.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the subnet.</dd><dt class="property-"
             title="">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1323,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default subnet of the VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default subnet of the VPC for this region.</dd><dt class="property-"
             title="">
         <span id="isremotevpcsnat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -1340,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet.</p>
-</dd><dt class="property-"
+    <dd>Name of the subnet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1357,8 +1762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet.</dd><dt class="property-"
             title="">
         <span id="tagkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -1372,10 +1776,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the subnet resource.</p>
-</dd><dt class="property-"
+    <dd>Tags of the subnet resource.</dd><dt class="property-"
             title="">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1383,8 +1786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1398,17 +1800,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsubnetsinstancelist">Get<wbr>Subnets<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsubnetsinstancelist">Sequence[Get<wbr>Subnets<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>List of subnets.</p>
-</dd><dt class="property-"
+    <dd>List of subnets.</dd><dt class="property-"
             title="">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1416,8 +1816,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The availability zone of the subnet.</p>
-</dd><dt class="property-"
+    <dd>The availability zone of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-"
             title="">
         <span id="cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -1425,8 +1832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A network address block of the subnet.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the subnet.</dd><dt class="property-"
             title="">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -1434,8 +1840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default subnet of the VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default subnet of the VPC for this region.</dd><dt class="property-"
             title="">
         <span id="is_remote_vpc_snat_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_remote_vpc_snat_python" style="color: inherit; text-decoration: inherit;">is_<wbr>remote_<wbr>vpc_<wbr>snat</a>
@@ -1451,8 +1856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the subnet.</p>
-</dd><dt class="property-"
+    <dd>Name of the subnet.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1468,8 +1872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet.</dd><dt class="property-"
             title="">
         <span id="tag_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
@@ -1483,10 +1886,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the subnet resource.</p>
-</dd><dt class="property-"
+    <dd>Tags of the subnet resource.</dd><dt class="property-"
             title="">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1494,8 +1896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1509,8 +1910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1518,8 +1918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubnetsinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of subnets.</p>
-</dd><dt class="property-"
+    <dd>List of subnets.</dd><dt class="property-"
             title="">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1527,8 +1926,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The availability zone of the subnet.</p>
-</dd><dt class="property-"
+    <dd>The availability zone of the subnet.</dd><dt class="property-"
+            title="">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-"
             title="">
         <span id="cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1536,8 +1942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the subnet.</p>
-</dd><dt class="property-"
+    <dd>A network address block of the subnet.</dd><dt class="property-"
             title="">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1545,8 +1950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default subnet of the VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default subnet of the VPC for this region.</dd><dt class="property-"
             title="">
         <span id="isremotevpcsnat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isremotevpcsnat_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Remote<wbr>Vpc<wbr>Snat</a>
@@ -1562,8 +1966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the subnet.</p>
-</dd><dt class="property-"
+    <dd>Name of the subnet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1579,8 +1982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-"
+    <dd>ID of the subnet.</dd><dt class="property-"
             title="">
         <span id="tagkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -1594,10 +1996,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet resource.</p>
-</dd><dt class="property-"
+    <dd>Tags of the subnet resource.</dd><dt class="property-"
             title="">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1605,8 +2006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1630,8 +2030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="availableipcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availableipcount_csharp" style="color: inherit; text-decoration: inherit;">Available<wbr>Ip<wbr>Count</a>
@@ -1639,8 +2038,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available IPs.</p>
-</dd><dt class="property-required"
+    <dd>The number of available IPs.</dd><dt class="property-required"
+            title="Required">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1648,8 +2054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1657,8 +2062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the subnet resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the subnet resource.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1666,8 +2070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default subnets.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Multicast</a>
@@ -1675,8 +2078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1684,8 +2086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="routetableid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Table<wbr>Id</a>
@@ -1693,8 +2094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the routing table.</p>
-</dd><dt class="property-required"
+    <dd>ID of the routing table.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1702,17 +2102,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1720,8 +2118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1735,8 +2132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="availableipcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availableipcount_go" style="color: inherit; text-decoration: inherit;">Available<wbr>Ip<wbr>Count</a>
@@ -1744,8 +2140,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available IPs.</p>
-</dd><dt class="property-required"
+    <dd>The number of available IPs.</dd><dt class="property-required"
+            title="Required">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1753,8 +2156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1762,8 +2164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the subnet resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the subnet resource.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1771,8 +2172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default subnets.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Multicast</a>
@@ -1780,8 +2180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1789,8 +2188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="routetableid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Table<wbr>Id</a>
@@ -1798,8 +2196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the routing table.</p>
-</dd><dt class="property-required"
+    <dd>ID of the routing table.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1807,17 +2204,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1825,8 +2220,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="available_ip_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_ip_count_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>ip_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of available IPs.</dd><dt class="property-required"
+            title="Required">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the subnet resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Filter default or no default subnets.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_multicast_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multicast_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>multicast</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether multicast is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the subnet to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="route_table_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_table_id_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>table_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the routing table.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1840,8 +2336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="availableipcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availableipcount_java" style="color: inherit; text-decoration: inherit;">available<wbr>Ip<wbr>Count</a>
@@ -1849,8 +2344,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of available IPs.</p>
-</dd><dt class="property-required"
+    <dd>The number of available IPs.</dd><dt class="property-required"
+            title="Required">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1858,8 +2360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1867,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the subnet resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the subnet resource.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1876,8 +2376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default subnets.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_java" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -1885,8 +2384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1894,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="routetableid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_java" style="color: inherit; text-decoration: inherit;">route<wbr>Table<wbr>Id</a>
@@ -1903,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the routing table.</p>
-</dd><dt class="property-required"
+    <dd>ID of the routing table.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1912,17 +2408,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1930,8 +2424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1945,8 +2438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="availableipcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availableipcount_nodejs" style="color: inherit; text-decoration: inherit;">available<wbr>Ip<wbr>Count</a>
@@ -1954,8 +2446,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of available IPs.</p>
-</dd><dt class="property-required"
+    <dd>The number of available IPs.</dd><dt class="property-required"
+            title="Required">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1963,8 +2462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1972,8 +2470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the subnet resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the subnet resource.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1981,8 +2478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default subnets.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -1990,8 +2486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1999,8 +2494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="routetableid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Table<wbr>Id</a>
@@ -2008,8 +2502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the routing table.</p>
-</dd><dt class="property-required"
+    <dd>ID of the routing table.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2017,17 +2510,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2035,8 +2526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2050,8 +2540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="available_ip_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_ip_count_python" style="color: inherit; text-decoration: inherit;">available_<wbr>ip_<wbr>count</a>
@@ -2059,8 +2548,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of available IPs.</p>
-</dd><dt class="property-required"
+    <dd>The number of available IPs.</dd><dt class="property-required"
+            title="Required">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-required"
             title="Required">
         <span id="cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -2068,8 +2564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2077,8 +2572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the subnet resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the subnet resource.</dd><dt class="property-required"
             title="Required">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -2086,8 +2580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default subnets.</dd><dt class="property-required"
             title="Required">
         <span id="is_multicast_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multicast_python" style="color: inherit; text-decoration: inherit;">is_<wbr>multicast</a>
@@ -2095,8 +2588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2104,8 +2596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="route_table_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_table_id_python" style="color: inherit; text-decoration: inherit;">route_<wbr>table_<wbr>id</a>
@@ -2113,8 +2604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the routing table.</p>
-</dd><dt class="property-required"
+    <dd>ID of the routing table.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2122,17 +2612,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2140,8 +2628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2155,8 +2642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Zone of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="availableipcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availableipcount_yaml" style="color: inherit; text-decoration: inherit;">available<wbr>Ip<wbr>Count</a>
@@ -2164,8 +2650,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of available IPs.</p>
-</dd><dt class="property-required"
+    <dd>The number of available IPs.</dd><dt class="property-required"
+            title="Required">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of CDC instance.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -2173,8 +2666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter subnet with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter subnet with this CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2182,8 +2674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the subnet resource.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the subnet resource.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -2191,8 +2682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter default or no default subnets.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default subnets.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -2200,8 +2690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2209,8 +2698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="routetableid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Table<wbr>Id</a>
@@ -2218,8 +2706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the routing table.</p>
-</dd><dt class="property-required"
+    <dd>ID of the routing table.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2227,17 +2714,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the subnet to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the subnet to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2245,8 +2730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2261,7 +2745,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

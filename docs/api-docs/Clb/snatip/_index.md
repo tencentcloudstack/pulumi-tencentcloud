@@ -2,9 +2,11 @@
 ---
 title: "SnatIp"
 title_tag: "tencentcloud.Clb.SnatIp"
-meta_desc: "Documentation for the tencentcloud.Clb.SnatIp resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a SnatIp of CLB instance. NOTE: Target CLB instance must enable snatPro before creating snat ips. NOTE: Dynamic allocate IP."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,115 +16,80 @@ no_edit_this_page: true
 
 Provide a resource to create a SnatIp of CLB instance.
 
-> **NOTE:** Target CLB instance must enable `snat_pro` before creating snat ips.
-**NOTE:** Dynamic allocate IP doesn't support for now.
+> **NOTE:** Target CLB instance must enable `snatPro` before creating snat ips.
+
+> **NOTE:** Dynamic allocate IP doesn't support for now.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const snatTest = new tencentcloud.clb.Instance("snatTest", {
-    networkType: "OPEN",
-    clbName: "tf-clb-snat-test",
-});
-const foo = new tencentcloud.clb.SnatIp("foo", {
-    clbId: snatTest.id,
+const example = new tencentcloud.clb.SnatIp("example", {
+    clbId: "lb-jnx618r2",
     ips: [
         {
-            subnetId: "subnet-12345678",
-            ip: "172.16.0.1",
+            subnetId: "subnet-hhi88a58",
+            ip: "10.0.30.10",
         },
         {
-            subnetId: "subnet-12345678",
-            ip: "172.16.0.2",
+            subnetId: "subnet-d4umunpy",
         },
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-snat_test = tencentcloud.clb.Instance("snatTest",
-    network_type="OPEN",
-    clb_name="tf-clb-snat-test")
-foo = tencentcloud.clb.SnatIp("foo",
-    clb_id=snat_test.id,
+example = tencentcloud.clb.SnatIp("example",
+    clb_id="lb-jnx618r2",
     ips=[
-        tencentcloud.clb.SnatIpIpArgs(
-            subnet_id="subnet-12345678",
-            ip="172.16.0.1",
-        ),
-        tencentcloud.clb.SnatIpIpArgs(
-            subnet_id="subnet-12345678",
-            ip="172.16.0.2",
-        ),
+        {
+            "subnet_id": "subnet-hhi88a58",
+            "ip": "10.0.30.10",
+        },
+        {
+            "subnet_id": "subnet-d4umunpy",
+        },
     ])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var snatTest = new Tencentcloud.Clb.Instance("snatTest", new()
-    {
-        NetworkType = "OPEN",
-        ClbName = "tf-clb-snat-test",
-    });
-
-    var foo = new Tencentcloud.Clb.SnatIp("foo", new()
-    {
-        ClbId = snatTest.Id,
-        Ips = new[]
-        {
-            new Tencentcloud.Clb.Inputs.SnatIpIpArgs
-            {
-                SubnetId = "subnet-12345678",
-                Ip = "172.16.0.1",
-            },
-            new Tencentcloud.Clb.Inputs.SnatIpIpArgs
-            {
-                SubnetId = "subnet-12345678",
-                Ip = "172.16.0.2",
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		snatTest, err := Clb.NewInstance(ctx, "snatTest", &Clb.InstanceArgs{
-			NetworkType: pulumi.String("OPEN"),
-			ClbName:     pulumi.String("tf-clb-snat-test"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Clb.NewSnatIp(ctx, "foo", &Clb.SnatIpArgs{
-			ClbId: snatTest.ID(),
+		_, err := clb.NewSnatIp(ctx, "example", &clb.SnatIpArgs{
+			ClbId: pulumi.String("lb-jnx618r2"),
 			Ips: clb.SnatIpIpArray{
 				&clb.SnatIpIpArgs{
-					SubnetId: pulumi.String("subnet-12345678"),
-					Ip:       pulumi.String("172.16.0.1"),
+					SubnetId: pulumi.String("subnet-hhi88a58"),
+					Ip:       pulumi.String("10.0.30.10"),
 				},
 				&clb.SnatIpIpArgs{
-					SubnetId: pulumi.String("subnet-12345678"),
-					Ip:       pulumi.String("172.16.0.2"),
+					SubnetId: pulumi.String("subnet-d4umunpy"),
 				},
 			},
 		})
@@ -133,19 +100,54 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.SnatIp("example", new()
+    {
+        ClbId = "lb-jnx618r2",
+        Ips = new[]
+        {
+            new Tencentcloud.Clb.Inputs.SnatIpIpArgs
+            {
+                SubnetId = "subnet-hhi88a58",
+                Ip = "10.0.30.10",
+            },
+            new Tencentcloud.Clb.Inputs.SnatIpIpArgs
+            {
+                SubnetId = "subnet-d4umunpy",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
 import com.pulumi.tencentcloud.Clb.SnatIp;
 import com.pulumi.tencentcloud.Clb.SnatIpArgs;
 import com.pulumi.tencentcloud.Clb.inputs.SnatIpIpArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -157,104 +159,151 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var snatTest = new Instance("snatTest", InstanceArgs.builder()        
-            .networkType("OPEN")
-            .clbName("tf-clb-snat-test")
-            .build());
-
-        var foo = new SnatIp("foo", SnatIpArgs.builder()        
-            .clbId(snatTest.id())
+        var example = new SnatIp("example", SnatIpArgs.builder()
+            .clbId("lb-jnx618r2")
             .ips(            
                 SnatIpIpArgs.builder()
-                    .subnetId("subnet-12345678")
-                    .ip("172.16.0.1")
+                    .subnetId("subnet-hhi88a58")
+                    .ip("10.0.30.10")
                     .build(),
                 SnatIpIpArgs.builder()
-                    .subnetId("subnet-12345678")
-                    .ip("172.16.0.2")
+                    .subnetId("subnet-d4umunpy")
                     .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  snatTest:
-    type: tencentcloud:Clb:Instance
-    properties:
-      networkType: OPEN
-      clbName: tf-clb-snat-test
-  foo:
+  example:
     type: tencentcloud:Clb:SnatIp
     properties:
-      clbId: ${snatTest.id}
+      clbId: lb-jnx618r2
       ips:
-        - subnetId: subnet-12345678
-          ip: 172.16.0.1
-        - subnetId: subnet-12345678
-          ip: 172.16.0.2
+        - subnetId: subnet-hhi88a58
+          ip: 10.0.30.10
+        - subnetId: subnet-d4umunpy
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_snatip" "example" {
+  clb_id = "lb-jnx618r2"
+  ips {
+    subnet_id = "subnet-hhi88a58"
+    ip        = "10.0.30.10"
+  }
+  ips {
+    subnet_id = "subnet-d4umunpy"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateLoadBalancerSnatIps](https://www.tencentcloud.com/document/api/214/37096)
+* Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+* Update:
+  - [CreateLoadBalancerSnatIps](https://www.tencentcloud.com/document/api/214/37096)
+  - [DeleteLoadBalancerSnatIps](https://www.tencentcloud.com/document/api/214/37094)
+* Delete:
+  - [DeleteLoadBalancerSnatIps](https://www.tencentcloud.com/document/api/214/37094)
+  - [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
 
 
 ## Create SnatIp Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
            <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.SnatIpIpArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[SnatIpIpArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSnatIp</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SnatIp</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSnatIp</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SnatIp</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">SnatIp</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SnatIpArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:SnatIp</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:SnatIp</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_clb_snat_ip&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -275,7 +324,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -392,11 +441,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## SnatIp Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -412,17 +469,15 @@ The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_csharp" style="color: inherit; text-decoration: inherit;">Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#snatipip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Snat<wbr>Ip<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#snatipip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Snat<wbr>Ip<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -436,8 +491,7 @@ The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_go" style="color: inherit; text-decoration: inherit;">Ips</a>
@@ -445,8 +499,29 @@ The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#snatipip">[]Snat<wbr>Ip<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_hcl" style="color: inherit; text-decoration: inherit;">ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#snatipip">list(object)</a></span>
+    </dt>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -460,17 +535,15 @@ The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_java" style="color: inherit; text-decoration: inherit;">ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#snatipip">List&lt;Snat<wbr>Ip<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#snatipip">List&lt;Snat<wbr>Ip<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -484,17 +557,15 @@ The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_nodejs" style="color: inherit; text-decoration: inherit;">ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#snatipip">Snat<wbr>Ip<wbr>Ip<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#snatipip">Snat<wbr>Ip<wbr>Ip[]</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -508,17 +579,15 @@ The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_python" style="color: inherit; text-decoration: inherit;">ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#snatipip">Snat<wbr>Ip<wbr>Ip<wbr>Args]</a></span>
+        <span class="property-type"><a href="#snatipip">Sequence[Snat<wbr>Ip<wbr>Ip<wbr>Args]</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -532,8 +601,7 @@ The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_yaml" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -541,8 +609,7 @@ The SnatIp resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#snatipip">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -563,8 +630,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -578,8 +644,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +672,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -608,8 +686,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -623,8 +700,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -638,8 +714,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -649,121 +724,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing SnatIp resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SnatIpState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SnatIp</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SnatIpState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SnatIp</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.SnatIpIpArgs]]</span> = None<span class="p">) -&gt;</span> SnatIp</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[SnatIpIpArgs]]</span> = None<span class="p">) -&gt;</span> SnatIp</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSnatIp<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SnatIpState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SnatIp</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSnatIp<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SnatIpState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SnatIp</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SnatIp</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SnatIpState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SnatIp</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SnatIpState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SnatIp</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SnatIpState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SnatIp</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SnatIpState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSnatIp</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Clb:SnatIp</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_clb_snat_ip</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SnatIpState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SnatIpState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -771,28 +885,31 @@ Get an existing SnatIp resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SnatIpState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -800,28 +917,31 @@ Get an existing SnatIp resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SnatIpState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -841,17 +961,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ips_csharp" style="color: inherit; text-decoration: inherit;">Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#snatipip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Snat<wbr>Ip<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#snatipip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Snat<wbr>Ip<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ips_go" style="color: inherit; text-decoration: inherit;">Ips</a>
@@ -874,8 +991,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#snatipip">[]Snat<wbr>Ip<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ips_hcl" style="color: inherit; text-decoration: inherit;">ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#snatipip">list(object)</a></span>
+    </dt>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -889,17 +1027,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ips_java" style="color: inherit; text-decoration: inherit;">ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#snatipip">List&lt;Snat<wbr>Ip<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#snatipip">List&lt;Snat<wbr>Ip<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -913,17 +1049,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ips_nodejs" style="color: inherit; text-decoration: inherit;">ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#snatipip">Snat<wbr>Ip<wbr>Ip<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#snatipip">Snat<wbr>Ip<wbr>Ip[]</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -937,17 +1071,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ips_python" style="color: inherit; text-decoration: inherit;">ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#snatipip">Snat<wbr>Ip<wbr>Ip<wbr>Args]</a></span>
+        <span class="property-type"><a href="#snatipip">Sequence[Snat<wbr>Ip<wbr>Ip<wbr>Args]</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -961,8 +1093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CLB instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>CLB instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ips_yaml" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -970,8 +1101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#snatipip">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Snat IP address config.</p>
-</dd></dl>
+    <dd>Snat IP address config.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -986,20 +1116,13 @@ The following state arguments are supported:
 
 
 
-<h4 id="snatipip">Snat<wbr>Ip<wbr>Ip</h4>
+<h4 id="snatipip">
+Snat<wbr>Ip<wbr>Ip<pulumi-choosable type="language" values="python,go" class="inline">, Snat<wbr>Ip<wbr>Ip<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-required"
-            title="Required">
-        <span id="ip_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Snat IP.</p>
-</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1007,8 +1130,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd></dl>
+    <dd>Subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Snat IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1016,23 +1146,43 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="ip_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Snat IP.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd></dl>
+    <dd>Subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Snat IP.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Snat IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1040,23 +1190,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="ip_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Snat IP.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd></dl>
+    <dd>Subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Snat IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1064,23 +1212,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="ip_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Snat IP.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd></dl>
+    <dd>Subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Snat IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1088,23 +1234,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="ip_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>Snat IP.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd></dl>
+    <dd>Subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Snat IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1112,23 +1256,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="ip_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Snat IP.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd></dl>
+    <dd>Subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Snat IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1136,12 +1278,15 @@ The following state arguments are supported:
 
 
 
-ClbSnatIp instance can be imported by clb instance id, e.g.
+Clb instance snat ip can be imported by clb instance id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
+$ pulumi import tencentcloud:Clb/snatIp:SnatIp example lb-jnx618r2
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1153,7 +1298,6 @@ $ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

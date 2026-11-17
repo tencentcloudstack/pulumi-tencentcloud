@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Clb.Instance"
-meta_desc: "Documentation for the tencentcloud.Clb.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CLB instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,80 +18,173 @@ Provides a resource to create a CLB instance.
 
 ## Example Usage
 
-### INTERNAL CLB
+### Create INTERNAL CLB
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const internalClb = new tencentcloud.clb.Instance("internalClb", {
-    clbName: "myclb",
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    cidrBlock: "10.0.1.0/24",
+    isMulticast: false,
+});
+// create INTERNAL clb
+const example1 = new tencentcloud.clb.Instance("example1", {
     networkType: "INTERNAL",
+    clbName: "tf-example",
     projectId: 0,
-    subnetId: "subnet-12rastkr",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
     tags: {
-        test: "tf",
+        tagKey: "tagValue",
     },
-    vpcId: "vpc-7007ll7q",
+});
+// create INTERNAL clb by sla_type and internet_bandwidth_max_out
+const example2 = new tencentcloud.clb.Instance("example2", {
+    networkType: "INTERNAL",
+    clbName: "tf-example",
+    projectId: 0,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    slaType: "clb.c2.medium",
+    internetBandwidthMaxOut: 100,
+    tags: {
+        tagKey: "tagValue",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-internal_clb = tencentcloud.clb.Instance("internalClb",
-    clb_name="myclb",
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
+    cidr_block="10.0.1.0/24",
+    is_multicast=False)
+# create INTERNAL clb
+example1 = tencentcloud.clb.Instance("example1",
     network_type="INTERNAL",
+    clb_name="tf-example",
     project_id=0,
-    subnet_id="subnet-12rastkr",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
     tags={
-        "test": "tf",
-    },
-    vpc_id="vpc-7007ll7q")
+        "tagKey": "tagValue",
+    })
+# create INTERNAL clb by sla_type and internet_bandwidth_max_out
+example2 = tencentcloud.clb.Instance("example2",
+    network_type="INTERNAL",
+    clb_name="tf-example",
+    project_id=0,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    sla_type="clb.c2.medium",
+    internet_bandwidth_max_out=100,
+    tags={
+        "tagKey": "tagValue",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
-    {
-        ClbName = "myclb",
-        NetworkType = "INTERNAL",
-        ProjectId = 0,
-        SubnetId = "subnet-12rastkr",
-        Tags = 
-        {
-            { "test", "tf" },
-        },
-        VpcId = "vpc-7007ll7q",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
-			ClbName:     pulumi.String("myclb"),
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create INTERNAL clb
+		_, err = clb.NewInstance(ctx, "example1", &clb.InstanceArgs{
 			NetworkType: pulumi.String("INTERNAL"),
+			ClbName:     pulumi.String("tf-example"),
 			ProjectId:   pulumi.Int(0),
-			SubnetId:    pulumi.String("subnet-12rastkr"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
 			},
-			VpcId: pulumi.String("vpc-7007ll7q"),
+		})
+		if err != nil {
+			return err
+		}
+		// create INTERNAL clb by sla_type and internet_bandwidth_max_out
+		_, err = clb.NewInstance(ctx, "example2", &clb.InstanceArgs{
+			NetworkType:             pulumi.String("INTERNAL"),
+			ClbName:                 pulumi.String("tf-example"),
+			ProjectId:               pulumi.Int(0),
+			VpcId:                   vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:                subnet2.ID().ToIDOutput().ToStringOutput(),
+			SlaType:                 pulumi.String("clb.c2.medium"),
+			InternetBandwidthMaxOut: pulumi.Int(100),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
 		})
 		if err != nil {
 			return err
@@ -98,16 +193,83 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        CidrBlock = "10.0.1.0/24",
+        IsMulticast = false,
+    });
+
+    // create INTERNAL clb
+    var example1 = new Tencentcloud.Clb.Instance("example1", new()
+    {
+        NetworkType = "INTERNAL",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+    // create INTERNAL clb by sla_type and internet_bandwidth_max_out
+    var example2 = new Tencentcloud.Clb.Instance("example2", new()
+    {
+        NetworkType = "INTERNAL",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        SlaType = "clb.c2.medium",
+        InternetBandwidthMaxOut = 100,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -119,111 +281,951 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var internalClb = new Instance("internalClb", InstanceArgs.builder()        
-            .clbName("myclb")
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .cidrBlock("10.0.1.0/24")
+            .isMulticast(false)
+            .build());
+
+        // create INTERNAL clb
+        var example1 = new com.pulumi.tencentcloud.Clb.Instance("example1", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
             .networkType("INTERNAL")
+            .clbName("tf-example")
             .projectId(0)
-            .subnetId("subnet-12rastkr")
-            .tags(Map.of("test", "tf"))
-            .vpcId("vpc-7007ll7q")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+        // create INTERNAL clb by sla_type and internet_bandwidth_max_out
+        var example2 = new com.pulumi.tencentcloud.Clb.Instance("example2", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .networkType("INTERNAL")
+            .clbName("tf-example")
+            .projectId(0)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .slaType("clb.c2.medium")
+            .internetBandwidthMaxOut(100)
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
 resources:
-  internalClb:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      cidrBlock: 10.0.1.0/24
+      isMulticast: false
+  # create INTERNAL clb
+  example1:
     type: tencentcloud:Clb:Instance
     properties:
-      clbName: myclb
       networkType: INTERNAL
+      clbName: tf-example
       projectId: 0
-      subnetId: subnet-12rastkr
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
       tags:
-        test: tf
-      vpcId: vpc-7007ll7q
+        tagKey: tagValue
+  # create INTERNAL clb by sla_type and internet_bandwidth_max_out
+  example2:
+    type: tencentcloud:Clb:Instance
+    properties:
+      networkType: INTERNAL
+      clbName: tf-example
+      projectId: 0
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      slaType: clb.c2.medium
+      internetBandwidthMaxOut: 100
+      tags:
+        tagKey: tagValue
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### LCU-supported CLB
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  is_multicast      = false
+}
+// create INTERNAL clb
+resource "tencentcloud_clb_instance" "example1" {
+  network_type = "INTERNAL"
+  clb_name     = "tf-example"
+  project_id   = 0
+  vpc_id       = tencentcloud_vpc_instance.vpc.id
+  subnet_id    = tencentcloud_subnet_instance.subnet.id
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+// create INTERNAL clb by sla_type and internet_bandwidth_max_out
+resource "tencentcloud_clb_instance" "example2" {
+  network_type               = "INTERNAL"
+  clb_name                   = "tf-example"
+  project_id                 = 0
+  vpc_id                     = tencentcloud_vpc_instance.vpc.id
+  subnet_id                  = tencentcloud_subnet_instance.subnet.id
+  sla_type                   = "clb.c2.medium"
+  internet_bandwidth_max_out = 100
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create CLB with eip_address_id, Only support INTERNAL CLB
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const internalClb = new tencentcloud.clb.Instance("internalClb", {
-    clbName: "myclb",
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    cidrBlock: "10.0.1.0/24",
+    isMulticast: false,
+});
+// create clb
+const example = new tencentcloud.clb.Instance("example", {
     networkType: "INTERNAL",
+    clbName: "tf-example",
+    projectId: 0,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    eipAddressId: "eip-lt0w6jhq",
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
+    cidr_block="10.0.1.0/24",
+    is_multicast=False)
+# create clb
+example = tencentcloud.clb.Instance("example",
+    network_type="INTERNAL",
+    clb_name="tf-example",
+    project_id=0,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    eip_address_id="eip-lt0w6jhq",
+    tags={
+        "tagKey": "tagValue",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create clb
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType:  pulumi.String("INTERNAL"),
+			ClbName:      pulumi.String("tf-example"),
+			ProjectId:    pulumi.Int(0),
+			VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:     subnet2.ID().ToIDOutput().ToStringOutput(),
+			EipAddressId: pulumi.String("eip-lt0w6jhq"),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        CidrBlock = "10.0.1.0/24",
+        IsMulticast = false,
+    });
+
+    // create clb
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "INTERNAL",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        EipAddressId = "eip-lt0w6jhq",
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .cidrBlock("10.0.1.0/24")
+            .isMulticast(false)
+            .build());
+
+        // create clb
+        var example = new com.pulumi.tencentcloud.Clb.Instance("example", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .networkType("INTERNAL")
+            .clbName("tf-example")
+            .projectId(0)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .eipAddressId("eip-lt0w6jhq")
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
+resources:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      cidrBlock: 10.0.1.0/24
+      isMulticast: false
+  # create clb
+  example:
+    type: tencentcloud:Clb:Instance
+    properties:
+      networkType: INTERNAL
+      clbName: tf-example
+      projectId: 0
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      eipAddressId: eip-lt0w6jhq
+      tags:
+        tagKey: tagValue
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  is_multicast      = false
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type   = "INTERNAL"
+  clb_name       = "tf-example"
+  project_id     = 0
+  vpc_id         = tencentcloud_vpc_instance.vpc.id
+  subnet_id      = tencentcloud_subnet_instance.subnet.id
+  eip_address_id = "eip-lt0w6jhq"
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create dedicated cluster clb
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    cidrBlock: "10.0.1.0/24",
+    cdcId: "cluster-lchwgxhs",
+    isMulticast: false,
+});
+// create clb
+const example = new tencentcloud.clb.Instance("example", {
+    networkType: "INTERNAL",
+    clbName: "tf-example",
+    projectId: 0,
+    clusterId: "cluster-lchwgxhs",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
+    cidr_block="10.0.1.0/24",
+    cdc_id="cluster-lchwgxhs",
+    is_multicast=False)
+# create clb
+example = tencentcloud.clb.Instance("example",
+    network_type="INTERNAL",
+    clb_name="tf-example",
+    project_id=0,
+    cluster_id="cluster-lchwgxhs",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    tags={
+        "tagKey": "tagValue",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+			CdcId:            pulumi.String("cluster-lchwgxhs"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create clb
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType: pulumi.String("INTERNAL"),
+			ClbName:     pulumi.String("tf-example"),
+			ProjectId:   pulumi.Int(0),
+			ClusterId:   pulumi.String("cluster-lchwgxhs"),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        CidrBlock = "10.0.1.0/24",
+        CdcId = "cluster-lchwgxhs",
+        IsMulticast = false,
+    });
+
+    // create clb
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "INTERNAL",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        ClusterId = "cluster-lchwgxhs",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .cidrBlock("10.0.1.0/24")
+            .cdcId("cluster-lchwgxhs")
+            .isMulticast(false)
+            .build());
+
+        // create clb
+        var example = new com.pulumi.tencentcloud.Clb.Instance("example", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .networkType("INTERNAL")
+            .clbName("tf-example")
+            .projectId(0)
+            .clusterId("cluster-lchwgxhs")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
+resources:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      cidrBlock: 10.0.1.0/24
+      cdcId: cluster-lchwgxhs
+      isMulticast: false
+  # create clb
+  example:
+    type: tencentcloud:Clb:Instance
+    properties:
+      networkType: INTERNAL
+      clbName: tf-example
+      projectId: 0
+      clusterId: cluster-lchwgxhs
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      tags:
+        tagKey: tagValue
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  cdc_id            = "cluster-lchwgxhs"
+  is_multicast      = false
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type = "INTERNAL"
+  clb_name     = "tf-example"
+  project_id   = 0
+  cluster_id   = "cluster-lchwgxhs"
+  vpc_id       = tencentcloud_vpc_instance.vpc.id
+  subnet_id    = tencentcloud_subnet_instance.subnet.id
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create LCU-supported CLB
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    cidrBlock: "10.0.1.0/24",
+    isMulticast: false,
+});
+// create clb
+const example = new tencentcloud.clb.Instance("example", {
+    networkType: "INTERNAL",
+    clbName: "tf-example",
     projectId: 0,
     slaType: "clb.c3.medium",
-    subnetId: "subnet-o3a5nt20",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
     tags: {
-        test: "tf",
+        tagKey: "tagValue",
     },
-    vpcId: "vpc-2hfyray3",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-internal_clb = tencentcloud.clb.Instance("internalClb",
-    clb_name="myclb",
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
+    cidr_block="10.0.1.0/24",
+    is_multicast=False)
+# create clb
+example = tencentcloud.clb.Instance("example",
     network_type="INTERNAL",
+    clb_name="tf-example",
     project_id=0,
     sla_type="clb.c3.medium",
-    subnet_id="subnet-o3a5nt20",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
     tags={
-        "test": "tf",
-    },
-    vpc_id="vpc-2hfyray3")
+        "tagKey": "tagValue",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
-    {
-        ClbName = "myclb",
-        NetworkType = "INTERNAL",
-        ProjectId = 0,
-        SlaType = "clb.c3.medium",
-        SubnetId = "subnet-o3a5nt20",
-        Tags = 
-        {
-            { "test", "tf" },
-        },
-        VpcId = "vpc-2hfyray3",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
-			ClbName:     pulumi.String("myclb"),
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create clb
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
 			NetworkType: pulumi.String("INTERNAL"),
+			ClbName:     pulumi.String("tf-example"),
 			ProjectId:   pulumi.Int(0),
 			SlaType:     pulumi.String("clb.c3.medium"),
-			SubnetId:    pulumi.String("subnet-o3a5nt20"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
 			},
-			VpcId: pulumi.String("vpc-2hfyray3"),
 		})
 		if err != nil {
 			return err
@@ -232,16 +1234,68 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        CidrBlock = "10.0.1.0/24",
+        IsMulticast = false,
+    });
+
+    // create clb
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "INTERNAL",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        SlaType = "clb.c3.medium",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -253,114 +1307,256 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var internalClb = new Instance("internalClb", InstanceArgs.builder()        
-            .clbName("myclb")
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .cidrBlock("10.0.1.0/24")
+            .isMulticast(false)
+            .build());
+
+        // create clb
+        var example = new com.pulumi.tencentcloud.Clb.Instance("example", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
             .networkType("INTERNAL")
+            .clbName("tf-example")
             .projectId(0)
             .slaType("clb.c3.medium")
-            .subnetId("subnet-o3a5nt20")
-            .tags(Map.of("test", "tf"))
-            .vpcId("vpc-2hfyray3")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
 resources:
-  internalClb:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      cidrBlock: 10.0.1.0/24
+      isMulticast: false
+  # create clb
+  example:
     type: tencentcloud:Clb:Instance
     properties:
-      clbName: myclb
       networkType: INTERNAL
+      clbName: tf-example
       projectId: 0
       slaType: clb.c3.medium
-      subnetId: subnet-o3a5nt20
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
       tags:
-        test: tf
-      vpcId: vpc-2hfyray3
+        tagKey: tagValue
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### OPEN CLB
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  is_multicast      = false
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type = "INTERNAL"
+  clb_name     = "tf-example"
+  project_id   = 0
+  sla_type     = "clb.c3.medium"
+  vpc_id       = tencentcloud_vpc_instance.vpc.id
+  subnet_id    = tencentcloud_subnet_instance.subnet.id
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### changes.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const openClb = new tencentcloud.clb.Instance("openClb", {
-    clbName: "myclb",
-    networkType: "OPEN",
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    cidrBlock: "10.0.1.0/24",
+    isMulticast: false,
+});
+// create clb and forcibly upgrade sla_type
+const example = new tencentcloud.clb.Instance("example", {
+    networkType: "INTERNAL",
+    clbName: "tf-example",
     projectId: 0,
-    securityGroups: ["sg-o0ek7r93"],
+    slaType: "clb.c3.medium",
+    force: true,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
     tags: {
-        test: "tf",
+        tagKey: "tagValue",
     },
-    vpcId: "vpc-da7ffa61",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-open_clb = tencentcloud.clb.Instance("openClb",
-    clb_name="myclb",
-    network_type="OPEN",
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
+    cidr_block="10.0.1.0/24",
+    is_multicast=False)
+# create clb and forcibly upgrade sla_type
+example = tencentcloud.clb.Instance("example",
+    network_type="INTERNAL",
+    clb_name="tf-example",
     project_id=0,
-    security_groups=["sg-o0ek7r93"],
+    sla_type="clb.c3.medium",
+    force=True,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
     tags={
-        "test": "tf",
-    },
-    vpc_id="vpc-da7ffa61")
+        "tagKey": "tagValue",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var openClb = new Tencentcloud.Clb.Instance("openClb", new()
-    {
-        ClbName = "myclb",
-        NetworkType = "OPEN",
-        ProjectId = 0,
-        SecurityGroups = new[]
-        {
-            "sg-o0ek7r93",
-        },
-        Tags = 
-        {
-            { "test", "tf" },
-        },
-        VpcId = "vpc-da7ffa61",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
-			ClbName:     pulumi.String("myclb"),
-			NetworkType: pulumi.String("OPEN"),
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create clb and forcibly upgrade sla_type
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType: pulumi.String("INTERNAL"),
+			ClbName:     pulumi.String("tf-example"),
 			ProjectId:   pulumi.Int(0),
-			SecurityGroups: pulumi.StringArray{
-				pulumi.String("sg-o0ek7r93"),
+			SlaType:     pulumi.String("clb.c3.medium"),
+			Force:       pulumi.Bool(true),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
 			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
-			},
-			VpcId: pulumi.String("vpc-da7ffa61"),
 		})
 		if err != nil {
 			return err
@@ -369,16 +1565,69 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        CidrBlock = "10.0.1.0/24",
+        IsMulticast = false,
+    });
+
+    // create clb and forcibly upgrade sla_type
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "INTERNAL",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        SlaType = "clb.c3.medium",
+        Force = true,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -390,121 +1639,258 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var openClb = new Instance("openClb", InstanceArgs.builder()        
-            .clbName("myclb")
-            .networkType("OPEN")
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .cidrBlock("10.0.1.0/24")
+            .isMulticast(false)
+            .build());
+
+        // create clb and forcibly upgrade sla_type
+        var example = new com.pulumi.tencentcloud.Clb.Instance("example", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .networkType("INTERNAL")
+            .clbName("tf-example")
             .projectId(0)
-            .securityGroups("sg-o0ek7r93")
-            .tags(Map.of("test", "tf"))
-            .vpcId("vpc-da7ffa61")
+            .slaType("clb.c3.medium")
+            .force(true)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
 resources:
-  openClb:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      cidrBlock: 10.0.1.0/24
+      isMulticast: false
+  # create clb and forcibly upgrade sla_type
+  example:
     type: tencentcloud:Clb:Instance
     properties:
-      clbName: myclb
-      networkType: OPEN
+      networkType: INTERNAL
+      clbName: tf-example
       projectId: 0
-      securityGroups:
-        - sg-o0ek7r93
+      slaType: clb.c3.medium
+      force: true
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
       tags:
-        test: tf
-      vpcId: vpc-da7ffa61
+        tagKey: tagValue
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### SUPPORT CORS
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  is_multicast      = false
+}
+// create clb and forcibly upgrade sla_type
+resource "tencentcloud_clb_instance" "example" {
+  network_type = "INTERNAL"
+  clb_name     = "tf-example"
+  project_id   = 0
+  sla_type     = "clb.c3.medium"
+  force        = true
+  vpc_id       = tencentcloud_vpc_instance.vpc.id
+  subnet_id    = tencentcloud_subnet_instance.subnet.id
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create OPEN CLB
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const openClb = new tencentcloud.clb.Instance("openClb", {
-    clbName: "myclb",
-    networkType: "OPEN",
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create security group
+const example = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
     projectId: 0,
-    securityGroups: ["sg-o0ek7r93"],
     tags: {
-        test: "tf",
+        example: "test",
     },
-    targetRegionInfoRegion: "ap-guangzhou",
-    targetRegionInfoVpcId: "vpc-da7ffa61",
-    vpcId: "vpc-da7ffa61",
+});
+// create clb
+const exampleInstance = new tencentcloud.clb.Instance("example", {
+    networkType: "OPEN",
+    clbName: "tf-example",
+    projectId: 0,
+    vpcId: vpc.id,
+    securityGroups: [example.id],
+    tags: {
+        tagKey: "tagValue",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-open_clb = tencentcloud.clb.Instance("openClb",
-    clb_name="myclb",
-    network_type="OPEN",
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create security group
+example = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
     project_id=0,
-    security_groups=["sg-o0ek7r93"],
     tags={
-        "test": "tf",
-    },
-    target_region_info_region="ap-guangzhou",
-    target_region_info_vpc_id="vpc-da7ffa61",
-    vpc_id="vpc-da7ffa61")
+        "example": "test",
+    })
+# create clb
+example_instance = tencentcloud.clb.Instance("example",
+    network_type="OPEN",
+    clb_name="tf-example",
+    project_id=0,
+    vpc_id=vpc.id,
+    security_groups=[example.id],
+    tags={
+        "tagKey": "tagValue",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var openClb = new Tencentcloud.Clb.Instance("openClb", new()
-    {
-        ClbName = "myclb",
-        NetworkType = "OPEN",
-        ProjectId = 0,
-        SecurityGroups = new[]
-        {
-            "sg-o0ek7r93",
-        },
-        Tags = 
-        {
-            { "test", "tf" },
-        },
-        TargetRegionInfoRegion = "ap-guangzhou",
-        TargetRegionInfoVpcId = "vpc-da7ffa61",
-        VpcId = "vpc-da7ffa61",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
-			ClbName:     pulumi.String("myclb"),
-			NetworkType: pulumi.String("OPEN"),
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create security group
+		example, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
 			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create clb
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType: pulumi.String("OPEN"),
+			ClbName:     pulumi.String("tf-example"),
+			ProjectId:   pulumi.Int(0),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
 			SecurityGroups: pulumi.StringArray{
-				pulumi.String("sg-o0ek7r93"),
+				example.ID().ToIDOutput().ToStringOutput(),
 			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
 			},
-			TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
-			TargetRegionInfoVpcId:  pulumi.String("vpc-da7ffa61"),
-			VpcId:                  pulumi.String("vpc-da7ffa61"),
 		})
 		if err != nil {
 			return err
@@ -513,16 +1899,74 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create security group
+    var example = new Tencentcloud.Security.Group("example", new()
+    {
+        Name = "tf-example",
+        Description = "sg desc.",
+        ProjectId = 0,
+        Tags = 
+        {
+            { "example", "test" },
+        },
+    });
+
+    // create clb
+    var exampleInstance = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "OPEN",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SecurityGroups = new[]
+        {
+            example.Id,
+        },
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -534,45 +1978,506 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var openClb = new Instance("openClb", InstanceArgs.builder()        
-            .clbName("myclb")
-            .networkType("OPEN")
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create security group
+        var example = new Group("example", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
             .projectId(0)
-            .securityGroups("sg-o0ek7r93")
-            .tags(Map.of("test", "tf"))
-            .targetRegionInfoRegion("ap-guangzhou")
-            .targetRegionInfoVpcId("vpc-da7ffa61")
-            .vpcId("vpc-da7ffa61")
+            .tags(Map.of("example", "test"))
+            .build());
+
+        // create clb
+        var exampleInstance = new com.pulumi.tencentcloud.Clb.Instance("exampleInstance", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .networkType("OPEN")
+            .clbName("tf-example")
+            .projectId(0)
+            .vpcId(vpc.id())
+            .securityGroups(example.id())
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
 resources:
-  openClb:
-    type: tencentcloud:Clb:Instance
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
     properties:
-      clbName: myclb
-      networkType: OPEN
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create security group
+  example:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example
+      description: sg desc.
       projectId: 0
-      securityGroups:
-        - sg-o0ek7r93
       tags:
-        test: tf
-      targetRegionInfoRegion: ap-guangzhou
-      targetRegionInfoVpcId: vpc-da7ffa61
-      vpcId: vpc-da7ffa61
+        example: test
+  # create clb
+  exampleInstance:
+    type: tencentcloud:Clb:Instance
+    name: example
+    properties:
+      networkType: OPEN
+      clbName: tf-example
+      projectId: 0
+      vpcId: ${vpc.id}
+      securityGroups:
+        - ${example.id}
+      tags:
+        tagKey: tagValue
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### OPNE CLB with VipIsp
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type    = "OPEN"
+  clb_name        = "tf-example"
+  project_id      = 0
+  vpc_id          = tencentcloud_vpc_instance.vpc.id
+  security_groups = [tencentcloud_security_group.example.id]
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Support CORS
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
+const config = new pulumi.Config();
+const zone = config.get("zone") || "ap-guangzhou";
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create security group
+const example = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
+    projectId: 0,
+    tags: {
+        example: "test",
+    },
+});
+// create clb
+const exampleInstance = new tencentcloud.clb.Instance("example", {
+    networkType: "OPEN",
+    clbName: "tf-example",
+    projectId: 0,
+    vpcId: vpc.id,
+    securityGroups: [example.id],
+    targetRegionInfoRegion: zone,
+    targetRegionInfoVpcId: vpc.id,
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+zone = config.get("zone")
+if zone is None:
+    zone = "ap-guangzhou"
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create security group
+example = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
+    project_id=0,
+    tags={
+        "example": "test",
+    })
+# create clb
+example_instance = tencentcloud.clb.Instance("example",
+    network_type="OPEN",
+    clb_name="tf-example",
+    project_id=0,
+    vpc_id=vpc.id,
+    security_groups=[example.id],
+    target_region_info_region=zone,
+    target_region_info_vpc_id=vpc.id,
+    tags={
+        "tagKey": "tagValue",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		zone := "ap-guangzhou"
+		if param := cfg.Get("zone"); param != "" {
+			zone = param
+		}
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create security group
+		example, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create clb
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType: pulumi.String("OPEN"),
+			ClbName:     pulumi.String("tf-example"),
+			ProjectId:   pulumi.Int(0),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+			SecurityGroups: pulumi.StringArray{
+				example.ID().ToIDOutput().ToStringOutput(),
+			},
+			TargetRegionInfoRegion: pulumi.String(zone),
+			TargetRegionInfoVpcId:  vpc2.ID().ToIDOutput().ToStringOutput(),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var zone = config.Get("zone") ?? "ap-guangzhou";
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create security group
+    var example = new Tencentcloud.Security.Group("example", new()
+    {
+        Name = "tf-example",
+        Description = "sg desc.",
+        ProjectId = 0,
+        Tags = 
+        {
+            { "example", "test" },
+        },
+    });
+
+    // create clb
+    var exampleInstance = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "OPEN",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SecurityGroups = new[]
+        {
+            example.Id,
+        },
+        TargetRegionInfoRegion = zone,
+        TargetRegionInfoVpcId = vpc.Id,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var zone = config.get("zone").orElse("ap-guangzhou");
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create security group
+        var example = new Group("example", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
+            .projectId(0)
+            .tags(Map.of("example", "test"))
+            .build());
+
+        // create clb
+        var exampleInstance = new com.pulumi.tencentcloud.Clb.Instance("exampleInstance", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .networkType("OPEN")
+            .clbName("tf-example")
+            .projectId(0)
+            .vpcId(vpc.id())
+            .securityGroups(example.id())
+            .targetRegionInfoRegion(zone)
+            .targetRegionInfoVpcId(vpc.id())
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  zone:
+    type: string
+    default: ap-guangzhou
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
+resources:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create security group
+  example:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example
+      description: sg desc.
+      projectId: 0
+      tags:
+        example: test
+  # create clb
+  exampleInstance:
+    type: tencentcloud:Clb:Instance
+    name: example
+    properties:
+      networkType: OPEN
+      clbName: tf-example
+      projectId: 0
+      vpcId: ${vpc.id}
+      securityGroups:
+        - ${example.id}
+      targetRegionInfoRegion: ${zone}
+      targetRegionInfoVpcId: ${vpc.id}
+      tags:
+        tagKey: tagValue
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type              = "OPEN"
+  clb_name                  = "tf-example"
+  project_id                = 0
+  vpc_id                    = tencentcloud_vpc_instance.vpc.id
+  security_groups           = [tencentcloud_security_group.example.id]
+  target_region_info_region = var.zone
+  target_region_info_vpc_id = tencentcloud_vpc_instance.vpc.id
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "zone" {
+  type    = string
+  default = "ap-guangzhou"
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Open CLB with VipIsp
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create vpc bandwidth package
 const example = new tencentcloud.vpc.BandwidthPackage("example", {
     networkType: "SINGLEISP_CMCC",
     chargeType: "ENHANCED95_POSTPAID_BY_MONTH",
@@ -583,23 +2488,33 @@ const example = new tencentcloud.vpc.BandwidthPackage("example", {
         createdBy: "terraform",
     },
 });
-const openClb = new tencentcloud.clb.Instance("openClb", {
+// create clb
+const exampleInstance = new tencentcloud.clb.Instance("example", {
     networkType: "OPEN",
-    clbName: "my-open-clb",
+    clbName: "tf-example",
     projectId: 0,
-    vpcId: "vpc-4owdpnwr",
     vipIsp: "CMCC",
     internetChargeType: "BANDWIDTH_PACKAGE",
     bandwidthPackageId: example.id,
+    vpcId: vpc.id,
     tags: {
-        test: "open",
+        tagKey: "tagValue",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create vpc bandwidth package
 example = tencentcloud.vpc.BandwidthPackage("example",
     network_type="SINGLEISP_CMCC",
     charge_type="ENHANCED95_POSTPAID_BY_MONTH",
@@ -609,18 +2524,81 @@ example = tencentcloud.vpc.BandwidthPackage("example",
     tags={
         "createdBy": "terraform",
     })
-open_clb = tencentcloud.clb.Instance("openClb",
+# create clb
+example_instance = tencentcloud.clb.Instance("example",
     network_type="OPEN",
-    clb_name="my-open-clb",
+    clb_name="tf-example",
     project_id=0,
-    vpc_id="vpc-4owdpnwr",
     vip_isp="CMCC",
     internet_charge_type="BANDWIDTH_PACKAGE",
     bandwidth_package_id=example.id,
+    vpc_id=vpc.id,
     tags={
-        "test": "open",
+        "tagKey": "tagValue",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create vpc bandwidth package
+		example, err := vpc.NewBandwidthPackage(ctx, "example", &vpc.BandwidthPackageArgs{
+			NetworkType:          pulumi.String("SINGLEISP_CMCC"),
+			ChargeType:           pulumi.String("ENHANCED95_POSTPAID_BY_MONTH"),
+			BandwidthPackageName: pulumi.String("tf-example"),
+			InternetMaxBandwidth: pulumi.Int(300),
+			Egress:               pulumi.String("center_egress1"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create clb
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType:        pulumi.String("OPEN"),
+			ClbName:            pulumi.String("tf-example"),
+			ProjectId:          pulumi.Int(0),
+			VipIsp:             pulumi.String("CMCC"),
+			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+			BandwidthPackageId: example.ID().ToIDOutput().ToStringOutput(),
+			VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -629,6 +2607,13 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create vpc bandwidth package
     var example = new Tencentcloud.Vpc.BandwidthPackage("example", new()
     {
         NetworkType = "SINGLEISP_CMCC",
@@ -642,66 +2627,29 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var openClb = new Tencentcloud.Clb.Instance("openClb", new()
+    // create clb
+    var exampleInstance = new Tencentcloud.Clb.Instance("example", new()
     {
         NetworkType = "OPEN",
-        ClbName = "my-open-clb",
+        ClbName = "tf-example",
         ProjectId = 0,
-        VpcId = "vpc-4owdpnwr",
         VipIsp = "CMCC",
         InternetChargeType = "BANDWIDTH_PACKAGE",
         BandwidthPackageId = example.Id,
+        VpcId = vpc.Id,
         Tags = 
         {
-            { "test", "open" },
+            { "tagKey", "tagValue" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		example, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
-			NetworkType:          pulumi.String("SINGLEISP_CMCC"),
-			ChargeType:           pulumi.String("ENHANCED95_POSTPAID_BY_MONTH"),
-			BandwidthPackageName: pulumi.String("tf-example"),
-			InternetMaxBandwidth: pulumi.Int(300),
-			Egress:               pulumi.String("center_egress1"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
-			NetworkType:        pulumi.String("OPEN"),
-			ClbName:            pulumi.String("my-open-clb"),
-			ProjectId:          pulumi.Int(0),
-			VpcId:              pulumi.String("vpc-4owdpnwr"),
-			VipIsp:             pulumi.String("CMCC"),
-			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
-			BandwidthPackageId: example.ID(),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("open"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -710,10 +2658,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Vpc.BandwidthPackage;
 import com.pulumi.tencentcloud.Vpc.BandwidthPackageArgs;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -725,7 +2671,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new BandwidthPackage("example", BandwidthPackageArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create vpc bandwidth package
+        var example = new BandwidthPackage("example", BandwidthPackageArgs.builder()
             .networkType("SINGLEISP_CMCC")
             .chargeType("ENHANCED95_POSTPAID_BY_MONTH")
             .bandwidthPackageName("tf-example")
@@ -734,22 +2686,34 @@ public class App {
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var openClb = new Instance("openClb", InstanceArgs.builder()        
+        // create clb
+        var exampleInstance = new com.pulumi.tencentcloud.Clb.Instance("exampleInstance", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
             .networkType("OPEN")
-            .clbName("my-open-clb")
+            .clbName("tf-example")
             .projectId(0)
-            .vpcId("vpc-4owdpnwr")
             .vipIsp("CMCC")
             .internetChargeType("BANDWIDTH_PACKAGE")
             .bandwidthPackageId(example.id())
-            .tags(Map.of("test", "open"))
+            .vpcId(vpc.id())
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create vpc bandwidth package
   example:
     type: tencentcloud:Vpc:BandwidthPackage
     properties:
@@ -760,608 +2724,340 @@ resources:
       egress: center_egress1
       tags:
         createdBy: terraform
-  openClb:
+  # create clb
+  exampleInstance:
     type: tencentcloud:Clb:Instance
+    name: example
     properties:
       networkType: OPEN
-      clbName: my-open-clb
+      clbName: tf-example
       projectId: 0
-      vpcId: vpc-4owdpnwr
       vipIsp: CMCC
       internetChargeType: BANDWIDTH_PACKAGE
       bandwidthPackageId: ${example.id}
+      vpcId: ${vpc.id}
       tags:
-        test: open
+        tagKey: tagValue
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create vpc bandwidth package
+resource "tencentcloud_vpc_bandwidthpackage" "example" {
+  network_type           = "SINGLEISP_CMCC"
+  charge_type            = "ENHANCED95_POSTPAID_BY_MONTH"
+  bandwidth_package_name = "tf-example"
+  internet_max_bandwidth = 300
+  egress                 = "center_egress1"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type         = "OPEN"
+  clb_name             = "tf-example"
+  project_id           = 0
+  vip_isp              = "CMCC"
+  internet_charge_type = "BANDWIDTH_PACKAGE"
+  bandwidth_package_id = tencentcloud_vpc_bandwidthpackage.example.id
+  vpc_id               = tencentcloud_vpc_instance.vpc.id
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Dynamic Vip Instance
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooGroup = new tencentcloud.security.Group("fooGroup", {});
-const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
-const clbOpen = new tencentcloud.clb.Instance("clbOpen", {
-    networkType: "OPEN",
-    clbName: "clb-instance-open",
-    projectId: 0,
-    vpcId: fooInstance.id,
-    targetRegionInfoRegion: "ap-guangzhou",
-    targetRegionInfoVpcId: fooInstance.id,
-    securityGroups: [fooGroup.id],
-    dynamicVip: true,
-    tags: {
-        test: "tf",
-    },
-});
-export const domain = clbOpen.domain;
-```
-```python
-import pulumi
-import tencentcloud_iac_pulumi as tencentcloud
-
-foo_group = tencentcloud.security.Group("fooGroup")
-foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
-clb_open = tencentcloud.clb.Instance("clbOpen",
-    network_type="OPEN",
-    clb_name="clb-instance-open",
-    project_id=0,
-    vpc_id=foo_instance.id,
-    target_region_info_region="ap-guangzhou",
-    target_region_info_vpc_id=foo_instance.id,
-    security_groups=[foo_group.id],
-    dynamic_vip=True,
-    tags={
-        "test": "tf",
-    })
-pulumi.export("domain", clb_open.domain)
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var fooGroup = new Tencentcloud.Security.Group("fooGroup");
-
-    var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new()
-    {
-        NetworkType = "OPEN",
-        ClbName = "clb-instance-open",
-        ProjectId = 0,
-        VpcId = fooInstance.Id,
-        TargetRegionInfoRegion = "ap-guangzhou",
-        TargetRegionInfoVpcId = fooInstance.Id,
-        SecurityGroups = new[]
-        {
-            fooGroup.Id,
-        },
-        DynamicVip = true,
-        Tags = 
-        {
-            { "test", "tf" },
-        },
-    });
-
-    return new Dictionary<string, object?>
-    {
-        ["domain"] = clbOpen.Domain,
-    };
-});
-```
-```go
-package main
-
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-		if err != nil {
-			return err
-		}
-		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		clbOpen, err := Clb.NewInstance(ctx, "clbOpen", &Clb.InstanceArgs{
-			NetworkType:            pulumi.String("OPEN"),
-			ClbName:                pulumi.String("clb-instance-open"),
-			ProjectId:              pulumi.Int(0),
-			VpcId:                  fooInstance.ID(),
-			TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
-			TargetRegionInfoVpcId:  fooInstance.ID(),
-			SecurityGroups: pulumi.StringArray{
-				fooGroup.ID(),
-			},
-			DynamicVip: pulumi.Bool(true),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		ctx.Export("domain", clbOpen.Domain)
-		return nil
-	})
-}
-```
-```java
-package generated_program;
-
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Security.Group;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        var fooGroup = new Group("fooGroup");
-
-        var fooInstance = new Instance("fooInstance", InstanceArgs.builder()        
-            .cidrBlock("10.0.0.0/16")
-            .build());
-
-        var clbOpen = new Instance("clbOpen", InstanceArgs.builder()        
-            .networkType("OPEN")
-            .clbName("clb-instance-open")
-            .projectId(0)
-            .vpcId(fooInstance.id())
-            .targetRegionInfoRegion("ap-guangzhou")
-            .targetRegionInfoVpcId(fooInstance.id())
-            .securityGroups(fooGroup.id())
-            .dynamicVip(true)
-            .tags(Map.of("test", "tf"))
-            .build());
-
-        ctx.export("domain", clbOpen.domain());
-    }
-}
-```
-```yaml
-resources:
-  fooGroup:
-    type: tencentcloud:Security:Group
-  fooInstance:
-    type: tencentcloud:Vpc:Instance
-    properties:
-      cidrBlock: 10.0.0.0/16
-  clbOpen:
-    type: tencentcloud:Clb:Instance
-    properties:
-      networkType: OPEN
-      clbName: clb-instance-open
-      projectId: 0
-      vpcId: ${fooInstance.id}
-      targetRegionInfoRegion: ap-guangzhou
-      targetRegionInfoVpcId: ${fooInstance.id}
-      securityGroups:
-        - ${fooGroup.id}
-      dynamicVip: true
-      tags:
-        test: tf
-outputs:
-  domain: ${clbOpen.domain}
-```
-<!--End PulumiCodeChooser -->
-
-### Specified  Vip Instance
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const fooGroup = new tencentcloud.security.Group("fooGroup", {});
-const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
-const clbOpen = new tencentcloud.clb.Instance("clbOpen", {
-    networkType: "OPEN",
-    clbName: "clb-instance-open",
-    projectId: 0,
-    vpcId: fooInstance.id,
-    securityGroups: [fooGroup.id],
-    vip: "111.230.4.204",
-    tags: {
-        test: "tf",
-    },
-});
-export const domain = tencentcloud_clb_instance.vip;
-```
-```python
-import pulumi
-import tencentcloud_iac_pulumi as tencentcloud
-
-foo_group = tencentcloud.security.Group("fooGroup")
-foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
-clb_open = tencentcloud.clb.Instance("clbOpen",
-    network_type="OPEN",
-    clb_name="clb-instance-open",
-    project_id=0,
-    vpc_id=foo_instance.id,
-    security_groups=[foo_group.id],
-    vip="111.230.4.204",
-    tags={
-        "test": "tf",
-    })
-pulumi.export("domain", tencentcloud_clb_instance["vip"])
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var fooGroup = new Tencentcloud.Security.Group("fooGroup");
-
-    var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new()
-    {
-        NetworkType = "OPEN",
-        ClbName = "clb-instance-open",
-        ProjectId = 0,
-        VpcId = fooInstance.Id,
-        SecurityGroups = new[]
-        {
-            fooGroup.Id,
-        },
-        Vip = "111.230.4.204",
-        Tags = 
-        {
-            { "test", "tf" },
-        },
-    });
-
-    return new Dictionary<string, object?>
-    {
-        ["domain"] = tencentcloud_clb_instance.Vip,
-    };
-});
-```
-```go
-package main
-
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-		if err != nil {
-			return err
-		}
-		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Clb.NewInstance(ctx, "clbOpen", &Clb.InstanceArgs{
-			NetworkType: pulumi.String("OPEN"),
-			ClbName:     pulumi.String("clb-instance-open"),
-			ProjectId:   pulumi.Int(0),
-			VpcId:       fooInstance.ID(),
-			SecurityGroups: pulumi.StringArray{
-				fooGroup.ID(),
-			},
-			Vip: pulumi.String("111.230.4.204"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		ctx.Export("domain", tencentcloud_clb_instance.Vip)
-		return nil
-	})
-}
-```
-```java
-package generated_program;
-
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Security.Group;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        var fooGroup = new Group("fooGroup");
-
-        var fooInstance = new Instance("fooInstance", InstanceArgs.builder()        
-            .cidrBlock("10.0.0.0/16")
-            .build());
-
-        var clbOpen = new Instance("clbOpen", InstanceArgs.builder()        
-            .networkType("OPEN")
-            .clbName("clb-instance-open")
-            .projectId(0)
-            .vpcId(fooInstance.id())
-            .securityGroups(fooGroup.id())
-            .vip("111.230.4.204")
-            .tags(Map.of("test", "tf"))
-            .build());
-
-        ctx.export("domain", tencentcloud_clb_instance.vip());
-    }
-}
-```
-```yaml
-resources:
-  fooGroup:
-    type: tencentcloud:Security:Group
-  fooInstance:
-    type: tencentcloud:Vpc:Instance
-    properties:
-      cidrBlock: 10.0.0.0/16
-  clbOpen:
-    type: tencentcloud:Clb:Instance
-    properties:
-      networkType: OPEN
-      clbName: clb-instance-open
-      projectId: 0
-      vpcId: ${fooInstance.id}
-      securityGroups:
-        - ${fooGroup.id}
-      vip: 111.230.4.204
-      tags:
-        test: tf
-outputs:
-  domain: ${tencentcloud_clb_instance.vip}
-```
-<!--End PulumiCodeChooser -->
-
-### Default enable
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const foo = new tencentcloud.vpc.Instance("foo", {
+const config = new pulumi.Config();
+const zone = config.get("zone") || "ap-guangzhou";
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
     cidrBlock: "10.0.0.0/16",
-    tags: {
-        test: "mytest",
-    },
+    name: "vpc",
 });
+// create subnet
 const subnet = new tencentcloud.subnet.Instance("subnet", {
-    availabilityZone: "ap-guangzhou-1",
-    vpcId: foo.id,
-    cidrBlock: "10.0.20.0/28",
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    cidrBlock: "10.0.1.0/24",
     isMulticast: false,
 });
-const sglab = new tencentcloud.security.Group("sglab", {
-    description: "favourite sg",
+// create security group
+const example = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
     projectId: 0,
-});
-const openClb = new tencentcloud.clb.Instance("openClb", {
-    networkType: "OPEN",
-    clbName: "my-open-clb",
-    projectId: 0,
-    vpcId: foo.id,
-    loadBalancerPassToTarget: true,
-    securityGroups: [sglab.id],
-    targetRegionInfoRegion: "ap-guangzhou",
-    targetRegionInfoVpcId: foo.id,
     tags: {
-        test: "open",
+        example: "test",
     },
 });
+// create clb
+const exampleInstance = new tencentcloud.clb.Instance("example", {
+    networkType: "OPEN",
+    clbName: "tf-example",
+    projectId: 0,
+    vpcId: vpc.id,
+    targetRegionInfoRegion: zone,
+    targetRegionInfoVpcId: vpc.id,
+    securityGroups: [example.id],
+    dynamicVip: true,
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+export const domain = exampleInstance.domain;
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.vpc.Instance("foo",
+config = pulumi.Config()
+zone = config.get("zone")
+if zone is None:
+    zone = "ap-guangzhou"
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
     cidr_block="10.0.0.0/16",
-    tags={
-        "test": "mytest",
-    })
+    name="vpc")
+# create subnet
 subnet = tencentcloud.subnet.Instance("subnet",
-    availability_zone="ap-guangzhou-1",
-    vpc_id=foo.id,
-    cidr_block="10.0.20.0/28",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
+    cidr_block="10.0.1.0/24",
     is_multicast=False)
-sglab = tencentcloud.security.Group("sglab",
-    description="favourite sg",
-    project_id=0)
-open_clb = tencentcloud.clb.Instance("openClb",
-    network_type="OPEN",
-    clb_name="my-open-clb",
+# create security group
+example = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
     project_id=0,
-    vpc_id=foo.id,
-    load_balancer_pass_to_target=True,
-    security_groups=[sglab.id],
-    target_region_info_region="ap-guangzhou",
-    target_region_info_vpc_id=foo.id,
     tags={
-        "test": "open",
+        "example": "test",
     })
+# create clb
+example_instance = tencentcloud.clb.Instance("example",
+    network_type="OPEN",
+    clb_name="tf-example",
+    project_id=0,
+    vpc_id=vpc.id,
+    target_region_info_region=zone,
+    target_region_info_vpc_id=vpc.id,
+    security_groups=[example.id],
+    dynamic_vip=True,
+    tags={
+        "tagKey": "tagValue",
+    })
+pulumi.export("domain", example_instance.domain)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Vpc.Instance("foo", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-        Tags = 
-        {
-            { "test", "mytest" },
-        },
-    });
-
-    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
-    {
-        AvailabilityZone = "ap-guangzhou-1",
-        VpcId = foo.Id,
-        CidrBlock = "10.0.20.0/28",
-        IsMulticast = false,
-    });
-
-    var sglab = new Tencentcloud.Security.Group("sglab", new()
-    {
-        Description = "favourite sg",
-        ProjectId = 0,
-    });
-
-    var openClb = new Tencentcloud.Clb.Instance("openClb", new()
-    {
-        NetworkType = "OPEN",
-        ClbName = "my-open-clb",
-        ProjectId = 0,
-        VpcId = foo.Id,
-        LoadBalancerPassToTarget = true,
-        SecurityGroups = new[]
-        {
-            sglab.Id,
-        },
-        TargetRegionInfoRegion = "ap-guangzhou",
-        TargetRegionInfoVpcId = foo.Id,
-        Tags = 
-        {
-            { "test", "open" },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+		cfg := config.New(ctx, "")
+		zone := "ap-guangzhou"
+		if param := cfg.Get("zone"); param != "" {
+			zone = param
+		}
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 			CidrBlock: pulumi.String("10.0.0.0/16"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("mytest"),
-			},
+			Name:      pulumi.String("vpc"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String("ap-guangzhou-1"),
-			VpcId:            foo.ID(),
-			CidrBlock:        pulumi.String("10.0.20.0/28"),
+		// create subnet
+		_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
 			IsMulticast:      pulumi.Bool(false),
 		})
 		if err != nil {
 			return err
 		}
-		sglab, err := Security.NewGroup(ctx, "sglab", &Security.GroupArgs{
-			Description: pulumi.String("favourite sg"),
+		// create security group
+		example, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
 			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
-			NetworkType:              pulumi.String("OPEN"),
-			ClbName:                  pulumi.String("my-open-clb"),
-			ProjectId:                pulumi.Int(0),
-			VpcId:                    foo.ID(),
-			LoadBalancerPassToTarget: pulumi.Bool(true),
+		// create clb
+		exampleInstance, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType:            pulumi.String("OPEN"),
+			ClbName:                pulumi.String("tf-example"),
+			ProjectId:              pulumi.Int(0),
+			VpcId:                  vpc2.ID().ToIDOutput().ToStringOutput(),
+			TargetRegionInfoRegion: pulumi.String(zone),
+			TargetRegionInfoVpcId:  vpc2.ID().ToIDOutput().ToStringOutput(),
 			SecurityGroups: pulumi.StringArray{
-				sglab.ID(),
+				example.ID().ToIDOutput().ToStringOutput(),
 			},
-			TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
-			TargetRegionInfoVpcId:  foo.ID(),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("open"),
+			DynamicVip: pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
 			},
 		})
 		if err != nil {
 			return err
 		}
+		ctx.Export("domain", exampleInstance.Domain)
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var zone = config.Get("zone") ?? "ap-guangzhou";
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        CidrBlock = "10.0.1.0/24",
+        IsMulticast = false,
+    });
+
+    // create security group
+    var example = new Tencentcloud.Security.Group("example", new()
+    {
+        Name = "tf-example",
+        Description = "sg desc.",
+        ProjectId = 0,
+        Tags = 
+        {
+            { "example", "test" },
+        },
+    });
+
+    // create clb
+    var exampleInstance = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "OPEN",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        TargetRegionInfoRegion = zone,
+        TargetRegionInfoVpcId = vpc.Id,
+        SecurityGroups = new[]
+        {
+            example.Id,
+        },
+        DynamicVip = true,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["domain"] = exampleInstance.Domain,
+    };
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1373,97 +3069,322 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Instance("foo", InstanceArgs.builder()        
+        final var config = ctx.config();
+        final var zone = config.get("zone").orElse("ap-guangzhou");
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
-            .tags(Map.of("test", "mytest"))
+            .name("vpc")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone("ap-guangzhou-1")
-            .vpcId(foo.id())
-            .cidrBlock("10.0.20.0/28")
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .cidrBlock("10.0.1.0/24")
             .isMulticast(false)
             .build());
 
-        var sglab = new Group("sglab", GroupArgs.builder()        
-            .description("favourite sg")
+        // create security group
+        var example = new Group("example", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
             .projectId(0)
+            .tags(Map.of("example", "test"))
             .build());
 
-        var openClb = new Instance("openClb", InstanceArgs.builder()        
+        // create clb
+        var exampleInstance = new com.pulumi.tencentcloud.Clb.Instance("exampleInstance", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
             .networkType("OPEN")
-            .clbName("my-open-clb")
+            .clbName("tf-example")
             .projectId(0)
-            .vpcId(foo.id())
-            .loadBalancerPassToTarget(true)
-            .securityGroups(sglab.id())
-            .targetRegionInfoRegion("ap-guangzhou")
-            .targetRegionInfoVpcId(foo.id())
-            .tags(Map.of("test", "open"))
+            .vpcId(vpc.id())
+            .targetRegionInfoRegion(zone)
+            .targetRegionInfoVpcId(vpc.id())
+            .securityGroups(example.id())
+            .dynamicVip(true)
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
+        ctx.export("domain", exampleInstance.domain());
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  zone:
+    type: string
+    default: ap-guangzhou
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
 resources:
-  subnet:
-    type: tencentcloud:Subnet:Instance
-    properties:
-      availabilityZone: ap-guangzhou-1
-      vpcId: ${foo.id}
-      cidrBlock: 10.0.20.0/28
-      isMulticast: false
-  sglab:
-    type: tencentcloud:Security:Group
-    properties:
-      description: favourite sg
-      projectId: 0
-  foo:
+  # create vpc
+  vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      cidrBlock: 10.0.1.0/24
+      isMulticast: false
+  # create security group
+  example:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example
+      description: sg desc.
+      projectId: 0
       tags:
-        test: mytest
-  openClb:
+        example: test
+  # create clb
+  exampleInstance:
     type: tencentcloud:Clb:Instance
+    name: example
     properties:
       networkType: OPEN
-      clbName: my-open-clb
+      clbName: tf-example
       projectId: 0
-      vpcId: ${foo.id}
-      loadBalancerPassToTarget: true
+      vpcId: ${vpc.id}
+      targetRegionInfoRegion: ${zone}
+      targetRegionInfoVpcId: ${vpc.id}
       securityGroups:
-        - ${sglab.id}
-      targetRegionInfoRegion: ap-guangzhou
-      targetRegionInfoVpcId: ${foo.id}
+        - ${example.id}
+      dynamicVip: true
       tags:
-        test: open
+        tagKey: tagValue
+outputs:
+  domain: ${exampleInstance.domain}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### CREATE multiple instance
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  is_multicast      = false
+}
+// create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type              = "OPEN"
+  clb_name                  = "tf-example"
+  project_id                = 0
+  vpc_id                    = tencentcloud_vpc_instance.vpc.id
+  target_region_info_region = var.zone
+  target_region_info_vpc_id = tencentcloud_vpc_instance.vpc.id
+  security_groups           = [tencentcloud_security_group.example.id]
+  dynamic_vip               = true
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "zone" {
+  type    = string
+  default = "ap-guangzhou"
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+output "domain" {
+  value = tencentcloud_clb_instance.example.domain
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Specified Vip Instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const openClb1 = new tencentcloud.clb.Instance("openClb1", {
-    clbName: "hello",
-    masterZoneId: "ap-guangzhou-3",
-    networkType: "OPEN",
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
 });
+// create security group
+const example = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
+    projectId: 0,
+    tags: {
+        example: "test",
+    },
+});
+// create clb
+const exampleInstance = new tencentcloud.clb.Instance("example", {
+    networkType: "OPEN",
+    clbName: "tf-example",
+    projectId: 0,
+    vpcId: vpc.id,
+    securityGroups: [example.id],
+    vip: "111.230.4.204",
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+export const domain = exampleInstance.domain;
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-open_clb1 = tencentcloud.clb.Instance("openClb1",
-    clb_name="hello",
-    master_zone_id="ap-guangzhou-3",
-    network_type="OPEN")
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create security group
+example = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
+    project_id=0,
+    tags={
+        "example": "test",
+    })
+# create clb
+example_instance = tencentcloud.clb.Instance("example",
+    network_type="OPEN",
+    clb_name="tf-example",
+    project_id=0,
+    vpc_id=vpc.id,
+    security_groups=[example.id],
+    vip="111.230.4.204",
+    tags={
+        "tagKey": "tagValue",
+    })
+pulumi.export("domain", example_instance.domain)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create security group
+		example, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create clb
+		exampleInstance, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType: pulumi.String("OPEN"),
+			ClbName:     pulumi.String("tf-example"),
+			ProjectId:   pulumi.Int(0),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+			SecurityGroups: pulumi.StringArray{
+				example.ID().ToIDOutput().ToStringOutput(),
+			},
+			Vip: pulumi.String("111.230.4.204"),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		ctx.Export("domain", exampleInstance.Domain)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -1472,47 +3393,66 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var openClb1 = new Tencentcloud.Clb.Instance("openClb1", new()
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
-        ClbName = "hello",
-        MasterZoneId = "ap-guangzhou-3",
-        NetworkType = "OPEN",
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
     });
 
+    // create security group
+    var example = new Tencentcloud.Security.Group("example", new()
+    {
+        Name = "tf-example",
+        Description = "sg desc.",
+        ProjectId = 0,
+        Tags = 
+        {
+            { "example", "test" },
+        },
+    });
+
+    // create clb
+    var exampleInstance = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "OPEN",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SecurityGroups = new[]
+        {
+            example.Id,
+        },
+        Vip = "111.230.4.204",
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["domain"] = exampleInstance.Domain,
+    };
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewInstance(ctx, "openClb1", &Clb.InstanceArgs{
-			ClbName:      pulumi.String("hello"),
-			MasterZoneId: pulumi.String("ap-guangzhou-3"),
-			NetworkType:  pulumi.String("OPEN"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1524,88 +3464,320 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var openClb1 = new Instance("openClb1", InstanceArgs.builder()        
-            .clbName("hello")
-            .masterZoneId("ap-guangzhou-3")
-            .networkType("OPEN")
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
             .build());
 
+        // create security group
+        var example = new Group("example", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
+            .projectId(0)
+            .tags(Map.of("example", "test"))
+            .build());
+
+        // create clb
+        var exampleInstance = new com.pulumi.tencentcloud.Clb.Instance("exampleInstance", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .networkType("OPEN")
+            .clbName("tf-example")
+            .projectId(0)
+            .vpcId(vpc.id())
+            .securityGroups(example.id())
+            .vip("111.230.4.204")
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+        ctx.export("domain", exampleInstance.domain());
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
 resources:
-  openClb1:
-    type: tencentcloud:Clb:Instance
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
     properties:
-      clbName: hello
-      masterZoneId: ap-guangzhou-3
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create security group
+  example:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example
+      description: sg desc.
+      projectId: 0
+      tags:
+        example: test
+  # create clb
+  exampleInstance:
+    type: tencentcloud:Clb:Instance
+    name: example
+    properties:
       networkType: OPEN
+      clbName: tf-example
+      projectId: 0
+      vpcId: ${vpc.id}
+      securityGroups:
+        - ${example.id}
+      vip: 111.230.4.204
+      tags:
+        tagKey: tagValue
+outputs:
+  domain: ${exampleInstance.domain}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### CREATE instance with log
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type    = "OPEN"
+  clb_name        = "tf-example"
+  project_id      = 0
+  vpc_id          = tencentcloud_vpc_instance.vpc.id
+  security_groups = [tencentcloud_security_group.example.id]
+  vip             = "111.230.4.204"
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+output "domain" {
+  value = tencentcloud_clb_instance.example.domain
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Default enable
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vpcTest = new tencentcloud.vpc.Instance("vpcTest", {cidrBlock: "10.0.0.0/16"});
-const rtbTest = new tencentcloud.route.Table("rtbTest", {vpcId: vpcTest.id});
-const subnetTest = new tencentcloud.subnet.Instance("subnetTest", {
-    availabilityZone: "ap-guangzhou-3",
+const config = new pulumi.Config();
+const zone = config.get("zone") || "ap-guangzhou";
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
     cidrBlock: "10.0.1.0/24",
-    routeTableId: rtbTest.id,
-    vpcId: vpcTest.id,
+    isMulticast: false,
 });
-const set = new tencentcloud.clb.LogSet("set", {period: 7});
-const topic = new tencentcloud.clb.LogTopic("topic", {
-    logSetId: set.id,
-    topicName: "clb-topic",
-});
-const internalClb = new tencentcloud.clb.Instance("internalClb", {
-    clbName: "myclb",
-    loadBalancerPassToTarget: true,
-    logSetId: set.id,
-    logTopicId: topic.id,
-    networkType: "INTERNAL",
+// create security group
+const example = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
     projectId: 0,
-    subnetId: subnetTest.id,
     tags: {
-        test: "tf",
+        example: "test",
     },
-    vpcId: vpcTest.id,
+});
+// create clb
+const exampleInstance = new tencentcloud.clb.Instance("example", {
+    networkType: "OPEN",
+    clbName: "tf-example",
+    projectId: 0,
+    loadBalancerPassToTarget: true,
+    vpcId: vpc.id,
+    securityGroups: [example.id],
+    targetRegionInfoVpcId: vpc.id,
+    targetRegionInfoRegion: zone,
+    tags: {
+        tagKey: "tagValue",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-vpc_test = tencentcloud.vpc.Instance("vpcTest", cidr_block="10.0.0.0/16")
-rtb_test = tencentcloud.route.Table("rtbTest", vpc_id=vpc_test.id)
-subnet_test = tencentcloud.subnet.Instance("subnetTest",
-    availability_zone="ap-guangzhou-3",
+config = pulumi.Config()
+zone = config.get("zone")
+if zone is None:
+    zone = "ap-guangzhou"
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
     cidr_block="10.0.1.0/24",
-    route_table_id=rtb_test.id,
-    vpc_id=vpc_test.id)
-set = tencentcloud.clb.LogSet("set", period=7)
-topic = tencentcloud.clb.LogTopic("topic",
-    log_set_id=set.id,
-    topic_name="clb-topic")
-internal_clb = tencentcloud.clb.Instance("internalClb",
-    clb_name="myclb",
-    load_balancer_pass_to_target=True,
-    log_set_id=set.id,
-    log_topic_id=topic.id,
-    network_type="INTERNAL",
+    is_multicast=False)
+# create security group
+example = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
     project_id=0,
-    subnet_id=subnet_test.id,
     tags={
-        "test": "tf",
-    },
-    vpc_id=vpc_test.id)
+        "example": "test",
+    })
+# create clb
+example_instance = tencentcloud.clb.Instance("example",
+    network_type="OPEN",
+    clb_name="tf-example",
+    project_id=0,
+    load_balancer_pass_to_target=True,
+    vpc_id=vpc.id,
+    security_groups=[example.id],
+    target_region_info_vpc_id=vpc.id,
+    target_region_info_region=zone,
+    tags={
+        "tagKey": "tagValue",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		zone := "ap-guangzhou"
+		if param := cfg.Get("zone"); param != "" {
+			zone = param
+		}
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		// create subnet
+		_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create security group
+		example, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create clb
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType:              pulumi.String("OPEN"),
+			ClbName:                  pulumi.String("tf-example"),
+			ProjectId:                pulumi.Int(0),
+			LoadBalancerPassToTarget: pulumi.Bool(true),
+			VpcId:                    vpc2.ID().ToIDOutput().ToStringOutput(),
+			SecurityGroups: pulumi.StringArray{
+				example.ID().ToIDOutput().ToStringOutput(),
+			},
+			TargetRegionInfoVpcId:  vpc2.ID().ToIDOutput().ToStringOutput(),
+			TargetRegionInfoRegion: pulumi.String(zone),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -1614,112 +3786,625 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var vpcTest = new Tencentcloud.Vpc.Instance("vpcTest", new()
+    var config = new Config();
+    var zone = config.Get("zone") ?? "ap-guangzhou";
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
     });
 
-    var rtbTest = new Tencentcloud.Route.Table("rtbTest", new()
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
-        VpcId = vpcTest.Id,
-    });
-
-    var subnetTest = new Tencentcloud.Subnet.Instance("subnetTest", new()
-    {
-        AvailabilityZone = "ap-guangzhou-3",
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
         CidrBlock = "10.0.1.0/24",
-        RouteTableId = rtbTest.Id,
-        VpcId = vpcTest.Id,
+        IsMulticast = false,
     });
 
-    var @set = new Tencentcloud.Clb.LogSet("set", new()
+    // create security group
+    var example = new Tencentcloud.Security.Group("example", new()
     {
-        Period = 7,
-    });
-
-    var topic = new Tencentcloud.Clb.LogTopic("topic", new()
-    {
-        LogSetId = @set.Id,
-        TopicName = "clb-topic",
-    });
-
-    var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
-    {
-        ClbName = "myclb",
-        LoadBalancerPassToTarget = true,
-        LogSetId = @set.Id,
-        LogTopicId = topic.Id,
-        NetworkType = "INTERNAL",
+        Name = "tf-example",
+        Description = "sg desc.",
         ProjectId = 0,
-        SubnetId = subnetTest.Id,
         Tags = 
         {
-            { "test", "tf" },
+            { "example", "test" },
         },
-        VpcId = vpcTest.Id,
+    });
+
+    // create clb
+    var exampleInstance = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "OPEN",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        LoadBalancerPassToTarget = true,
+        VpcId = vpc.Id,
+        SecurityGroups = new[]
+        {
+            example.Id,
+        },
+        TargetRegionInfoVpcId = vpc.Id,
+        TargetRegionInfoRegion = zone,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
     });
 
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var zone = config.get("zone").orElse("ap-guangzhou");
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
+            .build());
+
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .cidrBlock("10.0.1.0/24")
+            .isMulticast(false)
+            .build());
+
+        // create security group
+        var example = new Group("example", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
+            .projectId(0)
+            .tags(Map.of("example", "test"))
+            .build());
+
+        // create clb
+        var exampleInstance = new com.pulumi.tencentcloud.Clb.Instance("exampleInstance", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .networkType("OPEN")
+            .clbName("tf-example")
+            .projectId(0)
+            .loadBalancerPassToTarget(true)
+            .vpcId(vpc.id())
+            .securityGroups(example.id())
+            .targetRegionInfoVpcId(vpc.id())
+            .targetRegionInfoRegion(zone)
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  zone:
+    type: string
+    default: ap-guangzhou
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
+resources:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      cidrBlock: 10.0.1.0/24
+      isMulticast: false
+  # create security group
+  example:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example
+      description: sg desc.
+      projectId: 0
+      tags:
+        example: test
+  # create clb
+  exampleInstance:
+    type: tencentcloud:Clb:Instance
+    name: example
+    properties:
+      networkType: OPEN
+      clbName: tf-example
+      projectId: 0
+      loadBalancerPassToTarget: true
+      vpcId: ${vpc.id}
+      securityGroups:
+        - ${example.id}
+      targetRegionInfoVpcId: ${vpc.id}
+      targetRegionInfoRegion: ${zone}
+      tags:
+        tagKey: tagValue
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  is_multicast      = false
+}
+// create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type                 = "OPEN"
+  clb_name                     = "tf-example"
+  project_id                   = 0
+  load_balancer_pass_to_target = true
+  vpc_id                       = tencentcloud_vpc_instance.vpc.id
+  security_groups              = [tencentcloud_security_group.example.id]
+  target_region_info_vpc_id    = tencentcloud_vpc_instance.vpc.id
+  target_region_info_region    = var.zone
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+variable "zone" {
+  type    = string
+  default = "ap-guangzhou"
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create multiple instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+const example = new tencentcloud.clb.Instance("example", {
+    networkType: "OPEN",
+    clbName: "tf-example",
+    masterZoneId: availabilityZone,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+example = tencentcloud.clb.Instance("example",
+    network_type="OPEN",
+    clb_name="tf-example",
+    master_zone_id=availability_zone)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		vpcTest, err := Vpc.NewInstance(ctx, "vpcTest", &Vpc.InstanceArgs{
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		_, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType:  pulumi.String("OPEN"),
+			ClbName:      pulumi.String("tf-example"),
+			MasterZoneId: pulumi.String(availabilityZone),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "OPEN",
+        ClbName = "tf-example",
+        MasterZoneId = availabilityZone,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Instance;
+import com.pulumi.tencentcloud.Clb.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        var example = new Instance("example", InstanceArgs.builder()
+            .networkType("OPEN")
+            .clbName("tf-example")
+            .masterZoneId(availabilityZone)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
+resources:
+  example:
+    type: tencentcloud:Clb:Instance
+    properties:
+      networkType: OPEN
+      clbName: tf-example
+      masterZoneId: ${availabilityZone}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_instance" "example" {
+  network_type   = "OPEN"
+  clb_name       = "tf-example"
+  master_zone_id = var.availabilityZone
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create instance with log
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    cidrBlock: "10.0.1.0/24",
+    isMulticast: false,
+});
+// create route table
+const route = new tencentcloud.route.Table("route", {
+    name: "route_table",
+    vpcId: vpc.id,
+});
+// create security group
+const example = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
+    projectId: 0,
+    tags: {
+        example: "test",
+    },
+});
+const log = new tencentcloud.clb.LogSet("log", {period: 7});
+// create topic
+const topic = new tencentcloud.clb.LogTopic("topic", {
+    logSetId: log.id,
+    topicName: "clb-topic",
+});
+// create clb
+const exampleInstance = new tencentcloud.clb.Instance("example", {
+    networkType: "INTERNAL",
+    clbName: "tf-example",
+    projectId: 0,
+    loadBalancerPassToTarget: true,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    securityGroups: [example.id],
+    logSetId: log.id,
+    logTopicId: topic.id,
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
+    cidr_block="10.0.1.0/24",
+    is_multicast=False)
+# create route table
+route = tencentcloud.route.Table("route",
+    name="route_table",
+    vpc_id=vpc.id)
+# create security group
+example = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
+    project_id=0,
+    tags={
+        "example": "test",
+    })
+log = tencentcloud.clb.LogSet("log", period=7)
+# create topic
+topic = tencentcloud.clb.LogTopic("topic",
+    log_set_id=log.id,
+    topic_name="clb-topic")
+# create clb
+example_instance = tencentcloud.clb.Instance("example",
+    network_type="INTERNAL",
+    clb_name="tf-example",
+    project_id=0,
+    load_balancer_pass_to_target=True,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    security_groups=[example.id],
+    log_set_id=log.id,
+    log_topic_id=topic.id,
+    tags={
+        "tagKey": "tagValue",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/route"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
 		})
 		if err != nil {
 			return err
 		}
-		rtbTest, err := Route.NewTable(ctx, "rtbTest", &Route.TableArgs{
-			VpcId: vpcTest.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		subnetTest, err := Subnet.NewInstance(ctx, "subnetTest", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.Any(availabilityZone),
+			Name:             pulumi.String("subnet"),
 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-			RouteTableId:     rtbTest.ID(),
-			VpcId:            vpcTest.ID(),
+			IsMulticast:      pulumi.Bool(false),
 		})
 		if err != nil {
 			return err
 		}
-		set, err := Clb.NewLogSet(ctx, "set", &Clb.LogSetArgs{
+		// create route table
+		_, err = route.NewTable(ctx, "route", &route.TableArgs{
+			Name:  pulumi.String("route_table"),
+			VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		// create security group
+		example, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		log, err := clb.NewLogSet(ctx, "log", &clb.LogSetArgs{
 			Period: pulumi.Int(7),
 		})
 		if err != nil {
 			return err
 		}
-		topic, err := Clb.NewLogTopic(ctx, "topic", &Clb.LogTopicArgs{
-			LogSetId:  set.ID(),
+		// create topic
+		topic, err := clb.NewLogTopic(ctx, "topic", &clb.LogTopicArgs{
+			LogSetId:  log.ID().ToIDOutput().ToStringOutput(),
 			TopicName: pulumi.String("clb-topic"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
-			ClbName:                  pulumi.String("myclb"),
-			LoadBalancerPassToTarget: pulumi.Bool(true),
-			LogSetId:                 set.ID(),
-			LogTopicId:               topic.ID(),
+		// create clb
+		_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
 			NetworkType:              pulumi.String("INTERNAL"),
+			ClbName:                  pulumi.String("tf-example"),
 			ProjectId:                pulumi.Int(0),
-			SubnetId:                 subnetTest.ID(),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
+			LoadBalancerPassToTarget: pulumi.Bool(true),
+			VpcId:                    vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:                 subnet2.ID().ToIDOutput().ToStringOutput(),
+			SecurityGroups: pulumi.StringArray{
+				example.ID().ToIDOutput().ToStringOutput(),
 			},
-			VpcId: vpcTest.ID(),
+			LogSetId:   log.ID().ToIDOutput().ToStringOutput(),
+			LogTopicId: topic.ID().ToIDOutput().ToStringOutput(),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
 		})
 		if err != nil {
 			return err
@@ -1728,26 +4413,111 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        CidrBlock = "10.0.1.0/24",
+        IsMulticast = false,
+    });
+
+    // create route table
+    var route = new Tencentcloud.Route.Table("route", new()
+    {
+        Name = "route_table",
+        VpcId = vpc.Id,
+    });
+
+    // create security group
+    var example = new Tencentcloud.Security.Group("example", new()
+    {
+        Name = "tf-example",
+        Description = "sg desc.",
+        ProjectId = 0,
+        Tags = 
+        {
+            { "example", "test" },
+        },
+    });
+
+    var log = new Tencentcloud.Clb.LogSet("log", new()
+    {
+        Period = 7,
+    });
+
+    // create topic
+    var topic = new Tencentcloud.Clb.LogTopic("topic", new()
+    {
+        LogSetId = log.Id,
+        TopicName = "clb-topic",
+    });
+
+    // create clb
+    var exampleInstance = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "INTERNAL",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        LoadBalancerPassToTarget = true,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        SecurityGroups = new[]
+        {
+            example.Id,
+        },
+        LogSetId = log.Id,
+        LogTopicId = topic.Id,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
 import com.pulumi.tencentcloud.Route.Table;
 import com.pulumi.tencentcloud.Route.TableArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
 import com.pulumi.tencentcloud.Clb.LogSet;
 import com.pulumi.tencentcloud.Clb.LogSetArgs;
 import com.pulumi.tencentcloud.Clb.LogTopic;
 import com.pulumi.tencentcloud.Clb.LogTopicArgs;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1759,169 +4529,512 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpcTest = new Instance("vpcTest", InstanceArgs.builder()        
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("vpc")
             .build());
 
-        var rtbTest = new Table("rtbTest", TableArgs.builder()        
-            .vpcId(vpcTest.id())
-            .build());
-
-        var subnetTest = new Instance("subnetTest", InstanceArgs.builder()        
-            .availabilityZone("ap-guangzhou-3")
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
             .cidrBlock("10.0.1.0/24")
-            .routeTableId(rtbTest.id())
-            .vpcId(vpcTest.id())
+            .isMulticast(false)
             .build());
 
-        var set = new LogSet("set", LogSetArgs.builder()        
+        // create route table
+        var route = new Table("route", TableArgs.builder()
+            .name("route_table")
+            .vpcId(vpc.id())
+            .build());
+
+        // create security group
+        var example = new Group("example", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
+            .projectId(0)
+            .tags(Map.of("example", "test"))
+            .build());
+
+        var log = new LogSet("log", LogSetArgs.builder()
             .period(7)
             .build());
 
-        var topic = new LogTopic("topic", LogTopicArgs.builder()        
-            .logSetId(set.id())
+        // create topic
+        var topic = new LogTopic("topic", LogTopicArgs.builder()
+            .logSetId(log.id())
             .topicName("clb-topic")
             .build());
 
-        var internalClb = new Instance("internalClb", InstanceArgs.builder()        
-            .clbName("myclb")
-            .loadBalancerPassToTarget(true)
-            .logSetId(set.id())
-            .logTopicId(topic.id())
+        // create clb
+        var exampleInstance = new com.pulumi.tencentcloud.Clb.Instance("exampleInstance", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
             .networkType("INTERNAL")
+            .clbName("tf-example")
             .projectId(0)
-            .subnetId(subnetTest.id())
-            .tags(Map.of("test", "tf"))
-            .vpcId(vpcTest.id())
+            .loadBalancerPassToTarget(true)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .securityGroups(example.id())
+            .logSetId(log.id())
+            .logTopicId(topic.id())
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  vpcTest:
+  # create vpc
+  vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
-  rtbTest:
-    type: tencentcloud:Route:Table
-    properties:
-      vpcId: ${vpcTest.id}
-  subnetTest:
+      name: vpc
+  # create subnet
+  subnet:
     type: tencentcloud:Subnet:Instance
     properties:
-      availabilityZone: ap-guangzhou-3
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
       cidrBlock: 10.0.1.0/24
-      routeTableId: ${rtbTest.id}
-      vpcId: ${vpcTest.id}
-  set:
+      isMulticast: false
+  # create route table
+  route:
+    type: tencentcloud:Route:Table
+    properties:
+      name: route_table
+      vpcId: ${vpc.id}
+  # create security group
+  example:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example
+      description: sg desc.
+      projectId: 0
+      tags:
+        example: test
+  log:
     type: tencentcloud:Clb:LogSet
     properties:
       period: 7
+  # create topic
   topic:
     type: tencentcloud:Clb:LogTopic
     properties:
-      logSetId: ${set.id}
+      logSetId: ${log.id}
       topicName: clb-topic
-  internalClb:
+  # create clb
+  exampleInstance:
+    type: tencentcloud:Clb:Instance
+    name: example
+    properties:
+      networkType: INTERNAL
+      clbName: tf-example
+      projectId: 0
+      loadBalancerPassToTarget: true
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      securityGroups:
+        - ${example.id}
+      logSetId: ${log.id}
+      logTopicId: ${topic.id}
+      tags:
+        tagKey: tagValue
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  is_multicast      = false
+}
+// create route table
+resource "tencentcloud_route_table" "route" {
+  name   = "route_table"
+  vpc_id = tencentcloud_vpc_instance.vpc.id
+}
+// create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+resource "tencentcloud_clb_logset" "log" {
+  period = 7
+}
+// create topic
+resource "tencentcloud_clb_logtopic" "topic" {
+  log_set_id = tencentcloud_clb_logset.log.id
+  topic_name = "clb-topic"
+}
+// create clb
+resource "tencentcloud_clb_instance" "example" {
+  network_type                 = "INTERNAL"
+  clb_name                     = "tf-example"
+  project_id                   = 0
+  load_balancer_pass_to_target = true
+  vpc_id                       = tencentcloud_vpc_instance.vpc.id
+  subnet_id                    = tencentcloud_subnet_instance.subnet.id
+  security_groups              = [tencentcloud_security_group.example.id]
+  log_set_id                   = tencentcloud_clb_logset.log.id
+  log_topic_id                 = tencentcloud_clb_logtopic.topic.id
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create instance with associate endpoint
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Instance("example", {
+    networkType: "OPEN",
+    clbName: "tf-example",
+    projectId: 0,
+    vpcId: "vpc-e51ilko8",
+    associateEndpoint: "vpce-du9ssd3z",
+    tags: {
+        createBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Instance("example",
+    network_type="OPEN",
+    clb_name="tf-example",
+    project_id=0,
+    vpc_id="vpc-e51ilko8",
+    associate_endpoint="vpce-du9ssd3z",
+    tags={
+        "createBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType:       pulumi.String("OPEN"),
+			ClbName:           pulumi.String("tf-example"),
+			ProjectId:         pulumi.Int(0),
+			VpcId:             pulumi.String("vpc-e51ilko8"),
+			AssociateEndpoint: pulumi.String("vpce-du9ssd3z"),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "OPEN",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        VpcId = "vpc-e51ilko8",
+        AssociateEndpoint = "vpce-du9ssd3z",
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Instance;
+import com.pulumi.tencentcloud.Clb.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Instance("example", InstanceArgs.builder()
+            .networkType("OPEN")
+            .clbName("tf-example")
+            .projectId(0)
+            .vpcId("vpc-e51ilko8")
+            .associateEndpoint("vpce-du9ssd3z")
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
     type: tencentcloud:Clb:Instance
     properties:
-      clbName: myclb
-      loadBalancerPassToTarget: true
-      logSetId: ${set.id}
-      logTopicId: ${topic.id}
-      networkType: INTERNAL
+      networkType: OPEN
+      clbName: tf-example
       projectId: 0
-      subnetId: ${subnetTest.id}
+      vpcId: vpc-e51ilko8
+      associateEndpoint: vpce-du9ssd3z
       tags:
-        test: tf
-      vpcId: ${vpcTest.id}
+        createBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_instance" "example" {
+  network_type       = "OPEN"
+  clb_name           = "tf-example"
+  project_id         = 0
+  vpc_id             = "vpc-e51ilko8"
+  associate_endpoint = "vpce-du9ssd3z"
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateLoadBalancer](https://www.tencentcloud.com/document/api/214/33841)
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [ModifyLoadBalancerAttributes](https://www.tencentcloud.com/document/api/214/33817)
+  - [SetLoadBalancerClsLog](https://www.tencentcloud.com/document/api/214/35734)
+  - [SetLoadBalancerSecurityGroups](https://www.tencentcloud.com/document/api/214/33798)
+* Read:
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [AssociateAddress](https://www.tencentcloud.com/document/api/215/16700)
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DisassociateAddress](https://www.tencentcloud.com/document/api/215/16703)
+  - [ModifyLoadBalancerAttributes](https://www.tencentcloud.com/document/api/214/33817)
+  - [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
+  - [ModifyLoadBalancersProject](https://www.tencentcloud.com/document/api/214/57286)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [SetLoadBalancerClsLog](https://www.tencentcloud.com/document/api/214/35734)
+  - [SetLoadBalancerSecurityGroups](https://www.tencentcloud.com/document/api/214/33798)
+* Delete: [DeleteLoadBalancer](https://www.tencentcloud.com/document/api/214/33837)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">address_ip_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">clb_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">log_topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">snat_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceSnatIpArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">delete_protect</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">dynamic_vip</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">eip_address_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">exclusive_cluster</span><span class="p">:</span> <span class="nx">Optional[InstanceExclusiveClusterArgs]</span> = None<span class="p">,</span>
+             <span class="nx">force</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">internet_bandwidth_max_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">load_balancer_pass_to_target</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">log_set_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">log_topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">address_ip_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">master_zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+             <span class="nx">associate_endpoint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">sla_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">slave_zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">snat_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.InstanceSnatIpArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">snat_pro</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
              <span class="nx">target_region_info_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">target_region_info_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">vip_isp</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_clb_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -1942,7 +5055,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -2059,11 +5172,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -2079,8 +5200,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -2088,8 +5208,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addressipversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipversion_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Ip<wbr>Version</a>
@@ -2097,8 +5216,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="associateendpoint_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_csharp" style="color: inherit; text-decoration: inherit;">Associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -2106,8 +5232,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteprotect_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotect_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Protect</a>
@@ -2115,8 +5248,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="dynamicvip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicvip_csharp" style="color: inherit; text-decoration: inherit;">Dynamic<wbr>Vip</a>
@@ -2124,8 +5256,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eipaddressid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressid_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="exclusivecluster_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_csharp" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Exclusive<wbr>Cluster</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_csharp" style="color: inherit; text-decoration: inherit;">Force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetbandwidthmaxout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -2133,8 +5288,12 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -2142,8 +5301,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerpasstotarget_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -2151,8 +5309,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="logsetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Set<wbr>Id</a>
@@ -2160,8 +5317,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtopicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Topic<wbr>Id</a>
@@ -2169,8 +5325,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzoneid_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone<wbr>Id</a>
@@ -2178,8 +5333,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2187,8 +5341,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2196,8 +5349,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="slatype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_csharp" style="color: inherit; text-decoration: inherit;">Sla<wbr>Type</a>
@@ -2205,8 +5357,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavezoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezoneid_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone<wbr>Id</a>
@@ -2214,17 +5365,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesnatip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Snat<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesnatip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Snat<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatpro_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Pro</a>
@@ -2232,8 +5381,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2241,17 +5389,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninforegion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -2259,8 +5405,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninfovpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -2268,8 +5413,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2277,8 +5421,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vipisp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_csharp" style="color: inherit; text-decoration: inherit;">Vip<wbr>Isp</a>
@@ -2286,8 +5429,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2295,8 +5437,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -2304,8 +5445,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2319,8 +5459,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -2328,8 +5467,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addressipversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipversion_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Ip<wbr>Version</a>
@@ -2337,8 +5475,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="associateendpoint_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_go" style="color: inherit; text-decoration: inherit;">Associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -2346,8 +5491,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteprotect_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotect_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Protect</a>
@@ -2355,8 +5507,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="dynamicvip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicvip_go" style="color: inherit; text-decoration: inherit;">Dynamic<wbr>Vip</a>
@@ -2364,8 +5515,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eipaddressid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressid_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="exclusivecluster_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_go" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>Args</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_go" style="color: inherit; text-decoration: inherit;">Force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetbandwidthmaxout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -2373,8 +5547,12 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -2382,8 +5560,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerpasstotarget_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -2391,8 +5568,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="logsetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Set<wbr>Id</a>
@@ -2400,8 +5576,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtopicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Topic<wbr>Id</a>
@@ -2409,8 +5584,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzoneid_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone<wbr>Id</a>
@@ -2418,8 +5592,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2427,8 +5600,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2436,8 +5608,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="slatype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_go" style="color: inherit; text-decoration: inherit;">Sla<wbr>Type</a>
@@ -2445,8 +5616,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavezoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezoneid_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone<wbr>Id</a>
@@ -2454,8 +5624,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Ips</a>
@@ -2463,8 +5632,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesnatip">[]Instance<wbr>Snat<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatpro_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Pro</a>
@@ -2472,8 +5640,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2481,17 +5648,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninforegion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -2499,8 +5664,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninfovpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -2508,8 +5672,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2517,8 +5680,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vipisp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_go" style="color: inherit; text-decoration: inherit;">Vip<wbr>Isp</a>
@@ -2526,8 +5688,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2535,8 +5696,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -2544,8 +5704,266 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="clb_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_name_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="address_ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_version_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="associate_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associate_endpoint_hcl" style="color: inherit; text-decoration: inherit;">associate_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_protect_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_protect_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dynamic_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamic_vip_hcl" style="color: inherit; text-decoration: inherit;">dynamic_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eip_address_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_address_id_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>address_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="exclusive_cluster_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_cluster_hcl" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">object</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_hcl" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_bandwidth_max_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_bandwidth_max_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>bandwidth_<wbr>max_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="load_balancer_pass_to_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_pass_to_target_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>pass_<wbr>to_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="log_set_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_set_id_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>set_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The id of log set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="log_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_topic_id_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The id of log topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="master_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_zone_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sla_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sla_type_hcl" style="color: inherit; text-decoration: inherit;">sla_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slave_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_zone_id_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snat_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_ips_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancesnatip">list(object)</a></span>
+    </dt>
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snat_pro_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_pro_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_region_info_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_region_info_region_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_region_info_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_region_info_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vip_isp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_isp_hcl" style="color: inherit; text-decoration: inherit;">vip_<wbr>isp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2559,8 +5977,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2568,8 +5985,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addressipversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipversion_java" style="color: inherit; text-decoration: inherit;">address<wbr>Ip<wbr>Version</a>
@@ -2577,8 +5993,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="associateendpoint_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_java" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -2586,8 +6009,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteprotect_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotect_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Protect</a>
@@ -2595,8 +6025,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="dynamicvip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicvip_java" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Vip</a>
@@ -2604,8 +6033,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eipaddressid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressid_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="exclusivecluster_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_java" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Instance<wbr>Exclusive<wbr>Cluster</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_java" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetbandwidthmaxout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -2613,8 +6065,12 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2622,8 +6078,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerpasstotarget_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -2631,8 +6086,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="logsetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_java" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
@@ -2640,8 +6094,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtopicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_java" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
@@ -2649,8 +6102,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzoneid_java" style="color: inherit; text-decoration: inherit;">master<wbr>Zone<wbr>Id</a>
@@ -2658,8 +6110,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2667,8 +6118,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2676,8 +6126,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="slatype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_java" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
@@ -2685,8 +6134,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavezoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezoneid_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone<wbr>Id</a>
@@ -2694,17 +6142,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesnatip">List&lt;Instance<wbr>Snat<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesnatip">List&lt;Instance<wbr>Snat<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatpro_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
@@ -2712,8 +6158,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2721,17 +6166,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninforegion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_java" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -2739,8 +6182,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninfovpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -2748,8 +6190,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2757,8 +6198,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vipisp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_java" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -2766,8 +6206,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2775,8 +6214,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2784,8 +6222,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2799,8 +6236,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2808,8 +6244,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addressipversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipversion_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Ip<wbr>Version</a>
@@ -2817,8 +6252,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="associateendpoint_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_nodejs" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -2826,8 +6268,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteprotect_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotect_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Protect</a>
@@ -2835,8 +6284,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="dynamicvip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicvip_nodejs" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Vip</a>
@@ -2844,8 +6292,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eipaddressid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressid_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="exclusivecluster_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_nodejs" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Instance<wbr>Exclusive<wbr>Cluster</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_nodejs" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetbandwidthmaxout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -2853,8 +6324,12 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2862,8 +6337,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerpasstotarget_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -2871,8 +6345,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="logsetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
@@ -2880,8 +6353,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtopicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
@@ -2889,8 +6361,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzoneid_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Zone<wbr>Id</a>
@@ -2898,8 +6369,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2907,8 +6377,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2916,8 +6385,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="slatype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_nodejs" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
@@ -2925,8 +6393,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavezoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezoneid_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone<wbr>Id</a>
@@ -2934,17 +6401,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesnatip">Instance<wbr>Snat<wbr>Ip<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancesnatip">Instance<wbr>Snat<wbr>Ip[]</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatpro_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
@@ -2952,8 +6417,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2961,17 +6425,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninforegion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -2979,8 +6441,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninfovpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -2988,8 +6449,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2997,8 +6457,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vipisp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_nodejs" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -3006,8 +6465,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3015,8 +6473,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -3024,8 +6481,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3039,8 +6495,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -3048,8 +6503,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="address_ip_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_version_python" style="color: inherit; text-decoration: inherit;">address_<wbr>ip_<wbr>version</a>
@@ -3057,8 +6511,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="associate_endpoint_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associate_endpoint_python" style="color: inherit; text-decoration: inherit;">associate_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_package_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
@@ -3066,8 +6527,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="delete_protect_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_protect_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>protect</a>
@@ -3075,8 +6543,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="dynamic_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamic_vip_python" style="color: inherit; text-decoration: inherit;">dynamic_<wbr>vip</a>
@@ -3084,8 +6551,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eip_address_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_address_id_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>address_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="exclusive_cluster_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_cluster_python" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>Args</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_python" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="internet_bandwidth_max_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_bandwidth_max_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>bandwidth_<wbr>max_<wbr>out</a>
@@ -3093,8 +6583,12 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -3102,8 +6596,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="load_balancer_pass_to_target_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_pass_to_target_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>pass_<wbr>to_<wbr>target</a>
@@ -3111,8 +6604,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="log_set_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_set_id_python" style="color: inherit; text-decoration: inherit;">log_<wbr>set_<wbr>id</a>
@@ -3120,8 +6612,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="log_topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_topic_id_python" style="color: inherit; text-decoration: inherit;">log_<wbr>topic_<wbr>id</a>
@@ -3129,8 +6620,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_zone_id_python" style="color: inherit; text-decoration: inherit;">master_<wbr>zone_<wbr>id</a>
@@ -3138,8 +6628,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3147,8 +6636,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -3156,8 +6644,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="sla_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sla_type_python" style="color: inherit; text-decoration: inherit;">sla_<wbr>type</a>
@@ -3165,8 +6652,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="slave_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_zone_id_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone_<wbr>id</a>
@@ -3174,17 +6660,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="snat_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_ips_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesnatip">Instance<wbr>Snat<wbr>Ip<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancesnatip">Sequence[Instance<wbr>Snat<wbr>Ip<wbr>Args]</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="snat_pro_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_pro_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>pro</a>
@@ -3192,8 +6676,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -3201,17 +6684,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="target_region_info_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_region_info_region_python" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>region</a>
@@ -3219,8 +6700,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="target_region_info_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_region_info_vpc_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>vpc_<wbr>id</a>
@@ -3228,8 +6708,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3237,8 +6716,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_isp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_isp_python" style="color: inherit; text-decoration: inherit;">vip_<wbr>isp</a>
@@ -3246,8 +6724,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3255,8 +6732,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -3264,8 +6740,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3279,8 +6754,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -3288,8 +6762,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addressipversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipversion_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Ip<wbr>Version</a>
@@ -3297,8 +6770,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="associateendpoint_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_yaml" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -3306,8 +6786,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deleteprotect_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotect_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Protect</a>
@@ -3315,8 +6802,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="dynamicvip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicvip_yaml" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Vip</a>
@@ -3324,8 +6810,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eipaddressid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipaddressid_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="exclusivecluster_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_yaml" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Property Map</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_yaml" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetbandwidthmaxout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -3333,8 +6842,12 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -3342,8 +6855,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerpasstotarget_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -3351,8 +6863,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="logsetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
@@ -3360,8 +6871,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="logtopicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
@@ -3369,8 +6879,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzoneid_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Zone<wbr>Id</a>
@@ -3378,8 +6887,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3387,8 +6895,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3396,8 +6903,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="slatype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_yaml" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
@@ -3405,8 +6911,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavezoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezoneid_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone<wbr>Id</a>
@@ -3414,8 +6919,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
@@ -3423,8 +6927,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesnatip">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="snatpro_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
@@ -3432,8 +6935,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3441,17 +6943,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninforegion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -3459,8 +6959,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetregioninfovpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -3468,8 +6967,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3477,8 +6975,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vipisp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_yaml" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -3486,8 +6983,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3495,8 +6991,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -3504,8 +6999,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3526,8 +7020,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-"
             title="">
         <span id="clbvips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Vips</a>
@@ -3535,8 +7028,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -3544,8 +7036,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -3553,8 +7044,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv6mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_csharp" style="color: inherit; text-decoration: inherit;">Ipv6Mode</a>
@@ -3562,8 +7052,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd></dl>
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3577,8 +7066,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-"
             title="">
         <span id="clbvips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Vips</a>
@@ -3586,8 +7074,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -3595,8 +7082,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -3604,8 +7090,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv6mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_go" style="color: inherit; text-decoration: inherit;">Ipv6Mode</a>
@@ -3613,8 +7098,53 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd></dl>
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="address_ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ipv6_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-"
+            title="">
+        <span id="clb_vips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_vips_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>vips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name of the CLB instance.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="ipv6_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_mode_hcl" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3628,8 +7158,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-"
             title="">
         <span id="clbvips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -3637,8 +7166,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3646,8 +7174,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3655,8 +7182,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv6mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_java" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
@@ -3664,8 +7190,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd></dl>
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3679,8 +7204,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-"
             title="">
         <span id="clbvips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -3688,8 +7212,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3697,8 +7220,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3706,8 +7228,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv6mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_nodejs" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
@@ -3715,8 +7236,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd></dl>
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3730,8 +7250,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-"
             title="">
         <span id="clb_vips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_vips_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>vips</a>
@@ -3739,8 +7258,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3748,8 +7266,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3757,8 +7274,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv6_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_mode_python" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>mode</a>
@@ -3766,8 +7282,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd></dl>
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3781,8 +7296,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-"
             title="">
         <span id="clbvips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -3790,8 +7304,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3799,8 +7312,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3808,8 +7320,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv6mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_yaml" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
@@ -3817,8 +7328,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd></dl>
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3828,29 +7338,34 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">address_ip_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">address_ipv6</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">associate_endpoint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">clb_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">clb_vips</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+        <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">delete_protect</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">dynamic_vip</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">eip_address_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">exclusive_cluster</span><span class="p">:</span> <span class="nx">Optional[InstanceExclusiveClusterArgs]</span> = None<span class="p">,</span>
+        <span class="nx">force</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">internet_bandwidth_max_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ipv6_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -3863,114 +7378,153 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">sla_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">slave_zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">snat_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.InstanceSnatIpArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">snat_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceSnatIpArgs]]</span> = None<span class="p">,</span>
         <span class="nx">snat_pro</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">target_region_info_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">target_region_info_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vip_isp</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Clb:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_clb_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3978,28 +7532,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -4007,28 +7564,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -4048,8 +7608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addressipv6_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addressipv6_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Ipv6</a>
@@ -4057,8 +7616,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_associateendpoint_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_associateendpoint_csharp" style="color: inherit; text-decoration: inherit;">Associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -4066,8 +7632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbname_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Name</a>
@@ -4075,8 +7640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbvips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbvips_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Vips</a>
@@ -4084,8 +7648,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteprotect_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotect_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Protect</a>
@@ -4093,8 +7664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -4102,8 +7672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dynamicvip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dynamicvip_csharp" style="color: inherit; text-decoration: inherit;">Dynamic<wbr>Vip</a>
@@ -4111,8 +7680,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eipaddressid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipaddressid_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_exclusivecluster_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivecluster_csharp" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Exclusive<wbr>Cluster</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_csharp" style="color: inherit; text-decoration: inherit;">Force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetbandwidthmaxout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetbandwidthmaxout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -4120,8 +7712,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -4129,8 +7725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6mode_csharp" style="color: inherit; text-decoration: inherit;">Ipv6Mode</a>
@@ -4138,8 +7733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerpasstotarget_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerpasstotarget_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -4147,8 +7741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Set<wbr>Id</a>
@@ -4156,8 +7749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtopicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtopicid_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Topic<wbr>Id</a>
@@ -4165,8 +7757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterzoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterzoneid_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone<wbr>Id</a>
@@ -4174,8 +7765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -4183,8 +7773,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -4192,8 +7781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -4201,8 +7789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slatype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slatype_csharp" style="color: inherit; text-decoration: inherit;">Sla<wbr>Type</a>
@@ -4210,8 +7797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavezoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezoneid_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone<wbr>Id</a>
@@ -4219,17 +7805,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatips_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesnatip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Snat<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesnatip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Snat<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatpro_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatpro_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Pro</a>
@@ -4237,8 +7821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -4246,17 +7829,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninforegion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninforegion_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -4264,8 +7845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninfovpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninfovpcid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -4273,8 +7853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -4282,8 +7861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vipisp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vipisp_csharp" style="color: inherit; text-decoration: inherit;">Vip<wbr>Isp</a>
@@ -4291,8 +7869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -4300,8 +7877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -4309,8 +7885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4324,8 +7899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addressipv6_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addressipv6_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Ipv6</a>
@@ -4333,8 +7907,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_associateendpoint_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_associateendpoint_go" style="color: inherit; text-decoration: inherit;">Associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -4342,8 +7923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbname_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Name</a>
@@ -4351,8 +7931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbvips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbvips_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Vips</a>
@@ -4360,8 +7939,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteprotect_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotect_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Protect</a>
@@ -4369,8 +7955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -4378,8 +7963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dynamicvip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dynamicvip_go" style="color: inherit; text-decoration: inherit;">Dynamic<wbr>Vip</a>
@@ -4387,8 +7971,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eipaddressid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipaddressid_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_exclusivecluster_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivecluster_go" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>Args</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_go" style="color: inherit; text-decoration: inherit;">Force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetbandwidthmaxout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetbandwidthmaxout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -4396,8 +8003,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -4405,8 +8016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6mode_go" style="color: inherit; text-decoration: inherit;">Ipv6Mode</a>
@@ -4414,8 +8024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerpasstotarget_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerpasstotarget_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -4423,8 +8032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Set<wbr>Id</a>
@@ -4432,8 +8040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtopicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtopicid_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Topic<wbr>Id</a>
@@ -4441,8 +8048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterzoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterzoneid_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone<wbr>Id</a>
@@ -4450,8 +8056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -4459,8 +8064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -4468,8 +8072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -4477,8 +8080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slatype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slatype_go" style="color: inherit; text-decoration: inherit;">Sla<wbr>Type</a>
@@ -4486,8 +8088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavezoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezoneid_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone<wbr>Id</a>
@@ -4495,8 +8096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatips_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Ips</a>
@@ -4504,8 +8104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesnatip">[]Instance<wbr>Snat<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatpro_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatpro_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Pro</a>
@@ -4513,8 +8112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -4522,17 +8120,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninforegion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninforegion_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -4540,8 +8136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninfovpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninfovpcid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -4549,8 +8144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -4558,8 +8152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vipisp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vipisp_go" style="color: inherit; text-decoration: inherit;">Vip<wbr>Isp</a>
@@ -4567,8 +8160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -4576,8 +8168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -4585,8 +8176,298 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_address_ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_address_ip_version_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_address_ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_address_ipv6_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_associate_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_associate_endpoint_hcl" style="color: inherit; text-decoration: inherit;">associate_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_clb_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_name_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_clb_vips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_vips_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>vips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_protect_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_protect_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name of the CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dynamic_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dynamic_vip_hcl" style="color: inherit; text-decoration: inherit;">dynamic_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eip_address_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eip_address_id_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>address_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_exclusive_cluster_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusive_cluster_hcl" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">object</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_hcl" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internet_bandwidth_max_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_bandwidth_max_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>bandwidth_<wbr>max_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv6_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_mode_hcl" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_load_balancer_pass_to_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_load_balancer_pass_to_target_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>pass_<wbr>to_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_log_set_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_set_id_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>set_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The id of log set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_log_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_topic_id_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The id of log topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_master_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_master_zone_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sla_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sla_type_hcl" style="color: inherit; text-decoration: inherit;">sla_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slave_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slave_zone_id_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snat_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_ips_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancesnatip">list(object)</a></span>
+    </dt>
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snat_pro_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_pro_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_target_region_info_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_region_info_region_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_target_region_info_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_region_info_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vip_isp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_isp_hcl" style="color: inherit; text-decoration: inherit;">vip_<wbr>isp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4600,8 +8481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addressipv6_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addressipv6_java" style="color: inherit; text-decoration: inherit;">address<wbr>Ipv6</a>
@@ -4609,8 +8489,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_associateendpoint_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_associateendpoint_java" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -4618,8 +8505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbname_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -4627,8 +8513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbvips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbvips_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -4636,8 +8521,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteprotect_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotect_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Protect</a>
@@ -4645,8 +8537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -4654,8 +8545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dynamicvip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dynamicvip_java" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Vip</a>
@@ -4663,8 +8553,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eipaddressid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipaddressid_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_exclusivecluster_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivecluster_java" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Instance<wbr>Exclusive<wbr>Cluster</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_java" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetbandwidthmaxout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetbandwidthmaxout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -4672,8 +8585,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -4681,8 +8598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6mode_java" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
@@ -4690,8 +8606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerpasstotarget_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerpasstotarget_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -4699,8 +8614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_java" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
@@ -4708,8 +8622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtopicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtopicid_java" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
@@ -4717,8 +8630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterzoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterzoneid_java" style="color: inherit; text-decoration: inherit;">master<wbr>Zone<wbr>Id</a>
@@ -4726,8 +8638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -4735,8 +8646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -4744,8 +8654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -4753,8 +8662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slatype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slatype_java" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
@@ -4762,8 +8670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavezoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezoneid_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone<wbr>Id</a>
@@ -4771,17 +8678,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatips_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesnatip">List&lt;Instance<wbr>Snat<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesnatip">List&lt;Instance<wbr>Snat<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatpro_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatpro_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
@@ -4789,8 +8694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4798,17 +8702,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninforegion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninforegion_java" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -4816,8 +8718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninfovpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninfovpcid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -4825,8 +8726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -4834,8 +8734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vipisp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vipisp_java" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -4843,8 +8742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4852,8 +8750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -4861,8 +8758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4876,8 +8772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addressipv6_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addressipv6_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Ipv6</a>
@@ -4885,8 +8780,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_associateendpoint_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_associateendpoint_nodejs" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -4894,8 +8796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbname_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -4903,8 +8804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbvips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbvips_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -4912,8 +8812,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteprotect_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotect_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Protect</a>
@@ -4921,8 +8828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -4930,8 +8836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dynamicvip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dynamicvip_nodejs" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Vip</a>
@@ -4939,8 +8844,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eipaddressid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipaddressid_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_exclusivecluster_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivecluster_nodejs" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Instance<wbr>Exclusive<wbr>Cluster</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_nodejs" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetbandwidthmaxout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetbandwidthmaxout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -4948,8 +8876,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -4957,8 +8889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6mode_nodejs" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
@@ -4966,8 +8897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerpasstotarget_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerpasstotarget_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -4975,8 +8905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
@@ -4984,8 +8913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtopicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtopicid_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
@@ -4993,8 +8921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterzoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterzoneid_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Zone<wbr>Id</a>
@@ -5002,8 +8929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -5011,8 +8937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -5020,8 +8945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -5029,8 +8953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slatype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slatype_nodejs" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
@@ -5038,8 +8961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavezoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezoneid_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone<wbr>Id</a>
@@ -5047,17 +8969,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatips_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesnatip">Instance<wbr>Snat<wbr>Ip<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancesnatip">Instance<wbr>Snat<wbr>Ip[]</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatpro_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatpro_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
@@ -5065,8 +8985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5074,17 +8993,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninforegion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninforegion_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -5092,8 +9009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninfovpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninfovpcid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -5101,8 +9017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -5110,8 +9025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vipisp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vipisp_nodejs" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -5119,8 +9033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5128,8 +9041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -5137,8 +9049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5152,8 +9063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_address_ipv6_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_address_ipv6_python" style="color: inherit; text-decoration: inherit;">address_<wbr>ipv6</a>
@@ -5161,8 +9071,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_associate_endpoint_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_associate_endpoint_python" style="color: inherit; text-decoration: inherit;">associate_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_package_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
@@ -5170,8 +9087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clb_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_name_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
@@ -5179,8 +9095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clb_vips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_vips_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>vips</a>
@@ -5188,8 +9103,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_delete_protect_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_protect_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>protect</a>
@@ -5197,8 +9119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -5206,8 +9127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dynamic_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dynamic_vip_python" style="color: inherit; text-decoration: inherit;">dynamic_<wbr>vip</a>
@@ -5215,8 +9135,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eip_address_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eip_address_id_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>address_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_exclusive_cluster_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusive_cluster_python" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>Args</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_python" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internet_bandwidth_max_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_bandwidth_max_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>bandwidth_<wbr>max_<wbr>out</a>
@@ -5224,8 +9167,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -5233,8 +9180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_mode_python" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>mode</a>
@@ -5242,8 +9188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_load_balancer_pass_to_target_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_load_balancer_pass_to_target_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>pass_<wbr>to_<wbr>target</a>
@@ -5251,8 +9196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_log_set_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_set_id_python" style="color: inherit; text-decoration: inherit;">log_<wbr>set_<wbr>id</a>
@@ -5260,8 +9204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_log_topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_topic_id_python" style="color: inherit; text-decoration: inherit;">log_<wbr>topic_<wbr>id</a>
@@ -5269,8 +9212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_master_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_master_zone_id_python" style="color: inherit; text-decoration: inherit;">master_<wbr>zone_<wbr>id</a>
@@ -5278,8 +9220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -5287,8 +9228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -5296,8 +9236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -5305,8 +9244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sla_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sla_type_python" style="color: inherit; text-decoration: inherit;">sla_<wbr>type</a>
@@ -5314,8 +9252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slave_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slave_zone_id_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone_<wbr>id</a>
@@ -5323,17 +9260,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snat_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_ips_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesnatip">Instance<wbr>Snat<wbr>Ip<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancesnatip">Sequence[Instance<wbr>Snat<wbr>Ip<wbr>Args]</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snat_pro_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_pro_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>pro</a>
@@ -5341,8 +9276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -5350,17 +9284,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_region_info_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_region_info_region_python" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>region</a>
@@ -5368,8 +9300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_region_info_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_region_info_vpc_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>vpc_<wbr>id</a>
@@ -5377,8 +9308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -5386,8 +9316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_isp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_isp_python" style="color: inherit; text-decoration: inherit;">vip_<wbr>isp</a>
@@ -5395,8 +9324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -5404,8 +9332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -5413,8 +9340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5428,8 +9354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>ipv4</code>, <code>ipv6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>It's only applicable to public network CLB instances. IP version. Values: <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code> (case-insensitive). Default: <code>IPV4</code>. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addressipv6_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addressipv6_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Ipv6</a>
@@ -5437,8 +9362,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv6 address of the load balancing instance.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv6 address of the load balancing instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_associateendpoint_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_associateendpoint_yaml" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The associated terminal node ID; passing an empty string indicates unassociating the node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -5446,8 +9378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bandwidth package id. If set, the <code>internet_charge_type</code> must be <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Bandwidth package id. If set, the <code>internetChargeType</code> must be <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbname_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -5455,8 +9386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clbvips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbvips_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -5464,8 +9394,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteprotect_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotect_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Protect</a>
@@ -5473,8 +9410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable delete protection.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable delete protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -5482,8 +9418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of the CLB instance.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the CLB instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dynamicvip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dynamicvip_yaml" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Vip</a>
@@ -5491,8 +9426,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>If create dynamic vip CLB instance, <code>true</code> or <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eipaddressid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipaddressid_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Address<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_exclusivecluster_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivecluster_yaml" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusivecluster">Property Map</a></span>
+    </dt>
+    <dd>Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_yaml" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to forcibly upgrade the CLB instance, default is <code>false</code>. This parameter only takes effect when <code>slaType</code> changes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetbandwidthmaxout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetbandwidthmaxout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -5500,8 +9458,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.</p>
+<ul>
+<li>The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.</li>
+<li>The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+(Default to 10Mbps when CreateLoadBalancer is call.).</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -5509,8 +9471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6mode_yaml" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
@@ -5518,8 +9479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This field is meaningful when the IP address version is ipv6, <code>IPv6Nat64</code> | <code>IPv6FullChain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerpasstotarget_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerpasstotarget_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
@@ -5527,8 +9487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
@@ -5536,8 +9495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The id of log set.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtopicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtopicid_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
@@ -5545,8 +9503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The id of log topic.</p>
-</dd><dt class="property-optional"
+    <dd>The id of log topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterzoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterzoneid_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Zone<wbr>Id</a>
@@ -5554,8 +9511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -5563,8 +9519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CLB instance. Valid values: <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -5572,8 +9527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the CLB instance, <code>0</code> - Default Project.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the CLB instance, <code>0</code> - Default Project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -5581,8 +9535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups of the CLB instance. Supports both <code>OPEN</code> and <code>INTERNAL</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slatype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slatype_yaml" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
@@ -5590,8 +9543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is required to create LCU-supported instances. Values:<code>SLA</code>: Super Large 4. When you have activated Super Large models, <code>SLA</code> refers to Super Large 4; <code>clb.c2.medium</code>: Standard; <code>clb.c3.small</code>: Advanced 1; <code>clb.c3.medium</code>: Advanced 1; <code>clb.c4.small</code>: Super Large 1; <code>clb.c4.medium</code>: Super Large 2; <code>clb.c4.large</code>: Super Large 3; <code>clb.c4.xlarge</code>: Super Large 4. For more details, see <a href="https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1">Instance Specifications</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavezoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezoneid_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone<wbr>Id</a>
@@ -5599,8 +9551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</p>
-</dd><dt class="property-optional"
+    <dd>Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatips_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
@@ -5608,8 +9559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesnatip">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</p>
-</dd><dt class="property-optional"
+    <dd>Snat Ip List, required with <code>snat_pro=true</code>. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource <code>tencentcloud.Clb.SnatIp</code> to handle fixed ips.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatpro_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatpro_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
@@ -5617,8 +9567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether Binding IPs of other VPCs feature switch.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether Binding IPs of other VPCs feature switch.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5626,17 +9575,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</p>
-</dd><dt class="property-optional"
+    <dd>In the case of purchasing a <code>INTERNAL</code> clb instance, the subnet id must be specified. The VIP of the <code>INTERNAL</code> clb instance will be generated from this subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninforegion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninforegion_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -5644,8 +9591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional"
+    <dd>Region information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetregioninfovpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetregioninfovpcid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -5653,8 +9599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vpc information of backend services are attached the CLB instance. Only supports <code>OPEN</code> CLBs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -5662,8 +9607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vipisp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vipisp_yaml" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -5671,8 +9615,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5680,8 +9623,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -5689,8 +9631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone id, only applicable to open CLB.</p>
-</dd></dl>
+    <dd>Available zone id, only applicable to open CLB.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -5705,7 +9646,907 @@ The following state arguments are supported:
 
 
 
-<h4 id="instancesnatip">Instance<wbr>Snat<wbr>Ip</h4>
+<h4 id="instanceexclusivecluster">
+Instance<wbr>Exclusive<wbr>Cluster<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Exclusive<wbr>Cluster<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="classicalcluster_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classicalcluster_csharp" style="color: inherit; text-decoration: inherit;">Classical<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterclassicalcluster">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Exclusive<wbr>Cluster<wbr>Classical<wbr>Cluster</a></span>
+    </dt>
+    <dd>vpcgw cluster
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l4clusters_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l4clusters_csharp" style="color: inherit; text-decoration: inherit;">L4Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl4cluster">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Exclusive<wbr>Cluster<wbr>L4Cluster&gt;</a></span>
+    </dt>
+    <dd>Layer-4 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l7clusters_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l7clusters_csharp" style="color: inherit; text-decoration: inherit;">L7Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl7cluster">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Instance<wbr>Exclusive<wbr>Cluster<wbr>L7Cluster&gt;</a></span>
+    </dt>
+    <dd>Layer-7 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="classicalcluster_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classicalcluster_go" style="color: inherit; text-decoration: inherit;">Classical<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterclassicalcluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>Classical<wbr>Cluster</a></span>
+    </dt>
+    <dd>vpcgw cluster
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l4clusters_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l4clusters_go" style="color: inherit; text-decoration: inherit;">L4Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl4cluster">[]Instance<wbr>Exclusive<wbr>Cluster<wbr>L4Cluster</a></span>
+    </dt>
+    <dd>Layer-4 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l7clusters_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l7clusters_go" style="color: inherit; text-decoration: inherit;">L7Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl7cluster">[]Instance<wbr>Exclusive<wbr>Cluster<wbr>L7Cluster</a></span>
+    </dt>
+    <dd>Layer-7 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="classical_cluster_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classical_cluster_hcl" style="color: inherit; text-decoration: inherit;">classical_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterclassicalcluster">object</a></span>
+    </dt>
+    <dd>vpcgw cluster
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l4_clusters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l4_clusters_hcl" style="color: inherit; text-decoration: inherit;">l4_<wbr>clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl4cluster">list(object)</a></span>
+    </dt>
+    <dd>Layer-4 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l7_clusters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l7_clusters_hcl" style="color: inherit; text-decoration: inherit;">l7_<wbr>clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl7cluster">list(object)</a></span>
+    </dt>
+    <dd>Layer-7 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="classicalcluster_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classicalcluster_java" style="color: inherit; text-decoration: inherit;">classical<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterclassicalcluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>Classical<wbr>Cluster</a></span>
+    </dt>
+    <dd>vpcgw cluster
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l4clusters_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l4clusters_java" style="color: inherit; text-decoration: inherit;">l4Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl4cluster">List&lt;Instance<wbr>Exclusive<wbr>Cluster<wbr>L4Cluster&gt;</a></span>
+    </dt>
+    <dd>Layer-4 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l7clusters_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l7clusters_java" style="color: inherit; text-decoration: inherit;">l7Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl7cluster">List&lt;Instance<wbr>Exclusive<wbr>Cluster<wbr>L7Cluster&gt;</a></span>
+    </dt>
+    <dd>Layer-7 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="classicalcluster_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classicalcluster_nodejs" style="color: inherit; text-decoration: inherit;">classical<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterclassicalcluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>Classical<wbr>Cluster</a></span>
+    </dt>
+    <dd>vpcgw cluster
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l4clusters_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l4clusters_nodejs" style="color: inherit; text-decoration: inherit;">l4Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl4cluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>L4Cluster[]</a></span>
+    </dt>
+    <dd>Layer-4 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l7clusters_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l7clusters_nodejs" style="color: inherit; text-decoration: inherit;">l7Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl7cluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>L7Cluster[]</a></span>
+    </dt>
+    <dd>Layer-7 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="classical_cluster_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classical_cluster_python" style="color: inherit; text-decoration: inherit;">classical_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterclassicalcluster">Instance<wbr>Exclusive<wbr>Cluster<wbr>Classical<wbr>Cluster</a></span>
+    </dt>
+    <dd>vpcgw cluster
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l4_clusters_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l4_clusters_python" style="color: inherit; text-decoration: inherit;">l4_<wbr>clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl4cluster">Sequence[Instance<wbr>Exclusive<wbr>Cluster<wbr>L4Cluster]</a></span>
+    </dt>
+    <dd>Layer-4 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l7_clusters_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l7_clusters_python" style="color: inherit; text-decoration: inherit;">l7_<wbr>clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl7cluster">Sequence[Instance<wbr>Exclusive<wbr>Cluster<wbr>L7Cluster]</a></span>
+    </dt>
+    <dd>Layer-7 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="classicalcluster_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classicalcluster_yaml" style="color: inherit; text-decoration: inherit;">classical<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterclassicalcluster">Property Map</a></span>
+    </dt>
+    <dd>vpcgw cluster
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l4clusters_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l4clusters_yaml" style="color: inherit; text-decoration: inherit;">l4Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl4cluster">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Layer-4 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="l7clusters_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l7clusters_yaml" style="color: inherit; text-decoration: inherit;">l7Clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceexclusiveclusterl7cluster">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Layer-7 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="instanceexclusiveclusterclassicalcluster">
+Instance<wbr>Exclusive<wbr>Cluster<wbr>Classical<wbr>Cluster<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Exclusive<wbr>Cluster<wbr>Classical<wbr>Cluster<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cluster_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="instanceexclusiveclusterl4cluster">
+Instance<wbr>Exclusive<wbr>Cluster<wbr>L4Cluster<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Exclusive<wbr>Cluster<wbr>L4Cluster<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cluster_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="instanceexclusiveclusterl7cluster">
+Instance<wbr>Exclusive<wbr>Cluster<wbr>L7Cluster<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Exclusive<wbr>Cluster<wbr>L7Cluster<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cluster_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Unique cluster ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clustername_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="instancesnatip">
+Instance<wbr>Snat<wbr>Ip<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Snat<wbr>Ip<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5717,8 +10558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snat subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>Snat subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -5726,8 +10566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snat IP address, If set to empty will auto allocated.</p>
-</dd></dl>
+    <dd>Snat IP address, If set to empty will auto allocated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5741,8 +10580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snat subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>Snat subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -5750,8 +10588,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snat IP address, If set to empty will auto allocated.</p>
-</dd></dl>
+    <dd>Snat IP address, If set to empty will auto allocated.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Snat subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Snat IP address, If set to empty will auto allocated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5765,8 +10624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Snat subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>Snat subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -5774,8 +10632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Snat IP address, If set to empty will auto allocated.</p>
-</dd></dl>
+    <dd>Snat IP address, If set to empty will auto allocated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5789,8 +10646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snat subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>Snat subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -5798,8 +10654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snat IP address, If set to empty will auto allocated.</p>
-</dd></dl>
+    <dd>Snat IP address, If set to empty will auto allocated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5813,8 +10668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Snat subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>Snat subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -5822,8 +10676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Snat IP address, If set to empty will auto allocated.</p>
-</dd></dl>
+    <dd>Snat IP address, If set to empty will auto allocated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5837,8 +10690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Snat subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>Snat subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -5846,8 +10698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Snat IP address, If set to empty will auto allocated.</p>
-</dd></dl>
+    <dd>Snat IP address, If set to empty will auto allocated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5858,9 +10709,12 @@ The following state arguments are supported:
 CLB instance can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+$ pulumi import tencentcloud:Clb/instance:Instance example lb-7a0t6zqb
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -5872,7 +10726,6 @@ $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

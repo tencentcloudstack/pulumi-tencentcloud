@@ -2,9 +2,11 @@
 ---
 title: "getZoneConfig"
 title_tag: "tencentcloud.Redis.getZoneConfig"
-meta_desc: "Documentation for the tencentcloud.Redis.getZoneConfig function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query which instance types of Redis are available in a specific region."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query which instance types of Redis are available in a s
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const redislab = tencentcloud.Redis.getZoneConfig({
+const redislab = tencentcloud.redis.getZoneConfig({
     region: "ap-hongkong",
     resultOutputFile: "/temp/mytestpath",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-redislab = tencentcloud.Redis.get_zone_config(region="ap-hongkong",
+redislab = tencentcloud.redis.get_zone_config(region="ap-hongkong",
     result_output_file="/temp/mytestpath")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+			Region:           pulumi.StringRef("ap-hongkong"),
+			ResultOutputFile: pulumi.StringRef("/temp/mytestpath"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-			Region:           pulumi.StringRef("ap-hongkong"),
-			ResultOutputFile: pulumi.StringRef("/temp/mytestpath"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Redis.RedisFunctions;
 import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   redislab:
     fn::invoke:
-      Function: tencentcloud:Redis:getZoneConfig
-      Arguments:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
         region: ap-hongkong
         resultOutputFile: /temp/mytestpath
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "redislab" {
+  region             = "ap-hongkong"
+  result_output_file = "/temp/mytestpath"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeProductInfo](https://www.tencentcloud.com/document/api/239/32077)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getZoneConfig<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
+><span class="k">function </span>getZoneConfig<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
 ><span class="k">
-function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
+function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args
                     <span class="nx">type_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetZoneConfigResult</span
 ><span class="k">
-def </span>get_zone_config_output<span class="p">(</span><span class="nx">region</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">type_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneConfigResult]</span
+def </span>get_zone_config_output<span class="p">(</span><span class="nx">region</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">type_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneConfigResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetZoneConfig </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Redis/getZoneConfig:getZoneConfig
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_redis_get_zone_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_csharp" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd></dl>
+    <dd>Instance type ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_go" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd></dl>
+    <dd>Instance type ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_hcl" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance type ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_java" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd></dl>
+    <dd>Instance type ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_nodejs" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd></dl>
+    <dd>Instance type ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_python" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd></dl>
+    <dd>Instance type ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a region. If this value is not set, the current region getting from provider's configuration will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_yaml" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd></dl>
+    <dd>Instance type ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Outputs.<wbr>Get<wbr>Zone<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -453,8 +532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Which redis type supports in this zone.</p>
-</dd></dl>
+    <dd>Instance type. Which redis type supports in this zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -468,8 +546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -477,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">[]Get<wbr>Zone<wbr>Config<wbr>List</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -502,8 +578,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Which redis type supports in this zone.</p>
-</dd></dl>
+    <dd>Instance type. Which redis type supports in this zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneconfiglist">list(object)</a></span>
+    </dt>
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="type_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_hcl" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance type. Which redis type supports in this zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -517,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -526,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Get<wbr>Zone<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -551,8 +670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance type. Which redis type supports in this zone.</p>
-</dd></dl>
+    <dd>Instance type. Which redis type supports in this zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -566,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -575,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">Get<wbr>Zone<wbr>Config<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -600,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance type. Which redis type supports in this zone.</p>
-</dd></dl>
+    <dd>Instance type. Which redis type supports in this zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -615,17 +730,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneconfiglist">Get<wbr>Zone<wbr>Config<wbr>List]</a></span>
+        <span class="property-type"><a href="#getzoneconfiglist">Sequence[Get<wbr>Zone<wbr>Config<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -649,8 +762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Which redis type supports in this zone.</p>
-</dd></dl>
+    <dd>Instance type. Which redis type supports in this zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -664,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -673,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -698,8 +808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance type. Which redis type supports in this zone.</p>
-</dd></dl>
+    <dd>Instance type. Which redis type supports in this zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -723,9 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead. The memory volume of an available instance(in MB).</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead. The memory volume of an available instance(in MB).<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnums_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnums_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Replicas<wbr>Nums</a>
@@ -733,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The support numbers of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnums_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnums_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Shard<wbr>Nums</a>
@@ -742,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The support numbers of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="shardmemories_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmemories_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Memories</a>
@@ -751,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The memory volume list of an available instance shard(in MB).</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>The memory volume list of an available instance shard(in MB).</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -760,9 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_csharp" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -770,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance type ID.</dd><dt class="property-required"
             title="Required">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -779,8 +880,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -788,8 +888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available zone.</p>
-</dd></dl>
+    <dd>ID of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -803,9 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead. The memory volume of an available instance(in MB).</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead. The memory volume of an available instance(in MB).<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnums_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnums_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Replicas<wbr>Nums</a>
@@ -813,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The support numbers of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnums_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnums_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Shard<wbr>Nums</a>
@@ -822,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The support numbers of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="shardmemories_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmemories_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Memories</a>
@@ -831,8 +926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The memory volume list of an available instance shard(in MB).</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>The memory volume list of an available instance shard(in MB).</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -840,9 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_go" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -850,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance type ID.</dd><dt class="property-required"
             title="Required">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -859,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -868,8 +958,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available zone.</p>
-</dd></dl>
+    <dd>ID of available zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="mem_sizes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_sizes_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>sizes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead. The memory volume of an available instance(in MB).<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="redis_replicas_nums_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_replicas_nums_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>replicas_<wbr>nums</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The support numbers of instance copies.</dd><dt class="property-required"
+            title="Required">
+        <span id="redis_shard_nums_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_shard_nums_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>shard_<wbr>nums</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The support numbers of instance shard.</dd><dt class="property-required"
+            title="Required">
+        <span id="shard_memories_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_memories_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>memories</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The memory volume list of an available instance shard(in MB).</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="type_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_hcl" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance type ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -883,9 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead. The memory volume of an available instance(in MB).</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead. The memory volume of an available instance(in MB).<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnums_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnums_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Nums</a>
@@ -893,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The support numbers of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnums_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnums_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Nums</a>
@@ -902,8 +1058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The support numbers of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="shardmemories_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmemories_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Memories</a>
@@ -911,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The memory volume list of an available instance shard(in MB).</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>The memory volume list of an available instance shard(in MB).</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -920,9 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_java" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -930,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance type ID.</dd><dt class="property-required"
             title="Required">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -939,8 +1090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -948,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of available zone.</p>
-</dd></dl>
+    <dd>ID of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -963,9 +1112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead. The memory volume of an available instance(in MB).</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead. The memory volume of an available instance(in MB).<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnums_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnums_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Nums</a>
@@ -973,8 +1120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The support numbers of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnums_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnums_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Nums</a>
@@ -982,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The support numbers of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="shardmemories_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmemories_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Memories</a>
@@ -991,8 +1136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The memory volume list of an available instance shard(in MB).</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>The memory volume list of an available instance shard(in MB).</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1000,9 +1144,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_nodejs" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -1010,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance type ID.</dd><dt class="property-required"
             title="Required">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1019,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1028,8 +1168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available zone.</p>
-</dd></dl>
+    <dd>ID of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1043,9 +1182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead. The memory volume of an available instance(in MB).</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead. The memory volume of an available instance(in MB).<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="redis_replicas_nums_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_replicas_nums_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>replicas_<wbr>nums</a>
@@ -1053,8 +1190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The support numbers of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redis_shard_nums_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_shard_nums_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>shard_<wbr>nums</a>
@@ -1062,8 +1198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The support numbers of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="shard_memories_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_memories_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>memories</a>
@@ -1071,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The memory volume list of an available instance shard(in MB).</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>The memory volume list of an available instance shard(in MB).</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1080,9 +1214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="type_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_python" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
@@ -1090,8 +1222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance type ID.</dd><dt class="property-required"
             title="Required">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1099,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1108,8 +1238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of available zone.</p>
-</dd></dl>
+    <dd>ID of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1123,9 +1252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead. The memory volume of an available instance(in MB).</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>shard_memories</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead. The memory volume of an available instance(in MB).<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>shardMemories</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="redisreplicasnums_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnums_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Nums</a>
@@ -1133,8 +1260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The support numbers of instance copies.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance copies.</dd><dt class="property-required"
             title="Required">
         <span id="redisshardnums_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnums_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Nums</a>
@@ -1142,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The support numbers of instance shard.</p>
-</dd><dt class="property-required"
+    <dd>The support numbers of instance shard.</dd><dt class="property-required"
             title="Required">
         <span id="shardmemories_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardmemories_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Memories</a>
@@ -1151,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The memory volume list of an available instance shard(in MB).</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>The memory volume list of an available instance shard(in MB).</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1160,9 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>master_slave_redis</code>, <code>master_slave_ckv</code>, <code>cluster_ckv</code>, <code>cluster_redis</code> and <code>standalone_redis</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>masterSlaveRedis</code>, <code>masterSlaveCkv</code>, <code>clusterCkv</code>, <code>clusterRedis</code> and <code>standaloneRedis</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="typeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_yaml" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -1170,8 +1292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance type ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance type ID.</dd><dt class="property-required"
             title="Required">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1179,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version description of an available instance. Possible values: <code>Redis 3.2</code>, <code>Redis 4.0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1188,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of available zone.</p>
-</dd></dl>
+    <dd>ID of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1204,7 +1323,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

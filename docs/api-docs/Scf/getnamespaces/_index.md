@@ -2,9 +2,11 @@
 ---
 title: "getNamespaces"
 title_tag: "tencentcloud.Scf.getNamespaces"
-meta_desc: "Documentation for the tencentcloud.Scf.getNamespaces function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query SCF namespaces."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,69 +18,92 @@ Use this data source to query SCF namespaces.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooNamespace = new tencentcloud.scf.Namespace("fooNamespace", {namespace: "ci-test-scf"});
-const fooNamespaces = tencentcloud.Scf.getNamespacesOutput({
+const fooNamespace = new tencentcloud.scf.Namespace("foo", {namespace: "ci-test-scf"});
+const foo = tencentcloud.scf.getNamespacesOutput({
     namespace: fooNamespace.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_namespace = tencentcloud.scf.Namespace("fooNamespace", namespace="ci-test-scf")
-foo_namespaces = tencentcloud.Scf.get_namespaces_output(namespace=foo_namespace.id)
+foo_namespace = tencentcloud.scf.Namespace("foo", namespace="ci-test-scf")
+foo = tencentcloud.scf.get_namespaces_output(namespace=foo_namespace.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		fooNamespace, err := scf.NewNamespace(ctx, "foo", &scf.NamespaceArgs{
+			Namespace: pulumi.String("ci-test-scf"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = scf.GetNamespacesOutput(ctx, scf.GetNamespacesOutputArgs{
+			Namespace: fooNamespace.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooNamespace = new Tencentcloud.Scf.Namespace("fooNamespace", new()
+    var fooNamespace = new Tencentcloud.Scf.Namespace("foo", new()
     {
         ScfNamespace = "ci-test-scf",
     });
 
-    var fooNamespaces = Tencentcloud.Scf.GetNamespaces.Invoke(new()
+    var foo = Tencentcloud.Scf.GetNamespaces.Invoke(new()
     {
         Namespace = fooNamespace.Id,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooNamespace, err := Scf.NewNamespace(ctx, "fooNamespace", &Scf.NamespaceArgs{
-			Namespace: pulumi.String("ci-test-scf"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Scf.GetNamespacesOutput(ctx, scf.GetNamespacesOutputArgs{
-			Namespace: fooNamespace.ID(),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -89,8 +114,8 @@ import com.pulumi.tencentcloud.Scf.Namespace;
 import com.pulumi.tencentcloud.Scf.NamespaceArgs;
 import com.pulumi.tencentcloud.Scf.ScfFunctions;
 import com.pulumi.tencentcloud.Scf.inputs.GetNamespacesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -102,32 +127,67 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooNamespace = new Namespace("fooNamespace", NamespaceArgs.builder()        
+        var fooNamespace = new Namespace("fooNamespace", NamespaceArgs.builder()
             .namespace("ci-test-scf")
             .build());
 
-        final var fooNamespaces = ScfFunctions.getNamespaces(GetNamespacesArgs.builder()
+        final var foo = ScfFunctions.getNamespaces(GetNamespacesArgs.builder()
             .namespace(fooNamespace.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooNamespace:
     type: tencentcloud:Scf:Namespace
+    name: foo
     properties:
       namespace: ci-test-scf
 variables:
-  fooNamespaces:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Scf:getNamespaces
-      Arguments:
+      function: tencentcloud:Scf:getNamespaces
+      arguments:
         namespace: ${fooNamespace.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_scf_getnamespaces" "foo" {
+  namespace = tencentcloud_scf_namespace.foo.id
+}
+
+resource "tencentcloud_scf_namespace" "foo" {
+  namespace = "ci-test-scf"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListNamespaces](https://www.tencentcloud.com/document/api/583/34411)
 
 
 
@@ -139,7 +199,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +207,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getNamespaces<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNamespacesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>></span
+><span class="k">function </span>getNamespaces<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNamespacesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>></span
 ><span class="k">
-function </span>getNamespacesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNamespacesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>></span
+function </span>getNamespacesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNamespacesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -163,10 +223,10 @@ function </span>getNamespacesOutput<span class="p">(</span><span class="nx">args
                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetNamespacesResult</span
 ><span class="k">
-def </span>get_namespaces_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetNamespacesResult]</span
+def </span>get_namespaces_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">namespace</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetNamespacesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -191,7 +251,8 @@ func </span>GetNamespacesOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetNamespaces </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetNamespacesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNamespacesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNamespacesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNamespacesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,7 +261,8 @@ func </span>GetNamespacesOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> </span>getNamespaces<span class="p">(</span><span class="nx">GetNamespacesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> </span>getNamespaces<span class="p">(</span><span class="nx">GetNamespacesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetNamespacesResult</a></span>> </span>getNamespaces<span class="p">(</span><span class="nx">GetNamespacesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,6 +274,15 @@ func </span>GetNamespacesOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Scf/getNamespaces:getNamespaces
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_scf_get_namespaces&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -230,8 +301,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -239,8 +309,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -248,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -263,8 +331,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -272,8 +339,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -281,8 +347,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +391,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -305,8 +399,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -314,8 +407,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -329,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -338,8 +429,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -347,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -362,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -371,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -380,8 +467,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -395,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -404,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -413,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -437,8 +520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scfnamespaces_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scfnamespaces_csharp" style="color: inherit; text-decoration: inherit;">Scf<wbr>Namespaces</a>
@@ -446,8 +528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespace">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Outputs.<wbr>Get<wbr>Namespaces<wbr>Namespace&gt;</a></span>
     </dt>
-    <dd><p>An information list of namespace. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of namespace. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -455,8 +536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Description of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -464,8 +544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -487,8 +566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_go" style="color: inherit; text-decoration: inherit;">Namespaces</a>
@@ -496,8 +574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespace">[]Get<wbr>Namespaces<wbr>Namespace</a></span>
     </dt>
-    <dd><p>An information list of namespace. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of namespace. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -505,8 +582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Description of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -514,11 +590,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="namespaces_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_hcl" style="color: inherit; text-decoration: inherit;">namespaces</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getnamespacesnamespace">list(object)</a></span>
+    </dt>
+    <dd>An information list of namespace. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the SCF namespace.</dd><dt class="property-"
+            title="">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF namespace.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -537,8 +658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_java" style="color: inherit; text-decoration: inherit;">namespaces</a>
@@ -546,8 +666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespace">List&lt;Get<wbr>Namespaces<wbr>Namespace&gt;</a></span>
     </dt>
-    <dd><p>An information list of namespace. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of namespace. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -555,8 +674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Description of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -564,8 +682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -587,8 +704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_nodejs" style="color: inherit; text-decoration: inherit;">namespaces</a>
@@ -596,8 +712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespace">Get<wbr>Namespaces<wbr>Namespace[]</a></span>
     </dt>
-    <dd><p>An information list of namespace. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of namespace. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -605,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Description of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -614,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -637,17 +750,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_python" style="color: inherit; text-decoration: inherit;">namespaces</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getnamespacesnamespace">Get<wbr>Namespaces<wbr>Namespace]</a></span>
+        <span class="property-type"><a href="#getnamespacesnamespace">Sequence[Get<wbr>Namespaces<wbr>Namespace]</a></span>
     </dt>
-    <dd><p>An information list of namespace. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of namespace. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -655,8 +766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Description of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -664,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -687,8 +796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_yaml" style="color: inherit; text-decoration: inherit;">namespaces</a>
@@ -696,8 +804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnamespacesnamespace">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of namespace. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of namespace. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -705,8 +812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Description of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -714,8 +820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF namespace.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF namespace.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -747,8 +852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -756,8 +860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -765,8 +868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Modify time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -774,8 +876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -783,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF namespace.</p>
-</dd></dl>
+    <dd>Type of the SCF namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -798,8 +898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -807,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -816,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Modify time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -825,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -834,8 +930,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF namespace.</p>
-</dd></dl>
+    <dd>Type of the SCF namespace.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the SCF namespace.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Modify time of the SCF namespace.</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the SCF namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -849,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -858,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -867,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Modify time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -876,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -885,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SCF namespace.</p>
-</dd></dl>
+    <dd>Type of the SCF namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -900,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -909,8 +1044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -918,8 +1052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Modify time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -927,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -936,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF namespace.</p>
-</dd></dl>
+    <dd>Type of the SCF namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -951,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -960,8 +1090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -969,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Modify time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Modify time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -978,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -987,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the SCF namespace.</p>
-</dd></dl>
+    <dd>Type of the SCF namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1002,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1011,8 +1136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Description of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1020,8 +1144,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time of the SCF namespace.</p>
-</dd><dt class="property-required"
+    <dd>Modify time of the SCF namespace.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -1029,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF namespace to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF namespace to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1038,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SCF namespace.</p>
-</dd></dl>
+    <dd>Type of the SCF namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1054,7 +1175,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

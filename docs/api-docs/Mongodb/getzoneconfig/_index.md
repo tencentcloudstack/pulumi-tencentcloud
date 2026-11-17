@@ -2,9 +2,11 @@
 ---
 title: "getZoneConfig"
 title_tag: "tencentcloud.Mongodb.getZoneConfig"
-meta_desc: "Documentation for the tencentcloud.Mongodb.getZoneConfig function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the available mongodb specifications for different zone."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query the available mongodb specifications for different
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const mongodb = tencentcloud.Mongodb.getZoneConfig({
+const mongodb = tencentcloud.mongodb.getZoneConfig({
     availableZone: "ap-guangzhou-2",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-mongodb = tencentcloud.Mongodb.get_zone_config(available_zone="ap-guangzhou-2")
+mongodb = tencentcloud.mongodb.get_zone_config(available_zone="ap-guangzhou-2")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mongodb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := mongodb.GetZoneConfig(ctx, &mongodb.GetZoneConfigArgs{
+			AvailableZone: pulumi.StringRef("ap-guangzhou-2"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mongodb.GetZoneConfig(ctx, &mongodb.GetZoneConfigArgs{
-			AvailableZone: pulumi.StringRef("ap-guangzhou-2"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Mongodb.MongodbFunctions;
 import com.pulumi.tencentcloud.Mongodb.inputs.GetZoneConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   mongodb:
     fn::invoke:
-      Function: tencentcloud:Mongodb:getZoneConfig
-      Arguments:
+      function: tencentcloud:Mongodb:getZoneConfig
+      arguments:
         availableZone: ap-guangzhou-2
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_mongodb_getzoneconfig" "mongodb" {
+  available_zone = "ap-guangzhou-2"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeSpecInfo](https://www.tencentcloud.com/document/api/240/34701)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getZoneConfig<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
+><span class="k">function </span>getZoneConfig<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
 ><span class="k">
-function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
+function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args
                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetZoneConfigResult</span
 ><span class="k">
-def </span>get_zone_config_output<span class="p">(</span><span class="nx">available_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneConfigResult]</span
+def </span>get_zone_config_output<span class="p">(</span><span class="nx">available_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneConfigResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetZoneConfig </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Mongodb/getZoneConfig:getZoneConfig
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_mongodb_get_zone_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="available_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of the Mongodb.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -366,8 +443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mongodb.<wbr>Outputs.<wbr>Get<wbr>Zone<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of zone config. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone config. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availablezone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_csharp" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone</a>
@@ -375,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -398,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -407,8 +481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">[]Get<wbr>Zone<wbr>Config<wbr>List</a></span>
     </dt>
-    <dd><p>A list of zone config. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone config. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availablezone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_go" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone</a>
@@ -416,11 +489,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneconfiglist">list(object)</a></span>
+    </dt>
+    <dd>A list of zone config. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="available_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of the Mongodb.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -439,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -448,8 +557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Get<wbr>Zone<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of zone config. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone config. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availablezone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_java" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -457,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -480,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -489,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">Get<wbr>Zone<wbr>Config<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of zone config. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone config. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availablezone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_nodejs" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -498,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -521,17 +625,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneconfiglist">Get<wbr>Zone<wbr>Config<wbr>List]</a></span>
+        <span class="property-type"><a href="#getzoneconfiglist">Sequence[Get<wbr>Zone<wbr>Config<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of zone config. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone config. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="available_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_python" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
@@ -539,8 +641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -562,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -571,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of zone config. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone config. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availablezone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_yaml" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -580,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -622,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of Mongodb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -631,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cpu's core.</p>
-</dd><dt class="property-required"
+    <dd>Number of cpu's core.</dd><dt class="property-required"
             title="Required">
         <span id="defaultstorage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultstorage_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Storage</a>
@@ -640,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default disk size.</p>
-</dd><dt class="property-required"
+    <dd>Default disk size.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -649,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the Mongodb version.</p>
-</dd><dt class="property-required"
+    <dd>Version of the Mongodb version.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -658,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicatesetnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicatesetnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -667,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Maximum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxstorage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstorage_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Storage</a>
@@ -676,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -685,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicatesetnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicatesetnum_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -694,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Minimum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="minstorage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstorage_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Storage</a>
@@ -703,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum sie of the disk.</p>
-</dd></dl>
+    <dd>Minimum sie of the disk.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -718,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -727,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of Mongodb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -736,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cpu's core.</p>
-</dd><dt class="property-required"
+    <dd>Number of cpu's core.</dd><dt class="property-required"
             title="Required">
         <span id="defaultstorage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultstorage_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Storage</a>
@@ -745,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default disk size.</p>
-</dd><dt class="property-required"
+    <dd>Default disk size.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -754,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the Mongodb version.</p>
-</dd><dt class="property-required"
+    <dd>Version of the Mongodb version.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -763,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicatesetnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicatesetnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -772,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Maximum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxstorage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstorage_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Storage</a>
@@ -781,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -790,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicatesetnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicatesetnum_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -799,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Minimum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="minstorage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstorage_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Storage</a>
@@ -808,8 +885,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum sie of the disk.</p>
-</dd></dl>
+    <dd>Minimum sie of the disk.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of the Mongodb.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of Mongodb cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of cpu's core.</dd><dt class="property-required"
+            title="Required">
+        <span id="default_storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_storage_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Default disk size.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the Mongodb version.</dd><dt class="property-required"
+            title="Required">
+        <span id="machine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of Mongodb instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_replicate_set_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replicate_set_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>replicate_<wbr>set_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum replicate set num for sharding cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_storage_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum size of the disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_replicate_set_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_replicate_set_num_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>replicate_<wbr>set_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum replicate set num for sharding cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_storage_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum sie of the disk.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -823,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -832,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of Mongodb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -841,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of cpu's core.</p>
-</dd><dt class="property-required"
+    <dd>Number of cpu's core.</dd><dt class="property-required"
             title="Required">
         <span id="defaultstorage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultstorage_java" style="color: inherit; text-decoration: inherit;">default<wbr>Storage</a>
@@ -850,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Default disk size.</p>
-</dd><dt class="property-required"
+    <dd>Default disk size.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -859,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the Mongodb version.</p>
-</dd><dt class="property-required"
+    <dd>Version of the Mongodb version.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -868,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicatesetnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicatesetnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -877,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Maximum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxstorage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstorage_java" style="color: inherit; text-decoration: inherit;">max<wbr>Storage</a>
@@ -886,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum size of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -895,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicatesetnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicatesetnum_java" style="color: inherit; text-decoration: inherit;">min<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -904,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Minimum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="minstorage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstorage_java" style="color: inherit; text-decoration: inherit;">min<wbr>Storage</a>
@@ -913,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum sie of the disk.</p>
-</dd></dl>
+    <dd>Minimum sie of the disk.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -928,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -937,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of Mongodb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -946,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of cpu's core.</p>
-</dd><dt class="property-required"
+    <dd>Number of cpu's core.</dd><dt class="property-required"
             title="Required">
         <span id="defaultstorage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultstorage_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Storage</a>
@@ -955,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Default disk size.</p>
-</dd><dt class="property-required"
+    <dd>Default disk size.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -964,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the Mongodb version.</p>
-</dd><dt class="property-required"
+    <dd>Version of the Mongodb version.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -973,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicatesetnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicatesetnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -982,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Maximum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxstorage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstorage_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Storage</a>
@@ -991,8 +1143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum size of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1000,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicatesetnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicatesetnum_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -1009,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Minimum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="minstorage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstorage_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Storage</a>
@@ -1018,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum sie of the disk.</p>
-</dd></dl>
+    <dd>Minimum sie of the disk.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1033,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -1042,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of Mongodb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1051,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cpu's core.</p>
-</dd><dt class="property-required"
+    <dd>Number of cpu's core.</dd><dt class="property-required"
             title="Required">
         <span id="default_storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_storage_python" style="color: inherit; text-decoration: inherit;">default_<wbr>storage</a>
@@ -1060,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default disk size.</p>
-</dd><dt class="property-required"
+    <dd>Default disk size.</dd><dt class="property-required"
             title="Required">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -1069,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the Mongodb version.</p>
-</dd><dt class="property-required"
+    <dd>Version of the Mongodb version.</dd><dt class="property-required"
             title="Required">
         <span id="machine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
@@ -1078,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="max_replicate_set_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_replicate_set_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>replicate_<wbr>set_<wbr>num</a>
@@ -1087,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Maximum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="max_storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_storage_python" style="color: inherit; text-decoration: inherit;">max_<wbr>storage</a>
@@ -1096,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1105,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="min_replicate_set_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_replicate_set_num_python" style="color: inherit; text-decoration: inherit;">min_<wbr>replicate_<wbr>set_<wbr>num</a>
@@ -1114,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Minimum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="min_storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_storage_python" style="color: inherit; text-decoration: inherit;">min_<wbr>storage</a>
@@ -1123,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum sie of the disk.</p>
-</dd></dl>
+    <dd>Minimum sie of the disk.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1138,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the Mongodb.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1147,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of Mongodb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1156,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of cpu's core.</p>
-</dd><dt class="property-required"
+    <dd>Number of cpu's core.</dd><dt class="property-required"
             title="Required">
         <span id="defaultstorage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultstorage_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Storage</a>
@@ -1165,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Default disk size.</p>
-</dd><dt class="property-required"
+    <dd>Default disk size.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1174,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the Mongodb version.</p>
-</dd><dt class="property-required"
+    <dd>Version of the Mongodb version.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -1183,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="maxreplicatesetnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreplicatesetnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -1192,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Maximum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxstorage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstorage_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Storage</a>
@@ -1201,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum size of the disk.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of the disk.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1210,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="minreplicatesetnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minreplicatesetnum_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Replicate<wbr>Set<wbr>Num</a>
@@ -1219,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum replicate set num for sharding cluster.</p>
-</dd><dt class="property-required"
+    <dd>Minimum replicate set num for sharding cluster.</dd><dt class="property-required"
             title="Required">
         <span id="minstorage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstorage_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Storage</a>
@@ -1228,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum sie of the disk.</p>
-</dd></dl>
+    <dd>Minimum sie of the disk.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1244,7 +1370,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

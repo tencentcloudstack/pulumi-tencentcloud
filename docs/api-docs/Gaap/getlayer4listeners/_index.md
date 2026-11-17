@@ -2,9 +2,11 @@
 ---
 title: "getLayer4Listeners"
 title_tag: "tencentcloud.Gaap.getLayer4Listeners"
-meta_desc: "Documentation for the tencentcloud.Gaap.getLayer4Listeners function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query gaap layer4 listeners."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,21 +18,30 @@ Use this data source to query gaap layer4 listeners.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const fooProxy = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooRealserver = new tencentcloud.gaap.Realserver("fooRealserver", {ip: "1.1.1.1"});
-const fooLayer4Listener = new tencentcloud.gaap.Layer4Listener("fooLayer4Listener", {
+const fooRealserver = new tencentcloud.gaap.Realserver("foo", {
+    ip: "1.1.1.1",
+    name: "ci-test-gaap-realserver",
+});
+const fooLayer4Listener = new tencentcloud.gaap.Layer4Listener("foo", {
     protocol: "TCP",
+    name: "ci-test-gaap-4-listener",
     port: 80,
     realserverType: "IP",
     proxyId: fooProxy.id,
@@ -43,65 +54,142 @@ const fooLayer4Listener = new tencentcloud.gaap.Layer4Listener("fooLayer4Listene
         port: 80,
     }],
 });
-const fooLayer4Listeners = tencentcloud.Gaap.getLayer4ListenersOutput({
+const foo = tencentcloud.gaap.getLayer4ListenersOutput({
     protocol: "TCP",
     proxyId: fooProxy.id,
     listenerId: fooLayer4Listener.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo_proxy = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_realserver = tencentcloud.gaap.Realserver("fooRealserver", ip="1.1.1.1")
-foo_layer4_listener = tencentcloud.gaap.Layer4Listener("fooLayer4Listener",
+foo_realserver = tencentcloud.gaap.Realserver("foo",
+    ip="1.1.1.1",
+    name="ci-test-gaap-realserver")
+foo_layer4_listener = tencentcloud.gaap.Layer4Listener("foo",
     protocol="TCP",
+    name="ci-test-gaap-4-listener",
     port=80,
     realserver_type="IP",
     proxy_id=foo_proxy.id,
     health_check=True,
     interval=5,
     connect_timeout=2,
-    realserver_bind_sets=[tencentcloud.gaap.Layer4ListenerRealserverBindSetArgs(
-        id=foo_realserver.id,
-        ip=foo_realserver.ip,
-        port=80,
-    )])
-foo_layer4_listeners = tencentcloud.Gaap.get_layer4_listeners_output(protocol="TCP",
+    realserver_bind_sets=[{
+        "id": foo_realserver.id,
+        "ip": foo_realserver.ip,
+        "port": 80,
+    }])
+foo = tencentcloud.gaap.get_layer4_listeners_output(protocol="TCP",
     proxy_id=foo_proxy.id,
     listener_id=foo_layer4_listener.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		fooProxy, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
+			Bandwidth:        pulumi.Int(10),
+			Concurrent:       pulumi.Int(2),
+			AccessRegion:     pulumi.String("SouthChina"),
+			RealserverRegion: pulumi.String("NorthChina"),
+		})
+		if err != nil {
+			return err
+		}
+		fooRealserver, err := gaap.NewRealserver(ctx, "foo", &gaap.RealserverArgs{
+			Ip:   pulumi.String("1.1.1.1"),
+			Name: pulumi.String("ci-test-gaap-realserver"),
+		})
+		if err != nil {
+			return err
+		}
+		fooLayer4Listener, err := gaap.NewLayer4Listener(ctx, "foo", &gaap.Layer4ListenerArgs{
+			Protocol:       pulumi.String("TCP"),
+			Name:           pulumi.String("ci-test-gaap-4-listener"),
+			Port:           pulumi.Int(80),
+			RealserverType: pulumi.String("IP"),
+			ProxyId:        fooProxy.ID().ToIDOutput().ToStringOutput(),
+			HealthCheck:    pulumi.Bool(true),
+			Interval:       pulumi.Int(5),
+			ConnectTimeout: pulumi.Int(2),
+			RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
+				&gaap.Layer4ListenerRealserverBindSetArgs{
+					Id:   fooRealserver.ID().ToIDOutput().ToStringOutput(),
+					Ip:   fooRealserver.Ip,
+					Port: pulumi.Int(80),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_ = gaap.GetLayer4ListenersOutput(ctx, gaap.GetLayer4ListenersOutputArgs{
+			Protocol:   pulumi.String("TCP"),
+			ProxyId:    fooProxy.ID().ToIDOutput().ToStringOutput(),
+			ListenerId: fooLayer4Listener.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
+    var fooProxy = new Tencentcloud.Gaap.Proxy("foo", new()
     {
+        Name = "ci-test-gaap-proxy",
         Bandwidth = 10,
         Concurrent = 2,
         AccessRegion = "SouthChina",
         RealserverRegion = "NorthChina",
     });
 
-    var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
+    var fooRealserver = new Tencentcloud.Gaap.Realserver("foo", new()
     {
         Ip = "1.1.1.1",
+        Name = "ci-test-gaap-realserver",
     });
 
-    var fooLayer4Listener = new Tencentcloud.Gaap.Layer4Listener("fooLayer4Listener", new()
+    var fooLayer4Listener = new Tencentcloud.Gaap.Layer4Listener("foo", new()
     {
         Protocol = "TCP",
+        Name = "ci-test-gaap-4-listener",
         Port = 80,
         RealserverType = "IP",
         ProxyId = fooProxy.Id,
@@ -119,7 +207,7 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var fooLayer4Listeners = Tencentcloud.Gaap.GetLayer4Listeners.Invoke(new()
+    var foo = Tencentcloud.Gaap.GetLayer4Listeners.Invoke(new()
     {
         Protocol = "TCP",
         ProxyId = fooProxy.Id,
@@ -128,59 +216,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-			Bandwidth:        pulumi.Int(10),
-			Concurrent:       pulumi.Int(2),
-			AccessRegion:     pulumi.String("SouthChina"),
-			RealserverRegion: pulumi.String("NorthChina"),
-		})
-		if err != nil {
-			return err
-		}
-		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
-			Ip: pulumi.String("1.1.1.1"),
-		})
-		if err != nil {
-			return err
-		}
-		fooLayer4Listener, err := Gaap.NewLayer4Listener(ctx, "fooLayer4Listener", &Gaap.Layer4ListenerArgs{
-			Protocol:       pulumi.String("TCP"),
-			Port:           pulumi.Int(80),
-			RealserverType: pulumi.String("IP"),
-			ProxyId:        fooProxy.ID(),
-			HealthCheck:    pulumi.Bool(true),
-			Interval:       pulumi.Int(5),
-			ConnectTimeout: pulumi.Int(2),
-			RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
-				&gaap.Layer4ListenerRealserverBindSetArgs{
-					Id:   fooRealserver.ID(),
-					Ip:   fooRealserver.Ip,
-					Port: pulumi.Int(80),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_ = Gaap.GetLayer4ListenersOutput(ctx, gaap.GetLayer4ListenersOutputArgs{
-			Protocol:   pulumi.String("TCP"),
-			ProxyId:    fooProxy.ID(),
-			ListenerId: fooLayer4Listener.ID(),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -196,8 +236,8 @@ import com.pulumi.tencentcloud.Gaap.Layer4ListenerArgs;
 import com.pulumi.tencentcloud.Gaap.inputs.Layer4ListenerRealserverBindSetArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetLayer4ListenersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -209,19 +249,22 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooRealserver = new Realserver("fooRealserver", RealserverArgs.builder()        
+        var fooRealserver = new Realserver("fooRealserver", RealserverArgs.builder()
             .ip("1.1.1.1")
+            .name("ci-test-gaap-realserver")
             .build());
 
-        var fooLayer4Listener = new Layer4Listener("fooLayer4Listener", Layer4ListenerArgs.builder()        
+        var fooLayer4Listener = new Layer4Listener("fooLayer4Listener", Layer4ListenerArgs.builder()
             .protocol("TCP")
+            .name("ci-test-gaap-4-listener")
             .port(80)
             .realserverType("IP")
             .proxyId(fooProxy.id())
@@ -235,7 +278,7 @@ public class App {
                 .build())
             .build());
 
-        final var fooLayer4Listeners = GaapFunctions.getLayer4Listeners(GetLayer4ListenersArgs.builder()
+        final var foo = GaapFunctions.getLayer4Listeners(GetLayer4ListenersArgs.builder()
             .protocol("TCP")
             .proxyId(fooProxy.id())
             .listenerId(fooLayer4Listener.id())
@@ -244,23 +287,34 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooProxy:
     type: tencentcloud:Gaap:Proxy
+    name: foo
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooRealserver:
     type: tencentcloud:Gaap:Realserver
+    name: foo
     properties:
       ip: 1.1.1.1
+      name: ci-test-gaap-realserver
   fooLayer4Listener:
     type: tencentcloud:Gaap:Layer4Listener
+    name: foo
     properties:
       protocol: TCP
+      name: ci-test-gaap-4-listener
       port: 80
       realserverType: IP
       proxyId: ${fooProxy.id}
@@ -272,16 +326,72 @@ resources:
           ip: ${fooRealserver.ip}
           port: 80
 variables:
-  fooLayer4Listeners:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Gaap:getLayer4Listeners
-      Arguments:
+      function: tencentcloud:Gaap:getLayer4Listeners
+      arguments:
         protocol: TCP
         proxyId: ${fooProxy.id}
         listenerId: ${fooLayer4Listener.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getlayer4listeners" "foo" {
+  protocol    = "TCP"
+  proxy_id    = tencentcloud_gaap_proxy.foo.id
+  listener_id = tencentcloud_gaap_layer4listener.foo.id
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_realserver" "foo" {
+  ip   = "1.1.1.1"
+  name = "ci-test-gaap-realserver"
+}
+resource "tencentcloud_gaap_layer4listener" "foo" {
+  protocol        = "TCP"
+  name            = "ci-test-gaap-4-listener"
+  port            = 80
+  realserver_type = "IP"
+  proxy_id        = tencentcloud_gaap_proxy.foo.id
+  health_check    = true
+  interval        = 5
+  connect_timeout = 2
+  realserver_bind_sets {
+    id   = tencentcloud_gaap_realserver.foo.id
+    ip   = tencentcloud_gaap_realserver.foo.ip
+    port = 80
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+  - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
 
 
 
@@ -293,7 +403,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -301,9 +411,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getLayer4Listeners<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLayer4ListenersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>></span
+><span class="k">function </span>getLayer4Listeners<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLayer4ListenersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>></span
 ><span class="k">
-function </span>getLayer4ListenersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLayer4ListenersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>></span
+function </span>getLayer4ListenersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLayer4ListenersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -320,13 +430,13 @@ function </span>getLayer4ListenersOutput<span class="p">(</span><span class="nx"
                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetLayer4ListenersResult</span
 ><span class="k">
-def </span>get_layer4_listeners_output<span class="p">(</span><span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">listener_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetLayer4ListenersResult]</span
+def </span>get_layer4_listeners_output<span class="p">(</span><span class="nx">listener_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">listener_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">port</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetLayer4ListenersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -351,7 +461,8 @@ func </span>GetLayer4ListenersOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetLayer4Listeners </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetLayer4ListenersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLayer4ListenersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLayer4ListenersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLayer4ListenersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -360,7 +471,8 @@ func </span>GetLayer4ListenersOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>> </span>getLayer4Listeners<span class="p">(</span><span class="nx">GetLayer4ListenersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>> </span>getLayer4Listeners<span class="p">(</span><span class="nx">GetLayer4ListenersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetLayer4ListenersResult</a></span>> </span>getLayer4Listeners<span class="p">(</span><span class="nx">GetLayer4ListenersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -372,6 +484,15 @@ func </span>GetLayer4ListenersOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getLayer4Listeners:getLayer4Listeners
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_layer4_listeners&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -390,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -399,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -408,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -417,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -426,8 +543,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -435,8 +551,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -450,8 +565,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -459,8 +573,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -468,8 +581,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -477,8 +589,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -486,8 +597,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -495,8 +605,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer4 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="listener_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the layer4 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -510,8 +673,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -519,8 +681,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -528,8 +689,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -537,8 +697,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -546,8 +705,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -555,8 +713,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -570,8 +727,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -579,8 +735,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -588,8 +743,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -597,8 +751,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -606,8 +759,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -615,8 +767,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -630,8 +781,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -639,8 +789,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listener_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
@@ -648,8 +797,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -657,8 +805,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -666,8 +813,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -675,8 +821,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -690,8 +835,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -699,8 +843,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -708,8 +851,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -717,8 +859,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -726,8 +867,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -735,8 +875,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -759,8 +898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_csharp" style="color: inherit; text-decoration: inherit;">Listeners</a>
@@ -768,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer4listenerslistener">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Layer4Listeners<wbr>Listener&gt;</a></span>
     </dt>
-    <dd><p>An information list of layer4 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer4 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -777,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -802,8 +938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -811,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -834,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_go" style="color: inherit; text-decoration: inherit;">Listeners</a>
@@ -843,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer4listenerslistener">[]Get<wbr>Layer4Listeners<wbr>Listener</a></span>
     </dt>
-    <dd><p>An information list of layer4 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer4 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -852,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -877,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -886,11 +1016,80 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="listeners_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_hcl" style="color: inherit; text-decoration: inherit;">listeners</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getlayer4listenerslistener">list(object)</a></span>
+    </dt>
+    <dd>An information list of layer4 listeners. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer4 listener.</dd><dt class="property-"
+            title="">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="listener_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer4 listener.</dd><dt class="property-"
+            title="">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -909,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_java" style="color: inherit; text-decoration: inherit;">listeners</a>
@@ -918,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer4listenerslistener">List&lt;Get<wbr>Layer4Listeners<wbr>Listener&gt;</a></span>
     </dt>
-    <dd><p>An information list of layer4 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer4 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -927,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -952,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -961,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -984,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_nodejs" style="color: inherit; text-decoration: inherit;">listeners</a>
@@ -993,8 +1186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer4listenerslistener">Get<wbr>Layer4Listeners<wbr>Listener[]</a></span>
     </dt>
-    <dd><p>An information list of layer4 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer4 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1002,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1027,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1036,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1059,17 +1248,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_python" style="color: inherit; text-decoration: inherit;">listeners</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getlayer4listenerslistener">Get<wbr>Layer4Listeners<wbr>Listener]</a></span>
+        <span class="property-type"><a href="#getlayer4listenerslistener">Sequence[Get<wbr>Layer4Listeners<wbr>Listener]</a></span>
     </dt>
-    <dd><p>An information list of layer4 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer4 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1077,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1102,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -1111,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1134,8 +1318,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_yaml" style="color: inherit; text-decoration: inherit;">listeners</a>
@@ -1143,8 +1326,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer4listenerslistener">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of layer4 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer4 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1152,8 +1334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1177,8 +1358,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1186,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1219,8 +1398,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1228,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -1237,8 +1414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1246,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="interval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_csharp" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1255,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1264,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1273,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1282,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1291,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Type</a>
@@ -1300,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1309,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1318,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1333,8 +1500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1342,8 +1508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -1351,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1360,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="interval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_go" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1369,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1378,8 +1540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1387,8 +1548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1396,8 +1556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1405,8 +1564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Type</a>
@@ -1414,8 +1572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1423,8 +1580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1432,8 +1588,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="connect_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connect_timeout_hcl" style="color: inherit; text-decoration: inherit;">connect_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer4 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_hcl" style="color: inherit; text-decoration: inherit;">interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Interval of the health check.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the layer4 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="realserver_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_type_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling policy of the layer4 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1447,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1456,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1465,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1474,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="interval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_java" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1483,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1492,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1501,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1510,8 +1760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1519,8 +1768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -1528,8 +1776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1537,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1546,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1561,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1570,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1579,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1588,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="interval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_nodejs" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1597,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1606,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1615,8 +1854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1624,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1633,8 +1870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -1642,8 +1878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1651,8 +1886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1660,8 +1894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1675,8 +1908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1684,8 +1916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
@@ -1693,8 +1924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1702,8 +1932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_python" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1711,8 +1940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1720,8 +1948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1729,8 +1956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1738,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -1747,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realserver_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_type_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>type</a>
@@ -1756,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1765,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1774,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1789,8 +2010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1798,8 +2018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1807,8 +2026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1816,8 +2034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="interval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_yaml" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1825,8 +2042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1834,8 +2050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1843,8 +2058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer4 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer4 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1852,8 +2066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer4 listener to be queried. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1861,8 +2074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -1870,8 +2082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1879,8 +2090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the layer4 listener.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1888,8 +2098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1904,7 +2113,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

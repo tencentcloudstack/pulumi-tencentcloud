@@ -2,9 +2,11 @@
 ---
 title: "getWebhookTriggerLogs"
 title_tag: "tencentcloud.Tcr.getWebhookTriggerLogs"
-meta_desc: "Documentation for the tencentcloud.Tcr.getWebhookTriggerLogs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tencentcloud.Tcr.getWebhookTriggerLogs"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,67 +18,61 @@ Use this data source to query detailed information of tencentcloud.Tcr.getWebhoo
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const myLogs = tencentcloud.Tcr.getWebhookTriggerLogs({
-    registryId: local.tcr_id,
-    namespace: _var.tcr_namespace,
-    triggerId: _var.trigger_id,
+const myLogs = tencentcloud.tcr.getWebhookTriggerLogs({
+    registryId: tcrId,
+    namespace: tcrNamespace,
+    triggerId: Number(triggerId),
     tags: {
         createdBy: "terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-my_logs = tencentcloud.Tcr.get_webhook_trigger_logs(registry_id=local["tcr_id"],
-    namespace=var["tcr_namespace"],
-    trigger_id=var["trigger_id"],
+my_logs = tencentcloud.tcr.get_webhook_trigger_logs(registry_id=tcr_id,
+    namespace=tcr_namespace,
+    trigger_id=int(trigger_id),
     tags={
         "createdBy": "terraform",
     })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var myLogs = Tencentcloud.Tcr.GetWebhookTriggerLogs.Invoke(new()
-    {
-        RegistryId = local.Tcr_id,
-        Namespace = @var.Tcr_namespace,
-        TriggerId = @var.Trigger_id,
-        Tags = 
-        {
-            { "createdBy", "terraform" },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcr.GetWebhookTriggerLogs(ctx, &tcr.GetWebhookTriggerLogsArgs{
-			RegistryId: local.Tcr_id,
-			Namespace:  _var.Tcr_namespace,
-			TriggerId:  _var.Trigger_id,
-			Tags: map[string]interface{}{
+		_, err := tcr.GetWebhookTriggerLogs(ctx, &tcr.GetWebhookTriggerLogsArgs{
+			RegistryId: tcrId,
+			Namespace:  tcrNamespace,
+			TriggerId:  triggerId,
+			Tags: map[string]string{
 				"createdBy": "terraform",
 			},
 		}, nil)
@@ -87,6 +83,37 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var myLogs = Tencentcloud.Tcr.GetWebhookTriggerLogs.Invoke(new()
+    {
+        RegistryId = tcrId,
+        Namespace = tcrNamespace,
+        TriggerId = triggerId,
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -95,8 +122,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcr.TcrFunctions;
 import com.pulumi.tencentcloud.Tcr.inputs.GetWebhookTriggerLogsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -109,29 +136,64 @@ public class App {
 
     public static void stack(Context ctx) {
         final var myLogs = TcrFunctions.getWebhookTriggerLogs(GetWebhookTriggerLogsArgs.builder()
-            .registryId(local.tcr_id())
-            .namespace(var_.tcr_namespace())
-            .triggerId(var_.trigger_id())
+            .registryId(tcrId)
+            .namespace(tcrNamespace)
+            .triggerId(triggerId)
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   myLogs:
     fn::invoke:
-      Function: tencentcloud:Tcr:getWebhookTriggerLogs
-      Arguments:
-        registryId: ${local.tcr_id}
-        namespace: ${var.tcr_namespace}
-        triggerId: ${var.trigger_id}
+      function: tencentcloud:Tcr:getWebhookTriggerLogs
+      arguments:
+        registryId: ${tcrId}
+        namespace: ${tcrNamespace}
+        triggerId: ${triggerId}
         tags:
           createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tcr_getwebhooktriggerlogs" "myLogs" {
+  registry_id = tcrId
+  namespace   = tcrNamespace
+  trigger_id  = triggerId
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
 
 
 
@@ -143,7 +205,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -151,9 +213,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getWebhookTriggerLogs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWebhookTriggerLogsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>></span
+><span class="k">function </span>getWebhookTriggerLogs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWebhookTriggerLogsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>></span
 ><span class="k">
-function </span>getWebhookTriggerLogsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWebhookTriggerLogsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>></span
+function </span>getWebhookTriggerLogsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWebhookTriggerLogsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,16 +227,16 @@ function </span>getWebhookTriggerLogsOutput<span class="p">(</span><span class="
 ><span class="k">def </span>get_webhook_trigger_logs<span class="p">(</span><span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                              <span class="nx">registry_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                              <span class="nx">trigger_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetWebhookTriggerLogsResult</span
 ><span class="k">
-def </span>get_webhook_trigger_logs_output<span class="p">(</span><span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">registry_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                             <span class="nx">trigger_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetWebhookTriggerLogsResult]</span
+def </span>get_webhook_trigger_logs_output<span class="p">(</span><span class="nx">namespace</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">registry_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                             <span class="nx">trigger_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetWebhookTriggerLogsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -199,7 +261,8 @@ func </span>GetWebhookTriggerLogsOutput<span class="p">(</span><span class="nx">
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetWebhookTriggerLogs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetWebhookTriggerLogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWebhookTriggerLogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWebhookTriggerLogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWebhookTriggerLogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -208,7 +271,8 @@ func </span>GetWebhookTriggerLogsOutput<span class="p">(</span><span class="nx">
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>> </span>getWebhookTriggerLogs<span class="p">(</span><span class="nx">GetWebhookTriggerLogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>> </span>getWebhookTriggerLogs<span class="p">(</span><span class="nx">GetWebhookTriggerLogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetWebhookTriggerLogsResult</a></span>> </span>getWebhookTriggerLogs<span class="p">(</span><span class="nx">GetWebhookTriggerLogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -220,6 +284,15 @@ func </span>GetWebhookTriggerLogsOutput<span class="p">(</span><span class="nx">
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcr_get_webhook_trigger_logs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -238,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd><dt class="property-required"
+    <dd>namespace.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_csharp" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -247,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance Id.</p>
-</dd><dt class="property-required"
+    <dd>instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Id</a>
@@ -256,8 +327,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-optional"
+    <dd>trigger id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -265,17 +335,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -289,8 +357,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd><dt class="property-required"
+    <dd>namespace.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_go" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -298,8 +365,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance Id.</p>
-</dd><dt class="property-required"
+    <dd>instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Id</a>
@@ -307,8 +373,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-optional"
+    <dd>trigger id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -316,17 +381,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace.</dd><dt class="property-required"
+            title="Required">
+        <span id="registry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="trigger_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_id_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>trigger id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -340,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd><dt class="property-required"
+    <dd>namespace.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_java" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -349,8 +457,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance Id.</p>
-</dd><dt class="property-required"
+    <dd>instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Id</a>
@@ -358,8 +465,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-optional"
+    <dd>trigger id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -367,17 +473,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -391,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd><dt class="property-required"
+    <dd>namespace.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_nodejs" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -400,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance Id.</p>
-</dd><dt class="property-required"
+    <dd>instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Id</a>
@@ -409,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-optional"
+    <dd>trigger id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -418,17 +519,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -442,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd><dt class="property-required"
+    <dd>namespace.</dd><dt class="property-required"
             title="Required">
         <span id="registry_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_python" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
@@ -451,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance Id.</p>
-</dd><dt class="property-required"
+    <dd>instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="trigger_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_id_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>id</a>
@@ -460,8 +557,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-optional"
+    <dd>trigger id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -469,17 +565,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -493,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd><dt class="property-required"
+    <dd>namespace.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_yaml" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -502,8 +595,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance Id.</p>
-</dd><dt class="property-required"
+    <dd>instance Id.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Id</a>
@@ -511,8 +603,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-optional"
+    <dd>trigger id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -520,17 +611,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -553,8 +642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_csharp" style="color: inherit; text-decoration: inherit;">Logs</a>
@@ -562,8 +650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwebhooktriggerlogslog">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Outputs.<wbr>Get<wbr>Webhook<wbr>Trigger<wbr>Logs<wbr>Log&gt;</a></span>
     </dt>
-    <dd><p>log list.</p>
-</dd><dt class="property-"
+    <dd>log list.</dd><dt class="property-"
             title="">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -587,8 +674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger Id.</p>
-</dd><dt class="property-"
+    <dd>trigger Id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -602,7 +688,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -618,8 +704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_go" style="color: inherit; text-decoration: inherit;">Logs</a>
@@ -627,8 +712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwebhooktriggerlogslog">[]Get<wbr>Webhook<wbr>Trigger<wbr>Logs<wbr>Log</a></span>
     </dt>
-    <dd><p>log list.</p>
-</dd><dt class="property-"
+    <dd>log list.</dd><dt class="property-"
             title="">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -652,8 +736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger Id.</p>
-</dd><dt class="property-"
+    <dd>trigger Id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -667,7 +750,69 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="logs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_hcl" style="color: inherit; text-decoration: inherit;">logs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getwebhooktriggerlogslog">list(object)</a></span>
+    </dt>
+    <dd>log list.</dd><dt class="property-"
+            title="">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="registry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="trigger_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_id_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>trigger Id.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -683,8 +828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_java" style="color: inherit; text-decoration: inherit;">logs</a>
@@ -692,8 +836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwebhooktriggerlogslog">List&lt;Get<wbr>Webhook<wbr>Trigger<wbr>Logs<wbr>Log&gt;</a></span>
     </dt>
-    <dd><p>log list.</p>
-</dd><dt class="property-"
+    <dd>log list.</dd><dt class="property-"
             title="">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -717,8 +860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>trigger Id.</p>
-</dd><dt class="property-"
+    <dd>trigger Id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -732,7 +874,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -748,8 +890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_nodejs" style="color: inherit; text-decoration: inherit;">logs</a>
@@ -757,8 +898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwebhooktriggerlogslog">Get<wbr>Webhook<wbr>Trigger<wbr>Logs<wbr>Log[]</a></span>
     </dt>
-    <dd><p>log list.</p>
-</dd><dt class="property-"
+    <dd>log list.</dd><dt class="property-"
             title="">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -782,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>trigger Id.</p>
-</dd><dt class="property-"
+    <dd>trigger Id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -797,7 +936,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -813,17 +952,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_python" style="color: inherit; text-decoration: inherit;">logs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getwebhooktriggerlogslog">Get<wbr>Webhook<wbr>Trigger<wbr>Logs<wbr>Log]</a></span>
+        <span class="property-type"><a href="#getwebhooktriggerlogslog">Sequence[Get<wbr>Webhook<wbr>Trigger<wbr>Logs<wbr>Log]</a></span>
     </dt>
-    <dd><p>log list.</p>
-</dd><dt class="property-"
+    <dd>log list.</dd><dt class="property-"
             title="">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -847,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger Id.</p>
-</dd><dt class="property-"
+    <dd>trigger Id.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -862,7 +998,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -878,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_yaml" style="color: inherit; text-decoration: inherit;">logs</a>
@@ -887,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwebhooktriggerlogslog">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>log list.</p>
-</dd><dt class="property-"
+    <dd>log list.</dd><dt class="property-"
             title="">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -912,8 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>trigger Id.</p>
-</dd><dt class="property-"
+    <dd>trigger Id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -927,7 +1060,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -953,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="detail_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_csharp" style="color: inherit; text-decoration: inherit;">Detail</a>
@@ -962,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>webhook trigger detail.</p>
-</dd><dt class="property-required"
+    <dd>webhook trigger detail.</dd><dt class="property-required"
             title="Required">
         <span id="eventtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventtype_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Type</a>
@@ -971,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event type.</p>
-</dd><dt class="property-required"
+    <dd>event type.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -980,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>log id.</p>
-</dd><dt class="property-required"
+    <dd>log id.</dd><dt class="property-required"
             title="Required">
         <span id="notifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifytype_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Type</a>
@@ -989,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>notification type.</p>
-</dd><dt class="property-required"
+    <dd>notification type.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -998,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Id</a>
@@ -1007,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-required"
+    <dd>trigger id.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1016,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1031,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="detail_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_go" style="color: inherit; text-decoration: inherit;">Detail</a>
@@ -1040,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>webhook trigger detail.</p>
-</dd><dt class="property-required"
+    <dd>webhook trigger detail.</dd><dt class="property-required"
             title="Required">
         <span id="eventtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventtype_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Type</a>
@@ -1049,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event type.</p>
-</dd><dt class="property-required"
+    <dd>event type.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1058,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>log id.</p>
-</dd><dt class="property-required"
+    <dd>log id.</dd><dt class="property-required"
             title="Required">
         <span id="notifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifytype_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Type</a>
@@ -1067,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>notification type.</p>
-</dd><dt class="property-required"
+    <dd>notification type.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1076,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Id</a>
@@ -1085,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-required"
+    <dd>trigger id.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1094,8 +1212,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="creation_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creation_time_hcl" style="color: inherit; text-decoration: inherit;">creation_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="detail_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_hcl" style="color: inherit; text-decoration: inherit;">detail</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>webhook trigger detail.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_type_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>event type.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>log id.</dd><dt class="property-required"
+            title="Required">
+        <span id="notify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_type_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>notification type.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>status.</dd><dt class="property-required"
+            title="Required">
+        <span id="trigger_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_id_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>trigger id.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1109,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="detail_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_java" style="color: inherit; text-decoration: inherit;">detail</a>
@@ -1118,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>webhook trigger detail.</p>
-</dd><dt class="property-required"
+    <dd>webhook trigger detail.</dd><dt class="property-required"
             title="Required">
         <span id="eventtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventtype_java" style="color: inherit; text-decoration: inherit;">event<wbr>Type</a>
@@ -1127,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event type.</p>
-</dd><dt class="property-required"
+    <dd>event type.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1136,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>log id.</p>
-</dd><dt class="property-required"
+    <dd>log id.</dd><dt class="property-required"
             title="Required">
         <span id="notifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifytype_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Type</a>
@@ -1145,8 +1328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>notification type.</p>
-</dd><dt class="property-required"
+    <dd>notification type.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1154,8 +1336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Id</a>
@@ -1163,8 +1344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-required"
+    <dd>trigger id.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1172,8 +1352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1187,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="detail_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_nodejs" style="color: inherit; text-decoration: inherit;">detail</a>
@@ -1196,8 +1374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>webhook trigger detail.</p>
-</dd><dt class="property-required"
+    <dd>webhook trigger detail.</dd><dt class="property-required"
             title="Required">
         <span id="eventtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventtype_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Type</a>
@@ -1205,8 +1382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event type.</p>
-</dd><dt class="property-required"
+    <dd>event type.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1214,8 +1390,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>log id.</p>
-</dd><dt class="property-required"
+    <dd>log id.</dd><dt class="property-required"
             title="Required">
         <span id="notifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifytype_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Type</a>
@@ -1223,8 +1398,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>notification type.</p>
-</dd><dt class="property-required"
+    <dd>notification type.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1232,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Id</a>
@@ -1241,8 +1414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-required"
+    <dd>trigger id.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1250,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1265,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="detail_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_python" style="color: inherit; text-decoration: inherit;">detail</a>
@@ -1274,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>webhook trigger detail.</p>
-</dd><dt class="property-required"
+    <dd>webhook trigger detail.</dd><dt class="property-required"
             title="Required">
         <span id="event_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_type_python" style="color: inherit; text-decoration: inherit;">event_<wbr>type</a>
@@ -1283,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>event type.</p>
-</dd><dt class="property-required"
+    <dd>event type.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1292,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>log id.</p>
-</dd><dt class="property-required"
+    <dd>log id.</dd><dt class="property-required"
             title="Required">
         <span id="notify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_type_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>type</a>
@@ -1301,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>notification type.</p>
-</dd><dt class="property-required"
+    <dd>notification type.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1310,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="trigger_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_id_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>id</a>
@@ -1319,8 +1484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-required"
+    <dd>trigger id.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1328,8 +1492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1343,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="detail_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_yaml" style="color: inherit; text-decoration: inherit;">detail</a>
@@ -1352,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>webhook trigger detail.</p>
-</dd><dt class="property-required"
+    <dd>webhook trigger detail.</dd><dt class="property-required"
             title="Required">
         <span id="eventtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventtype_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Type</a>
@@ -1361,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event type.</p>
-</dd><dt class="property-required"
+    <dd>event type.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1370,8 +1530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>log id.</p>
-</dd><dt class="property-required"
+    <dd>log id.</dd><dt class="property-required"
             title="Required">
         <span id="notifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifytype_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Type</a>
@@ -1379,8 +1538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>notification type.</p>
-</dd><dt class="property-required"
+    <dd>notification type.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1388,8 +1546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="triggerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerid_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Id</a>
@@ -1397,8 +1554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>trigger id.</p>
-</dd><dt class="property-required"
+    <dd>trigger id.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1406,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1422,7 +1577,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

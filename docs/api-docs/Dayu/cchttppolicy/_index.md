@@ -2,9 +2,11 @@
 ---
 title: "CcHttpPolicy"
 title_tag: "tencentcloud.Dayu.CcHttpPolicy"
-meta_desc: "Documentation for the tencentcloud.Dayu.CcHttpPolicy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create a dayu CC self-define http policy"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,269 +18,213 @@ Use this resource to create a dayu CC self-define http policy
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const testBgpip = new tencentcloud.dayu.CcHttpPolicy("testBgpip", {
-    action: "drop",
-    resourceId: "bgpip-00000294",
+const testBgpip = new tencentcloud.dayu.CcHttpPolicy("test_bgpip", {
     resourceType: "bgpip",
-    ruleLists: [{
-        operator: "include",
-        skey: "host",
-        value: "123",
-    }],
+    resourceId: "bgpip-00000294",
+    name: "policy_match",
     smode: "matching",
-    "switch": true,
-});
-const testNet = new tencentcloud.dayu.CcHttpPolicy("testNet", {
     action: "drop",
-    resourceId: "net-0000007e",
+    "switch": true,
+    ruleLists: [{
+        skey: "host",
+        operator: "include",
+        value: "123",
+    }],
+});
+const testNet = new tencentcloud.dayu.CcHttpPolicy("test_net", {
     resourceType: "net",
+    resourceId: "net-0000007e",
+    name: "policy_match",
+    smode: "matching",
+    action: "drop",
+    "switch": true,
     ruleLists: [{
-        operator: "equal",
         skey: "cgi",
+        operator: "equal",
         value: "123",
     }],
-    smode: "matching",
-    "switch": true,
 });
-const testBgpmultip = new tencentcloud.dayu.CcHttpPolicy("testBgpmultip", {
-    action: "alg",
-    ip: "111.230.178.25",
-    resourceId: "bgp-0000008o",
+const testBgpmultip = new tencentcloud.dayu.CcHttpPolicy("test_bgpmultip", {
     resourceType: "bgp-multip",
-    ruleLists: [{
-        operator: "not_include",
-        skey: "referer",
-        value: "123",
-    }],
+    resourceId: "bgp-0000008o",
+    name: "policy_match",
     smode: "matching",
-    "switch": true,
-});
-const testBgp = new tencentcloud.dayu.CcHttpPolicy("testBgp", {
     action: "alg",
-    resourceId: "bgp-000006mq",
-    resourceType: "bgp",
+    "switch": true,
+    ip: "111.230.178.25",
     ruleLists: [{
+        skey: "referer",
         operator: "not_include",
-        skey: "ua",
         value: "123",
     }],
+});
+const testBgp = new tencentcloud.dayu.CcHttpPolicy("test_bgp", {
+    resourceType: "bgp",
+    resourceId: "bgp-000006mq",
+    name: "policy_match",
     smode: "matching",
+    action: "alg",
     "switch": true,
+    ruleLists: [{
+        skey: "ua",
+        operator: "not_include",
+        value: "123",
+    }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-test_bgpip = tencentcloud.dayu.CcHttpPolicy("testBgpip",
-    action="drop",
-    resource_id="bgpip-00000294",
+test_bgpip = tencentcloud.dayu.CcHttpPolicy("test_bgpip",
     resource_type="bgpip",
-    rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
-        operator="include",
-        skey="host",
-        value="123",
-    )],
+    resource_id="bgpip-00000294",
+    name="policy_match",
     smode="matching",
-    switch=True)
-test_net = tencentcloud.dayu.CcHttpPolicy("testNet",
     action="drop",
-    resource_id="net-0000007e",
+    switch=True,
+    rule_lists=[{
+        "skey": "host",
+        "operator": "include",
+        "value": "123",
+    }])
+test_net = tencentcloud.dayu.CcHttpPolicy("test_net",
     resource_type="net",
-    rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
-        operator="equal",
-        skey="cgi",
-        value="123",
-    )],
+    resource_id="net-0000007e",
+    name="policy_match",
     smode="matching",
-    switch=True)
-test_bgpmultip = tencentcloud.dayu.CcHttpPolicy("testBgpmultip",
-    action="alg",
-    ip="111.230.178.25",
-    resource_id="bgp-0000008o",
+    action="drop",
+    switch=True,
+    rule_lists=[{
+        "skey": "cgi",
+        "operator": "equal",
+        "value": "123",
+    }])
+test_bgpmultip = tencentcloud.dayu.CcHttpPolicy("test_bgpmultip",
     resource_type="bgp-multip",
-    rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
-        operator="not_include",
-        skey="referer",
-        value="123",
-    )],
+    resource_id="bgp-0000008o",
+    name="policy_match",
     smode="matching",
-    switch=True)
-test_bgp = tencentcloud.dayu.CcHttpPolicy("testBgp",
     action="alg",
-    resource_id="bgp-000006mq",
+    switch=True,
+    ip="111.230.178.25",
+    rule_lists=[{
+        "skey": "referer",
+        "operator": "not_include",
+        "value": "123",
+    }])
+test_bgp = tencentcloud.dayu.CcHttpPolicy("test_bgp",
     resource_type="bgp",
-    rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
-        operator="not_include",
-        skey="ua",
-        value="123",
-    )],
+    resource_id="bgp-000006mq",
+    name="policy_match",
     smode="matching",
-    switch=True)
+    action="alg",
+    switch=True,
+    rule_lists=[{
+        "skey": "ua",
+        "operator": "not_include",
+        "value": "123",
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var testBgpip = new Tencentcloud.Dayu.CcHttpPolicy("testBgpip", new()
-    {
-        Action = "drop",
-        ResourceId = "bgpip-00000294",
-        ResourceType = "bgpip",
-        RuleLists = new[]
-        {
-            new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
-            {
-                Operator = "include",
-                Skey = "host",
-                Value = "123",
-            },
-        },
-        Smode = "matching",
-        Switch = true,
-    });
-
-    var testNet = new Tencentcloud.Dayu.CcHttpPolicy("testNet", new()
-    {
-        Action = "drop",
-        ResourceId = "net-0000007e",
-        ResourceType = "net",
-        RuleLists = new[]
-        {
-            new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
-            {
-                Operator = "equal",
-                Skey = "cgi",
-                Value = "123",
-            },
-        },
-        Smode = "matching",
-        Switch = true,
-    });
-
-    var testBgpmultip = new Tencentcloud.Dayu.CcHttpPolicy("testBgpmultip", new()
-    {
-        Action = "alg",
-        Ip = "111.230.178.25",
-        ResourceId = "bgp-0000008o",
-        ResourceType = "bgp-multip",
-        RuleLists = new[]
-        {
-            new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
-            {
-                Operator = "not_include",
-                Skey = "referer",
-                Value = "123",
-            },
-        },
-        Smode = "matching",
-        Switch = true,
-    });
-
-    var testBgp = new Tencentcloud.Dayu.CcHttpPolicy("testBgp", new()
-    {
-        Action = "alg",
-        ResourceId = "bgp-000006mq",
-        ResourceType = "bgp",
-        RuleLists = new[]
-        {
-            new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
-            {
-                Operator = "not_include",
-                Skey = "ua",
-                Value = "123",
-            },
-        },
-        Smode = "matching",
-        Switch = true,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.NewCcHttpPolicy(ctx, "testBgpip", &Dayu.CcHttpPolicyArgs{
-			Action:       pulumi.String("drop"),
-			ResourceId:   pulumi.String("bgpip-00000294"),
+		_, err := dayu.NewCcHttpPolicy(ctx, "test_bgpip", &dayu.CcHttpPolicyArgs{
 			ResourceType: pulumi.String("bgpip"),
-			RuleLists: dayu.CcHttpPolicyRuleListArray{
-				&dayu.CcHttpPolicyRuleListArgs{
-					Operator: pulumi.String("include"),
-					Skey:     pulumi.String("host"),
-					Value:    pulumi.String("123"),
-				},
-			},
-			Smode:  pulumi.String("matching"),
-			Switch: pulumi.Bool(true),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Dayu.NewCcHttpPolicy(ctx, "testNet", &Dayu.CcHttpPolicyArgs{
+			ResourceId:   pulumi.String("bgpip-00000294"),
+			Name:         pulumi.String("policy_match"),
+			Smode:        pulumi.String("matching"),
 			Action:       pulumi.String("drop"),
-			ResourceId:   pulumi.String("net-0000007e"),
+			Switch:       pulumi.Bool(true),
+			RuleLists: dayu.CcHttpPolicyRuleListArray{
+				&dayu.CcHttpPolicyRuleListArgs{
+					Skey:     pulumi.String("host"),
+					Operator: pulumi.String("include"),
+					Value:    pulumi.String("123"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = dayu.NewCcHttpPolicy(ctx, "test_net", &dayu.CcHttpPolicyArgs{
 			ResourceType: pulumi.String("net"),
+			ResourceId:   pulumi.String("net-0000007e"),
+			Name:         pulumi.String("policy_match"),
+			Smode:        pulumi.String("matching"),
+			Action:       pulumi.String("drop"),
+			Switch:       pulumi.Bool(true),
 			RuleLists: dayu.CcHttpPolicyRuleListArray{
 				&dayu.CcHttpPolicyRuleListArgs{
-					Operator: pulumi.String("equal"),
 					Skey:     pulumi.String("cgi"),
+					Operator: pulumi.String("equal"),
 					Value:    pulumi.String("123"),
 				},
 			},
-			Smode:  pulumi.String("matching"),
-			Switch: pulumi.Bool(true),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Dayu.NewCcHttpPolicy(ctx, "testBgpmultip", &Dayu.CcHttpPolicyArgs{
-			Action:       pulumi.String("alg"),
-			Ip:           pulumi.String("111.230.178.25"),
-			ResourceId:   pulumi.String("bgp-0000008o"),
+		_, err = dayu.NewCcHttpPolicy(ctx, "test_bgpmultip", &dayu.CcHttpPolicyArgs{
 			ResourceType: pulumi.String("bgp-multip"),
+			ResourceId:   pulumi.String("bgp-0000008o"),
+			Name:         pulumi.String("policy_match"),
+			Smode:        pulumi.String("matching"),
+			Action:       pulumi.String("alg"),
+			Switch:       pulumi.Bool(true),
+			Ip:           pulumi.String("111.230.178.25"),
 			RuleLists: dayu.CcHttpPolicyRuleListArray{
 				&dayu.CcHttpPolicyRuleListArgs{
-					Operator: pulumi.String("not_include"),
 					Skey:     pulumi.String("referer"),
+					Operator: pulumi.String("not_include"),
 					Value:    pulumi.String("123"),
 				},
 			},
-			Smode:  pulumi.String("matching"),
-			Switch: pulumi.Bool(true),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Dayu.NewCcHttpPolicy(ctx, "testBgp", &Dayu.CcHttpPolicyArgs{
-			Action:       pulumi.String("alg"),
-			ResourceId:   pulumi.String("bgp-000006mq"),
+		_, err = dayu.NewCcHttpPolicy(ctx, "test_bgp", &dayu.CcHttpPolicyArgs{
 			ResourceType: pulumi.String("bgp"),
+			ResourceId:   pulumi.String("bgp-000006mq"),
+			Name:         pulumi.String("policy_match"),
+			Smode:        pulumi.String("matching"),
+			Action:       pulumi.String("alg"),
+			Switch:       pulumi.Bool(true),
 			RuleLists: dayu.CcHttpPolicyRuleListArray{
 				&dayu.CcHttpPolicyRuleListArgs{
-					Operator: pulumi.String("not_include"),
 					Skey:     pulumi.String("ua"),
+					Operator: pulumi.String("not_include"),
 					Value:    pulumi.String("123"),
 				},
 			},
-			Smode:  pulumi.String("matching"),
-			Switch: pulumi.Bool(true),
 		})
 		if err != nil {
 			return err
@@ -287,6 +233,103 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var testBgpip = new Tencentcloud.Dayu.CcHttpPolicy("test_bgpip", new()
+    {
+        ResourceType = "bgpip",
+        ResourceId = "bgpip-00000294",
+        Name = "policy_match",
+        Smode = "matching",
+        Action = "drop",
+        Switch = true,
+        RuleLists = new[]
+        {
+            new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+            {
+                Skey = "host",
+                Operator = "include",
+                Value = "123",
+            },
+        },
+    });
+
+    var testNet = new Tencentcloud.Dayu.CcHttpPolicy("test_net", new()
+    {
+        ResourceType = "net",
+        ResourceId = "net-0000007e",
+        Name = "policy_match",
+        Smode = "matching",
+        Action = "drop",
+        Switch = true,
+        RuleLists = new[]
+        {
+            new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+            {
+                Skey = "cgi",
+                Operator = "equal",
+                Value = "123",
+            },
+        },
+    });
+
+    var testBgpmultip = new Tencentcloud.Dayu.CcHttpPolicy("test_bgpmultip", new()
+    {
+        ResourceType = "bgp-multip",
+        ResourceId = "bgp-0000008o",
+        Name = "policy_match",
+        Smode = "matching",
+        Action = "alg",
+        Switch = true,
+        Ip = "111.230.178.25",
+        RuleLists = new[]
+        {
+            new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+            {
+                Skey = "referer",
+                Operator = "not_include",
+                Value = "123",
+            },
+        },
+    });
+
+    var testBgp = new Tencentcloud.Dayu.CcHttpPolicy("test_bgp", new()
+    {
+        ResourceType = "bgp",
+        ResourceId = "bgp-000006mq",
+        Name = "policy_match",
+        Smode = "matching",
+        Action = "alg",
+        Switch = true,
+        RuleLists = new[]
+        {
+            new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+            {
+                Skey = "ua",
+                Operator = "not_include",
+                Value = "123",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -296,8 +339,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.CcHttpPolicy;
 import com.pulumi.tencentcloud.Dayu.CcHttpPolicyArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.CcHttpPolicyRuleListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -309,182 +352,296 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var testBgpip = new CcHttpPolicy("testBgpip", CcHttpPolicyArgs.builder()        
-            .action("drop")
-            .resourceId("bgpip-00000294")
+        var testBgpip = new CcHttpPolicy("testBgpip", CcHttpPolicyArgs.builder()
             .resourceType("bgpip")
-            .ruleLists(CcHttpPolicyRuleListArgs.builder()
-                .operator("include")
-                .skey("host")
-                .value("123")
-                .build())
+            .resourceId("bgpip-00000294")
+            .name("policy_match")
             .smode("matching")
-            .switch_(true)
-            .build());
-
-        var testNet = new CcHttpPolicy("testNet", CcHttpPolicyArgs.builder()        
             .action("drop")
-            .resourceId("net-0000007e")
+            .switch_(true)
+            .ruleLists(CcHttpPolicyRuleListArgs.builder()
+                .skey("host")
+                .operator("include")
+                .value("123")
+                .build())
+            .build());
+
+        var testNet = new CcHttpPolicy("testNet", CcHttpPolicyArgs.builder()
             .resourceType("net")
+            .resourceId("net-0000007e")
+            .name("policy_match")
+            .smode("matching")
+            .action("drop")
+            .switch_(true)
             .ruleLists(CcHttpPolicyRuleListArgs.builder()
-                .operator("equal")
                 .skey("cgi")
+                .operator("equal")
                 .value("123")
                 .build())
-            .smode("matching")
-            .switch_(true)
             .build());
 
-        var testBgpmultip = new CcHttpPolicy("testBgpmultip", CcHttpPolicyArgs.builder()        
-            .action("alg")
-            .ip("111.230.178.25")
-            .resourceId("bgp-0000008o")
+        var testBgpmultip = new CcHttpPolicy("testBgpmultip", CcHttpPolicyArgs.builder()
             .resourceType("bgp-multip")
+            .resourceId("bgp-0000008o")
+            .name("policy_match")
+            .smode("matching")
+            .action("alg")
+            .switch_(true)
+            .ip("111.230.178.25")
             .ruleLists(CcHttpPolicyRuleListArgs.builder()
-                .operator("not_include")
                 .skey("referer")
+                .operator("not_include")
                 .value("123")
                 .build())
-            .smode("matching")
-            .switch_(true)
             .build());
 
-        var testBgp = new CcHttpPolicy("testBgp", CcHttpPolicyArgs.builder()        
-            .action("alg")
-            .resourceId("bgp-000006mq")
+        var testBgp = new CcHttpPolicy("testBgp", CcHttpPolicyArgs.builder()
             .resourceType("bgp")
+            .resourceId("bgp-000006mq")
+            .name("policy_match")
+            .smode("matching")
+            .action("alg")
+            .switch_(true)
             .ruleLists(CcHttpPolicyRuleListArgs.builder()
-                .operator("not_include")
                 .skey("ua")
+                .operator("not_include")
                 .value("123")
                 .build())
-            .smode("matching")
-            .switch_(true)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   testBgpip:
     type: tencentcloud:Dayu:CcHttpPolicy
+    name: test_bgpip
     properties:
-      action: drop
-      resourceId: bgpip-00000294
       resourceType: bgpip
-      ruleLists:
-        - operator: include
-          skey: host
-          value: '123'
+      resourceId: bgpip-00000294
+      name: policy_match
       smode: matching
+      action: drop
       switch: true
+      ruleLists:
+        - skey: host
+          operator: include
+          value: '123'
   testNet:
     type: tencentcloud:Dayu:CcHttpPolicy
+    name: test_net
     properties:
-      action: drop
-      resourceId: net-0000007e
       resourceType: net
-      ruleLists:
-        - operator: equal
-          skey: cgi
-          value: '123'
+      resourceId: net-0000007e
+      name: policy_match
       smode: matching
+      action: drop
       switch: true
+      ruleLists:
+        - skey: cgi
+          operator: equal
+          value: '123'
   testBgpmultip:
     type: tencentcloud:Dayu:CcHttpPolicy
+    name: test_bgpmultip
     properties:
-      action: alg
-      ip: 111.230.178.25
-      resourceId: bgp-0000008o
       resourceType: bgp-multip
-      ruleLists:
-        - operator: not_include
-          skey: referer
-          value: '123'
+      resourceId: bgp-0000008o
+      name: policy_match
       smode: matching
+      action: alg
       switch: true
+      ip: 111.230.178.25
+      ruleLists:
+        - skey: referer
+          operator: not_include
+          value: '123'
   testBgp:
     type: tencentcloud:Dayu:CcHttpPolicy
+    name: test_bgp
     properties:
-      action: alg
-      resourceId: bgp-000006mq
       resourceType: bgp
-      ruleLists:
-        - operator: not_include
-          skey: ua
-          value: '123'
+      resourceId: bgp-000006mq
+      name: policy_match
       smode: matching
+      action: alg
       switch: true
+      ruleLists:
+        - skey: ua
+          operator: not_include
+          value: '123'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dayu_cchttppolicy" "test_bgpip" {
+  resource_type = "bgpip"
+  resource_id   = "bgpip-00000294"
+  name          = "policy_match"
+  smode         = "matching"
+  action        = "drop"
+  switch        = true
+  rule_lists {
+    skey     = "host"
+    operator = "include"
+    value    = "123"
+  }
+}
+resource "tencentcloud_dayu_cchttppolicy" "test_net" {
+  resource_type = "net"
+  resource_id   = "net-0000007e"
+  name          = "policy_match"
+  smode         = "matching"
+  action        = "drop"
+  switch        = true
+  rule_lists {
+    skey     = "cgi"
+    operator = "equal"
+    value    = "123"
+  }
+}
+resource "tencentcloud_dayu_cchttppolicy" "test_bgpmultip" {
+  resource_type = "bgp-multip"
+  resource_id   = "bgp-0000008o"
+  name          = "policy_match"
+  smode         = "matching"
+  action        = "alg"
+  switch        = true
+  ip            = "111.230.178.25"
+  rule_lists {
+    skey     = "referer"
+    operator = "not_include"
+    value    = "123"
+  }
+}
+resource "tencentcloud_dayu_cchttppolicy" "test_bgp" {
+  resource_type = "bgp"
+  resource_id   = "bgp-000006mq"
+  name          = "policy_match"
+  smode         = "matching"
+  action        = "alg"
+  switch        = true
+  rule_lists {
+    skey     = "ua"
+    operator = "not_include"
+    value    = "123"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=CreateCCSelfDefinePolicy&type=document&lang=en)
+  - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+* Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+* Update: [ModifyCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=ModifyCCSelfDefinePolicy&type=document&lang=en)
+* Delete:
+  - [DeleteCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DeleteCCSelfDefinePolicy&type=document&lang=en)
+  - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
 
 
 
 ## Create CcHttpPolicy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                 <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">action</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">frequency</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                  <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcHttpPolicyRuleListArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcHttpPolicyRuleListArgs]]</span> = None<span class="p">,</span>
                  <span class="nx">smode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCcHttpPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcHttpPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCcHttpPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcHttpPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">CcHttpPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcHttpPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:CcHttpPolicy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:CcHttpPolicy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dayu_cc_http_policy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -505,7 +662,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -622,11 +779,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## CcHttpPolicy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -642,8 +807,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -651,8 +815,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_csharp" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -660,8 +823,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="frequency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_csharp" style="color: inherit; text-decoration: inherit;">Frequency</a>
@@ -669,8 +831,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -678,8 +839,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -687,17 +847,15 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="smode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_csharp" style="color: inherit; text-decoration: inherit;">Smode</a>
@@ -705,8 +863,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_csharp" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -714,8 +871,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,8 +885,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -738,8 +893,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_go" style="color: inherit; text-decoration: inherit;">Action</a>
@@ -747,8 +901,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="frequency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_go" style="color: inherit; text-decoration: inherit;">Frequency</a>
@@ -756,8 +909,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -765,8 +917,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -774,8 +925,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
@@ -783,8 +933,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cchttppolicyrulelist">[]Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="smode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_go" style="color: inherit; text-decoration: inherit;">Smode</a>
@@ -792,8 +941,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_go" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -801,8 +949,85 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_hcl" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_lists_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">list(object)</a></span>
+    </dt>
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="smode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_hcl" style="color: inherit; text-decoration: inherit;">smode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -816,8 +1041,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -825,8 +1049,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_java" style="color: inherit; text-decoration: inherit;">action</a>
@@ -834,8 +1057,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="frequency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_java" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -843,8 +1065,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -852,8 +1073,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -861,17 +1081,15 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="smode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_java" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -879,8 +1097,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch__java" style="color: inherit; text-decoration: inherit;">switch_</a>
@@ -888,8 +1105,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -903,8 +1119,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -912,8 +1127,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_nodejs" style="color: inherit; text-decoration: inherit;">action</a>
@@ -921,8 +1135,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="frequency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_nodejs" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -930,8 +1143,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -939,8 +1151,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -948,17 +1159,15 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttppolicyrulelist">Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List[]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="smode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_nodejs" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -966,8 +1175,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_nodejs" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -975,8 +1183,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -990,8 +1197,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -999,8 +1205,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_python" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1008,8 +1213,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="frequency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_python" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -1017,8 +1221,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1026,8 +1229,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1035,17 +1237,15 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_lists_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttppolicyrulelist">Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">Sequence[Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="smode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_python" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -1053,8 +1253,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_python" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1062,8 +1261,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1077,8 +1275,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1086,8 +1283,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="action_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_yaml" style="color: inherit; text-decoration: inherit;">action</a>
@@ -1095,8 +1291,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="frequency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_yaml" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -1104,8 +1299,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1113,8 +1307,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1122,8 +1315,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -1131,8 +1323,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="smode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_yaml" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -1140,8 +1331,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="switch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_yaml" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1149,8 +1339,7 @@ The CcHttpPolicy resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1171,8 +1360,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1180,8 +1368,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1189,8 +1376,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define http policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1204,8 +1390,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1213,8 +1398,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1222,8 +1406,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define http policy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the CC self-define http policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1237,8 +1450,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1246,8 +1458,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1255,8 +1466,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define http policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1270,8 +1480,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1279,8 +1488,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1288,8 +1496,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define http policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1303,8 +1510,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1312,8 +1518,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1321,8 +1526,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define http policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1336,8 +1540,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1345,8 +1548,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1354,8 +1556,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd></dl>
+    <dd>Id of the CC self-define http policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1365,18 +1566,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing CcHttpPolicy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CcHttpPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CcHttpPolicy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CcHttpPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CcHttpPolicy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1388,107 +1589,146 @@ Get an existing CcHttpPolicy resource's state with the given name, ID, and optio
         <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcHttpPolicyRuleListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">rule_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcHttpPolicyRuleListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">smode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">) -&gt;</span> CcHttpPolicy</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCcHttpPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CcHttpPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcHttpPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCcHttpPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CcHttpPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcHttpPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CcHttpPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcHttpPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CcHttpPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcHttpPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CcHttpPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcHttpPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CcHttpPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcHttpPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCcHttpPolicy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dayu:CcHttpPolicy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dayu_cc_http_policy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcHttpPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcHttpPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1496,28 +1736,31 @@ Get an existing CcHttpPolicy resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcHttpPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1525,28 +1768,31 @@ Get an existing CcHttpPolicy resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcHttpPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1566,8 +1812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1575,8 +1820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_frequency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_frequency_csharp" style="color: inherit; text-decoration: inherit;">Frequency</a>
@@ -1584,8 +1828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1593,8 +1836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1602,8 +1844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1611,8 +1852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define http policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1620,8 +1860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1629,17 +1868,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_smode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_smode_csharp" style="color: inherit; text-decoration: inherit;">Smode</a>
@@ -1647,8 +1884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_csharp" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -1656,8 +1892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1671,8 +1906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1680,8 +1914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_frequency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_frequency_go" style="color: inherit; text-decoration: inherit;">Frequency</a>
@@ -1689,8 +1922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1698,8 +1930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1707,8 +1938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1716,8 +1946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define http policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1725,8 +1954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1734,8 +1962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
@@ -1743,8 +1970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cchttppolicyrulelist">[]Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_smode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_smode_go" style="color: inherit; text-decoration: inherit;">Smode</a>
@@ -1752,8 +1978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_go" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -1761,8 +1986,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_frequency_hcl" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the CC self-define http policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_lists_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">list(object)</a></span>
+    </dt>
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_smode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_smode_hcl" style="color: inherit; text-decoration: inherit;">smode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1776,8 +2094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1785,8 +2102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_frequency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_frequency_java" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -1794,8 +2110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1803,8 +2118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1812,8 +2126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1821,8 +2134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define http policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1830,8 +2142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1839,17 +2150,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_smode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_smode_java" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -1857,8 +2166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch__java" style="color: inherit; text-decoration: inherit;">switch_</a>
@@ -1866,8 +2174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1881,8 +2188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1890,8 +2196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_frequency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_frequency_nodejs" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -1899,8 +2204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1908,8 +2212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1917,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1926,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define http policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1935,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1944,17 +2244,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttppolicyrulelist">Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List[]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_smode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_smode_nodejs" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -1962,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_nodejs" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1971,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1986,8 +2282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1995,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_frequency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_frequency_python" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -2004,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2013,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2022,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -2031,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define http policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -2040,8 +2330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -2049,17 +2338,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_lists_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cchttppolicyrulelist">Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#cchttppolicyrulelist">Sequence[Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_smode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_smode_python" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -2067,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_python" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -2076,8 +2362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2091,8 +2376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Action mode, only valid when <code>smode</code> is <code>matching</code>. Valid values are <code>alg</code> and <code>drop</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2100,8 +2384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_frequency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_frequency_yaml" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -2109,8 +2392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Max frequency per minute, only valid when <code>smode</code> is <code>speedlimit</code>, the valid value ranges from 1 to 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2118,8 +2400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the CC self-define http policy, only valid when <code>resource_type</code> is <code>bgp-multip</code>. The num of list items can only be set one.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the CC self-define http policy, only valid when <code>resourceType</code> is <code>bgp-multip</code>. The num of list items can only be set one.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2127,8 +2408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy. Length should between 1 and 20.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC self-define http policy. Length should between 1 and 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -2136,8 +2416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC self-define http policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Id of the CC self-define http policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -2145,8 +2424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2154,8 +2432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC self-define http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulelists_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -2163,8 +2440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cchttppolicyrulelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule list of the CC self-define http policy,  only valid when <code>smode</code> is <code>matching</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_smode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_smode_yaml" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -2172,8 +2448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</p>
-</dd><dt class="property-optional"
+    <dd>Match mode, and valid values are <code>matching</code>, <code>speedlimit</code>. Note: the speed limit type CC self-define policy can only set one.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_switch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_switch_yaml" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -2181,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2197,7 +2471,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="cchttppolicyrulelist">Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List</h4>
+<h4 id="cchttppolicyrulelist">
+Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Http<wbr>Policy<wbr>Rule<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2209,8 +2485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values: <code>include</code>, <code>not_include</code>, <code>equal</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Operator of the rule. Valid values: <code>include</code>, <code>notInclude</code>, <code>equal</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="skey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_csharp" style="color: inherit; text-decoration: inherit;">Skey</a>
@@ -2218,8 +2493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2227,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2242,8 +2515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values: <code>include</code>, <code>not_include</code>, <code>equal</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Operator of the rule. Valid values: <code>include</code>, <code>notInclude</code>, <code>equal</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="skey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_go" style="color: inherit; text-decoration: inherit;">Skey</a>
@@ -2251,8 +2523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2260,8 +2531,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operator of the rule. Valid values: <code>include</code>, <code>notInclude</code>, <code>equal</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="skey_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_hcl" style="color: inherit; text-decoration: inherit;">skey</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2275,8 +2575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values: <code>include</code>, <code>not_include</code>, <code>equal</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Operator of the rule. Valid values: <code>include</code>, <code>notInclude</code>, <code>equal</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="skey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_java" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -2284,8 +2583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2293,8 +2591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2308,8 +2605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values: <code>include</code>, <code>not_include</code>, <code>equal</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Operator of the rule. Valid values: <code>include</code>, <code>notInclude</code>, <code>equal</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="skey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_nodejs" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -2317,8 +2613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2326,8 +2621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2341,8 +2635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values: <code>include</code>, <code>not_include</code>, <code>equal</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Operator of the rule. Valid values: <code>include</code>, <code>notInclude</code>, <code>equal</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="skey_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_python" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -2350,8 +2643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2359,8 +2651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2374,8 +2665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator of the rule. Valid values: <code>include</code>, <code>not_include</code>, <code>equal</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Operator of the rule. Valid values: <code>include</code>, <code>notInclude</code>, <code>equal</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="skey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_yaml" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -2383,8 +2673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the rule. Valid values: <code>host</code>, <code>cgi</code>, <code>ua</code>, <code>referer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2392,8 +2681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule value, then length should be less than 31 bytes.</p>
-</dd></dl>
+    <dd>Rule value, then length should be less than 31 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2405,7 +2693,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

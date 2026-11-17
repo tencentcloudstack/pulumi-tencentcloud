@@ -2,9 +2,11 @@
 ---
 title: "Layer4Listener"
 title_tag: "tencentcloud.Gaap.Layer4Listener"
-meta_desc: "Documentation for the tencentcloud.Gaap.Layer4Listener resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a layer4 listener of GAAP."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,37 @@ Provides a resource to create a layer4 listener of GAAP.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const foo = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooRealserver = new tencentcloud.gaap.Realserver("fooRealserver", {ip: "1.1.1.1"});
-const bar = new tencentcloud.gaap.Realserver("bar", {ip: "119.29.29.29"});
-const fooLayer4Listener = new tencentcloud.gaap.Layer4Listener("fooLayer4Listener", {
+const fooRealserver = new tencentcloud.gaap.Realserver("foo", {
+    ip: "1.1.1.1",
+    name: "ci-test-gaap-realserver",
+});
+const bar = new tencentcloud.gaap.Realserver("bar", {
+    ip: "119.29.29.29",
+    name: "ci-test-gaap-realserver2",
+});
+const fooLayer4Listener = new tencentcloud.gaap.Layer4Listener("foo", {
     protocol: "TCP",
+    name: "ci-test-gaap-4-listener",
     port: 80,
     realserverType: "IP",
-    proxyId: fooProxy.id,
+    proxyId: foo.id,
     healthCheck: true,
     realserverBindSets: [
         {
@@ -49,36 +64,118 @@ const fooLayer4Listener = new tencentcloud.gaap.Layer4Listener("fooLayer4Listene
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_realserver = tencentcloud.gaap.Realserver("fooRealserver", ip="1.1.1.1")
-bar = tencentcloud.gaap.Realserver("bar", ip="119.29.29.29")
-foo_layer4_listener = tencentcloud.gaap.Layer4Listener("fooLayer4Listener",
+foo_realserver = tencentcloud.gaap.Realserver("foo",
+    ip="1.1.1.1",
+    name="ci-test-gaap-realserver")
+bar = tencentcloud.gaap.Realserver("bar",
+    ip="119.29.29.29",
+    name="ci-test-gaap-realserver2")
+foo_layer4_listener = tencentcloud.gaap.Layer4Listener("foo",
     protocol="TCP",
+    name="ci-test-gaap-4-listener",
     port=80,
     realserver_type="IP",
-    proxy_id=foo_proxy.id,
+    proxy_id=foo.id,
     health_check=True,
     realserver_bind_sets=[
-        tencentcloud.gaap.Layer4ListenerRealserverBindSetArgs(
-            id=foo_realserver.id,
-            ip=foo_realserver.ip,
-            port=80,
-        ),
-        tencentcloud.gaap.Layer4ListenerRealserverBindSetArgs(
-            id=bar.id,
-            ip=bar.ip,
-            port=80,
-        ),
+        {
+            "id": foo_realserver.id,
+            "ip": foo_realserver.ip,
+            "port": 80,
+        },
+        {
+            "id": bar.id,
+            "ip": bar.ip,
+            "port": 80,
+        },
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		foo, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
+			Bandwidth:        pulumi.Int(10),
+			Concurrent:       pulumi.Int(2),
+			AccessRegion:     pulumi.String("SouthChina"),
+			RealserverRegion: pulumi.String("NorthChina"),
+		})
+		if err != nil {
+			return err
+		}
+		fooRealserver, err := gaap.NewRealserver(ctx, "foo", &gaap.RealserverArgs{
+			Ip:   pulumi.String("1.1.1.1"),
+			Name: pulumi.String("ci-test-gaap-realserver"),
+		})
+		if err != nil {
+			return err
+		}
+		bar, err := gaap.NewRealserver(ctx, "bar", &gaap.RealserverArgs{
+			Ip:   pulumi.String("119.29.29.29"),
+			Name: pulumi.String("ci-test-gaap-realserver2"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = gaap.NewLayer4Listener(ctx, "foo", &gaap.Layer4ListenerArgs{
+			Protocol:       pulumi.String("TCP"),
+			Name:           pulumi.String("ci-test-gaap-4-listener"),
+			Port:           pulumi.Int(80),
+			RealserverType: pulumi.String("IP"),
+			ProxyId:        foo.ID().ToIDOutput().ToStringOutput(),
+			HealthCheck:    pulumi.Bool(true),
+			RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
+				&gaap.Layer4ListenerRealserverBindSetArgs{
+					Id:   fooRealserver.ID().ToIDOutput().ToStringOutput(),
+					Ip:   fooRealserver.Ip,
+					Port: pulumi.Int(80),
+				},
+				&gaap.Layer4ListenerRealserverBindSetArgs{
+					Id:   bar.ID().ToIDOutput().ToStringOutput(),
+					Ip:   bar.Ip,
+					Port: pulumi.Int(80),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -87,30 +184,34 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
+    var foo = new Tencentcloud.Gaap.Proxy("foo", new()
     {
+        Name = "ci-test-gaap-proxy",
         Bandwidth = 10,
         Concurrent = 2,
         AccessRegion = "SouthChina",
         RealserverRegion = "NorthChina",
     });
 
-    var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
+    var fooRealserver = new Tencentcloud.Gaap.Realserver("foo", new()
     {
         Ip = "1.1.1.1",
+        Name = "ci-test-gaap-realserver",
     });
 
     var bar = new Tencentcloud.Gaap.Realserver("bar", new()
     {
         Ip = "119.29.29.29",
+        Name = "ci-test-gaap-realserver2",
     });
 
-    var fooLayer4Listener = new Tencentcloud.Gaap.Layer4Listener("fooLayer4Listener", new()
+    var fooLayer4Listener = new Tencentcloud.Gaap.Layer4Listener("foo", new()
     {
         Protocol = "TCP",
+        Name = "ci-test-gaap-4-listener",
         Port = 80,
         RealserverType = "IP",
-        ProxyId = fooProxy.Id,
+        ProxyId = foo.Id,
         HealthCheck = true,
         RealserverBindSets = new[]
         {
@@ -131,63 +232,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-			Bandwidth:        pulumi.Int(10),
-			Concurrent:       pulumi.Int(2),
-			AccessRegion:     pulumi.String("SouthChina"),
-			RealserverRegion: pulumi.String("NorthChina"),
-		})
-		if err != nil {
-			return err
-		}
-		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
-			Ip: pulumi.String("1.1.1.1"),
-		})
-		if err != nil {
-			return err
-		}
-		bar, err := Gaap.NewRealserver(ctx, "bar", &Gaap.RealserverArgs{
-			Ip: pulumi.String("119.29.29.29"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Gaap.NewLayer4Listener(ctx, "fooLayer4Listener", &Gaap.Layer4ListenerArgs{
-			Protocol:       pulumi.String("TCP"),
-			Port:           pulumi.Int(80),
-			RealserverType: pulumi.String("IP"),
-			ProxyId:        fooProxy.ID(),
-			HealthCheck:    pulumi.Bool(true),
-			RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
-				&gaap.Layer4ListenerRealserverBindSetArgs{
-					Id:   fooRealserver.ID(),
-					Ip:   fooRealserver.Ip,
-					Port: pulumi.Int(80),
-				},
-				&gaap.Layer4ListenerRealserverBindSetArgs{
-					Id:   bar.ID(),
-					Ip:   bar.Ip,
-					Port: pulumi.Int(80),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -201,8 +250,8 @@ import com.pulumi.tencentcloud.Gaap.RealserverArgs;
 import com.pulumi.tencentcloud.Gaap.Layer4Listener;
 import com.pulumi.tencentcloud.Gaap.Layer4ListenerArgs;
 import com.pulumi.tencentcloud.Gaap.inputs.Layer4ListenerRealserverBindSetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -214,26 +263,30 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var foo = new Proxy("foo", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooRealserver = new Realserver("fooRealserver", RealserverArgs.builder()        
+        var fooRealserver = new Realserver("fooRealserver", RealserverArgs.builder()
             .ip("1.1.1.1")
+            .name("ci-test-gaap-realserver")
             .build());
 
-        var bar = new Realserver("bar", RealserverArgs.builder()        
+        var bar = new Realserver("bar", RealserverArgs.builder()
             .ip("119.29.29.29")
+            .name("ci-test-gaap-realserver2")
             .build());
 
-        var fooLayer4Listener = new Layer4Listener("fooLayer4Listener", Layer4ListenerArgs.builder()        
+        var fooLayer4Listener = new Layer4Listener("fooLayer4Listener", Layer4ListenerArgs.builder()
             .protocol("TCP")
+            .name("ci-test-gaap-4-listener")
             .port(80)
             .realserverType("IP")
-            .proxyId(fooProxy.id())
+            .proxyId(foo.id())
             .healthCheck(true)
             .realserverBindSets(            
                 Layer4ListenerRealserverBindSetArgs.builder()
@@ -251,30 +304,41 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  fooProxy:
+  foo:
     type: tencentcloud:Gaap:Proxy
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooRealserver:
     type: tencentcloud:Gaap:Realserver
+    name: foo
     properties:
       ip: 1.1.1.1
+      name: ci-test-gaap-realserver
   bar:
     type: tencentcloud:Gaap:Realserver
     properties:
       ip: 119.29.29.29
+      name: ci-test-gaap-realserver2
   fooLayer4Listener:
     type: tencentcloud:Gaap:Layer4Listener
+    name: foo
     properties:
       protocol: TCP
+      name: ci-test-gaap-4-listener
       port: 80
       realserverType: IP
-      proxyId: ${fooProxy.id}
+      proxyId: ${foo.id}
       healthCheck: true
       realserverBindSets:
         - id: ${fooRealserver.id}
@@ -284,75 +348,166 @@ resources:
           ip: ${bar.ip}
           port: 80
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_realserver" "foo" {
+  ip   = "1.1.1.1"
+  name = "ci-test-gaap-realserver"
+}
+resource "tencentcloud_gaap_realserver" "bar" {
+  ip   = "119.29.29.29"
+  name = "ci-test-gaap-realserver2"
+}
+resource "tencentcloud_gaap_layer4listener" "foo" {
+  protocol        = "TCP"
+  name            = "ci-test-gaap-4-listener"
+  port            = 80
+  realserver_type = "IP"
+  proxy_id        = tencentcloud_gaap_proxy.foo.id
+  health_check    = true
+  realserver_bind_sets {
+    id   = tencentcloud_gaap_realserver.foo.id
+    ip   = tencentcloud_gaap_realserver.foo.ip
+    port = 80
+  }
+  realserver_bind_sets {
+    id   = tencentcloud_gaap_realserver.bar.id
+    ip   = tencentcloud_gaap_realserver.bar.ip
+    port = 80
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [BindListenerRealServers](https://www.tencentcloud.com/document/api/608/33077)
+  - [CreateTCPListeners](https://www.tencentcloud.com/document/api/608/33074)
+  - [CreateUDPListeners](https://www.tencentcloud.com/document/api/608/33073)
+* Read:
+  - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+  - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
+* Update:
+  - [BindListenerRealServers](https://www.tencentcloud.com/document/api/608/33077)
+  - [ModifyTCPListenerAttribute](https://www.tencentcloud.com/document/api/608/33064)
+  - [ModifyUDPListenerAttribute](https://www.tencentcloud.com/document/api/608/33063)
+* Delete:
+  - [DeleteListeners](https://www.tencentcloud.com/document/api/608/33072)
+  - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+  - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
 
 
 ## Create Layer4Listener Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                   <span class="nx">client_ip_method</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">connect_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">health_check</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                   <span class="nx">interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">realserver_bind_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_gaap.Layer4ListenerRealserverBindSetArgs]]</span> = None<span class="p">,</span>
-                   <span class="nx">realserver_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">scheduler</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                   <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">realserver_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">client_ip_method</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">healthy_threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">check_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">context_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">connect_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">health_check</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                   <span class="nx">realserver_bind_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[Layer4ListenerRealserverBindSetArgs]]</span> = None<span class="p">,</span>
+                   <span class="nx">check_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">recv_context</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">scheduler</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">send_context</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">unhealthy_threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLayer4Listener</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Layer4Listener</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLayer4Listener</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Layer4Listener</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Layer4Listener</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">Layer4ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:Layer4Listener</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:Layer4Listener</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_gaap_layer4_listener&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -373,7 +528,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -490,11 +645,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Layer4Listener Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Layer4Listener resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -510,8 +673,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -519,8 +681,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -528,8 +689,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realservertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Type</a>
@@ -537,8 +697,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checkport_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkport_csharp" style="color: inherit; text-decoration: inherit;">Check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checktype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checktype_csharp" style="color: inherit; text-decoration: inherit;">Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clientipmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientipmethod_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Ip<wbr>Method</a>
@@ -546,8 +721,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="connecttimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connecttimeout_csharp" style="color: inherit; text-decoration: inherit;">Connect<wbr>Timeout</a>
@@ -555,8 +729,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contexttype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contexttype_csharp" style="color: inherit; text-decoration: inherit;">Context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -564,8 +745,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthythreshold_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthythreshold_csharp" style="color: inherit; text-decoration: inherit;">Healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_csharp" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -573,8 +761,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -582,17 +769,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverbindsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverbindsets_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Bind<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recvcontext_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvcontext_csharp" style="color: inherit; text-decoration: inherit;">Recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -600,8 +793,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd></dl>
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sendcontext_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendcontext_csharp" style="color: inherit; text-decoration: inherit;">Send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unhealthythreshold_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthythreshold_csharp" style="color: inherit; text-decoration: inherit;">Unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -615,8 +823,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -624,8 +831,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -633,8 +839,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realservertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Type</a>
@@ -642,8 +847,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checkport_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkport_go" style="color: inherit; text-decoration: inherit;">Check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checktype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checktype_go" style="color: inherit; text-decoration: inherit;">Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clientipmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientipmethod_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Ip<wbr>Method</a>
@@ -651,8 +871,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="connecttimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connecttimeout_go" style="color: inherit; text-decoration: inherit;">Connect<wbr>Timeout</a>
@@ -660,8 +879,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contexttype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contexttype_go" style="color: inherit; text-decoration: inherit;">Context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -669,8 +895,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthythreshold_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthythreshold_go" style="color: inherit; text-decoration: inherit;">Healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_go" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -678,8 +911,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -687,8 +919,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverbindsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverbindsets_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Bind<wbr>Sets</a>
@@ -696,8 +927,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#layer4listenerrealserverbindset">[]Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recvcontext_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvcontext_go" style="color: inherit; text-decoration: inherit;">Recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -705,8 +943,173 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd></dl>
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sendcontext_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendcontext_go" style="color: inherit; text-decoration: inherit;">Send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unhealthythreshold_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthythreshold_go" style="color: inherit; text-decoration: inherit;">Unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer4 listener.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="realserver_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_type_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="check_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_port_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="check_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_type_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="client_ip_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_ip_method_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>ip_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="connect_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connect_timeout_hcl" style="color: inherit; text-decoration: inherit;">connect_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="context_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#context_type_hcl" style="color: inherit; text-decoration: inherit;">context_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthy_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_threshold_hcl" style="color: inherit; text-decoration: inherit;">healthy_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_hcl" style="color: inherit; text-decoration: inherit;">interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="realserver_bind_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_bind_sets_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>bind_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">list(object)</a></span>
+    </dt>
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recv_context_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recv_context_hcl" style="color: inherit; text-decoration: inherit;">recv_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="send_context_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#send_context_hcl" style="color: inherit; text-decoration: inherit;">send_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unhealthy_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthy_threshold_hcl" style="color: inherit; text-decoration: inherit;">unhealthy_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -720,8 +1123,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -729,8 +1131,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -738,8 +1139,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realservertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -747,8 +1147,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checkport_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkport_java" style="color: inherit; text-decoration: inherit;">check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checktype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checktype_java" style="color: inherit; text-decoration: inherit;">check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clientipmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientipmethod_java" style="color: inherit; text-decoration: inherit;">client<wbr>Ip<wbr>Method</a>
@@ -756,8 +1171,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="connecttimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connecttimeout_java" style="color: inherit; text-decoration: inherit;">connect<wbr>Timeout</a>
@@ -765,8 +1179,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contexttype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contexttype_java" style="color: inherit; text-decoration: inherit;">context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -774,8 +1195,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthythreshold_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthythreshold_java" style="color: inherit; text-decoration: inherit;">healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_java" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -783,8 +1211,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -792,17 +1219,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverbindsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverbindsets_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Bind<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recvcontext_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvcontext_java" style="color: inherit; text-decoration: inherit;">recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -810,8 +1243,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd></dl>
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sendcontext_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendcontext_java" style="color: inherit; text-decoration: inherit;">send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unhealthythreshold_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthythreshold_java" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -825,8 +1273,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -834,8 +1281,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -843,8 +1289,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realservertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -852,8 +1297,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checkport_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkport_nodejs" style="color: inherit; text-decoration: inherit;">check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checktype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checktype_nodejs" style="color: inherit; text-decoration: inherit;">check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clientipmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientipmethod_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Ip<wbr>Method</a>
@@ -861,8 +1321,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="connecttimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connecttimeout_nodejs" style="color: inherit; text-decoration: inherit;">connect<wbr>Timeout</a>
@@ -870,8 +1329,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contexttype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contexttype_nodejs" style="color: inherit; text-decoration: inherit;">context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -879,8 +1345,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthythreshold_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthythreshold_nodejs" style="color: inherit; text-decoration: inherit;">healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_nodejs" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -888,8 +1361,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -897,17 +1369,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverbindsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverbindsets_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Bind<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#layer4listenerrealserverbindset">Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set[]</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recvcontext_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvcontext_nodejs" style="color: inherit; text-decoration: inherit;">recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -915,8 +1393,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd></dl>
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sendcontext_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendcontext_nodejs" style="color: inherit; text-decoration: inherit;">send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unhealthythreshold_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthythreshold_nodejs" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -930,8 +1423,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -939,8 +1431,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -948,8 +1439,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realserver_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_type_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>type</a>
@@ -957,8 +1447,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="check_port_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_port_python" style="color: inherit; text-decoration: inherit;">check_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="check_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_type_python" style="color: inherit; text-decoration: inherit;">check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="client_ip_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_ip_method_python" style="color: inherit; text-decoration: inherit;">client_<wbr>ip_<wbr>method</a>
@@ -966,8 +1471,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="connect_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connect_timeout_python" style="color: inherit; text-decoration: inherit;">connect_<wbr>timeout</a>
@@ -975,8 +1479,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="context_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#context_type_python" style="color: inherit; text-decoration: inherit;">context_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
@@ -984,8 +1495,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthy_threshold_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_threshold_python" style="color: inherit; text-decoration: inherit;">healthy_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_python" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -993,8 +1511,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1002,17 +1519,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserver_bind_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_bind_sets_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>bind_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#layer4listenerrealserverbindset">Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">Sequence[Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recv_context_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recv_context_python" style="color: inherit; text-decoration: inherit;">recv_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1020,8 +1543,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd></dl>
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="send_context_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#send_context_python" style="color: inherit; text-decoration: inherit;">send_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unhealthy_threshold_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthy_threshold_python" style="color: inherit; text-decoration: inherit;">unhealthy_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1035,8 +1573,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1044,8 +1581,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1053,8 +1589,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="realservertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -1062,8 +1597,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checkport_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkport_yaml" style="color: inherit; text-decoration: inherit;">check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="checktype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checktype_yaml" style="color: inherit; text-decoration: inherit;">check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clientipmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientipmethod_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Ip<wbr>Method</a>
@@ -1071,8 +1621,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="connecttimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connecttimeout_yaml" style="color: inherit; text-decoration: inherit;">connect<wbr>Timeout</a>
@@ -1080,8 +1629,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contexttype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contexttype_yaml" style="color: inherit; text-decoration: inherit;">context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1089,8 +1645,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthythreshold_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthythreshold_yaml" style="color: inherit; text-decoration: inherit;">healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_yaml" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1098,8 +1661,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1107,8 +1669,7 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="realserverbindsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverbindsets_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Bind<wbr>Sets</a>
@@ -1116,8 +1677,15 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recvcontext_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recvcontext_yaml" style="color: inherit; text-decoration: inherit;">recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1125,8 +1693,23 @@ The Layer4Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd></dl>
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sendcontext_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendcontext_yaml" style="color: inherit; text-decoration: inherit;">send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unhealthythreshold_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthythreshold_yaml" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1147,8 +1730,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1156,8 +1738,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1165,8 +1746,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1180,8 +1760,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1189,8 +1768,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1198,8 +1776,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1213,8 +1820,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1222,8 +1828,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1231,8 +1836,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1246,8 +1850,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1255,8 +1858,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1264,8 +1866,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1279,8 +1880,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1288,8 +1888,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1297,8 +1896,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1312,8 +1910,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1321,8 +1918,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1330,8 +1926,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1341,132 +1936,178 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Layer4Listener resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">Layer4ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Layer4Listener</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">Layer4ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Layer4Listener</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">check_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">check_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">client_ip_method</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">connect_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">context_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">health_check</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">healthy_threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">realserver_bind_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_gaap.Layer4ListenerRealserverBindSetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">realserver_bind_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[Layer4ListenerRealserverBindSetArgs]]</span> = None<span class="p">,</span>
         <span class="nx">realserver_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">recv_context</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">scheduler</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Layer4Listener</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">send_context</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">unhealthy_threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Layer4Listener</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLayer4Listener<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">Layer4ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Layer4Listener</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLayer4Listener<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">Layer4ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Layer4Listener</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Layer4Listener</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">Layer4ListenerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Layer4Listener</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">Layer4ListenerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Layer4Listener</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">Layer4ListenerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Layer4Listener</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">Layer4ListenerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingLayer4Listener</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Gaap:Layer4Listener</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_gaap_layer4_listener</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Layer4ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Layer4ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1474,28 +2115,31 @@ Get an existing Layer4Listener resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Layer4ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1503,28 +2147,31 @@ Get an existing Layer4Listener resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Layer4ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1536,7 +2183,23 @@ The following state arguments are supported:
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_checkport_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkport_csharp" style="color: inherit; text-decoration: inherit;">Check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_checktype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checktype_csharp" style="color: inherit; text-decoration: inherit;">Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clientipmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientipmethod_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Ip<wbr>Method</a>
@@ -1544,8 +2207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_connecttimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_connecttimeout_csharp" style="color: inherit; text-decoration: inherit;">Connect<wbr>Timeout</a>
@@ -1553,8 +2215,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_contexttype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contexttype_csharp" style="color: inherit; text-decoration: inherit;">Context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1562,8 +2231,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -1571,8 +2239,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthythreshold_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthythreshold_csharp" style="color: inherit; text-decoration: inherit;">Healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_csharp" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1580,8 +2255,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1589,8 +2263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1598,8 +2271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1607,8 +2279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1616,17 +2287,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverbindsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverbindsets_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Bind<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realservertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realservertype_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Type</a>
@@ -1634,8 +2303,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recvcontext_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recvcontext_csharp" style="color: inherit; text-decoration: inherit;">Recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1643,8 +2319,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sendcontext_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sendcontext_csharp" style="color: inherit; text-decoration: inherit;">Send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1652,14 +2335,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_unhealthythreshold_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unhealthythreshold_csharp" style="color: inherit; text-decoration: inherit;">Unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_checkport_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkport_go" style="color: inherit; text-decoration: inherit;">Check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_checktype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checktype_go" style="color: inherit; text-decoration: inherit;">Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clientipmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientipmethod_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Ip<wbr>Method</a>
@@ -1667,8 +2373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_connecttimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_connecttimeout_go" style="color: inherit; text-decoration: inherit;">Connect<wbr>Timeout</a>
@@ -1676,8 +2381,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_contexttype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contexttype_go" style="color: inherit; text-decoration: inherit;">Context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1685,8 +2397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -1694,8 +2405,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthythreshold_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthythreshold_go" style="color: inherit; text-decoration: inherit;">Healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_go" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1703,8 +2421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1712,8 +2429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1721,8 +2437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1730,8 +2445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1739,8 +2453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverbindsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverbindsets_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Bind<wbr>Sets</a>
@@ -1748,8 +2461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#layer4listenerrealserverbindset">[]Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realservertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realservertype_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Type</a>
@@ -1757,8 +2469,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recvcontext_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recvcontext_go" style="color: inherit; text-decoration: inherit;">Recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1766,8 +2485,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sendcontext_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sendcontext_go" style="color: inherit; text-decoration: inherit;">Send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1775,14 +2501,203 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_unhealthythreshold_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unhealthythreshold_go" style="color: inherit; text-decoration: inherit;">Unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_check_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_check_port_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_check_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_check_type_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_client_ip_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_ip_method_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>ip_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_connect_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_connect_timeout_hcl" style="color: inherit; text-decoration: inherit;">connect_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_context_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_context_type_hcl" style="color: inherit; text-decoration: inherit;">context_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthy_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthy_threshold_hcl" style="color: inherit; text-decoration: inherit;">healthy_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_hcl" style="color: inherit; text-decoration: inherit;">interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer4 listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_realserver_bind_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserver_bind_sets_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>bind_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">list(object)</a></span>
+    </dt>
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_realserver_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserver_type_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recv_context_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recv_context_hcl" style="color: inherit; text-decoration: inherit;">recv_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_send_context_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_send_context_hcl" style="color: inherit; text-decoration: inherit;">send_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the layer4 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_unhealthy_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unhealthy_threshold_hcl" style="color: inherit; text-decoration: inherit;">unhealthy_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_checkport_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkport_java" style="color: inherit; text-decoration: inherit;">check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_checktype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checktype_java" style="color: inherit; text-decoration: inherit;">check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clientipmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientipmethod_java" style="color: inherit; text-decoration: inherit;">client<wbr>Ip<wbr>Method</a>
@@ -1790,8 +2705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_connecttimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_connecttimeout_java" style="color: inherit; text-decoration: inherit;">connect<wbr>Timeout</a>
@@ -1799,8 +2713,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_contexttype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contexttype_java" style="color: inherit; text-decoration: inherit;">context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1808,8 +2729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1817,8 +2737,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthythreshold_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthythreshold_java" style="color: inherit; text-decoration: inherit;">healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_java" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1826,8 +2753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1835,8 +2761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1844,8 +2769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1853,8 +2777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1862,17 +2785,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverbindsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverbindsets_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Bind<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realservertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realservertype_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -1880,8 +2801,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recvcontext_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recvcontext_java" style="color: inherit; text-decoration: inherit;">recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1889,8 +2817,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sendcontext_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sendcontext_java" style="color: inherit; text-decoration: inherit;">send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1898,14 +2833,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_unhealthythreshold_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unhealthythreshold_java" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_checkport_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkport_nodejs" style="color: inherit; text-decoration: inherit;">check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_checktype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checktype_nodejs" style="color: inherit; text-decoration: inherit;">check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clientipmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientipmethod_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Ip<wbr>Method</a>
@@ -1913,8 +2871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_connecttimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_connecttimeout_nodejs" style="color: inherit; text-decoration: inherit;">connect<wbr>Timeout</a>
@@ -1922,8 +2879,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_contexttype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contexttype_nodejs" style="color: inherit; text-decoration: inherit;">context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1931,8 +2895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1940,8 +2903,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthythreshold_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthythreshold_nodejs" style="color: inherit; text-decoration: inherit;">healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_nodejs" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1949,8 +2919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1958,8 +2927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1967,8 +2935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1976,8 +2943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1985,17 +2951,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverbindsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverbindsets_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Bind<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#layer4listenerrealserverbindset">Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set[]</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realservertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realservertype_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -2003,8 +2967,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recvcontext_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recvcontext_nodejs" style="color: inherit; text-decoration: inherit;">recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2012,8 +2983,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sendcontext_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sendcontext_nodejs" style="color: inherit; text-decoration: inherit;">send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2021,14 +2999,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_unhealthythreshold_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unhealthythreshold_nodejs" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_check_port_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_check_port_python" style="color: inherit; text-decoration: inherit;">check_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_check_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_check_type_python" style="color: inherit; text-decoration: inherit;">check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_client_ip_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_ip_method_python" style="color: inherit; text-decoration: inherit;">client_<wbr>ip_<wbr>method</a>
@@ -2036,8 +3037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_connect_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_connect_timeout_python" style="color: inherit; text-decoration: inherit;">connect_<wbr>timeout</a>
@@ -2045,8 +3045,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_context_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_context_type_python" style="color: inherit; text-decoration: inherit;">context_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2054,8 +3061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
@@ -2063,8 +3069,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthy_threshold_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthy_threshold_python" style="color: inherit; text-decoration: inherit;">healthy_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_python" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -2072,8 +3085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2081,8 +3093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2090,8 +3101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2099,8 +3109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -2108,17 +3117,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserver_bind_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserver_bind_sets_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>bind_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#layer4listenerrealserverbindset">Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#layer4listenerrealserverbindset">Sequence[Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realserver_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserver_type_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>type</a>
@@ -2126,8 +3133,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recv_context_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recv_context_python" style="color: inherit; text-decoration: inherit;">recv_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2135,8 +3149,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_send_context_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_send_context_python" style="color: inherit; text-decoration: inherit;">send_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2144,14 +3165,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_unhealthy_threshold_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unhealthy_threshold_python" style="color: inherit; text-decoration: inherit;">unhealthy_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_checkport_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkport_yaml" style="color: inherit; text-decoration: inherit;">check<wbr>Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>UDP origin station health check probe port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_checktype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checktype_yaml" style="color: inherit; text-decoration: inherit;">check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP origin server health type. PORT means check port, and PING means PING.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clientipmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientipmethod_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Ip<wbr>Method</a>
@@ -2159,8 +3203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of <code>TCP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_connecttimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_connecttimeout_yaml" style="color: inherit; text-decoration: inherit;">connect<wbr>Timeout</a>
@@ -2168,8 +3211,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of <code>TCP</code> protocol and require less than <code>interval</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than <code>interval</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_contexttype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_contexttype_yaml" style="color: inherit; text-decoration: inherit;">context<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2177,8 +3227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer4 listener.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the layer4 listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -2186,8 +3235,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable, default value is <code>false</code>. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enable, default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthythreshold_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthythreshold_yaml" style="color: inherit; text-decoration: inherit;">healthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_yaml" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -2195,8 +3251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval of the health check, default value is 5s. NOTES: Only supports listeners of <code>TCP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Interval of the health check, default value is 5s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2204,8 +3259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer4 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer4 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2213,8 +3267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer4 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer4 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2222,8 +3275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer4 listener. Valid value: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -2231,8 +3283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverbindsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverbindsets_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Bind<wbr>Sets</a>
@@ -2240,8 +3291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#layer4listenerrealserverbindset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>An information list of GAAP realserver.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_realservertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realservertype_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -2249,8 +3299,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the realserver. Valid value: <code>IP</code> and <code>DOMAIN</code>. NOTES: when the <code>protocol</code> is specified as <code>TCP</code> and the <code>scheduler</code> is specified as <code>wrr</code>, the item can only be set to <code>IP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recvcontext_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recvcontext_yaml" style="color: inherit; text-decoration: inherit;">recv<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source server health check port detects received messages. Only used when the health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2258,8 +3315,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling policy of the layer4 listener, default value is <code>rr</code>. Valid value: <code>rr</code>, <code>wrr</code> and <code>lc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sendcontext_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sendcontext_yaml" style="color: inherit; text-decoration: inherit;">send<wbr>Context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>UDP source server health check port detection sends messages. Only used when health check type is PORT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2267,8 +3331,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the layer4 listener.</p>
-</dd></dl>
+    <dd>Status of the layer4 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_unhealthythreshold_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unhealthythreshold_yaml" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2283,7 +3354,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="layer4listenerrealserverbindset">Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set</h4>
+<h4 id="layer4listenerrealserverbindset">
+Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<pulumi-choosable type="language" values="python,go" class="inline">, Layer4Listener<wbr>Realserver<wbr>Bind<wbr>Set<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2295,8 +3368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2304,8 +3376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2313,8 +3384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2322,8 +3392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</p>
-</dd></dl>
+    <dd>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2337,8 +3406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2346,8 +3414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2355,8 +3422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2364,8 +3430,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</p>
-</dd></dl>
+    <dd>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the GAAP realserver.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2379,8 +3482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2388,8 +3490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2397,8 +3498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2406,8 +3506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</p>
-</dd></dl>
+    <dd>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2421,8 +3520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2430,8 +3528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2439,8 +3536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2448,8 +3544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</p>
-</dd></dl>
+    <dd>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2463,8 +3558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2472,8 +3566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2481,8 +3574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2490,8 +3582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</p>
-</dd></dl>
+    <dd>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2505,8 +3596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2514,8 +3604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2523,8 +3612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2532,8 +3620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</p>
-</dd></dl>
+    <dd>Scheduling weight, default value is <code>1</code>. The range of values is [1,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2544,9 +3631,12 @@ The following state arguments are supported:
 GAAP layer4 listener can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
+  $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener foo listener-11112222
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2558,7 +3648,6 @@ $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaa
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

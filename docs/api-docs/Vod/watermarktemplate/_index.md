@@ -2,9 +2,11 @@
 ---
 title: "WatermarkTemplate"
 title_tag: "tencentcloud.Vod.WatermarkTemplate"
-meta_desc: "Documentation for the tencentcloud.Vod.WatermarkTemplate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a vod watermark template"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -17,69 +19,84 @@ Provides a resource to create a vod watermark template
 
 
 ## Create WatermarkTemplate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                      <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                      <span class="nx">coordinate_origin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                      <span class="nx">image_template</span><span class="p">:</span> <span class="nx">Optional[_vod.WatermarkTemplateImageTemplateArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                      <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                      <span class="nx">svg_template</span><span class="p">:</span> <span class="nx">Optional[_vod.WatermarkTemplateSvgTemplateArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">text_template</span><span class="p">:</span> <span class="nx">Optional[_vod.WatermarkTemplateTextTemplateArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                      <span class="nx">x_pos</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                      <span class="nx">y_pos</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                      <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                      <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">coordinate_origin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">image_template</span><span class="p">:</span> <span class="nx">Optional[WatermarkTemplateImageTemplateArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">svg_template</span><span class="p">:</span> <span class="nx">Optional[WatermarkTemplateSvgTemplateArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">text_template</span><span class="p">:</span> <span class="nx">Optional[WatermarkTemplateTextTemplateArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">x_pos</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">y_pos</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewWatermarkTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">WatermarkTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewWatermarkTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">WatermarkTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">WatermarkTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WatermarkTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:WatermarkTemplate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:WatermarkTemplate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vod_watermark_template&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -100,7 +117,7 @@ Provides a resource to create a vod watermark template
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -217,11 +234,19 @@ Provides a resource to create a vod watermark template
 </pulumi-choosable>
 </div>
 
+
+
 ## WatermarkTemplate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The WatermarkTemplate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -237,8 +262,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-required"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -246,8 +270,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -255,8 +278,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="coordinateorigin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coordinateorigin_csharp" style="color: inherit; text-decoration: inherit;">Coordinate<wbr>Origin</a>
@@ -264,17 +286,15 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetemplate_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplateimagetemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplateimagetemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Image<wbr>Template</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -282,26 +302,23 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgtemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgtemplate_csharp" style="color: inherit; text-decoration: inherit;">Svg<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Svg<wbr>Template</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="texttemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#texttemplate_csharp" style="color: inherit; text-decoration: inherit;">Text<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatetexttemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatetexttemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Text<wbr>Template</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_csharp" style="color: inherit; text-decoration: inherit;">XPos</a>
@@ -309,8 +326,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_csharp" style="color: inherit; text-decoration: inherit;">YPos</a>
@@ -318,8 +334,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -333,8 +348,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-required"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -342,8 +356,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -351,8 +364,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="coordinateorigin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coordinateorigin_go" style="color: inherit; text-decoration: inherit;">Coordinate<wbr>Origin</a>
@@ -360,8 +372,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetemplate_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Template</a>
@@ -369,8 +380,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -378,8 +388,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgtemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgtemplate_go" style="color: inherit; text-decoration: inherit;">Svg<wbr>Template</a>
@@ -387,8 +396,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="texttemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#texttemplate_go" style="color: inherit; text-decoration: inherit;">Text<wbr>Template</a>
@@ -396,8 +404,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_go" style="color: inherit; text-decoration: inherit;">XPos</a>
@@ -405,8 +412,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_go" style="color: inherit; text-decoration: inherit;">YPos</a>
@@ -414,8 +420,93 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="coordinate_origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coordinate_origin_hcl" style="color: inherit; text-decoration: inherit;">coordinate_<wbr>origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_template_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#watermarktemplateimagetemplate">object</a></span>
+    </dt>
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="svg_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_template_hcl" style="color: inherit; text-decoration: inherit;">svg_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#watermarktemplatesvgtemplate">object</a></span>
+    </dt>
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="text_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_template_hcl" style="color: inherit; text-decoration: inherit;">text_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#watermarktemplatetexttemplate">object</a></span>
+    </dt>
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="x_pos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#x_pos_hcl" style="color: inherit; text-decoration: inherit;">x_<wbr>pos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="y_pos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#y_pos_hcl" style="color: inherit; text-decoration: inherit;">y_<wbr>pos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -429,8 +520,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-required"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -438,8 +528,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -447,8 +536,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="coordinateorigin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coordinateorigin_java" style="color: inherit; text-decoration: inherit;">coordinate<wbr>Origin</a>
@@ -456,17 +544,15 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetemplate_java" style="color: inherit; text-decoration: inherit;">image<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -474,26 +560,23 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgtemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgtemplate_java" style="color: inherit; text-decoration: inherit;">svg<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="texttemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#texttemplate_java" style="color: inherit; text-decoration: inherit;">text<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_java" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -501,8 +584,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_java" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -510,8 +592,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +606,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-required"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -534,8 +614,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -543,8 +622,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="coordinateorigin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coordinateorigin_nodejs" style="color: inherit; text-decoration: inherit;">coordinate<wbr>Origin</a>
@@ -552,17 +630,15 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetemplate_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -570,26 +646,23 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgtemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgtemplate_nodejs" style="color: inherit; text-decoration: inherit;">svg<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="texttemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#texttemplate_nodejs" style="color: inherit; text-decoration: inherit;">text<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_nodejs" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -597,8 +670,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_nodejs" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -606,8 +678,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -621,8 +692,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-required"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -630,8 +700,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -639,8 +708,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="coordinate_origin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coordinate_origin_python" style="color: inherit; text-decoration: inherit;">coordinate_<wbr>origin</a>
@@ -648,8 +716,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="image_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_template_python" style="color: inherit; text-decoration: inherit;">image_<wbr>template</a>
@@ -657,8 +724,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -666,8 +732,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="svg_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_template_python" style="color: inherit; text-decoration: inherit;">svg_<wbr>template</a>
@@ -675,8 +740,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="text_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_template_python" style="color: inherit; text-decoration: inherit;">text_<wbr>template</a>
@@ -684,8 +748,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="x_pos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#x_pos_python" style="color: inherit; text-decoration: inherit;">x_<wbr>pos</a>
@@ -693,8 +756,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="y_pos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#y_pos_python" style="color: inherit; text-decoration: inherit;">y_<wbr>pos</a>
@@ -702,8 +764,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -717,8 +778,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-required"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -726,8 +786,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -735,8 +794,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="coordinateorigin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coordinateorigin_yaml" style="color: inherit; text-decoration: inherit;">coordinate<wbr>Origin</a>
@@ -744,8 +802,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetemplate_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Template</a>
@@ -753,8 +810,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplateimagetemplate">Property Map</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -762,8 +818,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgtemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgtemplate_yaml" style="color: inherit; text-decoration: inherit;">svg<wbr>Template</a>
@@ -771,8 +826,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatesvgtemplate">Property Map</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="texttemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#texttemplate_yaml" style="color: inherit; text-decoration: inherit;">text<wbr>Template</a>
@@ -780,8 +834,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatetexttemplate">Property Map</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_yaml" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -789,8 +842,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_yaml" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -798,8 +850,7 @@ The WatermarkTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -820,8 +871,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -835,8 +885,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -850,8 +913,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +927,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -880,8 +941,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -895,8 +955,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -906,129 +965,168 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing WatermarkTemplate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">WatermarkTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">WatermarkTemplate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">WatermarkTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">WatermarkTemplate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">coordinate_origin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">image_template</span><span class="p">:</span> <span class="nx">Optional[_vod.WatermarkTemplateImageTemplateArgs]</span> = None<span class="p">,</span>
+        <span class="nx">image_template</span><span class="p">:</span> <span class="nx">Optional[WatermarkTemplateImageTemplateArgs]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">svg_template</span><span class="p">:</span> <span class="nx">Optional[_vod.WatermarkTemplateSvgTemplateArgs]</span> = None<span class="p">,</span>
-        <span class="nx">text_template</span><span class="p">:</span> <span class="nx">Optional[_vod.WatermarkTemplateTextTemplateArgs]</span> = None<span class="p">,</span>
+        <span class="nx">svg_template</span><span class="p">:</span> <span class="nx">Optional[WatermarkTemplateSvgTemplateArgs]</span> = None<span class="p">,</span>
+        <span class="nx">text_template</span><span class="p">:</span> <span class="nx">Optional[WatermarkTemplateTextTemplateArgs]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">x_pos</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">y_pos</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> WatermarkTemplate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetWatermarkTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">WatermarkTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">WatermarkTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetWatermarkTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">WatermarkTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">WatermarkTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">WatermarkTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WatermarkTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">WatermarkTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WatermarkTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">WatermarkTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WatermarkTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">WatermarkTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WatermarkTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingWatermarkTemplate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vod:WatermarkTemplate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vod_watermark_template</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WatermarkTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WatermarkTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1036,28 +1134,31 @@ Get an existing WatermarkTemplate resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WatermarkTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1065,28 +1166,31 @@ Get an existing WatermarkTemplate resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WatermarkTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1106,8 +1210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coordinateorigin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coordinateorigin_csharp" style="color: inherit; text-decoration: inherit;">Coordinate<wbr>Origin</a>
@@ -1115,17 +1218,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imagetemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagetemplate_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplateimagetemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplateimagetemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Image<wbr>Template</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1133,8 +1234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -1142,26 +1242,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_svgtemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_svgtemplate_csharp" style="color: inherit; text-decoration: inherit;">Svg<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Svg<wbr>Template</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_texttemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_texttemplate_csharp" style="color: inherit; text-decoration: inherit;">Text<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatetexttemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatetexttemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Watermark<wbr>Template<wbr>Text<wbr>Template</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1169,8 +1266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_xpos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_xpos_csharp" style="color: inherit; text-decoration: inherit;">XPos</a>
@@ -1178,8 +1274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ypos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ypos_csharp" style="color: inherit; text-decoration: inherit;">YPos</a>
@@ -1187,8 +1282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1202,8 +1296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coordinateorigin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coordinateorigin_go" style="color: inherit; text-decoration: inherit;">Coordinate<wbr>Origin</a>
@@ -1211,8 +1304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imagetemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagetemplate_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Template</a>
@@ -1220,8 +1312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1229,8 +1320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -1238,8 +1328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_svgtemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_svgtemplate_go" style="color: inherit; text-decoration: inherit;">Svg<wbr>Template</a>
@@ -1247,8 +1336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_texttemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_texttemplate_go" style="color: inherit; text-decoration: inherit;">Text<wbr>Template</a>
@@ -1256,8 +1344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1265,8 +1352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_xpos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_xpos_go" style="color: inherit; text-decoration: inherit;">XPos</a>
@@ -1274,8 +1360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ypos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ypos_go" style="color: inherit; text-decoration: inherit;">YPos</a>
@@ -1283,8 +1368,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_coordinate_origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coordinate_origin_hcl" style="color: inherit; text-decoration: inherit;">coordinate_<wbr>origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_image_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_template_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#watermarktemplateimagetemplate">object</a></span>
+    </dt>
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_svg_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_svg_template_hcl" style="color: inherit; text-decoration: inherit;">svg_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#watermarktemplatesvgtemplate">object</a></span>
+    </dt>
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_text_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_text_template_hcl" style="color: inherit; text-decoration: inherit;">text_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#watermarktemplatetexttemplate">object</a></span>
+    </dt>
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_x_pos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_x_pos_hcl" style="color: inherit; text-decoration: inherit;">x_<wbr>pos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_y_pos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_y_pos_hcl" style="color: inherit; text-decoration: inherit;">y_<wbr>pos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1298,8 +1468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coordinateorigin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coordinateorigin_java" style="color: inherit; text-decoration: inherit;">coordinate<wbr>Origin</a>
@@ -1307,17 +1476,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imagetemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagetemplate_java" style="color: inherit; text-decoration: inherit;">image<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1325,8 +1492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1334,26 +1500,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_svgtemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_svgtemplate_java" style="color: inherit; text-decoration: inherit;">svg<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_texttemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_texttemplate_java" style="color: inherit; text-decoration: inherit;">text<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1361,8 +1524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_xpos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_xpos_java" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -1370,8 +1532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ypos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ypos_java" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -1379,8 +1540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1394,8 +1554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coordinateorigin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coordinateorigin_nodejs" style="color: inherit; text-decoration: inherit;">coordinate<wbr>Origin</a>
@@ -1403,17 +1562,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imagetemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagetemplate_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1421,8 +1578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1430,26 +1586,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_svgtemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_svgtemplate_nodejs" style="color: inherit; text-decoration: inherit;">svg<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_texttemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_texttemplate_nodejs" style="color: inherit; text-decoration: inherit;">text<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1457,8 +1610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_xpos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_xpos_nodejs" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -1466,8 +1618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ypos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ypos_nodejs" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -1475,8 +1626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1490,8 +1640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coordinate_origin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coordinate_origin_python" style="color: inherit; text-decoration: inherit;">coordinate_<wbr>origin</a>
@@ -1499,8 +1648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_image_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_template_python" style="color: inherit; text-decoration: inherit;">image_<wbr>template</a>
@@ -1508,8 +1656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1517,8 +1664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -1526,8 +1672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_svg_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_svg_template_python" style="color: inherit; text-decoration: inherit;">svg_<wbr>template</a>
@@ -1535,8 +1680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_text_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_text_template_python" style="color: inherit; text-decoration: inherit;">text_<wbr>template</a>
@@ -1544,8 +1688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1553,8 +1696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_x_pos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_x_pos_python" style="color: inherit; text-decoration: inherit;">x_<wbr>pos</a>
@@ -1562,8 +1704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_y_pos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_y_pos_python" style="color: inherit; text-decoration: inherit;">y_<wbr>pos</a>
@@ -1571,8 +1712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1586,8 +1726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coordinateorigin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coordinateorigin_yaml" style="color: inherit; text-decoration: inherit;">coordinate<wbr>Origin</a>
@@ -1595,8 +1734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imagetemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagetemplate_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Template</a>
@@ -1604,8 +1742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplateimagetemplate">Property Map</a></span>
     </dt>
-    <dd><p>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermarking template. This field is required when <code>Type</code> is <code>image</code> and is invalid when <code>Type</code> is <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1613,8 +1750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1622,8 +1758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_svgtemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_svgtemplate_yaml" style="color: inherit; text-decoration: inherit;">svg<wbr>Template</a>
@@ -1631,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatesvgtemplate">Property Map</a></span>
     </dt>
-    <dd><p>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</p>
-</dd><dt class="property-optional"
+    <dd>SVG watermarking template. This field is required when <code>Type</code> is <code>svg</code> and is invalid when <code>Type</code> is <code>image</code> or <code>text</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_texttemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_texttemplate_yaml" style="color: inherit; text-decoration: inherit;">text<wbr>Template</a>
@@ -1640,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#watermarktemplatetexttemplate">Property Map</a></span>
     </dt>
-    <dd><p>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Text watermarking template. This field is required when <code>Type</code> is <code>text</code> and is invalid when <code>Type</code> is <code>image</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1649,8 +1782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_xpos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_xpos_yaml" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -1658,8 +1790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>XPos</code> of the watermark will be the specified percentage of the video width; for example, <code>10%</code> means that <code>XPos</code> is 10% of the video width; If the string ends in px, the <code>XPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>XPos</code> is 100 px.Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ypos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ypos_yaml" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -1667,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</p>
-</dd></dl>
+    <dd>The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the <code>YPos</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>YPos</code> is 10% of the video height; If the string ends in px, the <code>YPos</code> of the watermark will be the specified px; for example, <code>100px</code> means that <code>YPos</code> is 100 px.Default value: 0 px.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1683,7 +1813,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="watermarktemplateimagetemplate">Watermark<wbr>Template<wbr>Image<wbr>Template</h4>
+<h4 id="watermarktemplateimagetemplate">
+Watermark<wbr>Template<wbr>Image<wbr>Template<pulumi-choosable type="language" values="python,go" class="inline">, Watermark<wbr>Template<wbr>Image<wbr>Template<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1695,8 +1827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_csharp" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -1704,8 +1835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeattype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeattype_csharp" style="color: inherit; text-decoration: inherit;">Repeat<wbr>Type</a>
@@ -1713,8 +1843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</p>
-</dd><dt class="property-optional"
+    <dd>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</dd><dt class="property-optional"
             title="Optional">
         <span id="transparency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparency_csharp" style="color: inherit; text-decoration: inherit;">Transparency</a>
@@ -1722,8 +1851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_csharp" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -1731,8 +1859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</p>
-</dd></dl>
+    <dd>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1746,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_go" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -1755,8 +1881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeattype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeattype_go" style="color: inherit; text-decoration: inherit;">Repeat<wbr>Type</a>
@@ -1764,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</p>
-</dd><dt class="property-optional"
+    <dd>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</dd><dt class="property-optional"
             title="Optional">
         <span id="transparency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparency_go" style="color: inherit; text-decoration: inherit;">Transparency</a>
@@ -1773,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_go" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -1782,8 +1905,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</p>
-</dd></dl>
+    <dd>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="image_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_content_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="height_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_hcl" style="color: inherit; text-decoration: inherit;">height</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="repeat_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeat_type_hcl" style="color: inherit; text-decoration: inherit;">repeat_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transparency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparency_hcl" style="color: inherit; text-decoration: inherit;">transparency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_hcl" style="color: inherit; text-decoration: inherit;">width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1797,8 +1965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_java" style="color: inherit; text-decoration: inherit;">height</a>
@@ -1806,8 +1973,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeattype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeattype_java" style="color: inherit; text-decoration: inherit;">repeat<wbr>Type</a>
@@ -1815,8 +1981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</p>
-</dd><dt class="property-optional"
+    <dd>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</dd><dt class="property-optional"
             title="Optional">
         <span id="transparency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparency_java" style="color: inherit; text-decoration: inherit;">transparency</a>
@@ -1824,8 +1989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_java" style="color: inherit; text-decoration: inherit;">width</a>
@@ -1833,8 +1997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</p>
-</dd></dl>
+    <dd>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1848,8 +2011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_nodejs" style="color: inherit; text-decoration: inherit;">height</a>
@@ -1857,8 +2019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeattype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeattype_nodejs" style="color: inherit; text-decoration: inherit;">repeat<wbr>Type</a>
@@ -1866,8 +2027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</p>
-</dd><dt class="property-optional"
+    <dd>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</dd><dt class="property-optional"
             title="Optional">
         <span id="transparency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparency_nodejs" style="color: inherit; text-decoration: inherit;">transparency</a>
@@ -1875,8 +2035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_nodejs" style="color: inherit; text-decoration: inherit;">width</a>
@@ -1884,8 +2043,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</p>
-</dd></dl>
+    <dd>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1899,8 +2057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_python" style="color: inherit; text-decoration: inherit;">height</a>
@@ -1908,8 +2065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeat_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeat_type_python" style="color: inherit; text-decoration: inherit;">repeat_<wbr>type</a>
@@ -1917,8 +2073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</p>
-</dd><dt class="property-optional"
+    <dd>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</dd><dt class="property-optional"
             title="Optional">
         <span id="transparency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparency_python" style="color: inherit; text-decoration: inherit;">transparency</a>
@@ -1926,8 +2081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_python" style="color: inherit; text-decoration: inherit;">width</a>
@@ -1935,8 +2089,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</p>
-</dd></dl>
+    <dd>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1950,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The <a href="https://tools.ietf.org/html/rfc4648">Base64</a> encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_yaml" style="color: inherit; text-decoration: inherit;">height</a>
@@ -1959,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height. % and px formats are supported: If the string ends in %, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that <code>Height</code> will be proportionally scaled according to the aspect ratio of the original watermark image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeattype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeattype_yaml" style="color: inherit; text-decoration: inherit;">repeat<wbr>Type</a>
@@ -1968,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</p>
-</dd><dt class="property-optional"
+    <dd>Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.</dd><dt class="property-optional"
             title="Optional">
         <span id="transparency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparency_yaml" style="color: inherit; text-decoration: inherit;">transparency</a>
@@ -1977,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_yaml" style="color: inherit; text-decoration: inherit;">width</a>
@@ -1986,12 +2135,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</p>
-</dd></dl>
+    <dd>Watermark width. % and px formats are supported: If the string ends in %, the <code>Width</code> of the watermark will be the specified percentage of the video width. For example, <code>10%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in px, the <code>Width</code> of the watermark will be in pixels. For example, <code>100px</code> means that <code>Width</code> is 100 pixels. Value range: [8, 4096]. Default value: 10%.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="watermarktemplatesvgtemplate">Watermark<wbr>Template<wbr>Svg<wbr>Template</h4>
+<h4 id="watermarktemplatesvgtemplate">
+Watermark<wbr>Template<wbr>Svg<wbr>Template<pulumi-choosable type="language" values="python,go" class="inline">, Watermark<wbr>Template<wbr>Svg<wbr>Template<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2003,8 +2153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_csharp" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -2012,8 +2161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</p>
-</dd></dl>
+    <dd>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2027,8 +2175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_go" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -2036,8 +2183,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</p>
-</dd></dl>
+    <dd>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="height_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_hcl" style="color: inherit; text-decoration: inherit;">height</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_hcl" style="color: inherit; text-decoration: inherit;">width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2051,8 +2219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_java" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2060,8 +2227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</p>
-</dd></dl>
+    <dd>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2075,8 +2241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_nodejs" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2084,8 +2249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</p>
-</dd></dl>
+    <dd>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2099,8 +2263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_python" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2108,8 +2271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</p>
-</dd></dl>
+    <dd>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2123,8 +2285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Height</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Height</code> is 100 px; if <code>0px</code> is entered and <code>Width</code> is not <code>0px</code>, the watermark height will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark height will be the height of the source SVG image;  If the string ends in <code>W%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Height</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Height</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Height</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Height</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Height</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Height</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Height</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>H%</code>. Default value: 0 px.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_yaml" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2132,12 +2293,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</p>
-</dd></dl>
+    <dd>Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the <code>Width</code> of the watermark will be in px; for example, <code>100px</code> means that <code>Width</code> is 100 px; if <code>0px</code> is entered and <code>Height</code> is not <code>0px</code>, the watermark width will be proportionally scaled based on the source SVG image; if <code>0px</code> is entered for both <code>Width</code> and <code>Height</code>, the watermark width will be the width of the source SVG image;  If the string ends in <code>W%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video width; for example, <code>10W%</code> means that <code>Width</code> is 10% of the video width;  If the string ends in <code>H%</code>, the <code>Width</code> of the watermark will be the specified percentage of the video height; for example, <code>10H%</code> means that <code>Width</code> is 10% of the video height;  If the string ends in <code>S%</code>, the <code>Width</code> of the watermark will be the specified percentage of the short side of the video; for example, <code>10S%</code> means that <code>Width</code> is 10% of the short side of the video;  If the string ends in <code>L%</code>, the <code>Width</code> of the watermark will be the specified percentage of the long side of the video; for example, <code>10L%</code> means that <code>Width</code> is 10% of the long side of the video;  If the string ends in %, the meaning is the same as <code>W%</code>. Default value: 10W%.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="watermarktemplatetexttemplate">Watermark<wbr>Template<wbr>Text<wbr>Template</h4>
+<h4 id="watermarktemplatetexttemplate">
+Watermark<wbr>Template<wbr>Text<wbr>Template<pulumi-choosable type="language" values="python,go" class="inline">, Watermark<wbr>Template<wbr>Text<wbr>Template<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2149,8 +2311,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</p>
-</dd><dt class="property-required"
+    <dd>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</dd><dt class="property-required"
             title="Required">
         <span id="fontcolor_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontcolor_csharp" style="color: inherit; text-decoration: inherit;">Font<wbr>Color</a>
@@ -2158,8 +2319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</p>
-</dd><dt class="property-required"
+    <dd>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</dd><dt class="property-required"
             title="Required">
         <span id="fontsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontsize_csharp" style="color: inherit; text-decoration: inherit;">Font<wbr>Size</a>
@@ -2167,8 +2327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font size in Npx format where N is a numeric value.</p>
-</dd><dt class="property-required"
+    <dd>Font size in Npx format where N is a numeric value.</dd><dt class="property-required"
             title="Required">
         <span id="fonttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fonttype_csharp" style="color: inherit; text-decoration: inherit;">Font<wbr>Type</a>
@@ -2176,8 +2335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</p>
-</dd></dl>
+    <dd>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2191,8 +2349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</p>
-</dd><dt class="property-required"
+    <dd>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</dd><dt class="property-required"
             title="Required">
         <span id="fontcolor_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontcolor_go" style="color: inherit; text-decoration: inherit;">Font<wbr>Color</a>
@@ -2200,8 +2357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</p>
-</dd><dt class="property-required"
+    <dd>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</dd><dt class="property-required"
             title="Required">
         <span id="fontsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontsize_go" style="color: inherit; text-decoration: inherit;">Font<wbr>Size</a>
@@ -2209,8 +2365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font size in Npx format where N is a numeric value.</p>
-</dd><dt class="property-required"
+    <dd>Font size in Npx format where N is a numeric value.</dd><dt class="property-required"
             title="Required">
         <span id="fonttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fonttype_go" style="color: inherit; text-decoration: inherit;">Font<wbr>Type</a>
@@ -2218,8 +2373,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</p>
-</dd></dl>
+    <dd>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="font_alpha_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#font_alpha_hcl" style="color: inherit; text-decoration: inherit;">font_<wbr>alpha</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="font_color_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#font_color_hcl" style="color: inherit; text-decoration: inherit;">font_<wbr>color</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</dd><dt class="property-required"
+            title="Required">
+        <span id="font_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#font_size_hcl" style="color: inherit; text-decoration: inherit;">font_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Font size in Npx format where N is a numeric value.</dd><dt class="property-required"
+            title="Required">
+        <span id="font_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#font_type_hcl" style="color: inherit; text-decoration: inherit;">font_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2233,8 +2425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</p>
-</dd><dt class="property-required"
+    <dd>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</dd><dt class="property-required"
             title="Required">
         <span id="fontcolor_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontcolor_java" style="color: inherit; text-decoration: inherit;">font<wbr>Color</a>
@@ -2242,8 +2433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</p>
-</dd><dt class="property-required"
+    <dd>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</dd><dt class="property-required"
             title="Required">
         <span id="fontsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontsize_java" style="color: inherit; text-decoration: inherit;">font<wbr>Size</a>
@@ -2251,8 +2441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Font size in Npx format where N is a numeric value.</p>
-</dd><dt class="property-required"
+    <dd>Font size in Npx format where N is a numeric value.</dd><dt class="property-required"
             title="Required">
         <span id="fonttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fonttype_java" style="color: inherit; text-decoration: inherit;">font<wbr>Type</a>
@@ -2260,8 +2449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</p>
-</dd></dl>
+    <dd>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2275,8 +2463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</p>
-</dd><dt class="property-required"
+    <dd>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</dd><dt class="property-required"
             title="Required">
         <span id="fontcolor_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontcolor_nodejs" style="color: inherit; text-decoration: inherit;">font<wbr>Color</a>
@@ -2284,8 +2471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</p>
-</dd><dt class="property-required"
+    <dd>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</dd><dt class="property-required"
             title="Required">
         <span id="fontsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontsize_nodejs" style="color: inherit; text-decoration: inherit;">font<wbr>Size</a>
@@ -2293,8 +2479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font size in Npx format where N is a numeric value.</p>
-</dd><dt class="property-required"
+    <dd>Font size in Npx format where N is a numeric value.</dd><dt class="property-required"
             title="Required">
         <span id="fonttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fonttype_nodejs" style="color: inherit; text-decoration: inherit;">font<wbr>Type</a>
@@ -2302,8 +2487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</p>
-</dd></dl>
+    <dd>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2317,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</p>
-</dd><dt class="property-required"
+    <dd>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</dd><dt class="property-required"
             title="Required">
         <span id="font_color_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#font_color_python" style="color: inherit; text-decoration: inherit;">font_<wbr>color</a>
@@ -2326,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</p>
-</dd><dt class="property-required"
+    <dd>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</dd><dt class="property-required"
             title="Required">
         <span id="font_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#font_size_python" style="color: inherit; text-decoration: inherit;">font_<wbr>size</a>
@@ -2335,8 +2517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Font size in Npx format where N is a numeric value.</p>
-</dd><dt class="property-required"
+    <dd>Font size in Npx format where N is a numeric value.</dd><dt class="property-required"
             title="Required">
         <span id="font_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#font_type_python" style="color: inherit; text-decoration: inherit;">font_<wbr>type</a>
@@ -2344,8 +2525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</p>
-</dd></dl>
+    <dd>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2359,8 +2539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</p>
-</dd><dt class="property-required"
+    <dd>Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.</dd><dt class="property-required"
             title="Required">
         <span id="fontcolor_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontcolor_yaml" style="color: inherit; text-decoration: inherit;">font<wbr>Color</a>
@@ -2368,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</p>
-</dd><dt class="property-required"
+    <dd>Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).</dd><dt class="property-required"
             title="Required">
         <span id="fontsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fontsize_yaml" style="color: inherit; text-decoration: inherit;">font<wbr>Size</a>
@@ -2377,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Font size in Npx format where N is a numeric value.</p>
-</dd><dt class="property-required"
+    <dd>Font size in Npx format where N is a numeric value.</dd><dt class="property-required"
             title="Required">
         <span id="fonttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fonttype_yaml" style="color: inherit; text-decoration: inherit;">font<wbr>Type</a>
@@ -2386,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</p>
-</dd></dl>
+    <dd>Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2402,6 +2578,8 @@ $ pulumi import tencentcloud:Vod/watermarkTemplate:WatermarkTemplate watermark_t
 ```
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
 
 
 
@@ -2412,7 +2590,6 @@ $ pulumi import tencentcloud:Vod/watermarkTemplate:WatermarkTemplate watermark_t
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

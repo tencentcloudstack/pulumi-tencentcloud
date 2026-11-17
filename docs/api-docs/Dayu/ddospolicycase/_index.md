@@ -2,9 +2,11 @@
 ---
 title: "DdosPolicyCase"
 title_tag: "tencentcloud.Dayu.DdosPolicyCase"
-meta_desc: "Documentation for the tencentcloud.Dayu.DdosPolicyCase resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create dayu DDoS policy case NOTE: when a dayu DDoS policy case is created, there will be a dayu DDoS policy created with the same."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,80 +20,152 @@ Use this resource to create dayu DDoS policy case
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.dayu.DdosPolicyCase("foo", {
-    appProtocols: [
-        "tcp",
-        "udp",
-    ],
-    appType: "WEB",
-    hasAbroad: "yes",
-    hasInitiateTcp: "yes",
-    hasInitiateUdp: "yes",
-    hasVpn: "yes",
-    maxTcpPackageLen: "1200",
-    maxUdpPackageLen: "1200",
-    minTcpPackageLen: "1000",
-    minUdpPackageLen: "1000",
-    peerTcpPort: "1111",
-    peerUdpPort: "3333",
+    resourceType: "bgpip",
+    name: "tf_test_policy_case",
     platformTypes: [
         "PC",
         "MOBILE",
     ],
-    resourceType: "bgpip",
-    tcpEndPort: "2000",
-    tcpFootprint: "511",
+    appType: "WEB",
+    appProtocols: [
+        "tcp",
+        "udp",
+    ],
     tcpStartPort: "1000",
-    udpEndPort: "4000",
-    udpFootprint: "500",
+    tcpEndPort: "2000",
     udpStartPort: "3000",
+    udpEndPort: "4000",
+    hasAbroad: "yes",
+    hasInitiateTcp: "yes",
+    hasInitiateUdp: "yes",
+    peerTcpPort: "1111",
+    peerUdpPort: "3333",
+    tcpFootprint: "511",
+    udpFootprint: "500",
     webApiUrls: [
         "abc.com",
         "test.cn/aaa.png",
     ],
+    minTcpPackageLen: "1000",
+    maxTcpPackageLen: "1200",
+    minUdpPackageLen: "1000",
+    maxUdpPackageLen: "1200",
+    hasVpn: "yes",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.dayu.DdosPolicyCase("foo",
-    app_protocols=[
-        "tcp",
-        "udp",
-    ],
-    app_type="WEB",
-    has_abroad="yes",
-    has_initiate_tcp="yes",
-    has_initiate_udp="yes",
-    has_vpn="yes",
-    max_tcp_package_len="1200",
-    max_udp_package_len="1200",
-    min_tcp_package_len="1000",
-    min_udp_package_len="1000",
-    peer_tcp_port="1111",
-    peer_udp_port="3333",
+    resource_type="bgpip",
+    name="tf_test_policy_case",
     platform_types=[
         "PC",
         "MOBILE",
     ],
-    resource_type="bgpip",
-    tcp_end_port="2000",
-    tcp_footprint="511",
+    app_type="WEB",
+    app_protocols=[
+        "tcp",
+        "udp",
+    ],
     tcp_start_port="1000",
-    udp_end_port="4000",
-    udp_footprint="500",
+    tcp_end_port="2000",
     udp_start_port="3000",
+    udp_end_port="4000",
+    has_abroad="yes",
+    has_initiate_tcp="yes",
+    has_initiate_udp="yes",
+    peer_tcp_port="1111",
+    peer_udp_port="3333",
+    tcp_footprint="511",
+    udp_footprint="500",
     web_api_urls=[
         "abc.com",
         "test.cn/aaa.png",
-    ])
+    ],
+    min_tcp_package_len="1000",
+    max_tcp_package_len="1200",
+    min_udp_package_len="1000",
+    max_udp_package_len="1200",
+    has_vpn="yes")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dayu.NewDdosPolicyCase(ctx, "foo", &dayu.DdosPolicyCaseArgs{
+			ResourceType: pulumi.String("bgpip"),
+			Name:         pulumi.String("tf_test_policy_case"),
+			PlatformTypes: pulumi.StringArray{
+				pulumi.String("PC"),
+				pulumi.String("MOBILE"),
+			},
+			AppType: pulumi.String("WEB"),
+			AppProtocols: pulumi.StringArray{
+				pulumi.String("tcp"),
+				pulumi.String("udp"),
+			},
+			TcpStartPort:   pulumi.String("1000"),
+			TcpEndPort:     pulumi.String("2000"),
+			UdpStartPort:   pulumi.String("3000"),
+			UdpEndPort:     pulumi.String("4000"),
+			HasAbroad:      pulumi.String("yes"),
+			HasInitiateTcp: pulumi.String("yes"),
+			HasInitiateUdp: pulumi.String("yes"),
+			PeerTcpPort:    pulumi.String("1111"),
+			PeerUdpPort:    pulumi.String("3333"),
+			TcpFootprint:   pulumi.String("511"),
+			UdpFootprint:   pulumi.String("500"),
+			WebApiUrls: pulumi.StringArray{
+				pulumi.String("abc.com"),
+				pulumi.String("test.cn/aaa.png"),
+			},
+			MinTcpPackageLen: pulumi.String("1000"),
+			MaxTcpPackageLen: pulumi.String("1200"),
+			MinUdpPackageLen: pulumi.String("1000"),
+			MaxUdpPackageLen: pulumi.String("1200"),
+			HasVpn:           pulumi.String("yes"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -102,92 +176,49 @@ return await Deployment.RunAsync(() =>
 {
     var foo = new Tencentcloud.Dayu.DdosPolicyCase("foo", new()
     {
-        AppProtocols = new[]
-        {
-            "tcp",
-            "udp",
-        },
-        AppType = "WEB",
-        HasAbroad = "yes",
-        HasInitiateTcp = "yes",
-        HasInitiateUdp = "yes",
-        HasVpn = "yes",
-        MaxTcpPackageLen = "1200",
-        MaxUdpPackageLen = "1200",
-        MinTcpPackageLen = "1000",
-        MinUdpPackageLen = "1000",
-        PeerTcpPort = "1111",
-        PeerUdpPort = "3333",
+        ResourceType = "bgpip",
+        Name = "tf_test_policy_case",
         PlatformTypes = new[]
         {
             "PC",
             "MOBILE",
         },
-        ResourceType = "bgpip",
-        TcpEndPort = "2000",
-        TcpFootprint = "511",
+        AppType = "WEB",
+        AppProtocols = new[]
+        {
+            "tcp",
+            "udp",
+        },
         TcpStartPort = "1000",
-        UdpEndPort = "4000",
-        UdpFootprint = "500",
+        TcpEndPort = "2000",
         UdpStartPort = "3000",
+        UdpEndPort = "4000",
+        HasAbroad = "yes",
+        HasInitiateTcp = "yes",
+        HasInitiateUdp = "yes",
+        PeerTcpPort = "1111",
+        PeerUdpPort = "3333",
+        TcpFootprint = "511",
+        UdpFootprint = "500",
         WebApiUrls = new[]
         {
             "abc.com",
             "test.cn/aaa.png",
         },
+        MinTcpPackageLen = "1000",
+        MaxTcpPackageLen = "1200",
+        MinUdpPackageLen = "1000",
+        MaxUdpPackageLen = "1200",
+        HasVpn = "yes",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.NewDdosPolicyCase(ctx, "foo", &Dayu.DdosPolicyCaseArgs{
-			AppProtocols: pulumi.StringArray{
-				pulumi.String("tcp"),
-				pulumi.String("udp"),
-			},
-			AppType:          pulumi.String("WEB"),
-			HasAbroad:        pulumi.String("yes"),
-			HasInitiateTcp:   pulumi.String("yes"),
-			HasInitiateUdp:   pulumi.String("yes"),
-			HasVpn:           pulumi.String("yes"),
-			MaxTcpPackageLen: pulumi.String("1200"),
-			MaxUdpPackageLen: pulumi.String("1200"),
-			MinTcpPackageLen: pulumi.String("1000"),
-			MinUdpPackageLen: pulumi.String("1000"),
-			PeerTcpPort:      pulumi.String("1111"),
-			PeerUdpPort:      pulumi.String("3333"),
-			PlatformTypes: pulumi.StringArray{
-				pulumi.String("PC"),
-				pulumi.String("MOBILE"),
-			},
-			ResourceType: pulumi.String("bgpip"),
-			TcpEndPort:   pulumi.String("2000"),
-			TcpFootprint: pulumi.String("511"),
-			TcpStartPort: pulumi.String("1000"),
-			UdpEndPort:   pulumi.String("4000"),
-			UdpFootprint: pulumi.String("500"),
-			UdpStartPort: pulumi.String("3000"),
-			WebApiUrls: pulumi.StringArray{
-				pulumi.String("abc.com"),
-				pulumi.String("test.cn/aaa.png"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -196,8 +227,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.DdosPolicyCase;
 import com.pulumi.tencentcloud.Dayu.DdosPolicyCaseArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -209,153 +240,228 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new DdosPolicyCase("foo", DdosPolicyCaseArgs.builder()        
-            .appProtocols(            
-                "tcp",
-                "udp")
-            .appType("WEB")
-            .hasAbroad("yes")
-            .hasInitiateTcp("yes")
-            .hasInitiateUdp("yes")
-            .hasVpn("yes")
-            .maxTcpPackageLen("1200")
-            .maxUdpPackageLen("1200")
-            .minTcpPackageLen("1000")
-            .minUdpPackageLen("1000")
-            .peerTcpPort("1111")
-            .peerUdpPort("3333")
+        var foo = new DdosPolicyCase("foo", DdosPolicyCaseArgs.builder()
+            .resourceType("bgpip")
+            .name("tf_test_policy_case")
             .platformTypes(            
                 "PC",
                 "MOBILE")
-            .resourceType("bgpip")
-            .tcpEndPort("2000")
-            .tcpFootprint("511")
+            .appType("WEB")
+            .appProtocols(            
+                "tcp",
+                "udp")
             .tcpStartPort("1000")
-            .udpEndPort("4000")
-            .udpFootprint("500")
+            .tcpEndPort("2000")
             .udpStartPort("3000")
+            .udpEndPort("4000")
+            .hasAbroad("yes")
+            .hasInitiateTcp("yes")
+            .hasInitiateUdp("yes")
+            .peerTcpPort("1111")
+            .peerUdpPort("3333")
+            .tcpFootprint("511")
+            .udpFootprint("500")
             .webApiUrls(            
                 "abc.com",
                 "test.cn/aaa.png")
+            .minTcpPackageLen("1000")
+            .maxTcpPackageLen("1200")
+            .minUdpPackageLen("1000")
+            .maxUdpPackageLen("1200")
+            .hasVpn("yes")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Dayu:DdosPolicyCase
     properties:
-      appProtocols:
-        - tcp
-        - udp
-      appType: WEB
-      hasAbroad: yes
-      hasInitiateTcp: yes
-      hasInitiateUdp: yes
-      hasVpn: yes
-      maxTcpPackageLen: '1200'
-      maxUdpPackageLen: '1200'
-      minTcpPackageLen: '1000'
-      minUdpPackageLen: '1000'
-      peerTcpPort: '1111'
-      peerUdpPort: '3333'
+      resourceType: bgpip
+      name: tf_test_policy_case
       platformTypes:
         - PC
         - MOBILE
-      resourceType: bgpip
-      tcpEndPort: '2000'
-      tcpFootprint: '511'
+      appType: WEB
+      appProtocols:
+        - tcp
+        - udp
       tcpStartPort: '1000'
-      udpEndPort: '4000'
-      udpFootprint: '500'
+      tcpEndPort: '2000'
       udpStartPort: '3000'
+      udpEndPort: '4000'
+      hasAbroad: yes
+      hasInitiateTcp: yes
+      hasInitiateUdp: yes
+      peerTcpPort: '1111'
+      peerUdpPort: '3333'
+      tcpFootprint: '511'
+      udpFootprint: '500'
       webApiUrls:
         - abc.com
         - test.cn/aaa.png
+      minTcpPackageLen: '1000'
+      maxTcpPackageLen: '1200'
+      minUdpPackageLen: '1000'
+      maxUdpPackageLen: '1200'
+      hasVpn: yes
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dayu_ddospolicycase" "foo" {
+  resource_type       = "bgpip"
+  name                = "tf_test_policy_case"
+  platform_types      = ["PC", "MOBILE"]
+  app_type            = "WEB"
+  app_protocols       = ["tcp", "udp"]
+  tcp_start_port      = "1000"
+  tcp_end_port        = "2000"
+  udp_start_port      = "3000"
+  udp_end_port        = "4000"
+  has_abroad          = "yes"
+  has_initiate_tcp    = "yes"
+  has_initiate_udp    = "yes"
+  peer_tcp_port       = "1111"
+  peer_udp_port       = "3333"
+  tcp_footprint       = "511"
+  udp_footprint       = "500"
+  web_api_urls        = ["abc.com", "test.cn/aaa.png"]
+  min_tcp_package_len = "1000"
+  max_tcp_package_len = "1200"
+  min_udp_package_len = "1000"
+  max_udp_package_len = "1200"
+  has_vpn             = "yes"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateDDoSPolicyCase](https://www.tencentcloud.com/search/?wd=CreateDDoSPolicyCase&type=document&lang=en)
+* Read: [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&type=document&lang=en)
+* Update: [ModifyDDoSPolicyCase](https://www.tencentcloud.com/search/?wd=ModifyDDoSPolicyCase&type=document&lang=en)
+* Delete:
+  - [DeleteDDoSPolicyCase](https://www.tencentcloud.com/search/?wd=DeleteDDoSPolicyCase&type=document&lang=en)
+  - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+  - [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&type=document&lang=en)
+  - [ModifyResBindDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyResBindDDoSPolicy&type=document&lang=en)
 
 
 
 ## Create DdosPolicyCase Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                   <span class="nx">app_protocols</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">platform_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                    <span class="nx">app_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">has_abroad</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">has_initiate_tcp</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">has_initiate_udp</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">has_vpn</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">max_tcp_package_len</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">max_udp_package_len</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">min_tcp_package_len</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">min_udp_package_len</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">peer_tcp_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">peer_udp_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">platform_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">tcp_end_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">tcp_footprint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">tcp_start_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">udp_end_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">udp_footprint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">web_api_urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">app_protocols</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                    <span class="nx">udp_start_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">web_api_urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">udp_end_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">tcp_start_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">tcp_end_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">has_vpn</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">peer_udp_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">peer_tcp_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">min_udp_package_len</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">tcp_footprint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">min_tcp_package_len</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">max_udp_package_len</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">udp_footprint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">max_tcp_package_len</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">has_initiate_udp</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDdosPolicyCase</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosPolicyCase</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDdosPolicyCase</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosPolicyCase</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">DdosPolicyCase</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosPolicyCaseArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:DdosPolicyCase</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:DdosPolicyCase</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dayu_ddos_policy_case&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -376,7 +482,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -493,11 +599,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## DdosPolicyCase Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -513,8 +627,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_csharp" style="color: inherit; text-decoration: inherit;">App<wbr>Type</a>
@@ -522,8 +635,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Abroad</a>
@@ -531,8 +643,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Tcp</a>
@@ -540,8 +651,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_csharp" style="color: inherit; text-decoration: inherit;">Platform<wbr>Types</a>
@@ -549,8 +659,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -558,8 +667,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>End<wbr>Port</a>
@@ -567,8 +675,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Start<wbr>Port</a>
@@ -576,8 +683,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>End<wbr>Port</a>
@@ -585,8 +691,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>Start<wbr>Port</a>
@@ -594,8 +699,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_csharp" style="color: inherit; text-decoration: inherit;">Web<wbr>Api<wbr>Urls</a>
@@ -603,8 +707,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd><dt class="property-optional"
+    <dd>Web API url set.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasinitiateudp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Udp</a>
@@ -612,8 +715,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasvpn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Vpn</a>
@@ -621,8 +723,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtcppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -630,8 +731,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxudppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -639,8 +739,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="mintcppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -648,8 +747,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="minudppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -657,8 +755,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -666,8 +763,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="peertcpport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_csharp" style="color: inherit; text-decoration: inherit;">Peer<wbr>Tcp<wbr>Port</a>
@@ -675,8 +771,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="peerudpport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_csharp" style="color: inherit; text-decoration: inherit;">Peer<wbr>Udp<wbr>Port</a>
@@ -684,8 +779,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="tcpfootprint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Footprint</a>
@@ -693,8 +787,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="udpfootprint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>Footprint</a>
@@ -702,8 +795,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd></dl>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -717,8 +809,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_go" style="color: inherit; text-decoration: inherit;">App<wbr>Type</a>
@@ -726,8 +817,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Abroad</a>
@@ -735,8 +825,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Tcp</a>
@@ -744,8 +833,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_go" style="color: inherit; text-decoration: inherit;">Platform<wbr>Types</a>
@@ -753,8 +841,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -762,8 +849,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>End<wbr>Port</a>
@@ -771,8 +857,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Start<wbr>Port</a>
@@ -780,8 +865,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>End<wbr>Port</a>
@@ -789,8 +873,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>Start<wbr>Port</a>
@@ -798,8 +881,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_go" style="color: inherit; text-decoration: inherit;">Web<wbr>Api<wbr>Urls</a>
@@ -807,8 +889,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd><dt class="property-optional"
+    <dd>Web API url set.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasinitiateudp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Udp</a>
@@ -816,8 +897,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasvpn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Vpn</a>
@@ -825,8 +905,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtcppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -834,8 +913,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxudppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -843,8 +921,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="mintcppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -852,8 +929,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="minudppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -861,8 +937,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -870,8 +945,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="peertcpport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_go" style="color: inherit; text-decoration: inherit;">Peer<wbr>Tcp<wbr>Port</a>
@@ -879,8 +953,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="peerudpport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_go" style="color: inherit; text-decoration: inherit;">Peer<wbr>Udp<wbr>Port</a>
@@ -888,8 +961,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="tcpfootprint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Footprint</a>
@@ -897,8 +969,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="udpfootprint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>Footprint</a>
@@ -906,8 +977,189 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd></dl>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="app_protocols_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_protocols_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>protocols</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
+            title="Required">
+        <span id="app_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_type_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="has_abroad_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_abroad_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>abroad</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="has_initiate_tcp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_initiate_tcp_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>tcp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="platform_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_types_hcl" style="color: inherit; text-decoration: inherit;">platform_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tcp_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_end_port_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tcp_start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_start_port_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
+            title="Required">
+        <span id="udp_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_end_port_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="udp_start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_start_port_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
+            title="Required">
+        <span id="web_api_urls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_api_urls_hcl" style="color: inherit; text-decoration: inherit;">web_<wbr>api_<wbr>urls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Web API url set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="has_initiate_udp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_initiate_udp_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>udp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="has_vpn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_vpn_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>vpn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_tcp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_tcp_package_len_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>tcp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_udp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_udp_package_len_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>udp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="min_tcp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_tcp_package_len_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>tcp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="min_udp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_udp_package_len_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>udp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="peer_tcp_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_tcp_port_hcl" style="color: inherit; text-decoration: inherit;">peer_<wbr>tcp_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="peer_udp_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_udp_port_hcl" style="color: inherit; text-decoration: inherit;">peer_<wbr>udp_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tcp_footprint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_footprint_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>footprint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="udp_footprint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_footprint_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>footprint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -921,8 +1173,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_java" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -930,8 +1181,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_java" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -939,8 +1189,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_java" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -948,8 +1197,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_java" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -957,8 +1205,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -966,8 +1213,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -975,8 +1221,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -984,8 +1229,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_java" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -993,8 +1237,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_java" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -1002,8 +1245,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_java" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -1011,8 +1253,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd><dt class="property-optional"
+    <dd>Web API url set.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasinitiateudp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_java" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -1020,8 +1261,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasvpn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_java" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -1029,8 +1269,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtcppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_java" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1038,8 +1277,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxudppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_java" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1047,8 +1285,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="mintcppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_java" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1056,8 +1293,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="minudppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_java" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1065,8 +1301,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1074,8 +1309,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="peertcpport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_java" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -1083,8 +1317,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="peerudpport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_java" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -1092,8 +1325,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="tcpfootprint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -1101,8 +1333,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="udpfootprint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_java" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -1110,8 +1341,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd></dl>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1125,8 +1355,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_nodejs" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -1134,8 +1363,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -1143,8 +1371,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -1152,8 +1379,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_nodejs" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -1161,8 +1387,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1170,8 +1395,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -1179,8 +1403,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -1188,8 +1411,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -1197,8 +1419,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -1206,8 +1427,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_nodejs" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -1215,8 +1435,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd><dt class="property-optional"
+    <dd>Web API url set.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasinitiateudp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -1224,8 +1443,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasvpn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -1233,8 +1451,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtcppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1242,8 +1459,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxudppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1251,8 +1467,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="mintcppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1260,8 +1475,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="minudppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1269,8 +1483,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1278,8 +1491,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="peertcpport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_nodejs" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -1287,8 +1499,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="peerudpport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_nodejs" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -1296,8 +1507,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="tcpfootprint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -1305,8 +1515,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="udpfootprint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -1314,8 +1523,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd></dl>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1329,8 +1537,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="app_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_type_python" style="color: inherit; text-decoration: inherit;">app_<wbr>type</a>
@@ -1338,8 +1545,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="has_abroad_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_abroad_python" style="color: inherit; text-decoration: inherit;">has_<wbr>abroad</a>
@@ -1347,8 +1553,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="has_initiate_tcp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_initiate_tcp_python" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>tcp</a>
@@ -1356,8 +1561,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="platform_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_types_python" style="color: inherit; text-decoration: inherit;">platform_<wbr>types</a>
@@ -1365,8 +1569,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1374,8 +1577,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcp_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_end_port_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>end_<wbr>port</a>
@@ -1383,8 +1585,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcp_start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_start_port_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>start_<wbr>port</a>
@@ -1392,8 +1593,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="udp_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_end_port_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>end_<wbr>port</a>
@@ -1401,8 +1601,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="udp_start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_start_port_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>start_<wbr>port</a>
@@ -1410,8 +1609,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="web_api_urls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_api_urls_python" style="color: inherit; text-decoration: inherit;">web_<wbr>api_<wbr>urls</a>
@@ -1419,8 +1617,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd><dt class="property-optional"
+    <dd>Web API url set.</dd><dt class="property-optional"
             title="Optional">
         <span id="has_initiate_udp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_initiate_udp_python" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>udp</a>
@@ -1428,8 +1625,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="has_vpn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_vpn_python" style="color: inherit; text-decoration: inherit;">has_<wbr>vpn</a>
@@ -1437,8 +1633,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_tcp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_tcp_package_len_python" style="color: inherit; text-decoration: inherit;">max_<wbr>tcp_<wbr>package_<wbr>len</a>
@@ -1446,8 +1641,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_udp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_udp_package_len_python" style="color: inherit; text-decoration: inherit;">max_<wbr>udp_<wbr>package_<wbr>len</a>
@@ -1455,8 +1649,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_tcp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_tcp_package_len_python" style="color: inherit; text-decoration: inherit;">min_<wbr>tcp_<wbr>package_<wbr>len</a>
@@ -1464,8 +1657,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_udp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_udp_package_len_python" style="color: inherit; text-decoration: inherit;">min_<wbr>udp_<wbr>package_<wbr>len</a>
@@ -1473,8 +1665,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1482,8 +1673,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="peer_tcp_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_tcp_port_python" style="color: inherit; text-decoration: inherit;">peer_<wbr>tcp_<wbr>port</a>
@@ -1491,8 +1681,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="peer_udp_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_udp_port_python" style="color: inherit; text-decoration: inherit;">peer_<wbr>udp_<wbr>port</a>
@@ -1500,8 +1689,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="tcp_footprint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_footprint_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>footprint</a>
@@ -1509,8 +1697,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="udp_footprint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_footprint_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>footprint</a>
@@ -1518,8 +1705,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd></dl>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1533,8 +1719,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_yaml" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -1542,8 +1727,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -1551,8 +1735,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -1560,8 +1743,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_yaml" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -1569,8 +1751,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1578,8 +1759,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -1587,8 +1767,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -1596,8 +1775,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -1605,8 +1783,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -1614,8 +1791,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_yaml" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -1623,8 +1799,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd><dt class="property-optional"
+    <dd>Web API url set.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasinitiateudp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -1632,8 +1807,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hasvpn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -1641,8 +1815,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtcppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1650,8 +1823,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxudppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1659,8 +1831,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="mintcppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1668,8 +1839,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="minudppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1677,8 +1847,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1686,8 +1855,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="peertcpport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_yaml" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -1695,8 +1863,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="peerudpport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_yaml" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -1704,8 +1871,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="tcpfootprint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -1713,8 +1879,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="udpfootprint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -1722,8 +1887,7 @@ The DdosPolicyCase resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd></dl>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1744,8 +1908,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1753,8 +1916,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="sceneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -1762,8 +1924,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd></dl>
+    <dd>ID of the DDoS policy case.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1777,8 +1938,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1786,8 +1946,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="sceneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -1795,8 +1954,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd></dl>
+    <dd>ID of the DDoS policy case.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="scene_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DDoS policy case.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1810,8 +1998,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1819,8 +2006,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="sceneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1828,8 +2014,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd></dl>
+    <dd>ID of the DDoS policy case.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1843,8 +2028,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1852,8 +2036,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="sceneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1861,8 +2044,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd></dl>
+    <dd>ID of the DDoS policy case.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1876,8 +2058,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1885,8 +2066,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scene_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
@@ -1894,8 +2074,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd></dl>
+    <dd>ID of the DDoS policy case.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1909,8 +2088,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1918,8 +2096,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="sceneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1927,8 +2104,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd></dl>
+    <dd>ID of the DDoS policy case.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1938,18 +2114,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing DdosPolicyCase resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DdosPolicyCaseState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DdosPolicyCase</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DdosPolicyCaseState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DdosPolicyCase</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1977,104 +2153,143 @@ Get an existing DdosPolicyCase resource's state with the given name, ID, and opt
         <span class="nx">udp_footprint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">udp_start_port</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">web_api_urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">) -&gt;</span> DdosPolicyCase</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDdosPolicyCase<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DdosPolicyCaseState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosPolicyCase</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDdosPolicyCase<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DdosPolicyCaseState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosPolicyCase</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DdosPolicyCase</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosPolicyCaseState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DdosPolicyCase</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosPolicyCaseState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DdosPolicyCase</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosPolicyCaseState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DdosPolicyCase</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosPolicyCaseState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDdosPolicyCase</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dayu:DdosPolicyCase</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dayu_ddos_policy_case</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosPolicyCaseState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosPolicyCaseState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2082,28 +2297,31 @@ Get an existing DdosPolicyCase resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosPolicyCaseState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2111,28 +2329,31 @@ Get an existing DdosPolicyCase resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosPolicyCaseState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2152,8 +2373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apptype_csharp" style="color: inherit; text-decoration: inherit;">App<wbr>Type</a>
@@ -2161,8 +2381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2170,8 +2389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasabroad_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasabroad_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Abroad</a>
@@ -2179,8 +2397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiatetcp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiatetcp_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Tcp</a>
@@ -2188,8 +2405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiateudp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiateudp_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Udp</a>
@@ -2197,8 +2413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasvpn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasvpn_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Vpn</a>
@@ -2206,8 +2421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtcppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtcppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -2215,8 +2429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxudppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxudppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -2224,8 +2437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mintcppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mintcppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -2233,8 +2445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minudppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minudppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -2242,8 +2453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2251,8 +2461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peertcpport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peertcpport_csharp" style="color: inherit; text-decoration: inherit;">Peer<wbr>Tcp<wbr>Port</a>
@@ -2260,8 +2469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peerudpport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peerudpport_csharp" style="color: inherit; text-decoration: inherit;">Peer<wbr>Udp<wbr>Port</a>
@@ -2269,8 +2477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_platformtypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_platformtypes_csharp" style="color: inherit; text-decoration: inherit;">Platform<wbr>Types</a>
@@ -2278,8 +2485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -2287,8 +2493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sceneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sceneid_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -2296,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpendport_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>End<wbr>Port</a>
@@ -2305,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpfootprint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpfootprint_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Footprint</a>
@@ -2314,8 +2517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpstartport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpstartport_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Start<wbr>Port</a>
@@ -2323,8 +2525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpendport_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>End<wbr>Port</a>
@@ -2332,8 +2533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpfootprint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpfootprint_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>Footprint</a>
@@ -2341,8 +2541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpstartport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpstartport_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>Start<wbr>Port</a>
@@ -2350,8 +2549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webapiurls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webapiurls_csharp" style="color: inherit; text-decoration: inherit;">Web<wbr>Api<wbr>Urls</a>
@@ -2359,8 +2557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2374,8 +2571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apptype_go" style="color: inherit; text-decoration: inherit;">App<wbr>Type</a>
@@ -2383,8 +2579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2392,8 +2587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasabroad_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasabroad_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Abroad</a>
@@ -2401,8 +2595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiatetcp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiatetcp_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Tcp</a>
@@ -2410,8 +2603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiateudp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiateudp_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Udp</a>
@@ -2419,8 +2611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasvpn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasvpn_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Vpn</a>
@@ -2428,8 +2619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtcppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtcppackagelen_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -2437,8 +2627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxudppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxudppackagelen_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -2446,8 +2635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mintcppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mintcppackagelen_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -2455,8 +2643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minudppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minudppackagelen_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -2464,8 +2651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2473,8 +2659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peertcpport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peertcpport_go" style="color: inherit; text-decoration: inherit;">Peer<wbr>Tcp<wbr>Port</a>
@@ -2482,8 +2667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peerudpport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peerudpport_go" style="color: inherit; text-decoration: inherit;">Peer<wbr>Udp<wbr>Port</a>
@@ -2491,8 +2675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_platformtypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_platformtypes_go" style="color: inherit; text-decoration: inherit;">Platform<wbr>Types</a>
@@ -2500,8 +2683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -2509,8 +2691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sceneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sceneid_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -2518,8 +2699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpendport_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>End<wbr>Port</a>
@@ -2527,8 +2707,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpfootprint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpfootprint_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Footprint</a>
@@ -2536,8 +2715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpstartport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpstartport_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Start<wbr>Port</a>
@@ -2545,8 +2723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpendport_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>End<wbr>Port</a>
@@ -2554,8 +2731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpfootprint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpfootprint_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>Footprint</a>
@@ -2563,8 +2739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpstartport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpstartport_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>Start<wbr>Port</a>
@@ -2572,8 +2747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webapiurls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webapiurls_go" style="color: inherit; text-decoration: inherit;">Web<wbr>Api<wbr>Urls</a>
@@ -2581,8 +2755,205 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_app_protocols_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_app_protocols_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>protocols</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_app_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_app_type_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_has_abroad_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_has_abroad_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>abroad</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_has_initiate_tcp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_has_initiate_tcp_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>tcp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_has_initiate_udp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_has_initiate_udp_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>udp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_has_vpn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_has_vpn_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>vpn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_tcp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_tcp_package_len_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>tcp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_udp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_udp_package_len_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>udp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_min_tcp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_tcp_package_len_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>tcp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_min_udp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_udp_package_len_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>udp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_peer_tcp_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peer_tcp_port_hcl" style="color: inherit; text-decoration: inherit;">peer_<wbr>tcp_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_peer_udp_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peer_udp_port_hcl" style="color: inherit; text-decoration: inherit;">peer_<wbr>udp_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_platform_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_platform_types_hcl" style="color: inherit; text-decoration: inherit;">platform_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scene_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scene_id_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DDoS policy case.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tcp_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcp_end_port_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tcp_footprint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcp_footprint_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>footprint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tcp_start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcp_start_port_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_udp_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udp_end_port_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_udp_footprint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udp_footprint_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>footprint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_udp_start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udp_start_port_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_web_api_urls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_web_api_urls_hcl" style="color: inherit; text-decoration: inherit;">web_<wbr>api_<wbr>urls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2596,8 +2967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apptype_java" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -2605,8 +2975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2614,8 +2983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasabroad_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasabroad_java" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -2623,8 +2991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiatetcp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiatetcp_java" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -2632,8 +2999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiateudp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiateudp_java" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -2641,8 +3007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasvpn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasvpn_java" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -2650,8 +3015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtcppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtcppackagelen_java" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -2659,8 +3023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxudppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxudppackagelen_java" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -2668,8 +3031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mintcppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mintcppackagelen_java" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -2677,8 +3039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minudppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minudppackagelen_java" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -2686,8 +3047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2695,8 +3055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peertcpport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peertcpport_java" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -2704,8 +3063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peerudpport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peerudpport_java" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -2713,8 +3071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_platformtypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_platformtypes_java" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -2722,8 +3079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2731,8 +3087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sceneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sceneid_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -2740,8 +3095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpendport_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -2749,8 +3103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpfootprint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpfootprint_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -2758,8 +3111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpstartport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpstartport_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -2767,8 +3119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpendport_java" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -2776,8 +3127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpfootprint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpfootprint_java" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -2785,8 +3135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpstartport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpstartport_java" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -2794,8 +3143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webapiurls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webapiurls_java" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -2803,8 +3151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2818,8 +3165,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apptype_nodejs" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -2827,8 +3173,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2836,8 +3181,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasabroad_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasabroad_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -2845,8 +3189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiatetcp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiatetcp_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -2854,8 +3197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiateudp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiateudp_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -2863,8 +3205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasvpn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasvpn_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -2872,8 +3213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtcppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtcppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -2881,8 +3221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxudppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxudppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -2890,8 +3229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mintcppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mintcppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -2899,8 +3237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minudppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minudppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -2908,8 +3245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2917,8 +3253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peertcpport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peertcpport_nodejs" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -2926,8 +3261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peerudpport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peerudpport_nodejs" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -2935,8 +3269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_platformtypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_platformtypes_nodejs" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -2944,8 +3277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2953,8 +3285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sceneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sceneid_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -2962,8 +3293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpendport_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -2971,8 +3301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpfootprint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpfootprint_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -2980,8 +3309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpstartport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpstartport_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -2989,8 +3317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpendport_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -2998,8 +3325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpfootprint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpfootprint_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -3007,8 +3333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpstartport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpstartport_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -3016,8 +3341,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webapiurls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webapiurls_nodejs" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -3025,8 +3349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3040,8 +3363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_app_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_app_type_python" style="color: inherit; text-decoration: inherit;">app_<wbr>type</a>
@@ -3049,8 +3371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3058,8 +3379,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_has_abroad_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_has_abroad_python" style="color: inherit; text-decoration: inherit;">has_<wbr>abroad</a>
@@ -3067,8 +3387,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_has_initiate_tcp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_has_initiate_tcp_python" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>tcp</a>
@@ -3076,8 +3395,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_has_initiate_udp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_has_initiate_udp_python" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>udp</a>
@@ -3085,8 +3403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_has_vpn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_has_vpn_python" style="color: inherit; text-decoration: inherit;">has_<wbr>vpn</a>
@@ -3094,8 +3411,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_tcp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_tcp_package_len_python" style="color: inherit; text-decoration: inherit;">max_<wbr>tcp_<wbr>package_<wbr>len</a>
@@ -3103,8 +3419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_udp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_udp_package_len_python" style="color: inherit; text-decoration: inherit;">max_<wbr>udp_<wbr>package_<wbr>len</a>
@@ -3112,8 +3427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_min_tcp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_tcp_package_len_python" style="color: inherit; text-decoration: inherit;">min_<wbr>tcp_<wbr>package_<wbr>len</a>
@@ -3121,8 +3435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_min_udp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_udp_package_len_python" style="color: inherit; text-decoration: inherit;">min_<wbr>udp_<wbr>package_<wbr>len</a>
@@ -3130,8 +3443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3139,8 +3451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peer_tcp_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peer_tcp_port_python" style="color: inherit; text-decoration: inherit;">peer_<wbr>tcp_<wbr>port</a>
@@ -3148,8 +3459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peer_udp_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peer_udp_port_python" style="color: inherit; text-decoration: inherit;">peer_<wbr>udp_<wbr>port</a>
@@ -3157,8 +3467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_platform_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_platform_types_python" style="color: inherit; text-decoration: inherit;">platform_<wbr>types</a>
@@ -3166,8 +3475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -3175,8 +3483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scene_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scene_id_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
@@ -3184,8 +3491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcp_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcp_end_port_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>end_<wbr>port</a>
@@ -3193,8 +3499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcp_footprint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcp_footprint_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>footprint</a>
@@ -3202,8 +3507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcp_start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcp_start_port_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>start_<wbr>port</a>
@@ -3211,8 +3515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udp_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udp_end_port_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>end_<wbr>port</a>
@@ -3220,8 +3523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udp_footprint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udp_footprint_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>footprint</a>
@@ -3229,8 +3531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udp_start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udp_start_port_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>start_<wbr>port</a>
@@ -3238,8 +3539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_web_api_urls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_web_api_urls_python" style="color: inherit; text-decoration: inherit;">web_<wbr>api_<wbr>urls</a>
@@ -3247,8 +3547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3262,8 +3561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_apptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apptype_yaml" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -3271,8 +3569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</p>
-</dd><dt class="property-optional"
+    <dd>App type of the DDoS policy case. Valid values: <code>WEB</code>, <code>GAME</code>, <code>APP</code> and <code>OTHER</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3280,8 +3577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasabroad_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasabroad_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -3289,8 +3585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves overseas or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiatetcp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiatetcp_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -3298,8 +3593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service actively initiates TCP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasinitiateudp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasinitiateudp_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -3307,8 +3601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the actively initiate UDP requests or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hasvpn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hasvpn_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -3316,8 +3609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the service involves VPN service or not. Valid values: <code>no</code> and <code>yes</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtcppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtcppackagelen_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -3325,8 +3617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_tcp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minTcpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxudppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxudppackagelen_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -3334,8 +3625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>min_udp_package_len</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than <code>minUdpPackageLen</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mintcppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mintcppackagelen_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -3343,8 +3633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minudppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minudppackagelen_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -3352,8 +3641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3361,8 +3649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DDoS policy case. Length should between 1 and 64.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DDoS policy case. Length should between 1 and 64.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peertcpport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peertcpport_yaml" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -3370,8 +3657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates TCP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_peerudpport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_peerudpport_yaml" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -3379,8 +3665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</p>
-</dd><dt class="property-optional"
+    <dd>The port that actively initiates UDP requests. Valid value ranges: (1~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_platformtypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_platformtypes_yaml" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -3388,8 +3673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -3397,8 +3681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy case works for. Valid values: <code>bgpip</code>, <code>bgp</code> and <code>bgp-multip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sceneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sceneid_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -3406,8 +3689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpendport_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -3415,8 +3697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the TCP service. Valid value ranges: (0~65535). It must be greater than <code>tcpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpfootprint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpfootprint_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -3424,8 +3705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcpstartport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcpstartport_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -3433,8 +3713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the TCP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the TCP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpendport_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -3442,8 +3721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udp_start_port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End port of the UDP service. Valid value ranges: (0~65535). It must be greater than <code>udpStartPort</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpfootprint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpfootprint_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -3451,8 +3729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</p>
-</dd><dt class="property-optional"
+    <dd>The fixed signature of TCP protocol load, valid value length is range from 1 to 512.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_udpstartport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_udpstartport_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -3460,8 +3737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the UDP service. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Start port of the UDP service. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_webapiurls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_webapiurls_yaml" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -3469,8 +3745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3489,7 +3764,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

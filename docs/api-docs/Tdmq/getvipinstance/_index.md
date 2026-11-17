@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Tdmq.getVipInstance"
 meta_desc: "Documentation for the tencentcloud.Tdmq.getVipInstance function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,7 +25,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -31,9 +33,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getVipInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetVipInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>></span
+><span class="k">function </span>getVipInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetVipInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>></span
 ><span class="k">
-function </span>getVipInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetVipInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>></span
+function </span>getVipInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetVipInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -46,9 +48,9 @@ function </span>getVipInstanceOutput<span class="p">(</span><span class="nx">arg
                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetVipInstanceResult</span
 ><span class="k">
-def </span>get_vip_instance_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetVipInstanceResult]</span
+def </span>get_vip_instance_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetVipInstanceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -73,7 +75,8 @@ func </span>GetVipInstanceOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetVipInstance </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetVipInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetVipInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetVipInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetVipInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -82,7 +85,8 @@ func </span>GetVipInstanceOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>> </span>getVipInstance<span class="p">(</span><span class="nx">GetVipInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>> </span>getVipInstance<span class="p">(</span><span class="nx">GetVipInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetVipInstanceResult</a></span>> </span>getVipInstance<span class="p">(</span><span class="nx">GetVipInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -94,6 +98,15 @@ func </span>GetVipInstanceOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tdmq/getVipInstance:getVipInstance
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tdmq_get_vip_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -138,6 +151,28 @@ The following arguments are supported:
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -269,8 +304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconfigs_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Configs</a>
@@ -316,8 +350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconfigs_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Configs</a>
@@ -329,6 +362,52 @@ The following output properties are available:
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="cluster_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_infos_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getvipinstanceclusterinfo">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_configs_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getvipinstanceinstanceconfig">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -363,8 +442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconfigs_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Configs</a>
@@ -410,8 +488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconfigs_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Configs</a>
@@ -447,7 +524,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_infos_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getvipinstanceclusterinfo">Get<wbr>Vip<wbr>Instance<wbr>Cluster<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getvipinstanceclusterinfo">Sequence[Get<wbr>Vip<wbr>Instance<wbr>Cluster<wbr>Info]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -457,14 +534,13 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_configs_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getvipinstanceinstanceconfig">Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config]</a></span>
+        <span class="property-type"><a href="#getvipinstanceinstanceconfig">Sequence[Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -504,8 +580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconfigs_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Configs</a>
@@ -545,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -554,8 +628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster Name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster Name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -563,8 +636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creation time, in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="httppublicendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httppublicendpoint_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Public<wbr>Endpoint</a>
@@ -572,8 +644,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="httpvpcendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpvpcendpoint_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Vpc<wbr>Endpoint</a>
@@ -581,8 +652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isvip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isvip_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Vip</a>
@@ -590,8 +660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_csharp" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Time</a>
@@ -599,8 +668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>End<wbr>Point</a>
@@ -608,8 +676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access address.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -617,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -626,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="rocketmqflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rocketmqflag_csharp" style="color: inherit; text-decoration: inherit;">Rocket<wbr>Mq<wbr>Flag</a>
@@ -635,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -644,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="supportnamespaceendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportnamespaceendpoint_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Namespace<wbr>Endpoint</a>
@@ -653,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>End<wbr>Point</a>
@@ -662,8 +724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC access address.</p>
-</dd><dt class="property-required"
+    <dd>VPC access address.</dd><dt class="property-required"
             title="Required">
         <span id="vpcs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcs_csharp" style="color: inherit; text-decoration: inherit;">Vpcs</a>
@@ -671,8 +732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceclusterinfovpc">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Get<wbr>Vip<wbr>Instance<wbr>Cluster<wbr>Info<wbr>Vpc&gt;</a></span>
     </dt>
-    <dd><p>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -686,8 +746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -695,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster Name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster Name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -704,8 +762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creation time, in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="httppublicendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httppublicendpoint_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Public<wbr>Endpoint</a>
@@ -713,8 +770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="httpvpcendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpvpcendpoint_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Vpc<wbr>Endpoint</a>
@@ -722,8 +778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isvip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isvip_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Vip</a>
@@ -731,8 +786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_go" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Time</a>
@@ -740,8 +794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_go" style="color: inherit; text-decoration: inherit;">Public<wbr>End<wbr>Point</a>
@@ -749,8 +802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access address.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -758,8 +810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -767,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="rocketmqflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rocketmqflag_go" style="color: inherit; text-decoration: inherit;">Rocket<wbr>Mq<wbr>Flag</a>
@@ -776,8 +826,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -785,8 +834,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="supportnamespaceendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportnamespaceendpoint_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Namespace<wbr>Endpoint</a>
@@ -794,8 +842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>End<wbr>Point</a>
@@ -803,8 +850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC access address.</p>
-</dd><dt class="property-required"
+    <dd>VPC access address.</dd><dt class="property-required"
             title="Required">
         <span id="vpcs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcs_go" style="color: inherit; text-decoration: inherit;">Vpcs</a>
@@ -812,8 +858,133 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceclusterinfovpc">[]Get<wbr>Vip<wbr>Instance<wbr>Cluster<wbr>Info<wbr>Vpc</a></span>
     </dt>
-    <dd><p>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster Name.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Creation time, in milliseconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="http_public_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_public_endpoint_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>public_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="http_vpc_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_vpc_endpoint_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>vpc_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_vip_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolate_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_time_hcl" style="color: inherit; text-decoration: inherit;">isolate_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_end_point_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_end_point_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>end_<wbr>point</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public network access address.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="rocket_mq_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rocket_mq_flag_hcl" style="color: inherit; text-decoration: inherit;">rocket_<wbr>mq_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_namespace_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_namespace_endpoint_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>namespace_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_end_point_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_end_point_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>end_<wbr>point</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC access address.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpcs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcs_hcl" style="color: inherit; text-decoration: inherit;">vpcs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getvipinstanceclusterinfovpc">list(object)</a></span>
+    </dt>
+    <dd>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -836,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster Name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster Name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -845,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Creation time, in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="httppublicendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httppublicendpoint_java" style="color: inherit; text-decoration: inherit;">http<wbr>Public<wbr>Endpoint</a>
@@ -854,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="httpvpcendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpvpcendpoint_java" style="color: inherit; text-decoration: inherit;">http<wbr>Vpc<wbr>Endpoint</a>
@@ -863,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isvip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isvip_java" style="color: inherit; text-decoration: inherit;">is<wbr>Vip</a>
@@ -872,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_java" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -881,8 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_java" style="color: inherit; text-decoration: inherit;">public<wbr>End<wbr>Point</a>
@@ -890,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network access address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access address.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -899,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -908,8 +1070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="rocketmqflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rocketmqflag_java" style="color: inherit; text-decoration: inherit;">rocket<wbr>Mq<wbr>Flag</a>
@@ -917,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -926,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="supportnamespaceendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportnamespaceendpoint_java" style="color: inherit; text-decoration: inherit;">support<wbr>Namespace<wbr>Endpoint</a>
@@ -935,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>End<wbr>Point</a>
@@ -944,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC access address.</p>
-</dd><dt class="property-required"
+    <dd>VPC access address.</dd><dt class="property-required"
             title="Required">
         <span id="vpcs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcs_java" style="color: inherit; text-decoration: inherit;">vpcs</a>
@@ -953,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceclusterinfovpc">List&lt;Get<wbr>Vip<wbr>Instance<wbr>Cluster<wbr>Info<wbr>Vpc&gt;</a></span>
     </dt>
-    <dd><p>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -968,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -977,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster Name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster Name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -986,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Creation time, in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="httppublicendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httppublicendpoint_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Public<wbr>Endpoint</a>
@@ -995,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="httpvpcendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpvpcendpoint_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Vpc<wbr>Endpoint</a>
@@ -1004,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isvip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isvip_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Vip</a>
@@ -1013,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_nodejs" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -1022,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>End<wbr>Point</a>
@@ -1031,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access address.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1040,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1049,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="rocketmqflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rocketmqflag_nodejs" style="color: inherit; text-decoration: inherit;">rocket<wbr>Mq<wbr>Flag</a>
@@ -1058,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1067,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="supportnamespaceendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportnamespaceendpoint_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Namespace<wbr>Endpoint</a>
@@ -1076,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>End<wbr>Point</a>
@@ -1085,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC access address.</p>
-</dd><dt class="property-required"
+    <dd>VPC access address.</dd><dt class="property-required"
             title="Required">
         <span id="vpcs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcs_nodejs" style="color: inherit; text-decoration: inherit;">vpcs</a>
@@ -1094,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceclusterinfovpc">Get<wbr>Vip<wbr>Instance<wbr>Cluster<wbr>Info<wbr>Vpc[]</a></span>
     </dt>
-    <dd><p>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1109,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -1118,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster Name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster Name.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1127,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creation time, in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="http_public_endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_public_endpoint_python" style="color: inherit; text-decoration: inherit;">http_<wbr>public_<wbr>endpoint</a>
@@ -1136,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="http_vpc_endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_vpc_endpoint_python" style="color: inherit; text-decoration: inherit;">http_<wbr>vpc_<wbr>endpoint</a>
@@ -1145,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="is_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_vip_python" style="color: inherit; text-decoration: inherit;">is_<wbr>vip</a>
@@ -1154,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isolate_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_time_python" style="color: inherit; text-decoration: inherit;">isolate_<wbr>time</a>
@@ -1163,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="public_end_point_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_end_point_python" style="color: inherit; text-decoration: inherit;">public_<wbr>end_<wbr>point</a>
@@ -1172,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public network access address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access address.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1181,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1190,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="rocket_mq_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rocket_mq_flag_python" style="color: inherit; text-decoration: inherit;">rocket_<wbr>mq_<wbr>flag</a>
@@ -1199,8 +1330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1208,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="support_namespace_endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_namespace_endpoint_python" style="color: inherit; text-decoration: inherit;">support_<wbr>namespace_<wbr>endpoint</a>
@@ -1217,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_end_point_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_end_point_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>end_<wbr>point</a>
@@ -1226,17 +1354,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC access address.</p>
-</dd><dt class="property-required"
+    <dd>VPC access address.</dd><dt class="property-required"
             title="Required">
         <span id="vpcs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcs_python" style="color: inherit; text-decoration: inherit;">vpcs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getvipinstanceclusterinfovpc">Get<wbr>Vip<wbr>Instance<wbr>Cluster<wbr>Info<wbr>Vpc]</a></span>
+        <span class="property-type"><a href="#getvipinstanceclusterinfovpc">Sequence[Get<wbr>Vip<wbr>Instance<wbr>Cluster<wbr>Info<wbr>Vpc]</a></span>
     </dt>
-    <dd><p>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1250,8 +1376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1259,8 +1384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster Name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster Name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1268,8 +1392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Creation time, in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="httppublicendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httppublicendpoint_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Public<wbr>Endpoint</a>
@@ -1277,8 +1400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="httpvpcendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpvpcendpoint_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Vpc<wbr>Endpoint</a>
@@ -1286,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isvip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isvip_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Vip</a>
@@ -1295,8 +1416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_yaml" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -1304,8 +1424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>End<wbr>Point</a>
@@ -1313,8 +1432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network access address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access address.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1322,8 +1440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1331,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="rocketmqflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rocketmqflag_yaml" style="color: inherit; text-decoration: inherit;">rocket<wbr>Mq<wbr>Flag</a>
@@ -1340,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1349,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="supportnamespaceendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportnamespaceendpoint_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Namespace<wbr>Endpoint</a>
@@ -1358,8 +1472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>End<wbr>Point</a>
@@ -1367,8 +1480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC access address.</p>
-</dd><dt class="property-required"
+    <dd>VPC access address.</dd><dt class="property-required"
             title="Required">
         <span id="vpcs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcs_yaml" style="color: inherit; text-decoration: inherit;">vpcs</a>
@@ -1376,8 +1488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceclusterinfovpc">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>VPC informationNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1395,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet Id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet Id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1404,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1419,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet Id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet Id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1428,8 +1536,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1443,8 +1572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet Id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet Id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1452,8 +1580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1467,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet Id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet Id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1476,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1491,8 +1616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet Id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet Id.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1500,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1515,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet Id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet Id.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1524,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1543,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="maxgroupnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxgroupnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Group<wbr>Num</a>
@@ -1552,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of groups.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of groups.</dd><dt class="property-required"
             title="Required">
         <span id="maxnamespacenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnamespacenum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Namespace<wbr>Num</a>
@@ -1561,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="maxqueuespertopic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxqueuespertopic_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Queues<wbr>Per<wbr>Topic</a>
@@ -1570,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Topic<wbr>Num</a>
@@ -1579,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="maxtpspernamespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtpspernamespace_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Tps<wbr>Per<wbr>Namespace</a>
@@ -1588,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Single namespace TPS upper limit.</p>
-</dd><dt class="property-required"
+    <dd>Single namespace TPS upper limit.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -1597,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of cluster nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodedistributions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedistributions_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Distributions</a>
@@ -1606,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfignodedistribution">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Node<wbr>Distribution&gt;</a></span>
     </dt>
-    <dd><p>Node distribution.</p>
-</dd><dt class="property-required"
+    <dd>Node distribution.</dd><dt class="property-required"
             title="Required">
         <span id="topicdistributions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicdistributions_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Distributions</a>
@@ -1615,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfigtopicdistribution">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Topic<wbr>Distribution&gt;</a></span>
     </dt>
-    <dd><p>Topic distribution.</p>
-</dd><dt class="property-required"
+    <dd>Topic distribution.</dd><dt class="property-required"
             title="Required">
         <span id="usedgroupnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedgroupnum_csharp" style="color: inherit; text-decoration: inherit;">Used<wbr>Group<wbr>Num</a>
@@ -1624,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of used groups.</p>
-</dd><dt class="property-required"
+    <dd>Number of used groups.</dd><dt class="property-required"
             title="Required">
         <span id="usednamespacenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usednamespacenum_csharp" style="color: inherit; text-decoration: inherit;">Used<wbr>Namespace<wbr>Num</a>
@@ -1633,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of used namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Number of used namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="usedtopicnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedtopicnum_csharp" style="color: inherit; text-decoration: inherit;">Used<wbr>Topic<wbr>Num</a>
@@ -1642,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of topics used.</p>
-</dd></dl>
+    <dd>The number of topics used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1657,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="maxgroupnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxgroupnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Group<wbr>Num</a>
@@ -1666,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of groups.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of groups.</dd><dt class="property-required"
             title="Required">
         <span id="maxnamespacenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnamespacenum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Namespace<wbr>Num</a>
@@ -1675,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="maxqueuespertopic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxqueuespertopic_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Queues<wbr>Per<wbr>Topic</a>
@@ -1684,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Topic<wbr>Num</a>
@@ -1693,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="maxtpspernamespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtpspernamespace_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Tps<wbr>Per<wbr>Namespace</a>
@@ -1702,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Single namespace TPS upper limit.</p>
-</dd><dt class="property-required"
+    <dd>Single namespace TPS upper limit.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -1711,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of cluster nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodedistributions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedistributions_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Distributions</a>
@@ -1720,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfignodedistribution">[]Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Node<wbr>Distribution</a></span>
     </dt>
-    <dd><p>Node distribution.</p>
-</dd><dt class="property-required"
+    <dd>Node distribution.</dd><dt class="property-required"
             title="Required">
         <span id="topicdistributions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicdistributions_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Distributions</a>
@@ -1729,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfigtopicdistribution">[]Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Topic<wbr>Distribution</a></span>
     </dt>
-    <dd><p>Topic distribution.</p>
-</dd><dt class="property-required"
+    <dd>Topic distribution.</dd><dt class="property-required"
             title="Required">
         <span id="usedgroupnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedgroupnum_go" style="color: inherit; text-decoration: inherit;">Used<wbr>Group<wbr>Num</a>
@@ -1738,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of used groups.</p>
-</dd><dt class="property-required"
+    <dd>Number of used groups.</dd><dt class="property-required"
             title="Required">
         <span id="usednamespacenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usednamespacenum_go" style="color: inherit; text-decoration: inherit;">Used<wbr>Namespace<wbr>Num</a>
@@ -1747,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of used namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Number of used namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="usedtopicnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedtopicnum_go" style="color: inherit; text-decoration: inherit;">Used<wbr>Topic<wbr>Num</a>
@@ -1756,8 +1854,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of topics used.</p>
-</dd></dl>
+    <dd>The number of topics used.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="config_display_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_display_hcl" style="color: inherit; text-decoration: inherit;">config_<wbr>display</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster type.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_group_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_group_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>group_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_namespace_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_namespace_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>namespace_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of namespaces.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_queues_per_topic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_queues_per_topic_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>queues_<wbr>per_<wbr>topic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_topic_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_topic_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>topic_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of topics.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_tps_per_namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_tps_per_namespace_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>tps_<wbr>per_<wbr>namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Single namespace TPS upper limit.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of cluster nodes.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_distributions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_distributions_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>distributions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getvipinstanceinstanceconfignodedistribution">list(object)</a></span>
+    </dt>
+    <dd>Node distribution.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_distributions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_distributions_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>distributions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getvipinstanceinstanceconfigtopicdistribution">list(object)</a></span>
+    </dt>
+    <dd>Topic distribution.</dd><dt class="property-required"
+            title="Required">
+        <span id="used_group_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#used_group_num_hcl" style="color: inherit; text-decoration: inherit;">used_<wbr>group_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of used groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="used_namespace_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#used_namespace_num_hcl" style="color: inherit; text-decoration: inherit;">used_<wbr>namespace_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of used namespaces.</dd><dt class="property-required"
+            title="Required">
+        <span id="used_topic_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#used_topic_num_hcl" style="color: inherit; text-decoration: inherit;">used_<wbr>topic_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of topics used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1771,8 +1970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="maxgroupnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxgroupnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Group<wbr>Num</a>
@@ -1780,8 +1978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of groups.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of groups.</dd><dt class="property-required"
             title="Required">
         <span id="maxnamespacenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnamespacenum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Namespace<wbr>Num</a>
@@ -1789,8 +1986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="maxqueuespertopic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxqueuespertopic_java" style="color: inherit; text-decoration: inherit;">max<wbr>Queues<wbr>Per<wbr>Topic</a>
@@ -1798,8 +1994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Topic<wbr>Num</a>
@@ -1807,8 +2002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="maxtpspernamespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtpspernamespace_java" style="color: inherit; text-decoration: inherit;">max<wbr>Tps<wbr>Per<wbr>Namespace</a>
@@ -1816,8 +2010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Single namespace TPS upper limit.</p>
-</dd><dt class="property-required"
+    <dd>Single namespace TPS upper limit.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_java" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -1825,8 +2018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of cluster nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of cluster nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodedistributions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedistributions_java" style="color: inherit; text-decoration: inherit;">node<wbr>Distributions</a>
@@ -1834,8 +2026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfignodedistribution">List&lt;Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Node<wbr>Distribution&gt;</a></span>
     </dt>
-    <dd><p>Node distribution.</p>
-</dd><dt class="property-required"
+    <dd>Node distribution.</dd><dt class="property-required"
             title="Required">
         <span id="topicdistributions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicdistributions_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Distributions</a>
@@ -1843,8 +2034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfigtopicdistribution">List&lt;Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Topic<wbr>Distribution&gt;</a></span>
     </dt>
-    <dd><p>Topic distribution.</p>
-</dd><dt class="property-required"
+    <dd>Topic distribution.</dd><dt class="property-required"
             title="Required">
         <span id="usedgroupnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedgroupnum_java" style="color: inherit; text-decoration: inherit;">used<wbr>Group<wbr>Num</a>
@@ -1852,8 +2042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of used groups.</p>
-</dd><dt class="property-required"
+    <dd>Number of used groups.</dd><dt class="property-required"
             title="Required">
         <span id="usednamespacenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usednamespacenum_java" style="color: inherit; text-decoration: inherit;">used<wbr>Namespace<wbr>Num</a>
@@ -1861,8 +2050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of used namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Number of used namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="usedtopicnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedtopicnum_java" style="color: inherit; text-decoration: inherit;">used<wbr>Topic<wbr>Num</a>
@@ -1870,8 +2058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of topics used.</p>
-</dd></dl>
+    <dd>The number of topics used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1885,8 +2072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="maxgroupnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxgroupnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Group<wbr>Num</a>
@@ -1894,8 +2080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of groups.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of groups.</dd><dt class="property-required"
             title="Required">
         <span id="maxnamespacenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnamespacenum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Namespace<wbr>Num</a>
@@ -1903,8 +2088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="maxqueuespertopic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxqueuespertopic_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Queues<wbr>Per<wbr>Topic</a>
@@ -1912,8 +2096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Topic<wbr>Num</a>
@@ -1921,8 +2104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="maxtpspernamespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtpspernamespace_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Tps<wbr>Per<wbr>Namespace</a>
@@ -1930,8 +2112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Single namespace TPS upper limit.</p>
-</dd><dt class="property-required"
+    <dd>Single namespace TPS upper limit.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -1939,8 +2120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of cluster nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of cluster nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodedistributions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedistributions_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Distributions</a>
@@ -1948,8 +2128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfignodedistribution">Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Node<wbr>Distribution[]</a></span>
     </dt>
-    <dd><p>Node distribution.</p>
-</dd><dt class="property-required"
+    <dd>Node distribution.</dd><dt class="property-required"
             title="Required">
         <span id="topicdistributions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicdistributions_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Distributions</a>
@@ -1957,8 +2136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfigtopicdistribution">Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Topic<wbr>Distribution[]</a></span>
     </dt>
-    <dd><p>Topic distribution.</p>
-</dd><dt class="property-required"
+    <dd>Topic distribution.</dd><dt class="property-required"
             title="Required">
         <span id="usedgroupnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedgroupnum_nodejs" style="color: inherit; text-decoration: inherit;">used<wbr>Group<wbr>Num</a>
@@ -1966,8 +2144,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of used groups.</p>
-</dd><dt class="property-required"
+    <dd>Number of used groups.</dd><dt class="property-required"
             title="Required">
         <span id="usednamespacenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usednamespacenum_nodejs" style="color: inherit; text-decoration: inherit;">used<wbr>Namespace<wbr>Num</a>
@@ -1975,8 +2152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of used namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Number of used namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="usedtopicnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedtopicnum_nodejs" style="color: inherit; text-decoration: inherit;">used<wbr>Topic<wbr>Num</a>
@@ -1984,8 +2160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of topics used.</p>
-</dd></dl>
+    <dd>The number of topics used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1999,8 +2174,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="max_group_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_group_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>group_<wbr>num</a>
@@ -2008,8 +2182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of groups.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of groups.</dd><dt class="property-required"
             title="Required">
         <span id="max_namespace_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_namespace_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>namespace_<wbr>num</a>
@@ -2017,8 +2190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="max_queues_per_topic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_queues_per_topic_python" style="color: inherit; text-decoration: inherit;">max_<wbr>queues_<wbr>per_<wbr>topic</a>
@@ -2026,8 +2198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="max_topic_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_topic_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>topic_<wbr>num</a>
@@ -2035,8 +2206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="max_tps_per_namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_tps_per_namespace_python" style="color: inherit; text-decoration: inherit;">max_<wbr>tps_<wbr>per_<wbr>namespace</a>
@@ -2044,8 +2214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Single namespace TPS upper limit.</p>
-</dd><dt class="property-required"
+    <dd>Single namespace TPS upper limit.</dd><dt class="property-required"
             title="Required">
         <span id="node_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_python" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
@@ -2053,26 +2222,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of cluster nodes.</dd><dt class="property-required"
             title="Required">
         <span id="node_distributions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_distributions_python" style="color: inherit; text-decoration: inherit;">node_<wbr>distributions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getvipinstanceinstanceconfignodedistribution">Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Node<wbr>Distribution]</a></span>
+        <span class="property-type"><a href="#getvipinstanceinstanceconfignodedistribution">Sequence[Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Node<wbr>Distribution]</a></span>
     </dt>
-    <dd><p>Node distribution.</p>
-</dd><dt class="property-required"
+    <dd>Node distribution.</dd><dt class="property-required"
             title="Required">
         <span id="topic_distributions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_distributions_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>distributions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getvipinstanceinstanceconfigtopicdistribution">Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Topic<wbr>Distribution]</a></span>
+        <span class="property-type"><a href="#getvipinstanceinstanceconfigtopicdistribution">Sequence[Get<wbr>Vip<wbr>Instance<wbr>Instance<wbr>Config<wbr>Topic<wbr>Distribution]</a></span>
     </dt>
-    <dd><p>Topic distribution.</p>
-</dd><dt class="property-required"
+    <dd>Topic distribution.</dd><dt class="property-required"
             title="Required">
         <span id="used_group_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#used_group_num_python" style="color: inherit; text-decoration: inherit;">used_<wbr>group_<wbr>num</a>
@@ -2080,8 +2246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of used groups.</p>
-</dd><dt class="property-required"
+    <dd>Number of used groups.</dd><dt class="property-required"
             title="Required">
         <span id="used_namespace_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#used_namespace_num_python" style="color: inherit; text-decoration: inherit;">used_<wbr>namespace_<wbr>num</a>
@@ -2089,8 +2254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of used namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Number of used namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="used_topic_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#used_topic_num_python" style="color: inherit; text-decoration: inherit;">used_<wbr>topic_<wbr>num</a>
@@ -2098,8 +2262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of topics used.</p>
-</dd></dl>
+    <dd>The number of topics used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2113,8 +2276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="maxgroupnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxgroupnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Group<wbr>Num</a>
@@ -2122,8 +2284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of groups.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of groups.</dd><dt class="property-required"
             title="Required">
         <span id="maxnamespacenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnamespacenum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Namespace<wbr>Num</a>
@@ -2131,8 +2292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="maxqueuespertopic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxqueuespertopic_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Queues<wbr>Per<wbr>Topic</a>
@@ -2140,8 +2300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Topic<wbr>Num</a>
@@ -2149,8 +2308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="maxtpspernamespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtpspernamespace_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Tps<wbr>Per<wbr>Namespace</a>
@@ -2158,8 +2316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Single namespace TPS upper limit.</p>
-</dd><dt class="property-required"
+    <dd>Single namespace TPS upper limit.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -2167,8 +2324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of cluster nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of cluster nodes.</dd><dt class="property-required"
             title="Required">
         <span id="nodedistributions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedistributions_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Distributions</a>
@@ -2176,8 +2332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfignodedistribution">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Node distribution.</p>
-</dd><dt class="property-required"
+    <dd>Node distribution.</dd><dt class="property-required"
             title="Required">
         <span id="topicdistributions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicdistributions_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Distributions</a>
@@ -2185,8 +2340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getvipinstanceinstanceconfigtopicdistribution">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Topic distribution.</p>
-</dd><dt class="property-required"
+    <dd>Topic distribution.</dd><dt class="property-required"
             title="Required">
         <span id="usedgroupnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedgroupnum_yaml" style="color: inherit; text-decoration: inherit;">used<wbr>Group<wbr>Num</a>
@@ -2194,8 +2348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of used groups.</p>
-</dd><dt class="property-required"
+    <dd>Number of used groups.</dd><dt class="property-required"
             title="Required">
         <span id="usednamespacenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usednamespacenum_yaml" style="color: inherit; text-decoration: inherit;">used<wbr>Namespace<wbr>Num</a>
@@ -2203,8 +2356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of used namespaces.</p>
-</dd><dt class="property-required"
+    <dd>Number of used namespaces.</dd><dt class="property-required"
             title="Required">
         <span id="usedtopicnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usedtopicnum_yaml" style="color: inherit; text-decoration: inherit;">used<wbr>Topic<wbr>Num</a>
@@ -2212,8 +2364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of topics used.</p>
-</dd></dl>
+    <dd>The number of topics used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2231,8 +2382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -2240,8 +2390,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone id.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -2249,8 +2398,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2264,8 +2412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -2273,8 +2420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone id.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -2282,8 +2428,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of nodes.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone id.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2297,8 +2472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2306,8 +2480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone id.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -2315,8 +2488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2330,8 +2502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2339,8 +2510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone id.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -2348,8 +2518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2363,8 +2532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -2372,8 +2540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone id.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
@@ -2381,8 +2548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2396,8 +2562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2405,8 +2570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone id.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -2414,8 +2578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2433,8 +2596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="topictype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Type</a>
@@ -2442,8 +2604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic type.</p>
-</dd></dl>
+    <dd>Topic type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2457,8 +2618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="topictype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Type</a>
@@ -2466,8 +2626,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic type.</p>
-</dd></dl>
+    <dd>Topic type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_hcl" style="color: inherit; text-decoration: inherit;">count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of topics.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_type_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2481,8 +2662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="topictype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -2490,8 +2670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic type.</p>
-</dd></dl>
+    <dd>Topic type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2505,8 +2684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="topictype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -2514,8 +2692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic type.</p>
-</dd></dl>
+    <dd>Topic type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2529,8 +2706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="topic_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_type_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>type</a>
@@ -2538,8 +2714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic type.</p>
-</dd></dl>
+    <dd>Topic type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2553,8 +2728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of topics.</p>
-</dd><dt class="property-required"
+    <dd>Number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="topictype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -2562,8 +2736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic type.</p>
-</dd></dl>
+    <dd>Topic type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2578,7 +2751,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

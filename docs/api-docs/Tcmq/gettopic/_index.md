@@ -2,9 +2,11 @@
 ---
 title: "getTopic"
 title_tag: "tencentcloud.Tcmq.getTopic"
-meta_desc: "Documentation for the tencentcloud.Tcmq.getTopic function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tcmq topic"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of tcmq topic
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const topic = tencentcloud.Tcmq.getTopic({
+const topic = tencentcloud.tcmq.getTopic({
     topicName: "topic_name",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-topic = tencentcloud.Tcmq.get_topic(topic_name="topic_name")
+topic = tencentcloud.tcmq.get_topic(topic_name="topic_name")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcmq"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcmq.GetTopic(ctx, &tcmq.GetTopicArgs{
+			TopicName: pulumi.StringRef("topic_name"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcmq"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcmq.GetTopic(ctx, &tcmq.GetTopicArgs{
-			TopicName: pulumi.StringRef("topic_name"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcmq.TcmqFunctions;
 import com.pulumi.tencentcloud.Tcmq.inputs.GetTopicArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   topic:
     fn::invoke:
-      Function: tencentcloud:Tcmq:getTopic
-      Arguments:
+      function: tencentcloud:Tcmq:getTopic
+      arguments:
         topicName: topic_name
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tcmq_gettopic" "topic" {
+  topic_name = "topic_name"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCmqTopics](https://www.tencentcloud.com/search/?wd=DescribeCmqTopics&type=document&lang=en)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getTopic<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTopicArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>></span
+><span class="k">function </span>getTopic<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTopicArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>></span
 ><span class="k">
-function </span>getTopicOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTopicOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>></span
+function </span>getTopicOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTopicOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -134,7 +191,7 @@ function </span>getTopicOutput<span class="p">(</span><span class="nx">args</spa
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_topic<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcmq.GetTopicFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_topic<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetTopicFilter]]</span> = None<span class="p">,</span>
               <span class="nx">is_tag_filter</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
               <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
               <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -143,14 +200,14 @@ function </span>getTopicOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">topic_name_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetTopicResult</span
 ><span class="k">
-def </span>get_topic_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_tcmq.GetTopicFilterArgs]]]]</span> = None<span class="p">,</span>
-              <span class="nx">is_tag_filter</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-              <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">topic_name_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTopicResult]</span
+def </span>get_topic_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetTopicFilterArgs]]]]</span> = None<span class="p">,</span>
+              <span class="nx">is_tag_filter</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+              <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">topic_name_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTopicResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -159,12 +216,12 @@ def </span>get_topic_output<span class="p">(</span><span class="nx">filters</spa
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetTopic<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetTopicArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetTopicResult</a></span>, error)</span
+><span class="k">func </span>LookupTopic<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupTopicArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupTopicResult</a></span>, error)</span
 ><span class="k">
-func </span>GetTopicOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetTopicOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetTopicResultOutput</span
+func </span>LookupTopicOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupTopicOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupTopicResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetTopic` in the Go SDK.
+&gt; Note: This function is named `LookupTopic` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -175,7 +232,8 @@ func </span>GetTopicOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetTopic </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetTopicArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTopicInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTopicInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTopicInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,7 +242,8 @@ func </span>GetTopicOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>> </span>getTopic<span class="p">(</span><span class="nx">GetTopicArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>> </span>getTopic<span class="p">(</span><span class="nx">GetTopicArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTopicResult</a></span>> </span>getTopic<span class="p">(</span><span class="nx">GetTopicArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -196,6 +255,15 @@ func </span>GetTopicOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcmq/getTopic:getTopic
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcmq_get_topic&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -214,8 +282,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopicfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Inputs.<wbr>Get<wbr>Topic<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Tag<wbr>Filter</a>
@@ -223,8 +290,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -232,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -241,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -250,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -259,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-optional"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicnamelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name<wbr>Lists</a>
@@ -268,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Filter by CMQ topic name.</p>
-</dd></dl>
+    <dd>Filter by CMQ topic name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -283,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopicfilter">[]Get<wbr>Topic<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Tag<wbr>Filter</a>
@@ -292,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -301,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -310,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -319,8 +376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -328,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-optional"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicnamelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name<wbr>Lists</a>
@@ -337,8 +392,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Filter by CMQ topic name.</p>
-</dd></dl>
+    <dd>Filter by CMQ topic name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettopicfilter">list(object)</a></span>
+    </dt>
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_tag_filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_tag_filter_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>tag_<wbr>filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="topic_name_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_lists_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Filter by CMQ topic name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -352,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopicfilter">List&lt;Get<wbr>Topic<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_java" style="color: inherit; text-decoration: inherit;">is<wbr>Tag<wbr>Filter</a>
@@ -361,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -370,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -379,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -388,8 +500,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -397,8 +508,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-optional"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicnamelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name<wbr>Lists</a>
@@ -406,8 +516,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter by CMQ topic name.</p>
-</dd></dl>
+    <dd>Filter by CMQ topic name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -421,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopicfilter">Get<wbr>Topic<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Tag<wbr>Filter</a>
@@ -430,8 +538,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -439,8 +546,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -448,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -457,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -466,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-optional"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicnamelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name<wbr>Lists</a>
@@ -475,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Filter by CMQ topic name.</p>
-</dd></dl>
+    <dd>Filter by CMQ topic name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -488,10 +590,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettopicfilter">Get<wbr>Topic<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#gettopicfilter">Sequence[Get<wbr>Topic<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_tag_filter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_tag_filter_python" style="color: inherit; text-decoration: inherit;">is_<wbr>tag_<wbr>filter</a>
@@ -499,8 +600,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -508,8 +608,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -517,8 +616,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -526,8 +624,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -535,8 +632,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-optional"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-optional"
             title="Optional">
         <span id="topic_name_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_lists_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name_<wbr>lists</a>
@@ -544,8 +640,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Filter by CMQ topic name.</p>
-</dd></dl>
+    <dd>Filter by CMQ topic name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -559,8 +654,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopicfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Tag<wbr>Filter</a>
@@ -568,8 +662,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -577,8 +670,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -586,8 +678,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -595,8 +686,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -604,8 +694,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-optional"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-optional"
             title="Optional">
         <span id="topicnamelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name<wbr>Lists</a>
@@ -613,8 +702,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter by CMQ topic name.</p>
-</dd></dl>
+    <dd>Filter by CMQ topic name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -637,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="topiclists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topiclists_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Lists</a>
@@ -646,8 +733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Outputs.<wbr>Get<wbr>Topic<wbr>Topic<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Topic list.</p>
-</dd><dt class="property-"
+    <dd>Topic list.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -695,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name.</p>
-</dd><dt class="property-"
+    <dd>Topic name.</dd><dt class="property-"
             title="">
         <span id="topicnamelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name<wbr>Lists</a>
@@ -718,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="topiclists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topiclists_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Lists</a>
@@ -727,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclist">[]Get<wbr>Topic<wbr>Topic<wbr>List</a></span>
     </dt>
-    <dd><p>Topic list.</p>
-</dd><dt class="property-"
+    <dd>Topic list.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -776,14 +859,91 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name.</p>
-</dd><dt class="property-"
+    <dd>Topic name.</dd><dt class="property-"
             title="">
         <span id="topicnamelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="topic_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_lists_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettopictopiclist">list(object)</a></span>
+    </dt>
+    <dd>Topic list.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettopicfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="is_tag_filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_tag_filter_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>tag_<wbr>filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic name.</dd><dt class="property-"
+            title="">
+        <span id="topic_name_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_lists_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -799,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="topiclists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topiclists_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Lists</a>
@@ -808,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclist">List&lt;Get<wbr>Topic<wbr>Topic<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Topic list.</p>
-</dd><dt class="property-"
+    <dd>Topic list.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -857,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic name.</p>
-</dd><dt class="property-"
+    <dd>Topic name.</dd><dt class="property-"
             title="">
         <span id="topicnamelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name<wbr>Lists</a>
@@ -880,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="topiclists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topiclists_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Lists</a>
@@ -889,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclist">Get<wbr>Topic<wbr>Topic<wbr>List[]</a></span>
     </dt>
-    <dd><p>Topic list.</p>
-</dd><dt class="property-"
+    <dd>Topic list.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -938,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name.</p>
-</dd><dt class="property-"
+    <dd>Topic name.</dd><dt class="property-"
             title="">
         <span id="topicnamelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name<wbr>Lists</a>
@@ -961,23 +1115,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="topic_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_lists_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettopictopiclist">Get<wbr>Topic<wbr>Topic<wbr>List]</a></span>
+        <span class="property-type"><a href="#gettopictopiclist">Sequence[Get<wbr>Topic<wbr>Topic<wbr>List]</a></span>
     </dt>
-    <dd><p>Topic list.</p>
-</dd><dt class="property-"
+    <dd>Topic list.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettopicfilter">Get<wbr>Topic<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#gettopicfilter">Sequence[Get<wbr>Topic<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -1019,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic name.</p>
-</dd><dt class="property-"
+    <dd>Topic name.</dd><dt class="property-"
             title="">
         <span id="topic_name_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_lists_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name_<wbr>lists</a>
@@ -1042,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="topiclists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topiclists_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Lists</a>
@@ -1051,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Topic list.</p>
-</dd><dt class="property-"
+    <dd>Topic list.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -1100,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic name.</p>
-</dd><dt class="property-"
+    <dd>Topic name.</dd><dt class="property-"
             title="">
         <span id="topicnamelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnamelists_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name<wbr>Lists</a>
@@ -1133,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1142,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1166,8 +1311,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter parameter name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1181,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1190,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1205,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1214,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1238,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1253,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1262,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1281,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1290,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Uin</a>
@@ -1299,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</dd><dt class="property-required"
             title="Required">
         <span id="filtertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertype_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Type</a>
@@ -1308,8 +1463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_csharp" style="color: inherit; text-decoration: inherit;">Last<wbr>Modify<wbr>Time</a>
@@ -1317,8 +1471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Size</a>
@@ -1326,8 +1479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Count</a>
@@ -1335,8 +1487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of current messages in the topic (number of retained messages).</p>
-</dd><dt class="property-required"
+    <dd>Number of current messages in the topic (number of retained messages).</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Retention<wbr>Seconds</a>
@@ -1344,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</p>
-</dd><dt class="property-required"
+    <dd>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1353,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="qps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_csharp" style="color: inherit; text-decoration: inherit;">Qps</a>
@@ -1362,8 +1511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of messages published per second.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages published per second.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1371,8 +1519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1380,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclisttag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Inputs.<wbr>Get<wbr>Topic<wbr>Topic<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_csharp" style="color: inherit; text-decoration: inherit;">Tenant<wbr>Id</a>
@@ -1389,8 +1535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -1398,8 +1543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic ID.</p>
-</dd><dt class="property-required"
+    <dd>Topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1407,8 +1551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-required"
             title="Required">
         <span id="trace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_csharp" style="color: inherit; text-decoration: inherit;">Trace</a>
@@ -1416,8 +1559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd></dl>
+    <dd>Message trace. true: enabled; false: not enabled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1431,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1440,8 +1581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Uin</a>
@@ -1449,8 +1589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</dd><dt class="property-required"
             title="Required">
         <span id="filtertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertype_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Type</a>
@@ -1458,8 +1597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_go" style="color: inherit; text-decoration: inherit;">Last<wbr>Modify<wbr>Time</a>
@@ -1467,8 +1605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Size</a>
@@ -1476,8 +1613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Count</a>
@@ -1485,8 +1621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of current messages in the topic (number of retained messages).</p>
-</dd><dt class="property-required"
+    <dd>Number of current messages in the topic (number of retained messages).</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Retention<wbr>Seconds</a>
@@ -1494,8 +1629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</p>
-</dd><dt class="property-required"
+    <dd>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1503,8 +1637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="qps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_go" style="color: inherit; text-decoration: inherit;">Qps</a>
@@ -1512,8 +1645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of messages published per second.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages published per second.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1521,8 +1653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1530,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclisttag">[]Get<wbr>Topic<wbr>Topic<wbr>List<wbr>Tag</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_go" style="color: inherit; text-decoration: inherit;">Tenant<wbr>Id</a>
@@ -1539,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -1548,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic ID.</p>
-</dd><dt class="property-required"
+    <dd>Topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1557,8 +1685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-required"
             title="Required">
         <span id="trace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_go" style="color: inherit; text-decoration: inherit;">Trace</a>
@@ -1566,8 +1693,141 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd></dl>
+    <dd>Message trace. true: enabled; false: not enabled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="broker_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#broker_type_hcl" style="color: inherit; text-decoration: inherit;">broker_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_uin_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</dd><dt class="property-required"
+            title="Required">
+        <span id="filter_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_type_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</dd><dt class="property-required"
+            title="Required">
+        <span id="last_modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_modify_time_hcl" style="color: inherit; text-decoration: inherit;">last_<wbr>modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_msg_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_count_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of current messages in the topic (number of retained messages).</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_retention_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_retention_seconds_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>retention_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace name.</dd><dt class="property-required"
+            title="Required">
+        <span id="qps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_hcl" style="color: inherit; text-decoration: inherit;">qps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of messages published per second.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettopictopiclisttag">list(object)</a></span>
+    </dt>
+    <dd>Associated tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="tenant_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenant_id_hcl" style="color: inherit; text-decoration: inherit;">tenant_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tenant ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-required"
+            title="Required">
+        <span id="trace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_hcl" style="color: inherit; text-decoration: inherit;">trace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Message trace. true: enabled; false: not enabled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1581,8 +1841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1590,8 +1849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_java" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -1599,8 +1857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</dd><dt class="property-required"
             title="Required">
         <span id="filtertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertype_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Type</a>
@@ -1608,8 +1865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_java" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -1617,8 +1873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -1626,8 +1881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Count</a>
@@ -1635,8 +1889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of current messages in the topic (number of retained messages).</p>
-</dd><dt class="property-required"
+    <dd>Number of current messages in the topic (number of retained messages).</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -1644,8 +1897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</p>
-</dd><dt class="property-required"
+    <dd>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -1653,8 +1905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="qps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_java" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -1662,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of messages published per second.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages published per second.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1671,8 +1921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -1680,8 +1929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclisttag">List&lt;Get<wbr>Topic<wbr>Topic<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_java" style="color: inherit; text-decoration: inherit;">tenant<wbr>Id</a>
@@ -1689,8 +1937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1698,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic ID.</p>
-</dd><dt class="property-required"
+    <dd>Topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1707,8 +1953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-required"
             title="Required">
         <span id="trace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_java" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -1716,8 +1961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd></dl>
+    <dd>Message trace. true: enabled; false: not enabled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1731,8 +1975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1740,8 +1983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -1749,8 +1991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</dd><dt class="property-required"
             title="Required">
         <span id="filtertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertype_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Type</a>
@@ -1758,8 +1999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_nodejs" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -1767,8 +2007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -1776,8 +2015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Count</a>
@@ -1785,8 +2023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of current messages in the topic (number of retained messages).</p>
-</dd><dt class="property-required"
+    <dd>Number of current messages in the topic (number of retained messages).</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -1794,8 +2031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</p>
-</dd><dt class="property-required"
+    <dd>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -1803,8 +2039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="qps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_nodejs" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -1812,8 +2047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of messages published per second.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages published per second.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1821,8 +2055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -1830,8 +2063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclisttag">Get<wbr>Topic<wbr>Topic<wbr>List<wbr>Tag[]</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_nodejs" style="color: inherit; text-decoration: inherit;">tenant<wbr>Id</a>
@@ -1839,8 +2071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1848,8 +2079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic ID.</p>
-</dd><dt class="property-required"
+    <dd>Topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1857,8 +2087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-required"
             title="Required">
         <span id="trace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_nodejs" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -1866,8 +2095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd></dl>
+    <dd>Message trace. true: enabled; false: not enabled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1881,8 +2109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1890,8 +2117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="create_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_uin_python" style="color: inherit; text-decoration: inherit;">create_<wbr>uin</a>
@@ -1899,8 +2125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</dd><dt class="property-required"
             title="Required">
         <span id="filter_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_type_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>type</a>
@@ -1908,8 +2133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="last_modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_modify_time_python" style="color: inherit; text-decoration: inherit;">last_<wbr>modify_<wbr>time</a>
@@ -1917,8 +2141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="max_msg_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>size</a>
@@ -1926,8 +2149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</dd><dt class="property-required"
             title="Required">
         <span id="msg_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_count_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>count</a>
@@ -1935,8 +2157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of current messages in the topic (number of retained messages).</p>
-</dd><dt class="property-required"
+    <dd>Number of current messages in the topic (number of retained messages).</dd><dt class="property-required"
             title="Required">
         <span id="msg_retention_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_retention_seconds_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>retention_<wbr>seconds</a>
@@ -1944,8 +2165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</p>
-</dd><dt class="property-required"
+    <dd>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -1953,8 +2173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="qps_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_python" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -1962,8 +2181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of messages published per second.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages published per second.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1971,17 +2189,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettopictopiclisttag">Get<wbr>Topic<wbr>Topic<wbr>List<wbr>Tag]</a></span>
+        <span class="property-type"><a href="#gettopictopiclisttag">Sequence[Get<wbr>Topic<wbr>Topic<wbr>List<wbr>Tag]</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenant_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenant_id_python" style="color: inherit; text-decoration: inherit;">tenant_<wbr>id</a>
@@ -1989,8 +2205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
@@ -1998,8 +2213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic ID.</p>
-</dd><dt class="property-required"
+    <dd>Topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -2007,8 +2221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-required"
             title="Required">
         <span id="trace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_python" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2016,8 +2229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd></dl>
+    <dd>Message trace. true: enabled; false: not enabled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2031,8 +2243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>0</code> (Pulsar), <code>1</code> (RocketMQ).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2040,8 +2251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -2049,8 +2259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>. The <code>resource</code> field for CAM authentication is composed of this field.</dd><dt class="property-required"
             title="Required">
         <span id="filtertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertype_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Type</a>
@@ -2058,8 +2267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created: If <code>filterType</code> is 1, <code>FilterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>BindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_yaml" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -2067,8 +2275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -2076,8 +2283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1-1,024 KB). The default value is 65,536.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Count</a>
@@ -2085,8 +2291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of current messages in the topic (number of retained messages).</p>
-</dd><dt class="property-required"
+    <dd>Number of current messages in the topic (number of retained messages).</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -2094,8 +2299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</p>
-</dd><dt class="property-required"
+    <dd>Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2103,8 +2307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="qps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_yaml" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -2112,8 +2315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of messages published per second.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages published per second.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2121,8 +2323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2130,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettopictopiclisttag">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_yaml" style="color: inherit; text-decoration: inherit;">tenant<wbr>Id</a>
@@ -2139,8 +2339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -2148,8 +2347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic ID.</p>
-</dd><dt class="property-required"
+    <dd>Topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -2157,8 +2355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy search by TopicName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by TopicName.</dd><dt class="property-required"
             title="Required">
         <span id="trace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_yaml" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2166,8 +2363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd></dl>
+    <dd>Message trace. true: enabled; false: not enabled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2185,8 +2381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2194,8 +2389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2209,8 +2403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2218,8 +2411,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of the tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2233,8 +2447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2242,8 +2455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2257,8 +2469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2266,8 +2477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2281,8 +2491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -2290,8 +2499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2305,8 +2513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2314,8 +2521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2330,7 +2536,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

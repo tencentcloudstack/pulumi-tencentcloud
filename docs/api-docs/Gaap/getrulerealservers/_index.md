@@ -2,9 +2,11 @@
 ---
 title: "getRuleRealServers"
 title_tag: "tencentcloud.Gaap.getRuleRealServers"
-meta_desc: "Documentation for the tencentcloud.Gaap.getRuleRealServers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap rule real servers"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of gaap rule real servers
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const ruleRealServers = tencentcloud.Gaap.getRuleRealServers({
+const ruleRealServers = tencentcloud.gaap.getRuleRealServers({
     ruleId: "rule-xxxxxx",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-rule_real_servers = tencentcloud.Gaap.get_rule_real_servers(rule_id="rule-xxxxxx")
+rule_real_servers = tencentcloud.gaap.get_rule_real_servers(rule_id="rule-xxxxxx")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetRuleRealServers(ctx, &gaap.GetRuleRealServersArgs{
+			RuleId: "rule-xxxxxx",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetRuleRealServers(ctx, &gaap.GetRuleRealServersArgs{
-			RuleId: "rule-xxxxxx",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetRuleRealServersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   ruleRealServers:
     fn::invoke:
-      Function: tencentcloud:Gaap:getRuleRealServers
-      Arguments:
+      function: tencentcloud:Gaap:getRuleRealServers
+      arguments:
         ruleId: rule-xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getrulerealservers" "ruleRealServers" {
+  rule_id = "rule-xxxxxx"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRuleRealServers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleRealServersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>></span
+><span class="k">function </span>getRuleRealServers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleRealServersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>></span
 ><span class="k">
-function </span>getRuleRealServersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleRealServersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>></span
+function </span>getRuleRealServersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRuleRealServersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getRuleRealServersOutput<span class="p">(</span><span class="nx"
                           <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRuleRealServersResult</span
 ><span class="k">
-def </span>get_rule_real_servers_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRuleRealServersResult]</span
+def </span>get_rule_real_servers_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRuleRealServersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetRuleRealServersOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRuleRealServers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRuleRealServersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleRealServersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleRealServersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRuleRealServersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetRuleRealServersOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>> </span>getRuleRealServers<span class="p">(</span><span class="nx">GetRuleRealServersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>> </span>getRuleRealServers<span class="p">(</span><span class="nx">GetRuleRealServersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRuleRealServersResult</a></span>> </span>getRuleRealServers<span class="p">(</span><span class="nx">GetRuleRealServersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetRuleRealServersOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getRuleRealServers:getRuleRealServers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_rule_real_servers&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule Id.</p>
-</dd><dt class="property-optional"
+    <dd>Rule Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule Id.</p>
-</dd><dt class="property-optional"
+    <dd>Rule Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule Id.</p>
-</dd><dt class="property-optional"
+    <dd>Rule Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule Id.</p>
-</dd><dt class="property-optional"
+    <dd>Rule Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule Id.</p>
-</dd><dt class="property-optional"
+    <dd>Rule Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule Id.</p>
-</dd><dt class="property-optional"
+    <dd>Rule Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversbindrealserverset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Bind<wbr>Real<wbr>Server<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Bind Real Server info.</p>
-</dd><dt class="property-"
+    <dd>Bind Real Server info.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -366,8 +443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserversets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserversets_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Sets</a>
@@ -375,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversrealserverset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Real<wbr>Server<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Real Server Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Set.</dd><dt class="property-"
             title="">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -406,8 +481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversbindrealserverset">[]Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Bind<wbr>Real<wbr>Server<wbr>Set</a></span>
     </dt>
-    <dd><p>Bind Real Server info.</p>
-</dd><dt class="property-"
+    <dd>Bind Real Server info.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -415,8 +489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserversets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserversets_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Sets</a>
@@ -424,8 +497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversrealserverset">[]Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Real<wbr>Server<wbr>Set</a></span>
     </dt>
-    <dd><p>Real Server Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Set.</dd><dt class="property-"
             title="">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -446,6 +518,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="bind_real_server_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_real_server_sets_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>real_<wbr>server_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrulerealserversbindrealserverset">list(object)</a></span>
+    </dt>
+    <dd>Bind Real Server info.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="real_server_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_sets_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrulerealserversrealserverset">list(object)</a></span>
+    </dt>
+    <dd>Real Server Set.</dd><dt class="property-"
+            title="">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -455,8 +573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversbindrealserverset">List&lt;Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Bind<wbr>Real<wbr>Server<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Bind Real Server info.</p>
-</dd><dt class="property-"
+    <dd>Bind Real Server info.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -464,8 +581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserversets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserversets_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Sets</a>
@@ -473,8 +589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversrealserverset">List&lt;Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Real<wbr>Server<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Real Server Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Set.</dd><dt class="property-"
             title="">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -504,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversbindrealserverset">Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Bind<wbr>Real<wbr>Server<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Bind Real Server info.</p>
-</dd><dt class="property-"
+    <dd>Bind Real Server info.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -513,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserversets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserversets_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Sets</a>
@@ -522,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversrealserverset">Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Real<wbr>Server<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Real Server Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Set.</dd><dt class="property-"
             title="">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -551,10 +663,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_real_server_sets_python" style="color: inherit; text-decoration: inherit;">bind_<wbr>real_<wbr>server_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrulerealserversbindrealserverset">Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Bind<wbr>Real<wbr>Server<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getrulerealserversbindrealserverset">Sequence[Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Bind<wbr>Real<wbr>Server<wbr>Set]</a></span>
     </dt>
-    <dd><p>Bind Real Server info.</p>
-</dd><dt class="property-"
+    <dd>Bind Real Server info.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -562,17 +673,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="real_server_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_sets_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrulerealserversrealserverset">Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Real<wbr>Server<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getrulerealserversrealserverset">Sequence[Get<wbr>Rule<wbr>Real<wbr>Servers<wbr>Real<wbr>Server<wbr>Set]</a></span>
     </dt>
-    <dd><p>Real Server Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Set.</dd><dt class="property-"
             title="">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -602,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversbindrealserverset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Bind Real Server info.</p>
-</dd><dt class="property-"
+    <dd>Bind Real Server info.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -611,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserversets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserversets_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Sets</a>
@@ -620,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrulerealserversrealserverset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Real Server Set.</p>
-</dd><dt class="property-"
+    <dd>Real Server Set.</dd><dt class="property-"
             title="">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -661,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</p>
-</dd><dt class="property-required"
+    <dd>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</dd><dt class="property-required"
             title="Required">
         <span id="realserverfailoverrole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverfailoverrole_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Failover<wbr>Role</a>
@@ -670,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</p>
-</dd><dt class="property-required"
+    <dd>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Id</a>
@@ -679,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Ip</a>
@@ -688,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realserverport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverport_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Port</a>
@@ -697,8 +799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverstatus_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Status</a>
@@ -706,8 +807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverweight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverweight_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Weight</a>
@@ -715,8 +815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Real Server Weight.</p>
-</dd></dl>
+    <dd>Real Server Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -730,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</p>
-</dd><dt class="property-required"
+    <dd>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</dd><dt class="property-required"
             title="Required">
         <span id="realserverfailoverrole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverfailoverrole_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Failover<wbr>Role</a>
@@ -739,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</p>
-</dd><dt class="property-required"
+    <dd>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Id</a>
@@ -748,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Ip</a>
@@ -757,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realserverport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverport_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Port</a>
@@ -766,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverstatus_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Status</a>
@@ -775,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverweight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverweight_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Weight</a>
@@ -784,8 +877,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Real Server Weight.</p>
-</dd></dl>
+    <dd>Real Server Weight.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="down_ip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#down_ip_lists_hcl" style="color: inherit; text-decoration: inherit;">down_<wbr>ip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_failover_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_failover_role_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>failover_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_id_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Real Server Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_ip_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_port_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_status_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_weight_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Real Server Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -799,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</p>
-</dd><dt class="property-required"
+    <dd>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</dd><dt class="property-required"
             title="Required">
         <span id="realserverfailoverrole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverfailoverrole_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Failover<wbr>Role</a>
@@ -808,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</p>
-</dd><dt class="property-required"
+    <dd>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -817,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ip</a>
@@ -826,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realserverport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverport_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Port</a>
@@ -835,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverstatus_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Status</a>
@@ -844,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverweight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverweight_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Weight</a>
@@ -853,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Real Server Weight.</p>
-</dd></dl>
+    <dd>Real Server Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -868,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</p>
-</dd><dt class="property-required"
+    <dd>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</dd><dt class="property-required"
             title="Required">
         <span id="realserverfailoverrole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverfailoverrole_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Failover<wbr>Role</a>
@@ -877,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</p>
-</dd><dt class="property-required"
+    <dd>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -886,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ip</a>
@@ -895,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realserverport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverport_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Port</a>
@@ -904,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverstatus_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Status</a>
@@ -913,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverweight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverweight_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Weight</a>
@@ -922,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Real Server Weight.</p>
-</dd></dl>
+    <dd>Real Server Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -937,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</p>
-</dd><dt class="property-required"
+    <dd>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_failover_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_failover_role_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>failover_<wbr>role</a>
@@ -946,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</p>
-</dd><dt class="property-required"
+    <dd>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_id_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>id</a>
@@ -955,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_ip_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>ip</a>
@@ -964,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_port_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>port</a>
@@ -973,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_status_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>status</a>
@@ -982,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_weight_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>weight</a>
@@ -991,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Real Server Weight.</p>
-</dd></dl>
+    <dd>Real Server Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1006,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</p>
-</dd><dt class="property-required"
+    <dd>When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.</dd><dt class="property-required"
             title="Required">
         <span id="realserverfailoverrole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverfailoverrole_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Failover<wbr>Role</a>
@@ -1015,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</p>
-</dd><dt class="property-required"
+    <dd>The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -1024,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ip</a>
@@ -1033,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realserverport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverport_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Port</a>
@@ -1042,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverstatus_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Status</a>
@@ -1051,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverweight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverweight_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Weight</a>
@@ -1060,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Real Server Weight.</p>
-</dd></dl>
+    <dd>Real Server Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1079,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</p>
-</dd><dt class="property-required"
+    <dd>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1088,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-required"
+    <dd>Project Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Id</a>
@@ -1097,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Ip</a>
@@ -1106,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realservername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservername_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Name</a>
@@ -1115,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Name.</p>
-</dd></dl>
+    <dd>Real Server Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1130,8 +1251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</p>
-</dd><dt class="property-required"
+    <dd>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1139,8 +1259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-required"
+    <dd>Project Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Id</a>
@@ -1148,8 +1267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Ip</a>
@@ -1157,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realservername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservername_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Name</a>
@@ -1166,8 +1283,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Name.</p>
-</dd></dl>
+    <dd>Real Server Name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="in_ban_blacklist_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#in_ban_blacklist_hcl" style="color: inherit; text-decoration: inherit;">in_<wbr>ban_<wbr>blacklist</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_id_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Real Server Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_ip_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_name_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Real Server Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1181,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</p>
-</dd><dt class="property-required"
+    <dd>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1190,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-required"
+    <dd>Project Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -1199,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ip</a>
@@ -1208,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realservername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservername_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Name</a>
@@ -1217,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server Name.</p>
-</dd></dl>
+    <dd>Real Server Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1232,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</p>
-</dd><dt class="property-required"
+    <dd>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1241,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-required"
+    <dd>Project Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -1250,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ip</a>
@@ -1259,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realservername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservername_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Name</a>
@@ -1268,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real Server Name.</p>
-</dd></dl>
+    <dd>Real Server Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1283,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</p>
-</dd><dt class="property-required"
+    <dd>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1292,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-required"
+    <dd>Project Id.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_id_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>id</a>
@@ -1301,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_ip_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>ip</a>
@@ -1310,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_name_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>name</a>
@@ -1319,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Real Server Name.</p>
-</dd></dl>
+    <dd>Real Server Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1334,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</p>
-</dd><dt class="property-required"
+    <dd>Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1343,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-required"
+    <dd>Project Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverid_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Id</a>
@@ -1352,8 +1497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server Id.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Id.</dd><dt class="property-required"
             title="Required">
         <span id="realserverip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverip_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Ip</a>
@@ -1361,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Real Server IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="realservername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservername_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Name</a>
@@ -1370,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real Server Name.</p>
-</dd></dl>
+    <dd>Real Server Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1386,7 +1528,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

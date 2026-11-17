@@ -2,9 +2,11 @@
 ---
 title: "getClusterCommonNames"
 title_tag: "tencentcloud.Kubernetes.getClusterCommonNames"
-meta_desc: "Documentation for the tencentcloud.Kubernetes.getClusterCommonNames function with examples, input properties, output properties, and supporting types."
+meta_desc: "Provide a datasource to query cluster CommonNames."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,64 +18,61 @@ Provide a datasource to query cluster CommonNames.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query common names by subaccount uins
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Kubernetes.getClusterCommonNames({
-    clusterId: "cls-12345678",
+const example = tencentcloud.kubernetes.getClusterCommonNames({
+    clusterId: "cls-fdy7hm1q",
     subaccountUins: [
-        "1234567890",
-        "0987654321",
+        "100037718139",
+        "100031340176",
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Kubernetes.get_cluster_common_names(cluster_id="cls-12345678",
+example = tencentcloud.kubernetes.get_cluster_common_names(cluster_id="cls-fdy7hm1q",
     subaccount_uins=[
-        "1234567890",
-        "0987654321",
+        "100037718139",
+        "100031340176",
     ])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
-    {
-        ClusterId = "cls-12345678",
-        SubaccountUins = new[]
-        {
-            "1234567890",
-            "0987654321",
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
-			ClusterId: pulumi.StringRef("cls-12345678"),
+		_, err := kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
+			ClusterId: pulumi.StringRef("cls-fdy7hm1q"),
 			SubaccountUins: []string{
-				"1234567890",
-				"0987654321",
+				"100037718139",
+				"100031340176",
 			},
 		}, nil)
 		if err != nil {
@@ -83,6 +82,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
+    {
+        ClusterId = "cls-fdy7hm1q",
+        SubaccountUins = new[]
+        {
+            "100037718139",
+            "100031340176",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -91,8 +120,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Kubernetes.KubernetesFunctions;
 import com.pulumi.tencentcloud.Kubernetes.inputs.GetClusterCommonNamesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,29 +133,213 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var foo = KubernetesFunctions.getClusterCommonNames(GetClusterCommonNamesArgs.builder()
-            .clusterId("cls-12345678")
+        final var example = KubernetesFunctions.getClusterCommonNames(GetClusterCommonNamesArgs.builder()
+            .clusterId("cls-fdy7hm1q")
             .subaccountUins(            
-                "1234567890",
-                "0987654321")
+                "100037718139",
+                "100031340176")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  foo:
+  example:
     fn::invoke:
-      Function: tencentcloud:Kubernetes:getClusterCommonNames
-      Arguments:
-        clusterId: cls-12345678
+      function: tencentcloud:Kubernetes:getClusterCommonNames
+      arguments:
+        clusterId: cls-fdy7hm1q
         subaccountUins:
-          - '1234567890'
-          - '0987654321'
+          - '100037718139'
+          - '100031340176'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_kubernetes_getclustercommonnames" "example" {
+  cluster_id      = "cls-fdy7hm1q"
+  subaccount_uins = ["100037718139", "100031340176"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query common names by role ids
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.kubernetes.getClusterCommonNames({
+    clusterId: "cls-fdy7hm1q",
+    roleIds: ["4611686018441060141"],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.kubernetes.get_cluster_common_names(cluster_id="cls-fdy7hm1q",
+    role_ids=["4611686018441060141"])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
+			ClusterId: pulumi.StringRef("cls-fdy7hm1q"),
+			RoleIds: []string{
+				"4611686018441060141",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
+    {
+        ClusterId = "cls-fdy7hm1q",
+        RoleIds = new[]
+        {
+            "4611686018441060141",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Kubernetes.KubernetesFunctions;
+import com.pulumi.tencentcloud.Kubernetes.inputs.GetClusterCommonNamesArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = KubernetesFunctions.getClusterCommonNames(GetClusterCommonNamesArgs.builder()
+            .clusterId("cls-fdy7hm1q")
+            .roleIds("4611686018441060141")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Kubernetes:getClusterCommonNames
+      arguments:
+        clusterId: cls-fdy7hm1q
+        roleIds:
+          - '4611686018441060141'
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_kubernetes_getclustercommonnames" "example" {
+  cluster_id = "cls-fdy7hm1q"
+  role_ids   = ["4611686018441060141"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeClusterCommonNames](https://www.tencentcloud.com/document/api/457/41571)
 
 
 
@@ -138,7 +351,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -146,9 +359,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getClusterCommonNames<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterCommonNamesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>></span
+><span class="k">function </span>getClusterCommonNames<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterCommonNamesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>></span
 ><span class="k">
-function </span>getClusterCommonNamesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterCommonNamesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>></span
+function </span>getClusterCommonNamesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterCommonNamesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -163,11 +376,11 @@ function </span>getClusterCommonNamesOutput<span class="p">(</span><span class="
                              <span class="nx">subaccount_uins</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetClusterCommonNamesResult</span
 ><span class="k">
-def </span>get_cluster_common_names_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">role_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                             <span class="nx">subaccount_uins</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClusterCommonNamesResult]</span
+def </span>get_cluster_common_names_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">role_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                             <span class="nx">subaccount_uins</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClusterCommonNamesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,7 +405,8 @@ func </span>GetClusterCommonNamesOutput<span class="p">(</span><span class="nx">
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetClusterCommonNames </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetClusterCommonNamesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterCommonNamesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterCommonNamesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterCommonNamesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -201,7 +415,8 @@ func </span>GetClusterCommonNamesOutput<span class="p">(</span><span class="nx">
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>> </span>getClusterCommonNames<span class="p">(</span><span class="nx">GetClusterCommonNamesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>> </span>getClusterCommonNames<span class="p">(</span><span class="nx">GetClusterCommonNamesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClusterCommonNamesResult</a></span>> </span>getClusterCommonNames<span class="p">(</span><span class="nx">GetClusterCommonNamesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -213,6 +428,15 @@ func </span>GetClusterCommonNamesOutput<span class="p">(</span><span class="nx">
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_kubernetes_get_cluster_common_names&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -231,8 +455,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -240,8 +463,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleids_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Ids</a>
@@ -249,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd><dt class="property-optional"
+    <dd>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</dd><dt class="property-optional"
             title="Optional">
         <span id="subaccountuins_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuins_csharp" style="color: inherit; text-decoration: inherit;">Subaccount<wbr>Uins</a>
@@ -258,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd></dl>
+    <dd>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -273,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -282,8 +501,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleids_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Ids</a>
@@ -291,8 +509,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd><dt class="property-optional"
+    <dd>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</dd><dt class="property-optional"
             title="Optional">
         <span id="subaccountuins_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuins_go" style="color: inherit; text-decoration: inherit;">Subaccount<wbr>Uins</a>
@@ -300,8 +517,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd></dl>
+    <dd>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_ids_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subaccount_uins_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccount_uins_hcl" style="color: inherit; text-decoration: inherit;">subaccount_<wbr>uins</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -315,8 +569,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -324,8 +577,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleids_java" style="color: inherit; text-decoration: inherit;">role<wbr>Ids</a>
@@ -333,8 +585,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd><dt class="property-optional"
+    <dd>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</dd><dt class="property-optional"
             title="Optional">
         <span id="subaccountuins_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuins_java" style="color: inherit; text-decoration: inherit;">subaccount<wbr>Uins</a>
@@ -342,8 +593,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd></dl>
+    <dd>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -366,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleids_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Ids</a>
@@ -375,8 +623,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd><dt class="property-optional"
+    <dd>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</dd><dt class="property-optional"
             title="Optional">
         <span id="subaccountuins_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuins_nodejs" style="color: inherit; text-decoration: inherit;">subaccount<wbr>Uins</a>
@@ -384,8 +631,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd></dl>
+    <dd>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -399,8 +645,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -408,8 +653,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_ids_python" style="color: inherit; text-decoration: inherit;">role_<wbr>ids</a>
@@ -417,8 +661,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd><dt class="property-optional"
+    <dd>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</dd><dt class="property-optional"
             title="Optional">
         <span id="subaccount_uins_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccount_uins_python" style="color: inherit; text-decoration: inherit;">subaccount_<wbr>uins</a>
@@ -426,8 +669,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd></dl>
+    <dd>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -441,8 +683,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -450,8 +691,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleids_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Ids</a>
@@ -459,8 +699,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd><dt class="property-optional"
+    <dd>List of Role ID. Up to 50 sub-accounts can be passed in at a time.</dd><dt class="property-optional"
             title="Optional">
         <span id="subaccountuins_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuins_yaml" style="color: inherit; text-decoration: inherit;">subaccount<wbr>Uins</a>
@@ -468,8 +707,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</p>
-</dd></dl>
+    <dd>List of sub-account. Up to 50 sub-accounts can be passed in at a time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -492,8 +730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -501,8 +738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustercommonnameslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Outputs.<wbr>Get<wbr>Cluster<wbr>Common<wbr>Names<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</p>
-</dd><dt class="property-"
+    <dd>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -548,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -557,8 +792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustercommonnameslist">[]Get<wbr>Cluster<wbr>Common<wbr>Names<wbr>List</a></span>
     </dt>
-    <dd><p>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</p>
-</dd><dt class="property-"
+    <dd>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -595,6 +829,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclustercommonnameslist">list(object)</a></span>
+    </dt>
+    <dd>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="role_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_ids_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subaccount_uins_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccount_uins_hcl" style="color: inherit; text-decoration: inherit;">subaccount_<wbr>uins</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -604,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -613,8 +900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustercommonnameslist">List&lt;Get<wbr>Cluster<wbr>Common<wbr>Names<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</p>
-</dd><dt class="property-"
+    <dd>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -660,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -669,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustercommonnameslist">Get<wbr>Cluster<wbr>Common<wbr>Names<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</p>
-</dd><dt class="property-"
+    <dd>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -716,17 +1000,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclustercommonnameslist">Get<wbr>Cluster<wbr>Common<wbr>Names<wbr>List]</a></span>
+        <span class="property-type"><a href="#getclustercommonnameslist">Sequence[Get<wbr>Cluster<wbr>Common<wbr>Names<wbr>List]</a></span>
     </dt>
-    <dd><p>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</p>
-</dd><dt class="property-"
+    <dd>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -772,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -781,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustercommonnameslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</p>
-</dd><dt class="property-"
+    <dd>List of the CommonName in the certificate of the client corresponding to the sub-account UIN.</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -832,14 +1112,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="commonname_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonname_csharp" style="color: inherit; text-decoration: inherit;">Common<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The CommonName in the certificate of the client corresponding to the sub-account.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
         <span id="commonnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonnames_csharp" style="color: inherit; text-decoration: inherit;">Common<wbr>Names</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CommonName in the certificate of the client corresponding to the sub-account.</p>
-</dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.81.140. Please use <code>commonName</code>. The CommonName in the certificate of the client corresponding to the sub-account.<p class="property-message">Deprecated: It has been deprecated from version 1.81.140. Please use <code>commonName</code>.</p></dd><dt class="property-required"
             title="Required">
         <span id="subaccountuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuin_csharp" style="color: inherit; text-decoration: inherit;">Subaccount<wbr>Uin</a>
@@ -847,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User UIN.</p>
-</dd></dl>
+    <dd>User UIN.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -856,14 +1142,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="commonname_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonname_go" style="color: inherit; text-decoration: inherit;">Common<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The CommonName in the certificate of the client corresponding to the sub-account.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
         <span id="commonnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonnames_go" style="color: inherit; text-decoration: inherit;">Common<wbr>Names</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CommonName in the certificate of the client corresponding to the sub-account.</p>
-</dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.81.140. Please use <code>commonName</code>. The CommonName in the certificate of the client corresponding to the sub-account.<p class="property-message">Deprecated: It has been deprecated from version 1.81.140. Please use <code>commonName</code>.</p></dd><dt class="property-required"
             title="Required">
         <span id="subaccountuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuin_go" style="color: inherit; text-decoration: inherit;">Subaccount<wbr>Uin</a>
@@ -871,8 +1164,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User UIN.</p>
-</dd></dl>
+    <dd>User UIN.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="common_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#common_name_hcl" style="color: inherit; text-decoration: inherit;">common_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The CommonName in the certificate of the client corresponding to the sub-account.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="common_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#common_names_hcl" style="color: inherit; text-decoration: inherit;">common_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.81.140. Please use <code>commonName</code>. The CommonName in the certificate of the client corresponding to the sub-account.<p class="property-message">Deprecated: It has been deprecated from version 1.81.140. Please use <code>commonName</code>.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="subaccount_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccount_uin_hcl" style="color: inherit; text-decoration: inherit;">subaccount_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User UIN.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -880,14 +1202,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="commonname_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonname_java" style="color: inherit; text-decoration: inherit;">common<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The CommonName in the certificate of the client corresponding to the sub-account.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
         <span id="commonnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonnames_java" style="color: inherit; text-decoration: inherit;">common<wbr>Names</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The CommonName in the certificate of the client corresponding to the sub-account.</p>
-</dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.81.140. Please use <code>commonName</code>. The CommonName in the certificate of the client corresponding to the sub-account.<p class="property-message">Deprecated: It has been deprecated from version 1.81.140. Please use <code>commonName</code>.</p></dd><dt class="property-required"
             title="Required">
         <span id="subaccountuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuin_java" style="color: inherit; text-decoration: inherit;">subaccount<wbr>Uin</a>
@@ -895,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User UIN.</p>
-</dd></dl>
+    <dd>User UIN.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -904,14 +1232,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="commonname_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonname_nodejs" style="color: inherit; text-decoration: inherit;">common<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The CommonName in the certificate of the client corresponding to the sub-account.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
         <span id="commonnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonnames_nodejs" style="color: inherit; text-decoration: inherit;">common<wbr>Names</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CommonName in the certificate of the client corresponding to the sub-account.</p>
-</dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.81.140. Please use <code>commonName</code>. The CommonName in the certificate of the client corresponding to the sub-account.<p class="property-message">Deprecated: It has been deprecated from version 1.81.140. Please use <code>commonName</code>.</p></dd><dt class="property-required"
             title="Required">
         <span id="subaccountuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuin_nodejs" style="color: inherit; text-decoration: inherit;">subaccount<wbr>Uin</a>
@@ -919,8 +1254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User UIN.</p>
-</dd></dl>
+    <dd>User UIN.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -928,14 +1262,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="common_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#common_name_python" style="color: inherit; text-decoration: inherit;">common_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The CommonName in the certificate of the client corresponding to the sub-account.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
         <span id="common_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#common_names_python" style="color: inherit; text-decoration: inherit;">common_<wbr>names</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The CommonName in the certificate of the client corresponding to the sub-account.</p>
-</dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.81.140. Please use <code>commonName</code>. The CommonName in the certificate of the client corresponding to the sub-account.<p class="property-message">Deprecated: It has been deprecated from version 1.81.140. Please use <code>commonName</code>.</p></dd><dt class="property-required"
             title="Required">
         <span id="subaccount_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccount_uin_python" style="color: inherit; text-decoration: inherit;">subaccount_<wbr>uin</a>
@@ -943,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User UIN.</p>
-</dd></dl>
+    <dd>User UIN.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -952,14 +1292,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="commonname_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonname_yaml" style="color: inherit; text-decoration: inherit;">common<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The CommonName in the certificate of the client corresponding to the sub-account.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
         <span id="commonnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonnames_yaml" style="color: inherit; text-decoration: inherit;">common<wbr>Names</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The CommonName in the certificate of the client corresponding to the sub-account.</p>
-</dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.81.140. Please use <code>commonName</code>. The CommonName in the certificate of the client corresponding to the sub-account.<p class="property-message">Deprecated: It has been deprecated from version 1.81.140. Please use <code>commonName</code>.</p></dd><dt class="property-required"
             title="Required">
         <span id="subaccountuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subaccountuin_yaml" style="color: inherit; text-decoration: inherit;">subaccount<wbr>Uin</a>
@@ -967,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User UIN.</p>
-</dd></dl>
+    <dd>User UIN.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,7 +1329,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

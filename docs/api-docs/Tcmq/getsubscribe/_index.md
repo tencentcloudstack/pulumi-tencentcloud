@@ -2,9 +2,11 @@
 ---
 title: "getSubscribe"
 title_tag: "tencentcloud.Tcmq.getSubscribe"
-meta_desc: "Documentation for the tencentcloud.Tcmq.getSubscribe function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tcmq subscribe"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -25,7 +27,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -33,9 +35,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSubscribe<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSubscribeArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>></span
+><span class="k">function </span>getSubscribe<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSubscribeArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>></span
 ><span class="k">
-function </span>getSubscribeOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSubscribeOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>></span
+function </span>getSubscribeOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSubscribeOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -51,12 +53,12 @@ function </span>getSubscribeOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSubscribeResult</span
 ><span class="k">
-def </span>get_subscribe_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">subscription_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSubscribeResult]</span
+def </span>get_subscribe_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">subscription_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSubscribeResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -65,12 +67,12 @@ def </span>get_subscribe_output<span class="p">(</span><span class="nx">limit</s
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetSubscribe<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetSubscribeArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetSubscribeResult</a></span>, error)</span
+><span class="k">func </span>LookupSubscribe<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupSubscribeArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupSubscribeResult</a></span>, error)</span
 ><span class="k">
-func </span>GetSubscribeOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetSubscribeOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetSubscribeResultOutput</span
+func </span>LookupSubscribeOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupSubscribeOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupSubscribeResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetSubscribe` in the Go SDK.
+&gt; Note: This function is named `LookupSubscribe` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -81,7 +83,8 @@ func </span>GetSubscribeOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSubscribe </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSubscribeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSubscribeInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSubscribeInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSubscribeInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -90,7 +93,8 @@ func </span>GetSubscribeOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>> </span>getSubscribe<span class="p">(</span><span class="nx">GetSubscribeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>> </span>getSubscribe<span class="p">(</span><span class="nx">GetSubscribeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSubscribeResult</a></span>> </span>getSubscribe<span class="p">(</span><span class="nx">GetSubscribeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -102,6 +106,15 @@ func </span>GetSubscribeOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcmq/getSubscribe:getSubscribe
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcmq_get_subscribe&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -120,8 +133,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -129,8 +141,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -138,8 +149,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -147,8 +157,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscriptionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_csharp" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Name</a>
@@ -156,8 +165,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd></dl>
+    <dd>Fuzzy search by SubscriptionName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -171,8 +179,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -180,8 +187,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -189,8 +195,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -198,8 +203,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscriptionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_go" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Name</a>
@@ -207,8 +211,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd></dl>
+    <dd>Fuzzy search by SubscriptionName.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subscription_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_name_hcl" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fuzzy search by SubscriptionName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +271,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -231,8 +279,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -240,8 +287,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -249,8 +295,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscriptionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_java" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -258,8 +303,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd></dl>
+    <dd>Fuzzy search by SubscriptionName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -273,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -282,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -291,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -300,8 +341,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscriptionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_nodejs" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -309,8 +349,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd></dl>
+    <dd>Fuzzy search by SubscriptionName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +363,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -333,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -342,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -351,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscription_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_name_python" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
@@ -360,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd></dl>
+    <dd>Fuzzy search by SubscriptionName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -375,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -384,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -393,8 +425,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -402,8 +433,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscriptionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_yaml" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -411,8 +441,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd></dl>
+    <dd>Fuzzy search by SubscriptionName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -435,8 +464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="subscriptionlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionlists_csharp" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Lists</a>
@@ -444,8 +472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubscribesubscriptionlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Outputs.<wbr>Get<wbr>Subscribe<wbr>Subscription<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Set of subscription attributes.</p>
-</dd><dt class="property-"
+    <dd>Set of subscription attributes.</dd><dt class="property-"
             title="">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -485,8 +512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -500,8 +526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="subscriptionlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionlists_go" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Lists</a>
@@ -509,8 +534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubscribesubscriptionlist">[]Get<wbr>Subscribe<wbr>Subscription<wbr>List</a></span>
     </dt>
-    <dd><p>Set of subscription attributes.</p>
-</dd><dt class="property-"
+    <dd>Set of subscription attributes.</dd><dt class="property-"
             title="">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -550,8 +574,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="subscription_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_lists_hcl" style="color: inherit; text-decoration: inherit;">subscription_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsubscribesubscriptionlist">list(object)</a></span>
+    </dt>
+    <dd>Set of subscription attributes.</dd><dt class="property-"
+            title="">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subscription_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_name_hcl" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -565,8 +650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="subscriptionlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionlists_java" style="color: inherit; text-decoration: inherit;">subscription<wbr>Lists</a>
@@ -574,8 +658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubscribesubscriptionlist">List&lt;Get<wbr>Subscribe<wbr>Subscription<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Set of subscription attributes.</p>
-</dd><dt class="property-"
+    <dd>Set of subscription attributes.</dd><dt class="property-"
             title="">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -615,8 +698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -630,8 +712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="subscriptionlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionlists_nodejs" style="color: inherit; text-decoration: inherit;">subscription<wbr>Lists</a>
@@ -639,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubscribesubscriptionlist">Get<wbr>Subscribe<wbr>Subscription<wbr>List[]</a></span>
     </dt>
-    <dd><p>Set of subscription attributes.</p>
-</dd><dt class="property-"
+    <dd>Set of subscription attributes.</dd><dt class="property-"
             title="">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -680,8 +760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -695,17 +774,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="subscription_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_lists_python" style="color: inherit; text-decoration: inherit;">subscription_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsubscribesubscriptionlist">Get<wbr>Subscribe<wbr>Subscription<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsubscribesubscriptionlist">Sequence[Get<wbr>Subscribe<wbr>Subscription<wbr>List]</a></span>
     </dt>
-    <dd><p>Set of subscription attributes.</p>
-</dd><dt class="property-"
+    <dd>Set of subscription attributes.</dd><dt class="property-"
             title="">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -745,8 +822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -760,8 +836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="subscriptionlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionlists_yaml" style="color: inherit; text-decoration: inherit;">subscription<wbr>Lists</a>
@@ -769,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsubscribesubscriptionlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Set of subscription attributes.</p>
-</dd><dt class="property-"
+    <dd>Set of subscription attributes.</dd><dt class="property-"
             title="">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -810,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -835,8 +908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Filtering policy for subscribing to and receiving messages.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy for subscribing to and receiving messages.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -844,8 +916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="endpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_csharp" style="color: inherit; text-decoration: inherit;">Endpoint</a>
@@ -853,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</p>
-</dd><dt class="property-required"
+    <dd>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</dd><dt class="property-required"
             title="Required">
         <span id="filtertags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Tags</a>
@@ -862,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_csharp" style="color: inherit; text-decoration: inherit;">Last<wbr>Modify<wbr>Time</a>
@@ -871,8 +940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Count</a>
@@ -880,8 +948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of messages to be delivered in the subscription.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages to be delivered in the subscription.</dd><dt class="property-required"
             title="Required">
         <span id="notifycontentformat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Content<wbr>Format</a>
@@ -889,8 +956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-required"
+    <dd>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notifystrategy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Strategy</a>
@@ -898,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-required"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -907,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionid_csharp" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Id</a>
@@ -916,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription ID, which will be used during monitoring data pull.</p>
-</dd><dt class="property-required"
+    <dd>Subscription ID, which will be used during monitoring data pull.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_csharp" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Name</a>
@@ -925,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by SubscriptionName.</dd><dt class="property-required"
             title="Required">
         <span id="topicowner_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicowner_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Owner</a>
@@ -934,8 +996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription owner APPID.</p>
-</dd></dl>
+    <dd>Subscription owner APPID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -949,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Filtering policy for subscribing to and receiving messages.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy for subscribing to and receiving messages.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -958,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="endpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_go" style="color: inherit; text-decoration: inherit;">Endpoint</a>
@@ -967,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</p>
-</dd><dt class="property-required"
+    <dd>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</dd><dt class="property-required"
             title="Required">
         <span id="filtertags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Tags</a>
@@ -976,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_go" style="color: inherit; text-decoration: inherit;">Last<wbr>Modify<wbr>Time</a>
@@ -985,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Count</a>
@@ -994,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of messages to be delivered in the subscription.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages to be delivered in the subscription.</dd><dt class="property-required"
             title="Required">
         <span id="notifycontentformat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Content<wbr>Format</a>
@@ -1003,8 +1058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-required"
+    <dd>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notifystrategy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Strategy</a>
@@ -1012,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-required"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1021,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionid_go" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Id</a>
@@ -1030,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription ID, which will be used during monitoring data pull.</p>
-</dd><dt class="property-required"
+    <dd>Subscription ID, which will be used during monitoring data pull.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_go" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Name</a>
@@ -1039,8 +1090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by SubscriptionName.</dd><dt class="property-required"
             title="Required">
         <span id="topicowner_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicowner_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Owner</a>
@@ -1048,8 +1098,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription owner APPID.</p>
-</dd></dl>
+    <dd>Subscription owner APPID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="binding_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#binding_keys_hcl" style="color: inherit; text-decoration: inherit;">binding_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Filtering policy for subscribing to and receiving messages.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
+            title="Required">
+        <span id="endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_hcl" style="color: inherit; text-decoration: inherit;">endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</dd><dt class="property-required"
+            title="Required">
+        <span id="filter_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_tags_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</dd><dt class="property-required"
+            title="Required">
+        <span id="last_modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_modify_time_hcl" style="color: inherit; text-decoration: inherit;">last_<wbr>modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_count_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of messages to be delivered in the subscription.</dd><dt class="property-required"
+            title="Required">
+        <span id="notify_content_format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_content_format_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>content_<wbr>format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="notify_strategy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_strategy_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
+            title="Required">
+        <span id="subscription_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_id_hcl" style="color: inherit; text-decoration: inherit;">subscription_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subscription ID, which will be used during monitoring data pull.</dd><dt class="property-required"
+            title="Required">
+        <span id="subscription_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_name_hcl" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fuzzy search by SubscriptionName.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_owner_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_owner_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>owner</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subscription owner APPID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1063,8 +1214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filtering policy for subscribing to and receiving messages.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy for subscribing to and receiving messages.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1072,8 +1222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="endpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_java" style="color: inherit; text-decoration: inherit;">endpoint</a>
@@ -1081,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</p>
-</dd><dt class="property-required"
+    <dd>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</dd><dt class="property-required"
             title="Required">
         <span id="filtertags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -1090,8 +1238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_java" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -1099,8 +1246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Count</a>
@@ -1108,8 +1254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of messages to be delivered in the subscription.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages to be delivered in the subscription.</dd><dt class="property-required"
             title="Required">
         <span id="notifycontentformat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -1117,8 +1262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-required"
+    <dd>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notifystrategy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -1126,8 +1270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-required"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1135,8 +1278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionid_java" style="color: inherit; text-decoration: inherit;">subscription<wbr>Id</a>
@@ -1144,8 +1286,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription ID, which will be used during monitoring data pull.</p>
-</dd><dt class="property-required"
+    <dd>Subscription ID, which will be used during monitoring data pull.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_java" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -1153,8 +1294,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by SubscriptionName.</dd><dt class="property-required"
             title="Required">
         <span id="topicowner_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicowner_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Owner</a>
@@ -1162,8 +1302,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subscription owner APPID.</p>
-</dd></dl>
+    <dd>Subscription owner APPID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1177,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Filtering policy for subscribing to and receiving messages.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy for subscribing to and receiving messages.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1186,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="endpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_nodejs" style="color: inherit; text-decoration: inherit;">endpoint</a>
@@ -1195,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</p>
-</dd><dt class="property-required"
+    <dd>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</dd><dt class="property-required"
             title="Required">
         <span id="filtertags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -1204,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_nodejs" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -1213,8 +1348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Count</a>
@@ -1222,8 +1356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of messages to be delivered in the subscription.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages to be delivered in the subscription.</dd><dt class="property-required"
             title="Required">
         <span id="notifycontentformat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -1231,8 +1364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-required"
+    <dd>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notifystrategy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -1240,8 +1372,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-required"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1249,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionid_nodejs" style="color: inherit; text-decoration: inherit;">subscription<wbr>Id</a>
@@ -1258,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription ID, which will be used during monitoring data pull.</p>
-</dd><dt class="property-required"
+    <dd>Subscription ID, which will be used during monitoring data pull.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_nodejs" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -1267,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by SubscriptionName.</dd><dt class="property-required"
             title="Required">
         <span id="topicowner_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicowner_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Owner</a>
@@ -1276,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subscription owner APPID.</p>
-</dd></dl>
+    <dd>Subscription owner APPID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1291,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Filtering policy for subscribing to and receiving messages.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy for subscribing to and receiving messages.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1300,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_python" style="color: inherit; text-decoration: inherit;">endpoint</a>
@@ -1309,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</p>
-</dd><dt class="property-required"
+    <dd>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</dd><dt class="property-required"
             title="Required">
         <span id="filter_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_tags_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>tags</a>
@@ -1318,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="last_modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_modify_time_python" style="color: inherit; text-decoration: inherit;">last_<wbr>modify_<wbr>time</a>
@@ -1327,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="msg_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_count_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>count</a>
@@ -1336,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of messages to be delivered in the subscription.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages to be delivered in the subscription.</dd><dt class="property-required"
             title="Required">
         <span id="notify_content_format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_content_format_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>content_<wbr>format</a>
@@ -1345,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-required"
+    <dd>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notify_strategy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_strategy_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>strategy</a>
@@ -1354,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-required"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1363,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscription_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_id_python" style="color: inherit; text-decoration: inherit;">subscription_<wbr>id</a>
@@ -1372,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subscription ID, which will be used during monitoring data pull.</p>
-</dd><dt class="property-required"
+    <dd>Subscription ID, which will be used during monitoring data pull.</dd><dt class="property-required"
             title="Required">
         <span id="subscription_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_name_python" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
@@ -1381,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by SubscriptionName.</dd><dt class="property-required"
             title="Required">
         <span id="topic_owner_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_owner_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>owner</a>
@@ -1390,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subscription owner APPID.</p>
-</dd></dl>
+    <dd>Subscription owner APPID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1405,8 +1520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filtering policy for subscribing to and receiving messages.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy for subscribing to and receiving messages.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1414,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="endpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_yaml" style="color: inherit; text-decoration: inherit;">endpoint</a>
@@ -1423,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</p>
-</dd><dt class="property-required"
+    <dd>Endpoint that receives notifications, which varies by <code>protocol</code>: for HTTP, the endpoint must start with <code>http://</code>, and the <code>host</code> can be a domain or IP; for <code>queue</code>, <code>queueName</code> should be entered.</dd><dt class="property-required"
             title="Required">
         <span id="filtertags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -1432,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</p>
-</dd><dt class="property-required"
+    <dd>Filtering policy selected when a subscription is created:If <code>filterType</code> is 1, <code>filterTag</code> will be used for filtering. If <code>filterType</code> is 2, <code>bindingKey</code> will be used for filtering.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_yaml" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -1441,8 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="msgcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgcount_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Count</a>
@@ -1450,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of messages to be delivered in the subscription.</p>
-</dd><dt class="property-required"
+    <dd>Number of messages to be delivered in the subscription.</dd><dt class="property-required"
             title="Required">
         <span id="notifycontentformat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -1459,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-required"
+    <dd>Push content format. Valid values: 1. <code>JSON</code>; 2. <code>SIMPLIFIED</code>, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notifystrategy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -1468,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-required"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1477,8 +1584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionid_yaml" style="color: inherit; text-decoration: inherit;">subscription<wbr>Id</a>
@@ -1486,8 +1592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription ID, which will be used during monitoring data pull.</p>
-</dd><dt class="property-required"
+    <dd>Subscription ID, which will be used during monitoring data pull.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_yaml" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -1495,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy search by SubscriptionName.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy search by SubscriptionName.</dd><dt class="property-required"
             title="Required">
         <span id="topicowner_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicowner_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Owner</a>
@@ -1504,8 +1608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subscription owner APPID.</p>
-</dd></dl>
+    <dd>Subscription owner APPID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1520,7 +1623,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Vpc.getInstances"
-meta_desc: "Documentation for the tencentcloud.Vpc.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query vpc instances' information."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,40 +18,91 @@ Use this data source to query vpc instances' information.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.vpc.Instance("foo", {cidrBlock: "10.0.0.0/16"});
-const idInstances = tencentcloud.Vpc.getInstancesOutput({
+const foo = new tencentcloud.vpc.Instance("foo", {
+    name: "guagua_vpc_instance_test",
+    cidrBlock: "10.0.0.0/16",
+});
+const idInstances = tencentcloud.vpc.getInstancesOutput({
     vpcId: foo.id,
 });
-const nameInstances = tencentcloud.Vpc.getInstancesOutput({
+const nameInstances = tencentcloud.vpc.getInstancesOutput({
     name: foo.name,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.vpc.Instance("foo", cidr_block="10.0.0.0/16")
-id_instances = tencentcloud.Vpc.get_instances_output(vpc_id=foo.id)
-name_instances = tencentcloud.Vpc.get_instances_output(name=foo.name)
+foo = tencentcloud.vpc.Instance("foo",
+    name="guagua_vpc_instance_test",
+    cidr_block="10.0.0.0/16")
+id_instances = tencentcloud.vpc.get_instances_output(vpc_id=foo.id)
+name_instances = tencentcloud.vpc.get_instances_output(name=foo.name)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		foo, err := vpc.NewInstance(ctx, "foo", &vpc.InstanceArgs{
+			Name:      pulumi.String("guagua_vpc_instance_test"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
+			VpcId: foo.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		_ = vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
+			Name: foo.Name,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var foo = new Tencentcloud.Vpc.Instance("foo", new()
     {
+        Name = "guagua_vpc_instance_test",
         CidrBlock = "10.0.0.0/16",
     });
 
@@ -65,32 +118,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
-			VpcId: foo.ID(),
-		}, nil)
-		_ = Vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
-			Name: foo.Name,
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -101,8 +133,8 @@ import com.pulumi.tencentcloud.Vpc.Instance;
 import com.pulumi.tencentcloud.Vpc.InstanceArgs;
 import com.pulumi.tencentcloud.Vpc.VpcFunctions;
 import com.pulumi.tencentcloud.Vpc.inputs.GetInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -114,7 +146,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Instance("foo", InstanceArgs.builder()        
+        var foo = new Instance("foo", InstanceArgs.builder()
+            .name("guagua_vpc_instance_test")
             .cidrBlock("10.0.0.0/16")
             .build());
 
@@ -129,26 +162,67 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: guagua_vpc_instance_test
       cidrBlock: 10.0.0.0/16
 variables:
   idInstances:
     fn::invoke:
-      Function: tencentcloud:Vpc:getInstances
-      Arguments:
+      function: tencentcloud:Vpc:getInstances
+      arguments:
         vpcId: ${foo.id}
   nameInstances:
     fn::invoke:
-      Function: tencentcloud:Vpc:getInstances
-      Arguments:
+      function: tencentcloud:Vpc:getInstances
+      arguments:
         name: ${foo.name}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getinstances" "idInstances" {
+  vpc_id = tencentcloud_vpc_instance.foo.id
+}
+data "tencentcloud_vpc_getinstances" "nameInstances" {
+  name = tencentcloud_vpc_instance.foo.name
+}
+
+resource "tencentcloud_vpc_instance" "foo" {
+  name       = "guagua_vpc_instance_test"
+  cidr_block = "10.0.0.0/16"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeSubnets](https://www.tencentcloud.com/document/api/215/15784)
+  - [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778)
 
 
 
@@ -160,7 +234,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -168,9 +242,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,18 +258,18 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                   <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">cidr_block</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">is_default</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">cidr_block</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">is_default</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                  <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -220,7 +294,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -229,7 +304,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -241,6 +317,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Vpc/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_vpc_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -259,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -268,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -277,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -286,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -295,17 +376,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter if VPC has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if VPC has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -313,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -328,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -337,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -346,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -355,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -364,17 +438,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter if VPC has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if VPC has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -382,8 +454,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Filter default or no default VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPC to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter if VPC has this tag.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -397,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -406,8 +538,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -415,8 +546,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -424,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -433,17 +562,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter if VPC has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if VPC has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -451,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -466,8 +592,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -475,8 +600,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -484,8 +608,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +616,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -502,17 +624,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter if VPC has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if VPC has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -520,8 +640,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -535,8 +654,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -544,8 +662,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -553,8 +670,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -562,8 +678,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
@@ -571,17 +686,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter if VPC has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if VPC has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -589,8 +702,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -604,8 +716,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -613,8 +724,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter default or no default VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -622,8 +732,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -631,8 +740,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -640,17 +748,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter if VPC has this tag.</p>
-</dd><dt class="property-optional"
+    <dd>Filter if VPC has this tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -658,8 +764,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -682,8 +787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -691,8 +795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpc.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>The information list of the VPC.</p>
-</dd><dt class="property-"
+    <dd>The information list of the VPC.</dd><dt class="property-"
             title="">
         <span id="cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -700,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of a VPC CIDR.</p>
-</dd><dt class="property-"
+    <dd>A network address block of a VPC CIDR.</dd><dt class="property-"
             title="">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -709,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -718,8 +819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -741,10 +841,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Tags of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -752,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -767,8 +865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -776,8 +873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">[]Get<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>The information list of the VPC.</p>
-</dd><dt class="property-"
+    <dd>The information list of the VPC.</dd><dt class="property-"
             title="">
         <span id="cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -785,8 +881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of a VPC CIDR.</p>
-</dd><dt class="property-"
+    <dd>A network address block of a VPC CIDR.</dd><dt class="property-"
             title="">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -794,8 +889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -803,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -826,10 +919,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Tags of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -837,8 +929,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>The information list of the VPC.</dd><dt class="property-"
+            title="">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A network address block of a VPC CIDR.</dd><dt class="property-"
+            title="">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPC.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPC.</dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -852,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -861,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>The information list of the VPC.</p>
-</dd><dt class="property-"
+    <dd>The information list of the VPC.</dd><dt class="property-"
             title="">
         <span id="cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -870,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of a VPC CIDR.</p>
-</dd><dt class="property-"
+    <dd>A network address block of a VPC CIDR.</dd><dt class="property-"
             title="">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -879,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -888,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -911,10 +1075,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Tags of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -922,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -937,8 +1099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -946,8 +1107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>The information list of the VPC.</p>
-</dd><dt class="property-"
+    <dd>The information list of the VPC.</dd><dt class="property-"
             title="">
         <span id="cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -955,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of a VPC CIDR.</p>
-</dd><dt class="property-"
+    <dd>A network address block of a VPC CIDR.</dd><dt class="property-"
             title="">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -964,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -973,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -996,10 +1153,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Tags of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1007,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1022,17 +1177,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>The information list of the VPC.</p>
-</dd><dt class="property-"
+    <dd>The information list of the VPC.</dd><dt class="property-"
             title="">
         <span id="cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -1040,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A network address block of a VPC CIDR.</p>
-</dd><dt class="property-"
+    <dd>A network address block of a VPC CIDR.</dd><dt class="property-"
             title="">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -1049,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1058,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPC.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1081,10 +1231,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Tags of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1092,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1107,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1116,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The information list of the VPC.</p>
-</dd><dt class="property-"
+    <dd>The information list of the VPC.</dd><dt class="property-"
             title="">
         <span id="cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1125,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of a VPC CIDR.</p>
-</dd><dt class="property-"
+    <dd>A network address block of a VPC CIDR.</dd><dt class="property-"
             title="">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1134,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether it is the default VPC for this region.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether it is the default VPC for this region.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1143,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPC.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1166,10 +1309,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC.</p>
-</dd><dt class="property-"
+    <dd>Tags of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1177,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1202,8 +1343,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="commonassistantcidrs_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonassistantcidrs_csharp" style="color: inherit; text-decoration: inherit;">Common<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>common assistant CIDR block.</dd><dt class="property-required"
+            title="Required">
+        <span id="containerassistantcidrs_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerassistantcidrs_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>container assistant CIDR block.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1211,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of VPC.</dd><dt class="property-required"
             title="Required">
         <span id="dnsservers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
@@ -1220,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of DNS servers which can be used within the VPC.</p>
-</dd><dt class="property-required"
+    <dd>A list of DNS servers which can be used within the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1229,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default VPC.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Multicast</a>
@@ -1238,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether VPC multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1247,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -1256,17 +1407,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A ID list of subnets within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A ID list of subnets within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1274,8 +1423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1289,8 +1437,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="commonassistantcidrs_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonassistantcidrs_go" style="color: inherit; text-decoration: inherit;">Common<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>common assistant CIDR block.</dd><dt class="property-required"
+            title="Required">
+        <span id="containerassistantcidrs_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerassistantcidrs_go" style="color: inherit; text-decoration: inherit;">Container<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>container assistant CIDR block.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1298,8 +1461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of VPC.</dd><dt class="property-required"
             title="Required">
         <span id="dnsservers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
@@ -1307,8 +1469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of DNS servers which can be used within the VPC.</p>
-</dd><dt class="property-required"
+    <dd>A list of DNS servers which can be used within the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -1316,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default VPC.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Multicast</a>
@@ -1325,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether VPC multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1334,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -1343,17 +1501,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A ID list of subnets within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A ID list of subnets within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1361,8 +1517,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="common_assistant_cidrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#common_assistant_cidrs_hcl" style="color: inherit; text-decoration: inherit;">common_<wbr>assistant_<wbr>cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>common assistant CIDR block.</dd><dt class="property-required"
+            title="Required">
+        <span id="container_assistant_cidrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_assistant_cidrs_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>assistant_<wbr>cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>container assistant CIDR block.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="dns_servers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_servers_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of DNS servers which can be used within the VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Filter default or no default VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_multicast_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multicast_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>multicast</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether VPC multicast is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPC to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A ID list of subnets within this VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1376,8 +1625,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="commonassistantcidrs_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonassistantcidrs_java" style="color: inherit; text-decoration: inherit;">common<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>common assistant CIDR block.</dd><dt class="property-required"
+            title="Required">
+        <span id="containerassistantcidrs_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerassistantcidrs_java" style="color: inherit; text-decoration: inherit;">container<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>container assistant CIDR block.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1385,8 +1649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of VPC.</dd><dt class="property-required"
             title="Required">
         <span id="dnsservers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -1394,8 +1657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of DNS servers which can be used within the VPC.</p>
-</dd><dt class="property-required"
+    <dd>A list of DNS servers which can be used within the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1403,8 +1665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default VPC.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_java" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -1412,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether VPC multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1421,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1430,17 +1689,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A ID list of subnets within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A ID list of subnets within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1448,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1463,8 +1719,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="commonassistantcidrs_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonassistantcidrs_nodejs" style="color: inherit; text-decoration: inherit;">common<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>common assistant CIDR block.</dd><dt class="property-required"
+            title="Required">
+        <span id="containerassistantcidrs_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerassistantcidrs_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>container assistant CIDR block.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1472,8 +1743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of VPC.</dd><dt class="property-required"
             title="Required">
         <span id="dnsservers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -1481,8 +1751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of DNS servers which can be used within the VPC.</p>
-</dd><dt class="property-required"
+    <dd>A list of DNS servers which can be used within the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1490,8 +1759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default VPC.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -1499,8 +1767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether VPC multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1508,8 +1775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1517,17 +1783,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A ID list of subnets within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A ID list of subnets within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1535,8 +1799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1550,8 +1813,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="common_assistant_cidrs_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#common_assistant_cidrs_python" style="color: inherit; text-decoration: inherit;">common_<wbr>assistant_<wbr>cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>common assistant CIDR block.</dd><dt class="property-required"
+            title="Required">
+        <span id="container_assistant_cidrs_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_assistant_cidrs_python" style="color: inherit; text-decoration: inherit;">container_<wbr>assistant_<wbr>cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>container assistant CIDR block.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1559,8 +1837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of VPC.</dd><dt class="property-required"
             title="Required">
         <span id="dns_servers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_servers_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
@@ -1568,8 +1845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of DNS servers which can be used within the VPC.</p>
-</dd><dt class="property-required"
+    <dd>A list of DNS servers which can be used within the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -1577,8 +1853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default VPC.</dd><dt class="property-required"
             title="Required">
         <span id="is_multicast_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_multicast_python" style="color: inherit; text-decoration: inherit;">is_<wbr>multicast</a>
@@ -1586,8 +1861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether VPC multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1595,8 +1869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -1604,17 +1877,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A ID list of subnets within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A ID list of subnets within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1622,8 +1893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1637,8 +1907,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter VPC with this CIDR.</p>
-</dd><dt class="property-required"
+    <dd>Filter VPC with this CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="commonassistantcidrs_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commonassistantcidrs_yaml" style="color: inherit; text-decoration: inherit;">common<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>common assistant CIDR block.</dd><dt class="property-required"
+            title="Required">
+        <span id="containerassistantcidrs_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerassistantcidrs_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>Assistant<wbr>Cidrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>container assistant CIDR block.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1646,8 +1931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of VPC.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of VPC.</dd><dt class="property-required"
             title="Required">
         <span id="dnsservers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
@@ -1655,8 +1939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of DNS servers which can be used within the VPC.</p>
-</dd><dt class="property-required"
+    <dd>A list of DNS servers which can be used within the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1664,8 +1947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter default or no default VPC.</p>
-</dd><dt class="property-required"
+    <dd>Filter default or no default VPC.</dd><dt class="property-required"
             title="Required">
         <span id="ismulticast_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ismulticast_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Multicast</a>
@@ -1673,8 +1955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether VPC multicast is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether VPC multicast is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1682,8 +1963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1691,17 +1971,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A ID list of subnets within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A ID list of subnets within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPC to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPC to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1709,8 +1987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC to be queried.</p>
-</dd></dl>
+    <dd>ID of the VPC to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1725,7 +2002,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

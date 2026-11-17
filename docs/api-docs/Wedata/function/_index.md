@@ -2,9 +2,11 @@
 ---
 title: "Function"
 title_tag: "tencentcloud.Wedata.Function"
-meta_desc: "Documentation for the tencentcloud.Wedata.Function resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a wedata function"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,56 +18,118 @@ Provides a resource to create a wedata function
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.wedata.Function("example", {
-    className: "tf_class_example",
-    clusterIdentifier: "emr-m6u3qgk0",
-    comment: "V1",
-    dbName: "tf_db_example",
-    description: "description.",
-    example: "example info.",
+    type: "HIVE",
     kind: "ANALYSIS",
-    paramDesc: "param info.",
+    name: "tf_example",
+    clusterIdentifier: "emr-m6u3qgk0",
+    dbName: "tf_db_example",
     projectId: "1612982498218618880",
+    className: "tf_class_example",
     resourceLists: [{
-        id: "5b28bcdf-a0e6-4022-927d-927d399c4593",
-        name: "untitled3-1.0-SNAPSHOT.jar",
         path: "/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar",
+        name: "untitled3-1.0-SNAPSHOT.jar",
+        id: "5b28bcdf-a0e6-4022-927d-927d399c4593",
         type: "cos",
     }],
-    returnDesc: "return value info.",
-    type: "HIVE",
+    description: "description.",
     usage: "usage info.",
+    paramDesc: "param info.",
+    returnDesc: "return value info.",
+    example: "example info.",
+    comment: "V1",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.wedata.Function("example",
-    class_name="tf_class_example",
-    cluster_identifier="emr-m6u3qgk0",
-    comment="V1",
-    db_name="tf_db_example",
-    description="description.",
-    example="example info.",
-    kind="ANALYSIS",
-    param_desc="param info.",
-    project_id="1612982498218618880",
-    resource_lists=[tencentcloud.wedata.FunctionResourceListArgs(
-        id="5b28bcdf-a0e6-4022-927d-927d399c4593",
-        name="untitled3-1.0-SNAPSHOT.jar",
-        path="/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar",
-        type="cos",
-    )],
-    return_desc="return value info.",
     type="HIVE",
-    usage="usage info.")
+    kind="ANALYSIS",
+    name="tf_example",
+    cluster_identifier="emr-m6u3qgk0",
+    db_name="tf_db_example",
+    project_id="1612982498218618880",
+    class_name="tf_class_example",
+    resource_lists=[{
+        "path": "/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar",
+        "name": "untitled3-1.0-SNAPSHOT.jar",
+        "id": "5b28bcdf-a0e6-4022-927d-927d399c4593",
+        "type": "cos",
+    }],
+    description="description.",
+    usage="usage info.",
+    param_desc="param info.",
+    return_desc="return value info.",
+    example="example info.",
+    comment="V1")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/wedata"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := wedata.NewFunction(ctx, "example", &wedata.FunctionArgs{
+			Type:              pulumi.String("HIVE"),
+			Kind:              pulumi.String("ANALYSIS"),
+			Name:              pulumi.String("tf_example"),
+			ClusterIdentifier: pulumi.String("emr-m6u3qgk0"),
+			DbName:            pulumi.String("tf_db_example"),
+			ProjectId:         pulumi.String("1612982498218618880"),
+			ClassName:         pulumi.String("tf_class_example"),
+			ResourceLists: wedata.FunctionResourceListArray{
+				&wedata.FunctionResourceListArgs{
+					Path: pulumi.String("/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar"),
+					Name: pulumi.String("untitled3-1.0-SNAPSHOT.jar"),
+					Id:   pulumi.String("5b28bcdf-a0e6-4022-927d-927d399c4593"),
+					Type: pulumi.String("cos"),
+				},
+			},
+			Description: pulumi.String("description."),
+			Usage:       pulumi.String("usage info."),
+			ParamDesc:   pulumi.String("param info."),
+			ReturnDesc:  pulumi.String("return value info."),
+			Example:     pulumi.String("example info."),
+			Comment:     pulumi.String("V1"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -76,71 +140,38 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Wedata.Function("example", new()
     {
-        ClassName = "tf_class_example",
-        ClusterIdentifier = "emr-m6u3qgk0",
-        Comment = "V1",
-        DbName = "tf_db_example",
-        Description = "description.",
-        Example = "example info.",
+        Type = "HIVE",
         Kind = "ANALYSIS",
-        ParamDesc = "param info.",
+        Name = "tf_example",
+        ClusterIdentifier = "emr-m6u3qgk0",
+        DbName = "tf_db_example",
         ProjectId = "1612982498218618880",
+        ClassName = "tf_class_example",
         ResourceLists = new[]
         {
             new Tencentcloud.Wedata.Inputs.FunctionResourceListArgs
             {
-                Id = "5b28bcdf-a0e6-4022-927d-927d399c4593",
-                Name = "untitled3-1.0-SNAPSHOT.jar",
                 Path = "/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar",
+                Name = "untitled3-1.0-SNAPSHOT.jar",
+                Id = "5b28bcdf-a0e6-4022-927d-927d399c4593",
                 Type = "cos",
             },
         },
-        ReturnDesc = "return value info.",
-        Type = "HIVE",
+        Description = "description.",
         Usage = "usage info.",
+        ParamDesc = "param info.",
+        ReturnDesc = "return value info.",
+        Example = "example info.",
+        Comment = "V1",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Wedata.NewFunction(ctx, "example", &Wedata.FunctionArgs{
-			ClassName:         pulumi.String("tf_class_example"),
-			ClusterIdentifier: pulumi.String("emr-m6u3qgk0"),
-			Comment:           pulumi.String("V1"),
-			DbName:            pulumi.String("tf_db_example"),
-			Description:       pulumi.String("description."),
-			Example:           pulumi.String("example info."),
-			Kind:              pulumi.String("ANALYSIS"),
-			ParamDesc:         pulumi.String("param info."),
-			ProjectId:         pulumi.String("1612982498218618880"),
-			ResourceLists: wedata.FunctionResourceListArray{
-				&wedata.FunctionResourceListArgs{
-					Id:   pulumi.String("5b28bcdf-a0e6-4022-927d-927d399c4593"),
-					Name: pulumi.String("untitled3-1.0-SNAPSHOT.jar"),
-					Path: pulumi.String("/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar"),
-					Type: pulumi.String("cos"),
-				},
-			},
-			ReturnDesc: pulumi.String("return value info."),
-			Type:       pulumi.String("HIVE"),
-			Usage:      pulumi.String("usage info."),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -150,8 +181,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Wedata.Function;
 import com.pulumi.tencentcloud.Wedata.FunctionArgs;
 import com.pulumi.tencentcloud.Wedata.inputs.FunctionResourceListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -163,126 +194,199 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Function("example", FunctionArgs.builder()        
-            .className("tf_class_example")
-            .clusterIdentifier("emr-m6u3qgk0")
-            .comment("V1")
-            .dbName("tf_db_example")
-            .description("description.")
-            .example("example info.")
+        var example = new Function("example", FunctionArgs.builder()
+            .type("HIVE")
             .kind("ANALYSIS")
-            .paramDesc("param info.")
+            .name("tf_example")
+            .clusterIdentifier("emr-m6u3qgk0")
+            .dbName("tf_db_example")
             .projectId("1612982498218618880")
+            .className("tf_class_example")
             .resourceLists(FunctionResourceListArgs.builder()
-                .id("5b28bcdf-a0e6-4022-927d-927d399c4593")
-                .name("untitled3-1.0-SNAPSHOT.jar")
                 .path("/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar")
+                .name("untitled3-1.0-SNAPSHOT.jar")
+                .id("5b28bcdf-a0e6-4022-927d-927d399c4593")
                 .type("cos")
                 .build())
-            .returnDesc("return value info.")
-            .type("HIVE")
+            .description("description.")
             .usage("usage info.")
+            .paramDesc("param info.")
+            .returnDesc("return value info.")
+            .example("example info.")
+            .comment("V1")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Wedata:Function
     properties:
-      className: tf_class_example
-      clusterIdentifier: emr-m6u3qgk0
-      comment: V1
-      dbName: tf_db_example
-      description: description.
-      example: example info.
-      kind: ANALYSIS
-      paramDesc: param info.
-      projectId: '1612982498218618880'
-      resourceLists:
-        - id: 5b28bcdf-a0e6-4022-927d-927d399c4593
-          name: untitled3-1.0-SNAPSHOT.jar
-          path: /wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar
-          type: cos
-      returnDesc: return value info.
       type: HIVE
+      kind: ANALYSIS
+      name: tf_example
+      clusterIdentifier: emr-m6u3qgk0
+      dbName: tf_db_example
+      projectId: '1612982498218618880'
+      className: tf_class_example
+      resourceLists:
+        - path: /wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar
+          name: untitled3-1.0-SNAPSHOT.jar
+          id: 5b28bcdf-a0e6-4022-927d-927d399c4593
+          type: cos
+      description: description.
       usage: usage info.
+      paramDesc: param info.
+      returnDesc: return value info.
+      example: example info.
+      comment: V1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_wedata_function" "example" {
+  type               = "HIVE"
+  kind               = "ANALYSIS"
+  name               = "tf_example"
+  cluster_identifier = "emr-m6u3qgk0"
+  db_name            = "tf_db_example"
+  project_id         = "1612982498218618880"
+  class_name         = "tf_class_example"
+  resource_lists {
+    path = "/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar"
+    name = "untitled3-1.0-SNAPSHOT.jar"
+    id   = "5b28bcdf-a0e6-4022-927d-927d399c4593"
+    type = "cos"
+  }
+  description = "description."
+  usage       = "usage info."
+  param_desc  = "param info."
+  return_desc = "return value info."
+  example     = "example info."
+  comment     = "V1"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateCustomFunction](https://www.tencentcloud.com/document/api/1174/61172)
+  - [SaveCustomFunction](https://www.tencentcloud.com/document/api/1174/61148)
+  - [SubmitCustomFunction](https://www.tencentcloud.com/document/api/1174/61147)
+* Read: [DescribeOrganizationalFunctions](https://www.tencentcloud.com/document/api/1174/61154)
+* Update:
+  - [SaveCustomFunction](https://www.tencentcloud.com/document/api/1174/61148)
+  - [SubmitCustomFunction](https://www.tencentcloud.com/document/api/1174/61147)
+* Delete: [DeleteCustomFunction](https://www.tencentcloud.com/document/api/1174/61168)
 
 
 
 ## Create Function Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Function</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Function</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Function</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Function</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">class_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">cluster_identifier</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">kind</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">db_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">example</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">kind</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">param_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">class_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">cluster_identifier</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">resource_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_wedata.FunctionResourceListArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">resource_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionResourceListArgs]]</span> = None<span class="p">,</span>
              <span class="nx">return_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">usage</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Function</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">usage</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewFunction</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Function</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewFunction</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Function</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Function</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Function</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Function</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Function</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Wedata:Function</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Wedata:Function</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_wedata_function&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -303,7 +407,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -420,11 +524,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Function Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Function resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -440,8 +552,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-required"
+    <dd>Class name of function entry.</dd><dt class="property-required"
             title="Required">
         <span id="clusteridentifier_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridentifier_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Identifier</a>
@@ -449,8 +560,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -458,8 +568,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-required"
+    <dd>Comment.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -467,8 +576,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -476,8 +584,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-required"
+    <dd>Description of the function.</dd><dt class="property-required"
             title="Required">
         <span id="example_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#example_csharp" style="color: inherit; text-decoration: inherit;">Example</a>
@@ -485,8 +592,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-required"
+    <dd>Example of the function.</dd><dt class="property-required"
             title="Required">
         <span id="kind_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_csharp" style="color: inherit; text-decoration: inherit;">Kind</a>
@@ -494,8 +600,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-required"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-required"
             title="Required">
         <span id="paramdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdesc_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Desc</a>
@@ -503,8 +608,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Parameter.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -512,17 +616,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="resourcelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcelists_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionresourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Wedata.<wbr>Inputs.<wbr>Function<wbr>Resource<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionresourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Wedata.<wbr>Inputs.<wbr>Function<wbr>Resource<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-required"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-required"
             title="Required">
         <span id="returndesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#returndesc_csharp" style="color: inherit; text-decoration: inherit;">Return<wbr>Desc</a>
@@ -530,8 +632,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Return value.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -539,8 +640,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-required"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-required"
             title="Required">
         <span id="usage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_csharp" style="color: inherit; text-decoration: inherit;">Usage</a>
@@ -548,8 +648,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -557,8 +656,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd></dl>
+    <dd>Function Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -572,8 +670,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-required"
+    <dd>Class name of function entry.</dd><dt class="property-required"
             title="Required">
         <span id="clusteridentifier_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridentifier_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Identifier</a>
@@ -581,8 +678,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -590,8 +686,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-required"
+    <dd>Comment.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -599,8 +694,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -608,8 +702,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-required"
+    <dd>Description of the function.</dd><dt class="property-required"
             title="Required">
         <span id="example_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#example_go" style="color: inherit; text-decoration: inherit;">Example</a>
@@ -617,8 +710,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-required"
+    <dd>Example of the function.</dd><dt class="property-required"
             title="Required">
         <span id="kind_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_go" style="color: inherit; text-decoration: inherit;">Kind</a>
@@ -626,8 +718,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-required"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-required"
             title="Required">
         <span id="paramdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdesc_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Desc</a>
@@ -635,8 +726,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Parameter.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -644,8 +734,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="resourcelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcelists_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Lists</a>
@@ -653,8 +742,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionresourcelist">[]Function<wbr>Resource<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-required"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-required"
             title="Required">
         <span id="returndesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#returndesc_go" style="color: inherit; text-decoration: inherit;">Return<wbr>Desc</a>
@@ -662,8 +750,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Return value.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -671,8 +758,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-required"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-required"
             title="Required">
         <span id="usage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_go" style="color: inherit; text-decoration: inherit;">Usage</a>
@@ -680,8 +766,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -689,8 +774,125 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd></dl>
+    <dd>Function Name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="class_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#class_name_hcl" style="color: inherit; text-decoration: inherit;">class_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Class name of function entry.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_identifier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_identifier_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>identifier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Comment.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the function.</dd><dt class="property-required"
+            title="Required">
+        <span id="example_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#example_hcl" style="color: inherit; text-decoration: inherit;">example</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Example of the function.</dd><dt class="property-required"
+            title="Required">
+        <span id="kind_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_hcl" style="color: inherit; text-decoration: inherit;">kind</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-required"
+            title="Required">
+        <span id="param_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_desc_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the Parameter.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_lists_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functionresourcelist">list(object)</a></span>
+    </dt>
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-required"
+            title="Required">
+        <span id="return_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#return_desc_hcl" style="color: inherit; text-decoration: inherit;">return_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the Return value.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-required"
+            title="Required">
+        <span id="usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_hcl" style="color: inherit; text-decoration: inherit;">usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Usage of the function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -704,8 +906,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-required"
+    <dd>Class name of function entry.</dd><dt class="property-required"
             title="Required">
         <span id="clusteridentifier_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridentifier_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Identifier</a>
@@ -713,8 +914,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -722,8 +922,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-required"
+    <dd>Comment.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -731,8 +930,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -740,8 +938,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-required"
+    <dd>Description of the function.</dd><dt class="property-required"
             title="Required">
         <span id="example_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#example_java" style="color: inherit; text-decoration: inherit;">example</a>
@@ -749,8 +946,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-required"
+    <dd>Example of the function.</dd><dt class="property-required"
             title="Required">
         <span id="kind_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_java" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -758,8 +954,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-required"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-required"
             title="Required">
         <span id="paramdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdesc_java" style="color: inherit; text-decoration: inherit;">param<wbr>Desc</a>
@@ -767,8 +962,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Parameter.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -776,17 +970,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="resourcelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcelists_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionresourcelist">List&lt;Function<wbr>Resource<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionresourcelist">List&lt;Function<wbr>Resource<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-required"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-required"
             title="Required">
         <span id="returndesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#returndesc_java" style="color: inherit; text-decoration: inherit;">return<wbr>Desc</a>
@@ -794,8 +986,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Return value.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -803,8 +994,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-required"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-required"
             title="Required">
         <span id="usage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_java" style="color: inherit; text-decoration: inherit;">usage</a>
@@ -812,8 +1002,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -821,8 +1010,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd></dl>
+    <dd>Function Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -836,8 +1024,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-required"
+    <dd>Class name of function entry.</dd><dt class="property-required"
             title="Required">
         <span id="clusteridentifier_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridentifier_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Identifier</a>
@@ -845,8 +1032,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -854,8 +1040,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-required"
+    <dd>Comment.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -863,8 +1048,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -872,8 +1056,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-required"
+    <dd>Description of the function.</dd><dt class="property-required"
             title="Required">
         <span id="example_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#example_nodejs" style="color: inherit; text-decoration: inherit;">example</a>
@@ -881,8 +1064,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-required"
+    <dd>Example of the function.</dd><dt class="property-required"
             title="Required">
         <span id="kind_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_nodejs" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -890,8 +1072,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-required"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-required"
             title="Required">
         <span id="paramdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdesc_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Desc</a>
@@ -899,8 +1080,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Parameter.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -908,17 +1088,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="resourcelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcelists_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionresourcelist">Function<wbr>Resource<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functionresourcelist">Function<wbr>Resource<wbr>List[]</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-required"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-required"
             title="Required">
         <span id="returndesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#returndesc_nodejs" style="color: inherit; text-decoration: inherit;">return<wbr>Desc</a>
@@ -926,8 +1104,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Return value.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -935,8 +1112,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-required"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-required"
             title="Required">
         <span id="usage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_nodejs" style="color: inherit; text-decoration: inherit;">usage</a>
@@ -944,8 +1120,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -953,8 +1128,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd></dl>
+    <dd>Function Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -968,8 +1142,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-required"
+    <dd>Class name of function entry.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_identifier_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_identifier_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>identifier</a>
@@ -977,8 +1150,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -986,8 +1158,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-required"
+    <dd>Comment.</dd><dt class="property-required"
             title="Required">
         <span id="db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -995,8 +1166,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1004,8 +1174,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-required"
+    <dd>Description of the function.</dd><dt class="property-required"
             title="Required">
         <span id="example_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#example_python" style="color: inherit; text-decoration: inherit;">example</a>
@@ -1013,8 +1182,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-required"
+    <dd>Example of the function.</dd><dt class="property-required"
             title="Required">
         <span id="kind_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_python" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -1022,8 +1190,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-required"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-required"
             title="Required">
         <span id="param_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_desc_python" style="color: inherit; text-decoration: inherit;">param_<wbr>desc</a>
@@ -1031,8 +1198,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Parameter.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1040,17 +1206,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="resource_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_lists_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionresourcelist">Function<wbr>Resource<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functionresourcelist">Sequence[Function<wbr>Resource<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-required"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-required"
             title="Required">
         <span id="return_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#return_desc_python" style="color: inherit; text-decoration: inherit;">return_<wbr>desc</a>
@@ -1058,8 +1222,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Return value.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1067,8 +1230,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-required"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-required"
             title="Required">
         <span id="usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_python" style="color: inherit; text-decoration: inherit;">usage</a>
@@ -1076,8 +1238,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1085,8 +1246,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd></dl>
+    <dd>Function Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1100,8 +1260,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-required"
+    <dd>Class name of function entry.</dd><dt class="property-required"
             title="Required">
         <span id="clusteridentifier_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridentifier_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Identifier</a>
@@ -1109,8 +1268,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1118,8 +1276,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-required"
+    <dd>Comment.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -1127,8 +1284,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1136,8 +1292,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-required"
+    <dd>Description of the function.</dd><dt class="property-required"
             title="Required">
         <span id="example_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#example_yaml" style="color: inherit; text-decoration: inherit;">example</a>
@@ -1145,8 +1300,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-required"
+    <dd>Example of the function.</dd><dt class="property-required"
             title="Required">
         <span id="kind_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_yaml" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -1154,8 +1308,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-required"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-required"
             title="Required">
         <span id="paramdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdesc_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Desc</a>
@@ -1163,8 +1316,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Parameter.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1172,8 +1324,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="resourcelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcelists_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Lists</a>
@@ -1181,8 +1332,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionresourcelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-required"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-required"
             title="Required">
         <span id="returndesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#returndesc_yaml" style="color: inherit; text-decoration: inherit;">return<wbr>Desc</a>
@@ -1190,8 +1340,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-required"
+    <dd>Description of the Return value.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1199,8 +1348,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-required"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-required"
             title="Required">
         <span id="usage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_yaml" style="color: inherit; text-decoration: inherit;">usage</a>
@@ -1208,8 +1356,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1217,8 +1364,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd></dl>
+    <dd>Function Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1239,8 +1385,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-"
+    <dd>Function ID.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1248,8 +1393,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1263,8 +1407,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-"
+    <dd>Function ID.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1272,8 +1415,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="function_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_id_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function ID.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1287,8 +1451,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-"
+    <dd>Function ID.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1296,8 +1459,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1311,8 +1473,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-"
+    <dd>Function ID.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1320,8 +1481,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1335,8 +1495,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-"
+    <dd>Function ID.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1344,8 +1503,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1359,8 +1517,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-"
+    <dd>Function ID.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1368,8 +1525,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1379,18 +1535,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Function resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">FunctionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Function</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">FunctionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Function</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1405,108 +1561,147 @@ Get an existing Function resource's state with the given name, ID, and optional 
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">param_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">resource_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_wedata.FunctionResourceListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">resource_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionResourceListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">return_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">usage</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Function</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetFunction<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">FunctionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Function</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetFunction<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">FunctionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Function</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Function</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FunctionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Function</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FunctionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Function</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FunctionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Function</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FunctionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingFunction</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Wedata:Function</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_wedata_function</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FunctionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FunctionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1514,28 +1709,31 @@ Get an existing Function resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FunctionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1543,28 +1741,31 @@ Get an existing Function resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FunctionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1584,8 +1785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-optional"
+    <dd>Class name of function entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusteridentifier_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusteridentifier_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Identifier</a>
@@ -1593,8 +1793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1602,8 +1801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-optional"
+    <dd>Comment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -1611,8 +1809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1620,8 +1817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_example_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_example_csharp" style="color: inherit; text-decoration: inherit;">Example</a>
@@ -1629,8 +1825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Example of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_csharp" style="color: inherit; text-decoration: inherit;">Function<wbr>Id</a>
@@ -1638,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-optional"
+    <dd>Function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kind_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kind_csharp" style="color: inherit; text-decoration: inherit;">Kind</a>
@@ -1647,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-optional"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1656,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd><dt class="property-optional"
+    <dd>Function Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdesc_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Desc</a>
@@ -1665,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1674,17 +1865,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcelists_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionresourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Wedata.<wbr>Inputs.<wbr>Function<wbr>Resource<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionresourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Wedata.<wbr>Inputs.<wbr>Function<wbr>Resource<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-optional"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_returndesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_returndesc_csharp" style="color: inherit; text-decoration: inherit;">Return<wbr>Desc</a>
@@ -1692,8 +1881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Return value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1701,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-optional"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_csharp" style="color: inherit; text-decoration: inherit;">Usage</a>
@@ -1710,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd></dl>
+    <dd>Usage of the function.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1725,8 +1911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-optional"
+    <dd>Class name of function entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusteridentifier_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusteridentifier_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Identifier</a>
@@ -1734,8 +1919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1743,8 +1927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-optional"
+    <dd>Comment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -1752,8 +1935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1761,8 +1943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_example_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_example_go" style="color: inherit; text-decoration: inherit;">Example</a>
@@ -1770,8 +1951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Example of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_go" style="color: inherit; text-decoration: inherit;">Function<wbr>Id</a>
@@ -1779,8 +1959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-optional"
+    <dd>Function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kind_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kind_go" style="color: inherit; text-decoration: inherit;">Kind</a>
@@ -1788,8 +1967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-optional"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1797,8 +1975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd><dt class="property-optional"
+    <dd>Function Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdesc_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Desc</a>
@@ -1806,8 +1983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1815,8 +1991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcelists_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Lists</a>
@@ -1824,8 +1999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionresourcelist">[]Function<wbr>Resource<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-optional"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_returndesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_returndesc_go" style="color: inherit; text-decoration: inherit;">Return<wbr>Desc</a>
@@ -1833,8 +2007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Return value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1842,8 +2015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-optional"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_go" style="color: inherit; text-decoration: inherit;">Usage</a>
@@ -1851,8 +2023,133 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd></dl>
+    <dd>Usage of the function.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_class_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_class_name_hcl" style="color: inherit; text-decoration: inherit;">class_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Class name of function entry.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_identifier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_identifier_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>identifier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Comment.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_example_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_example_hcl" style="color: inherit; text-decoration: inherit;">example</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Example of the function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_function_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_function_id_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kind_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kind_hcl" style="color: inherit; text-decoration: inherit;">kind</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function Name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_param_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_desc_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the Parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_lists_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functionresourcelist">list(object)</a></span>
+    </dt>
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_return_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_return_desc_hcl" style="color: inherit; text-decoration: inherit;">return_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the Return value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_hcl" style="color: inherit; text-decoration: inherit;">usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Usage of the function.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1866,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-optional"
+    <dd>Class name of function entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusteridentifier_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusteridentifier_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Identifier</a>
@@ -1875,8 +2171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1884,8 +2179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-optional"
+    <dd>Comment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -1893,8 +2187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1902,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_example_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_example_java" style="color: inherit; text-decoration: inherit;">example</a>
@@ -1911,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Example of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_java" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -1920,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-optional"
+    <dd>Function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kind_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kind_java" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -1929,8 +2219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-optional"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1938,8 +2227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd><dt class="property-optional"
+    <dd>Function Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdesc_java" style="color: inherit; text-decoration: inherit;">param<wbr>Desc</a>
@@ -1947,8 +2235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1956,17 +2243,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcelists_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionresourcelist">List&lt;Function<wbr>Resource<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionresourcelist">List&lt;Function<wbr>Resource<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-optional"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_returndesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_returndesc_java" style="color: inherit; text-decoration: inherit;">return<wbr>Desc</a>
@@ -1974,8 +2259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Return value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1983,8 +2267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-optional"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_java" style="color: inherit; text-decoration: inherit;">usage</a>
@@ -1992,8 +2275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd></dl>
+    <dd>Usage of the function.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2007,8 +2289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-optional"
+    <dd>Class name of function entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusteridentifier_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusteridentifier_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Identifier</a>
@@ -2016,8 +2297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -2025,8 +2305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-optional"
+    <dd>Comment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -2034,8 +2313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2043,8 +2321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_example_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_example_nodejs" style="color: inherit; text-decoration: inherit;">example</a>
@@ -2052,8 +2329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Example of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_nodejs" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -2061,8 +2337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-optional"
+    <dd>Function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kind_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kind_nodejs" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -2070,8 +2345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-optional"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2079,8 +2353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd><dt class="property-optional"
+    <dd>Function Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdesc_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Desc</a>
@@ -2088,8 +2361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2097,17 +2369,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcelists_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionresourcelist">Function<wbr>Resource<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functionresourcelist">Function<wbr>Resource<wbr>List[]</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-optional"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_returndesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_returndesc_nodejs" style="color: inherit; text-decoration: inherit;">return<wbr>Desc</a>
@@ -2115,8 +2385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Return value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2124,8 +2393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-optional"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_nodejs" style="color: inherit; text-decoration: inherit;">usage</a>
@@ -2133,8 +2401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd></dl>
+    <dd>Usage of the function.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2148,8 +2415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-optional"
+    <dd>Class name of function entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_identifier_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_identifier_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>identifier</a>
@@ -2157,8 +2423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -2166,8 +2431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-optional"
+    <dd>Comment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -2175,8 +2439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2184,8 +2447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_example_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_example_python" style="color: inherit; text-decoration: inherit;">example</a>
@@ -2193,8 +2455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Example of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_function_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_function_id_python" style="color: inherit; text-decoration: inherit;">function_<wbr>id</a>
@@ -2202,8 +2463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-optional"
+    <dd>Function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kind_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kind_python" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -2211,8 +2471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-optional"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2220,8 +2479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd><dt class="property-optional"
+    <dd>Function Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_param_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_desc_python" style="color: inherit; text-decoration: inherit;">param_<wbr>desc</a>
@@ -2229,8 +2487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2238,17 +2495,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_lists_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionresourcelist">Function<wbr>Resource<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functionresourcelist">Sequence[Function<wbr>Resource<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-optional"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_return_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_return_desc_python" style="color: inherit; text-decoration: inherit;">return_<wbr>desc</a>
@@ -2256,8 +2511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Return value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2265,8 +2519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-optional"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_python" style="color: inherit; text-decoration: inherit;">usage</a>
@@ -2274,8 +2527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd></dl>
+    <dd>Usage of the function.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2289,8 +2541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Class name of function entry.</p>
-</dd><dt class="property-optional"
+    <dd>Class name of function entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusteridentifier_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusteridentifier_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Identifier</a>
@@ -2298,8 +2549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -2307,8 +2557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Comment.</p>
-</dd><dt class="property-optional"
+    <dd>Comment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -2316,8 +2565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2325,8 +2573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_example_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_example_yaml" style="color: inherit; text-decoration: inherit;">example</a>
@@ -2334,8 +2581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Example of the function.</p>
-</dd><dt class="property-optional"
+    <dd>Example of the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_yaml" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -2343,8 +2589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function ID.</p>
-</dd><dt class="property-optional"
+    <dd>Function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kind_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kind_yaml" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -2352,8 +2597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</p>
-</dd><dt class="property-optional"
+    <dd>Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2361,8 +2605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Name.</p>
-</dd><dt class="property-optional"
+    <dd>Function Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdesc_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Desc</a>
@@ -2370,8 +2613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the Parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2379,8 +2621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcelists_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Lists</a>
@@ -2388,8 +2629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionresourcelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Resource of the function, stored in WeData COS(.jar,...).</p>
-</dd><dt class="property-optional"
+    <dd>Resource of the function, stored in WeData COS(.jar,...).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_returndesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_returndesc_yaml" style="color: inherit; text-decoration: inherit;">return<wbr>Desc</a>
@@ -2397,8 +2637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the Return value.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the Return value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2406,8 +2645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function Type, Enum: HIVE, SPARK, DLC.</p>
-</dd><dt class="property-optional"
+    <dd>Function Type, Enum: HIVE, SPARK, DLC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_yaml" style="color: inherit; text-decoration: inherit;">usage</a>
@@ -2415,8 +2653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of the function.</p>
-</dd></dl>
+    <dd>Usage of the function.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2431,7 +2668,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="functionresourcelist">Function<wbr>Resource<wbr>List</h4>
+<h4 id="functionresourcelist">
+Function<wbr>Resource<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Resource<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2443,8 +2682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Name.</p>
-</dd><dt class="property-required"
+    <dd>Resource Name.</dd><dt class="property-required"
             title="Required">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -2452,8 +2690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2461,8 +2698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="md5_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#md5_csharp" style="color: inherit; text-decoration: inherit;">Md5</a>
@@ -2470,8 +2706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource MD5 Value.</p>
-</dd><dt class="property-optional"
+    <dd>Resource MD5 Value.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2479,8 +2714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Type.</p>
-</dd></dl>
+    <dd>Resource Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2494,8 +2728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Name.</p>
-</dd><dt class="property-required"
+    <dd>Resource Name.</dd><dt class="property-required"
             title="Required">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -2503,8 +2736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2512,8 +2744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="md5_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#md5_go" style="color: inherit; text-decoration: inherit;">Md5</a>
@@ -2521,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource MD5 Value.</p>
-</dd><dt class="property-optional"
+    <dd>Resource MD5 Value.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2530,8 +2760,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Type.</p>
-</dd></dl>
+    <dd>Resource Type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource Name.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource Path.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="md5_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#md5_hcl" style="color: inherit; text-decoration: inherit;">md5</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource MD5 Value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2545,8 +2820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Name.</p>
-</dd><dt class="property-required"
+    <dd>Resource Name.</dd><dt class="property-required"
             title="Required">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -2554,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2563,8 +2836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="md5_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#md5_java" style="color: inherit; text-decoration: inherit;">md5</a>
@@ -2572,8 +2844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource MD5 Value.</p>
-</dd><dt class="property-optional"
+    <dd>Resource MD5 Value.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2581,8 +2852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Type.</p>
-</dd></dl>
+    <dd>Resource Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2596,8 +2866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Name.</p>
-</dd><dt class="property-required"
+    <dd>Resource Name.</dd><dt class="property-required"
             title="Required">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -2605,8 +2874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2614,8 +2882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="md5_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#md5_nodejs" style="color: inherit; text-decoration: inherit;">md5</a>
@@ -2623,8 +2890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource MD5 Value.</p>
-</dd><dt class="property-optional"
+    <dd>Resource MD5 Value.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2632,8 +2898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Type.</p>
-</dd></dl>
+    <dd>Resource Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2647,8 +2912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource Name.</p>
-</dd><dt class="property-required"
+    <dd>Resource Name.</dd><dt class="property-required"
             title="Required">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -2656,8 +2920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource Path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2665,8 +2928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="md5_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#md5_python" style="color: inherit; text-decoration: inherit;">md5</a>
@@ -2674,8 +2936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource MD5 Value.</p>
-</dd><dt class="property-optional"
+    <dd>Resource MD5 Value.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2683,8 +2944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource Type.</p>
-</dd></dl>
+    <dd>Resource Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2698,8 +2958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Name.</p>
-</dd><dt class="property-required"
+    <dd>Resource Name.</dd><dt class="property-required"
             title="Required">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -2707,8 +2966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2716,8 +2974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="md5_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#md5_yaml" style="color: inherit; text-decoration: inherit;">md5</a>
@@ -2725,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource MD5 Value.</p>
-</dd><dt class="property-optional"
+    <dd>Resource MD5 Value.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2734,8 +2990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Type.</p>
-</dd></dl>
+    <dd>Resource Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2747,7 +3002,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

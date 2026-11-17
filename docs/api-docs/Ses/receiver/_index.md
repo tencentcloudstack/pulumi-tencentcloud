@@ -2,9 +2,11 @@
 ---
 title: "Receiver"
 title_tag: "tencentcloud.Ses.Receiver"
-meta_desc: "Documentation for the tencentcloud.Ses.Receiver resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a ses receiver"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,12 +18,19 @@ Provides a resource to create a ses receiver
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const receiver = new tencentcloud.ses.Receiver("receiver", {
+    receiversName: "terraform_test",
+    desc: "description",
     datas: [
         {
             email: "abc@abc.com",
@@ -30,26 +39,68 @@ const receiver = new tencentcloud.ses.Receiver("receiver", {
             email: "abcd@abcd.com",
         },
     ],
-    desc: "description",
-    receiversName: "terraform_test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 receiver = tencentcloud.ses.Receiver("receiver",
-    datas=[
-        tencentcloud.ses.ReceiverDataArgs(
-            email="abc@abc.com",
-        ),
-        tencentcloud.ses.ReceiverDataArgs(
-            email="abcd@abcd.com",
-        ),
-    ],
+    receivers_name="terraform_test",
     desc="description",
-    receivers_name="terraform_test")
+    datas=[
+        {
+            "email": "abc@abc.com",
+        },
+        {
+            "email": "abcd@abcd.com",
+        },
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ses"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ses.NewReceiver(ctx, "receiver", &ses.ReceiverArgs{
+			ReceiversName: pulumi.String("terraform_test"),
+			Desc:          pulumi.String("description"),
+			Datas: ses.ReceiverDataArray{
+				&ses.ReceiverDataArgs{
+					Email: pulumi.String("abc@abc.com"),
+				},
+				&ses.ReceiverDataArgs{
+					Email: pulumi.String("abcd@abcd.com"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +111,8 @@ return await Deployment.RunAsync(() =>
 {
     var receiver = new Tencentcloud.Ses.Receiver("receiver", new()
     {
+        ReceiversName = "terraform_test",
+        Desc = "description",
         Datas = new[]
         {
             new Tencentcloud.Ses.Inputs.ReceiverDataArgs
@@ -71,41 +124,15 @@ return await Deployment.RunAsync(() =>
                 Email = "abcd@abcd.com",
             },
         },
-        Desc = "description",
-        ReceiversName = "terraform_test",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ses.NewReceiver(ctx, "receiver", &Ses.ReceiverArgs{
-			Datas: ses.ReceiverDataArray{
-				&ses.ReceiverDataArgs{
-					Email: pulumi.String("abc@abc.com"),
-				},
-				&ses.ReceiverDataArgs{
-					Email: pulumi.String("abcd@abcd.com"),
-				},
-			},
-			Desc:          pulumi.String("description"),
-			ReceiversName: pulumi.String("terraform_test"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -115,8 +142,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ses.Receiver;
 import com.pulumi.tencentcloud.Ses.ReceiverArgs;
 import com.pulumi.tencentcloud.Ses.inputs.ReceiverDataArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -128,7 +155,9 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var receiver = new Receiver("receiver", ReceiverArgs.builder()        
+        var receiver = new Receiver("receiver", ReceiverArgs.builder()
+            .receiversName("terraform_test")
+            .desc("description")
             .datas(            
                 ReceiverDataArgs.builder()
                     .email("abc@abc.com")
@@ -136,32 +165,71 @@ public class App {
                 ReceiverDataArgs.builder()
                     .email("abcd@abcd.com")
                     .build())
-            .desc("description")
-            .receiversName("terraform_test")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   receiver:
     type: tencentcloud:Ses:Receiver
     properties:
+      receiversName: terraform_test
+      desc: description
       datas:
         - email: abc@abc.com
         - email: abcd@abcd.com
-      desc: description
-      receiversName: terraform_test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-<!--Start PulumiCodeChooser -->
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ses_receiver" "receiver" {
+  receivers_name = "terraform_test"
+  desc           = "description"
+  datas {
+    email = "abc@abc.com"
+  }
+  datas {
+    email = "abcd@abcd.com"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const receiver = new tencentcloud.ses.Receiver("receiver", {
+    receiversName: "terraform_test",
+    desc: "description",
     datas: [
         {
             email: "abc@abc.com",
@@ -172,68 +240,49 @@ const receiver = new tencentcloud.ses.Receiver("receiver", {
             templateData: "{\"name\":\"xxx\",\"age\":\"xx\"}",
         },
     ],
-    desc: "description",
-    receiversName: "terraform_test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 receiver = tencentcloud.ses.Receiver("receiver",
-    datas=[
-        tencentcloud.ses.ReceiverDataArgs(
-            email="abc@abc.com",
-            template_data="{\"name\":\"xxx\",\"age\":\"xx\"}",
-        ),
-        tencentcloud.ses.ReceiverDataArgs(
-            email="abcd@abcd.com",
-            template_data="{\"name\":\"xxx\",\"age\":\"xx\"}",
-        ),
-    ],
+    receivers_name="terraform_test",
     desc="description",
-    receivers_name="terraform_test")
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var receiver = new Tencentcloud.Ses.Receiver("receiver", new()
-    {
-        Datas = new[]
+    datas=[
         {
-            new Tencentcloud.Ses.Inputs.ReceiverDataArgs
-            {
-                Email = "abc@abc.com",
-                TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
-            },
-            new Tencentcloud.Ses.Inputs.ReceiverDataArgs
-            {
-                Email = "abcd@abcd.com",
-                TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
-            },
+            "email": "abc@abc.com",
+            "template_data": "{\"name\":\"xxx\",\"age\":\"xx\"}",
         },
-        Desc = "description",
-        ReceiversName = "terraform_test",
-    });
-
-});
+        {
+            "email": "abcd@abcd.com",
+            "template_data": "{\"name\":\"xxx\",\"age\":\"xx\"}",
+        },
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ses"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ses.NewReceiver(ctx, "receiver", &Ses.ReceiverArgs{
+		_, err := ses.NewReceiver(ctx, "receiver", &ses.ReceiverArgs{
+			ReceiversName: pulumi.String("terraform_test"),
+			Desc:          pulumi.String("description"),
 			Datas: ses.ReceiverDataArray{
 				&ses.ReceiverDataArgs{
 					Email:        pulumi.String("abc@abc.com"),
@@ -244,8 +293,6 @@ func main() {
 					TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
 				},
 			},
-			Desc:          pulumi.String("description"),
-			ReceiversName: pulumi.String("terraform_test"),
 		})
 		if err != nil {
 			return err
@@ -254,6 +301,45 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var receiver = new Tencentcloud.Ses.Receiver("receiver", new()
+    {
+        ReceiversName = "terraform_test",
+        Desc = "description",
+        Datas = new[]
+        {
+            new Tencentcloud.Ses.Inputs.ReceiverDataArgs
+            {
+                Email = "abc@abc.com",
+                TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
+            },
+            new Tencentcloud.Ses.Inputs.ReceiverDataArgs
+            {
+                Email = "abcd@abcd.com",
+                TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -263,8 +349,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ses.Receiver;
 import com.pulumi.tencentcloud.Ses.ReceiverArgs;
 import com.pulumi.tencentcloud.Ses.inputs.ReceiverDataArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -276,7 +362,9 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var receiver = new Receiver("receiver", ReceiverArgs.builder()        
+        var receiver = new Receiver("receiver", ReceiverArgs.builder()
+            .receiversName("terraform_test")
+            .desc("description")
             .datas(            
                 ReceiverDataArgs.builder()
                     .email("abc@abc.com")
@@ -286,87 +374,146 @@ public class App {
                     .email("abcd@abcd.com")
                     .templateData("{\"name\":\"xxx\",\"age\":\"xx\"}")
                     .build())
-            .desc("description")
-            .receiversName("terraform_test")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   receiver:
     type: tencentcloud:Ses:Receiver
     properties:
+      receiversName: terraform_test
+      desc: description
       datas:
         - email: abc@abc.com
           templateData: '{"name":"xxx","age":"xx"}'
         - email: abcd@abcd.com
           templateData: '{"name":"xxx","age":"xx"}'
-      desc: description
-      receiversName: terraform_test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ses_receiver" "receiver" {
+  receivers_name = "terraform_test"
+  desc           = "description"
+  datas {
+    email         = "abc@abc.com"
+    template_data = "{\"name\":\"xxx\",\"age\":\"xx\"}"
+  }
+  datas {
+    email         = "abcd@abcd.com"
+    template_data = "{\"name\":\"xxx\",\"age\":\"xx\"}"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateReceiver](https://www.tencentcloud.com/document/api/1084/44868)
+  - [CreateReceiverDetail](https://www.tencentcloud.com/document/api/1084/44867)
+  - [CreateReceiverDetailWithData](https://www.tencentcloud.com/document/api/1084/77221)
+* Read:
+  - [ListReceiverDetails](https://www.tencentcloud.com/document/api/1084/77206)
+  - [ListReceivers](https://www.tencentcloud.com/document/api/1084/44866)
+* Delete: [DeleteReceiver](https://www.tencentcloud.com/document/api/1084/46000)
 
 
 ## Create Receiver Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">datas</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ses.ReceiverDataArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">receivers_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">datas</span><span class="p">:</span> <span class="nx">Optional[Sequence[ReceiverDataArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">receivers_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewReceiver</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Receiver</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewReceiver</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Receiver</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Receiver</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReceiverArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ses:Receiver</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ses:Receiver</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ses_receiver&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -387,7 +534,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -504,11 +651,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Receiver Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -522,10 +677,9 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_csharp" style="color: inherit; text-decoration: inherit;">Datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#receiverdata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ses.<wbr>Inputs.<wbr>Receiver<wbr>Data<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#receiverdata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ses.<wbr>Inputs.<wbr>Receiver<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="receiversname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_csharp" style="color: inherit; text-decoration: inherit;">Receivers<wbr>Name</a>
@@ -533,8 +687,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_csharp" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -542,8 +695,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd></dl>
+    <dd>Recipient group description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -557,8 +709,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#receiverdata">[]Receiver<wbr>Data<wbr>Args</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="receiversname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_go" style="color: inherit; text-decoration: inherit;">Receivers<wbr>Name</a>
@@ -566,8 +717,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_go" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -575,8 +725,37 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd></dl>
+    <dd>Recipient group description.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="datas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_hcl" style="color: inherit; text-decoration: inherit;">datas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#receiverdata">list(object)</a></span>
+    </dt>
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="receivers_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_name_hcl" style="color: inherit; text-decoration: inherit;">receivers_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recipient group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_hcl" style="color: inherit; text-decoration: inherit;">desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recipient group description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -588,10 +767,9 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_java" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#receiverdata">List&lt;Receiver<wbr>Data<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#receiverdata">List&lt;Receiver<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="receiversname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_java" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -599,8 +777,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_java" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -608,8 +785,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd></dl>
+    <dd>Recipient group description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -621,10 +797,9 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_nodejs" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#receiverdata">Receiver<wbr>Data<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#receiverdata">Receiver<wbr>Data[]</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="receiversname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_nodejs" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -632,8 +807,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_nodejs" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -641,8 +815,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd></dl>
+    <dd>Recipient group description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -654,10 +827,9 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_python" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#receiverdata">Receiver<wbr>Data<wbr>Args]</a></span>
+        <span class="property-type"><a href="#receiverdata">Sequence[Receiver<wbr>Data<wbr>Args]</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="receivers_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_name_python" style="color: inherit; text-decoration: inherit;">receivers_<wbr>name</a>
@@ -665,8 +837,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_python" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -674,8 +845,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd></dl>
+    <dd>Recipient group description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -689,8 +859,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#receiverdata">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="receiversname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_yaml" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -698,8 +867,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_yaml" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -707,8 +875,7 @@ The Receiver resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd></dl>
+    <dd>Recipient group description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,8 +896,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -744,8 +910,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -759,8 +938,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -774,8 +952,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -789,8 +966,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -804,8 +980,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -815,122 +990,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Receiver resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ReceiverState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Receiver</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ReceiverState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Receiver</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">datas</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ses.ReceiverDataArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">datas</span><span class="p">:</span> <span class="nx">Optional[Sequence[ReceiverDataArgs]]</span> = None<span class="p">,</span>
         <span class="nx">desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">receivers_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Receiver</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetReceiver<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ReceiverState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Receiver</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetReceiver<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ReceiverState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Receiver</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Receiver</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReceiverState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Receiver</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReceiverState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Receiver</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReceiverState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Receiver</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReceiverState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingReceiver</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ses:Receiver</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ses_receiver</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReceiverState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReceiverState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -938,28 +1152,31 @@ Get an existing Receiver resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReceiverState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -967,28 +1184,31 @@ Get an existing Receiver resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReceiverState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1006,10 +1226,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datas_csharp" style="color: inherit; text-decoration: inherit;">Datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#receiverdata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ses.<wbr>Inputs.<wbr>Receiver<wbr>Data<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#receiverdata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ses.<wbr>Inputs.<wbr>Receiver<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_desc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_csharp" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -1017,8 +1236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_receiversname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receiversname_csharp" style="color: inherit; text-decoration: inherit;">Receivers<wbr>Name</a>
@@ -1026,8 +1244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd></dl>
+    <dd>Recipient group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1041,8 +1258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#receiverdata">[]Receiver<wbr>Data<wbr>Args</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_desc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_go" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -1050,8 +1266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_receiversname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receiversname_go" style="color: inherit; text-decoration: inherit;">Receivers<wbr>Name</a>
@@ -1059,8 +1274,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd></dl>
+    <dd>Recipient group name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_datas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datas_hcl" style="color: inherit; text-decoration: inherit;">datas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#receiverdata">list(object)</a></span>
+    </dt>
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_hcl" style="color: inherit; text-decoration: inherit;">desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recipient group description.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_receivers_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_name_hcl" style="color: inherit; text-decoration: inherit;">receivers_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recipient group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1072,10 +1316,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datas_java" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#receiverdata">List&lt;Receiver<wbr>Data<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#receiverdata">List&lt;Receiver<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_desc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_java" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1083,8 +1326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_receiversname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receiversname_java" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -1092,8 +1334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd></dl>
+    <dd>Recipient group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1105,10 +1346,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datas_nodejs" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#receiverdata">Receiver<wbr>Data<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#receiverdata">Receiver<wbr>Data[]</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_desc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_nodejs" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1116,8 +1356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_receiversname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receiversname_nodejs" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -1125,8 +1364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd></dl>
+    <dd>Recipient group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1138,10 +1376,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datas_python" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#receiverdata">Receiver<wbr>Data<wbr>Args]</a></span>
+        <span class="property-type"><a href="#receiverdata">Sequence[Receiver<wbr>Data<wbr>Args]</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_python" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1149,8 +1386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_receivers_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_name_python" style="color: inherit; text-decoration: inherit;">receivers_<wbr>name</a>
@@ -1158,8 +1394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd></dl>
+    <dd>Recipient group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1173,8 +1408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#receiverdata">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>template_data</code>, then other objects are also required.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the <code>data</code> list that inputs <code>templateData</code>, then other objects are also required.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_desc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_yaml" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1182,8 +1416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient group description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_receiversname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receiversname_yaml" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -1191,8 +1424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd></dl>
+    <dd>Recipient group name.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1207,7 +1439,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="receiverdata">Receiver<wbr>Data</h4>
+<h4 id="receiverdata">
+Receiver<wbr>Data<pulumi-choosable type="language" values="python,go" class="inline">, Receiver<wbr>Data<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1219,8 +1453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient email addresses.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email addresses.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="templatedata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatedata_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Data</a>
@@ -1228,8 +1461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</p>
-</dd></dl>
+    <dd>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1243,8 +1475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient email addresses.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email addresses.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="templatedata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatedata_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Data</a>
@@ -1252,8 +1483,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</p>
-</dd></dl>
+    <dd>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_hcl" style="color: inherit; text-decoration: inherit;">email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recipient email addresses.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="template_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_data_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1267,8 +1519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient email addresses.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email addresses.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="templatedata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatedata_java" style="color: inherit; text-decoration: inherit;">template<wbr>Data</a>
@@ -1276,8 +1527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</p>
-</dd></dl>
+    <dd>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1291,8 +1541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient email addresses.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email addresses.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="templatedata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatedata_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Data</a>
@@ -1300,8 +1549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</p>
-</dd></dl>
+    <dd>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1315,8 +1563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recipient email addresses.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email addresses.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="template_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_data_python" style="color: inherit; text-decoration: inherit;">template_<wbr>data</a>
@@ -1324,8 +1571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</p>
-</dd></dl>
+    <dd>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1339,8 +1585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient email addresses.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Recipient email addresses.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="templatedata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatedata_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Data</a>
@@ -1348,8 +1593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</p>
-</dd></dl>
+    <dd>Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1357,12 +1601,14 @@ The following state arguments are supported:
 
 
 
-ses email_address can be imported using the id, e.g.
-
+ses emailAddress can be imported using the id, e.g.
 ```sh
 $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1374,7 +1620,6 @@ $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

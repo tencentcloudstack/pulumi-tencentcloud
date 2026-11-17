@@ -2,9 +2,11 @@
 ---
 title: "getScalingConfigs"
 title_tag: "tencentcloud.As.getScalingConfigs"
-meta_desc: "Documentation for the tencentcloud.As.getScalingConfigs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query scaling configuration information."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query scaling configuration information.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const asConfigs = tencentcloud.As.getScalingConfigs({
+const asConfigs = tencentcloud.as.getScalingConfigs({
     configurationId: "asc-oqio4yyj",
     resultOutputFile: "my_test_path",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-as_configs = tencentcloud.As.get_scaling_configs(configuration_id="asc-oqio4yyj",
+as_configs = tencentcloud.as_.get_scaling_configs(configuration_id="asc-oqio4yyj",
     result_output_file="my_test_path")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := as.GetScalingConfigs(ctx, &as.GetScalingConfigsArgs{
+			ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
+			ResultOutputFile: pulumi.StringRef("my_test_path"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := As.GetScalingConfigs(ctx, &as.GetScalingConfigsArgs{
-			ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
-			ResultOutputFile: pulumi.StringRef("my_test_path"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.As.AsFunctions;
 import com.pulumi.tencentcloud.As.inputs.GetScalingConfigsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   asConfigs:
     fn::invoke:
-      Function: tencentcloud:As:getScalingConfigs
-      Arguments:
+      function: tencentcloud:As:getScalingConfigs
+      arguments:
         configurationId: asc-oqio4yyj
         resultOutputFile: my_test_path
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_as_getscalingconfigs" "asConfigs" {
+  configuration_id   = "asc-oqio4yyj"
+  result_output_file = "my_test_path"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getScalingConfigs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingConfigsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>></span
+><span class="k">function </span>getScalingConfigs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingConfigsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>></span
 ><span class="k">
-function </span>getScalingConfigsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingConfigsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>></span
+function </span>getScalingConfigsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingConfigsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getScalingConfigsOutput<span class="p">(</span><span class="nx">
                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetScalingConfigsResult</span
 ><span class="k">
-def </span>get_scaling_configs_output<span class="p">(</span><span class="nx">configuration_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">configuration_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetScalingConfigsResult]</span
+def </span>get_scaling_configs_output<span class="p">(</span><span class="nx">configuration_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">configuration_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetScalingConfigsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetScalingConfigsOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetScalingConfigs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetScalingConfigsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingConfigsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingConfigsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingConfigsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetScalingConfigsOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>> </span>getScalingConfigs<span class="p">(</span><span class="nx">GetScalingConfigsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>> </span>getScalingConfigs<span class="p">(</span><span class="nx">GetScalingConfigsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetScalingConfigsResult</a></span>> </span>getScalingConfigs<span class="p">(</span><span class="nx">GetScalingConfigsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetScalingConfigsOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:As/getScalingConfigs:getScalingConfigs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_as_get_scaling_configs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="configurationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_csharp" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Name</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="configurationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_go" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Name</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="configuration_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_name_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="configurationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_java" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="configurationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_nodejs" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="configuration_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_name_python" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="configurationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_yaml" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Launch configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Outputs.<wbr>Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of configuration. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of configuration. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="configurationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_csharp" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Id</a>
@@ -437,8 +516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="configurationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_csharp" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Name</a>
@@ -446,8 +524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -469,8 +546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlist">[]Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List</a></span>
     </dt>
-    <dd><p>A list of configuration. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of configuration. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -478,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="configurationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_go" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Id</a>
@@ -487,8 +562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="configurationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_go" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Name</a>
@@ -496,11 +570,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="configuration_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_lists_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getscalingconfigsconfigurationlist">list(object)</a></span>
+    </dt>
+    <dd>A list of configuration. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration ID.</dd><dt class="property-"
+            title="">
+        <span id="configuration_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_name_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration name.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -519,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlist">List&lt;Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of configuration. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of configuration. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -528,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="configurationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_java" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
@@ -537,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="configurationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_java" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -546,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -569,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlist">Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of configuration. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of configuration. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -578,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="configurationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_nodejs" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
@@ -587,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="configurationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_nodejs" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -596,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -617,10 +728,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_lists_python" style="color: inherit; text-decoration: inherit;">configuration_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalingconfigsconfigurationlist">Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List]</a></span>
+        <span class="property-type"><a href="#getscalingconfigsconfigurationlist">Sequence[Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of configuration. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of configuration. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -628,8 +738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="configuration_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_python" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
@@ -637,8 +746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="configuration_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_name_python" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
@@ -646,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration name.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -669,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of configuration. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of configuration. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -678,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="configurationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_yaml" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
@@ -687,8 +792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="configurationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_yaml" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -696,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -729,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="configurationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_csharp" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Name</a>
@@ -738,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -747,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -756,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlistdatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-required"
+    <dd>Configurations of data disk.</dd><dt class="property-required"
             title="Required">
         <span id="disktypepolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type<wbr>Policy</a>
@@ -765,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type.</p>
-</dd><dt class="property-required"
+    <dd>Policy of cloud disk type.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedmonitorservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Monitor<wbr>Service</a>
@@ -774,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to activate cloud monitor service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud monitor service.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedsecurityservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Security<wbr>Service</a>
@@ -783,8 +880,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to activate cloud security service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud security service.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -792,17 +888,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available image, for example <code>img-8toqc6s3</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of available image, for example <code>img-8toqc6s3</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancetags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A tag list associates with an instance.</p>
-</dd><dt class="property-required"
+    <dd>A tag list associates with an instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Types</a>
@@ -810,8 +904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Instance type list of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>Instance type list of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -819,8 +912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic.</p>
-</dd><dt class="property-required"
+    <dd>Charge types for network traffic.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -828,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth of Internet access in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="keyids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Ids</a>
@@ -837,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of login keys.</p>
-</dd><dt class="property-required"
+    <dd>ID list of login keys.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -846,8 +936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the configuration belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the configuration belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="publicipassigned_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Assigned</a>
@@ -855,8 +944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -864,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security groups to which the instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Security groups to which the instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -873,8 +960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -882,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size of the scaling configuration in GB.</p>
-</dd><dt class="property-required"
+    <dd>System disk size of the scaling configuration in GB.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -891,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk category of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>System disk category of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="userdata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -900,8 +984,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded User Data text.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text.</dd><dt class="property-required"
+            title="Required">
+        <span id="versionnumber_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_csharp" style="color: inherit; text-decoration: inherit;">Version<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Version Number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="configurationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_go" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Name</a>
@@ -924,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -933,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -942,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlistdatadisk">[]Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List<wbr>Data<wbr>Disk</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-required"
+    <dd>Configurations of data disk.</dd><dt class="property-required"
             title="Required">
         <span id="disktypepolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type<wbr>Policy</a>
@@ -951,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type.</p>
-</dd><dt class="property-required"
+    <dd>Policy of cloud disk type.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedmonitorservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Monitor<wbr>Service</a>
@@ -960,8 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to activate cloud monitor service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud monitor service.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedsecurityservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Security<wbr>Service</a>
@@ -969,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to activate cloud security service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud security service.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -978,17 +1062,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available image, for example <code>img-8toqc6s3</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of available image, for example <code>img-8toqc6s3</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancetags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A tag list associates with an instance.</p>
-</dd><dt class="property-required"
+    <dd>A tag list associates with an instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Types</a>
@@ -996,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Instance type list of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>Instance type list of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1005,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic.</p>
-</dd><dt class="property-required"
+    <dd>Charge types for network traffic.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1014,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth of Internet access in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="keyids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Ids</a>
@@ -1023,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of login keys.</p>
-</dd><dt class="property-required"
+    <dd>ID list of login keys.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1032,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the configuration belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the configuration belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="publicipassigned_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Assigned</a>
@@ -1041,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -1050,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security groups to which the instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Security groups to which the instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1059,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -1068,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size of the scaling configuration in GB.</p>
-</dd><dt class="property-required"
+    <dd>System disk size of the scaling configuration in GB.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -1077,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk category of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>System disk category of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="userdata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_go" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -1086,8 +1158,189 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded User Data text.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text.</dd><dt class="property-required"
+            title="Required">
+        <span id="versionnumber_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_go" style="color: inherit; text-decoration: inherit;">Version<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Version Number.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="configuration_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_name_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration name.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the launch configuration was created.</dd><dt class="property-required"
+            title="Required">
+        <span id="data_disks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getscalingconfigsconfigurationlistdatadisk">list(object)</a></span>
+    </dt>
+    <dd>Configurations of data disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_policy_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy of cloud disk type.</dd><dt class="property-required"
+            title="Required">
+        <span id="enhanced_monitor_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_monitor_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>monitor_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to activate cloud monitor service.</dd><dt class="property-required"
+            title="Required">
+        <span id="enhanced_security_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_security_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>security_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to activate cloud security service.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of available image, for example <code>img-8toqc6s3</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_tags_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A tag list associates with an instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_types_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Instance type list of the scaling configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge types for network traffic.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max bandwidth of Internet access in Mbps.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_ids_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of login keys.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which the configuration belongs. Default value is 0.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_ip_assigned_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_assigned_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>assigned</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security groups to which the instance belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of a launch configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="system_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>System disk size of the scaling configuration in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="system_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk category of the scaling configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Base64-encoded User Data text.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_number_hcl" style="color: inherit; text-decoration: inherit;">version_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Version Number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1101,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="configurationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_java" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -1110,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1119,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -1128,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlistdatadisk">List&lt;Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-required"
+    <dd>Configurations of data disk.</dd><dt class="property-required"
             title="Required">
         <span id="disktypepolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -1137,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of cloud disk type.</p>
-</dd><dt class="property-required"
+    <dd>Policy of cloud disk type.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedmonitorservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -1146,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to activate cloud monitor service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud monitor service.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedsecurityservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -1155,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to activate cloud security service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud security service.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1164,17 +1410,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of available image, for example <code>img-8toqc6s3</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of available image, for example <code>img-8toqc6s3</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancetags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A tag list associates with an instance.</p>
-</dd><dt class="property-required"
+    <dd>A tag list associates with an instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -1182,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance type list of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>Instance type list of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1191,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge types for network traffic.</p>
-</dd><dt class="property-required"
+    <dd>Charge types for network traffic.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1200,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth of Internet access in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="keyids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_java" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -1209,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of login keys.</p>
-</dd><dt class="property-required"
+    <dd>ID list of login keys.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1218,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which the configuration belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the configuration belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="publicipassigned_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -1227,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1236,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to which the instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Security groups to which the instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1245,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1254,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>System disk size of the scaling configuration in GB.</p>
-</dd><dt class="property-required"
+    <dd>System disk size of the scaling configuration in GB.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1263,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk category of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>System disk category of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="userdata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_java" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -1272,8 +1506,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64-encoded User Data text.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text.</dd><dt class="property-required"
+            title="Required">
+        <span id="versionnumber_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_java" style="color: inherit; text-decoration: inherit;">version<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Version Number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1287,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="configurationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_nodejs" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -1296,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1305,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -1314,8 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlistdatadisk">Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List<wbr>Data<wbr>Disk[]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-required"
+    <dd>Configurations of data disk.</dd><dt class="property-required"
             title="Required">
         <span id="disktypepolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -1323,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type.</p>
-</dd><dt class="property-required"
+    <dd>Policy of cloud disk type.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedmonitorservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -1332,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to activate cloud monitor service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud monitor service.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedsecurityservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -1341,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to activate cloud security service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud security service.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1350,17 +1584,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available image, for example <code>img-8toqc6s3</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of available image, for example <code>img-8toqc6s3</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancetags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A tag list associates with an instance.</p>
-</dd><dt class="property-required"
+    <dd>A tag list associates with an instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -1368,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Instance type list of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>Instance type list of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1377,8 +1608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic.</p>
-</dd><dt class="property-required"
+    <dd>Charge types for network traffic.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1386,8 +1616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth of Internet access in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="keyids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -1395,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of login keys.</p>
-</dd><dt class="property-required"
+    <dd>ID list of login keys.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1404,8 +1632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which the configuration belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the configuration belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="publicipassigned_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -1413,8 +1640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1422,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security groups to which the instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Security groups to which the instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1431,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1440,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>System disk size of the scaling configuration in GB.</p>
-</dd><dt class="property-required"
+    <dd>System disk size of the scaling configuration in GB.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1449,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk category of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>System disk category of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="userdata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -1458,8 +1680,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded User Data text.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text.</dd><dt class="property-required"
+            title="Required">
+        <span id="versionnumber_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_nodejs" style="color: inherit; text-decoration: inherit;">version<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Version Number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1473,8 +1702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="configuration_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_name_python" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
@@ -1482,8 +1710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1491,17 +1718,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-required"
             title="Required">
         <span id="data_disks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalingconfigsconfigurationlistdatadisk">Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List<wbr>Data<wbr>Disk]</a></span>
+        <span class="property-type"><a href="#getscalingconfigsconfigurationlistdatadisk">Sequence[Get<wbr>Scaling<wbr>Configs<wbr>Configuration<wbr>List<wbr>Data<wbr>Disk]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-required"
+    <dd>Configurations of data disk.</dd><dt class="property-required"
             title="Required">
         <span id="disk_type_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_policy_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type_<wbr>policy</a>
@@ -1509,8 +1734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy of cloud disk type.</p>
-</dd><dt class="property-required"
+    <dd>Policy of cloud disk type.</dd><dt class="property-required"
             title="Required">
         <span id="enhanced_monitor_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_monitor_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>monitor_<wbr>service</a>
@@ -1518,8 +1742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to activate cloud monitor service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud monitor service.</dd><dt class="property-required"
             title="Required">
         <span id="enhanced_security_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_security_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>security_<wbr>service</a>
@@ -1527,8 +1750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to activate cloud security service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud security service.</dd><dt class="property-required"
             title="Required">
         <span id="image_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
@@ -1536,17 +1758,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of available image, for example <code>img-8toqc6s3</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of available image, for example <code>img-8toqc6s3</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instance_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_tags_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A tag list associates with an instance.</p>
-</dd><dt class="property-required"
+    <dd>A tag list associates with an instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_types_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>types</a>
@@ -1554,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Instance type list of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>Instance type list of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -1563,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge types for network traffic.</p>
-</dd><dt class="property-required"
+    <dd>Charge types for network traffic.</dd><dt class="property-required"
             title="Required">
         <span id="internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -1572,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth of Internet access in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="key_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_ids_python" style="color: inherit; text-decoration: inherit;">key_<wbr>ids</a>
@@ -1581,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of login keys.</p>
-</dd><dt class="property-required"
+    <dd>ID list of login keys.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1590,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the configuration belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the configuration belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="public_ip_assigned_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_assigned_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>assigned</a>
@@ -1599,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-required"
             title="Required">
         <span id="security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
@@ -1608,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security groups to which the instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Security groups to which the instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1617,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="system_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
@@ -1626,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size of the scaling configuration in GB.</p>
-</dd><dt class="property-required"
+    <dd>System disk size of the scaling configuration in GB.</dd><dt class="property-required"
             title="Required">
         <span id="system_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
@@ -1635,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System disk category of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>System disk category of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="user_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_python" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
@@ -1644,8 +1854,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Base64-encoded User Data text.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_number_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_number_python" style="color: inherit; text-decoration: inherit;">version_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Version Number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1659,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="configurationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationname_yaml" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -1668,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1677,8 +1892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -1686,8 +1900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingconfigsconfigurationlistdatadisk">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-required"
+    <dd>Configurations of data disk.</dd><dt class="property-required"
             title="Required">
         <span id="disktypepolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -1695,8 +1908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of cloud disk type.</p>
-</dd><dt class="property-required"
+    <dd>Policy of cloud disk type.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedmonitorservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -1704,8 +1916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to activate cloud monitor service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud monitor service.</dd><dt class="property-required"
             title="Required">
         <span id="enhancedsecurityservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -1713,8 +1924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to activate cloud security service.</p>
-</dd><dt class="property-required"
+    <dd>Whether to activate cloud security service.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1722,17 +1932,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of available image, for example <code>img-8toqc6s3</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of available image, for example <code>img-8toqc6s3</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancetags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A tag list associates with an instance.</p>
-</dd><dt class="property-required"
+    <dd>A tag list associates with an instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -1740,8 +1948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance type list of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>Instance type list of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1749,8 +1956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge types for network traffic.</p>
-</dd><dt class="property-required"
+    <dd>Charge types for network traffic.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1758,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth of Internet access in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="keyids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -1767,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of login keys.</p>
-</dd><dt class="property-required"
+    <dd>ID list of login keys.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1776,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which the configuration belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the configuration belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="publicipassigned_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -1785,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-required"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1794,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to which the instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Security groups to which the instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1803,8 +2004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1812,8 +2012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>System disk size of the scaling configuration in GB.</p>
-</dd><dt class="property-required"
+    <dd>System disk size of the scaling configuration in GB.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1821,8 +2020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk category of the scaling configuration.</p>
-</dd><dt class="property-required"
+    <dd>System disk category of the scaling configuration.</dd><dt class="property-required"
             title="Required">
         <span id="userdata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -1830,8 +2028,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64-encoded User Data text.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text.</dd><dt class="property-required"
+            title="Required">
+        <span id="versionnumber_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_yaml" style="color: inherit; text-decoration: inherit;">version<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Version Number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1849,8 +2054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the disk remove after instance terminated.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1858,8 +2062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1867,8 +2070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of disk.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -1876,8 +2078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1891,8 +2092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the disk remove after instance terminated.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1900,8 +2100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1909,8 +2108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of disk.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -1918,8 +2116,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="delete_with_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the disk remove after instance terminated.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1933,8 +2168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the disk remove after instance terminated.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1942,8 +2176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1951,8 +2184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of disk.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1960,8 +2192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1975,8 +2206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the disk remove after instance terminated.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1984,8 +2214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1993,8 +2222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of disk.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -2002,8 +2230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2017,8 +2244,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the disk remove after instance terminated.</dd><dt class="property-required"
             title="Required">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -2026,8 +2252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -2035,8 +2260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of disk.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -2044,8 +2268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2059,8 +2282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the disk remove after instance terminated.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2068,8 +2290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-required"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2077,8 +2298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of disk.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -2086,8 +2306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2102,7 +2321,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

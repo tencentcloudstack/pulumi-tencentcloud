@@ -2,9 +2,11 @@
 ---
 title: "Sign"
 title_tag: "tencentcloud.Sms.Sign"
-meta_desc: "Documentation for the tencentcloud.Sms.Sign resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a sms sign"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,34 +20,77 @@ Provides a resource to create a sms sign
 
 ### Create a sms sign instance
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.sms.Sign("example", {
+    signName: "tf_example_sms_sign",
+    signType: 1,
     documentType: 4,
     international: 0,
-    proofImage: "your_proof_image",
-    signName: "tf_example_sms_sign",
     signPurpose: 0,
-    signType: 1,
+    proofImage: "your_proof_image",
 });
-// 1：APP,  DocumentType can be chosen（0，1，2，3，4）
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.sms.Sign("example",
+    sign_name="tf_example_sms_sign",
+    sign_type=1,
     document_type=4,
     international=0,
-    proof_image="your_proof_image",
-    sign_name="tf_example_sms_sign",
     sign_purpose=0,
-    sign_type=1)
-# 1：APP,  DocumentType can be chosen（0，1，2，3，4）
+    proof_image="your_proof_image")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sms"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := sms.NewSign(ctx, "example", &sms.SignArgs{
+			SignName:      pulumi.String("tf_example_sms_sign"),
+			SignType:      pulumi.Int(1),
+			DocumentType:  pulumi.Int(4),
+			International: pulumi.Int(0),
+			SignPurpose:   pulumi.Int(0),
+			ProofImage:    pulumi.String("your_proof_image"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -56,42 +101,21 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Sms.Sign("example", new()
     {
+        SignName = "tf_example_sms_sign",
+        SignType = 1,
         DocumentType = 4,
         International = 0,
-        ProofImage = "your_proof_image",
-        SignName = "tf_example_sms_sign",
         SignPurpose = 0,
-        SignType = 1,
+        ProofImage = "your_proof_image",
     });
 
-    // 1：APP,  DocumentType can be chosen（0，1，2，3，4）
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sms"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Sms.NewSign(ctx, "example", &Sms.SignArgs{
-			DocumentType:  pulumi.Int(4),
-			International: pulumi.Int(0),
-			ProofImage:    pulumi.String("your_proof_image"),
-			SignName:      pulumi.String("tf_example_sms_sign"),
-			SignPurpose:   pulumi.Int(0),
-			SignType:      pulumi.Int(1),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -100,8 +124,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Sms.Sign;
 import com.pulumi.tencentcloud.Sms.SignArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -113,101 +137,150 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Sign("example", SignArgs.builder()        
+        var example = new Sign("example", SignArgs.builder()
+            .signName("tf_example_sms_sign")
+            .signType(1)
             .documentType(4)
             .international(0)
-            .proofImage("your_proof_image")
-            .signName("tf_example_sms_sign")
             .signPurpose(0)
-            .signType(1)
+            .proofImage("your_proof_image")
             .build());
 
-        // 1：APP,  DocumentType can be chosen（0，1，2，3，4）
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Sms:Sign
     properties:
-      documentType: 4
-      # Screenshot of application background management (personally developed APP)
-      international: 0
-      # Mainland China SMS
-      proofImage: your_proof_image
       signName: tf_example_sms_sign
-      signPurpose: 0
-      # personal use
-      signType: 1
+      signType: 1 # 1：APP,  DocumentType can be chosen（0，1，2，3，4）
+      documentType: 4 # Screenshot of application background management (personally developed APP)
+      international: 0 # Mainland China SMS
+      signPurpose: 0 # personal use
+      proofImage: your_proof_image
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_sms_sign" "example" {
+  sign_name     = "tf_example_sms_sign"
+  sign_type     = 1 # 1：APP,  DocumentType can be chosen（0，1，2，3，4）
+  document_type = 4 # Screenshot of application background management (personally developed APP)
+  international = 0 # Mainland China SMS
+  sign_purpose  = 0 # personal use
+  proof_image   = "your_proof_image"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [AddSmsSign](https://www.tencentcloud.com/document/api/382/40534)
+* Read: [DescribeSmsSignList](https://www.tencentcloud.com/document/api/382/40532)
+* Update: [ModifySmsSign](https://www.tencentcloud.com/document/api/382/40531)
+* Delete: [DeleteSmsSign](https://www.tencentcloud.com/document/api/382/40533)
 
 
 
 ## Create Sign Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SignArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SignArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SignArgs</a></span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-         <span class="nx">commission_image</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">document_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
          <span class="nx">international</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
          <span class="nx">proof_image</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">sign_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">sign_purpose</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-         <span class="nx">sign_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SignArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">sign_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+         <span class="nx">commission_image</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSign</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SignArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Sign</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSign</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SignArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Sign</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SignArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SignArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SignArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Sign</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SignArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sms:Sign</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sms:Sign</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_sms_sign&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -228,7 +301,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -345,11 +418,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Sign Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -365,8 +446,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-required"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-required"
             title="Required">
         <span id="international_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#international_csharp" style="color: inherit; text-decoration: inherit;">International</a>
@@ -374,8 +454,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-required"
             title="Required">
         <span id="proofimage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proofimage_csharp" style="color: inherit; text-decoration: inherit;">Proof<wbr>Image</a>
@@ -383,8 +462,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-required"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-required"
             title="Required">
         <span id="signname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signname_csharp" style="color: inherit; text-decoration: inherit;">Sign<wbr>Name</a>
@@ -392,8 +470,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-required"
+    <dd>Sms sign name, unique.</dd><dt class="property-required"
             title="Required">
         <span id="signpurpose_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signpurpose_csharp" style="color: inherit; text-decoration: inherit;">Sign<wbr>Purpose</a>
@@ -401,8 +478,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-required"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-required"
             title="Required">
         <span id="signtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signtype_csharp" style="color: inherit; text-decoration: inherit;">Sign<wbr>Type</a>
@@ -410,8 +486,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd><dt class="property-optional"
             title="Optional">
         <span id="commissionimage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commissionimage_csharp" style="color: inherit; text-decoration: inherit;">Commission<wbr>Image</a>
@@ -419,8 +494,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -428,8 +502,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd></dl>
+    <dd>Signature application remarks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -443,8 +516,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-required"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-required"
             title="Required">
         <span id="international_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#international_go" style="color: inherit; text-decoration: inherit;">International</a>
@@ -452,8 +524,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-required"
             title="Required">
         <span id="proofimage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proofimage_go" style="color: inherit; text-decoration: inherit;">Proof<wbr>Image</a>
@@ -461,8 +532,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-required"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-required"
             title="Required">
         <span id="signname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signname_go" style="color: inherit; text-decoration: inherit;">Sign<wbr>Name</a>
@@ -470,8 +540,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-required"
+    <dd>Sms sign name, unique.</dd><dt class="property-required"
             title="Required">
         <span id="signpurpose_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signpurpose_go" style="color: inherit; text-decoration: inherit;">Sign<wbr>Purpose</a>
@@ -479,8 +548,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-required"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-required"
             title="Required">
         <span id="signtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signtype_go" style="color: inherit; text-decoration: inherit;">Sign<wbr>Type</a>
@@ -488,8 +556,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd><dt class="property-optional"
             title="Optional">
         <span id="commissionimage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commissionimage_go" style="color: inherit; text-decoration: inherit;">Commission<wbr>Image</a>
@@ -497,8 +564,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -506,8 +572,77 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd></dl>
+    <dd>Signature application remarks.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="document_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#document_type_hcl" style="color: inherit; text-decoration: inherit;">document_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-required"
+            title="Required">
+        <span id="international_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#international_hcl" style="color: inherit; text-decoration: inherit;">international</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-required"
+            title="Required">
+        <span id="proof_image_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proof_image_hcl" style="color: inherit; text-decoration: inherit;">proof_<wbr>image</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-required"
+            title="Required">
+        <span id="sign_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sign_name_hcl" style="color: inherit; text-decoration: inherit;">sign_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sms sign name, unique.</dd><dt class="property-required"
+            title="Required">
+        <span id="sign_purpose_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sign_purpose_hcl" style="color: inherit; text-decoration: inherit;">sign_<wbr>purpose</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-required"
+            title="Required">
+        <span id="sign_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sign_type_hcl" style="color: inherit; text-decoration: inherit;">sign_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="commission_image_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commission_image_hcl" style="color: inherit; text-decoration: inherit;">commission_<wbr>image</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Signature application remarks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -521,8 +656,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-required"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-required"
             title="Required">
         <span id="international_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#international_java" style="color: inherit; text-decoration: inherit;">international</a>
@@ -530,8 +664,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-required"
             title="Required">
         <span id="proofimage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proofimage_java" style="color: inherit; text-decoration: inherit;">proof<wbr>Image</a>
@@ -539,8 +672,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-required"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-required"
             title="Required">
         <span id="signname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signname_java" style="color: inherit; text-decoration: inherit;">sign<wbr>Name</a>
@@ -548,8 +680,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-required"
+    <dd>Sms sign name, unique.</dd><dt class="property-required"
             title="Required">
         <span id="signpurpose_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signpurpose_java" style="color: inherit; text-decoration: inherit;">sign<wbr>Purpose</a>
@@ -557,8 +688,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-required"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-required"
             title="Required">
         <span id="signtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signtype_java" style="color: inherit; text-decoration: inherit;">sign<wbr>Type</a>
@@ -566,8 +696,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd><dt class="property-optional"
             title="Optional">
         <span id="commissionimage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commissionimage_java" style="color: inherit; text-decoration: inherit;">commission<wbr>Image</a>
@@ -575,8 +704,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -584,8 +712,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd></dl>
+    <dd>Signature application remarks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -599,8 +726,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-required"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-required"
             title="Required">
         <span id="international_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#international_nodejs" style="color: inherit; text-decoration: inherit;">international</a>
@@ -608,8 +734,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-required"
             title="Required">
         <span id="proofimage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proofimage_nodejs" style="color: inherit; text-decoration: inherit;">proof<wbr>Image</a>
@@ -617,8 +742,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-required"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-required"
             title="Required">
         <span id="signname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signname_nodejs" style="color: inherit; text-decoration: inherit;">sign<wbr>Name</a>
@@ -626,8 +750,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-required"
+    <dd>Sms sign name, unique.</dd><dt class="property-required"
             title="Required">
         <span id="signpurpose_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signpurpose_nodejs" style="color: inherit; text-decoration: inherit;">sign<wbr>Purpose</a>
@@ -635,8 +758,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-required"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-required"
             title="Required">
         <span id="signtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signtype_nodejs" style="color: inherit; text-decoration: inherit;">sign<wbr>Type</a>
@@ -644,8 +766,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd><dt class="property-optional"
             title="Optional">
         <span id="commissionimage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commissionimage_nodejs" style="color: inherit; text-decoration: inherit;">commission<wbr>Image</a>
@@ -653,8 +774,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -662,8 +782,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd></dl>
+    <dd>Signature application remarks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -677,8 +796,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-required"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-required"
             title="Required">
         <span id="international_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#international_python" style="color: inherit; text-decoration: inherit;">international</a>
@@ -686,8 +804,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-required"
             title="Required">
         <span id="proof_image_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proof_image_python" style="color: inherit; text-decoration: inherit;">proof_<wbr>image</a>
@@ -695,8 +812,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-required"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-required"
             title="Required">
         <span id="sign_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sign_name_python" style="color: inherit; text-decoration: inherit;">sign_<wbr>name</a>
@@ -704,8 +820,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-required"
+    <dd>Sms sign name, unique.</dd><dt class="property-required"
             title="Required">
         <span id="sign_purpose_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sign_purpose_python" style="color: inherit; text-decoration: inherit;">sign_<wbr>purpose</a>
@@ -713,8 +828,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-required"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-required"
             title="Required">
         <span id="sign_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sign_type_python" style="color: inherit; text-decoration: inherit;">sign_<wbr>type</a>
@@ -722,8 +836,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd><dt class="property-optional"
             title="Optional">
         <span id="commission_image_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commission_image_python" style="color: inherit; text-decoration: inherit;">commission_<wbr>image</a>
@@ -731,8 +844,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -740,8 +852,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd></dl>
+    <dd>Signature application remarks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -755,8 +866,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-required"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-required"
             title="Required">
         <span id="international_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#international_yaml" style="color: inherit; text-decoration: inherit;">international</a>
@@ -764,8 +874,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-required"
             title="Required">
         <span id="proofimage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proofimage_yaml" style="color: inherit; text-decoration: inherit;">proof<wbr>Image</a>
@@ -773,8 +882,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-required"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-required"
             title="Required">
         <span id="signname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signname_yaml" style="color: inherit; text-decoration: inherit;">sign<wbr>Name</a>
@@ -782,8 +890,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-required"
+    <dd>Sms sign name, unique.</dd><dt class="property-required"
             title="Required">
         <span id="signpurpose_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signpurpose_yaml" style="color: inherit; text-decoration: inherit;">sign<wbr>Purpose</a>
@@ -791,8 +898,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-required"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-required"
             title="Required">
         <span id="signtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#signtype_yaml" style="color: inherit; text-decoration: inherit;">sign<wbr>Type</a>
@@ -800,8 +906,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd><dt class="property-optional"
             title="Optional">
         <span id="commissionimage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commissionimage_yaml" style="color: inherit; text-decoration: inherit;">commission<wbr>Image</a>
@@ -809,8 +914,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -818,8 +922,7 @@ The Sign resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd></dl>
+    <dd>Signature application remarks.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -840,8 +943,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -855,8 +957,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -870,8 +985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -885,8 +999,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -900,8 +1013,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,8 +1027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -926,18 +1037,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Sign resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SignState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Sign</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SignState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Sign</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -949,104 +1060,143 @@ Get an existing Sign resource's state with the given name, ID, and optional extr
         <span class="nx">sign_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">sign_purpose</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">sign_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Sign</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSign<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SignState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Sign</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSign<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SignState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Sign</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Sign</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SignState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Sign</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SignState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Sign</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SignState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Sign</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SignState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSign</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Sms:Sign</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_sms_sign</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SignState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SignState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1054,28 +1204,31 @@ Get an existing Sign resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SignState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1083,28 +1236,31 @@ Get an existing Sign resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SignState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1124,8 +1280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_documenttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_documenttype_csharp" style="color: inherit; text-decoration: inherit;">Document<wbr>Type</a>
@@ -1133,8 +1288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-optional"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_international_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_international_csharp" style="color: inherit; text-decoration: inherit;">International</a>
@@ -1142,8 +1296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proofimage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proofimage_csharp" style="color: inherit; text-decoration: inherit;">Proof<wbr>Image</a>
@@ -1151,8 +1304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1160,8 +1312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Signature application remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signname_csharp" style="color: inherit; text-decoration: inherit;">Sign<wbr>Name</a>
@@ -1169,8 +1320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign name, unique.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signpurpose_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signpurpose_csharp" style="color: inherit; text-decoration: inherit;">Sign<wbr>Purpose</a>
@@ -1178,8 +1328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-optional"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signtype_csharp" style="color: inherit; text-decoration: inherit;">Sign<wbr>Type</a>
@@ -1187,8 +1336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd></dl>
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1202,8 +1350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_documenttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_documenttype_go" style="color: inherit; text-decoration: inherit;">Document<wbr>Type</a>
@@ -1211,8 +1358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-optional"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_international_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_international_go" style="color: inherit; text-decoration: inherit;">International</a>
@@ -1220,8 +1366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proofimage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proofimage_go" style="color: inherit; text-decoration: inherit;">Proof<wbr>Image</a>
@@ -1229,8 +1374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1238,8 +1382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Signature application remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signname_go" style="color: inherit; text-decoration: inherit;">Sign<wbr>Name</a>
@@ -1247,8 +1390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign name, unique.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signpurpose_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signpurpose_go" style="color: inherit; text-decoration: inherit;">Sign<wbr>Purpose</a>
@@ -1256,8 +1398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-optional"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signtype_go" style="color: inherit; text-decoration: inherit;">Sign<wbr>Type</a>
@@ -1265,8 +1406,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd></dl>
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_commission_image_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_commission_image_hcl" style="color: inherit; text-decoration: inherit;">commission_<wbr>image</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_document_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_document_type_hcl" style="color: inherit; text-decoration: inherit;">document_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_international_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_international_hcl" style="color: inherit; text-decoration: inherit;">international</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proof_image_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proof_image_hcl" style="color: inherit; text-decoration: inherit;">proof_<wbr>image</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Signature application remarks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sign_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sign_name_hcl" style="color: inherit; text-decoration: inherit;">sign_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sms sign name, unique.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sign_purpose_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sign_purpose_hcl" style="color: inherit; text-decoration: inherit;">sign_<wbr>purpose</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sign_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sign_type_hcl" style="color: inherit; text-decoration: inherit;">sign_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1280,8 +1490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_documenttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_documenttype_java" style="color: inherit; text-decoration: inherit;">document<wbr>Type</a>
@@ -1289,8 +1498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-optional"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_international_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_international_java" style="color: inherit; text-decoration: inherit;">international</a>
@@ -1298,8 +1506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proofimage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proofimage_java" style="color: inherit; text-decoration: inherit;">proof<wbr>Image</a>
@@ -1307,8 +1514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1316,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Signature application remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signname_java" style="color: inherit; text-decoration: inherit;">sign<wbr>Name</a>
@@ -1325,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign name, unique.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signpurpose_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signpurpose_java" style="color: inherit; text-decoration: inherit;">sign<wbr>Purpose</a>
@@ -1334,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-optional"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signtype_java" style="color: inherit; text-decoration: inherit;">sign<wbr>Type</a>
@@ -1343,8 +1546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd></dl>
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1358,8 +1560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_documenttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_documenttype_nodejs" style="color: inherit; text-decoration: inherit;">document<wbr>Type</a>
@@ -1367,8 +1568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-optional"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_international_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_international_nodejs" style="color: inherit; text-decoration: inherit;">international</a>
@@ -1376,8 +1576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proofimage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proofimage_nodejs" style="color: inherit; text-decoration: inherit;">proof<wbr>Image</a>
@@ -1385,8 +1584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1394,8 +1592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Signature application remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signname_nodejs" style="color: inherit; text-decoration: inherit;">sign<wbr>Name</a>
@@ -1403,8 +1600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign name, unique.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signpurpose_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signpurpose_nodejs" style="color: inherit; text-decoration: inherit;">sign<wbr>Purpose</a>
@@ -1412,8 +1608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-optional"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signtype_nodejs" style="color: inherit; text-decoration: inherit;">sign<wbr>Type</a>
@@ -1421,8 +1616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd></dl>
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1436,8 +1630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_document_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_document_type_python" style="color: inherit; text-decoration: inherit;">document_<wbr>type</a>
@@ -1445,8 +1638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-optional"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_international_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_international_python" style="color: inherit; text-decoration: inherit;">international</a>
@@ -1454,8 +1646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proof_image_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proof_image_python" style="color: inherit; text-decoration: inherit;">proof_<wbr>image</a>
@@ -1463,8 +1654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1472,8 +1662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Signature application remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sign_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sign_name_python" style="color: inherit; text-decoration: inherit;">sign_<wbr>name</a>
@@ -1481,8 +1670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign name, unique.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sign_purpose_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sign_purpose_python" style="color: inherit; text-decoration: inherit;">sign_<wbr>purpose</a>
@@ -1490,8 +1678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-optional"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sign_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sign_type_python" style="color: inherit; text-decoration: inherit;">sign_<wbr>type</a>
@@ -1499,8 +1686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd></dl>
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1514,8 +1700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</p>
-</dd><dt class="property-optional"
+    <dd>Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_documenttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_documenttype_yaml" style="color: inherit; text-decoration: inherit;">document<wbr>Type</a>
@@ -1523,8 +1708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</p>
-</dd><dt class="property-optional"
+    <dd>DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_international_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_international_yaml" style="color: inherit; text-decoration: inherit;">international</a>
@@ -1532,8 +1716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</p>
-</dd><dt class="property-optional"
+    <dd>Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proofimage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proofimage_yaml" style="color: inherit; text-decoration: inherit;">proof<wbr>Image</a>
@@ -1541,8 +1724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1550,8 +1732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Signature application remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Signature application remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signname_yaml" style="color: inherit; text-decoration: inherit;">sign<wbr>Name</a>
@@ -1559,8 +1740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sms sign name, unique.</p>
-</dd><dt class="property-optional"
+    <dd>Sms sign name, unique.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signpurpose_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signpurpose_yaml" style="color: inherit; text-decoration: inherit;">sign<wbr>Purpose</a>
@@ -1568,8 +1748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Signature purpose: 0: for personal use; 1: for others.</p>
-</dd><dt class="property-optional"
+    <dd>Signature purpose: 0: for personal use; 1: for others.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_signtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_signtype_yaml" style="color: inherit; text-decoration: inherit;">sign<wbr>Type</a>
@@ -1577,8 +1756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</p>
-</dd></dl>
+    <dd>Sms sign type: 0, 1, 2, 3, 4, 5, 6.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1597,7 +1775,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

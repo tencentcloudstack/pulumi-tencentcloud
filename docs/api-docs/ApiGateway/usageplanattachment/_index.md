@@ -2,9 +2,11 @@
 ---
 title: "UsagePlanAttachment"
 title_tag: "tencentcloud.ApiGateway.UsagePlanAttachment"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.UsagePlanAttachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to attach API gateway usage plan to service. NOTE: If the authType parameter of API is not SECRET, it cannot be bound access key."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,24 +16,29 @@ no_edit_this_page: true
 
 Use this resource to attach API gateway usage plan to service.
 
-> **NOTE:** If the `auth_type` parameter of API is not `SECRET`, it cannot be bound access key.
+> **NOTE:** If the `authType` parameter of API is not `SECRET`, it cannot be bound access key.
 
 ## Example Usage
 
 ### Normal creation
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleUsagePlan = new tencentcloud.apigateway.UsagePlan("exampleUsagePlan", {
+const example = new tencentcloud.apigateway.UsagePlan("example", {
     usagePlanName: "tf_example",
     usagePlanDesc: "desc.",
     maxRequestNum: 100,
     maxRequestNumPreSec: 10,
 });
-const exampleService = new tencentcloud.apigateway.Service("exampleService", {
+const exampleService = new tencentcloud.apigateway.Service("example", {
     serviceName: "tf_example",
     protocol: "http&https",
     serviceDesc: "desc.",
@@ -41,7 +48,7 @@ const exampleService = new tencentcloud.apigateway.Service("exampleService", {
     ],
     ipVersion: "IPv4",
 });
-const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
+const exampleApi = new tencentcloud.apigateway.Api("example", {
     serviceId: exampleService.id,
     apiName: "tf_example",
     apiDesc: "my hello api update",
@@ -74,24 +81,29 @@ const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
         needConvert: true,
     }],
 });
-const exampleUsagePlanAttachment = new tencentcloud.apigateway.UsagePlanAttachment("exampleUsagePlanAttachment", {
-    usagePlanId: exampleUsagePlan.id,
+const exampleUsagePlanAttachment = new tencentcloud.apigateway.UsagePlanAttachment("example", {
+    usagePlanId: example.id,
     serviceId: exampleService.id,
     environment: "release",
     bindType: "API",
     apiId: exampleApi.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_usage_plan = tencentcloud.api_gateway.UsagePlan("exampleUsagePlan",
+example = tencentcloud.apigateway.UsagePlan("example",
     usage_plan_name="tf_example",
     usage_plan_desc="desc.",
     max_request_num=100,
     max_request_num_pre_sec=10)
-example_service = tencentcloud.api_gateway.Service("exampleService",
+example_service = tencentcloud.apigateway.Service("example",
     service_name="tf_example",
     protocol="http&https",
     service_desc="desc.",
@@ -100,7 +112,7 @@ example_service = tencentcloud.api_gateway.Service("exampleService",
         "OUTER",
     ],
     ip_version="IPv4")
-example_api = tencentcloud.api_gateway.Api("exampleApi",
+example_api = tencentcloud.apigateway.Api("example",
     service_id=example_service.id,
     api_name="tf_example",
     api_desc="my hello api update",
@@ -109,14 +121,14 @@ example_api = tencentcloud.api_gateway.Api("exampleApi",
     enable_cors=True,
     request_config_path="/user/info",
     request_config_method="POST",
-    request_parameters=[tencentcloud.api_gateway.ApiRequestParameterArgs(
-        name="email",
-        position="QUERY",
-        type="string",
-        desc="desc.",
-        default_value="test@qq.com",
-        required=True,
-    )],
+    request_parameters=[{
+        "name": "email",
+        "position": "QUERY",
+        "type": "string",
+        "desc": "desc.",
+        "default_value": "test@qq.com",
+        "required": True,
+    }],
     service_config_type="HTTP",
     service_config_timeout=10,
     service_config_url="http://www.tencent.com",
@@ -125,20 +137,116 @@ example_api = tencentcloud.api_gateway.Api("exampleApi",
     response_type="XML",
     response_success_example="<note>success</note>",
     response_fail_example="<note>fail</note>",
-    response_error_codes=[tencentcloud.api_gateway.ApiResponseErrorCodeArgs(
-        code=500,
-        msg="system error",
-        desc="system error code",
-        converted_code=5000,
-        need_convert=True,
-    )])
-example_usage_plan_attachment = tencentcloud.api_gateway.UsagePlanAttachment("exampleUsagePlanAttachment",
-    usage_plan_id=example_usage_plan.id,
+    response_error_codes=[{
+        "code": 500,
+        "msg": "system error",
+        "desc": "system error code",
+        "converted_code": 5000,
+        "need_convert": True,
+    }])
+example_usage_plan_attachment = tencentcloud.apigateway.UsagePlanAttachment("example",
+    usage_plan_id=example.id,
     service_id=example_service.id,
     environment="release",
     bind_type="API",
     api_id=example_api.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := apigateway.NewUsagePlan(ctx, "example", &apigateway.UsagePlanArgs{
+			UsagePlanName:       pulumi.String("tf_example"),
+			UsagePlanDesc:       pulumi.String("desc."),
+			MaxRequestNum:       pulumi.Int(100),
+			MaxRequestNumPreSec: pulumi.Int(10),
+		})
+		if err != nil {
+			return err
+		}
+		exampleService, err := apigateway.NewService(ctx, "example", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("tf_example"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("desc."),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+		})
+		if err != nil {
+			return err
+		}
+		exampleApi, err := apigateway.NewApi(ctx, "example", &apigateway.ApiArgs{
+			ServiceId:           exampleService.ID().ToIDOutput().ToStringOutput(),
+			ApiName:             pulumi.String("tf_example"),
+			ApiDesc:             pulumi.String("my hello api update"),
+			AuthType:            pulumi.String("SECRET"),
+			Protocol:            pulumi.String("HTTP"),
+			EnableCors:          pulumi.Bool(true),
+			RequestConfigPath:   pulumi.String("/user/info"),
+			RequestConfigMethod: pulumi.String("POST"),
+			RequestParameters: apigateway.ApiRequestParameterArray{
+				&apigateway.ApiRequestParameterArgs{
+					Name:         pulumi.String("email"),
+					Position:     pulumi.String("QUERY"),
+					Type:         pulumi.String("string"),
+					Desc:         pulumi.String("desc."),
+					DefaultValue: pulumi.String("test@qq.com"),
+					Required:     pulumi.Bool(true),
+				},
+			},
+			ServiceConfigType:      pulumi.String("HTTP"),
+			ServiceConfigTimeout:   pulumi.Int(10),
+			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
+			ServiceConfigPath:      pulumi.String("/user"),
+			ServiceConfigMethod:    pulumi.String("POST"),
+			ResponseType:           pulumi.String("XML"),
+			ResponseSuccessExample: pulumi.String("<note>success</note>"),
+			ResponseFailExample:    pulumi.String("<note>fail</note>"),
+			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+				&apigateway.ApiResponseErrorCodeArgs{
+					Code:          pulumi.Int(500),
+					Msg:           pulumi.String("system error"),
+					Desc:          pulumi.String("system error code"),
+					ConvertedCode: pulumi.Int(5000),
+					NeedConvert:   pulumi.Bool(true),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.NewUsagePlanAttachment(ctx, "example", &apigateway.UsagePlanAttachmentArgs{
+			UsagePlanId: example.ID().ToIDOutput().ToStringOutput(),
+			ServiceId:   exampleService.ID().ToIDOutput().ToStringOutput(),
+			Environment: pulumi.String("release"),
+			BindType:    pulumi.String("API"),
+			ApiId:       exampleApi.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -147,7 +255,7 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleUsagePlan = new Tencentcloud.ApiGateway.UsagePlan("exampleUsagePlan", new()
+    var example = new Tencentcloud.ApiGateway.UsagePlan("example", new()
     {
         UsagePlanName = "tf_example",
         UsagePlanDesc = "desc.",
@@ -155,7 +263,7 @@ return await Deployment.RunAsync(() =>
         MaxRequestNumPreSec = 10,
     });
 
-    var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new()
+    var exampleService = new Tencentcloud.ApiGateway.Service("example", new()
     {
         ServiceName = "tf_example",
         Protocol = "http&https",
@@ -168,7 +276,7 @@ return await Deployment.RunAsync(() =>
         IpVersion = "IPv4",
     });
 
-    var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new()
+    var exampleApi = new Tencentcloud.ApiGateway.Api("example", new()
     {
         ServiceId = exampleService.Id,
         ApiName = "tf_example",
@@ -211,9 +319,9 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("exampleUsagePlanAttachment", new()
+    var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("example", new()
     {
-        UsagePlanId = exampleUsagePlan.Id,
+        UsagePlanId = example.Id,
         ServiceId = exampleService.Id,
         Environment = "release",
         BindType = "API",
@@ -222,92 +330,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleUsagePlan, err := ApiGateway.NewUsagePlan(ctx, "exampleUsagePlan", &ApiGateway.UsagePlanArgs{
-			UsagePlanName:       pulumi.String("tf_example"),
-			UsagePlanDesc:       pulumi.String("desc."),
-			MaxRequestNum:       pulumi.Int(100),
-			MaxRequestNumPreSec: pulumi.Int(10),
-		})
-		if err != nil {
-			return err
-		}
-		exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("tf_example"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("desc."),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion: pulumi.String("IPv4"),
-		})
-		if err != nil {
-			return err
-		}
-		exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
-			ServiceId:           exampleService.ID(),
-			ApiName:             pulumi.String("tf_example"),
-			ApiDesc:             pulumi.String("my hello api update"),
-			AuthType:            pulumi.String("SECRET"),
-			Protocol:            pulumi.String("HTTP"),
-			EnableCors:          pulumi.Bool(true),
-			RequestConfigPath:   pulumi.String("/user/info"),
-			RequestConfigMethod: pulumi.String("POST"),
-			RequestParameters: apigateway.ApiRequestParameterArray{
-				&apigateway.ApiRequestParameterArgs{
-					Name:         pulumi.String("email"),
-					Position:     pulumi.String("QUERY"),
-					Type:         pulumi.String("string"),
-					Desc:         pulumi.String("desc."),
-					DefaultValue: pulumi.String("test@qq.com"),
-					Required:     pulumi.Bool(true),
-				},
-			},
-			ServiceConfigType:      pulumi.String("HTTP"),
-			ServiceConfigTimeout:   pulumi.Int(10),
-			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
-			ServiceConfigPath:      pulumi.String("/user"),
-			ServiceConfigMethod:    pulumi.String("POST"),
-			ResponseType:           pulumi.String("XML"),
-			ResponseSuccessExample: pulumi.String("<note>success</note>"),
-			ResponseFailExample:    pulumi.String("<note>fail</note>"),
-			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-				&apigateway.ApiResponseErrorCodeArgs{
-					Code:          pulumi.Int(500),
-					Msg:           pulumi.String("system error"),
-					Desc:          pulumi.String("system error code"),
-					ConvertedCode: pulumi.Int(5000),
-					NeedConvert:   pulumi.Bool(true),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = ApiGateway.NewUsagePlanAttachment(ctx, "exampleUsagePlanAttachment", &ApiGateway.UsagePlanAttachmentArgs{
-			UsagePlanId: exampleUsagePlan.ID(),
-			ServiceId:   exampleService.ID(),
-			Environment: pulumi.String("release"),
-			BindType:    pulumi.String("API"),
-			ApiId:       exampleApi.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -324,8 +351,8 @@ import com.pulumi.tencentcloud.ApiGateway.inputs.ApiRequestParameterArgs;
 import com.pulumi.tencentcloud.ApiGateway.inputs.ApiResponseErrorCodeArgs;
 import com.pulumi.tencentcloud.ApiGateway.UsagePlanAttachment;
 import com.pulumi.tencentcloud.ApiGateway.UsagePlanAttachmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -337,14 +364,14 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleUsagePlan = new UsagePlan("exampleUsagePlan", UsagePlanArgs.builder()        
+        var example = new UsagePlan("example", UsagePlanArgs.builder()
             .usagePlanName("tf_example")
             .usagePlanDesc("desc.")
             .maxRequestNum(100)
             .maxRequestNumPreSec(10)
             .build());
 
-        var exampleService = new Service("exampleService", ServiceArgs.builder()        
+        var exampleService = new Service("exampleService", ServiceArgs.builder()
             .serviceName("tf_example")
             .protocol("http&https")
             .serviceDesc("desc.")
@@ -354,7 +381,7 @@ public class App {
             .ipVersion("IPv4")
             .build());
 
-        var exampleApi = new Api("exampleApi", ApiArgs.builder()        
+        var exampleApi = new Api("exampleApi", ApiArgs.builder()
             .serviceId(exampleService.id())
             .apiName("tf_example")
             .apiDesc("my hello api update")
@@ -388,8 +415,8 @@ public class App {
                 .build())
             .build());
 
-        var exampleUsagePlanAttachment = new UsagePlanAttachment("exampleUsagePlanAttachment", UsagePlanAttachmentArgs.builder()        
-            .usagePlanId(exampleUsagePlan.id())
+        var exampleUsagePlanAttachment = new UsagePlanAttachment("exampleUsagePlanAttachment", UsagePlanAttachmentArgs.builder()
+            .usagePlanId(example.id())
             .serviceId(exampleService.id())
             .environment("release")
             .bindType("API")
@@ -399,9 +426,14 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleUsagePlan:
+  example:
     type: tencentcloud:ApiGateway:UsagePlan
     properties:
       usagePlanName: tf_example
@@ -410,6 +442,7 @@ resources:
       maxRequestNumPreSec: 10
   exampleService:
     type: tencentcloud:ApiGateway:Service
+    name: example
     properties:
       serviceName: tf_example
       protocol: http&https
@@ -420,6 +453,7 @@ resources:
       ipVersion: IPv4
   exampleApi:
     type: tencentcloud:ApiGateway:Api
+    name: example
     properties:
       serviceId: ${exampleService.id}
       apiName: tf_example
@@ -452,104 +486,161 @@ resources:
           needConvert: true
   exampleUsagePlanAttachment:
     type: tencentcloud:ApiGateway:UsagePlanAttachment
+    name: example
     properties:
-      usagePlanId: ${exampleUsagePlan.id}
+      usagePlanId: ${example.id}
       serviceId: ${exampleService.id}
       environment: release
       bindType: API
       apiId: ${exampleApi.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_usageplan" "example" {
+  usage_plan_name         = "tf_example"
+  usage_plan_desc         = "desc."
+  max_request_num         = 100
+  max_request_num_pre_sec = 10
+}
+resource "tencentcloud_apigateway_service" "example" {
+  service_name = "tf_example"
+  protocol     = "http&https"
+  service_desc = "desc."
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+}
+resource "tencentcloud_apigateway_api" "example" {
+  service_id            = tencentcloud_apigateway_service.example.id
+  api_name              = "tf_example"
+  api_desc              = "my hello api update"
+  auth_type             = "SECRET"
+  protocol              = "HTTP"
+  enable_cors           = true
+  request_config_path   = "/user/info"
+  request_config_method = "POST"
+  request_parameters {
+    name          = "email"
+    position      = "QUERY"
+    type          = "string"
+    desc          = "desc."
+    default_value = "test@qq.com"
+    required      = true
+  }
+  service_config_type      = "HTTP"
+  service_config_timeout   = 10
+  service_config_url       = "http://www.tencent.com"
+  service_config_path      = "/user"
+  service_config_method    = "POST"
+  response_type            = "XML"
+  response_success_example = "<note>success</note>"
+  response_fail_example    = "<note>fail</note>"
+  response_error_codes {
+    code           = 500
+    msg            = "system error"
+    desc           = "system error code"
+    converted_code = 5000
+    need_convert   = true
+  }
+}
+resource "tencentcloud_apigateway_usageplanattachment" "example" {
+  usage_plan_id = tencentcloud_apigateway_usageplan.example.id
+  service_id    = tencentcloud_apigateway_service.example.id
+  environment   = "release"
+  bind_type     = "API"
+  api_id        = tencentcloud_apigateway_api.example.id
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Bind the key to a usage plan
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleApiKey = new tencentcloud.apigateway.ApiKey("exampleApiKey", {
+const example = new tencentcloud.apigateway.ApiKey("example", {
     secretName: "tf_example",
     status: "on",
 });
-const exampleUsagePlanAttachment = new tencentcloud.apigateway.UsagePlanAttachment("exampleUsagePlanAttachment", {
-    usagePlanId: tencentcloud_api_gateway_usage_plan.example.id,
-    serviceId: tencentcloud_api_gateway_service.example.id,
+const exampleUsagePlanAttachment = new tencentcloud.apigateway.UsagePlanAttachment("example", {
+    usagePlanId: exampleTencentcloudApiGatewayUsagePlan.id,
+    serviceId: exampleTencentcloudApiGatewayService.id,
     environment: "release",
     bindType: "API",
-    apiId: tencentcloud_api_gateway_api.example.id,
-    accessKeyIds: [exampleApiKey.id],
+    apiId: exampleTencentcloudApiGatewayApi.id,
+    accessKeyIds: [example.id],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_api_key = tencentcloud.api_gateway.ApiKey("exampleApiKey",
+example = tencentcloud.apigateway.ApiKey("example",
     secret_name="tf_example",
     status="on")
-example_usage_plan_attachment = tencentcloud.api_gateway.UsagePlanAttachment("exampleUsagePlanAttachment",
-    usage_plan_id=tencentcloud_api_gateway_usage_plan["example"]["id"],
-    service_id=tencentcloud_api_gateway_service["example"]["id"],
+example_usage_plan_attachment = tencentcloud.apigateway.UsagePlanAttachment("example",
+    usage_plan_id=example_tencentcloud_api_gateway_usage_plan["id"],
+    service_id=example_tencentcloud_api_gateway_service["id"],
     environment="release",
     bind_type="API",
-    api_id=tencentcloud_api_gateway_api["example"]["id"],
-    access_key_ids=[example_api_key.id])
+    api_id=example_tencentcloud_api_gateway_api["id"],
+    access_key_ids=[example.id])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var exampleApiKey = new Tencentcloud.ApiGateway.ApiKey("exampleApiKey", new()
-    {
-        SecretName = "tf_example",
-        Status = "on",
-    });
-
-    var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("exampleUsagePlanAttachment", new()
-    {
-        UsagePlanId = tencentcloud_api_gateway_usage_plan.Example.Id,
-        ServiceId = tencentcloud_api_gateway_service.Example.Id,
-        Environment = "release",
-        BindType = "API",
-        ApiId = tencentcloud_api_gateway_api.Example.Id,
-        AccessKeyIds = new[]
-        {
-            exampleApiKey.Id,
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleApiKey, err := ApiGateway.NewApiKey(ctx, "exampleApiKey", &ApiGateway.ApiKeyArgs{
+		example, err := apigateway.NewApiKey(ctx, "example", &apigateway.ApiKeyArgs{
 			SecretName: pulumi.String("tf_example"),
 			Status:     pulumi.String("on"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = ApiGateway.NewUsagePlanAttachment(ctx, "exampleUsagePlanAttachment", &ApiGateway.UsagePlanAttachmentArgs{
-			UsagePlanId: pulumi.Any(tencentcloud_api_gateway_usage_plan.Example.Id),
-			ServiceId:   pulumi.Any(tencentcloud_api_gateway_service.Example.Id),
+		_, err = apigateway.NewUsagePlanAttachment(ctx, "example", &apigateway.UsagePlanAttachmentArgs{
+			UsagePlanId: pulumi.Any(exampleTencentcloudApiGatewayUsagePlan.Id),
+			ServiceId:   pulumi.Any(exampleTencentcloudApiGatewayService.Id),
 			Environment: pulumi.String("release"),
 			BindType:    pulumi.String("API"),
-			ApiId:       pulumi.Any(tencentcloud_api_gateway_api.Example.Id),
+			ApiId:       pulumi.Any(exampleTencentcloudApiGatewayApi.Id),
 			AccessKeyIds: pulumi.StringArray{
-				exampleApiKey.ID(),
+				example.ID().ToIDOutput().ToStringOutput(),
 			},
 		})
 		if err != nil {
@@ -559,6 +650,45 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.ApiGateway.ApiKey("example", new()
+    {
+        SecretName = "tf_example",
+        Status = "on",
+    });
+
+    var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("example", new()
+    {
+        UsagePlanId = exampleTencentcloudApiGatewayUsagePlan.Id,
+        ServiceId = exampleTencentcloudApiGatewayService.Id,
+        Environment = "release",
+        BindType = "API",
+        ApiId = exampleTencentcloudApiGatewayApi.Id,
+        AccessKeyIds = new[]
+        {
+            example.Id,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -569,8 +699,8 @@ import com.pulumi.tencentcloud.ApiGateway.ApiKey;
 import com.pulumi.tencentcloud.ApiGateway.ApiKeyArgs;
 import com.pulumi.tencentcloud.ApiGateway.UsagePlanAttachment;
 import com.pulumi.tencentcloud.ApiGateway.UsagePlanAttachmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -582,105 +712,169 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleApiKey = new ApiKey("exampleApiKey", ApiKeyArgs.builder()        
+        var example = new ApiKey("example", ApiKeyArgs.builder()
             .secretName("tf_example")
             .status("on")
             .build());
 
-        var exampleUsagePlanAttachment = new UsagePlanAttachment("exampleUsagePlanAttachment", UsagePlanAttachmentArgs.builder()        
-            .usagePlanId(tencentcloud_api_gateway_usage_plan.example().id())
-            .serviceId(tencentcloud_api_gateway_service.example().id())
+        var exampleUsagePlanAttachment = new UsagePlanAttachment("exampleUsagePlanAttachment", UsagePlanAttachmentArgs.builder()
+            .usagePlanId(exampleTencentcloudApiGatewayUsagePlan.id())
+            .serviceId(exampleTencentcloudApiGatewayService.id())
             .environment("release")
             .bindType("API")
-            .apiId(tencentcloud_api_gateway_api.example().id())
-            .accessKeyIds(exampleApiKey.id())
+            .apiId(exampleTencentcloudApiGatewayApi.id())
+            .accessKeyIds(example.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleApiKey:
+  example:
     type: tencentcloud:ApiGateway:ApiKey
     properties:
       secretName: tf_example
       status: on
   exampleUsagePlanAttachment:
     type: tencentcloud:ApiGateway:UsagePlanAttachment
+    name: example
     properties:
-      usagePlanId: ${tencentcloud_api_gateway_usage_plan.example.id}
-      serviceId: ${tencentcloud_api_gateway_service.example.id}
+      usagePlanId: ${exampleTencentcloudApiGatewayUsagePlan.id}
+      serviceId: ${exampleTencentcloudApiGatewayService.id}
       environment: release
       bindType: API
-      apiId: ${tencentcloud_api_gateway_api.example.id}
+      apiId: ${exampleTencentcloudApiGatewayApi.id}
       accessKeyIds:
-        - ${exampleApiKey.id}
+        - ${example.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_apikey" "example" {
+  secret_name = "tf_example"
+  status      = "on"
+}
+resource "tencentcloud_apigateway_usageplanattachment" "example" {
+  usage_plan_id  = exampleTencentcloudApiGatewayUsagePlan.id
+  service_id     = exampleTencentcloudApiGatewayService.id
+  environment    = "release"
+  bind_type      = "API"
+  api_id         = exampleTencentcloudApiGatewayApi.id
+  access_key_ids = [tencentcloud_apigateway_apikey.example.id]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [BindEnvironment](https://www.tencentcloud.com/search/?wd=BindEnvironment&type=document&lang=en)
+  - [BindSecretIds](https://www.tencentcloud.com/search/?wd=BindSecretIds&type=document&lang=en)
+* Read:
+  - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
+  - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&type=document&lang=en)
+  - [DescribeUsagePlanSecretIds](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanSecretIds&type=document&lang=en)
+* Delete:
+  - [UnBindEnvironment](https://www.tencentcloud.com/search/?wd=UnBindEnvironment&type=document&lang=en)
+  - [UnBindSecretIds](https://www.tencentcloud.com/search/?wd=UnBindSecretIds&type=document&lang=en)
 
 
 ## Create UsagePlanAttachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                        <span class="nx">access_key_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">api_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                        <span class="nx">bind_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                        <span class="nx">environment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                        <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                        <span class="nx">usage_plan_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                        <span class="nx">environment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                        <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                        <span class="nx">usage_plan_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                        <span class="nx">access_key_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">api_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                        <span class="nx">bind_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUsagePlanAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UsagePlanAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUsagePlanAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UsagePlanAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">UsagePlanAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UsagePlanAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:UsagePlanAttachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:UsagePlanAttachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_usage_plan_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -701,7 +895,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -818,11 +1012,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## UsagePlanAttachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The UsagePlanAttachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -838,8 +1040,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -847,8 +1048,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="usageplanid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -856,8 +1056,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the usage plan.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accesskeyids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyids_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Ids</a>
@@ -865,8 +1064,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="apiid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -874,8 +1072,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bindtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_csharp" style="color: inherit; text-decoration: inherit;">Bind<wbr>Type</a>
@@ -883,8 +1080,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd></dl>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -898,8 +1094,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -907,8 +1102,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="usageplanid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -916,8 +1110,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the usage plan.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accesskeyids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyids_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Key<wbr>Ids</a>
@@ -925,8 +1118,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="apiid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -934,8 +1126,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bindtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_go" style="color: inherit; text-decoration: inherit;">Bind<wbr>Type</a>
@@ -943,8 +1134,61 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd></dl>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="environment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_hcl" style="color: inherit; text-decoration: inherit;">environment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the service.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="usage_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the usage plan.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="access_key_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_ids_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bind_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_type_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -958,8 +1202,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -967,8 +1210,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="usageplanid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -976,8 +1218,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the usage plan.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accesskeyids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyids_java" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Ids</a>
@@ -985,8 +1226,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="apiid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -994,8 +1234,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bindtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_java" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -1003,8 +1242,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd></dl>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1018,8 +1256,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1027,8 +1264,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="usageplanid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -1036,8 +1272,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the usage plan.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accesskeyids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyids_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Ids</a>
@@ -1045,8 +1280,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="apiid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -1054,8 +1288,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bindtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_nodejs" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -1063,8 +1296,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd></dl>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1310,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -1087,8 +1318,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="usage_plan_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
@@ -1096,8 +1326,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the usage plan.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="access_key_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_key_ids_python" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>ids</a>
@@ -1105,8 +1334,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="api_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
@@ -1114,8 +1342,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bind_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_type_python" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
@@ -1123,8 +1350,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd></dl>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1138,8 +1364,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1147,8 +1372,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the service.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="usageplanid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -1156,8 +1380,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the usage plan.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="accesskeyids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesskeyids_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Key<wbr>Ids</a>
@@ -1165,8 +1388,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="apiid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -1174,8 +1396,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="bindtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_yaml" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -1183,8 +1404,7 @@ The UsagePlanAttachment resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd></dl>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1205,8 +1425,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1220,8 +1439,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1467,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1250,8 +1481,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1265,8 +1495,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1280,8 +1509,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1291,18 +1519,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing UsagePlanAttachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UsagePlanAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">UsagePlanAttachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UsagePlanAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">UsagePlanAttachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1312,104 +1540,143 @@ Get an existing UsagePlanAttachment resource's state with the given name, ID, an
         <span class="nx">environment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">usage_plan_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> UsagePlanAttachment</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUsagePlanAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UsagePlanAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UsagePlanAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUsagePlanAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UsagePlanAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UsagePlanAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">UsagePlanAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UsagePlanAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">UsagePlanAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UsagePlanAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">UsagePlanAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UsagePlanAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">UsagePlanAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UsagePlanAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingUsagePlanAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:UsagePlanAttachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_usage_plan_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UsagePlanAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UsagePlanAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1417,28 +1684,31 @@ Get an existing UsagePlanAttachment resource's state with the given name, ID, an
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UsagePlanAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1446,28 +1716,31 @@ Get an existing UsagePlanAttachment resource's state with the given name, ID, an
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UsagePlanAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1487,8 +1760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_apiid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -1496,8 +1768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bindtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bindtype_csharp" style="color: inherit; text-decoration: inherit;">Bind<wbr>Type</a>
@@ -1505,8 +1776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_csharp" style="color: inherit; text-decoration: inherit;">Environment</a>
@@ -1514,8 +1784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1523,8 +1792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_usageplanid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanid_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -1532,8 +1800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd></dl>
+    <dd>ID of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1547,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_apiid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -1556,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bindtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bindtype_go" style="color: inherit; text-decoration: inherit;">Bind<wbr>Type</a>
@@ -1565,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_go" style="color: inherit; text-decoration: inherit;">Environment</a>
@@ -1574,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1583,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_usageplanid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanid_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -1592,8 +1854,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd></dl>
+    <dd>ID of the usage plan.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_access_key_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_key_ids_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>key_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bind_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bind_type_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_environment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_hcl" style="color: inherit; text-decoration: inherit;">environment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the service.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_usage_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_plan_id_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1607,8 +1922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_apiid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -1616,8 +1930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bindtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bindtype_java" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -1625,8 +1938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_java" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1634,8 +1946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1643,8 +1954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_usageplanid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanid_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -1652,8 +1962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd></dl>
+    <dd>ID of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1667,8 +1976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_apiid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -1676,8 +1984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bindtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bindtype_nodejs" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -1685,8 +1992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_nodejs" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1694,8 +2000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1703,8 +2008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_usageplanid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanid_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -1712,8 +2016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd></dl>
+    <dd>ID of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1727,8 +2030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_api_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
@@ -1736,8 +2038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bind_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bind_type_python" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
@@ -1745,8 +2046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_python" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1754,8 +2054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -1763,8 +2062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_usage_plan_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_plan_id_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
@@ -1772,8 +2070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd></dl>
+    <dd>ID of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1787,8 +2084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Array of key IDs to be bound.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Array of key IDs to be bound.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_apiid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apiid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -1796,8 +2092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the API. This parameter will be required when <code>bind_type</code> is <code>API</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the API. This parameter will be required when <code>bindType</code> is <code>API</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_bindtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bindtype_yaml" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -1805,8 +2100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding type. Valid values: <code>API</code>, <code>SERVICE</code>. Default value is <code>SERVICE</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_yaml" style="color: inherit; text-decoration: inherit;">environment</a>
@@ -1814,8 +2108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The environment to be bound. Valid values: <code>test</code>, <code>prepub</code>, <code>release</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1823,8 +2116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the service.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the service.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_usageplanid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanid_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -1832,8 +2124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd></dl>
+    <dd>ID of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1856,6 +2147,9 @@ $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment 
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1865,7 +2159,6 @@ $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment 
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

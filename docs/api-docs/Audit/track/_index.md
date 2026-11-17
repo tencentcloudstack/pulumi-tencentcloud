@@ -2,9 +2,11 @@
 ---
 title: "Track"
 title_tag: "tencentcloud.Audit.Track"
-meta_desc: "Documentation for the tencentcloud.Audit.Track resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a audit track"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,95 +18,84 @@ Provides a resource to create a audit track
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const track = new tencentcloud.audit.Track("track", {
+const example = new tencentcloud.audit.Track("example", {
     actionType: "Read",
     eventNames: ["*"],
+    name: "terraform_track",
     resourceType: "*",
     status: 1,
+    trackForAllMembers: 0,
     storage: {
         storageName: "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
         storagePrefix: "cloudaudit",
         storageRegion: "ap-guangzhou",
         storageType: "cls",
     },
-    trackForAllMembers: 0,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-track = tencentcloud.audit.Track("track",
+example = tencentcloud.audit.Track("example",
     action_type="Read",
     event_names=["*"],
+    name="terraform_track",
     resource_type="*",
     status=1,
-    storage=tencentcloud.audit.TrackStorageArgs(
-        storage_name="db90b92c-91d2-46b0-94ac-debbbb21dc4e",
-        storage_prefix="cloudaudit",
-        storage_region="ap-guangzhou",
-        storage_type="cls",
-    ),
-    track_for_all_members=0)
+    track_for_all_members=0,
+    storage={
+        "storage_name": "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+        "storage_prefix": "cloudaudit",
+        "storage_region": "ap-guangzhou",
+        "storage_type": "cls",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var track = new Tencentcloud.Audit.Track("track", new()
-    {
-        ActionType = "Read",
-        EventNames = new[]
-        {
-            "*",
-        },
-        ResourceType = "*",
-        Status = 1,
-        Storage = new Tencentcloud.Audit.Inputs.TrackStorageArgs
-        {
-            StorageName = "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
-            StoragePrefix = "cloudaudit",
-            StorageRegion = "ap-guangzhou",
-            StorageType = "cls",
-        },
-        TrackForAllMembers = 0,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/audit"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Audit.NewTrack(ctx, "track", &Audit.TrackArgs{
+		_, err := audit.NewTrack(ctx, "example", &audit.TrackArgs{
 			ActionType: pulumi.String("Read"),
 			EventNames: pulumi.StringArray{
 				pulumi.String("*"),
 			},
-			ResourceType: pulumi.String("*"),
-			Status:       pulumi.Int(1),
+			Name:               pulumi.String("terraform_track"),
+			ResourceType:       pulumi.String("*"),
+			Status:             pulumi.Int(1),
+			TrackForAllMembers: pulumi.Int(0),
 			Storage: &audit.TrackStorageArgs{
 				StorageName:   pulumi.String("db90b92c-91d2-46b0-94ac-debbbb21dc4e"),
 				StoragePrefix: pulumi.String("cloudaudit"),
 				StorageRegion: pulumi.String("ap-guangzhou"),
 				StorageType:   pulumi.String("cls"),
 			},
-			TrackForAllMembers: pulumi.Int(0),
 		})
 		if err != nil {
 			return err
@@ -113,6 +104,46 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Audit.Track("example", new()
+    {
+        ActionType = "Read",
+        EventNames = new[]
+        {
+            "*",
+        },
+        Name = "terraform_track",
+        ResourceType = "*",
+        Status = 1,
+        TrackForAllMembers = 0,
+        Storage = new Tencentcloud.Audit.Inputs.TrackStorageArgs
+        {
+            StorageName = "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+            StoragePrefix = "cloudaudit",
+            StorageRegion = "ap-guangzhou",
+            StorageType = "cls",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -122,8 +153,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Audit.Track;
 import com.pulumi.tencentcloud.Audit.TrackArgs;
 import com.pulumi.tencentcloud.Audit.inputs.TrackStorageArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -135,105 +166,411 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var track = new Track("track", TrackArgs.builder()        
+        var example = new Track("example", TrackArgs.builder()
             .actionType("Read")
             .eventNames("*")
+            .name("terraform_track")
             .resourceType("*")
             .status(1)
+            .trackForAllMembers(0)
             .storage(TrackStorageArgs.builder()
                 .storageName("db90b92c-91d2-46b0-94ac-debbbb21dc4e")
                 .storagePrefix("cloudaudit")
                 .storageRegion("ap-guangzhou")
                 .storageType("cls")
                 .build())
-            .trackForAllMembers(0)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  track:
+  example:
     type: tencentcloud:Audit:Track
     properties:
       actionType: Read
       eventNames:
         - '*'
+      name: terraform_track
       resourceType: '*'
       status: 1
+      trackForAllMembers: 0
       storage:
         storageName: db90b92c-91d2-46b0-94ac-debbbb21dc4e
         storagePrefix: cloudaudit
         storageRegion: ap-guangzhou
         storageType: cls
-      trackForAllMembers: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_audit_track" "example" {
+  action_type           = "Read"
+  event_names           = ["*"]
+  name                  = "terraform_track"
+  resource_type         = "*"
+  status                = 1
+  track_for_all_members = 0
+  storage = {
+    storage_name   = "db90b92c-91d2-46b0-94ac-debbbb21dc4e"
+    storage_prefix = "cloudaudit"
+    storage_region = "ap-guangzhou"
+    storage_type   = "cls"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Specify storage user
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.audit.Track("example", {
+    actionType: "Read",
+    eventNames: ["*"],
+    name: "terraform_track",
+    resourceType: "*",
+    status: 1,
+    trackForAllMembers: 0,
+    storage: {
+        storageName: "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+        storagePrefix: "cloudaudit",
+        storageRegion: "ap-guangzhou",
+        storageType: "cos",
+        storageAccountId: "100037717137",
+        storageAppId: "1309116520",
+        compress: 1,
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.audit.Track("example",
+    action_type="Read",
+    event_names=["*"],
+    name="terraform_track",
+    resource_type="*",
+    status=1,
+    track_for_all_members=0,
+    storage={
+        "storage_name": "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+        "storage_prefix": "cloudaudit",
+        "storage_region": "ap-guangzhou",
+        "storage_type": "cos",
+        "storage_account_id": "100037717137",
+        "storage_app_id": "1309116520",
+        "compress": 1,
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/audit"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := audit.NewTrack(ctx, "example", &audit.TrackArgs{
+			ActionType: pulumi.String("Read"),
+			EventNames: pulumi.StringArray{
+				pulumi.String("*"),
+			},
+			Name:               pulumi.String("terraform_track"),
+			ResourceType:       pulumi.String("*"),
+			Status:             pulumi.Int(1),
+			TrackForAllMembers: pulumi.Int(0),
+			Storage: &audit.TrackStorageArgs{
+				StorageName:      pulumi.String("db90b92c-91d2-46b0-94ac-debbbb21dc4e"),
+				StoragePrefix:    pulumi.String("cloudaudit"),
+				StorageRegion:    pulumi.String("ap-guangzhou"),
+				StorageType:      pulumi.String("cos"),
+				StorageAccountId: pulumi.String("100037717137"),
+				StorageAppId:     pulumi.String("1309116520"),
+				Compress:         pulumi.Int(1),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Audit.Track("example", new()
+    {
+        ActionType = "Read",
+        EventNames = new[]
+        {
+            "*",
+        },
+        Name = "terraform_track",
+        ResourceType = "*",
+        Status = 1,
+        TrackForAllMembers = 0,
+        Storage = new Tencentcloud.Audit.Inputs.TrackStorageArgs
+        {
+            StorageName = "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+            StoragePrefix = "cloudaudit",
+            StorageRegion = "ap-guangzhou",
+            StorageType = "cos",
+            StorageAccountId = "100037717137",
+            StorageAppId = "1309116520",
+            Compress = 1,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Audit.Track;
+import com.pulumi.tencentcloud.Audit.TrackArgs;
+import com.pulumi.tencentcloud.Audit.inputs.TrackStorageArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Track("example", TrackArgs.builder()
+            .actionType("Read")
+            .eventNames("*")
+            .name("terraform_track")
+            .resourceType("*")
+            .status(1)
+            .trackForAllMembers(0)
+            .storage(TrackStorageArgs.builder()
+                .storageName("db90b92c-91d2-46b0-94ac-debbbb21dc4e")
+                .storagePrefix("cloudaudit")
+                .storageRegion("ap-guangzhou")
+                .storageType("cos")
+                .storageAccountId("100037717137")
+                .storageAppId("1309116520")
+                .compress(1)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Audit:Track
+    properties:
+      actionType: Read
+      eventNames:
+        - '*'
+      name: terraform_track
+      resourceType: '*'
+      status: 1
+      trackForAllMembers: 0
+      storage:
+        storageName: db90b92c-91d2-46b0-94ac-debbbb21dc4e
+        storagePrefix: cloudaudit
+        storageRegion: ap-guangzhou
+        storageType: cos
+        storageAccountId: '100037717137'
+        storageAppId: '1309116520'
+        compress: 1
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_audit_track" "example" {
+  action_type           = "Read"
+  event_names           = ["*"]
+  name                  = "terraform_track"
+  resource_type         = "*"
+  status                = 1
+  track_for_all_members = 0
+  storage = {
+    storage_name       = "db90b92c-91d2-46b0-94ac-debbbb21dc4e"
+    storage_prefix     = "cloudaudit"
+    storage_region     = "ap-guangzhou"
+    storage_type       = "cos"
+    storage_account_id = "100037717137"
+    storage_app_id     = "1309116520"
+    compress           = 1
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateAuditTrack](https://www.tencentcloud.com/search/?wd=CreateAuditTrack&type=document&lang=en)
+* Read: [DescribeAuditTrack](https://www.tencentcloud.com/search/?wd=DescribeAuditTrack&type=document&lang=en)
+* Update: [ModifyAuditTrack](https://www.tencentcloud.com/search/?wd=ModifyAuditTrack&type=document&lang=en)
+* Delete: [DeleteAuditTrack](https://www.tencentcloud.com/search/?wd=DeleteAuditTrack&type=document&lang=en)
 
 
 ## Create Track Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Track</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Track</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Track</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Track</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
           <span class="nx">action_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">event_names</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-          <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[_audit.TrackStorageArgs]</span> = None<span class="p">,</span>
-          <span class="nx">track_for_all_members</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Track</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[TrackStorageArgs]</span> = None<span class="p">,</span>
+          <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">track_for_all_members</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTrack</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Track</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTrack</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Track</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Track</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Track</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Track</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Track</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TrackArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Audit:Track</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Audit:Track</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_audit_track&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -254,7 +591,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -371,11 +708,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Track Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Track resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -391,8 +736,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-required"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-required"
             title="Required">
         <span id="eventnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Names</a>
@@ -400,8 +744,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-required"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -409,8 +752,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -418,17 +760,15 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-required"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-required"
             title="Required">
         <span id="storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#trackstorage">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Audit.<wbr>Inputs.<wbr>Track<wbr>Storage<wbr>Args</a></span>
+        <span class="property-type"><a href="#trackstorage">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Audit.<wbr>Inputs.<wbr>Track<wbr>Storage</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -436,8 +776,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="trackforallmembers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trackforallmembers_csharp" style="color: inherit; text-decoration: inherit;">Track<wbr>For<wbr>All<wbr>Members</a>
@@ -445,8 +784,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -460,8 +798,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-required"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-required"
             title="Required">
         <span id="eventnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Names</a>
@@ -469,8 +806,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-required"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -478,8 +814,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -487,8 +822,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-required"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-required"
             title="Required">
         <span id="storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -496,8 +830,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#trackstorage">Track<wbr>Storage<wbr>Args</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -505,8 +838,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="trackforallmembers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trackforallmembers_go" style="color: inherit; text-decoration: inherit;">Track<wbr>For<wbr>All<wbr>Members</a>
@@ -514,8 +846,69 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_type_hcl" style="color: inherit; text-decoration: inherit;">action_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_names_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#trackstorage">object</a></span>
+    </dt>
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="track_for_all_members_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#track_for_all_members_hcl" style="color: inherit; text-decoration: inherit;">track_<wbr>for_<wbr>all_<wbr>members</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -529,8 +922,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-required"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-required"
             title="Required">
         <span id="eventnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_java" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -538,8 +930,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-required"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -547,8 +938,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -556,17 +946,15 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-required"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-required"
             title="Required">
         <span id="storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#trackstorage">Track<wbr>Storage<wbr>Args</a></span>
+        <span class="property-type"><a href="#trackstorage">Track<wbr>Storage</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -574,8 +962,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="trackforallmembers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trackforallmembers_java" style="color: inherit; text-decoration: inherit;">track<wbr>For<wbr>All<wbr>Members</a>
@@ -583,8 +970,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -598,8 +984,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-required"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-required"
             title="Required">
         <span id="eventnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -607,8 +992,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-required"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -616,8 +1000,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -625,17 +1008,15 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-required"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-required"
             title="Required">
         <span id="storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#trackstorage">Track<wbr>Storage<wbr>Args</a></span>
+        <span class="property-type"><a href="#trackstorage">Track<wbr>Storage</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -643,8 +1024,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="trackforallmembers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trackforallmembers_nodejs" style="color: inherit; text-decoration: inherit;">track<wbr>For<wbr>All<wbr>Members</a>
@@ -652,8 +1032,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +1046,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-required"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-required"
             title="Required">
         <span id="event_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_names_python" style="color: inherit; text-decoration: inherit;">event_<wbr>names</a>
@@ -676,8 +1054,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-required"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -685,8 +1062,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -694,8 +1070,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-required"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-required"
             title="Required">
         <span id="storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -703,8 +1078,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#trackstorage">Track<wbr>Storage<wbr>Args</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -712,8 +1086,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="track_for_all_members_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#track_for_all_members_python" style="color: inherit; text-decoration: inherit;">track_<wbr>for_<wbr>all_<wbr>members</a>
@@ -721,8 +1094,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -736,8 +1108,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-required"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-required"
             title="Required">
         <span id="eventnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -745,8 +1116,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-required"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -754,8 +1124,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -763,8 +1132,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-required"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-required"
             title="Required">
         <span id="storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -772,8 +1140,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#trackstorage">Property Map</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -781,8 +1148,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="trackforallmembers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trackforallmembers_yaml" style="color: inherit; text-decoration: inherit;">track<wbr>For<wbr>All<wbr>Members</a>
@@ -790,8 +1156,7 @@ The Track resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -812,8 +1177,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-"
+    <dd>Track create time.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -821,8 +1185,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -836,8 +1199,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-"
+    <dd>Track create time.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -845,8 +1207,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track create time.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -860,8 +1243,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-"
+    <dd>Track create time.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -869,8 +1251,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -884,8 +1265,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-"
+    <dd>Track create time.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -893,8 +1273,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -908,8 +1287,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-"
+    <dd>Track create time.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -917,8 +1295,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -932,8 +1309,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-"
+    <dd>Track create time.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -941,8 +1317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -952,18 +1327,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Track resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TrackState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Track</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TrackState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Track</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -973,106 +1348,145 @@ Get an existing Track resource's state with the given name, ID, and optional ext
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[_audit.TrackStorageArgs]</span> = None<span class="p">,</span>
+        <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[TrackStorageArgs]</span> = None<span class="p">,</span>
         <span class="nx">track_for_all_members</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Track</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTrack<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TrackState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Track</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTrack<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TrackState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Track</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Track</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TrackState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Track</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TrackState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Track</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TrackState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Track</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TrackState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTrack</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Audit:Track</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_audit_track</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TrackState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TrackState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1080,28 +1494,31 @@ Get an existing Track resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TrackState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1109,28 +1526,31 @@ Get an existing Track resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TrackState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1150,8 +1570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1159,8 +1578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-optional"
+    <dd>Track create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventnames_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Names</a>
@@ -1168,8 +1586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1177,8 +1594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1186,8 +1602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1195,17 +1610,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-optional"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#trackstorage">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Audit.<wbr>Inputs.<wbr>Track<wbr>Storage<wbr>Args</a></span>
+        <span class="property-type"><a href="#trackstorage">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Audit.<wbr>Inputs.<wbr>Track<wbr>Storage</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trackforallmembers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trackforallmembers_csharp" style="color: inherit; text-decoration: inherit;">Track<wbr>For<wbr>All<wbr>Members</a>
@@ -1213,8 +1626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1228,8 +1640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1237,8 +1648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-optional"
+    <dd>Track create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventnames_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Names</a>
@@ -1246,8 +1656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1255,8 +1664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1264,8 +1672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1273,8 +1680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-optional"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -1282,8 +1688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#trackstorage">Track<wbr>Storage<wbr>Args</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trackforallmembers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trackforallmembers_go" style="color: inherit; text-decoration: inherit;">Track<wbr>For<wbr>All<wbr>Members</a>
@@ -1291,8 +1696,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_action_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_action_type_hcl" style="color: inherit; text-decoration: inherit;">action_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_event_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_event_names_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#trackstorage">object</a></span>
+    </dt>
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_track_for_all_members_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_track_for_all_members_hcl" style="color: inherit; text-decoration: inherit;">track_<wbr>for_<wbr>all_<wbr>members</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1306,8 +1780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1315,8 +1788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-optional"
+    <dd>Track create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventnames_java" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -1324,8 +1796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1333,8 +1804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1342,8 +1812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1351,17 +1820,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-optional"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#trackstorage">Track<wbr>Storage<wbr>Args</a></span>
+        <span class="property-type"><a href="#trackstorage">Track<wbr>Storage</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trackforallmembers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trackforallmembers_java" style="color: inherit; text-decoration: inherit;">track<wbr>For<wbr>All<wbr>Members</a>
@@ -1369,8 +1836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1384,8 +1850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1393,8 +1858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-optional"
+    <dd>Track create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventnames_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -1402,8 +1866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1411,8 +1874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1420,8 +1882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1429,17 +1890,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-optional"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#trackstorage">Track<wbr>Storage<wbr>Args</a></span>
+        <span class="property-type"><a href="#trackstorage">Track<wbr>Storage</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trackforallmembers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trackforallmembers_nodejs" style="color: inherit; text-decoration: inherit;">track<wbr>For<wbr>All<wbr>Members</a>
@@ -1447,8 +1906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1462,8 +1920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1471,8 +1928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-optional"
+    <dd>Track create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_event_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_event_names_python" style="color: inherit; text-decoration: inherit;">event_<wbr>names</a>
@@ -1480,8 +1936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1489,8 +1944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1498,8 +1952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1507,8 +1960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-optional"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1516,8 +1968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#trackstorage">Track<wbr>Storage<wbr>Args</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_track_for_all_members_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_track_for_all_members_python" style="color: inherit; text-decoration: inherit;">track_<wbr>for_<wbr>all_<wbr>members</a>
@@ -1525,8 +1976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1540,8 +1990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface type, optional:- <code>Read</code>: Read interface- <code>Write</code>: Write interface- <code>*</code>: All interface.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1549,8 +1998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track create time.</p>
-</dd><dt class="property-optional"
+    <dd>Track create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventnames_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -1558,8 +2006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Track interface name list:- when ResourceType is <code>*</code>, EventNames is must <code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support all interface:<code>[&amp;amp;quot;*&amp;amp;quot;]</code>- when ResourceType is a single product, EventNames support some interface, up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1567,8 +2014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track name.</p>
-</dd><dt class="property-optional"
+    <dd>Track name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1576,8 +2022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track product, optional:- <code>*</code>: All product- Single product, such as <code>cos</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1585,8 +2030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd><dt class="property-optional"
+    <dd>Track status, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1594,8 +2038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#trackstorage">Property Map</a></span>
     </dt>
-    <dd><p>Track Storage, support <code>cos</code> and <code>cls</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Track Storage, support <code>cos</code>, <code>cls</code> and <code>ckafka</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trackforallmembers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trackforallmembers_yaml" style="color: inherit; text-decoration: inherit;">track<wbr>For<wbr>All<wbr>Members</a>
@@ -1603,8 +2046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</p>
-</dd></dl>
+    <dd>Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- <code>0</code>: Close- <code>1</code>: Open.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1619,7 +2061,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="trackstorage">Track<wbr>Storage</h4>
+<h4 id="trackstorage">
+Track<wbr>Storage<pulumi-choosable type="language" values="python,go" class="inline">, Track<wbr>Storage<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1631,8 +2075,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="storageprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageprefix_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Prefix</a>
@@ -1640,8 +2083,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage path prefix.</p>
-</dd><dt class="property-required"
+    <dd>Storage path prefix.</dd><dt class="property-required"
             title="Required">
         <span id="storageregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageregion_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Region</a>
@@ -1649,8 +2091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage region.</p>
-</dd><dt class="property-required"
+    <dd>Storage region.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1658,8 +2099,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track Storage type, optional:- <code>cos</code>- <code>cls</code>.</p>
-</dd></dl>
+    <dd>Track Storage type, optional:- <code>cos</code>- <code>cls</code>- <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_csharp" style="color: inherit; text-decoration: inherit;">Compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to compress. <code>1</code>: compress, <code>2</code>: do not compress.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageaccountid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageaccountid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Account<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Designated to store user ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageappid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageappid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>App<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Designated to store user appid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1673,8 +2137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="storageprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageprefix_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Prefix</a>
@@ -1682,8 +2145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage path prefix.</p>
-</dd><dt class="property-required"
+    <dd>Storage path prefix.</dd><dt class="property-required"
             title="Required">
         <span id="storageregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageregion_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Region</a>
@@ -1691,8 +2153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage region.</p>
-</dd><dt class="property-required"
+    <dd>Storage region.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1700,8 +2161,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track Storage type, optional:- <code>cos</code>- <code>cls</code>.</p>
-</dd></dl>
+    <dd>Track Storage type, optional:- <code>cos</code>- <code>cls</code>- <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_go" style="color: inherit; text-decoration: inherit;">Compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to compress. <code>1</code>: compress, <code>2</code>: do not compress.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageaccountid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageaccountid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Account<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Designated to store user ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageappid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageappid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>App<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Designated to store user appid.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="storage_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_prefix_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage path prefix.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_region_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage region.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Track Storage type, optional:- <code>cos</code>- <code>cls</code>- <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_hcl" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to compress. <code>1</code>: compress, <code>2</code>: do not compress.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_account_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_account_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>account_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Designated to store user ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_app_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Designated to store user appid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1715,8 +2261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="storageprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageprefix_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Prefix</a>
@@ -1724,8 +2269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Storage path prefix.</p>
-</dd><dt class="property-required"
+    <dd>Storage path prefix.</dd><dt class="property-required"
             title="Required">
         <span id="storageregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageregion_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Region</a>
@@ -1733,8 +2277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Storage region.</p>
-</dd><dt class="property-required"
+    <dd>Storage region.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1742,8 +2285,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track Storage type, optional:- <code>cos</code>- <code>cls</code>.</p>
-</dd></dl>
+    <dd>Track Storage type, optional:- <code>cos</code>- <code>cls</code>- <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_java" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Whether to compress. <code>1</code>: compress, <code>2</code>: do not compress.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageaccountid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageaccountid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Account<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Designated to store user ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageappid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageappid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>App<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Designated to store user appid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1757,8 +2323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="storageprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageprefix_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Prefix</a>
@@ -1766,8 +2331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage path prefix.</p>
-</dd><dt class="property-required"
+    <dd>Storage path prefix.</dd><dt class="property-required"
             title="Required">
         <span id="storageregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageregion_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Region</a>
@@ -1775,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Storage region.</p>
-</dd><dt class="property-required"
+    <dd>Storage region.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1784,8 +2347,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Track Storage type, optional:- <code>cos</code>- <code>cls</code>.</p>
-</dd></dl>
+    <dd>Track Storage type, optional:- <code>cos</code>- <code>cls</code>- <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_nodejs" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to compress. <code>1</code>: compress, <code>2</code>: do not compress.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageaccountid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageaccountid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Account<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Designated to store user ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageappid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageappid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>App<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Designated to store user appid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1799,8 +2385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="storage_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_prefix_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>prefix</a>
@@ -1808,8 +2393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Storage path prefix.</p>
-</dd><dt class="property-required"
+    <dd>Storage path prefix.</dd><dt class="property-required"
             title="Required">
         <span id="storage_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_region_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>region</a>
@@ -1817,8 +2401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Storage region.</p>
-</dd><dt class="property-required"
+    <dd>Storage region.</dd><dt class="property-required"
             title="Required">
         <span id="storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -1826,8 +2409,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Track Storage type, optional:- <code>cos</code>- <code>cls</code>.</p>
-</dd></dl>
+    <dd>Track Storage type, optional:- <code>cos</code>- <code>cls</code>- <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_python" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to compress. <code>1</code>: compress, <code>2</code>: do not compress.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_account_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_account_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>account_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Designated to store user ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_app_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_app_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Designated to store user appid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1841,8 +2447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Track Storage name:- when StorageType is <code>cls</code>, StorageName is cls topicId- when StorageType is <code>cos</code>, StorageName is cos bucket name that does not contain <code>-APPID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="storageprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageprefix_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Prefix</a>
@@ -1850,8 +2455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Storage path prefix.</p>
-</dd><dt class="property-required"
+    <dd>Storage path prefix.</dd><dt class="property-required"
             title="Required">
         <span id="storageregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageregion_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Region</a>
@@ -1859,8 +2463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Storage region.</p>
-</dd><dt class="property-required"
+    <dd>Storage region.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1868,8 +2471,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Track Storage type, optional:- <code>cos</code>- <code>cls</code>.</p>
-</dd></dl>
+    <dd>Track Storage type, optional:- <code>cos</code>- <code>cls</code>- <code>ckafka</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_yaml" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Whether to compress. <code>1</code>: compress, <code>2</code>: do not compress.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageaccountid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageaccountid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Account<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Designated to store user ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storageappid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageappid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>App<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Designated to store user appid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1878,11 +2504,13 @@ The following state arguments are supported:
 
 
 audit track can be imported using the id, e.g.
-
 ```sh
-$ pulumi import tencentcloud:Audit/track:Track track track_id
+$ pulumi import tencentcloud:Audit/track:Track example 24283
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1894,7 +2522,6 @@ $ pulumi import tencentcloud:Audit/track:Track track track_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

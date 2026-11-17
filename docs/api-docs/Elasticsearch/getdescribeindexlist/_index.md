@@ -2,9 +2,11 @@
 ---
 title: "getDescribeIndexList"
 title_tag: "tencentcloud.Elasticsearch.getDescribeIndexList"
-meta_desc: "Documentation for the tencentcloud.Elasticsearch.getDescribeIndexList function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of elasticsearch index list"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query detailed information of elasticsearch index list
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const describeIndexList = tencentcloud.Elasticsearch.getDescribeIndexList({
+const describeIndexList = tencentcloud.elasticsearch.getDescribeIndexList({
     indexType: "normal",
     instanceId: "es-nni6pm4s",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-describe_index_list = tencentcloud.Elasticsearch.get_describe_index_list(index_type="normal",
+describe_index_list = tencentcloud.elasticsearch.get_describe_index_list(index_type="normal",
     instance_id="es-nni6pm4s")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := elasticsearch.GetDescribeIndexList(ctx, &elasticsearch.GetDescribeIndexListArgs{
+			IndexType:  "normal",
+			InstanceId: pulumi.StringRef("es-nni6pm4s"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Elasticsearch.GetDescribeIndexList(ctx, &elasticsearch.GetDescribeIndexListArgs{
-			IndexType:  "normal",
-			InstanceId: pulumi.StringRef("es-nni6pm4s"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Elasticsearch.ElasticsearchFunctions;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.GetDescribeIndexListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   describeIndexList:
     fn::invoke:
-      Function: tencentcloud:Elasticsearch:getDescribeIndexList
-      Arguments:
+      function: tencentcloud:Elasticsearch:getDescribeIndexList
+      arguments:
         indexType: normal
         instanceId: es-nni6pm4s
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_elasticsearch_getdescribeindexlist" "describeIndexList" {
+  index_type  = "normal"
+  instance_id = "es-nni6pm4s"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDescribeIndexList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDescribeIndexListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>></span
+><span class="k">function </span>getDescribeIndexList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDescribeIndexListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>></span
 ><span class="k">
-function </span>getDescribeIndexListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDescribeIndexListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>></span
+function </span>getDescribeIndexListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDescribeIndexListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -151,16 +209,16 @@ function </span>getDescribeIndexListOutput<span class="p">(</span><span class="n
                             <span class="nx">username</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDescribeIndexListResult</span
 ><span class="k">
-def </span>get_describe_index_list_output<span class="p">(</span><span class="nx">index_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">index_status_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                            <span class="nx">index_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">order</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">username</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDescribeIndexListResult]</span
+def </span>get_describe_index_list_output<span class="p">(</span><span class="nx">index_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">index_status_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                            <span class="nx">index_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">order</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">order_by</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">password</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">username</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDescribeIndexListResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -185,7 +243,8 @@ func </span>GetDescribeIndexListOutput<span class="p">(</span><span class="nx">c
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDescribeIndexList </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDescribeIndexListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDescribeIndexListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDescribeIndexListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDescribeIndexListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,7 +253,8 @@ func </span>GetDescribeIndexListOutput<span class="p">(</span><span class="nx">c
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>> </span>getDescribeIndexList<span class="p">(</span><span class="nx">GetDescribeIndexListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>> </span>getDescribeIndexList<span class="p">(</span><span class="nx">GetDescribeIndexListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDescribeIndexListResult</a></span>> </span>getDescribeIndexList<span class="p">(</span><span class="nx">GetDescribeIndexListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,6 +266,15 @@ func </span>GetDescribeIndexListOutput<span class="p">(</span><span class="nx">c
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_elasticsearch_get_describe_index_list&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -224,8 +293,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd><dt class="property-optional"
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Name</a>
@@ -233,8 +301,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-optional"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexstatuslists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Status<wbr>Lists</a>
@@ -242,8 +309,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Index status list.</p>
-</dd><dt class="property-optional"
+    <dd>Index status list.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -251,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ES cluster id.</p>
-</dd><dt class="property-optional"
+    <dd>ES cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_csharp" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -260,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort order, which supports asc and desc. The default is desc data format asc,desc.</p>
-</dd><dt class="property-optional"
+    <dd>Sort order, which supports asc and desc. The default is desc data format asc,desc.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -269,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</p>
-</dd><dt class="property-optional"
+    <dd>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -278,8 +341,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster access password.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster access password.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -287,8 +349,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -296,8 +357,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster access user name.</p>
-</dd></dl>
+    <dd>Cluster access user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd><dt class="property-optional"
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Name</a>
@@ -320,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-optional"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexstatuslists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Status<wbr>Lists</a>
@@ -329,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Index status list.</p>
-</dd><dt class="property-optional"
+    <dd>Index status list.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -338,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ES cluster id.</p>
-</dd><dt class="property-optional"
+    <dd>ES cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_go" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -347,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort order, which supports asc and desc. The default is desc data format asc,desc.</p>
-</dd><dt class="property-optional"
+    <dd>Sort order, which supports asc and desc. The default is desc data format asc,desc.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -356,8 +411,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</p>
-</dd><dt class="property-optional"
+    <dd>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -365,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster access password.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster access password.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -374,8 +427,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -383,8 +435,85 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster access user name.</p>
-</dd></dl>
+    <dd>Cluster access user name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="index_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_type_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="index_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_name_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="index_status_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_status_lists_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>status_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Index status list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ES cluster id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sort order, which supports asc and desc. The default is desc data format asc,desc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster access password.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="username_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_hcl" style="color: inherit; text-decoration: inherit;">username</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster access user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -398,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd><dt class="property-optional"
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_java" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -407,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-optional"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexstatuslists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_java" style="color: inherit; text-decoration: inherit;">index<wbr>Status<wbr>Lists</a>
@@ -416,8 +543,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Index status list.</p>
-</dd><dt class="property-optional"
+    <dd>Index status list.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -425,8 +551,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ES cluster id.</p>
-</dd><dt class="property-optional"
+    <dd>ES cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_java" style="color: inherit; text-decoration: inherit;">order</a>
@@ -434,8 +559,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sort order, which supports asc and desc. The default is desc data format asc,desc.</p>
-</dd><dt class="property-optional"
+    <dd>Sort order, which supports asc and desc. The default is desc data format asc,desc.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_java" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -443,8 +567,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</p>
-</dd><dt class="property-optional"
+    <dd>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -452,8 +575,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster access password.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster access password.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -461,8 +583,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">username</a>
@@ -470,8 +591,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster access user name.</p>
-</dd></dl>
+    <dd>Cluster access user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -485,8 +605,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd><dt class="property-optional"
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -494,8 +613,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-optional"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexstatuslists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Status<wbr>Lists</a>
@@ -503,8 +621,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Index status list.</p>
-</dd><dt class="property-optional"
+    <dd>Index status list.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -512,8 +629,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ES cluster id.</p>
-</dd><dt class="property-optional"
+    <dd>ES cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_nodejs" style="color: inherit; text-decoration: inherit;">order</a>
@@ -521,8 +637,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort order, which supports asc and desc. The default is desc data format asc,desc.</p>
-</dd><dt class="property-optional"
+    <dd>Sort order, which supports asc and desc. The default is desc data format asc,desc.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -530,8 +645,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</p>
-</dd><dt class="property-optional"
+    <dd>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -539,8 +653,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster access password.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster access password.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -548,8 +661,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">username</a>
@@ -557,8 +669,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster access user name.</p>
-</dd></dl>
+    <dd>Cluster access user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -572,8 +683,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd><dt class="property-optional"
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_name_python" style="color: inherit; text-decoration: inherit;">index_<wbr>name</a>
@@ -581,8 +691,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-optional"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_status_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_status_lists_python" style="color: inherit; text-decoration: inherit;">index_<wbr>status_<wbr>lists</a>
@@ -590,8 +699,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Index status list.</p>
-</dd><dt class="property-optional"
+    <dd>Index status list.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -599,8 +707,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ES cluster id.</p>
-</dd><dt class="property-optional"
+    <dd>ES cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_python" style="color: inherit; text-decoration: inherit;">order</a>
@@ -608,8 +715,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sort order, which supports asc and desc. The default is desc data format asc,desc.</p>
-</dd><dt class="property-optional"
+    <dd>Sort order, which supports asc and desc. The default is desc data format asc,desc.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
@@ -617,8 +723,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</p>
-</dd><dt class="property-optional"
+    <dd>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -626,8 +731,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster access password.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster access password.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -635,8 +739,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_python" style="color: inherit; text-decoration: inherit;">username</a>
@@ -644,8 +747,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster access user name.</p>
-</dd></dl>
+    <dd>Cluster access user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -659,8 +761,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd><dt class="property-optional"
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -668,8 +769,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-optional"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexstatuslists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Status<wbr>Lists</a>
@@ -677,8 +777,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Index status list.</p>
-</dd><dt class="property-optional"
+    <dd>Index status list.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -686,8 +785,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ES cluster id.</p>
-</dd><dt class="property-optional"
+    <dd>ES cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_yaml" style="color: inherit; text-decoration: inherit;">order</a>
@@ -695,8 +793,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sort order, which supports asc and desc. The default is desc data format asc,desc.</p>
-</dd><dt class="property-optional"
+    <dd>Sort order, which supports asc and desc. The default is desc data format asc,desc.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -704,8 +801,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</p>
-</dd><dt class="property-optional"
+    <dd>Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -713,8 +809,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster access password.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster access password.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -722,8 +817,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">username</a>
@@ -731,8 +825,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster access user name.</p>
-</dd></dl>
+    <dd>Cluster access user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -755,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="indexmetafields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetafields_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Meta<wbr>Fields</a>
@@ -764,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafield">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Outputs.<wbr>Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Index metadata field.</p>
-</dd><dt class="property-"
+    <dd>Index metadata field.</dd><dt class="property-"
             title="">
         <span id="indextype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Type</a>
@@ -773,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type.</p>
-</dd><dt class="property-"
+    <dd>Index type.</dd><dt class="property-"
             title="">
         <span id="indexname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Name</a>
@@ -782,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name.</p>
-</dd><dt class="property-"
+    <dd>Index name.</dd><dt class="property-"
             title="">
         <span id="indexstatuslists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Status<wbr>Lists</a>
@@ -853,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="indexmetafields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetafields_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Meta<wbr>Fields</a>
@@ -862,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafield">[]Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field</a></span>
     </dt>
-    <dd><p>Index metadata field.</p>
-</dd><dt class="property-"
+    <dd>Index metadata field.</dd><dt class="property-"
             title="">
         <span id="indextype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Type</a>
@@ -871,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type.</p>
-</dd><dt class="property-"
+    <dd>Index type.</dd><dt class="property-"
             title="">
         <span id="indexname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Name</a>
@@ -880,8 +966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name.</p>
-</dd><dt class="property-"
+    <dd>Index name.</dd><dt class="property-"
             title="">
         <span id="indexstatuslists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Status<wbr>Lists</a>
@@ -942,6 +1027,100 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="index_meta_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_meta_fields_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>meta_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafield">list(object)</a></span>
+    </dt>
+    <dd>Index metadata field.</dd><dt class="property-"
+            title="">
+        <span id="index_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_type_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index type.</dd><dt class="property-"
+            title="">
+        <span id="index_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_name_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index name.</dd><dt class="property-"
+            title="">
+        <span id="index_status_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_status_lists_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>status_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="username_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_hcl" style="color: inherit; text-decoration: inherit;">username</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -951,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="indexmetafields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetafields_java" style="color: inherit; text-decoration: inherit;">index<wbr>Meta<wbr>Fields</a>
@@ -960,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafield">List&lt;Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Index metadata field.</p>
-</dd><dt class="property-"
+    <dd>Index metadata field.</dd><dt class="property-"
             title="">
         <span id="indextype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_java" style="color: inherit; text-decoration: inherit;">index<wbr>Type</a>
@@ -969,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index type.</p>
-</dd><dt class="property-"
+    <dd>Index type.</dd><dt class="property-"
             title="">
         <span id="indexname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_java" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -978,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index name.</p>
-</dd><dt class="property-"
+    <dd>Index name.</dd><dt class="property-"
             title="">
         <span id="indexstatuslists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_java" style="color: inherit; text-decoration: inherit;">index<wbr>Status<wbr>Lists</a>
@@ -1049,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="indexmetafields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetafields_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Meta<wbr>Fields</a>
@@ -1058,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafield">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field[]</a></span>
     </dt>
-    <dd><p>Index metadata field.</p>
-</dd><dt class="property-"
+    <dd>Index metadata field.</dd><dt class="property-"
             title="">
         <span id="indextype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Type</a>
@@ -1067,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type.</p>
-</dd><dt class="property-"
+    <dd>Index type.</dd><dt class="property-"
             title="">
         <span id="indexname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -1076,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name.</p>
-</dd><dt class="property-"
+    <dd>Index name.</dd><dt class="property-"
             title="">
         <span id="indexstatuslists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Status<wbr>Lists</a>
@@ -1147,17 +1318,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="index_meta_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_meta_fields_python" style="color: inherit; text-decoration: inherit;">index_<wbr>meta_<wbr>fields</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdescribeindexlistindexmetafield">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field]</a></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafield">Sequence[Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field]</a></span>
     </dt>
-    <dd><p>Index metadata field.</p>
-</dd><dt class="property-"
+    <dd>Index metadata field.</dd><dt class="property-"
             title="">
         <span id="index_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_type_python" style="color: inherit; text-decoration: inherit;">index_<wbr>type</a>
@@ -1165,8 +1334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index type.</p>
-</dd><dt class="property-"
+    <dd>Index type.</dd><dt class="property-"
             title="">
         <span id="index_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_name_python" style="color: inherit; text-decoration: inherit;">index_<wbr>name</a>
@@ -1174,8 +1342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index name.</p>
-</dd><dt class="property-"
+    <dd>Index name.</dd><dt class="property-"
             title="">
         <span id="index_status_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_status_lists_python" style="color: inherit; text-decoration: inherit;">index_<wbr>status_<wbr>lists</a>
@@ -1245,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="indexmetafields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetafields_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Meta<wbr>Fields</a>
@@ -1254,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafield">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Index metadata field.</p>
-</dd><dt class="property-"
+    <dd>Index metadata field.</dd><dt class="property-"
             title="">
         <span id="indextype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Type</a>
@@ -1263,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index type.</p>
-</dd><dt class="property-"
+    <dd>Index type.</dd><dt class="property-"
             title="">
         <span id="indexname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -1272,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index name.</p>
-</dd><dt class="property-"
+    <dd>Index name.</dd><dt class="property-"
             title="">
         <span id="indexstatuslists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatuslists_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Status<wbr>Lists</a>
@@ -1353,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>App id.</p>
-</dd><dt class="property-required"
+    <dd>App id.</dd><dt class="property-required"
             title="Required">
         <span id="backingindices_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backingindices_csharp" style="color: inherit; text-decoration: inherit;">Backing<wbr>Indices</a>
@@ -1362,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldbackingindex">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Backing<wbr>Index&gt;</a></span>
     </dt>
-    <dd><p>Backing indices.</p>
-</dd><dt class="property-required"
+    <dd>Backing indices.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1371,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1380,8 +1540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -1389,8 +1548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster version.</p>
-</dd><dt class="property-required"
+    <dd>Cluster version.</dd><dt class="property-required"
             title="Required">
         <span id="indexcreatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexcreatetime_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Create<wbr>Time</a>
@@ -1398,8 +1556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocs_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Docs</a>
@@ -1407,8 +1564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of indexed documents.</p>
-</dd><dt class="property-required"
+    <dd>Number of indexed documents.</dd><dt class="property-required"
             title="Required">
         <span id="indexmetajson_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetajson_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Meta<wbr>Json</a>
@@ -1416,8 +1572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index meta json.</p>
-</dd><dt class="property-required"
+    <dd>Index meta json.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Name</a>
@@ -1425,8 +1580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexoptionsfields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexoptionsfields_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Options<wbr>Fields</a>
@@ -1434,8 +1588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexoptionsfield">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Options<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Index options field.</p>
-</dd><dt class="property-required"
+    <dd>Index options field.</dd><dt class="property-required"
             title="Required">
         <span id="indexpolicyfields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexpolicyfields_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Policy<wbr>Fields</a>
@@ -1443,8 +1596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexpolicyfield">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Policy<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Index lifecycle field.</p>
-</dd><dt class="property-required"
+    <dd>Index lifecycle field.</dd><dt class="property-required"
             title="Required">
         <span id="indexsettingsfields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexsettingsfields_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Settings<wbr>Fields</a>
@@ -1452,8 +1604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexsettingsfield">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Settings<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Index settings field.</p>
-</dd><dt class="property-required"
+    <dd>Index settings field.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Status</a>
@@ -1461,8 +1612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Storage</a>
@@ -1470,8 +1620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd><dt class="property-required"
+    <dd>Index storage.</dd><dt class="property-required"
             title="Required">
         <span id="indextype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Type</a>
@@ -1479,8 +1628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd></dl>
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1494,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>App id.</p>
-</dd><dt class="property-required"
+    <dd>App id.</dd><dt class="property-required"
             title="Required">
         <span id="backingindices_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backingindices_go" style="color: inherit; text-decoration: inherit;">Backing<wbr>Indices</a>
@@ -1503,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldbackingindex">[]Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Backing<wbr>Index</a></span>
     </dt>
-    <dd><p>Backing indices.</p>
-</dd><dt class="property-required"
+    <dd>Backing indices.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1512,8 +1658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1521,8 +1666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -1530,8 +1674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster version.</p>
-</dd><dt class="property-required"
+    <dd>Cluster version.</dd><dt class="property-required"
             title="Required">
         <span id="indexcreatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexcreatetime_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Create<wbr>Time</a>
@@ -1539,8 +1682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocs_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Docs</a>
@@ -1548,8 +1690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of indexed documents.</p>
-</dd><dt class="property-required"
+    <dd>Number of indexed documents.</dd><dt class="property-required"
             title="Required">
         <span id="indexmetajson_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetajson_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Meta<wbr>Json</a>
@@ -1557,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index meta json.</p>
-</dd><dt class="property-required"
+    <dd>Index meta json.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Name</a>
@@ -1566,8 +1706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexoptionsfields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexoptionsfields_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Options<wbr>Fields</a>
@@ -1575,8 +1714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexoptionsfield">[]Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Options<wbr>Field</a></span>
     </dt>
-    <dd><p>Index options field.</p>
-</dd><dt class="property-required"
+    <dd>Index options field.</dd><dt class="property-required"
             title="Required">
         <span id="indexpolicyfields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexpolicyfields_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Policy<wbr>Fields</a>
@@ -1584,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexpolicyfield">[]Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Policy<wbr>Field</a></span>
     </dt>
-    <dd><p>Index lifecycle field.</p>
-</dd><dt class="property-required"
+    <dd>Index lifecycle field.</dd><dt class="property-required"
             title="Required">
         <span id="indexsettingsfields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexsettingsfields_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Settings<wbr>Fields</a>
@@ -1593,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexsettingsfield">[]Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Settings<wbr>Field</a></span>
     </dt>
-    <dd><p>Index settings field.</p>
-</dd><dt class="property-required"
+    <dd>Index settings field.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Status</a>
@@ -1602,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Storage</a>
@@ -1611,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd><dt class="property-required"
+    <dd>Index storage.</dd><dt class="property-required"
             title="Required">
         <span id="indextype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Type</a>
@@ -1620,8 +1754,133 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd></dl>
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_id_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>App id.</dd><dt class="property-required"
+            title="Required">
+        <span id="backing_indices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backing_indices_hcl" style="color: inherit; text-decoration: inherit;">backing_<wbr>indices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldbackingindex">list(object)</a></span>
+    </dt>
+    <dd>Backing indices.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster id.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_version_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster version.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_create_time_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_docs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_docs_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>docs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of indexed documents.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_meta_json_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_meta_json_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>meta_<wbr>json</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index meta json.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_name_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_options_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_options_fields_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>options_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexoptionsfield">list(object)</a></span>
+    </dt>
+    <dd>Index options field.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_policy_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_policy_fields_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>policy_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexpolicyfield">list(object)</a></span>
+    </dt>
+    <dd>Index lifecycle field.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_settings_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_settings_fields_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>settings_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexsettingsfield">list(object)</a></span>
+    </dt>
+    <dd>Index settings field.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_status_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index status.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_storage_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Index storage.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_type_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1635,8 +1894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>App id.</p>
-</dd><dt class="property-required"
+    <dd>App id.</dd><dt class="property-required"
             title="Required">
         <span id="backingindices_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backingindices_java" style="color: inherit; text-decoration: inherit;">backing<wbr>Indices</a>
@@ -1644,8 +1902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldbackingindex">List&lt;Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Backing<wbr>Index&gt;</a></span>
     </dt>
-    <dd><p>Backing indices.</p>
-</dd><dt class="property-required"
+    <dd>Backing indices.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1653,8 +1910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1662,8 +1918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -1671,8 +1926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster version.</p>
-</dd><dt class="property-required"
+    <dd>Cluster version.</dd><dt class="property-required"
             title="Required">
         <span id="indexcreatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexcreatetime_java" style="color: inherit; text-decoration: inherit;">index<wbr>Create<wbr>Time</a>
@@ -1680,8 +1934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocs_java" style="color: inherit; text-decoration: inherit;">index<wbr>Docs</a>
@@ -1689,8 +1942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of indexed documents.</p>
-</dd><dt class="property-required"
+    <dd>Number of indexed documents.</dd><dt class="property-required"
             title="Required">
         <span id="indexmetajson_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetajson_java" style="color: inherit; text-decoration: inherit;">index<wbr>Meta<wbr>Json</a>
@@ -1698,8 +1950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index meta json.</p>
-</dd><dt class="property-required"
+    <dd>Index meta json.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_java" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -1707,8 +1958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexoptionsfields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexoptionsfields_java" style="color: inherit; text-decoration: inherit;">index<wbr>Options<wbr>Fields</a>
@@ -1716,8 +1966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexoptionsfield">List&lt;Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Options<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Index options field.</p>
-</dd><dt class="property-required"
+    <dd>Index options field.</dd><dt class="property-required"
             title="Required">
         <span id="indexpolicyfields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexpolicyfields_java" style="color: inherit; text-decoration: inherit;">index<wbr>Policy<wbr>Fields</a>
@@ -1725,8 +1974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexpolicyfield">List&lt;Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Policy<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Index lifecycle field.</p>
-</dd><dt class="property-required"
+    <dd>Index lifecycle field.</dd><dt class="property-required"
             title="Required">
         <span id="indexsettingsfields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexsettingsfields_java" style="color: inherit; text-decoration: inherit;">index<wbr>Settings<wbr>Fields</a>
@@ -1734,8 +1982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexsettingsfield">List&lt;Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Settings<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Index settings field.</p>
-</dd><dt class="property-required"
+    <dd>Index settings field.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_java" style="color: inherit; text-decoration: inherit;">index<wbr>Status</a>
@@ -1743,8 +1990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_java" style="color: inherit; text-decoration: inherit;">index<wbr>Storage</a>
@@ -1752,8 +1998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd><dt class="property-required"
+    <dd>Index storage.</dd><dt class="property-required"
             title="Required">
         <span id="indextype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_java" style="color: inherit; text-decoration: inherit;">index<wbr>Type</a>
@@ -1761,8 +2006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd></dl>
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1776,8 +2020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>App id.</p>
-</dd><dt class="property-required"
+    <dd>App id.</dd><dt class="property-required"
             title="Required">
         <span id="backingindices_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backingindices_nodejs" style="color: inherit; text-decoration: inherit;">backing<wbr>Indices</a>
@@ -1785,8 +2028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldbackingindex">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Backing<wbr>Index[]</a></span>
     </dt>
-    <dd><p>Backing indices.</p>
-</dd><dt class="property-required"
+    <dd>Backing indices.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1794,8 +2036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1803,8 +2044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -1812,8 +2052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster version.</p>
-</dd><dt class="property-required"
+    <dd>Cluster version.</dd><dt class="property-required"
             title="Required">
         <span id="indexcreatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexcreatetime_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Create<wbr>Time</a>
@@ -1821,8 +2060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocs_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Docs</a>
@@ -1830,8 +2068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of indexed documents.</p>
-</dd><dt class="property-required"
+    <dd>Number of indexed documents.</dd><dt class="property-required"
             title="Required">
         <span id="indexmetajson_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetajson_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Meta<wbr>Json</a>
@@ -1839,8 +2076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index meta json.</p>
-</dd><dt class="property-required"
+    <dd>Index meta json.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -1848,8 +2084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexoptionsfields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexoptionsfields_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Options<wbr>Fields</a>
@@ -1857,8 +2092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexoptionsfield">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Options<wbr>Field[]</a></span>
     </dt>
-    <dd><p>Index options field.</p>
-</dd><dt class="property-required"
+    <dd>Index options field.</dd><dt class="property-required"
             title="Required">
         <span id="indexpolicyfields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexpolicyfields_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Policy<wbr>Fields</a>
@@ -1866,8 +2100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexpolicyfield">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Policy<wbr>Field[]</a></span>
     </dt>
-    <dd><p>Index lifecycle field.</p>
-</dd><dt class="property-required"
+    <dd>Index lifecycle field.</dd><dt class="property-required"
             title="Required">
         <span id="indexsettingsfields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexsettingsfields_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Settings<wbr>Fields</a>
@@ -1875,8 +2108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexsettingsfield">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Settings<wbr>Field[]</a></span>
     </dt>
-    <dd><p>Index settings field.</p>
-</dd><dt class="property-required"
+    <dd>Index settings field.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Status</a>
@@ -1884,8 +2116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Storage</a>
@@ -1893,8 +2124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd><dt class="property-required"
+    <dd>Index storage.</dd><dt class="property-required"
             title="Required">
         <span id="indextype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Type</a>
@@ -1902,8 +2132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd></dl>
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1917,17 +2146,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>App id.</p>
-</dd><dt class="property-required"
+    <dd>App id.</dd><dt class="property-required"
             title="Required">
         <span id="backing_indices_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backing_indices_python" style="color: inherit; text-decoration: inherit;">backing_<wbr>indices</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldbackingindex">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Backing<wbr>Index]</a></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldbackingindex">Sequence[Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Backing<wbr>Index]</a></span>
     </dt>
-    <dd><p>Backing indices.</p>
-</dd><dt class="property-required"
+    <dd>Backing indices.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1935,8 +2162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -1944,8 +2170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_version_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
@@ -1953,8 +2178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster version.</p>
-</dd><dt class="property-required"
+    <dd>Cluster version.</dd><dt class="property-required"
             title="Required">
         <span id="index_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_create_time_python" style="color: inherit; text-decoration: inherit;">index_<wbr>create_<wbr>time</a>
@@ -1962,8 +2186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="index_docs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_docs_python" style="color: inherit; text-decoration: inherit;">index_<wbr>docs</a>
@@ -1971,8 +2194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of indexed documents.</p>
-</dd><dt class="property-required"
+    <dd>Number of indexed documents.</dd><dt class="property-required"
             title="Required">
         <span id="index_meta_json_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_meta_json_python" style="color: inherit; text-decoration: inherit;">index_<wbr>meta_<wbr>json</a>
@@ -1980,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index meta json.</p>
-</dd><dt class="property-required"
+    <dd>Index meta json.</dd><dt class="property-required"
             title="Required">
         <span id="index_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_name_python" style="color: inherit; text-decoration: inherit;">index_<wbr>name</a>
@@ -1989,35 +2210,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="index_options_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_options_fields_python" style="color: inherit; text-decoration: inherit;">index_<wbr>options_<wbr>fields</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexoptionsfield">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Options<wbr>Field]</a></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexoptionsfield">Sequence[Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Options<wbr>Field]</a></span>
     </dt>
-    <dd><p>Index options field.</p>
-</dd><dt class="property-required"
+    <dd>Index options field.</dd><dt class="property-required"
             title="Required">
         <span id="index_policy_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_policy_fields_python" style="color: inherit; text-decoration: inherit;">index_<wbr>policy_<wbr>fields</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexpolicyfield">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Policy<wbr>Field]</a></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexpolicyfield">Sequence[Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Policy<wbr>Field]</a></span>
     </dt>
-    <dd><p>Index lifecycle field.</p>
-</dd><dt class="property-required"
+    <dd>Index lifecycle field.</dd><dt class="property-required"
             title="Required">
         <span id="index_settings_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_settings_fields_python" style="color: inherit; text-decoration: inherit;">index_<wbr>settings_<wbr>fields</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexsettingsfield">Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Settings<wbr>Field]</a></span>
+        <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexsettingsfield">Sequence[Get<wbr>Describe<wbr>Index<wbr>List<wbr>Index<wbr>Meta<wbr>Field<wbr>Index<wbr>Settings<wbr>Field]</a></span>
     </dt>
-    <dd><p>Index settings field.</p>
-</dd><dt class="property-required"
+    <dd>Index settings field.</dd><dt class="property-required"
             title="Required">
         <span id="index_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_status_python" style="color: inherit; text-decoration: inherit;">index_<wbr>status</a>
@@ -2025,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="index_storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_storage_python" style="color: inherit; text-decoration: inherit;">index_<wbr>storage</a>
@@ -2034,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd><dt class="property-required"
+    <dd>Index storage.</dd><dt class="property-required"
             title="Required">
         <span id="index_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_type_python" style="color: inherit; text-decoration: inherit;">index_<wbr>type</a>
@@ -2043,8 +2258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd></dl>
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2058,8 +2272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>App id.</p>
-</dd><dt class="property-required"
+    <dd>App id.</dd><dt class="property-required"
             title="Required">
         <span id="backingindices_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backingindices_yaml" style="color: inherit; text-decoration: inherit;">backing<wbr>Indices</a>
@@ -2067,8 +2280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldbackingindex">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Backing indices.</p>
-</dd><dt class="property-required"
+    <dd>Backing indices.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2076,8 +2288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -2085,8 +2296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -2094,8 +2304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster version.</p>
-</dd><dt class="property-required"
+    <dd>Cluster version.</dd><dt class="property-required"
             title="Required">
         <span id="indexcreatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexcreatetime_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Create<wbr>Time</a>
@@ -2103,8 +2312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexdocs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexdocs_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Docs</a>
@@ -2112,8 +2320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of indexed documents.</p>
-</dd><dt class="property-required"
+    <dd>Number of indexed documents.</dd><dt class="property-required"
             title="Required">
         <span id="indexmetajson_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexmetajson_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Meta<wbr>Json</a>
@@ -2121,8 +2328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index meta json.</p>
-</dd><dt class="property-required"
+    <dd>Index meta json.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -2130,8 +2336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexoptionsfields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexoptionsfields_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Options<wbr>Fields</a>
@@ -2139,8 +2344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexoptionsfield">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Index options field.</p>
-</dd><dt class="property-required"
+    <dd>Index options field.</dd><dt class="property-required"
             title="Required">
         <span id="indexpolicyfields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexpolicyfields_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Policy<wbr>Fields</a>
@@ -2148,8 +2352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexpolicyfield">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Index lifecycle field.</p>
-</dd><dt class="property-required"
+    <dd>Index lifecycle field.</dd><dt class="property-required"
             title="Required">
         <span id="indexsettingsfields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexsettingsfields_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Settings<wbr>Fields</a>
@@ -2157,8 +2360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdescribeindexlistindexmetafieldindexsettingsfield">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Index settings field.</p>
-</dd><dt class="property-required"
+    <dd>Index settings field.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Status</a>
@@ -2166,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Storage</a>
@@ -2175,8 +2376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd><dt class="property-required"
+    <dd>Index storage.</dd><dt class="property-required"
             title="Required">
         <span id="indextype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indextype_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Type</a>
@@ -2184,8 +2384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</p>
-</dd></dl>
+    <dd>Index type. <code>auto</code>: Autonomous index; <code>normal</code>: General index.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2203,8 +2402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Name</a>
@@ -2212,8 +2410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexphrase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexphrase_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Phrase</a>
@@ -2221,8 +2418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index phrase.</p>
-</dd><dt class="property-required"
+    <dd>Index phrase.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Status</a>
@@ -2230,8 +2426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Storage</a>
@@ -2239,8 +2434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd></dl>
+    <dd>Index storage.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2254,8 +2448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Name</a>
@@ -2263,8 +2456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexphrase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexphrase_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Phrase</a>
@@ -2272,8 +2464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index phrase.</p>
-</dd><dt class="property-required"
+    <dd>Index phrase.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Status</a>
@@ -2281,8 +2472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Storage</a>
@@ -2290,8 +2480,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd></dl>
+    <dd>Index storage.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="index_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_create_time_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_name_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_phrase_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_phrase_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>phrase</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index phrase.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_status_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index status.</dd><dt class="property-required"
+            title="Required">
+        <span id="index_storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_storage_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Index storage.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2305,8 +2540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_java" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -2314,8 +2548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexphrase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexphrase_java" style="color: inherit; text-decoration: inherit;">index<wbr>Phrase</a>
@@ -2323,8 +2556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index phrase.</p>
-</dd><dt class="property-required"
+    <dd>Index phrase.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_java" style="color: inherit; text-decoration: inherit;">index<wbr>Status</a>
@@ -2332,8 +2564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_java" style="color: inherit; text-decoration: inherit;">index<wbr>Storage</a>
@@ -2341,8 +2572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd></dl>
+    <dd>Index storage.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2356,8 +2586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -2365,8 +2594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexphrase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexphrase_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Phrase</a>
@@ -2374,8 +2602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index phrase.</p>
-</dd><dt class="property-required"
+    <dd>Index phrase.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Status</a>
@@ -2383,8 +2610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Storage</a>
@@ -2392,8 +2618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd></dl>
+    <dd>Index storage.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2407,8 +2632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="index_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_name_python" style="color: inherit; text-decoration: inherit;">index_<wbr>name</a>
@@ -2416,8 +2640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="index_phrase_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_phrase_python" style="color: inherit; text-decoration: inherit;">index_<wbr>phrase</a>
@@ -2425,8 +2648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index phrase.</p>
-</dd><dt class="property-required"
+    <dd>Index phrase.</dd><dt class="property-required"
             title="Required">
         <span id="index_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_status_python" style="color: inherit; text-decoration: inherit;">index_<wbr>status</a>
@@ -2434,8 +2656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="index_storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_storage_python" style="color: inherit; text-decoration: inherit;">index_<wbr>storage</a>
@@ -2443,8 +2664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd></dl>
+    <dd>Index storage.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2458,8 +2678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index create time.</p>
-</dd><dt class="property-required"
+    <dd>Index create time.</dd><dt class="property-required"
             title="Required">
         <span id="indexname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexname_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Name</a>
@@ -2467,8 +2686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index name. If you fill in the blanks, get all indexes.</p>
-</dd><dt class="property-required"
+    <dd>Index name. If you fill in the blanks, get all indexes.</dd><dt class="property-required"
             title="Required">
         <span id="indexphrase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexphrase_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Phrase</a>
@@ -2476,8 +2694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index phrase.</p>
-</dd><dt class="property-required"
+    <dd>Index phrase.</dd><dt class="property-required"
             title="Required">
         <span id="indexstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstatus_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Status</a>
@@ -2485,8 +2702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index status.</p>
-</dd><dt class="property-required"
+    <dd>Index status.</dd><dt class="property-required"
             title="Required">
         <span id="indexstorage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexstorage_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Storage</a>
@@ -2494,8 +2710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Index storage.</p>
-</dd></dl>
+    <dd>Index storage.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2513,8 +2728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire max age.</p>
-</dd><dt class="property-required"
+    <dd>Expire max age.</dd><dt class="property-required"
             title="Required">
         <span id="expiremaxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiremaxsize_csharp" style="color: inherit; text-decoration: inherit;">Expire<wbr>Max<wbr>Size</a>
@@ -2522,8 +2736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire max size.</p>
-</dd><dt class="property-required"
+    <dd>Expire max size.</dd><dt class="property-required"
             title="Required">
         <span id="rolloverdynamic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolloverdynamic_csharp" style="color: inherit; text-decoration: inherit;">Rollover<wbr>Dynamic</a>
@@ -2531,8 +2744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to turn on dynamic scrolling.</p>
-</dd><dt class="property-required"
+    <dd>Whether to turn on dynamic scrolling.</dd><dt class="property-required"
             title="Required">
         <span id="rollovermaxage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollovermaxage_csharp" style="color: inherit; text-decoration: inherit;">Rollover<wbr>Max<wbr>Age</a>
@@ -2540,8 +2752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rollover max age.</p>
-</dd><dt class="property-required"
+    <dd>Rollover max age.</dd><dt class="property-required"
             title="Required">
         <span id="shardnumdynamic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardnumdynamic_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Num<wbr>Dynamic</a>
@@ -2549,8 +2760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable dynamic slicing.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable dynamic slicing.</dd><dt class="property-required"
             title="Required">
         <span id="timestampfield_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestampfield_csharp" style="color: inherit; text-decoration: inherit;">Timestamp<wbr>Field</a>
@@ -2558,8 +2768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time partition field.</p>
-</dd><dt class="property-required"
+    <dd>Time partition field.</dd><dt class="property-required"
             title="Required">
         <span id="writemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#writemode_csharp" style="color: inherit; text-decoration: inherit;">Write<wbr>Mode</a>
@@ -2567,8 +2776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Write mode.</p>
-</dd></dl>
+    <dd>Write mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2582,8 +2790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire max age.</p>
-</dd><dt class="property-required"
+    <dd>Expire max age.</dd><dt class="property-required"
             title="Required">
         <span id="expiremaxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiremaxsize_go" style="color: inherit; text-decoration: inherit;">Expire<wbr>Max<wbr>Size</a>
@@ -2591,8 +2798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire max size.</p>
-</dd><dt class="property-required"
+    <dd>Expire max size.</dd><dt class="property-required"
             title="Required">
         <span id="rolloverdynamic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolloverdynamic_go" style="color: inherit; text-decoration: inherit;">Rollover<wbr>Dynamic</a>
@@ -2600,8 +2806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to turn on dynamic scrolling.</p>
-</dd><dt class="property-required"
+    <dd>Whether to turn on dynamic scrolling.</dd><dt class="property-required"
             title="Required">
         <span id="rollovermaxage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollovermaxage_go" style="color: inherit; text-decoration: inherit;">Rollover<wbr>Max<wbr>Age</a>
@@ -2609,8 +2814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rollover max age.</p>
-</dd><dt class="property-required"
+    <dd>Rollover max age.</dd><dt class="property-required"
             title="Required">
         <span id="shardnumdynamic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardnumdynamic_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Num<wbr>Dynamic</a>
@@ -2618,8 +2822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable dynamic slicing.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable dynamic slicing.</dd><dt class="property-required"
             title="Required">
         <span id="timestampfield_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestampfield_go" style="color: inherit; text-decoration: inherit;">Timestamp<wbr>Field</a>
@@ -2627,8 +2830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time partition field.</p>
-</dd><dt class="property-required"
+    <dd>Time partition field.</dd><dt class="property-required"
             title="Required">
         <span id="writemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#writemode_go" style="color: inherit; text-decoration: inherit;">Write<wbr>Mode</a>
@@ -2636,8 +2838,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Write mode.</p>
-</dd></dl>
+    <dd>Write mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="expire_max_age_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_max_age_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>max_<wbr>age</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expire max age.</dd><dt class="property-required"
+            title="Required">
+        <span id="expire_max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_max_size_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expire max size.</dd><dt class="property-required"
+            title="Required">
+        <span id="rollover_dynamic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollover_dynamic_hcl" style="color: inherit; text-decoration: inherit;">rollover_<wbr>dynamic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to turn on dynamic scrolling.</dd><dt class="property-required"
+            title="Required">
+        <span id="rollover_max_age_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollover_max_age_hcl" style="color: inherit; text-decoration: inherit;">rollover_<wbr>max_<wbr>age</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rollover max age.</dd><dt class="property-required"
+            title="Required">
+        <span id="shard_num_dynamic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_num_dynamic_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>num_<wbr>dynamic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable dynamic slicing.</dd><dt class="property-required"
+            title="Required">
+        <span id="timestamp_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_field_hcl" style="color: inherit; text-decoration: inherit;">timestamp_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time partition field.</dd><dt class="property-required"
+            title="Required">
+        <span id="write_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#write_mode_hcl" style="color: inherit; text-decoration: inherit;">write_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Write mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2651,8 +2914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expire max age.</p>
-</dd><dt class="property-required"
+    <dd>Expire max age.</dd><dt class="property-required"
             title="Required">
         <span id="expiremaxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiremaxsize_java" style="color: inherit; text-decoration: inherit;">expire<wbr>Max<wbr>Size</a>
@@ -2660,8 +2922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expire max size.</p>
-</dd><dt class="property-required"
+    <dd>Expire max size.</dd><dt class="property-required"
             title="Required">
         <span id="rolloverdynamic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolloverdynamic_java" style="color: inherit; text-decoration: inherit;">rollover<wbr>Dynamic</a>
@@ -2669,8 +2930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to turn on dynamic scrolling.</p>
-</dd><dt class="property-required"
+    <dd>Whether to turn on dynamic scrolling.</dd><dt class="property-required"
             title="Required">
         <span id="rollovermaxage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollovermaxage_java" style="color: inherit; text-decoration: inherit;">rollover<wbr>Max<wbr>Age</a>
@@ -2678,8 +2938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rollover max age.</p>
-</dd><dt class="property-required"
+    <dd>Rollover max age.</dd><dt class="property-required"
             title="Required">
         <span id="shardnumdynamic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardnumdynamic_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Num<wbr>Dynamic</a>
@@ -2687,8 +2946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable dynamic slicing.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable dynamic slicing.</dd><dt class="property-required"
             title="Required">
         <span id="timestampfield_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestampfield_java" style="color: inherit; text-decoration: inherit;">timestamp<wbr>Field</a>
@@ -2696,8 +2954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time partition field.</p>
-</dd><dt class="property-required"
+    <dd>Time partition field.</dd><dt class="property-required"
             title="Required">
         <span id="writemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#writemode_java" style="color: inherit; text-decoration: inherit;">write<wbr>Mode</a>
@@ -2705,8 +2962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Write mode.</p>
-</dd></dl>
+    <dd>Write mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2720,8 +2976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire max age.</p>
-</dd><dt class="property-required"
+    <dd>Expire max age.</dd><dt class="property-required"
             title="Required">
         <span id="expiremaxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiremaxsize_nodejs" style="color: inherit; text-decoration: inherit;">expire<wbr>Max<wbr>Size</a>
@@ -2729,8 +2984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire max size.</p>
-</dd><dt class="property-required"
+    <dd>Expire max size.</dd><dt class="property-required"
             title="Required">
         <span id="rolloverdynamic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolloverdynamic_nodejs" style="color: inherit; text-decoration: inherit;">rollover<wbr>Dynamic</a>
@@ -2738,8 +2992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to turn on dynamic scrolling.</p>
-</dd><dt class="property-required"
+    <dd>Whether to turn on dynamic scrolling.</dd><dt class="property-required"
             title="Required">
         <span id="rollovermaxage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollovermaxage_nodejs" style="color: inherit; text-decoration: inherit;">rollover<wbr>Max<wbr>Age</a>
@@ -2747,8 +3000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rollover max age.</p>
-</dd><dt class="property-required"
+    <dd>Rollover max age.</dd><dt class="property-required"
             title="Required">
         <span id="shardnumdynamic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardnumdynamic_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Num<wbr>Dynamic</a>
@@ -2756,8 +3008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable dynamic slicing.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable dynamic slicing.</dd><dt class="property-required"
             title="Required">
         <span id="timestampfield_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestampfield_nodejs" style="color: inherit; text-decoration: inherit;">timestamp<wbr>Field</a>
@@ -2765,8 +3016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time partition field.</p>
-</dd><dt class="property-required"
+    <dd>Time partition field.</dd><dt class="property-required"
             title="Required">
         <span id="writemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#writemode_nodejs" style="color: inherit; text-decoration: inherit;">write<wbr>Mode</a>
@@ -2774,8 +3024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Write mode.</p>
-</dd></dl>
+    <dd>Write mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2789,8 +3038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expire max age.</p>
-</dd><dt class="property-required"
+    <dd>Expire max age.</dd><dt class="property-required"
             title="Required">
         <span id="expire_max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_max_size_python" style="color: inherit; text-decoration: inherit;">expire_<wbr>max_<wbr>size</a>
@@ -2798,8 +3046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expire max size.</p>
-</dd><dt class="property-required"
+    <dd>Expire max size.</dd><dt class="property-required"
             title="Required">
         <span id="rollover_dynamic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollover_dynamic_python" style="color: inherit; text-decoration: inherit;">rollover_<wbr>dynamic</a>
@@ -2807,8 +3054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to turn on dynamic scrolling.</p>
-</dd><dt class="property-required"
+    <dd>Whether to turn on dynamic scrolling.</dd><dt class="property-required"
             title="Required">
         <span id="rollover_max_age_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollover_max_age_python" style="color: inherit; text-decoration: inherit;">rollover_<wbr>max_<wbr>age</a>
@@ -2816,8 +3062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rollover max age.</p>
-</dd><dt class="property-required"
+    <dd>Rollover max age.</dd><dt class="property-required"
             title="Required">
         <span id="shard_num_dynamic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_num_dynamic_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>num_<wbr>dynamic</a>
@@ -2825,8 +3070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable dynamic slicing.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable dynamic slicing.</dd><dt class="property-required"
             title="Required">
         <span id="timestamp_field_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_field_python" style="color: inherit; text-decoration: inherit;">timestamp_<wbr>field</a>
@@ -2834,8 +3078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time partition field.</p>
-</dd><dt class="property-required"
+    <dd>Time partition field.</dd><dt class="property-required"
             title="Required">
         <span id="write_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#write_mode_python" style="color: inherit; text-decoration: inherit;">write_<wbr>mode</a>
@@ -2843,8 +3086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Write mode.</p>
-</dd></dl>
+    <dd>Write mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2858,8 +3100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expire max age.</p>
-</dd><dt class="property-required"
+    <dd>Expire max age.</dd><dt class="property-required"
             title="Required">
         <span id="expiremaxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiremaxsize_yaml" style="color: inherit; text-decoration: inherit;">expire<wbr>Max<wbr>Size</a>
@@ -2867,8 +3108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expire max size.</p>
-</dd><dt class="property-required"
+    <dd>Expire max size.</dd><dt class="property-required"
             title="Required">
         <span id="rolloverdynamic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolloverdynamic_yaml" style="color: inherit; text-decoration: inherit;">rollover<wbr>Dynamic</a>
@@ -2876,8 +3116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to turn on dynamic scrolling.</p>
-</dd><dt class="property-required"
+    <dd>Whether to turn on dynamic scrolling.</dd><dt class="property-required"
             title="Required">
         <span id="rollovermaxage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rollovermaxage_yaml" style="color: inherit; text-decoration: inherit;">rollover<wbr>Max<wbr>Age</a>
@@ -2885,8 +3124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rollover max age.</p>
-</dd><dt class="property-required"
+    <dd>Rollover max age.</dd><dt class="property-required"
             title="Required">
         <span id="shardnumdynamic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardnumdynamic_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Num<wbr>Dynamic</a>
@@ -2894,8 +3132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable dynamic slicing.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable dynamic slicing.</dd><dt class="property-required"
             title="Required">
         <span id="timestampfield_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestampfield_yaml" style="color: inherit; text-decoration: inherit;">timestamp<wbr>Field</a>
@@ -2903,8 +3140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time partition field.</p>
-</dd><dt class="property-required"
+    <dd>Time partition field.</dd><dt class="property-required"
             title="Required">
         <span id="writemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#writemode_yaml" style="color: inherit; text-decoration: inherit;">write<wbr>Mode</a>
@@ -2912,8 +3148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Write mode.</p>
-</dd></dl>
+    <dd>Write mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2931,8 +3166,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cold action.</p>
-</dd><dt class="property-required"
+    <dd>Cold action.</dd><dt class="property-required"
             title="Required">
         <span id="coldenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldenable_csharp" style="color: inherit; text-decoration: inherit;">Cold<wbr>Enable</a>
@@ -2940,8 +3174,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the cold phase.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the cold phase.</dd><dt class="property-required"
             title="Required">
         <span id="coldminage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldminage_csharp" style="color: inherit; text-decoration: inherit;">Cold<wbr>Min<wbr>Age</a>
@@ -2949,8 +3182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cold phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Cold phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="frozenenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenenable_csharp" style="color: inherit; text-decoration: inherit;">Frozen<wbr>Enable</a>
@@ -2958,8 +3190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start frozen phase.</p>
-</dd><dt class="property-required"
+    <dd>Start frozen phase.</dd><dt class="property-required"
             title="Required">
         <span id="frozenminage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenminage_csharp" style="color: inherit; text-decoration: inherit;">Frozen<wbr>Min<wbr>Age</a>
@@ -2967,8 +3198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Frozen phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Frozen phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="warmenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmenable_csharp" style="color: inherit; text-decoration: inherit;">Warm<wbr>Enable</a>
@@ -2976,8 +3206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable warm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable warm.</dd><dt class="property-required"
             title="Required">
         <span id="warmminage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmminage_csharp" style="color: inherit; text-decoration: inherit;">Warm<wbr>Min<wbr>Age</a>
@@ -2985,8 +3214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Warm phase transition time.</p>
-</dd></dl>
+    <dd>Warm phase transition time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3000,8 +3228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cold action.</p>
-</dd><dt class="property-required"
+    <dd>Cold action.</dd><dt class="property-required"
             title="Required">
         <span id="coldenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldenable_go" style="color: inherit; text-decoration: inherit;">Cold<wbr>Enable</a>
@@ -3009,8 +3236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the cold phase.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the cold phase.</dd><dt class="property-required"
             title="Required">
         <span id="coldminage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldminage_go" style="color: inherit; text-decoration: inherit;">Cold<wbr>Min<wbr>Age</a>
@@ -3018,8 +3244,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cold phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Cold phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="frozenenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenenable_go" style="color: inherit; text-decoration: inherit;">Frozen<wbr>Enable</a>
@@ -3027,8 +3252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start frozen phase.</p>
-</dd><dt class="property-required"
+    <dd>Start frozen phase.</dd><dt class="property-required"
             title="Required">
         <span id="frozenminage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenminage_go" style="color: inherit; text-decoration: inherit;">Frozen<wbr>Min<wbr>Age</a>
@@ -3036,8 +3260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Frozen phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Frozen phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="warmenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmenable_go" style="color: inherit; text-decoration: inherit;">Warm<wbr>Enable</a>
@@ -3045,8 +3268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable warm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable warm.</dd><dt class="property-required"
             title="Required">
         <span id="warmminage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmminage_go" style="color: inherit; text-decoration: inherit;">Warm<wbr>Min<wbr>Age</a>
@@ -3054,8 +3276,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Warm phase transition time.</p>
-</dd></dl>
+    <dd>Warm phase transition time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cold_action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cold_action_hcl" style="color: inherit; text-decoration: inherit;">cold_<wbr>action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cold action.</dd><dt class="property-required"
+            title="Required">
+        <span id="cold_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cold_enable_hcl" style="color: inherit; text-decoration: inherit;">cold_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable the cold phase.</dd><dt class="property-required"
+            title="Required">
+        <span id="cold_min_age_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cold_min_age_hcl" style="color: inherit; text-decoration: inherit;">cold_<wbr>min_<wbr>age</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cold phase transition time.</dd><dt class="property-required"
+            title="Required">
+        <span id="frozen_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozen_enable_hcl" style="color: inherit; text-decoration: inherit;">frozen_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start frozen phase.</dd><dt class="property-required"
+            title="Required">
+        <span id="frozen_min_age_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozen_min_age_hcl" style="color: inherit; text-decoration: inherit;">frozen_<wbr>min_<wbr>age</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Frozen phase transition time.</dd><dt class="property-required"
+            title="Required">
+        <span id="warm_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warm_enable_hcl" style="color: inherit; text-decoration: inherit;">warm_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable warm.</dd><dt class="property-required"
+            title="Required">
+        <span id="warm_min_age_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warm_min_age_hcl" style="color: inherit; text-decoration: inherit;">warm_<wbr>min_<wbr>age</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Warm phase transition time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3069,8 +3352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cold action.</p>
-</dd><dt class="property-required"
+    <dd>Cold action.</dd><dt class="property-required"
             title="Required">
         <span id="coldenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldenable_java" style="color: inherit; text-decoration: inherit;">cold<wbr>Enable</a>
@@ -3078,8 +3360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the cold phase.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the cold phase.</dd><dt class="property-required"
             title="Required">
         <span id="coldminage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldminage_java" style="color: inherit; text-decoration: inherit;">cold<wbr>Min<wbr>Age</a>
@@ -3087,8 +3368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cold phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Cold phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="frozenenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenenable_java" style="color: inherit; text-decoration: inherit;">frozen<wbr>Enable</a>
@@ -3096,8 +3376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start frozen phase.</p>
-</dd><dt class="property-required"
+    <dd>Start frozen phase.</dd><dt class="property-required"
             title="Required">
         <span id="frozenminage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenminage_java" style="color: inherit; text-decoration: inherit;">frozen<wbr>Min<wbr>Age</a>
@@ -3105,8 +3384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Frozen phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Frozen phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="warmenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmenable_java" style="color: inherit; text-decoration: inherit;">warm<wbr>Enable</a>
@@ -3114,8 +3392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable warm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable warm.</dd><dt class="property-required"
             title="Required">
         <span id="warmminage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmminage_java" style="color: inherit; text-decoration: inherit;">warm<wbr>Min<wbr>Age</a>
@@ -3123,8 +3400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Warm phase transition time.</p>
-</dd></dl>
+    <dd>Warm phase transition time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3138,8 +3414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cold action.</p>
-</dd><dt class="property-required"
+    <dd>Cold action.</dd><dt class="property-required"
             title="Required">
         <span id="coldenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldenable_nodejs" style="color: inherit; text-decoration: inherit;">cold<wbr>Enable</a>
@@ -3147,8 +3422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the cold phase.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the cold phase.</dd><dt class="property-required"
             title="Required">
         <span id="coldminage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldminage_nodejs" style="color: inherit; text-decoration: inherit;">cold<wbr>Min<wbr>Age</a>
@@ -3156,8 +3430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cold phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Cold phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="frozenenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenenable_nodejs" style="color: inherit; text-decoration: inherit;">frozen<wbr>Enable</a>
@@ -3165,8 +3438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start frozen phase.</p>
-</dd><dt class="property-required"
+    <dd>Start frozen phase.</dd><dt class="property-required"
             title="Required">
         <span id="frozenminage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenminage_nodejs" style="color: inherit; text-decoration: inherit;">frozen<wbr>Min<wbr>Age</a>
@@ -3174,8 +3446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Frozen phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Frozen phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="warmenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmenable_nodejs" style="color: inherit; text-decoration: inherit;">warm<wbr>Enable</a>
@@ -3183,8 +3454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable warm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable warm.</dd><dt class="property-required"
             title="Required">
         <span id="warmminage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmminage_nodejs" style="color: inherit; text-decoration: inherit;">warm<wbr>Min<wbr>Age</a>
@@ -3192,8 +3462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Warm phase transition time.</p>
-</dd></dl>
+    <dd>Warm phase transition time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3207,8 +3476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cold action.</p>
-</dd><dt class="property-required"
+    <dd>Cold action.</dd><dt class="property-required"
             title="Required">
         <span id="cold_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cold_enable_python" style="color: inherit; text-decoration: inherit;">cold_<wbr>enable</a>
@@ -3216,8 +3484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable the cold phase.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the cold phase.</dd><dt class="property-required"
             title="Required">
         <span id="cold_min_age_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cold_min_age_python" style="color: inherit; text-decoration: inherit;">cold_<wbr>min_<wbr>age</a>
@@ -3225,8 +3492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cold phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Cold phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="frozen_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozen_enable_python" style="color: inherit; text-decoration: inherit;">frozen_<wbr>enable</a>
@@ -3234,8 +3500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start frozen phase.</p>
-</dd><dt class="property-required"
+    <dd>Start frozen phase.</dd><dt class="property-required"
             title="Required">
         <span id="frozen_min_age_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozen_min_age_python" style="color: inherit; text-decoration: inherit;">frozen_<wbr>min_<wbr>age</a>
@@ -3243,8 +3508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Frozen phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Frozen phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="warm_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warm_enable_python" style="color: inherit; text-decoration: inherit;">warm_<wbr>enable</a>
@@ -3252,8 +3516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable warm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable warm.</dd><dt class="property-required"
             title="Required">
         <span id="warm_min_age_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warm_min_age_python" style="color: inherit; text-decoration: inherit;">warm_<wbr>min_<wbr>age</a>
@@ -3261,8 +3524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Warm phase transition time.</p>
-</dd></dl>
+    <dd>Warm phase transition time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3276,8 +3538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cold action.</p>
-</dd><dt class="property-required"
+    <dd>Cold action.</dd><dt class="property-required"
             title="Required">
         <span id="coldenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldenable_yaml" style="color: inherit; text-decoration: inherit;">cold<wbr>Enable</a>
@@ -3285,8 +3546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the cold phase.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the cold phase.</dd><dt class="property-required"
             title="Required">
         <span id="coldminage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coldminage_yaml" style="color: inherit; text-decoration: inherit;">cold<wbr>Min<wbr>Age</a>
@@ -3294,8 +3554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cold phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Cold phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="frozenenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenenable_yaml" style="color: inherit; text-decoration: inherit;">frozen<wbr>Enable</a>
@@ -3303,8 +3562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start frozen phase.</p>
-</dd><dt class="property-required"
+    <dd>Start frozen phase.</dd><dt class="property-required"
             title="Required">
         <span id="frozenminage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frozenminage_yaml" style="color: inherit; text-decoration: inherit;">frozen<wbr>Min<wbr>Age</a>
@@ -3312,8 +3570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Frozen phase transition time.</p>
-</dd><dt class="property-required"
+    <dd>Frozen phase transition time.</dd><dt class="property-required"
             title="Required">
         <span id="warmenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmenable_yaml" style="color: inherit; text-decoration: inherit;">warm<wbr>Enable</a>
@@ -3321,8 +3578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable warm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable warm.</dd><dt class="property-required"
             title="Required">
         <span id="warmminage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warmminage_yaml" style="color: inherit; text-decoration: inherit;">warm<wbr>Min<wbr>Age</a>
@@ -3330,8 +3586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Warm phase transition time.</p>
-</dd></dl>
+    <dd>Warm phase transition time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3349,8 +3604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Number of index copy fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index copy fragments.</dd><dt class="property-required"
             title="Required">
         <span id="numberofshards_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofshards_csharp" style="color: inherit; text-decoration: inherit;">Number<wbr>Of<wbr>Shards</a>
@@ -3358,8 +3612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Number of index main fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index main fragments.</dd><dt class="property-required"
             title="Required">
         <span id="refreshinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#refreshinterval_csharp" style="color: inherit; text-decoration: inherit;">Refresh<wbr>Interval</a>
@@ -3367,8 +3620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index refresh frequency.</p>
-</dd></dl>
+    <dd>Index refresh frequency.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3382,8 +3634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Number of index copy fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index copy fragments.</dd><dt class="property-required"
             title="Required">
         <span id="numberofshards_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofshards_go" style="color: inherit; text-decoration: inherit;">Number<wbr>Of<wbr>Shards</a>
@@ -3391,8 +3642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Number of index main fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index main fragments.</dd><dt class="property-required"
             title="Required">
         <span id="refreshinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#refreshinterval_go" style="color: inherit; text-decoration: inherit;">Refresh<wbr>Interval</a>
@@ -3400,8 +3650,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index refresh frequency.</p>
-</dd></dl>
+    <dd>Index refresh frequency.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="number_of_replicas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_replicas_hcl" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>replicas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Number of index copy fragments.</dd><dt class="property-required"
+            title="Required">
+        <span id="number_of_shards_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_shards_hcl" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>shards</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Number of index main fragments.</dd><dt class="property-required"
+            title="Required">
+        <span id="refresh_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#refresh_interval_hcl" style="color: inherit; text-decoration: inherit;">refresh_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index refresh frequency.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3415,8 +3694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Number of index copy fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index copy fragments.</dd><dt class="property-required"
             title="Required">
         <span id="numberofshards_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofshards_java" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Shards</a>
@@ -3424,8 +3702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Number of index main fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index main fragments.</dd><dt class="property-required"
             title="Required">
         <span id="refreshinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#refreshinterval_java" style="color: inherit; text-decoration: inherit;">refresh<wbr>Interval</a>
@@ -3433,8 +3710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index refresh frequency.</p>
-</dd></dl>
+    <dd>Index refresh frequency.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3448,8 +3724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Number of index copy fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index copy fragments.</dd><dt class="property-required"
             title="Required">
         <span id="numberofshards_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofshards_nodejs" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Shards</a>
@@ -3457,8 +3732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Number of index main fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index main fragments.</dd><dt class="property-required"
             title="Required">
         <span id="refreshinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#refreshinterval_nodejs" style="color: inherit; text-decoration: inherit;">refresh<wbr>Interval</a>
@@ -3466,8 +3740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index refresh frequency.</p>
-</dd></dl>
+    <dd>Index refresh frequency.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3481,8 +3754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Number of index copy fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index copy fragments.</dd><dt class="property-required"
             title="Required">
         <span id="number_of_shards_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_shards_python" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>shards</a>
@@ -3490,8 +3762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Number of index main fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index main fragments.</dd><dt class="property-required"
             title="Required">
         <span id="refresh_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#refresh_interval_python" style="color: inherit; text-decoration: inherit;">refresh_<wbr>interval</a>
@@ -3499,8 +3770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index refresh frequency.</p>
-</dd></dl>
+    <dd>Index refresh frequency.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3514,8 +3784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Number of index copy fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index copy fragments.</dd><dt class="property-required"
             title="Required">
         <span id="numberofshards_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofshards_yaml" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Shards</a>
@@ -3523,8 +3792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Number of index main fragments.</p>
-</dd><dt class="property-required"
+    <dd>Number of index main fragments.</dd><dt class="property-required"
             title="Required">
         <span id="refreshinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#refreshinterval_yaml" style="color: inherit; text-decoration: inherit;">refresh<wbr>Interval</a>
@@ -3532,8 +3800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index refresh frequency.</p>
-</dd></dl>
+    <dd>Index refresh frequency.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3548,7 +3815,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "AuthenticateDomainOwnerOperation"
 title_tag: "tencentcloud.Css.AuthenticateDomainOwnerOperation"
-meta_desc: "Documentation for the tencentcloud.Css.AuthenticateDomainOwnerOperation resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,7 +20,12 @@ Provides a resource to verify the domain ownership by specified way when DomainN
 
 ### dnsCheck way:
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -28,6 +35,11 @@ const dnsCheck = new tencentcloud.css.AuthenticateDomainOwnerOperation("dnsCheck
     verifyType: "dnsCheck",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -36,6 +48,37 @@ dns_check = tencentcloud.css.AuthenticateDomainOwnerOperation("dnsCheck",
     domain_name="your_domain_name",
     verify_type="dnsCheck")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/css"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := css.NewAuthenticateDomainOwnerOperation(ctx, "dnsCheck", &css.AuthenticateDomainOwnerOperationArgs{
+			DomainName: pulumi.String("your_domain_name"),
+			VerifyType: pulumi.String("dnsCheck"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -52,27 +95,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "dnsCheck", &Css.AuthenticateDomainOwnerOperationArgs{
-			DomainName: pulumi.String("your_domain_name"),
-			VerifyType: pulumi.String("dnsCheck"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -81,8 +108,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Css.AuthenticateDomainOwnerOperation;
 import com.pulumi.tencentcloud.Css.AuthenticateDomainOwnerOperationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,7 +121,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var dnsCheck = new AuthenticateDomainOwnerOperation("dnsCheck", AuthenticateDomainOwnerOperationArgs.builder()        
+        var dnsCheck = new AuthenticateDomainOwnerOperation("dnsCheck", AuthenticateDomainOwnerOperationArgs.builder()
             .domainName("your_domain_name")
             .verifyType("dnsCheck")
             .build());
@@ -102,6 +129,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   dnsCheck:
@@ -110,11 +142,37 @@ resources:
       domainName: your_domain_name
       verifyType: dnsCheck
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_css_authenticatedomainowneroperation" "dnsCheck" {
+  domain_name = "your_domain_name"
+  verify_type = "dnsCheck"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### fileCheck way:
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -124,6 +182,11 @@ const fileCheck = new tencentcloud.css.AuthenticateDomainOwnerOperation("fileChe
     verifyType: "fileCheck",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -132,6 +195,37 @@ file_check = tencentcloud.css.AuthenticateDomainOwnerOperation("fileCheck",
     domain_name="your_domain_name",
     verify_type="fileCheck")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/css"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := css.NewAuthenticateDomainOwnerOperation(ctx, "fileCheck", &css.AuthenticateDomainOwnerOperationArgs{
+			DomainName: pulumi.String("your_domain_name"),
+			VerifyType: pulumi.String("fileCheck"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -148,27 +242,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "fileCheck", &Css.AuthenticateDomainOwnerOperationArgs{
-			DomainName: pulumi.String("your_domain_name"),
-			VerifyType: pulumi.String("fileCheck"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -177,8 +255,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Css.AuthenticateDomainOwnerOperation;
 import com.pulumi.tencentcloud.Css.AuthenticateDomainOwnerOperationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -190,7 +268,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fileCheck = new AuthenticateDomainOwnerOperation("fileCheck", AuthenticateDomainOwnerOperationArgs.builder()        
+        var fileCheck = new AuthenticateDomainOwnerOperation("fileCheck", AuthenticateDomainOwnerOperationArgs.builder()
             .domainName("your_domain_name")
             .verifyType("fileCheck")
             .build());
@@ -198,6 +276,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fileCheck:
@@ -206,67 +289,108 @@ resources:
       domainName: your_domain_name
       verifyType: fileCheck
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_css_authenticatedomainowneroperation" "fileCheck" {
+  domain_name = "your_domain_name"
+  verify_type = "fileCheck"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [AuthenticateDomainOwner](https://www.tencentcloud.com/document/api/267/50612)
 
 
 
 ## Create AuthenticateDomainOwnerOperation Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p">,</span>
+                                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                                      <span class="nx">domain_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                                     <span class="nx">verify_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p">,</span>
-                                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                                     <span class="nx">verify_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AuthenticateDomainOwnerOperation</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AuthenticateDomainOwnerOperation</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AuthenticateDomainOwnerOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Css:AuthenticateDomainOwnerOperation</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Css:AuthenticateDomainOwnerOperation</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_css_authenticate_domain_owner_operation&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -287,7 +411,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -404,11 +528,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## AuthenticateDomainOwnerOperation Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The AuthenticateDomainOwnerOperation resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -424,8 +556,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="verifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_csharp" style="color: inherit; text-decoration: inherit;">Verify<wbr>Type</a>
@@ -433,8 +564,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -448,8 +578,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="verifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_go" style="color: inherit; text-decoration: inherit;">Verify<wbr>Type</a>
@@ -457,8 +586,29 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_name_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="verify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_type_hcl" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -472,8 +622,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="verifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_java" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -481,8 +630,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -496,8 +644,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="verifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_nodejs" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -505,8 +652,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -520,8 +666,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="verify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_type_python" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
@@ -529,8 +674,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -544,8 +688,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="verifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_yaml" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -553,8 +696,7 @@ The AuthenticateDomainOwnerOperation resource accepts the following [input](/doc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -575,8 +717,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -590,8 +731,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +759,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -620,8 +773,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -635,8 +787,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -650,8 +801,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -661,121 +811,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing AuthenticateDomainOwnerOperation resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AuthenticateDomainOwnerOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">AuthenticateDomainOwnerOperation</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AuthenticateDomainOwnerOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">AuthenticateDomainOwnerOperation</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">domain_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">verify_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> AuthenticateDomainOwnerOperation</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAuthenticateDomainOwnerOperation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AuthenticateDomainOwnerOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AuthenticateDomainOwnerOperation</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAuthenticateDomainOwnerOperation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AuthenticateDomainOwnerOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AuthenticateDomainOwnerOperation</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AuthenticateDomainOwnerOperationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AuthenticateDomainOwnerOperationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AuthenticateDomainOwnerOperationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">AuthenticateDomainOwnerOperation</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AuthenticateDomainOwnerOperationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAuthenticateDomainOwnerOperation</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Css:AuthenticateDomainOwnerOperation</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_css_authenticate_domain_owner_operation</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AuthenticateDomainOwnerOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AuthenticateDomainOwnerOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -783,28 +972,31 @@ Get an existing AuthenticateDomainOwnerOperation resource's state with the given
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AuthenticateDomainOwnerOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -812,28 +1004,31 @@ Get an existing AuthenticateDomainOwnerOperation resource's state with the given
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AuthenticateDomainOwnerOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -853,8 +1048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_verifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_verifytype_csharp" style="color: inherit; text-decoration: inherit;">Verify<wbr>Type</a>
@@ -862,8 +1056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -877,8 +1070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_verifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_verifytype_go" style="color: inherit; text-decoration: inherit;">Verify<wbr>Type</a>
@@ -886,8 +1078,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_name_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_verify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_verify_type_hcl" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -901,8 +1114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_verifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_verifytype_java" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -910,8 +1122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -925,8 +1136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_verifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_verifytype_nodejs" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -934,8 +1144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -949,8 +1158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_verify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_verify_type_python" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
@@ -958,8 +1166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -973,8 +1180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain name to verify.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The domain name to verify.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_verifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_verifytype_yaml" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -982,8 +1188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</p>
-</dd></dl>
+    <dd>Authentication type. Possible values:<code>dnsCheck</code>: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.<code>fileCheck</code>: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.<code>dbCheck</code>: Check if authentication has been successful.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1002,7 +1207,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

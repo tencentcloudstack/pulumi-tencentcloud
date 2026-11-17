@@ -2,9 +2,11 @@
 ---
 title: "getProxyGroups"
 title_tag: "tencentcloud.Gaap.getProxyGroups"
-meta_desc: "Documentation for the tencentcloud.Gaap.getProxyGroups function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap proxy groups"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,39 +18,88 @@ Use this data source to query detailed information of gaap proxy groups
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const proxyGroups = tencentcloud.Gaap.getProxyGroups({
+const proxyGroups = tencentcloud.gaap.getProxyGroups({
+    projectId: 0,
     filters: [{
         name: "GroupId",
         values: ["lg-2foz7wjh"],
     }],
-    projectId: 0,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-proxy_groups = tencentcloud.Gaap.get_proxy_groups(filters=[tencentcloud.gaap.GetProxyGroupsFilterArgs(
-        name="GroupId",
-        values=["lg-2foz7wjh"],
-    )],
-    project_id=0)
+proxy_groups = tencentcloud.gaap.get_proxy_groups(project_id=0,
+    filters=[{
+        "name": "GroupId",
+        "values": ["lg-2foz7wjh"],
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetProxyGroups(ctx, &gaap.GetProxyGroupsArgs{
+			ProjectId: 0,
+			Filters: []gaap.GetProxyGroupsFilter{
+				{
+					Name: "GroupId",
+					Values: []string{
+						"lg-2foz7wjh",
+					},
+				},
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var proxyGroups = Tencentcloud.Gaap.GetProxyGroups.Invoke(new()
     {
+        ProjectId = 0,
         Filters = new[]
         {
             new Tencentcloud.Gaap.Inputs.GetProxyGroupsFilterInputArgs
@@ -60,39 +111,15 @@ return await Deployment.RunAsync(() =>
                 },
             },
         },
-        ProjectId = 0,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetProxyGroups(ctx, &gaap.GetProxyGroupsArgs{
-			Filters: []gaap.GetProxyGroupsFilter{
-				{
-					Name: "GroupId",
-					Values: []string{
-						"lg-2foz7wjh",
-					},
-				},
-			},
-			ProjectId: 0,
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -101,8 +128,9 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetProxyGroupsArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Gaap.inputs.GetProxyGroupsFilterArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -115,30 +143,64 @@ public class App {
 
     public static void stack(Context ctx) {
         final var proxyGroups = GaapFunctions.getProxyGroups(GetProxyGroupsArgs.builder()
+            .projectId(0)
             .filters(GetProxyGroupsFilterArgs.builder()
                 .name("GroupId")
                 .values("lg-2foz7wjh")
                 .build())
-            .projectId(0)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   proxyGroups:
     fn::invoke:
-      Function: tencentcloud:Gaap:getProxyGroups
-      Arguments:
+      function: tencentcloud:Gaap:getProxyGroups
+      arguments:
+        projectId: 0
         filters:
           - name: GroupId
             values:
               - lg-2foz7wjh
-        projectId: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getproxygroups" "proxyGroups" {
+  project_id = 0
+  filters {
+    name   = "GroupId"
+    values = ["lg-2foz7wjh"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
 
 
 
@@ -150,7 +212,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -158,9 +220,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProxyGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>></span
+><span class="k">function </span>getProxyGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>></span
 ><span class="k">
-function </span>getProxyGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>></span
+function </span>getProxyGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -169,17 +231,17 @@ function </span>getProxyGroupsOutput<span class="p">(</span><span class="nx">arg
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_proxy_groups<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_gaap.GetProxyGroupsFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_proxy_groups<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetProxyGroupsFilter]]</span> = None<span class="p">,</span>
                      <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">tag_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_gaap.GetProxyGroupsTagSet]]</span> = None<span class="p">,</span>
+                     <span class="nx">tag_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetProxyGroupsTagSet]]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProxyGroupsResult</span
 ><span class="k">
-def </span>get_proxy_groups_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_gaap.GetProxyGroupsFilterArgs]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">tag_sets</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_gaap.GetProxyGroupsTagSetArgs]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxyGroupsResult]</span
+def </span>get_proxy_groups_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetProxyGroupsFilterArgs]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">tag_sets</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetProxyGroupsTagSetArgs]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxyGroupsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -204,7 +266,8 @@ func </span>GetProxyGroupsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProxyGroups </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProxyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -213,7 +276,8 @@ func </span>GetProxyGroupsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>> </span>getProxyGroups<span class="p">(</span><span class="nx">GetProxyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>> </span>getProxyGroups<span class="p">(</span><span class="nx">GetProxyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxyGroupsResult</a></span>> </span>getProxyGroups<span class="p">(</span><span class="nx">GetProxyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -225,6 +289,15 @@ func </span>GetProxyGroupsOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getProxyGroups:getProxyGroups
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_proxy_groups&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -243,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -252,8 +324,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Proxy<wbr>Groups<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -261,8 +332,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Sets</a>
@@ -270,8 +340,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd></dl>
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -285,8 +354,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -294,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsfilter">[]Get<wbr>Proxy<wbr>Groups<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -303,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Sets</a>
@@ -312,8 +378,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">[]Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd></dl>
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxygroupsfilter">list(object)</a></span>
+    </dt>
+    <dd>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_sets_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxygroupstagset">list(object)</a></span>
+    </dt>
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -327,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -336,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsfilter">List&lt;Get<wbr>Proxy<wbr>Groups<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -345,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
@@ -354,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">List&lt;Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd></dl>
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -369,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -378,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsfilter">Get<wbr>Proxy<wbr>Groups<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
@@ -396,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd></dl>
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -411,17 +506,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxygroupsfilter">Get<wbr>Proxy<wbr>Groups<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getproxygroupsfilter">Sequence[Get<wbr>Proxy<wbr>Groups<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -429,17 +522,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_sets_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxygroupstagset">Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getproxygroupstagset">Sequence[Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set]</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd></dl>
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -453,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -462,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -471,8 +560,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
@@ -480,8 +568,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd></dl>
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -504,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -513,8 +599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-"
+    <dd>Project Id.</dd><dt class="property-"
             title="">
         <span id="proxygrouplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygrouplists_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Group<wbr>Lists</a>
@@ -522,8 +607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -547,8 +631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Tag Set.</p>
-</dd></dl>
+    <dd>Tag Set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -562,8 +645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -571,8 +653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-"
+    <dd>Project Id.</dd><dt class="property-"
             title="">
         <span id="proxygrouplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygrouplists_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Group<wbr>Lists</a>
@@ -580,8 +661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplist">[]Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List</a></span>
     </dt>
-    <dd><p>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -605,8 +685,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">[]Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set</a></span>
     </dt>
-    <dd><p>Tag Set.</p>
-</dd></dl>
+    <dd>Tag Set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project Id.</dd><dt class="property-"
+            title="">
+        <span id="proxy_group_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_group_lists_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>group_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxygroupsproxygrouplist">list(object)</a></span>
+    </dt>
+    <dd>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxygroupsfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tag_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_sets_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxygroupstagset">list(object)</a></span>
+    </dt>
+    <dd>Tag Set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -620,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -629,8 +761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-"
+    <dd>Project Id.</dd><dt class="property-"
             title="">
         <span id="proxygrouplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygrouplists_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Lists</a>
@@ -638,8 +769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplist">List&lt;Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -663,8 +793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">List&lt;Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Tag Set.</p>
-</dd></dl>
+    <dd>Tag Set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -678,8 +807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -687,8 +815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-"
+    <dd>Project Id.</dd><dt class="property-"
             title="">
         <span id="proxygrouplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygrouplists_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Lists</a>
@@ -696,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplist">Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -721,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Tag Set.</p>
-</dd></dl>
+    <dd>Tag Set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -736,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -745,23 +869,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-"
+    <dd>Project Id.</dd><dt class="property-"
             title="">
         <span id="proxy_group_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_group_lists_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>group_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxygroupsproxygrouplist">Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List]</a></span>
+        <span class="property-type"><a href="#getproxygroupsproxygrouplist">Sequence[Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List]</a></span>
     </dt>
-    <dd><p>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxygroupsfilter">Get<wbr>Proxy<wbr>Groups<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getproxygroupsfilter">Sequence[Get<wbr>Proxy<wbr>Groups<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -777,10 +899,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_sets_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxygroupstagset">Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getproxygroupstagset">Sequence[Get<wbr>Proxy<wbr>Groups<wbr>Tag<wbr>Set]</a></span>
     </dt>
-    <dd><p>Tag Set.</p>
-</dd></dl>
+    <dd>Tag Set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -794,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -803,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-"
+    <dd>Project Id.</dd><dt class="property-"
             title="">
         <span id="proxygrouplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygrouplists_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Lists</a>
@@ -812,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>List of proxy groups.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -837,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupstagset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Tag Set.</p>
-</dd></dl>
+    <dd>Tag Set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -862,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter conditions.</p>
-</dd><dt class="property-required"
+    <dd>Filter conditions.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -871,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>filtering value.</p>
-</dd></dl>
+    <dd>filtering value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -886,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter conditions.</p>
-</dd><dt class="property-required"
+    <dd>Filter conditions.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -895,8 +1009,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>filtering value.</p>
-</dd></dl>
+    <dd>filtering value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter conditions.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>filtering value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -910,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter conditions.</p>
-</dd><dt class="property-required"
+    <dd>Filter conditions.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -919,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>filtering value.</p>
-</dd></dl>
+    <dd>filtering value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -934,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter conditions.</p>
-</dd><dt class="property-required"
+    <dd>Filter conditions.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -943,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>filtering value.</p>
-</dd></dl>
+    <dd>filtering value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -958,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter conditions.</p>
-</dd><dt class="property-required"
+    <dd>Filter conditions.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -967,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>filtering value.</p>
-</dd></dl>
+    <dd>filtering value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -982,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter conditions.</p>
-</dd><dt class="property-required"
+    <dd>Filter conditions.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -991,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>filtering value.</p>
-</dd></dl>
+    <dd>filtering value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1010,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1019,8 +1145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_csharp" style="color: inherit; text-decoration: inherit;">Feature<wbr>Bitmap</a>
@@ -1028,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -1037,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group Id.</p>
-</dd><dt class="property-required"
+    <dd>proxy group Id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -1046,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="http3supported_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http3supported_csharp" style="color: inherit; text-decoration: inherit;">Http3Supported</a>
@@ -1055,8 +1177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1064,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-required"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-required"
             title="Required">
         <span id="proxytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Type</a>
@@ -1073,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregioninfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregioninfos_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region<wbr>Infos</a>
@@ -1082,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Real Server Region Info.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Region Info.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1091,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</p>
-</dd><dt class="property-required"
+    <dd>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</dd><dt class="property-required"
             title="Required">
         <span id="tagsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Sets</a>
@@ -1100,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplisttagset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd><dt class="property-required"
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd><dt class="property-required"
             title="Required">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1109,8 +1225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1124,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1133,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_go" style="color: inherit; text-decoration: inherit;">Feature<wbr>Bitmap</a>
@@ -1142,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -1151,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group Id.</p>
-</dd><dt class="property-required"
+    <dd>proxy group Id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -1160,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="http3supported_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http3supported_go" style="color: inherit; text-decoration: inherit;">Http3Supported</a>
@@ -1169,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1178,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-required"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-required"
             title="Required">
         <span id="proxytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Type</a>
@@ -1187,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregioninfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregioninfos_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region<wbr>Infos</a>
@@ -1196,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfo">[]Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info</a></span>
     </dt>
-    <dd><p>Real Server Region Info.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Region Info.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1205,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</p>
-</dd><dt class="property-required"
+    <dd>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</dd><dt class="property-required"
             title="Required">
         <span id="tagsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Sets</a>
@@ -1214,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplisttagset">[]Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Tag<wbr>Set</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd><dt class="property-required"
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd><dt class="property-required"
             title="Required">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1223,8 +1327,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="feature_bitmap_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#feature_bitmap_hcl" style="color: inherit; text-decoration: inherit;">feature_<wbr>bitmap</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>proxy group Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="http3_supported_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http3_supported_hcl" style="color: inherit; text-decoration: inherit;">http3_<wbr>supported</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_type_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_region_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_region_infos_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfo">list(object)</a></span>
+    </dt>
+    <dd>Real Server Region Info.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_sets_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxygroupsproxygrouplisttagset">list(object)</a></span>
+    </dt>
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1238,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1247,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_java" style="color: inherit; text-decoration: inherit;">feature<wbr>Bitmap</a>
@@ -1256,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1265,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy group Id.</p>
-</dd><dt class="property-required"
+    <dd>proxy group Id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_java" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1274,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="http3supported_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http3supported_java" style="color: inherit; text-decoration: inherit;">http3Supported</a>
@@ -1283,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1292,8 +1491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-required"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-required"
             title="Required">
         <span id="proxytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -1301,8 +1499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregioninfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregioninfos_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region<wbr>Infos</a>
@@ -1310,8 +1507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfo">List&lt;Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Real Server Region Info.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Region Info.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1319,8 +1515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</p>
-</dd><dt class="property-required"
+    <dd>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</dd><dt class="property-required"
             title="Required">
         <span id="tagsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
@@ -1328,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplisttagset">List&lt;Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd><dt class="property-required"
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd><dt class="property-required"
             title="Required">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1337,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1352,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1361,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_nodejs" style="color: inherit; text-decoration: inherit;">feature<wbr>Bitmap</a>
@@ -1370,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1379,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group Id.</p>
-</dd><dt class="property-required"
+    <dd>proxy group Id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1388,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="http3supported_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http3supported_nodejs" style="color: inherit; text-decoration: inherit;">http3Supported</a>
@@ -1397,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1406,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-required"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-required"
             title="Required">
         <span id="proxytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -1415,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregioninfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregioninfos_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region<wbr>Infos</a>
@@ -1424,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfo">Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Real Server Region Info.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Region Info.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1433,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</p>
-</dd><dt class="property-required"
+    <dd>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</dd><dt class="property-required"
             title="Required">
         <span id="tagsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
@@ -1442,8 +1625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplisttagset">Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Tag<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd><dt class="property-required"
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd><dt class="property-required"
             title="Required">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1451,8 +1633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1466,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1475,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="feature_bitmap_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#feature_bitmap_python" style="color: inherit; text-decoration: inherit;">feature_<wbr>bitmap</a>
@@ -1484,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -1493,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>proxy group Id.</p>
-</dd><dt class="property-required"
+    <dd>proxy group Id.</dd><dt class="property-required"
             title="Required">
         <span id="group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_python" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
@@ -1502,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="http3_supported_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http3_supported_python" style="color: inherit; text-decoration: inherit;">http3_<wbr>supported</a>
@@ -1511,8 +1687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1520,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-required"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_type_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>type</a>
@@ -1529,17 +1703,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_region_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_region_infos_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfo">Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfo">Sequence[Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info]</a></span>
     </dt>
-    <dd><p>Real Server Region Info.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Region Info.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1547,17 +1719,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</p>
-</dd><dt class="property-required"
+    <dd>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</dd><dt class="property-required"
             title="Required">
         <span id="tag_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_sets_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxygroupsproxygrouplisttagset">Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Tag<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getproxygroupsproxygrouplisttagset">Sequence[Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Tag<wbr>Set]</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd><dt class="property-required"
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd><dt class="property-required"
             title="Required">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1565,8 +1735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1580,8 +1749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1589,8 +1757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_yaml" style="color: inherit; text-decoration: inherit;">feature<wbr>Bitmap</a>
@@ -1598,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1607,8 +1773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy group Id.</p>
-</dd><dt class="property-required"
+    <dd>proxy group Id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1616,8 +1781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="http3supported_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http3supported_yaml" style="color: inherit; text-decoration: inherit;">http3Supported</a>
@@ -1625,8 +1789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1634,8 +1797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</p>
-</dd><dt class="property-required"
+    <dd>Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.</dd><dt class="property-required"
             title="Required">
         <span id="proxytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -1643,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregioninfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregioninfos_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region<wbr>Infos</a>
@@ -1652,8 +1813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Real Server Region Info.</p>
-</dd><dt class="property-required"
+    <dd>Real Server Region Info.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1661,8 +1821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</p>
-</dd><dt class="property-required"
+    <dd>proxy group status.Among them,'RUNNING' indicates running;'CREATING' indicates being created;'DESTROYING' indicates being destroyed;'MOVING' indicates that the proxy is being migrated;'CHANGING' indicates partial deployment.</dd><dt class="property-required"
             title="Required">
         <span id="tagsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
@@ -1670,8 +1829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplisttagset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</p>
-</dd><dt class="property-required"
+    <dd>Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.</dd><dt class="property-required"
             title="Required">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1679,8 +1837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1698,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_csharp" style="color: inherit; text-decoration: inherit;">Idc<wbr>Type</a>
@@ -1707,8 +1863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Area</a>
@@ -1716,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Area<wbr>Name</a>
@@ -1725,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -1734,8 +1887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Id.</p>
-</dd><dt class="property-required"
+    <dd>Region Id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -1743,8 +1895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Name.</p>
-</dd><dt class="property-required"
+    <dd>Region Name.</dd><dt class="property-required"
             title="Required">
         <span id="supportfeatures_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportfeatures_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Features</a>
@@ -1752,8 +1903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfosupportfeature">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info<wbr>Support<wbr>Feature&gt;</a></span>
     </dt>
-    <dd><p>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1767,8 +1917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_go" style="color: inherit; text-decoration: inherit;">Idc<wbr>Type</a>
@@ -1776,8 +1925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Area</a>
@@ -1785,8 +1933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Area<wbr>Name</a>
@@ -1794,8 +1941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -1803,8 +1949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Id.</p>
-</dd><dt class="property-required"
+    <dd>Region Id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -1812,8 +1957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Name.</p>
-</dd><dt class="property-required"
+    <dd>Region Name.</dd><dt class="property-required"
             title="Required">
         <span id="supportfeatures_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportfeatures_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Features</a>
@@ -1821,8 +1965,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfosupportfeature">[]Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info<wbr>Support<wbr>Feature</a></span>
     </dt>
-    <dd><p>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="feature_bitmap_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#feature_bitmap_hcl" style="color: inherit; text-decoration: inherit;">feature_<wbr>bitmap</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="idc_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idc_type_hcl" style="color: inherit; text-decoration: inherit;">idc_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_area_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the computer room.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_area_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_area_name_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>area_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region name of the computer room.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region Name.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_features_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_features_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>features</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfosupportfeature">list(object)</a></span>
+    </dt>
+    <dd>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1836,8 +2041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_java" style="color: inherit; text-decoration: inherit;">idc<wbr>Type</a>
@@ -1845,8 +2049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_java" style="color: inherit; text-decoration: inherit;">region<wbr>Area</a>
@@ -1854,8 +2057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_java" style="color: inherit; text-decoration: inherit;">region<wbr>Area<wbr>Name</a>
@@ -1863,8 +2065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_java" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1872,8 +2073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region Id.</p>
-</dd><dt class="property-required"
+    <dd>Region Id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_java" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -1881,8 +2081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region Name.</p>
-</dd><dt class="property-required"
+    <dd>Region Name.</dd><dt class="property-required"
             title="Required">
         <span id="supportfeatures_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportfeatures_java" style="color: inherit; text-decoration: inherit;">support<wbr>Features</a>
@@ -1890,8 +2089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfosupportfeature">List&lt;Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info<wbr>Support<wbr>Feature&gt;</a></span>
     </dt>
-    <dd><p>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1905,8 +2103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_nodejs" style="color: inherit; text-decoration: inherit;">idc<wbr>Type</a>
@@ -1914,8 +2111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Area</a>
@@ -1923,8 +2119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Area<wbr>Name</a>
@@ -1932,8 +2127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1941,8 +2135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Id.</p>
-</dd><dt class="property-required"
+    <dd>Region Id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -1950,8 +2143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Name.</p>
-</dd><dt class="property-required"
+    <dd>Region Name.</dd><dt class="property-required"
             title="Required">
         <span id="supportfeatures_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportfeatures_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Features</a>
@@ -1959,8 +2151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfosupportfeature">Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info<wbr>Support<wbr>Feature[]</a></span>
     </dt>
-    <dd><p>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1974,8 +2165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="idc_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idc_type_python" style="color: inherit; text-decoration: inherit;">idc_<wbr>type</a>
@@ -1983,8 +2173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="region_area_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_area_python" style="color: inherit; text-decoration: inherit;">region_<wbr>area</a>
@@ -1992,8 +2181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="region_area_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_area_name_python" style="color: inherit; text-decoration: inherit;">region_<wbr>area_<wbr>name</a>
@@ -2001,8 +2189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_python" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
@@ -2010,8 +2197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region Id.</p>
-</dd><dt class="property-required"
+    <dd>Region Id.</dd><dt class="property-required"
             title="Required">
         <span id="region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_python" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
@@ -2019,17 +2205,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region Name.</p>
-</dd><dt class="property-required"
+    <dd>Region Name.</dd><dt class="property-required"
             title="Required">
         <span id="support_features_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_features_python" style="color: inherit; text-decoration: inherit;">support_<wbr>features</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfosupportfeature">Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info<wbr>Support<wbr>Feature]</a></span>
+        <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfosupportfeature">Sequence[Get<wbr>Proxy<wbr>Groups<wbr>Proxy<wbr>Group<wbr>List<wbr>Real<wbr>Server<wbr>Region<wbr>Info<wbr>Support<wbr>Feature]</a></span>
     </dt>
-    <dd><p>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2043,8 +2227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_yaml" style="color: inherit; text-decoration: inherit;">idc<wbr>Type</a>
@@ -2052,8 +2235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where 'dc' represents the DataCenter data center and 'ec' represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Area</a>
@@ -2061,8 +2243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Area<wbr>Name</a>
@@ -2070,8 +2251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -2079,8 +2259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region Id.</p>
-</dd><dt class="property-required"
+    <dd>Region Id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -2088,8 +2267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region Name.</p>
-</dd><dt class="property-required"
+    <dd>Region Name.</dd><dt class="property-required"
             title="Required">
         <span id="supportfeatures_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportfeatures_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Features</a>
@@ -2097,8 +2275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxygroupsproxygrouplistrealserverregioninfosupportfeature">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2116,8 +2293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</p>
-</dd></dl>
+    <dd>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2131,8 +2307,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</p>
-</dd></dl>
+    <dd>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="network_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_types_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2146,8 +2335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</p>
-</dd></dl>
+    <dd>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2161,8 +2349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</p>
-</dd></dl>
+    <dd>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2176,8 +2363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</p>
-</dd></dl>
+    <dd>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2191,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</p>
-</dd></dl>
+    <dd>A list of network types supported by the access area, with 'normal' indicating support for regular BGP, 'cn2' indicating premium BGP, 'triple' indicating three networks, and 'secure_EIP' represents a custom secure EIP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2210,8 +2395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2219,8 +2403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2234,8 +2417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2243,8 +2425,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag Key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2258,8 +2461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2267,8 +2469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2282,8 +2483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2291,8 +2491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2306,8 +2505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -2315,8 +2513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2330,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2339,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2358,8 +2553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2367,8 +2561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2382,8 +2575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2391,8 +2583,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag Key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2406,8 +2619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2415,8 +2627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2430,8 +2641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2439,8 +2649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2454,8 +2663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -2463,8 +2671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2478,8 +2685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd><dt class="property-required"
+    <dd>Tag Key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2487,8 +2693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2503,7 +2708,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Connection"
 title_tag: "tencentcloud.Vpn.Connection"
-meta_desc: "Documentation for the tencentcloud.Vpn.Connection resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a VPN connection."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,70 +18,174 @@ Provides a resource to create a VPN connection.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.vpn.Connection("foo", {
-    customerGatewayId: "cgw-xfqag",
-    ikeDhGroupName: "GROUP2",
-    ikeExchangeMode: "AGGRESSIVE",
-    ikeLocalAddress: "1.1.1.1",
-    ikeLocalIdentity: "ADDRESS",
-    ikeProtoAuthenAlgorithm: "SHA",
+const example = new tencentcloud.vpn.Connection("example", {
+    name: "tf-example",
+    vpcId: "vpc-6ccw0s5l",
+    vpnGatewayId: "vpngw-33p5vnwd",
+    customerGatewayId: "cgw-e503id2z",
+    preShareKey: "your_pre_share_key",
+    routeType: "StaticRoute",
+    negotiationType: "flowTrigger",
     ikeProtoEncryAlgorithm: "3DES-CBC",
-    ikeRemoteAddress: "2.2.2.2",
+    ikeProtoAuthenAlgorithm: "SHA",
+    ikeLocalIdentity: "ADDRESS",
+    ikeExchangeMode: "AGGRESSIVE",
+    ikeLocalAddress: "159.75.204.38",
     ikeRemoteIdentity: "ADDRESS",
-    ikeSaLifetimeSeconds: 86401,
+    ikeRemoteAddress: "109.244.60.154",
+    ikeDhGroupName: "GROUP2",
+    ikeSaLifetimeSeconds: 86400,
     ipsecEncryptAlgorithm: "3DES-CBC",
     ipsecIntegrityAlgorithm: "SHA1",
+    ipsecSaLifetimeSeconds: 14400,
     ipsecPfsDhGroup: "NULL",
-    ipsecSaLifetimeSeconds: 7200,
-    ipsecSaLifetimeTraffic: 2570,
-    preShareKey: "testt",
+    ipsecSaLifetimeTraffic: 4096000000,
+    enableHealthCheck: true,
+    healthCheckLocalIp: "169.254.227.187",
+    healthCheckRemoteIp: "169.254.164.37",
+    healthCheckConfig: {
+        probeType: "NQA",
+        probeInterval: 5000,
+        probeThreshold: 3,
+        probeTimeout: 150,
+    },
     securityGroupPolicies: [{
         localCidrBlock: "172.16.0.0/16",
         remoteCidrBlocks: ["2.2.2.0/26"],
     }],
     tags: {
-        test: "testt",
+        createBy: "Terraform",
     },
-    vpcId: "vpc-dk8zmwuf",
-    vpnGatewayId: "vpngw-8ccsnclt",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.vpn.Connection("foo",
-    customer_gateway_id="cgw-xfqag",
-    ike_dh_group_name="GROUP2",
-    ike_exchange_mode="AGGRESSIVE",
-    ike_local_address="1.1.1.1",
-    ike_local_identity="ADDRESS",
-    ike_proto_authen_algorithm="SHA",
+example = tencentcloud.vpn.Connection("example",
+    name="tf-example",
+    vpc_id="vpc-6ccw0s5l",
+    vpn_gateway_id="vpngw-33p5vnwd",
+    customer_gateway_id="cgw-e503id2z",
+    pre_share_key="your_pre_share_key",
+    route_type="StaticRoute",
+    negotiation_type="flowTrigger",
     ike_proto_encry_algorithm="3DES-CBC",
-    ike_remote_address="2.2.2.2",
+    ike_proto_authen_algorithm="SHA",
+    ike_local_identity="ADDRESS",
+    ike_exchange_mode="AGGRESSIVE",
+    ike_local_address="159.75.204.38",
     ike_remote_identity="ADDRESS",
-    ike_sa_lifetime_seconds=86401,
+    ike_remote_address="109.244.60.154",
+    ike_dh_group_name="GROUP2",
+    ike_sa_lifetime_seconds=86400,
     ipsec_encrypt_algorithm="3DES-CBC",
     ipsec_integrity_algorithm="SHA1",
+    ipsec_sa_lifetime_seconds=14400,
     ipsec_pfs_dh_group="NULL",
-    ipsec_sa_lifetime_seconds=7200,
-    ipsec_sa_lifetime_traffic=2570,
-    pre_share_key="testt",
-    security_group_policies=[tencentcloud.vpn.ConnectionSecurityGroupPolicyArgs(
-        local_cidr_block="172.16.0.0/16",
-        remote_cidr_blocks=["2.2.2.0/26"],
-    )],
-    tags={
-        "test": "testt",
+    ipsec_sa_lifetime_traffic=int(4096000000),
+    enable_health_check=True,
+    health_check_local_ip="169.254.227.187",
+    health_check_remote_ip="169.254.164.37",
+    health_check_config={
+        "probe_type": "NQA",
+        "probe_interval": 5000,
+        "probe_threshold": 3,
+        "probe_timeout": 150,
     },
-    vpc_id="vpc-dk8zmwuf",
-    vpn_gateway_id="vpngw-8ccsnclt")
+    security_group_policies=[{
+        "local_cidr_block": "172.16.0.0/16",
+        "remote_cidr_blocks": ["2.2.2.0/26"],
+    }],
+    tags={
+        "createBy": "Terraform",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpn.NewConnection(ctx, "example", &vpn.ConnectionArgs{
+			Name:                    pulumi.String("tf-example"),
+			VpcId:                   pulumi.String("vpc-6ccw0s5l"),
+			VpnGatewayId:            pulumi.String("vpngw-33p5vnwd"),
+			CustomerGatewayId:       pulumi.String("cgw-e503id2z"),
+			PreShareKey:             pulumi.String("your_pre_share_key"),
+			RouteType:               pulumi.String("StaticRoute"),
+			NegotiationType:         pulumi.String("flowTrigger"),
+			IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
+			IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
+			IkeLocalIdentity:        pulumi.String("ADDRESS"),
+			IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
+			IkeLocalAddress:         pulumi.String("159.75.204.38"),
+			IkeRemoteIdentity:       pulumi.String("ADDRESS"),
+			IkeRemoteAddress:        pulumi.String("109.244.60.154"),
+			IkeDhGroupName:          pulumi.String("GROUP2"),
+			IkeSaLifetimeSeconds:    pulumi.Int(86400),
+			IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
+			IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
+			IpsecSaLifetimeSeconds:  pulumi.Int(14400),
+			IpsecPfsDhGroup:         pulumi.String("NULL"),
+			IpsecSaLifetimeTraffic:  pulumi.Int(4096000000),
+			EnableHealthCheck:       pulumi.Bool(true),
+			HealthCheckLocalIp:      pulumi.String("169.254.227.187"),
+			HealthCheckRemoteIp:     pulumi.String("169.254.164.37"),
+			HealthCheckConfig: &vpn.ConnectionHealthCheckConfigArgs{
+				ProbeType:      pulumi.String("NQA"),
+				ProbeInterval:  pulumi.Int(5000),
+				ProbeThreshold: pulumi.Int(3),
+				ProbeTimeout:   pulumi.Int(150),
+			},
+			SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
+				&vpn.ConnectionSecurityGroupPolicyArgs{
+					LocalCidrBlock: pulumi.String("172.16.0.0/16"),
+					RemoteCidrBlocks: pulumi.StringArray{
+						pulumi.String("2.2.2.0/26"),
+					},
+				},
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -88,24 +194,39 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var foo = new Tencentcloud.Vpn.Connection("foo", new()
+    var example = new Tencentcloud.Vpn.Connection("example", new()
     {
-        CustomerGatewayId = "cgw-xfqag",
-        IkeDhGroupName = "GROUP2",
-        IkeExchangeMode = "AGGRESSIVE",
-        IkeLocalAddress = "1.1.1.1",
-        IkeLocalIdentity = "ADDRESS",
-        IkeProtoAuthenAlgorithm = "SHA",
+        Name = "tf-example",
+        VpcId = "vpc-6ccw0s5l",
+        VpnGatewayId = "vpngw-33p5vnwd",
+        CustomerGatewayId = "cgw-e503id2z",
+        PreShareKey = "your_pre_share_key",
+        RouteType = "StaticRoute",
+        NegotiationType = "flowTrigger",
         IkeProtoEncryAlgorithm = "3DES-CBC",
-        IkeRemoteAddress = "2.2.2.2",
+        IkeProtoAuthenAlgorithm = "SHA",
+        IkeLocalIdentity = "ADDRESS",
+        IkeExchangeMode = "AGGRESSIVE",
+        IkeLocalAddress = "159.75.204.38",
         IkeRemoteIdentity = "ADDRESS",
-        IkeSaLifetimeSeconds = 86401,
+        IkeRemoteAddress = "109.244.60.154",
+        IkeDhGroupName = "GROUP2",
+        IkeSaLifetimeSeconds = 86400,
         IpsecEncryptAlgorithm = "3DES-CBC",
         IpsecIntegrityAlgorithm = "SHA1",
+        IpsecSaLifetimeSeconds = 14400,
         IpsecPfsDhGroup = "NULL",
-        IpsecSaLifetimeSeconds = 7200,
-        IpsecSaLifetimeTraffic = 2570,
-        PreShareKey = "testt",
+        IpsecSaLifetimeTraffic = 4096000000,
+        EnableHealthCheck = true,
+        HealthCheckLocalIp = "169.254.227.187",
+        HealthCheckRemoteIp = "169.254.164.37",
+        HealthCheckConfig = new Tencentcloud.Vpn.Inputs.ConnectionHealthCheckConfigArgs
+        {
+            ProbeType = "NQA",
+            ProbeInterval = 5000,
+            ProbeThreshold = 3,
+            ProbeTimeout = 150,
+        },
         SecurityGroupPolicies = new[]
         {
             new Tencentcloud.Vpn.Inputs.ConnectionSecurityGroupPolicyArgs
@@ -119,62 +240,17 @@ return await Deployment.RunAsync(() =>
         },
         Tags = 
         {
-            { "test", "testt" },
+            { "createBy", "Terraform" },
         },
-        VpcId = "vpc-dk8zmwuf",
-        VpnGatewayId = "vpngw-8ccsnclt",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
-			CustomerGatewayId:       pulumi.String("cgw-xfqag"),
-			IkeDhGroupName:          pulumi.String("GROUP2"),
-			IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
-			IkeLocalAddress:         pulumi.String("1.1.1.1"),
-			IkeLocalIdentity:        pulumi.String("ADDRESS"),
-			IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
-			IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
-			IkeRemoteAddress:        pulumi.String("2.2.2.2"),
-			IkeRemoteIdentity:       pulumi.String("ADDRESS"),
-			IkeSaLifetimeSeconds:    pulumi.Int(86401),
-			IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
-			IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
-			IpsecPfsDhGroup:         pulumi.String("NULL"),
-			IpsecSaLifetimeSeconds:  pulumi.Int(7200),
-			IpsecSaLifetimeTraffic:  pulumi.Int(2570),
-			PreShareKey:             pulumi.String("testt"),
-			SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
-				&vpn.ConnectionSecurityGroupPolicyArgs{
-					LocalCidrBlock: pulumi.String("172.16.0.0/16"),
-					RemoteCidrBlocks: pulumi.StringArray{
-						pulumi.String("2.2.2.0/26"),
-					},
-				},
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("testt"),
-			},
-			VpcId:        pulumi.String("vpc-dk8zmwuf"),
-			VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -183,9 +259,10 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Vpn.Connection;
 import com.pulumi.tencentcloud.Vpn.ConnectionArgs;
+import com.pulumi.tencentcloud.Vpn.inputs.ConnectionHealthCheckConfigArgs;
 import com.pulumi.tencentcloud.Vpn.inputs.ConnectionSecurityGroupPolicyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -197,91 +274,211 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Connection("foo", ConnectionArgs.builder()        
-            .customerGatewayId("cgw-xfqag")
-            .ikeDhGroupName("GROUP2")
-            .ikeExchangeMode("AGGRESSIVE")
-            .ikeLocalAddress("1.1.1.1")
-            .ikeLocalIdentity("ADDRESS")
-            .ikeProtoAuthenAlgorithm("SHA")
+        var example = new Connection("example", ConnectionArgs.builder()
+            .name("tf-example")
+            .vpcId("vpc-6ccw0s5l")
+            .vpnGatewayId("vpngw-33p5vnwd")
+            .customerGatewayId("cgw-e503id2z")
+            .preShareKey("your_pre_share_key")
+            .routeType("StaticRoute")
+            .negotiationType("flowTrigger")
             .ikeProtoEncryAlgorithm("3DES-CBC")
-            .ikeRemoteAddress("2.2.2.2")
+            .ikeProtoAuthenAlgorithm("SHA")
+            .ikeLocalIdentity("ADDRESS")
+            .ikeExchangeMode("AGGRESSIVE")
+            .ikeLocalAddress("159.75.204.38")
             .ikeRemoteIdentity("ADDRESS")
-            .ikeSaLifetimeSeconds(86401)
+            .ikeRemoteAddress("109.244.60.154")
+            .ikeDhGroupName("GROUP2")
+            .ikeSaLifetimeSeconds(86400)
             .ipsecEncryptAlgorithm("3DES-CBC")
             .ipsecIntegrityAlgorithm("SHA1")
+            .ipsecSaLifetimeSeconds(14400)
             .ipsecPfsDhGroup("NULL")
-            .ipsecSaLifetimeSeconds(7200)
-            .ipsecSaLifetimeTraffic(2570)
-            .preShareKey("testt")
+            .ipsecSaLifetimeTraffic(4096000000)
+            .enableHealthCheck(true)
+            .healthCheckLocalIp("169.254.227.187")
+            .healthCheckRemoteIp("169.254.164.37")
+            .healthCheckConfig(ConnectionHealthCheckConfigArgs.builder()
+                .probeType("NQA")
+                .probeInterval(5000)
+                .probeThreshold(3)
+                .probeTimeout(150)
+                .build())
             .securityGroupPolicies(ConnectionSecurityGroupPolicyArgs.builder()
                 .localCidrBlock("172.16.0.0/16")
                 .remoteCidrBlocks("2.2.2.0/26")
                 .build())
-            .tags(Map.of("test", "testt"))
-            .vpcId("vpc-dk8zmwuf")
-            .vpnGatewayId("vpngw-8ccsnclt")
+            .tags(Map.of("createBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Vpn:Connection
     properties:
-      customerGatewayId: cgw-xfqag
-      ikeDhGroupName: GROUP2
-      ikeExchangeMode: AGGRESSIVE
-      ikeLocalAddress: 1.1.1.1
-      ikeLocalIdentity: ADDRESS
-      ikeProtoAuthenAlgorithm: SHA
+      name: tf-example
+      vpcId: vpc-6ccw0s5l
+      vpnGatewayId: vpngw-33p5vnwd
+      customerGatewayId: cgw-e503id2z
+      preShareKey: your_pre_share_key
+      routeType: StaticRoute
+      negotiationType: flowTrigger
       ikeProtoEncryAlgorithm: 3DES-CBC
-      ikeRemoteAddress: 2.2.2.2
+      ikeProtoAuthenAlgorithm: SHA
+      ikeLocalIdentity: ADDRESS
+      ikeExchangeMode: AGGRESSIVE
+      ikeLocalAddress: 159.75.204.38
       ikeRemoteIdentity: ADDRESS
-      ikeSaLifetimeSeconds: 86401
+      ikeRemoteAddress: 109.244.60.154
+      ikeDhGroupName: GROUP2
+      ikeSaLifetimeSeconds: 86400 # IPSEC setting
       ipsecEncryptAlgorithm: 3DES-CBC
       ipsecIntegrityAlgorithm: SHA1
+      ipsecSaLifetimeSeconds: 14400
       ipsecPfsDhGroup: NULL
-      ipsecSaLifetimeSeconds: 7200
-      ipsecSaLifetimeTraffic: 2570
-      preShareKey: testt
+      ipsecSaLifetimeTraffic: 4.096e+09 # health check setting
+      enableHealthCheck: true
+      healthCheckLocalIp: 169.254.227.187
+      healthCheckRemoteIp: 169.254.164.37
+      healthCheckConfig:
+        probeType: NQA
+        probeInterval: 5000
+        probeThreshold: 3
+        probeTimeout: 150
       securityGroupPolicies:
         - localCidrBlock: 172.16.0.0/16
           remoteCidrBlocks:
             - 2.2.2.0/26
       tags:
-        test: testt
-      vpcId: vpc-dk8zmwuf
-      vpnGatewayId: vpngw-8ccsnclt
+        createBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpn_connection" "example" {
+  name                       = "tf-example"
+  vpc_id                     = "vpc-6ccw0s5l"
+  vpn_gateway_id             = "vpngw-33p5vnwd"
+  customer_gateway_id        = "cgw-e503id2z"
+  pre_share_key              = "your_pre_share_key"
+  route_type                 = "StaticRoute"
+  negotiation_type           = "flowTrigger"
+  ike_proto_encry_algorithm  = "3DES-CBC"
+  ike_proto_authen_algorithm = "SHA"
+  ike_local_identity         = "ADDRESS"
+  ike_exchange_mode          = "AGGRESSIVE"
+  ike_local_address          = "159.75.204.38"
+  ike_remote_identity        = "ADDRESS"
+  ike_remote_address         = "109.244.60.154"
+  ike_dh_group_name          = "GROUP2"
+  ike_sa_lifetime_seconds    = 86400
+  # IPSEC setting
+  ipsec_encrypt_algorithm   = "3DES-CBC"
+  ipsec_integrity_algorithm = "SHA1"
+  ipsec_sa_lifetime_seconds = 14400
+  ipsec_pfs_dh_group        = "NULL"
+  ipsec_sa_lifetime_traffic = 4096000000
+  # health check setting
+  enable_health_check    = true
+  health_check_local_ip  = "169.254.227.187"
+  health_check_remote_ip = "169.254.164.37"
+  health_check_config = {
+    probe_type      = "NQA"
+    probe_interval  = 5000
+    probe_threshold = 3
+    probe_timeout   = 150
+  }
+  security_group_policies {
+    local_cidr_block   = "172.16.0.0/16"
+    remote_cidr_blocks = ["2.2.2.0/26"]
+  }
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateVpnConnection](https://www.tencentcloud.com/document/api/215/17522)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+  - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+  - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
+* Update:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+  - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyVpnConnectionAttribute](https://www.tencentcloud.com/document/api/215/17508)
+* Delete:
+  - [DeleteVpnConnection](https://www.tencentcloud.com/document/api/215/17519)
+  - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
 
 
 ## Create Connection Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+               <span class="nx">pre_share_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">customer_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">dpd_action</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">dpd_enable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-               <span class="nx">dpd_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+               <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">ike_remote_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">ike_sa_lifetime_seconds</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">enable_health_check</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+               <span class="nx">health_check_config</span><span class="p">:</span> <span class="nx">Optional[ConnectionHealthCheckConfigArgs]</span> = None<span class="p">,</span>
                <span class="nx">health_check_local_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">health_check_remote_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">ike_dh_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -291,60 +488,67 @@ resources:
                <span class="nx">ike_local_identity</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">ike_proto_authen_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">ike_proto_encry_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">ike_remote_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">bgp_config</span><span class="p">:</span> <span class="nx">Optional[ConnectionBgpConfigArgs]</span> = None<span class="p">,</span>
+               <span class="nx">dpd_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">ike_remote_fqdn_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">ike_remote_identity</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">ike_sa_lifetime_seconds</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-               <span class="nx">ike_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">ipsec_encrypt_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">ike_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">ike_remote_identity</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">ipsec_integrity_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">ipsec_pfs_dh_group</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">ipsec_sa_lifetime_seconds</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">ipsec_sa_lifetime_traffic</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">pre_share_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">negotiation_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">dpd_enable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">route_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">security_group_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[_vpn.ConnectionSecurityGroupPolicyArgs]]</span> = None<span class="p">,</span>
-               <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+               <span class="nx">security_group_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[ConnectionSecurityGroupPolicyArgs]]</span> = None<span class="p">,</span>
+               <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">dpd_action</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewConnection</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Connection</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewConnection</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Connection</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ConnectionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpn:Connection</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpn:Connection</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vpn_connection&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -365,7 +569,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -482,11 +686,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Connection Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Connection resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -502,8 +714,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the customer gateway.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_csharp" style="color: inherit; text-decoration: inherit;">Pre<wbr>Share<wbr>Key</a>
@@ -511,8 +722,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -520,8 +730,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgpconfig_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpconfig_csharp" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Connection<wbr>Bgp<wbr>Config</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdaction_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdaction_csharp" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Action</a>
@@ -529,8 +746,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdenable_csharp" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Enable</a>
@@ -538,8 +754,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdtimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdtimeout_csharp" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Timeout</a>
@@ -547,8 +762,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablehealthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablehealthcheck_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Health<wbr>Check</a>
@@ -556,8 +770,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheckconfig_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckconfig_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Connection<wbr>Health<wbr>Check<wbr>Config</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecklocalip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecklocalip_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -565,8 +786,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckremoteip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckremoteip_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -574,8 +794,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikedhgroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -583,8 +802,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeexchangemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Exchange<wbr>Mode</a>
@@ -592,8 +810,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocaladdress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Address</a>
@@ -601,8 +818,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalfqdnname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -610,8 +826,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalidentity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Identity</a>
@@ -619,8 +834,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoauthenalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -628,8 +842,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoencryalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -637,8 +850,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Address</a>
@@ -646,8 +858,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremotefqdnname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -655,8 +866,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteidentity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Identity</a>
@@ -664,8 +874,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikesalifetimeseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -673,8 +882,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Version</a>
@@ -682,8 +890,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecencryptalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -691,8 +898,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecintegrityalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -700,8 +906,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecpfsdhgroup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -709,8 +914,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimeseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -718,8 +922,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimetraffic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -727,8 +930,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -736,8 +938,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="negotiationtype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#negotiationtype_csharp" style="color: inherit; text-decoration: inherit;">Negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -745,26 +954,23 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygrouppolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Connection<wbr>Security<wbr>Group<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -772,8 +978,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd></dl>
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -787,8 +992,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the customer gateway.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_go" style="color: inherit; text-decoration: inherit;">Pre<wbr>Share<wbr>Key</a>
@@ -796,8 +1000,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -805,8 +1008,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgpconfig_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpconfig_go" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Connection<wbr>Bgp<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdaction_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdaction_go" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Action</a>
@@ -814,8 +1024,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdenable_go" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Enable</a>
@@ -823,8 +1032,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdtimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdtimeout_go" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Timeout</a>
@@ -832,8 +1040,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablehealthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablehealthcheck_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Health<wbr>Check</a>
@@ -841,8 +1048,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheckconfig_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckconfig_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Connection<wbr>Health<wbr>Check<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecklocalip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecklocalip_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -850,8 +1064,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckremoteip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckremoteip_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -859,8 +1072,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikedhgroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -868,8 +1080,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeexchangemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Exchange<wbr>Mode</a>
@@ -877,8 +1088,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocaladdress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Address</a>
@@ -886,8 +1096,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalfqdnname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -895,8 +1104,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalidentity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Identity</a>
@@ -904,8 +1112,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoauthenalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -913,8 +1120,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoencryalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -922,8 +1128,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Address</a>
@@ -931,8 +1136,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremotefqdnname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -940,8 +1144,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteidentity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Identity</a>
@@ -949,8 +1152,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikesalifetimeseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -958,8 +1160,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Version</a>
@@ -967,8 +1168,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecencryptalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -976,8 +1176,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecintegrityalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -985,8 +1184,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecpfsdhgroup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -994,8 +1192,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimeseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1003,8 +1200,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimetraffic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -1012,8 +1208,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1021,8 +1216,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="negotiationtype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#negotiationtype_go" style="color: inherit; text-decoration: inherit;">Negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -1030,8 +1232,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygrouppolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Policies</a>
@@ -1039,17 +1240,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#connectionsecuritygrouppolicy">[]Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1057,8 +1256,285 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd></dl>
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="customer_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the customer gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="pre_share_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_share_key_hcl" style="color: inherit; text-decoration: inherit;">pre_<wbr>share_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="vpn_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgp_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_config_hcl" style="color: inherit; text-decoration: inherit;">bgp_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">object</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dpd_action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpd_action_hcl" style="color: inherit; text-decoration: inherit;">dpd_<wbr>action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dpd_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpd_enable_hcl" style="color: inherit; text-decoration: inherit;">dpd_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dpd_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpd_timeout_hcl" style="color: inherit; text-decoration: inherit;">dpd_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_health_check_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_config_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">object</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_local_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_local_ip_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>local_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_remote_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_remote_ip_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>remote_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check peer address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_dh_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_dh_group_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>dh_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_exchange_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_exchange_mode_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>exchange_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_local_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_address_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_local_fqdn_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_fqdn_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>fqdn_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_local_identity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_identity_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_proto_authen_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_proto_authen_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>authen_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_proto_encry_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_proto_encry_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>encry_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_remote_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_address_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_remote_fqdn_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_fqdn_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>fqdn_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_remote_identity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_identity_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_sa_lifetime_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_sa_lifetime_seconds_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ike_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_version_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipsec_encrypt_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_encrypt_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>encrypt_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipsec_integrity_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_integrity_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>integrity_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipsec_pfs_dh_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_pfs_dh_group_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>pfs_<wbr>dh_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipsec_sa_lifetime_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_sa_lifetime_seconds_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipsec_sa_lifetime_traffic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_sa_lifetime_traffic_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>traffic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="negotiation_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#negotiation_type_hcl" style="color: inherit; text-decoration: inherit;">negotiation_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_type_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_group_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_policies_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">list(object)</a></span>
+    </dt>
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1072,8 +1548,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the customer gateway.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_java" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -1081,8 +1556,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -1090,8 +1564,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgpconfig_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpconfig_java" style="color: inherit; text-decoration: inherit;">bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Connection<wbr>Bgp<wbr>Config</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdaction_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdaction_java" style="color: inherit; text-decoration: inherit;">dpd<wbr>Action</a>
@@ -1099,8 +1580,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdenable_java" style="color: inherit; text-decoration: inherit;">dpd<wbr>Enable</a>
@@ -1108,8 +1588,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdtimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdtimeout_java" style="color: inherit; text-decoration: inherit;">dpd<wbr>Timeout</a>
@@ -1117,8 +1596,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablehealthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablehealthcheck_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Health<wbr>Check</a>
@@ -1126,8 +1604,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheckconfig_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckconfig_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Connection<wbr>Health<wbr>Check<wbr>Config</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecklocalip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecklocalip_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -1135,8 +1620,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckremoteip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckremoteip_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -1144,8 +1628,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikedhgroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -1153,8 +1636,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeexchangemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -1162,8 +1644,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocaladdress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -1171,8 +1652,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalfqdnname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -1180,8 +1660,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalidentity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -1189,8 +1668,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoauthenalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -1198,8 +1676,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoencryalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -1207,8 +1684,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -1216,8 +1692,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremotefqdnname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -1225,8 +1700,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteidentity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -1234,8 +1708,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikesalifetimeseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1243,8 +1716,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -1252,8 +1724,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecencryptalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -1261,8 +1732,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecintegrityalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -1270,8 +1740,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecpfsdhgroup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -1279,8 +1748,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimeseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1288,8 +1756,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimetraffic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -1297,8 +1764,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1306,8 +1772,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="negotiationtype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#negotiationtype_java" style="color: inherit; text-decoration: inherit;">negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_java" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -1315,26 +1788,23 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygrouppolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Connection<wbr>Security<wbr>Group<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1342,8 +1812,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd></dl>
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1357,8 +1826,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the customer gateway.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_nodejs" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -1366,8 +1834,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -1375,8 +1842,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgpconfig_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpconfig_nodejs" style="color: inherit; text-decoration: inherit;">bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Connection<wbr>Bgp<wbr>Config</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdaction_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdaction_nodejs" style="color: inherit; text-decoration: inherit;">dpd<wbr>Action</a>
@@ -1384,8 +1858,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdenable_nodejs" style="color: inherit; text-decoration: inherit;">dpd<wbr>Enable</a>
@@ -1393,8 +1866,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdtimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdtimeout_nodejs" style="color: inherit; text-decoration: inherit;">dpd<wbr>Timeout</a>
@@ -1402,8 +1874,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablehealthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablehealthcheck_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Health<wbr>Check</a>
@@ -1411,8 +1882,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheckconfig_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckconfig_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Connection<wbr>Health<wbr>Check<wbr>Config</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecklocalip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecklocalip_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -1420,8 +1898,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckremoteip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckremoteip_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -1429,8 +1906,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikedhgroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -1438,8 +1914,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeexchangemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -1447,8 +1922,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocaladdress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -1456,8 +1930,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalfqdnname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -1465,8 +1938,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalidentity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -1474,8 +1946,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoauthenalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -1483,8 +1954,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoencryalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -1492,8 +1962,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -1501,8 +1970,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremotefqdnname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -1510,8 +1978,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteidentity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -1519,8 +1986,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikesalifetimeseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1528,8 +1994,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -1537,8 +2002,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecencryptalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -1546,8 +2010,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecintegrityalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -1555,8 +2018,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecpfsdhgroup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -1564,8 +2026,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimeseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1573,8 +2034,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimetraffic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -1582,8 +2042,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1591,8 +2050,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="negotiationtype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#negotiationtype_nodejs" style="color: inherit; text-decoration: inherit;">negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -1600,26 +2066,23 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygrouppolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#connectionsecuritygrouppolicy">Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">Connection<wbr>Security<wbr>Group<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1627,8 +2090,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd></dl>
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1642,8 +2104,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the customer gateway.</dd><dt class="property-required"
             title="Required">
         <span id="pre_share_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_share_key_python" style="color: inherit; text-decoration: inherit;">pre_<wbr>share_<wbr>key</a>
@@ -1651,8 +2112,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpn_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
@@ -1660,8 +2120,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgp_config_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgp_config_python" style="color: inherit; text-decoration: inherit;">bgp_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Connection<wbr>Bgp<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpd_action_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpd_action_python" style="color: inherit; text-decoration: inherit;">dpd_<wbr>action</a>
@@ -1669,8 +2136,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpd_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpd_enable_python" style="color: inherit; text-decoration: inherit;">dpd_<wbr>enable</a>
@@ -1678,8 +2144,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="dpd_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpd_timeout_python" style="color: inherit; text-decoration: inherit;">dpd_<wbr>timeout</a>
@@ -1687,8 +2152,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_health_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_health_check_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>health_<wbr>check</a>
@@ -1696,8 +2160,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_config_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_config_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Connection<wbr>Health<wbr>Check<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_local_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_local_ip_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>local_<wbr>ip</a>
@@ -1705,8 +2176,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_remote_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_remote_ip_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>remote_<wbr>ip</a>
@@ -1714,8 +2184,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_dh_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_dh_group_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>dh_<wbr>group_<wbr>name</a>
@@ -1723,8 +2192,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_exchange_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_exchange_mode_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>exchange_<wbr>mode</a>
@@ -1732,8 +2200,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_local_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_address_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>address</a>
@@ -1741,8 +2208,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_local_fqdn_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_fqdn_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>fqdn_<wbr>name</a>
@@ -1750,8 +2216,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_local_identity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_identity_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>identity</a>
@@ -1759,8 +2224,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_proto_authen_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_proto_authen_algorithm_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>authen_<wbr>algorithm</a>
@@ -1768,8 +2232,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_proto_encry_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_proto_encry_algorithm_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>encry_<wbr>algorithm</a>
@@ -1777,8 +2240,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_remote_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_address_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>address</a>
@@ -1786,8 +2248,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_remote_fqdn_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_fqdn_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>fqdn_<wbr>name</a>
@@ -1795,8 +2256,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_remote_identity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_identity_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>identity</a>
@@ -1804,8 +2264,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_sa_lifetime_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_sa_lifetime_seconds_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
@@ -1813,8 +2272,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ike_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_version_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>version</a>
@@ -1822,8 +2280,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsec_encrypt_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_encrypt_algorithm_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>encrypt_<wbr>algorithm</a>
@@ -1831,8 +2288,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsec_integrity_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_integrity_algorithm_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>integrity_<wbr>algorithm</a>
@@ -1840,8 +2296,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsec_pfs_dh_group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_pfs_dh_group_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>pfs_<wbr>dh_<wbr>group</a>
@@ -1849,8 +2304,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsec_sa_lifetime_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_sa_lifetime_seconds_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
@@ -1858,8 +2312,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsec_sa_lifetime_traffic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_sa_lifetime_traffic_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>traffic</a>
@@ -1867,8 +2320,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1876,8 +2328,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="negotiation_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#negotiation_type_python" style="color: inherit; text-decoration: inherit;">negotiation_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="route_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_type_python" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
@@ -1885,26 +2344,23 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_group_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_policies_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#connectionsecuritygrouppolicy">Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">Sequence[Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args]</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1912,8 +2368,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd></dl>
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1927,8 +2382,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the customer gateway.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_yaml" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -1936,8 +2390,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -1945,8 +2398,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="bgpconfig_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bgpconfig_yaml" style="color: inherit; text-decoration: inherit;">bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Property Map</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdaction_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdaction_yaml" style="color: inherit; text-decoration: inherit;">dpd<wbr>Action</a>
@@ -1954,8 +2414,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdenable_yaml" style="color: inherit; text-decoration: inherit;">dpd<wbr>Enable</a>
@@ -1963,8 +2422,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="dpdtimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dpdtimeout_yaml" style="color: inherit; text-decoration: inherit;">dpd<wbr>Timeout</a>
@@ -1972,8 +2430,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablehealthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablehealthcheck_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Health<wbr>Check</a>
@@ -1981,8 +2438,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheckconfig_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckconfig_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Property Map</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecklocalip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecklocalip_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -1990,8 +2454,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckremoteip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckremoteip_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -1999,8 +2462,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikedhgroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -2008,8 +2470,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeexchangemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -2017,8 +2478,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocaladdress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -2026,8 +2486,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalfqdnname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -2035,8 +2494,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikelocalidentity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -2044,8 +2502,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoauthenalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -2053,8 +2510,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeprotoencryalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -2062,8 +2518,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -2071,8 +2526,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremotefqdnname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -2080,8 +2534,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeremoteidentity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -2089,8 +2542,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikesalifetimeseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -2098,8 +2550,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ikeversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -2107,8 +2558,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecencryptalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -2116,8 +2566,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecintegrityalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -2125,8 +2574,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecpfsdhgroup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -2134,8 +2582,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimeseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -2143,8 +2590,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipsecsalifetimetraffic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -2152,8 +2598,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2161,8 +2606,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="negotiationtype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#negotiationtype_yaml" style="color: inherit; text-decoration: inherit;">negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="routetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -2170,8 +2622,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygrouppolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
@@ -2179,17 +2630,15 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2197,8 +2646,7 @@ The Connection resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd></dl>
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2219,8 +2667,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Create time of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="encryptproto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_csharp" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Proto</a>
@@ -2228,8 +2675,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2237,8 +2683,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isccntype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isccntype_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Ccn<wbr>Type</a>
@@ -2246,8 +2691,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-"
             title="">
         <span id="netstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Status</a>
@@ -2255,8 +2699,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-"
             title="">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -2264,8 +2707,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-"
             title="">
         <span id="vpnproto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Proto</a>
@@ -2273,8 +2715,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2288,8 +2729,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Create time of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="encryptproto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_go" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Proto</a>
@@ -2297,8 +2737,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2306,8 +2745,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isccntype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isccntype_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Ccn<wbr>Type</a>
@@ -2315,8 +2753,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-"
             title="">
         <span id="netstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Status</a>
@@ -2324,8 +2761,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-"
             title="">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -2333,8 +2769,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-"
             title="">
         <span id="vpnproto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Proto</a>
@@ -2342,8 +2777,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the VPN connection.</dd><dt class="property-"
+            title="">
+        <span id="encrypt_proto_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_proto_hcl" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>proto</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="is_ccn_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ccn_type_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>ccn_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-"
+            title="">
+        <span id="net_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_status_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-"
+            title="">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-"
+            title="">
+        <span id="vpn_proto_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_proto_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>proto</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2357,8 +2853,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Create time of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="encryptproto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_java" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -2366,8 +2861,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2375,8 +2869,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isccntype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isccntype_java" style="color: inherit; text-decoration: inherit;">is<wbr>Ccn<wbr>Type</a>
@@ -2384,8 +2877,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-"
             title="">
         <span id="netstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_java" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -2393,8 +2885,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-"
             title="">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2402,8 +2893,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-"
             title="">
         <span id="vpnproto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -2411,8 +2901,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2426,8 +2915,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Create time of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="encryptproto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_nodejs" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -2435,8 +2923,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2444,8 +2931,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isccntype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isccntype_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Ccn<wbr>Type</a>
@@ -2453,8 +2939,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-"
             title="">
         <span id="netstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -2462,8 +2947,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-"
             title="">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2471,8 +2955,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-"
             title="">
         <span id="vpnproto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -2480,8 +2963,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2495,8 +2977,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Create time of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="encrypt_proto_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_proto_python" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>proto</a>
@@ -2504,8 +2985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2513,8 +2993,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="is_ccn_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ccn_type_python" style="color: inherit; text-decoration: inherit;">is_<wbr>ccn_<wbr>type</a>
@@ -2522,8 +3001,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-"
             title="">
         <span id="net_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_status_python" style="color: inherit; text-decoration: inherit;">net_<wbr>status</a>
@@ -2531,8 +3009,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-"
             title="">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2540,8 +3017,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-"
             title="">
         <span id="vpn_proto_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_proto_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>proto</a>
@@ -2549,8 +3025,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2564,8 +3039,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Create time of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="encryptproto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_yaml" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -2573,8 +3047,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2582,8 +3055,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="isccntype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isccntype_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Ccn<wbr>Type</a>
@@ -2591,8 +3063,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-"
             title="">
         <span id="netstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -2600,8 +3071,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-"
             title="">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2609,8 +3079,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-"
             title="">
         <span id="vpnproto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -2618,8 +3087,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2629,21 +3097,22 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Connection resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ConnectionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Connection</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ConnectionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Connection</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">bgp_config</span><span class="p">:</span> <span class="nx">Optional[ConnectionBgpConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">customer_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">dpd_action</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -2651,6 +3120,7 @@ Get an existing Connection resource's state with the given name, ID, and optiona
         <span class="nx">dpd_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">enable_health_check</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">encrypt_proto</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">health_check_config</span><span class="p">:</span> <span class="nx">Optional[ConnectionHealthCheckConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">health_check_local_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">health_check_remote_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ike_dh_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -2672,113 +3142,153 @@ Get an existing Connection resource's state with the given name, ID, and optiona
         <span class="nx">ipsec_sa_lifetime_traffic</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">is_ccn_type</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">negotiation_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">net_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">pre_share_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">route_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">security_group_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[_vpn.ConnectionSecurityGroupPolicyArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">security_group_policies</span><span class="p">:</span> <span class="nx">Optional[Sequence[ConnectionSecurityGroupPolicyArgs]]</span> = None<span class="p">,</span>
         <span class="nx">state</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpn_proto</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Connection</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetConnection<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ConnectionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Connection</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetConnection<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ConnectionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Connection</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Connection</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ConnectionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Connection</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ConnectionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Connection</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ConnectionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Connection</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ConnectionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingConnection</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vpn:Connection</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vpn_connection</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ConnectionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ConnectionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2786,28 +3296,31 @@ Get an existing Connection resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ConnectionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2815,28 +3328,31 @@ Get an existing Connection resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ConnectionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2848,7 +3364,15 @@ The following state arguments are supported:
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgpconfig_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpconfig_csharp" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Connection<wbr>Bgp<wbr>Config</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2856,8 +3380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customergatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customergatewayid_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Gateway<wbr>Id</a>
@@ -2865,8 +3388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdaction_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdaction_csharp" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Action</a>
@@ -2874,8 +3396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdenable_csharp" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Enable</a>
@@ -2883,8 +3404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdtimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdtimeout_csharp" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Timeout</a>
@@ -2892,8 +3412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablehealthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablehealthcheck_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Health<wbr>Check</a>
@@ -2901,8 +3420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptproto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptproto_csharp" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Proto</a>
@@ -2910,8 +3428,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheckconfig_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckconfig_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Connection<wbr>Health<wbr>Check<wbr>Config</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecklocalip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecklocalip_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -2919,8 +3444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckremoteip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckremoteip_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -2928,8 +3452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikedhgroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikedhgroupname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -2937,8 +3460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeexchangemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeexchangemode_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Exchange<wbr>Mode</a>
@@ -2946,8 +3468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocaladdress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocaladdress_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Address</a>
@@ -2955,8 +3476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalfqdnname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalfqdnname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -2964,8 +3484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalidentity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalidentity_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Identity</a>
@@ -2973,8 +3492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoauthenalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoauthenalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -2982,8 +3500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoencryalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoencryalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -2991,8 +3508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteaddress_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Address</a>
@@ -3000,8 +3516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremotefqdnname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremotefqdnname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -3009,8 +3524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteidentity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteidentity_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Identity</a>
@@ -3018,8 +3532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikesalifetimeseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikesalifetimeseconds_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -3027,8 +3540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeversion_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Version</a>
@@ -3036,8 +3548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecencryptalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecencryptalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -3045,8 +3556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecintegrityalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecintegrityalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -3054,8 +3564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecpfsdhgroup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecpfsdhgroup_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -3063,8 +3572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimeseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimeseconds_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -3072,8 +3580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimetraffic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimetraffic_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -3081,8 +3588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isccntype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isccntype_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Ccn<wbr>Type</a>
@@ -3090,8 +3596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3099,8 +3604,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_negotiationtype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_negotiationtype_csharp" style="color: inherit; text-decoration: inherit;">Negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netstatus_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Status</a>
@@ -3108,8 +3620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_presharekey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_presharekey_csharp" style="color: inherit; text-decoration: inherit;">Pre<wbr>Share<wbr>Key</a>
@@ -3117,8 +3628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -3126,17 +3636,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygrouppolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygrouppolicies_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Connection<wbr>Security<wbr>Group<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -3144,17 +3652,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3162,8 +3668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -3171,8 +3676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpnproto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpnproto_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Proto</a>
@@ -3180,14 +3684,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgpconfig_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpconfig_go" style="color: inherit; text-decoration: inherit;">Bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Connection<wbr>Bgp<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3195,8 +3706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customergatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customergatewayid_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Gateway<wbr>Id</a>
@@ -3204,8 +3714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdaction_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdaction_go" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Action</a>
@@ -3213,8 +3722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdenable_go" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Enable</a>
@@ -3222,8 +3730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdtimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdtimeout_go" style="color: inherit; text-decoration: inherit;">Dpd<wbr>Timeout</a>
@@ -3231,8 +3738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablehealthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablehealthcheck_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Health<wbr>Check</a>
@@ -3240,8 +3746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptproto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptproto_go" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Proto</a>
@@ -3249,8 +3754,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheckconfig_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckconfig_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Connection<wbr>Health<wbr>Check<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecklocalip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecklocalip_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -3258,8 +3770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckremoteip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckremoteip_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -3267,8 +3778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikedhgroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikedhgroupname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -3276,8 +3786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeexchangemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeexchangemode_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Exchange<wbr>Mode</a>
@@ -3285,8 +3794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocaladdress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocaladdress_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Address</a>
@@ -3294,8 +3802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalfqdnname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalfqdnname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -3303,8 +3810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalidentity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalidentity_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Identity</a>
@@ -3312,8 +3818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoauthenalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoauthenalgorithm_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -3321,8 +3826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoencryalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoencryalgorithm_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -3330,8 +3834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteaddress_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Address</a>
@@ -3339,8 +3842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremotefqdnname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremotefqdnname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -3348,8 +3850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteidentity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteidentity_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Identity</a>
@@ -3357,8 +3858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikesalifetimeseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikesalifetimeseconds_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -3366,8 +3866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeversion_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Version</a>
@@ -3375,8 +3874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecencryptalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecencryptalgorithm_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -3384,8 +3882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecintegrityalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecintegrityalgorithm_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -3393,8 +3890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecpfsdhgroup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecpfsdhgroup_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -3402,8 +3898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimeseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimeseconds_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -3411,8 +3906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimetraffic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimetraffic_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -3420,8 +3914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isccntype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isccntype_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Ccn<wbr>Type</a>
@@ -3429,8 +3922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3438,8 +3930,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_negotiationtype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_negotiationtype_go" style="color: inherit; text-decoration: inherit;">Negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netstatus_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Status</a>
@@ -3447,8 +3946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_presharekey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_presharekey_go" style="color: inherit; text-decoration: inherit;">Pre<wbr>Share<wbr>Key</a>
@@ -3456,8 +3954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -3465,8 +3962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygrouppolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygrouppolicies_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Policies</a>
@@ -3474,8 +3970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#connectionsecuritygrouppolicy">[]Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -3483,17 +3978,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3501,8 +3994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -3510,8 +4002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpnproto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpnproto_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Proto</a>
@@ -3519,14 +4010,347 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgp_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgp_config_hcl" style="color: inherit; text-decoration: inherit;">bgp_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">object</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the VPN connection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_customer_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customer_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the customer gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dpd_action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpd_action_hcl" style="color: inherit; text-decoration: inherit;">dpd_<wbr>action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dpd_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpd_enable_hcl" style="color: inherit; text-decoration: inherit;">dpd_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dpd_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpd_timeout_hcl" style="color: inherit; text-decoration: inherit;">dpd_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_health_check_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypt_proto_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_proto_hcl" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>proto</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_config_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">object</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_local_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_local_ip_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>local_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_remote_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_remote_ip_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>remote_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check peer address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_dh_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_dh_group_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>dh_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_exchange_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_exchange_mode_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>exchange_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_local_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_local_address_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_local_fqdn_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_local_fqdn_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>fqdn_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_local_identity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_local_identity_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_proto_authen_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_proto_authen_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>authen_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_proto_encry_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_proto_encry_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>encry_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_remote_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_remote_address_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_remote_fqdn_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_remote_fqdn_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>fqdn_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_remote_identity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_remote_identity_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_sa_lifetime_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_sa_lifetime_seconds_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ike_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_version_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipsec_encrypt_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_encrypt_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>encrypt_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipsec_integrity_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_integrity_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>integrity_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipsec_pfs_dh_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_pfs_dh_group_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>pfs_<wbr>dh_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipsec_sa_lifetime_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_sa_lifetime_seconds_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipsec_sa_lifetime_traffic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_sa_lifetime_traffic_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>traffic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_ccn_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_ccn_type_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>ccn_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_negotiation_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_negotiation_type_hcl" style="color: inherit; text-decoration: inherit;">negotiation_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_net_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_net_status_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pre_share_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pre_share_key_hcl" style="color: inherit; text-decoration: inherit;">pre_<wbr>share_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_type_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_group_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_policies_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">list(object)</a></span>
+    </dt>
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpn_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpn_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpn_proto_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpn_proto_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>proto</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgpconfig_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpconfig_java" style="color: inherit; text-decoration: inherit;">bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Connection<wbr>Bgp<wbr>Config</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3534,8 +4358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customergatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customergatewayid_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -3543,8 +4366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdaction_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdaction_java" style="color: inherit; text-decoration: inherit;">dpd<wbr>Action</a>
@@ -3552,8 +4374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdenable_java" style="color: inherit; text-decoration: inherit;">dpd<wbr>Enable</a>
@@ -3561,8 +4382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdtimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdtimeout_java" style="color: inherit; text-decoration: inherit;">dpd<wbr>Timeout</a>
@@ -3570,8 +4390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablehealthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablehealthcheck_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Health<wbr>Check</a>
@@ -3579,8 +4398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptproto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptproto_java" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -3588,8 +4406,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheckconfig_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckconfig_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Connection<wbr>Health<wbr>Check<wbr>Config</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecklocalip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecklocalip_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -3597,8 +4422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckremoteip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckremoteip_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -3606,8 +4430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikedhgroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikedhgroupname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -3615,8 +4438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeexchangemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeexchangemode_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -3624,8 +4446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocaladdress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocaladdress_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -3633,8 +4454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalfqdnname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalfqdnname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -3642,8 +4462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalidentity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalidentity_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -3651,8 +4470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoauthenalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoauthenalgorithm_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -3660,8 +4478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoencryalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoencryalgorithm_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -3669,8 +4486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteaddress_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -3678,8 +4494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremotefqdnname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremotefqdnname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -3687,8 +4502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteidentity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteidentity_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -3696,8 +4510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikesalifetimeseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikesalifetimeseconds_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -3705,8 +4518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeversion_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -3714,8 +4526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecencryptalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecencryptalgorithm_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -3723,8 +4534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecintegrityalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecintegrityalgorithm_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -3732,8 +4542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecpfsdhgroup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecpfsdhgroup_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -3741,8 +4550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimeseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimeseconds_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -3750,8 +4558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimetraffic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimetraffic_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -3759,8 +4566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isccntype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isccntype_java" style="color: inherit; text-decoration: inherit;">is<wbr>Ccn<wbr>Type</a>
@@ -3768,8 +4574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3777,8 +4582,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_negotiationtype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_negotiationtype_java" style="color: inherit; text-decoration: inherit;">negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netstatus_java" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -3786,8 +4598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_presharekey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_presharekey_java" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -3795,8 +4606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_java" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -3804,17 +4614,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygrouppolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygrouppolicies_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Connection<wbr>Security<wbr>Group<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -3822,17 +4630,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3840,8 +4646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -3849,8 +4654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpnproto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpnproto_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -3858,14 +4662,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgpconfig_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpconfig_nodejs" style="color: inherit; text-decoration: inherit;">bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Connection<wbr>Bgp<wbr>Config</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3873,8 +4684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customergatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customergatewayid_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -3882,8 +4692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdaction_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdaction_nodejs" style="color: inherit; text-decoration: inherit;">dpd<wbr>Action</a>
@@ -3891,8 +4700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdenable_nodejs" style="color: inherit; text-decoration: inherit;">dpd<wbr>Enable</a>
@@ -3900,8 +4708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdtimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdtimeout_nodejs" style="color: inherit; text-decoration: inherit;">dpd<wbr>Timeout</a>
@@ -3909,8 +4716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablehealthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablehealthcheck_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Health<wbr>Check</a>
@@ -3918,8 +4724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptproto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptproto_nodejs" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -3927,8 +4732,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheckconfig_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckconfig_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Connection<wbr>Health<wbr>Check<wbr>Config</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecklocalip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecklocalip_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -3936,8 +4748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckremoteip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckremoteip_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -3945,8 +4756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikedhgroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikedhgroupname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -3954,8 +4764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeexchangemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeexchangemode_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -3963,8 +4772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocaladdress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocaladdress_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -3972,8 +4780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalfqdnname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalfqdnname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -3981,8 +4788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalidentity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalidentity_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -3990,8 +4796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoauthenalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoauthenalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -3999,8 +4804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoencryalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoencryalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -4008,8 +4812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteaddress_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -4017,8 +4820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremotefqdnname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremotefqdnname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -4026,8 +4828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteidentity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteidentity_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -4035,8 +4836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikesalifetimeseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikesalifetimeseconds_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -4044,8 +4844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeversion_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -4053,8 +4852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecencryptalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecencryptalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -4062,8 +4860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecintegrityalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecintegrityalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -4071,8 +4868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecpfsdhgroup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecpfsdhgroup_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -4080,8 +4876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimeseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimeseconds_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -4089,8 +4884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimetraffic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimetraffic_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -4098,8 +4892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isccntype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isccntype_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Ccn<wbr>Type</a>
@@ -4107,8 +4900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4116,8 +4908,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_negotiationtype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_negotiationtype_nodejs" style="color: inherit; text-decoration: inherit;">negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netstatus_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -4125,8 +4924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_presharekey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_presharekey_nodejs" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -4134,8 +4932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -4143,17 +4940,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygrouppolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygrouppolicies_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#connectionsecuritygrouppolicy">Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">Connection<wbr>Security<wbr>Group<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -4161,17 +4956,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4179,8 +4972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -4188,8 +4980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpnproto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpnproto_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -4197,14 +4988,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgp_config_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgp_config_python" style="color: inherit; text-decoration: inherit;">bgp_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Connection<wbr>Bgp<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -4212,8 +5010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customer_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customer_gateway_id_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>gateway_<wbr>id</a>
@@ -4221,8 +5018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpd_action_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpd_action_python" style="color: inherit; text-decoration: inherit;">dpd_<wbr>action</a>
@@ -4230,8 +5026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpd_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpd_enable_python" style="color: inherit; text-decoration: inherit;">dpd_<wbr>enable</a>
@@ -4239,8 +5034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpd_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpd_timeout_python" style="color: inherit; text-decoration: inherit;">dpd_<wbr>timeout</a>
@@ -4248,8 +5042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_health_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_health_check_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>health_<wbr>check</a>
@@ -4257,8 +5050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encrypt_proto_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_proto_python" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>proto</a>
@@ -4266,8 +5058,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_config_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_config_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Connection<wbr>Health<wbr>Check<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_local_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_local_ip_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>local_<wbr>ip</a>
@@ -4275,8 +5074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_remote_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_remote_ip_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>remote_<wbr>ip</a>
@@ -4284,8 +5082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_dh_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_dh_group_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>dh_<wbr>group_<wbr>name</a>
@@ -4293,8 +5090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_exchange_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_exchange_mode_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>exchange_<wbr>mode</a>
@@ -4302,8 +5098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_local_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_local_address_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>address</a>
@@ -4311,8 +5106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_local_fqdn_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_local_fqdn_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>fqdn_<wbr>name</a>
@@ -4320,8 +5114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_local_identity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_local_identity_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>identity</a>
@@ -4329,8 +5122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_proto_authen_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_proto_authen_algorithm_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>authen_<wbr>algorithm</a>
@@ -4338,8 +5130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_proto_encry_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_proto_encry_algorithm_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>encry_<wbr>algorithm</a>
@@ -4347,8 +5138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_remote_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_remote_address_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>address</a>
@@ -4356,8 +5146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_remote_fqdn_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_remote_fqdn_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>fqdn_<wbr>name</a>
@@ -4365,8 +5154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_remote_identity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_remote_identity_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>identity</a>
@@ -4374,8 +5162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_sa_lifetime_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_sa_lifetime_seconds_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
@@ -4383,8 +5170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ike_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ike_version_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>version</a>
@@ -4392,8 +5178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsec_encrypt_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_encrypt_algorithm_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>encrypt_<wbr>algorithm</a>
@@ -4401,8 +5186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsec_integrity_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_integrity_algorithm_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>integrity_<wbr>algorithm</a>
@@ -4410,8 +5194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsec_pfs_dh_group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_pfs_dh_group_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>pfs_<wbr>dh_<wbr>group</a>
@@ -4419,8 +5202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsec_sa_lifetime_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_sa_lifetime_seconds_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
@@ -4428,8 +5210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsec_sa_lifetime_traffic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsec_sa_lifetime_traffic_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>traffic</a>
@@ -4437,8 +5218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_ccn_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_ccn_type_python" style="color: inherit; text-decoration: inherit;">is_<wbr>ccn_<wbr>type</a>
@@ -4446,8 +5226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4455,8 +5234,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_negotiation_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_negotiation_type_python" style="color: inherit; text-decoration: inherit;">negotiation_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_net_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_net_status_python" style="color: inherit; text-decoration: inherit;">net_<wbr>status</a>
@@ -4464,8 +5250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pre_share_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pre_share_key_python" style="color: inherit; text-decoration: inherit;">pre_<wbr>share_<wbr>key</a>
@@ -4473,8 +5258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_route_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_type_python" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
@@ -4482,17 +5266,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_group_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_policies_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#connectionsecuritygrouppolicy">Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#connectionsecuritygrouppolicy">Sequence[Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args]</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -4500,17 +5282,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -4518,8 +5298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpn_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpn_gateway_id_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
@@ -4527,8 +5306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpn_proto_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpn_proto_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>proto</a>
@@ -4536,14 +5314,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_bgpconfig_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bgpconfig_yaml" style="color: inherit; text-decoration: inherit;">bgp<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionbgpconfig">Property Map</a></span>
+    </dt>
+    <dd>BGP config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4551,8 +5336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_customergatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customergatewayid_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -4560,8 +5344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdaction_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdaction_yaml" style="color: inherit; text-decoration: inherit;">dpd<wbr>Action</a>
@@ -4569,8 +5352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdenable_yaml" style="color: inherit; text-decoration: inherit;">dpd<wbr>Enable</a>
@@ -4578,8 +5360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dpdtimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dpdtimeout_yaml" style="color: inherit; text-decoration: inherit;">dpd<wbr>Timeout</a>
@@ -4587,8 +5368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</p>
-</dd><dt class="property-optional"
+    <dd>DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablehealthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablehealthcheck_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Health<wbr>Check</a>
@@ -4596,8 +5376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether intra-tunnel health checks are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Whether intra-tunnel health checks are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptproto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptproto_yaml" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -4605,8 +5384,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheckconfig_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckconfig_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#connectionhealthcheckconfig">Property Map</a></span>
+    </dt>
+    <dd>VPN channel health check configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecklocalip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecklocalip_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Local<wbr>Ip</a>
@@ -4614,8 +5400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check the address of this terminal.</p>
-</dd><dt class="property-optional"
+    <dd>Health check the address of this terminal.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckremoteip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckremoteip_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Remote<wbr>Ip</a>
@@ -4623,8 +5408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check peer address.</p>
-</dd><dt class="property-optional"
+    <dd>Health check peer address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikedhgroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikedhgroupname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -4632,8 +5416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>DH group name of the IKE operation specification. Valid values: <code>GROUP1</code>, <code>GROUP2</code>, <code>GROUP5</code>, <code>GROUP14</code>, <code>GROUP24</code>. Default value is <code>GROUP1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeexchangemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeexchangemode_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -4641,8 +5424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Exchange mode of the IKE operation specification. Valid values: <code>AGGRESSIVE</code>, <code>MAIN</code>. Default value is <code>MAIN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocaladdress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocaladdress_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -4650,8 +5432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local address of IKE operation specification, valid when ike_local_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Local address of IKE operation specification, valid when ikeLocalIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalfqdnname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalfqdnname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -4659,8 +5440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikelocalidentity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikelocalidentity_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -4668,8 +5448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Local identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoauthenalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoauthenalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -4677,8 +5456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto authenticate algorithm of the IKE operation specification. Valid values: <code>MD5</code>, <code>SHA</code>, <code>SHA-256</code>. Default Value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeprotoencryalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeprotoencryalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -4686,8 +5464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Proto encrypt algorithm of the IKE operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>,<code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteaddress_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -4695,8 +5472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote address of IKE operation specification, valid when ike_remote_identity is <code>ADDRESS</code>, generally the value is <code>public_ip_address</code> of the related customer gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Remote address of IKE operation specification, valid when ikeRemoteIdentity is <code>ADDRESS</code>, generally the value is <code>publicIpAddress</code> of the related customer gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremotefqdnname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremotefqdnname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -4704,8 +5480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-optional"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeremoteidentity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeremoteidentity_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -4713,8 +5488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Remote identity way of IKE operation specification. Valid values: <code>ADDRESS</code>, <code>FQDN</code>. Default value is <code>ADDRESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikesalifetimeseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikesalifetimeseconds_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -4722,8 +5496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>. The value ranges from 60 to 604800. Default value is 86400 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ikeversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ikeversion_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -4731,8 +5504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the IKE operation specification, values: <code>IKEV1</code>, <code>IKEV2</code>. Default value is <code>IKEV1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecencryptalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecencryptalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -4740,8 +5512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Encrypt algorithm of the IPSEC operation specification. Valid values: <code>3DES-CBC</code>, <code>AES-CBC-128</code>, <code>AES-CBC-192</code>, <code>AES-CBC-256</code>, <code>DES-CBC</code>, <code>SM4</code>, <code>NULL</code>, <code>AES128GCM128</code>, <code>AES192GCM128</code>, <code>AES256GCM128</code>. Default value is <code>3DES-CBC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecintegrityalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecintegrityalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -4749,8 +5520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Integrity algorithm of the IPSEC operation specification. Valid values: <code>SHA1</code>, <code>MD5</code>, <code>SHA-256</code>. Default value is <code>MD5</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecpfsdhgroup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecpfsdhgroup_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -4758,8 +5528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>PFS DH group. Valid value: <code>DH-GROUP1</code>, <code>DH-GROUP2</code>, <code>DH-GROUP5</code>, <code>DH-GROUP14</code>, <code>DH-GROUP24</code>, <code>NULL</code>. Default value is <code>NULL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimeseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimeseconds_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -4767,8 +5536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipsecsalifetimetraffic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipsecsalifetimetraffic_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -4776,8 +5544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</p>
-</dd><dt class="property-optional"
+    <dd>SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isccntype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isccntype_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Ccn<wbr>Type</a>
@@ -4785,8 +5552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpc_id</code>. If <code>is_ccn_type</code> is true, modification of <code>vpc_id</code> will be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether is ccn type. Modification of this field only impacts force new logic of <code>vpcId</code>. If <code>isCcnType</code> is true, modification of <code>vpcId</code> will be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4794,8 +5560,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_negotiationtype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_negotiationtype_yaml" style="color: inherit; text-decoration: inherit;">negotiation<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The default negotiation type is <code>active</code>. Optional values: <code>active</code> (active negotiation), <code>passive</code> (passive negotiation), <code>flowTrigger</code> (traffic negotiation).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_netstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_netstatus_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -4803,8 +5576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Net status of the VPN connection. Valid value: <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_presharekey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_presharekey_yaml" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -4812,8 +5584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_routetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routetype_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -4821,8 +5592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Route type of the VPN connection. Valid value: <code>STATIC</code>, <code>StaticRoute</code>, <code>Policy</code>, <code>Bgp</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygrouppolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygrouppolicies_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
@@ -4830,8 +5600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#connectionsecuritygrouppolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</p>
-</dd><dt class="property-optional"
+    <dd>SPD policy group, for example: {&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -4839,17 +5608,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>State of the connection. Valid value: <code>PENDING</code>, <code>AVAILABLE</code>, <code>DELETING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4857,8 +5624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the VPC. Required if vpn gateway is not in <code>CCN</code> type, and doesn't make sense for <code>CCN</code> vpn gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -4866,8 +5632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpnproto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpnproto_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -4875,8 +5640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -4891,7 +5655,493 @@ The following state arguments are supported:
 
 
 
-<h4 id="connectionsecuritygrouppolicy">Connection<wbr>Security<wbr>Group<wbr>Policy</h4>
+<h4 id="connectionbgpconfig">
+Connection<wbr>Bgp<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Connection<wbr>Bgp<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localbgpip_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgpip_csharp" style="color: inherit; text-decoration: inherit;">Local<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="remotebgpip_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotebgpip_csharp" style="color: inherit; text-decoration: inherit;">Remote<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User side BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="tunnelcidr_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tunnelcidr_csharp" style="color: inherit; text-decoration: inherit;">Tunnel<wbr>Cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>BGP tunnel segment.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localbgpip_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgpip_go" style="color: inherit; text-decoration: inherit;">Local<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="remotebgpip_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotebgpip_go" style="color: inherit; text-decoration: inherit;">Remote<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User side BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="tunnelcidr_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tunnelcidr_go" style="color: inherit; text-decoration: inherit;">Tunnel<wbr>Cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>BGP tunnel segment.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="local_bgp_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_bgp_ip_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>bgp_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="remote_bgp_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_bgp_ip_hcl" style="color: inherit; text-decoration: inherit;">remote_<wbr>bgp_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User side BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="tunnel_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tunnel_cidr_hcl" style="color: inherit; text-decoration: inherit;">tunnel_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>BGP tunnel segment.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localbgpip_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgpip_java" style="color: inherit; text-decoration: inherit;">local<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cloud BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="remotebgpip_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotebgpip_java" style="color: inherit; text-decoration: inherit;">remote<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>User side BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="tunnelcidr_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tunnelcidr_java" style="color: inherit; text-decoration: inherit;">tunnel<wbr>Cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>BGP tunnel segment.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localbgpip_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgpip_nodejs" style="color: inherit; text-decoration: inherit;">local<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="remotebgpip_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotebgpip_nodejs" style="color: inherit; text-decoration: inherit;">remote<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User side BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="tunnelcidr_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tunnelcidr_nodejs" style="color: inherit; text-decoration: inherit;">tunnel<wbr>Cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>BGP tunnel segment.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="local_bgp_ip_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_bgp_ip_python" style="color: inherit; text-decoration: inherit;">local_<wbr>bgp_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cloud BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="remote_bgp_ip_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_bgp_ip_python" style="color: inherit; text-decoration: inherit;">remote_<wbr>bgp_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>User side BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="tunnel_cidr_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tunnel_cidr_python" style="color: inherit; text-decoration: inherit;">tunnel_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>BGP tunnel segment.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localbgpip_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgpip_yaml" style="color: inherit; text-decoration: inherit;">local<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cloud BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="remotebgpip_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotebgpip_yaml" style="color: inherit; text-decoration: inherit;">remote<wbr>Bgp<wbr>Ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>User side BGP address. It must be allocated from within the BGP tunnel network segment.</dd><dt class="property-required"
+            title="Required">
+        <span id="tunnelcidr_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tunnelcidr_yaml" style="color: inherit; text-decoration: inherit;">tunnel<wbr>Cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>BGP tunnel segment.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="connectionhealthcheckconfig">
+Connection<wbr>Health<wbr>Check<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Connection<wbr>Health<wbr>Check<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="probeinterval_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probeinterval_csharp" style="color: inherit; text-decoration: inherit;">Probe<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probethreshold_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probethreshold_csharp" style="color: inherit; text-decoration: inherit;">Probe<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetimeout_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetimeout_csharp" style="color: inherit; text-decoration: inherit;">Probe<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection timeout, range [10-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetype_csharp" style="color: inherit; text-decoration: inherit;">Probe<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detection mode, default is <code>NQA</code>, cannot be modified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="probeinterval_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probeinterval_go" style="color: inherit; text-decoration: inherit;">Probe<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probethreshold_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probethreshold_go" style="color: inherit; text-decoration: inherit;">Probe<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetimeout_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetimeout_go" style="color: inherit; text-decoration: inherit;">Probe<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection timeout, range [10-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetype_go" style="color: inherit; text-decoration: inherit;">Probe<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detection mode, default is <code>NQA</code>, cannot be modified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="probe_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_interval_hcl" style="color: inherit; text-decoration: inherit;">probe_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probe_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_threshold_hcl" style="color: inherit; text-decoration: inherit;">probe_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probe_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_timeout_hcl" style="color: inherit; text-decoration: inherit;">probe_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Detection timeout, range [10-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probe_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_type_hcl" style="color: inherit; text-decoration: inherit;">probe_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detection mode, default is <code>NQA</code>, cannot be modified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="probeinterval_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probeinterval_java" style="color: inherit; text-decoration: inherit;">probe<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probethreshold_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probethreshold_java" style="color: inherit; text-decoration: inherit;">probe<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetimeout_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetimeout_java" style="color: inherit; text-decoration: inherit;">probe<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Detection timeout, range [10-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetype_java" style="color: inherit; text-decoration: inherit;">probe<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Detection mode, default is <code>NQA</code>, cannot be modified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="probeinterval_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probeinterval_nodejs" style="color: inherit; text-decoration: inherit;">probe<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probethreshold_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probethreshold_nodejs" style="color: inherit; text-decoration: inherit;">probe<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetimeout_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetimeout_nodejs" style="color: inherit; text-decoration: inherit;">probe<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Detection timeout, range [10-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetype_nodejs" style="color: inherit; text-decoration: inherit;">probe<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detection mode, default is <code>NQA</code>, cannot be modified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="probe_interval_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_interval_python" style="color: inherit; text-decoration: inherit;">probe_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probe_threshold_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_threshold_python" style="color: inherit; text-decoration: inherit;">probe_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probe_timeout_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_timeout_python" style="color: inherit; text-decoration: inherit;">probe_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Detection timeout, range [10-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probe_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_type_python" style="color: inherit; text-decoration: inherit;">probe_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Detection mode, default is <code>NQA</code>, cannot be modified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="probeinterval_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probeinterval_yaml" style="color: inherit; text-decoration: inherit;">probe<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probethreshold_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probethreshold_yaml" style="color: inherit; text-decoration: inherit;">probe<wbr>Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetimeout_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetimeout_yaml" style="color: inherit; text-decoration: inherit;">probe<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Detection timeout, range [10-5000], Unit: ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="probetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetype_yaml" style="color: inherit; text-decoration: inherit;">probe<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Detection mode, default is <code>NQA</code>, cannot be modified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="connectionsecuritygrouppolicy">
+Connection<wbr>Security<wbr>Group<wbr>Policy<pulumi-choosable type="language" values="python,go" class="inline">, Connection<wbr>Security<wbr>Group<wbr>Policy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4903,8 +6153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_csharp" style="color: inherit; text-decoration: inherit;">Remote<wbr>Cidr<wbr>Blocks</a>
@@ -4912,8 +6161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4927,8 +6175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_go" style="color: inherit; text-decoration: inherit;">Remote<wbr>Cidr<wbr>Blocks</a>
@@ -4936,8 +6183,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="local_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local cidr block.</dd><dt class="property-required"
+            title="Required">
+        <span id="remote_cidr_blocks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_cidr_blocks_hcl" style="color: inherit; text-decoration: inherit;">remote_<wbr>cidr_<wbr>blocks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4951,8 +6219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_java" style="color: inherit; text-decoration: inherit;">remote<wbr>Cidr<wbr>Blocks</a>
@@ -4960,8 +6227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4975,8 +6241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_nodejs" style="color: inherit; text-decoration: inherit;">remote<wbr>Cidr<wbr>Blocks</a>
@@ -4984,8 +6249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4999,8 +6263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remote_cidr_blocks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_cidr_blocks_python" style="color: inherit; text-decoration: inherit;">remote_<wbr>cidr_<wbr>blocks</a>
@@ -5008,8 +6271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5023,8 +6285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_yaml" style="color: inherit; text-decoration: inherit;">remote<wbr>Cidr<wbr>Blocks</a>
@@ -5032,8 +6293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5044,9 +6304,12 @@ The following state arguments are supported:
 VPN connection can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
+$ pulumi import tencentcloud:Vpn/connection:Connection example vpnx-nadifg3s
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -5058,7 +6321,6 @@ $ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

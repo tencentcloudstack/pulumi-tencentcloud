@@ -2,9 +2,11 @@
 ---
 title: "getSecrets"
 title_tag: "tencentcloud.Ssm.getSecrets"
-meta_desc: "Documentation for the tencentcloud.Ssm.getSecrets function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of SSM secret"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,48 +18,94 @@ Use this data source to query detailed information of SSM secret
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleSecret = new tencentcloud.ssm.Secret("exampleSecret", {
+const exampleSecret = new tencentcloud.ssm.Secret("example", {
     secretName: "tf_example",
     description: "desc.",
     tags: {
         createdBy: "terraform",
     },
 });
-const exampleSecrets = exampleSecret.secretName.apply(secretName => tencentcloud.Ssm.getSecretsOutput({
-    secretName: secretName,
+const example = tencentcloud.ssm.getSecretsOutput({
+    secretName: exampleSecret.secretName,
     state: 1,
-}));
+});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_secret = tencentcloud.ssm.Secret("exampleSecret",
+example_secret = tencentcloud.ssm.Secret("example",
     secret_name="tf_example",
     description="desc.",
     tags={
         "createdBy": "terraform",
     })
-example_secrets = example_secret.secret_name.apply(lambda secret_name: tencentcloud.Ssm.get_secrets_output(secret_name=secret_name,
-    state=1))
+example = tencentcloud.ssm.get_secrets_output(secret_name=example_secret.secret_name,
+    state=1)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		exampleSecret, err := ssm.NewSecret(ctx, "example", &ssm.SecretArgs{
+			SecretName:  pulumi.String("tf_example"),
+			Description: pulumi.String("desc."),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_ = ssm.GetSecretsOutput(ctx, ssm.GetSecretsOutputArgs{
+			SecretName: exampleSecret.SecretName,
+			State:      pulumi.Int(1),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new()
+    var exampleSecret = new Tencentcloud.Ssm.Secret("example", new()
     {
         SecretName = "tf_example",
         Description = "desc.",
@@ -67,7 +115,7 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleSecrets = Tencentcloud.Ssm.GetSecrets.Invoke(new()
+    var example = Tencentcloud.Ssm.GetSecrets.Invoke(new()
     {
         SecretName = exampleSecret.SecretName,
         State = 1,
@@ -75,36 +123,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleSecret, err := Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
-			SecretName:  pulumi.String("tf_example"),
-			Description: pulumi.String("desc."),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_ = exampleSecret.SecretName.ApplyT(func(secretName string) (ssm.GetSecretsResult, error) {
-			return Ssm.GetSecretsOutput(ctx, ssm.GetSecretsOutputArgs{
-				SecretName: secretName,
-				State:      1,
-			}, nil), nil
-		}).(ssm.GetSecretsResultOutput)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -115,8 +138,8 @@ import com.pulumi.tencentcloud.Ssm.Secret;
 import com.pulumi.tencentcloud.Ssm.SecretArgs;
 import com.pulumi.tencentcloud.Ssm.SsmFunctions;
 import com.pulumi.tencentcloud.Ssm.inputs.GetSecretsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -128,13 +151,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleSecret = new Secret("exampleSecret", SecretArgs.builder()        
+        var exampleSecret = new Secret("exampleSecret", SecretArgs.builder()
             .secretName("tf_example")
             .description("desc.")
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        final var exampleSecrets = SsmFunctions.getSecrets(GetSecretsArgs.builder()
+        final var example = SsmFunctions.getSecrets(GetSecretsArgs.builder()
             .secretName(exampleSecret.secretName())
             .state(1)
             .build());
@@ -142,84 +165,114 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   exampleSecret:
     type: tencentcloud:Ssm:Secret
+    name: example
     properties:
       secretName: tf_example
       description: desc.
       tags:
         createdBy: terraform
 variables:
-  exampleSecrets:
+  example:
     fn::invoke:
-      Function: tencentcloud:Ssm:getSecrets
-      Arguments:
+      function: tencentcloud:Ssm:getSecrets
+      arguments:
         secretName: ${exampleSecret.secretName}
         state: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ssm_getsecrets" "example" {
+  secret_name = tencentcloud_ssm_secret.example.secret_name
+  state       = 1
+}
+
+resource "tencentcloud_ssm_secret" "example" {
+  secret_name = "tf_example"
+  description = "desc."
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### OR you can filter by tags
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Ssm.getSecrets({
-    secretName: tencentcloud_ssm_secret.example.secret_name,
+const example = tencentcloud.ssm.getSecrets({
+    secretName: exampleTencentcloudSsmSecret.secretName,
     state: 1,
     tags: {
         createdBy: "terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Ssm.get_secrets(secret_name=tencentcloud_ssm_secret["example"]["secret_name"],
+example = tencentcloud.ssm.get_secrets(secret_name=example_tencentcloud_ssm_secret["secretName"],
     state=1,
     tags={
         "createdBy": "terraform",
     })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Ssm.GetSecrets.Invoke(new()
-    {
-        SecretName = tencentcloud_ssm_secret.Example.Secret_name,
-        State = 1,
-        Tags = 
-        {
-            { "createdBy", "terraform" },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ssm.GetSecrets(ctx, &ssm.GetSecretsArgs{
-			SecretName: pulumi.StringRef(tencentcloud_ssm_secret.Example.Secret_name),
+		_, err := ssm.GetSecrets(ctx, &ssm.GetSecretsArgs{
+			SecretName: pulumi.StringRef(exampleTencentcloudSsmSecret.SecretName),
 			State:      pulumi.IntRef(1),
-			Tags: map[string]interface{}{
+			Tags: map[string]string{
 				"createdBy": "terraform",
 			},
 		}, nil)
@@ -230,6 +283,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Ssm.GetSecrets.Invoke(new()
+    {
+        SecretName = exampleTencentcloudSsmSecret.SecretName,
+        State = 1,
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -238,8 +321,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ssm.SsmFunctions;
 import com.pulumi.tencentcloud.Ssm.inputs.GetSecretsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -252,7 +335,7 @@ public class App {
 
     public static void stack(Context ctx) {
         final var example = SsmFunctions.getSecrets(GetSecretsArgs.builder()
-            .secretName(tencentcloud_ssm_secret.example().secret_name())
+            .secretName(exampleTencentcloudSsmSecret.secretName())
             .state(1)
             .tags(Map.of("createdBy", "terraform"))
             .build());
@@ -260,19 +343,53 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Ssm:getSecrets
-      Arguments:
-        secretName: ${tencentcloud_ssm_secret.example.secret_name}
+      function: tencentcloud:Ssm:getSecrets
+      arguments:
+        secretName: ${exampleTencentcloudSsmSecret.secretName}
         state: 1
         tags:
           createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ssm_getsecrets" "example" {
+  secret_name = exampleTencentcloudSsmSecret.secretName
+  state       = 1
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListSecrets](https://www.tencentcloud.com/document/api/1078/38646)
 
 
 
@@ -284,7 +401,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -292,9 +409,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSecrets<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecretsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>></span
+><span class="k">function </span>getSecrets<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecretsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>></span
 ><span class="k">
-function </span>getSecretsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecretsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>></span
+function </span>getSecretsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecretsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -309,17 +426,17 @@ function </span>getSecretsOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">secret_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                 <span class="nx">state</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSecretsResult</span
 ><span class="k">
-def </span>get_secrets_output<span class="p">(</span><span class="nx">order_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">product_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">secret_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">state</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecretsResult]</span
+def </span>get_secrets_output<span class="p">(</span><span class="nx">order_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">product_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">secret_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">state</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecretsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -344,7 +461,8 @@ func </span>GetSecretsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSecrets </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSecretsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecretsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecretsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecretsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -353,7 +471,8 @@ func </span>GetSecretsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>> </span>getSecrets<span class="p">(</span><span class="nx">GetSecretsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>> </span>getSecrets<span class="p">(</span><span class="nx">GetSecretsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecretsResult</a></span>> </span>getSecrets<span class="p">(</span><span class="nx">GetSecretsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -365,6 +484,15 @@ func </span>GetSecretsOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ssm/getSecrets:getSecrets
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ssm_get_secrets&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -383,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="productname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Name</a>
@@ -392,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -401,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -410,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -419,8 +543,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-optional"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -428,17 +551,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags to filter secret.</p>
-</dd></dl>
+    <dd>Tags to filter secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -452,8 +573,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="productname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Name</a>
@@ -461,8 +581,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -470,8 +589,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -479,8 +597,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -488,8 +605,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-optional"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -497,17 +613,77 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags to filter secret.</p>
-</dd></dl>
+    <dd>Tags to filter secret.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="order_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags to filter secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -521,8 +697,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="productname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -530,8 +705,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -539,8 +713,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -548,8 +721,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -557,8 +729,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-optional"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -566,17 +737,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags to filter secret.</p>
-</dd></dl>
+    <dd>Tags to filter secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -590,8 +759,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="productname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -599,8 +767,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -608,8 +775,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -617,8 +783,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -626,8 +791,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-optional"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -635,17 +799,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags to filter secret.</p>
-</dd></dl>
+    <dd>Tags to filter secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -659,8 +821,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
@@ -668,8 +829,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -677,8 +837,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -686,8 +845,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
@@ -695,8 +853,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-optional"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -704,17 +861,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags to filter secret.</p>
-</dd></dl>
+    <dd>Tags to filter secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -728,8 +883,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The order to sort the create time of secret. <code>0</code> - desc, <code>1</code> - asc. Default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="productname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -737,8 +891,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -746,8 +899,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -755,8 +907,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -764,8 +915,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-optional"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -773,17 +923,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by state of secret. <code>0</code> - all secrets are queried, <code>1</code> - only Enabled secrets are queried, <code>2</code> - only Disabled secrets are queried, <code>3</code> - only PendingDelete secrets are queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags to filter secret.</p>
-</dd></dl>
+    <dd>Tags to filter secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -806,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretlists_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Lists</a>
@@ -815,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretssecretlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssm.<wbr>Outputs.<wbr>Get<wbr>Secrets<wbr>Secret<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of SSM secrets.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secrets.</dd><dt class="property-"
             title="">
         <span id="ordertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
@@ -832,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</p>
-</dd><dt class="property-"
+    <dd>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -849,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret.</p>
-</dd><dt class="property-"
+    <dd>Name of secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -858,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</p>
-</dd><dt class="property-"
+    <dd>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</dd><dt class="property-"
             title="">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -873,7 +1016,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -889,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretlists_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Lists</a>
@@ -898,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretssecretlist">[]Get<wbr>Secrets<wbr>Secret<wbr>List</a></span>
     </dt>
-    <dd><p>A list of SSM secrets.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secrets.</dd><dt class="property-"
             title="">
         <span id="ordertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
@@ -915,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</p>
-</dd><dt class="property-"
+    <dd>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -932,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret.</p>
-</dd><dt class="property-"
+    <dd>Name of secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -941,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</p>
-</dd><dt class="property-"
+    <dd>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</dd><dt class="property-"
             title="">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -956,7 +1094,85 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="secret_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_lists_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsecretssecretlist">list(object)</a></span>
+    </dt>
+    <dd>A list of SSM secrets.</dd><dt class="property-"
+            title="">
+        <span id="order_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="product_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of secret.</dd><dt class="property-"
+            title="">
+        <span id="secret_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</dd><dt class="property-"
+            title="">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -972,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretlists_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Lists</a>
@@ -981,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretssecretlist">List&lt;Get<wbr>Secrets<wbr>Secret<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of SSM secrets.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secrets.</dd><dt class="property-"
             title="">
         <span id="ordertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_java" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -998,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</p>
-</dd><dt class="property-"
+    <dd>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1015,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret.</p>
-</dd><dt class="property-"
+    <dd>Name of secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1024,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</p>
-</dd><dt class="property-"
+    <dd>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</dd><dt class="property-"
             title="">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1039,7 +1250,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1055,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretlists_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Lists</a>
@@ -1064,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretssecretlist">Get<wbr>Secrets<wbr>Secret<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of SSM secrets.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secrets.</dd><dt class="property-"
             title="">
         <span id="ordertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -1081,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</p>
-</dd><dt class="property-"
+    <dd>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1098,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret.</p>
-</dd><dt class="property-"
+    <dd>Name of secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1107,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</p>
-</dd><dt class="property-"
+    <dd>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</dd><dt class="property-"
             title="">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1122,7 +1328,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1138,17 +1344,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secret_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_lists_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsecretssecretlist">Get<wbr>Secrets<wbr>Secret<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsecretssecretlist">Sequence[Get<wbr>Secrets<wbr>Secret<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of SSM secrets.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secrets.</dd><dt class="property-"
             title="">
         <span id="order_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_python" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
@@ -1164,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</p>
-</dd><dt class="property-"
+    <dd>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1181,8 +1384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of secret.</p>
-</dd><dt class="property-"
+    <dd>Name of secret.</dd><dt class="property-"
             title="">
         <span id="secret_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
@@ -1190,8 +1392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</p>
-</dd><dt class="property-"
+    <dd>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</dd><dt class="property-"
             title="">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1205,7 +1406,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1221,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretlists_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Lists</a>
@@ -1230,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretssecretlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of SSM secrets.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secrets.</dd><dt class="property-"
             title="">
         <span id="ordertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -1247,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</p>
-</dd><dt class="property-"
+    <dd>Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1264,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret.</p>
-</dd><dt class="property-"
+    <dd>Name of secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1273,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</p>
-</dd><dt class="property-"
+    <dd>0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.</dd><dt class="property-"
             title="">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1288,7 +1484,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -1314,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1323,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create time of secret.</p>
-</dd><dt class="property-required"
+    <dd>Create time of secret.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Uin</a>
@@ -1332,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletetime_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Time</a>
@@ -1341,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1350,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret.</p>
-</dd><dt class="property-required"
+    <dd>Description of secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1359,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret.</p>
-</dd><dt class="property-required"
+    <dd>KMS keyId used to encrypt secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeytype_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Type</a>
@@ -1368,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</p>
-</dd><dt class="property-required"
+    <dd>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotationtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotationtime_csharp" style="color: inherit; text-decoration: inherit;">Next<wbr>Rotation<wbr>Time</a>
@@ -1377,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Next rotation start time, uinx timestamp.</p>
-</dd><dt class="property-required"
+    <dd>Next rotation start time, uinx timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="productname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Name</a>
@@ -1386,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-required"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1395,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1404,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cloud product instance ID number corresponding to the cloud product credentials.</p>
-</dd><dt class="property-required"
+    <dd>The cloud product instance ID number corresponding to the cloud product credentials.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -1413,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</dd><dt class="property-required"
             title="Required">
         <span id="rotationbegintime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationbegintime_csharp" style="color: inherit; text-decoration: inherit;">Rotation<wbr>Begin<wbr>Time</a>
@@ -1422,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user specified rotation start time.</p>
-</dd><dt class="property-required"
+    <dd>The user specified rotation start time.</dd><dt class="property-required"
             title="Required">
         <span id="rotationfrequency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationfrequency_csharp" style="color: inherit; text-decoration: inherit;">Rotation<wbr>Frequency</a>
@@ -1431,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The frequency of rotation, in days, takes effect when rotation is on.</p>
-</dd><dt class="property-required"
+    <dd>The frequency of rotation, in days, takes effect when rotation is on.</dd><dt class="property-required"
             title="Required">
         <span id="rotationstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationstatus_csharp" style="color: inherit; text-decoration: inherit;">Rotation<wbr>Status</a>
@@ -1440,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1449,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-required"
+    <dd>Secret name used to filter result.</dd><dt class="property-required"
             title="Required">
         <span id="secrettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -1458,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-required"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1467,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-required"
+    <dd>Status of secret.</dd><dt class="property-required"
             title="Required">
         <span id="targetuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetuin_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Uin</a>
@@ -1476,8 +1654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</p>
-</dd></dl>
+    <dd>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1491,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1500,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create time of secret.</p>
-</dd><dt class="property-required"
+    <dd>Create time of secret.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Uin</a>
@@ -1509,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletetime_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Time</a>
@@ -1518,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1527,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret.</p>
-</dd><dt class="property-required"
+    <dd>Description of secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1536,8 +1708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret.</p>
-</dd><dt class="property-required"
+    <dd>KMS keyId used to encrypt secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeytype_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Type</a>
@@ -1545,8 +1716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</p>
-</dd><dt class="property-required"
+    <dd>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotationtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotationtime_go" style="color: inherit; text-decoration: inherit;">Next<wbr>Rotation<wbr>Time</a>
@@ -1554,8 +1724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Next rotation start time, uinx timestamp.</p>
-</dd><dt class="property-required"
+    <dd>Next rotation start time, uinx timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="productname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Name</a>
@@ -1563,8 +1732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-required"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1572,8 +1740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1581,8 +1748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cloud product instance ID number corresponding to the cloud product credentials.</p>
-</dd><dt class="property-required"
+    <dd>The cloud product instance ID number corresponding to the cloud product credentials.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -1590,8 +1756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</dd><dt class="property-required"
             title="Required">
         <span id="rotationbegintime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationbegintime_go" style="color: inherit; text-decoration: inherit;">Rotation<wbr>Begin<wbr>Time</a>
@@ -1599,8 +1764,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user specified rotation start time.</p>
-</dd><dt class="property-required"
+    <dd>The user specified rotation start time.</dd><dt class="property-required"
             title="Required">
         <span id="rotationfrequency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationfrequency_go" style="color: inherit; text-decoration: inherit;">Rotation<wbr>Frequency</a>
@@ -1608,8 +1772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The frequency of rotation, in days, takes effect when rotation is on.</p>
-</dd><dt class="property-required"
+    <dd>The frequency of rotation, in days, takes effect when rotation is on.</dd><dt class="property-required"
             title="Required">
         <span id="rotationstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationstatus_go" style="color: inherit; text-decoration: inherit;">Rotation<wbr>Status</a>
@@ -1617,8 +1780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1626,8 +1788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-required"
+    <dd>Secret name used to filter result.</dd><dt class="property-required"
             title="Required">
         <span id="secrettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -1635,8 +1796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-required"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1644,8 +1804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-required"
+    <dd>Status of secret.</dd><dt class="property-required"
             title="Required">
         <span id="targetuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetuin_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Uin</a>
@@ -1653,8 +1812,165 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</p>
-</dd></dl>
+    <dd>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="associated_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associated_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">associated_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Create time of secret.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_uin_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uin of Creator.</dd><dt class="property-required"
+            title="Required">
+        <span id="delete_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_time_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Delete time of CMK.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of secret.</dd><dt class="property-required"
+            title="Required">
+        <span id="kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS keyId used to encrypt secret.</dd><dt class="property-required"
+            title="Required">
+        <span id="kms_key_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_type_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</dd><dt class="property-required"
+            title="Required">
+        <span id="next_rotation_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#next_rotation_time_hcl" style="color: inherit; text-decoration: inherit;">next_<wbr>rotation_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Next rotation start time, uinx timestamp.</dd><dt class="property-required"
+            title="Required">
+        <span id="product_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The cloud product instance ID number corresponding to the cloud product credentials.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</dd><dt class="property-required"
+            title="Required">
+        <span id="rotation_begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotation_begin_time_hcl" style="color: inherit; text-decoration: inherit;">rotation_<wbr>begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user specified rotation start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="rotation_frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotation_frequency_hcl" style="color: inherit; text-decoration: inherit;">rotation_<wbr>frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The frequency of rotation, in days, takes effect when rotation is on.</dd><dt class="property-required"
+            title="Required">
+        <span id="rotation_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotation_status_hcl" style="color: inherit; text-decoration: inherit;">rotation_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret name used to filter result.</dd><dt class="property-required"
+            title="Required">
+        <span id="secret_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of secret.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_uin_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1668,8 +1984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1677,8 +1992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Create time of secret.</p>
-</dd><dt class="property-required"
+    <dd>Create time of secret.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_java" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -1686,8 +2000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uin of Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletetime_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Time</a>
@@ -1695,8 +2008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1704,8 +2016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of secret.</p>
-</dd><dt class="property-required"
+    <dd>Description of secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1713,8 +2024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret.</p>
-</dd><dt class="property-required"
+    <dd>KMS keyId used to encrypt secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeytype_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Type</a>
@@ -1722,8 +2032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</p>
-</dd><dt class="property-required"
+    <dd>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotationtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotationtime_java" style="color: inherit; text-decoration: inherit;">next<wbr>Rotation<wbr>Time</a>
@@ -1731,8 +2040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Next rotation start time, uinx timestamp.</p>
-</dd><dt class="property-required"
+    <dd>Next rotation start time, uinx timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="productname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -1740,8 +2048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-required"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1749,8 +2056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1758,8 +2064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The cloud product instance ID number corresponding to the cloud product credentials.</p>
-</dd><dt class="property-required"
+    <dd>The cloud product instance ID number corresponding to the cloud product credentials.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -1767,8 +2072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</dd><dt class="property-required"
             title="Required">
         <span id="rotationbegintime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationbegintime_java" style="color: inherit; text-decoration: inherit;">rotation<wbr>Begin<wbr>Time</a>
@@ -1776,8 +2080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user specified rotation start time.</p>
-</dd><dt class="property-required"
+    <dd>The user specified rotation start time.</dd><dt class="property-required"
             title="Required">
         <span id="rotationfrequency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationfrequency_java" style="color: inherit; text-decoration: inherit;">rotation<wbr>Frequency</a>
@@ -1785,8 +2088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The frequency of rotation, in days, takes effect when rotation is on.</p>
-</dd><dt class="property-required"
+    <dd>The frequency of rotation, in days, takes effect when rotation is on.</dd><dt class="property-required"
             title="Required">
         <span id="rotationstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationstatus_java" style="color: inherit; text-decoration: inherit;">rotation<wbr>Status</a>
@@ -1794,8 +2096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1803,8 +2104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-required"
+    <dd>Secret name used to filter result.</dd><dt class="property-required"
             title="Required">
         <span id="secrettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1812,8 +2112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-required"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1821,8 +2120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-required"
+    <dd>Status of secret.</dd><dt class="property-required"
             title="Required">
         <span id="targetuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetuin_java" style="color: inherit; text-decoration: inherit;">target<wbr>Uin</a>
@@ -1830,8 +2128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</p>
-</dd></dl>
+    <dd>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1845,8 +2142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1854,8 +2150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Create time of secret.</p>
-</dd><dt class="property-required"
+    <dd>Create time of secret.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -1863,8 +2158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uin of Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletetime_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Time</a>
@@ -1872,8 +2166,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1881,8 +2174,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret.</p>
-</dd><dt class="property-required"
+    <dd>Description of secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1890,8 +2182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret.</p>
-</dd><dt class="property-required"
+    <dd>KMS keyId used to encrypt secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeytype_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Type</a>
@@ -1899,8 +2190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</p>
-</dd><dt class="property-required"
+    <dd>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotationtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotationtime_nodejs" style="color: inherit; text-decoration: inherit;">next<wbr>Rotation<wbr>Time</a>
@@ -1908,8 +2198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Next rotation start time, uinx timestamp.</p>
-</dd><dt class="property-required"
+    <dd>Next rotation start time, uinx timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="productname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -1917,8 +2206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-required"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1926,8 +2214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1935,8 +2222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cloud product instance ID number corresponding to the cloud product credentials.</p>
-</dd><dt class="property-required"
+    <dd>The cloud product instance ID number corresponding to the cloud product credentials.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -1944,8 +2230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</dd><dt class="property-required"
             title="Required">
         <span id="rotationbegintime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationbegintime_nodejs" style="color: inherit; text-decoration: inherit;">rotation<wbr>Begin<wbr>Time</a>
@@ -1953,8 +2238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user specified rotation start time.</p>
-</dd><dt class="property-required"
+    <dd>The user specified rotation start time.</dd><dt class="property-required"
             title="Required">
         <span id="rotationfrequency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationfrequency_nodejs" style="color: inherit; text-decoration: inherit;">rotation<wbr>Frequency</a>
@@ -1962,8 +2246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The frequency of rotation, in days, takes effect when rotation is on.</p>
-</dd><dt class="property-required"
+    <dd>The frequency of rotation, in days, takes effect when rotation is on.</dd><dt class="property-required"
             title="Required">
         <span id="rotationstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationstatus_nodejs" style="color: inherit; text-decoration: inherit;">rotation<wbr>Status</a>
@@ -1971,8 +2254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1980,8 +2262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-required"
+    <dd>Secret name used to filter result.</dd><dt class="property-required"
             title="Required">
         <span id="secrettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1989,8 +2270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-required"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1998,8 +2278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-required"
+    <dd>Status of secret.</dd><dt class="property-required"
             title="Required">
         <span id="targetuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetuin_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Uin</a>
@@ -2007,8 +2286,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</p>
-</dd></dl>
+    <dd>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2022,8 +2300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2031,8 +2308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Create time of secret.</p>
-</dd><dt class="property-required"
+    <dd>Create time of secret.</dd><dt class="property-required"
             title="Required">
         <span id="create_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_uin_python" style="color: inherit; text-decoration: inherit;">create_<wbr>uin</a>
@@ -2040,8 +2316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of Creator.</dd><dt class="property-required"
             title="Required">
         <span id="delete_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_time_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>time</a>
@@ -2049,8 +2324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2058,8 +2332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of secret.</p>
-</dd><dt class="property-required"
+    <dd>Description of secret.</dd><dt class="property-required"
             title="Required">
         <span id="kms_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
@@ -2067,8 +2340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret.</p>
-</dd><dt class="property-required"
+    <dd>KMS keyId used to encrypt secret.</dd><dt class="property-required"
             title="Required">
         <span id="kms_key_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_type_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>type</a>
@@ -2076,8 +2348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</p>
-</dd><dt class="property-required"
+    <dd>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</dd><dt class="property-required"
             title="Required">
         <span id="next_rotation_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#next_rotation_time_python" style="color: inherit; text-decoration: inherit;">next_<wbr>rotation_<wbr>time</a>
@@ -2085,8 +2356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Next rotation start time, uinx timestamp.</p>
-</dd><dt class="property-required"
+    <dd>Next rotation start time, uinx timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="product_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
@@ -2094,8 +2364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-required"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2103,8 +2372,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</dd><dt class="property-required"
             title="Required">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -2112,8 +2380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The cloud product instance ID number corresponding to the cloud product credentials.</p>
-</dd><dt class="property-required"
+    <dd>The cloud product instance ID number corresponding to the cloud product credentials.</dd><dt class="property-required"
             title="Required">
         <span id="resource_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
@@ -2121,8 +2388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</dd><dt class="property-required"
             title="Required">
         <span id="rotation_begin_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotation_begin_time_python" style="color: inherit; text-decoration: inherit;">rotation_<wbr>begin_<wbr>time</a>
@@ -2130,8 +2396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user specified rotation start time.</p>
-</dd><dt class="property-required"
+    <dd>The user specified rotation start time.</dd><dt class="property-required"
             title="Required">
         <span id="rotation_frequency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotation_frequency_python" style="color: inherit; text-decoration: inherit;">rotation_<wbr>frequency</a>
@@ -2139,8 +2404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The frequency of rotation, in days, takes effect when rotation is on.</p>
-</dd><dt class="property-required"
+    <dd>The frequency of rotation, in days, takes effect when rotation is on.</dd><dt class="property-required"
             title="Required">
         <span id="rotation_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotation_status_python" style="color: inherit; text-decoration: inherit;">rotation_<wbr>status</a>
@@ -2148,8 +2412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -2157,8 +2420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-required"
+    <dd>Secret name used to filter result.</dd><dt class="property-required"
             title="Required">
         <span id="secret_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
@@ -2166,8 +2428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-required"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2175,8 +2436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-required"
+    <dd>Status of secret.</dd><dt class="property-required"
             title="Required">
         <span id="target_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_uin_python" style="color: inherit; text-decoration: inherit;">target_<wbr>uin</a>
@@ -2184,8 +2444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</p>
-</dd></dl>
+    <dd>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2199,8 +2458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2208,8 +2466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Create time of secret.</p>
-</dd><dt class="property-required"
+    <dd>Create time of secret.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -2217,8 +2474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uin of Creator.</p>
-</dd><dt class="property-required"
+    <dd>Uin of Creator.</dd><dt class="property-required"
             title="Required">
         <span id="deletetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletetime_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Time</a>
@@ -2226,8 +2482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Delete time of CMK.</p>
-</dd><dt class="property-required"
+    <dd>Delete time of CMK.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2235,8 +2490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of secret.</p>
-</dd><dt class="property-required"
+    <dd>Description of secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -2244,8 +2498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret.</p>
-</dd><dt class="property-required"
+    <dd>KMS keyId used to encrypt secret.</dd><dt class="property-required"
             title="Required">
         <span id="kmskeytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeytype_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Type</a>
@@ -2253,8 +2506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</p>
-</dd><dt class="property-required"
+    <dd>KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.</dd><dt class="property-required"
             title="Required">
         <span id="nextrotationtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nextrotationtime_yaml" style="color: inherit; text-decoration: inherit;">next<wbr>Rotation<wbr>Time</a>
@@ -2262,8 +2514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Next rotation start time, uinx timestamp.</p>
-</dd><dt class="property-required"
+    <dd>Next rotation start time, uinx timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="productname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -2271,8 +2522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</p>
-</dd><dt class="property-required"
+    <dd>This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2280,8 +2530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -2289,8 +2538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The cloud product instance ID number corresponding to the cloud product credentials.</p>
-</dd><dt class="property-required"
+    <dd>The cloud product instance ID number corresponding to the cloud product credentials.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -2298,8 +2546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</p>
-</dd><dt class="property-required"
+    <dd>When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.</dd><dt class="property-required"
             title="Required">
         <span id="rotationbegintime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationbegintime_yaml" style="color: inherit; text-decoration: inherit;">rotation<wbr>Begin<wbr>Time</a>
@@ -2307,8 +2554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user specified rotation start time.</p>
-</dd><dt class="property-required"
+    <dd>The user specified rotation start time.</dd><dt class="property-required"
             title="Required">
         <span id="rotationfrequency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationfrequency_yaml" style="color: inherit; text-decoration: inherit;">rotation<wbr>Frequency</a>
@@ -2316,8 +2562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The frequency of rotation, in days, takes effect when rotation is on.</p>
-</dd><dt class="property-required"
+    <dd>The frequency of rotation, in days, takes effect when rotation is on.</dd><dt class="property-required"
             title="Required">
         <span id="rotationstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotationstatus_yaml" style="color: inherit; text-decoration: inherit;">rotation<wbr>Status</a>
@@ -2325,8 +2570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -2334,8 +2578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-required"
+    <dd>Secret name used to filter result.</dd><dt class="property-required"
             title="Required">
         <span id="secrettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -2343,8 +2586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</p>
-</dd><dt class="property-required"
+    <dd>0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2352,8 +2594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-required"
+    <dd>Status of secret.</dd><dt class="property-required"
             title="Required">
         <span id="targetuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetuin_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Uin</a>
@@ -2361,8 +2602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</p>
-</dd></dl>
+    <dd>When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2377,7 +2617,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

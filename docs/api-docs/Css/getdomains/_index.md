@@ -2,9 +2,11 @@
 ---
 title: "getDomains"
 title_tag: "tencentcloud.Css.getDomains"
-meta_desc: "Documentation for the tencentcloud.Css.getDomains function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of css domains"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,56 +18,54 @@ Use this data source to query detailed information of css domains
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const domains = tencentcloud.Css.getDomains({
+const domains = tencentcloud.css.getDomains({
     domainType: 0,
-    isDelayLive: 0,
     playType: 1,
+    isDelayLive: 0,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-domains = tencentcloud.Css.get_domains(domain_type=0,
-    is_delay_live=0,
-    play_type=1)
+domains = tencentcloud.css.get_domains(domain_type=0,
+    play_type=1,
+    is_delay_live=0)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var domains = Tencentcloud.Css.GetDomains.Invoke(new()
-    {
-        DomainType = 0,
-        IsDelayLive = 0,
-        PlayType = 1,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/css"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Css.GetDomains(ctx, &css.GetDomainsArgs{
+		_, err := css.GetDomains(ctx, &css.GetDomainsArgs{
 			DomainType:  pulumi.IntRef(0),
-			IsDelayLive: pulumi.IntRef(0),
 			PlayType:    pulumi.IntRef(1),
+			IsDelayLive: pulumi.IntRef(0),
 		}, nil)
 		if err != nil {
 			return err
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var domains = Tencentcloud.Css.GetDomains.Invoke(new()
+    {
+        DomainType = 0,
+        PlayType = 1,
+        IsDelayLive = 0,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Css.CssFunctions;
 import com.pulumi.tencentcloud.Css.inputs.GetDomainsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -97,25 +124,57 @@ public class App {
     public static void stack(Context ctx) {
         final var domains = CssFunctions.getDomains(GetDomainsArgs.builder()
             .domainType(0)
-            .isDelayLive(0)
             .playType(1)
+            .isDelayLive(0)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   domains:
     fn::invoke:
-      Function: tencentcloud:Css:getDomains
-      Arguments:
+      function: tencentcloud:Css:getDomains
+      arguments:
         domainType: 0
-        isDelayLive: 0
         playType: 1
+        isDelayLive: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_css_getdomains" "domains" {
+  domain_type   = 0
+  play_type     = 1
+  is_delay_live = 0
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeLiveDomains](https://www.tencentcloud.com/document/api/267/35186)
 
 
 
@@ -127,7 +186,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +194,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
+><span class="k">function </span>getDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
 ><span class="k">
-function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
+function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -154,13 +213,13 @@ function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDomainsResult</span
 ><span class="k">
-def </span>get_domains_output<span class="p">(</span><span class="nx">domain_prefix</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">domain_status</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">domain_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">is_delay_live</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">play_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainsResult]</span
+def </span>get_domains_output<span class="p">(</span><span class="nx">domain_prefix</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">domain_status</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">domain_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">is_delay_live</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">play_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -185,7 +244,8 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDomains </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,7 +254,8 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,6 +267,15 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Css/getDomains:getDomains
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_css_get_domains&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -224,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name prefix.</p>
-</dd><dt class="property-optional"
+    <dd>domain name prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainstatus_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Status</a>
@@ -233,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>domain name status filter. 0-disable, 1-enable.</p>
-</dd><dt class="property-optional"
+    <dd>domain name status filter. 0-disable, 1-enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="domaintype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaintype_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Type</a>
@@ -242,8 +310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name type filtering. 0-push, 1-play.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name type filtering. 0-push, 1-play.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Delay<wbr>Live</a>
@@ -251,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-optional"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="playtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_csharp" style="color: inherit; text-decoration: inherit;">Play<wbr>Type</a>
@@ -260,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -269,8 +334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -284,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name prefix.</p>
-</dd><dt class="property-optional"
+    <dd>domain name prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainstatus_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Status</a>
@@ -293,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>domain name status filter. 0-disable, 1-enable.</p>
-</dd><dt class="property-optional"
+    <dd>domain name status filter. 0-disable, 1-enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="domaintype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaintype_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Type</a>
@@ -302,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name type filtering. 0-push, 1-play.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name type filtering. 0-push, 1-play.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Delay<wbr>Live</a>
@@ -311,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-optional"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="playtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_go" style="color: inherit; text-decoration: inherit;">Play<wbr>Type</a>
@@ -320,8 +380,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -329,8 +388,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="domain_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_prefix_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>domain name prefix.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="domain_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_status_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>domain name status filter. 0-disable, 1-enable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="domain_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_type_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Domain name type filtering. 0-push, 1-play.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_delay_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_delay_live_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="play_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#play_type_hcl" style="color: inherit; text-decoration: inherit;">play_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain name prefix.</p>
-</dd><dt class="property-optional"
+    <dd>domain name prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainstatus_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Status</a>
@@ -353,8 +464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>domain name status filter. 0-disable, 1-enable.</p>
-</dd><dt class="property-optional"
+    <dd>domain name status filter. 0-disable, 1-enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="domaintype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaintype_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Type</a>
@@ -362,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Domain name type filtering. 0-push, 1-play.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name type filtering. 0-push, 1-play.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_java" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -371,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-optional"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="playtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_java" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -380,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -389,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -404,8 +510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name prefix.</p>
-</dd><dt class="property-optional"
+    <dd>domain name prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainstatus_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Status</a>
@@ -413,8 +518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>domain name status filter. 0-disable, 1-enable.</p>
-</dd><dt class="property-optional"
+    <dd>domain name status filter. 0-disable, 1-enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="domaintype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaintype_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Type</a>
@@ -422,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Domain name type filtering. 0-push, 1-play.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name type filtering. 0-push, 1-play.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -431,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-optional"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="playtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_nodejs" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -440,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -449,8 +550,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>domain name prefix.</p>
-</dd><dt class="property-optional"
+    <dd>domain name prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_status_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>status</a>
@@ -473,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>domain name status filter. 0-disable, 1-enable.</p>
-</dd><dt class="property-optional"
+    <dd>domain name status filter. 0-disable, 1-enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_type_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>type</a>
@@ -482,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain name type filtering. 0-push, 1-play.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name type filtering. 0-push, 1-play.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_delay_live_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_delay_live_python" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
@@ -491,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-optional"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="play_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#play_type_python" style="color: inherit; text-decoration: inherit;">play_<wbr>type</a>
@@ -500,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -509,8 +604,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -524,8 +618,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain name prefix.</p>
-</dd><dt class="property-optional"
+    <dd>domain name prefix.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainstatus_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Status</a>
@@ -533,8 +626,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>domain name status filter. 0-disable, 1-enable.</p>
-</dd><dt class="property-optional"
+    <dd>domain name status filter. 0-disable, 1-enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="domaintype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaintype_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Type</a>
@@ -542,8 +634,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Domain name type filtering. 0-push, 1-play.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name type filtering. 0-push, 1-play.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -551,8 +642,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-optional"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="playtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_yaml" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -560,8 +650,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -569,8 +658,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Outputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of domain name details.</p>
-</dd><dt class="property-"
+    <dd>A list of domain name details.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -602,8 +689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domainprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainprefix_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Prefix</a>
@@ -635,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</p>
-</dd><dt class="property-"
+    <dd>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</dd><dt class="property-"
             title="">
         <span id="playtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_csharp" style="color: inherit; text-decoration: inherit;">Play<wbr>Type</a>
@@ -644,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</p>
-</dd><dt class="property-"
+    <dd>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -667,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">[]Get<wbr>Domains<wbr>Domain<wbr>List</a></span>
     </dt>
-    <dd><p>A list of domain name details.</p>
-</dd><dt class="property-"
+    <dd>A list of domain name details.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -676,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domainprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainprefix_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Prefix</a>
@@ -709,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</p>
-</dd><dt class="property-"
+    <dd>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</dd><dt class="property-"
             title="">
         <span id="playtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_go" style="color: inherit; text-decoration: inherit;">Play<wbr>Type</a>
@@ -718,11 +799,80 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</p>
-</dd><dt class="property-"
+    <dd>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="domain_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_lists_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainlist">list(object)</a></span>
+    </dt>
+    <dd>A list of domain name details.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="domain_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_prefix_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="domain_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_status_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="domain_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_type_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="is_delay_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_delay_live_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</dd><dt class="property-"
+            title="">
+        <span id="play_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#play_type_hcl" style="color: inherit; text-decoration: inherit;">play_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -741,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">List&lt;Get<wbr>Domains<wbr>Domain<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of domain name details.</p>
-</dd><dt class="property-"
+    <dd>A list of domain name details.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -750,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domainprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainprefix_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Prefix</a>
@@ -783,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</p>
-</dd><dt class="property-"
+    <dd>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</dd><dt class="property-"
             title="">
         <span id="playtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_java" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -792,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</p>
-</dd><dt class="property-"
+    <dd>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -815,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">Get<wbr>Domains<wbr>Domain<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of domain name details.</p>
-</dd><dt class="property-"
+    <dd>A list of domain name details.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -824,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domainprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainprefix_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Prefix</a>
@@ -857,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</p>
-</dd><dt class="property-"
+    <dd>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</dd><dt class="property-"
             title="">
         <span id="playtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_nodejs" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -866,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</p>
-</dd><dt class="property-"
+    <dd>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -887,10 +1029,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_lists_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainlist">Get<wbr>Domains<wbr>Domain<wbr>List]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainlist">Sequence[Get<wbr>Domains<wbr>Domain<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of domain name details.</p>
-</dd><dt class="property-"
+    <dd>A list of domain name details.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -898,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_prefix_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>prefix</a>
@@ -931,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</p>
-</dd><dt class="property-"
+    <dd>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</dd><dt class="property-"
             title="">
         <span id="play_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#play_type_python" style="color: inherit; text-decoration: inherit;">play_<wbr>type</a>
@@ -940,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</p>
-</dd><dt class="property-"
+    <dd>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -963,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of domain name details.</p>
-</dd><dt class="property-"
+    <dd>A list of domain name details.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -972,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domainprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainprefix_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Prefix</a>
@@ -1005,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</p>
-</dd><dt class="property-"
+    <dd>Whether to slow live broadcast: 0: normal live broadcast. 1: Slow live broadcast.</dd><dt class="property-"
             title="">
         <span id="playtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_yaml" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -1014,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</p>
-</dd><dt class="property-"
+    <dd>Playing area, this parameter is meaningful only when Type=1. 1: Domestic. 2: Global. 3: Overseas.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1047,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</p>
-</dd><dt class="property-required"
+    <dd>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1056,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>add time.Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>add time.Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="currentcname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentcname_csharp" style="color: inherit; text-decoration: inherit;">Current<wbr>CName</a>
@@ -1065,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cname information used by the current client.</p>
-</dd><dt class="property-required"
+    <dd>The cname information used by the current client.</dd><dt class="property-required"
             title="Required">
         <span id="isdelaylive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Delay<wbr>Live</a>
@@ -1074,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-required"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-required"
             title="Required">
         <span id="isminiprogramlive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isminiprogramlive_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Mini<wbr>Program<wbr>Live</a>
@@ -1083,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1092,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Live domain name.</p>
-</dd><dt class="property-required"
+    <dd>Live domain name.</dd><dt class="property-required"
             title="Required">
         <span id="playtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_csharp" style="color: inherit; text-decoration: inherit;">Play<wbr>Type</a>
@@ -1101,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="rentexpiretime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rentexpiretime_csharp" style="color: inherit; text-decoration: inherit;">Rent<wbr>Expire<wbr>Time</a>
@@ -1110,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="renttag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renttag_csharp" style="color: inherit; text-decoration: inherit;">Rent<wbr>Tag</a>
@@ -1119,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>invalid parameter, can be ignored.</p>
-</dd><dt class="property-required"
+    <dd>invalid parameter, can be ignored.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1128,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain Status: 0: disable. 1: Enabled.</p>
-</dd><dt class="property-required"
+    <dd>Domain Status: 0: disable. 1: Enabled.</dd><dt class="property-required"
             title="Required">
         <span id="targetdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetdomain_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Domain</a>
@@ -1137,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name corresponding to the cname.</p>
-</dd><dt class="property-required"
+    <dd>The domain name corresponding to the cname.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1146,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain Type: 0: push stream. 1: Play.</p>
-</dd></dl>
+    <dd>Domain Type: 0: push stream. 1: Play.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1161,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</p>
-</dd><dt class="property-required"
+    <dd>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1170,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>add time.Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>add time.Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="currentcname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentcname_go" style="color: inherit; text-decoration: inherit;">Current<wbr>CName</a>
@@ -1179,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cname information used by the current client.</p>
-</dd><dt class="property-required"
+    <dd>The cname information used by the current client.</dd><dt class="property-required"
             title="Required">
         <span id="isdelaylive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Delay<wbr>Live</a>
@@ -1188,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-required"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-required"
             title="Required">
         <span id="isminiprogramlive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isminiprogramlive_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Mini<wbr>Program<wbr>Live</a>
@@ -1197,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1206,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Live domain name.</p>
-</dd><dt class="property-required"
+    <dd>Live domain name.</dd><dt class="property-required"
             title="Required">
         <span id="playtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_go" style="color: inherit; text-decoration: inherit;">Play<wbr>Type</a>
@@ -1215,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="rentexpiretime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rentexpiretime_go" style="color: inherit; text-decoration: inherit;">Rent<wbr>Expire<wbr>Time</a>
@@ -1224,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="renttag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renttag_go" style="color: inherit; text-decoration: inherit;">Rent<wbr>Tag</a>
@@ -1233,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>invalid parameter, can be ignored.</p>
-</dd><dt class="property-required"
+    <dd>invalid parameter, can be ignored.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1242,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain Status: 0: disable. 1: Enabled.</p>
-</dd><dt class="property-required"
+    <dd>Domain Status: 0: disable. 1: Enabled.</dd><dt class="property-required"
             title="Required">
         <span id="targetdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetdomain_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Domain</a>
@@ -1251,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name corresponding to the cname.</p>
-</dd><dt class="property-required"
+    <dd>The domain name corresponding to the cname.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1260,8 +1371,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain Type: 0: push stream. 1: Play.</p>
-</dd></dl>
+    <dd>Domain Type: 0: push stream. 1: Play.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="b_c_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#b_c_name_hcl" style="color: inherit; text-decoration: inherit;">b_<wbr>c_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>add time.Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
+            title="Required">
+        <span id="current_c_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_c_name_hcl" style="color: inherit; text-decoration: inherit;">current_<wbr>c_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The cname information used by the current client.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_delay_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_delay_live_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_mini_program_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_mini_program_live_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>mini_<wbr>program_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Live domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="play_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#play_type_hcl" style="color: inherit; text-decoration: inherit;">play_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-required"
+            title="Required">
+        <span id="rent_expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rent_expire_time_hcl" style="color: inherit; text-decoration: inherit;">rent_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
+            title="Required">
+        <span id="rent_tag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rent_tag_hcl" style="color: inherit; text-decoration: inherit;">rent_<wbr>tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>invalid parameter, can be ignored.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Domain Status: 0: disable. 1: Enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_domain_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain name corresponding to the cname.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Domain Type: 0: push stream. 1: Play.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1275,8 +1487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</p>
-</dd><dt class="property-required"
+    <dd>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1284,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>add time.Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>add time.Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="currentcname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentcname_java" style="color: inherit; text-decoration: inherit;">current<wbr>CName</a>
@@ -1293,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The cname information used by the current client.</p>
-</dd><dt class="property-required"
+    <dd>The cname information used by the current client.</dd><dt class="property-required"
             title="Required">
         <span id="isdelaylive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_java" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -1302,8 +1511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-required"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-required"
             title="Required">
         <span id="isminiprogramlive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isminiprogramlive_java" style="color: inherit; text-decoration: inherit;">is<wbr>Mini<wbr>Program<wbr>Live</a>
@@ -1311,8 +1519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1320,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Live domain name.</p>
-</dd><dt class="property-required"
+    <dd>Live domain name.</dd><dt class="property-required"
             title="Required">
         <span id="playtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_java" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -1329,8 +1535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="rentexpiretime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rentexpiretime_java" style="color: inherit; text-decoration: inherit;">rent<wbr>Expire<wbr>Time</a>
@@ -1338,8 +1543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="renttag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renttag_java" style="color: inherit; text-decoration: inherit;">rent<wbr>Tag</a>
@@ -1347,8 +1551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>invalid parameter, can be ignored.</p>
-</dd><dt class="property-required"
+    <dd>invalid parameter, can be ignored.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1356,8 +1559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Domain Status: 0: disable. 1: Enabled.</p>
-</dd><dt class="property-required"
+    <dd>Domain Status: 0: disable. 1: Enabled.</dd><dt class="property-required"
             title="Required">
         <span id="targetdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetdomain_java" style="color: inherit; text-decoration: inherit;">target<wbr>Domain</a>
@@ -1365,8 +1567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain name corresponding to the cname.</p>
-</dd><dt class="property-required"
+    <dd>The domain name corresponding to the cname.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1374,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Domain Type: 0: push stream. 1: Play.</p>
-</dd></dl>
+    <dd>Domain Type: 0: push stream. 1: Play.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1389,8 +1589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</p>
-</dd><dt class="property-required"
+    <dd>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1398,8 +1597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>add time.Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>add time.Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="currentcname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentcname_nodejs" style="color: inherit; text-decoration: inherit;">current<wbr>CName</a>
@@ -1407,8 +1605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cname information used by the current client.</p>
-</dd><dt class="property-required"
+    <dd>The cname information used by the current client.</dd><dt class="property-required"
             title="Required">
         <span id="isdelaylive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -1416,8 +1613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-required"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-required"
             title="Required">
         <span id="isminiprogramlive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isminiprogramlive_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Mini<wbr>Program<wbr>Live</a>
@@ -1425,8 +1621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1434,8 +1629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Live domain name.</p>
-</dd><dt class="property-required"
+    <dd>Live domain name.</dd><dt class="property-required"
             title="Required">
         <span id="playtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_nodejs" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -1443,8 +1637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="rentexpiretime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rentexpiretime_nodejs" style="color: inherit; text-decoration: inherit;">rent<wbr>Expire<wbr>Time</a>
@@ -1452,8 +1645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="renttag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renttag_nodejs" style="color: inherit; text-decoration: inherit;">rent<wbr>Tag</a>
@@ -1461,8 +1653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>invalid parameter, can be ignored.</p>
-</dd><dt class="property-required"
+    <dd>invalid parameter, can be ignored.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1470,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Domain Status: 0: disable. 1: Enabled.</p>
-</dd><dt class="property-required"
+    <dd>Domain Status: 0: disable. 1: Enabled.</dd><dt class="property-required"
             title="Required">
         <span id="targetdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetdomain_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Domain</a>
@@ -1479,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain name corresponding to the cname.</p>
-</dd><dt class="property-required"
+    <dd>The domain name corresponding to the cname.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1488,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Domain Type: 0: push stream. 1: Play.</p>
-</dd></dl>
+    <dd>Domain Type: 0: push stream. 1: Play.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1503,8 +1691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</p>
-</dd><dt class="property-required"
+    <dd>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1512,8 +1699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>add time.Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>add time.Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="current_c_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_c_name_python" style="color: inherit; text-decoration: inherit;">current_<wbr>c_<wbr>name</a>
@@ -1521,8 +1707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The cname information used by the current client.</p>
-</dd><dt class="property-required"
+    <dd>The cname information used by the current client.</dd><dt class="property-required"
             title="Required">
         <span id="is_delay_live_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_delay_live_python" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
@@ -1530,8 +1715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-required"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-required"
             title="Required">
         <span id="is_mini_program_live_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_mini_program_live_python" style="color: inherit; text-decoration: inherit;">is_<wbr>mini_<wbr>program_<wbr>live</a>
@@ -1539,8 +1723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1548,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Live domain name.</p>
-</dd><dt class="property-required"
+    <dd>Live domain name.</dd><dt class="property-required"
             title="Required">
         <span id="play_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#play_type_python" style="color: inherit; text-decoration: inherit;">play_<wbr>type</a>
@@ -1557,8 +1739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="rent_expire_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rent_expire_time_python" style="color: inherit; text-decoration: inherit;">rent_<wbr>expire_<wbr>time</a>
@@ -1566,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="rent_tag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rent_tag_python" style="color: inherit; text-decoration: inherit;">rent_<wbr>tag</a>
@@ -1575,8 +1755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>invalid parameter, can be ignored.</p>
-</dd><dt class="property-required"
+    <dd>invalid parameter, can be ignored.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1584,8 +1763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain Status: 0: disable. 1: Enabled.</p>
-</dd><dt class="property-required"
+    <dd>Domain Status: 0: disable. 1: Enabled.</dd><dt class="property-required"
             title="Required">
         <span id="target_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_domain_python" style="color: inherit; text-decoration: inherit;">target_<wbr>domain</a>
@@ -1593,8 +1771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The domain name corresponding to the cname.</p>
-</dd><dt class="property-required"
+    <dd>The domain name corresponding to the cname.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1602,8 +1779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Domain Type: 0: push stream. 1: Play.</p>
-</dd></dl>
+    <dd>Domain Type: 0: push stream. 1: Play.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1617,8 +1793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</p>
-</dd><dt class="property-required"
+    <dd>Is there a CName to the fixed rule domain name: 0: No. 1: Yes.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1626,8 +1801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>add time.Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>add time.Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="currentcname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentcname_yaml" style="color: inherit; text-decoration: inherit;">current<wbr>CName</a>
@@ -1635,8 +1809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The cname information used by the current client.</p>
-</dd><dt class="property-required"
+    <dd>The cname information used by the current client.</dd><dt class="property-required"
             title="Required">
         <span id="isdelaylive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -1644,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0 normal live broadcast 1 slow live broadcast default 0.</p>
-</dd><dt class="property-required"
+    <dd>0 normal live broadcast 1 slow live broadcast default 0.</dd><dt class="property-required"
             title="Required">
         <span id="isminiprogramlive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isminiprogramlive_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Mini<wbr>Program<wbr>Live</a>
@@ -1653,8 +1825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0: Standard live broadcast. 1: Mini program live broadcast. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1662,8 +1833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Live domain name.</p>
-</dd><dt class="property-required"
+    <dd>Live domain name.</dd><dt class="property-required"
             title="Required">
         <span id="playtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#playtype_yaml" style="color: inherit; text-decoration: inherit;">play<wbr>Type</a>
@@ -1671,8 +1841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="rentexpiretime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rentexpiretime_yaml" style="color: inherit; text-decoration: inherit;">rent<wbr>Expire<wbr>Time</a>
@@ -1680,8 +1849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</p>
-</dd><dt class="property-required"
+    <dd>Failure parameter, can be ignored. Note: This field is Beijing time (UTC+8 time zone).</dd><dt class="property-required"
             title="Required">
         <span id="renttag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renttag_yaml" style="color: inherit; text-decoration: inherit;">rent<wbr>Tag</a>
@@ -1689,8 +1857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>invalid parameter, can be ignored.</p>
-</dd><dt class="property-required"
+    <dd>invalid parameter, can be ignored.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1698,8 +1865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Domain Status: 0: disable. 1: Enabled.</p>
-</dd><dt class="property-required"
+    <dd>Domain Status: 0: disable. 1: Enabled.</dd><dt class="property-required"
             title="Required">
         <span id="targetdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetdomain_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Domain</a>
@@ -1707,8 +1873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain name corresponding to the cname.</p>
-</dd><dt class="property-required"
+    <dd>The domain name corresponding to the cname.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1716,8 +1881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Domain Type: 0: push stream. 1: Play.</p>
-</dd></dl>
+    <dd>Domain Type: 0: push stream. 1: Play.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1732,7 +1896,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

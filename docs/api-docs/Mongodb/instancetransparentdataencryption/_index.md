@@ -2,9 +2,11 @@
 ---
 title: "InstanceTransparentDataEncryption"
 title_tag: "tencentcloud.Mongodb.InstanceTransparentDataEncryption"
-meta_desc: "Documentation for the tencentcloud.Mongodb.InstanceTransparentDataEncryption resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to enable mongodb transparent data encryption"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Provides a resource to enable mongodb transparent data encryption
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -26,6 +33,11 @@ const encryption = new tencentcloud.mongodb.InstanceTransparentDataEncryption("e
     kmsRegion: "ap-guangzhou",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -34,6 +46,37 @@ encryption = tencentcloud.mongodb.InstanceTransparentDataEncryption("encryption"
     instance_id="cmgo-xxxxxx",
     kms_region="ap-guangzhou")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mongodb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := mongodb.NewInstanceTransparentDataEncryption(ctx, "encryption", &mongodb.InstanceTransparentDataEncryptionArgs{
+			InstanceId: pulumi.String("cmgo-xxxxxx"),
+			KmsRegion:  pulumi.String("ap-guangzhou"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -50,27 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mongodb.NewInstanceTransparentDataEncryption(ctx, "encryption", &Mongodb.InstanceTransparentDataEncryptionArgs{
-			InstanceId: pulumi.String("cmgo-xxxxxx"),
-			KmsRegion:  pulumi.String("ap-guangzhou"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Mongodb.InstanceTransparentDataEncryption;
 import com.pulumi.tencentcloud.Mongodb.InstanceTransparentDataEncryptionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,7 +119,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var encryption = new InstanceTransparentDataEncryption("encryption", InstanceTransparentDataEncryptionArgs.builder()        
+        var encryption = new InstanceTransparentDataEncryption("encryption", InstanceTransparentDataEncryptionArgs.builder()
             .instanceId("cmgo-xxxxxx")
             .kmsRegion("ap-guangzhou")
             .build());
@@ -100,6 +127,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   encryption:
@@ -108,67 +140,113 @@ resources:
       instanceId: cmgo-xxxxxx
       kmsRegion: ap-guangzhou
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_mongodb_instancetransparentdataencryption" "encryption" {
+  instance_id = "cmgo-xxxxxx"
+  kms_region  = "ap-guangzhou"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+  - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+  - [EnableTransparentDataEncryption](https://www.tencentcloud.com/document/api/240/74801)
+* Read: [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+* Update: [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
 
 
 ## Create InstanceTransparentDataEncryption Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p">,</span>
+                                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                                       <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                                      <span class="nx">key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                                      <span class="nx">kms_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p">,</span>
-                                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                                      <span class="nx">kms_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                                      <span class="nx">key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">InstanceTransparentDataEncryption</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">InstanceTransparentDataEncryption</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">InstanceTransparentDataEncryption</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceTransparentDataEncryptionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mongodb:InstanceTransparentDataEncryption</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mongodb:InstanceTransparentDataEncryption</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mongodb_instance_transparent_data_encryption&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -189,7 +267,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -306,11 +384,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## InstanceTransparentDataEncryption Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The InstanceTransparentDataEncryption resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -326,8 +412,7 @@ The InstanceTransparentDataEncryption resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-required"
             title="Required">
         <span id="kmsregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
@@ -335,8 +420,7 @@ The InstanceTransparentDataEncryption resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -344,9 +428,7 @@ The InstanceTransparentDataEncryption resource accepts the following [input](/do
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd></dl>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -360,8 +442,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-required"
             title="Required">
         <span id="kmsregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
@@ -369,8 +450,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -378,9 +458,37 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd></dl>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="kms_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_region_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -394,8 +502,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-required"
             title="Required">
         <span id="kmsregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -403,8 +510,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_java" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -412,9 +518,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd></dl>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -428,8 +532,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-required"
             title="Required">
         <span id="kmsregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -437,8 +540,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -446,9 +548,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd></dl>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -462,8 +562,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-required"
             title="Required">
         <span id="kms_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_region_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
@@ -471,8 +570,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_python" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
@@ -480,9 +578,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd></dl>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -496,8 +592,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-required"
             title="Required">
         <span id="kmsregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -505,8 +600,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -514,9 +608,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd></dl>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -537,8 +629,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyinfolists_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Info<wbr>Lists</a>
@@ -546,8 +637,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mongodb.<wbr>Outputs.<wbr>Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-"
+    <dd>List of bound keys.</dd><dt class="property-"
             title="">
         <span id="transparentdataencryptionstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparentdataencryptionstatus_csharp" style="color: inherit; text-decoration: inherit;">Transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -555,12 +645,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -574,8 +663,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyinfolists_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Info<wbr>Lists</a>
@@ -583,8 +671,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">[]Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-"
+    <dd>List of bound keys.</dd><dt class="property-"
             title="">
         <span id="transparentdataencryptionstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparentdataencryptionstatus_go" style="color: inherit; text-decoration: inherit;">Transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -592,12 +679,45 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="key_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_info_lists_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">list(object)</a></span>
+    </dt>
+    <dd>List of bound keys.</dd><dt class="property-"
+            title="">
+        <span id="transparent_data_encryption_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparent_data_encryption_status_hcl" style="color: inherit; text-decoration: inherit;">transparent_<wbr>data_<wbr>encryption_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
+<ul>
+<li>close: Not opened;</li>
+<li>open: It has been opened.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -611,8 +731,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyinfolists_java" style="color: inherit; text-decoration: inherit;">key<wbr>Info<wbr>Lists</a>
@@ -620,8 +739,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">List&lt;Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-"
+    <dd>List of bound keys.</dd><dt class="property-"
             title="">
         <span id="transparentdataencryptionstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparentdataencryptionstatus_java" style="color: inherit; text-decoration: inherit;">transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -629,12 +747,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -648,8 +765,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyinfolists_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Info<wbr>Lists</a>
@@ -657,8 +773,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-"
+    <dd>List of bound keys.</dd><dt class="property-"
             title="">
         <span id="transparentdataencryptionstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparentdataencryptionstatus_nodejs" style="color: inherit; text-decoration: inherit;">transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -666,12 +781,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -685,17 +799,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_info_lists_python" style="color: inherit; text-decoration: inherit;">key_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List]</a></span>
+        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">Sequence[Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List]</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-"
+    <dd>List of bound keys.</dd><dt class="property-"
             title="">
         <span id="transparent_data_encryption_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparent_data_encryption_status_python" style="color: inherit; text-decoration: inherit;">transparent_<wbr>data_<wbr>encryption_<wbr>status</a>
@@ -703,12 +815,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -722,8 +833,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyinfolists_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Info<wbr>Lists</a>
@@ -731,8 +841,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-"
+    <dd>List of bound keys.</dd><dt class="property-"
             title="">
         <span id="transparentdataencryptionstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transparentdataencryptionstatus_yaml" style="color: inherit; text-decoration: inherit;">transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -740,12 +849,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -755,124 +863,163 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing InstanceTransparentDataEncryption resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceTransparentDataEncryptionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">InstanceTransparentDataEncryption</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceTransparentDataEncryptionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">InstanceTransparentDataEncryption</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">key_info_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mongodb.InstanceTransparentDataEncryptionKeyInfoListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">key_info_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceTransparentDataEncryptionKeyInfoListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">kms_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">transparent_data_encryption_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> InstanceTransparentDataEncryption</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstanceTransparentDataEncryption<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceTransparentDataEncryptionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">InstanceTransparentDataEncryption</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstanceTransparentDataEncryption<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceTransparentDataEncryptionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">InstanceTransparentDataEncryption</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">InstanceTransparentDataEncryption</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceTransparentDataEncryptionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">InstanceTransparentDataEncryption</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceTransparentDataEncryptionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">InstanceTransparentDataEncryption</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceTransparentDataEncryptionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">InstanceTransparentDataEncryption</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceTransparentDataEncryptionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstanceTransparentDataEncryption</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mongodb:InstanceTransparentDataEncryption</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mongodb_instance_transparent_data_encryption</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceTransparentDataEncryptionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceTransparentDataEncryptionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -880,28 +1027,31 @@ Get an existing InstanceTransparentDataEncryption resource's state with the give
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceTransparentDataEncryptionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -909,28 +1059,31 @@ Get an existing InstanceTransparentDataEncryption resource's state with the give
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceTransparentDataEncryptionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -950,8 +1103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -959,18 +1111,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyinfolists_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mongodb.<wbr>Inputs.<wbr>Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mongodb.<wbr>Inputs.<wbr>Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-optional"
+    <dd>List of bound keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
@@ -978,8 +1127,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transparentdataencryptionstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transparentdataencryptionstatus_csharp" style="color: inherit; text-decoration: inherit;">Transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -987,12 +1135,11 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1006,8 +1153,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -1015,9 +1161,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyinfolists_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Info<wbr>Lists</a>
@@ -1025,8 +1169,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">[]Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-optional"
+    <dd>List of bound keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
@@ -1034,8 +1177,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transparentdataencryptionstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transparentdataencryptionstatus_go" style="color: inherit; text-decoration: inherit;">Transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -1043,12 +1185,61 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_info_lists_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">list(object)</a></span>
+    </dt>
+    <dd>List of bound keys.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_region_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_transparent_data_encryption_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transparent_data_encryption_status_hcl" style="color: inherit; text-decoration: inherit;">transparent_<wbr>data_<wbr>encryption_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
+<ul>
+<li>close: Not opened;</li>
+<li>open: It has been opened.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1062,8 +1253,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_java" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1071,18 +1261,15 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyinfolists_java" style="color: inherit; text-decoration: inherit;">key<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">List&lt;Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">List&lt;Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-optional"
+    <dd>List of bound keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -1090,8 +1277,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transparentdataencryptionstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transparentdataencryptionstatus_java" style="color: inherit; text-decoration: inherit;">transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -1099,12 +1285,11 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1118,8 +1303,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1127,18 +1311,15 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyinfolists_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Info<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-optional"
+    <dd>List of bound keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -1146,8 +1327,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transparentdataencryptionstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transparentdataencryptionstatus_nodejs" style="color: inherit; text-decoration: inherit;">transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -1155,12 +1335,11 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1174,8 +1353,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_id_python" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
@@ -1183,18 +1361,15 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_key_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_info_lists_python" style="color: inherit; text-decoration: inherit;">key_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">Sequence[Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-optional"
+    <dd>List of bound keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kms_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_region_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
@@ -1202,8 +1377,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transparent_data_encryption_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transparent_data_encryption_status_python" style="color: inherit; text-decoration: inherit;">transparent_<wbr>data_<wbr>encryption_<wbr>status</a>
@@ -1211,12 +1385,11 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1230,8 +1403,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1239,9 +1411,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate
-the key and this key will be beyond the control of Terraform.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyinfolists_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Info<wbr>Lists</a>
@@ -1249,8 +1419,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancetransparentdataencryptionkeyinfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of bound keys.</p>
-</dd><dt class="property-optional"
+    <dd>List of bound keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -1258,8 +1427,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</p>
-</dd><dt class="property-optional"
+    <dd>The region where the Key Management Service (KMS) serves, such as ap-shanghai.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transparentdataencryptionstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transparentdataencryptionstatus_yaml" style="color: inherit; text-decoration: inherit;">transparent<wbr>Data<wbr>Encryption<wbr>Status</a>
@@ -1267,12 +1435,11 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Represents whether transparent encryption is turned on. Valid values:</p>
+    <dd>Represents whether transparent encryption is turned on. Valid values:</p>
 <ul>
 <li>close: Not opened;</li>
 <li>open: It has been opened.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1287,7 +1454,9 @@ the key and this key will be beyond the control of Terraform.</p>
 
 
 
-<h4 id="instancetransparentdataencryptionkeyinfolist">Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List</h4>
+<h4 id="instancetransparentdataencryptionkeyinfolist">
+Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Transparent<wbr>Data<wbr>Encryption<wbr>Key<wbr>Info<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1299,8 +1468,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance and key binding time.</p>
-</dd><dt class="property-optional"
+    <dd>Instance and key binding time.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -1308,8 +1476,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master Key ID.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -1317,8 +1484,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master key name.</p>
-</dd><dt class="property-optional"
+    <dd>Master key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyorigin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyorigin_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Origin</a>
@@ -1326,8 +1492,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key origin.</p>
-</dd><dt class="property-optional"
+    <dd>Key origin.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -1335,8 +1500,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purpose of the key.</p>
-</dd><dt class="property-optional"
+    <dd>Purpose of the key.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1344,8 +1508,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status.</p>
-</dd></dl>
+    <dd>Key status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1359,8 +1522,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance and key binding time.</p>
-</dd><dt class="property-optional"
+    <dd>Instance and key binding time.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
@@ -1368,8 +1530,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master Key ID.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -1377,8 +1538,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master key name.</p>
-</dd><dt class="property-optional"
+    <dd>Master key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyorigin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyorigin_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Origin</a>
@@ -1386,8 +1546,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key origin.</p>
-</dd><dt class="property-optional"
+    <dd>Key origin.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -1395,8 +1554,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purpose of the key.</p>
-</dd><dt class="property-optional"
+    <dd>Purpose of the key.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1404,8 +1562,61 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status.</p>
-</dd></dl>
+    <dd>Key status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance and key binding time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Master key name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_origin_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key origin.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Purpose of the key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1419,8 +1630,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance and key binding time.</p>
-</dd><dt class="property-optional"
+    <dd>Instance and key binding time.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_java" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1428,8 +1638,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master Key ID.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_java" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -1437,8 +1646,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master key name.</p>
-</dd><dt class="property-optional"
+    <dd>Master key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyorigin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyorigin_java" style="color: inherit; text-decoration: inherit;">key<wbr>Origin</a>
@@ -1446,8 +1654,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key origin.</p>
-</dd><dt class="property-optional"
+    <dd>Key origin.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_java" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1455,8 +1662,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purpose of the key.</p>
-</dd><dt class="property-optional"
+    <dd>Purpose of the key.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1464,8 +1670,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key status.</p>
-</dd></dl>
+    <dd>Key status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1479,8 +1684,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance and key binding time.</p>
-</dd><dt class="property-optional"
+    <dd>Instance and key binding time.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1488,8 +1692,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master Key ID.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -1497,8 +1700,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master key name.</p>
-</dd><dt class="property-optional"
+    <dd>Master key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyorigin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyorigin_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Origin</a>
@@ -1506,8 +1708,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key origin.</p>
-</dd><dt class="property-optional"
+    <dd>Key origin.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1515,8 +1716,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purpose of the key.</p>
-</dd><dt class="property-optional"
+    <dd>Purpose of the key.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1524,8 +1724,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key status.</p>
-</dd></dl>
+    <dd>Key status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1539,8 +1738,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance and key binding time.</p>
-</dd><dt class="property-optional"
+    <dd>Instance and key binding time.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_python" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
@@ -1548,8 +1746,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Master Key ID.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_python" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
@@ -1557,8 +1754,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Master key name.</p>
-</dd><dt class="property-optional"
+    <dd>Master key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_origin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_origin_python" style="color: inherit; text-decoration: inherit;">key_<wbr>origin</a>
@@ -1566,8 +1762,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key origin.</p>
-</dd><dt class="property-optional"
+    <dd>Key origin.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_python" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
@@ -1575,8 +1770,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Purpose of the key.</p>
-</dd><dt class="property-optional"
+    <dd>Purpose of the key.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1584,8 +1778,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key status.</p>
-</dd></dl>
+    <dd>Key status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1599,8 +1792,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance and key binding time.</p>
-</dd><dt class="property-optional"
+    <dd>Instance and key binding time.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
@@ -1608,8 +1800,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master Key ID.</p>
-</dd><dt class="property-optional"
+    <dd>Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -1617,8 +1808,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master key name.</p>
-</dd><dt class="property-optional"
+    <dd>Master key name.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyorigin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyorigin_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Origin</a>
@@ -1626,8 +1816,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key origin.</p>
-</dd><dt class="property-optional"
+    <dd>Key origin.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1635,8 +1824,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purpose of the key.</p>
-</dd><dt class="property-optional"
+    <dd>Purpose of the key.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1644,8 +1832,7 @@ the key and this key will be beyond the control of Terraform.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key status.</p>
-</dd></dl>
+    <dd>Key status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1661,6 +1848,9 @@ $ pulumi import tencentcloud:Mongodb/instanceTransparentDataEncryption:InstanceT
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1670,7 +1860,6 @@ $ pulumi import tencentcloud:Mongodb/instanceTransparentDataEncryption:InstanceT
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

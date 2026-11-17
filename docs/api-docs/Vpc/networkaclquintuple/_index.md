@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Vpc.NetworkAclQuintuple"
 meta_desc: "Documentation for the tencentcloud.Vpc.NetworkAclQuintuple resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,61 +18,76 @@ no_edit_this_page: true
 
 
 ## Create NetworkAclQuintuple Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                         <span class="nx">network_acl_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                        <span class="nx">network_acl_quintuple_set</span><span class="p">:</span> <span class="nx">Optional[_vpc.NetworkAclQuintupleNetworkAclQuintupleSetArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                        <span class="nx">network_acl_quintuple_set</span><span class="p">:</span> <span class="nx">Optional[NetworkAclQuintupleNetworkAclQuintupleSetArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNetworkAclQuintuple</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">NetworkAclQuintuple</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNetworkAclQuintuple</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">NetworkAclQuintuple</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">NetworkAclQuintuple</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NetworkAclQuintupleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpc:NetworkAclQuintuple</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpc:NetworkAclQuintuple</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vpc_network_acl_quintuple&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -91,7 +108,7 @@ no_edit_this_page: true
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -208,11 +225,19 @@ no_edit_this_page: true
 </pulumi-choosable>
 </div>
 
+
+
 ## NetworkAclQuintuple Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The NetworkAclQuintuple resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -228,17 +253,15 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-required"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-required"
             title="Required">
         <span id="networkaclquintupleset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleset_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpc.<wbr>Inputs.<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpc.<wbr>Inputs.<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +275,7 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-required"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-required"
             title="Required">
         <span id="networkaclquintupleset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleset_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
@@ -261,8 +283,29 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="network_acl_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_acl_quintuple_set_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_quintuple_set_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>quintuple_<wbr>set</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">object</a></span>
+    </dt>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,17 +319,15 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-required"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-required"
             title="Required">
         <span id="networkaclquintupleset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleset_java" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,17 +341,15 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-required"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-required"
             title="Required">
         <span id="networkaclquintupleset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleset_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +363,7 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-required"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-required"
             title="Required">
         <span id="network_acl_quintuple_set_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_quintuple_set_python" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>quintuple_<wbr>set</a>
@@ -333,8 +371,7 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -348,8 +385,7 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-required"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-required"
             title="Required">
         <span id="networkaclquintupleset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleset_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
@@ -357,8 +393,7 @@ The NetworkAclQuintuple resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Property Map</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -379,8 +414,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -394,8 +428,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -409,8 +456,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -424,8 +470,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -439,8 +484,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -454,8 +498,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -465,121 +508,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing NetworkAclQuintuple resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NetworkAclQuintupleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">NetworkAclQuintuple</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NetworkAclQuintupleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">NetworkAclQuintuple</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">network_acl_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">network_acl_quintuple_set</span><span class="p">:</span> <span class="nx">Optional[_vpc.NetworkAclQuintupleNetworkAclQuintupleSetArgs]</span> = None<span class="p">) -&gt;</span> NetworkAclQuintuple</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">network_acl_quintuple_set</span><span class="p">:</span> <span class="nx">Optional[NetworkAclQuintupleNetworkAclQuintupleSetArgs]</span> = None<span class="p">) -&gt;</span> NetworkAclQuintuple</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNetworkAclQuintuple<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NetworkAclQuintupleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">NetworkAclQuintuple</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNetworkAclQuintuple<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NetworkAclQuintupleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">NetworkAclQuintuple</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">NetworkAclQuintuple</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NetworkAclQuintupleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">NetworkAclQuintuple</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NetworkAclQuintupleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">NetworkAclQuintuple</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NetworkAclQuintupleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">NetworkAclQuintuple</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NetworkAclQuintupleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingNetworkAclQuintuple</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vpc:NetworkAclQuintuple</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vpc_network_acl_quintuple</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NetworkAclQuintupleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NetworkAclQuintupleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -587,28 +669,31 @@ Get an existing NetworkAclQuintuple resource's state with the given name, ID, an
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NetworkAclQuintupleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -616,28 +701,31 @@ Get an existing NetworkAclQuintuple resource's state with the given name, ID, an
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NetworkAclQuintupleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -657,17 +745,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkaclquintupleset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkaclquintupleset_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpc.<wbr>Inputs.<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpc.<wbr>Inputs.<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -681,8 +767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkaclquintupleset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkaclquintupleset_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
@@ -690,8 +775,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_network_acl_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_acl_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_network_acl_quintuple_set_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_acl_quintuple_set_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>quintuple_<wbr>set</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">object</a></span>
+    </dt>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -705,17 +811,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkaclquintupleset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkaclquintupleset_java" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,17 +833,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkaclquintupleset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkaclquintupleset_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -753,8 +855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_network_acl_quintuple_set_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_acl_quintuple_set_python" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>quintuple_<wbr>set</a>
@@ -762,8 +863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -777,8 +877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network ACL instance ID. For example:acl-12345678.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL instance ID. For example:acl-12345678.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkaclquintupleset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkaclquintupleset_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Set</a>
@@ -786,8 +885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintupleset">Property Map</a></span>
     </dt>
-    <dd><p>Network quintuple ACL rule set.</p>
-</dd></dl>
+    <dd>Network quintuple ACL rule set.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -802,7 +900,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="networkaclquintuplenetworkaclquintupleset">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set</h4>
+<h4 id="networkaclquintuplenetworkaclquintupleset">
+Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<pulumi-choosable type="language" values="python,go" class="inline">, Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -814,8 +914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetegress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpc.<wbr>Inputs.<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress&gt;</a></span>
     </dt>
-    <dd><p>Network ACL quintuple outbound rule.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL quintuple outbound rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_csharp" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -823,8 +922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetingress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpc.<wbr>Inputs.<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress&gt;</a></span>
     </dt>
-    <dd><p>Network ACL quintuple inbound rule.</p>
-</dd></dl>
+    <dd>Network ACL quintuple inbound rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -838,8 +936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetegress">[]Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress</a></span>
     </dt>
-    <dd><p>Network ACL quintuple outbound rule.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL quintuple outbound rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_go" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -847,8 +944,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetingress">[]Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress</a></span>
     </dt>
-    <dd><p>Network ACL quintuple inbound rule.</p>
-</dd></dl>
+    <dd>Network ACL quintuple inbound rule.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="egresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_hcl" style="color: inherit; text-decoration: inherit;">egresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetegress">list(object)</a></span>
+    </dt>
+    <dd>Network ACL quintuple outbound rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ingresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_hcl" style="color: inherit; text-decoration: inherit;">ingresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetingress">list(object)</a></span>
+    </dt>
+    <dd>Network ACL quintuple inbound rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -862,8 +980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetegress">List&lt;Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress&gt;</a></span>
     </dt>
-    <dd><p>Network ACL quintuple outbound rule.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL quintuple outbound rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_java" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -871,8 +988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetingress">List&lt;Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress&gt;</a></span>
     </dt>
-    <dd><p>Network ACL quintuple inbound rule.</p>
-</dd></dl>
+    <dd>Network ACL quintuple inbound rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -886,8 +1002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetegress">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress[]</a></span>
     </dt>
-    <dd><p>Network ACL quintuple outbound rule.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL quintuple outbound rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_nodejs" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -895,8 +1010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetingress">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress[]</a></span>
     </dt>
-    <dd><p>Network ACL quintuple inbound rule.</p>
-</dd></dl>
+    <dd>Network ACL quintuple inbound rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -908,19 +1022,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_python" style="color: inherit; text-decoration: inherit;">egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetegress">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress]</a></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetegress">Sequence[Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress]</a></span>
     </dt>
-    <dd><p>Network ACL quintuple outbound rule.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL quintuple outbound rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_python" style="color: inherit; text-decoration: inherit;">ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetingress">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress]</a></span>
+        <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetingress">Sequence[Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress]</a></span>
     </dt>
-    <dd><p>Network ACL quintuple inbound rule.</p>
-</dd></dl>
+    <dd>Network ACL quintuple inbound rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -934,8 +1046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetegress">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Network ACL quintuple outbound rule.</p>
-</dd><dt class="property-optional"
+    <dd>Network ACL quintuple outbound rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_yaml" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -943,12 +1054,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#networkaclquintuplenetworkaclquintuplesetingress">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Network ACL quintuple inbound rule.</p>
-</dd></dl>
+    <dd>Network ACL quintuple inbound rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="networkaclquintuplenetworkaclquintuplesetegress">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress</h4>
+<h4 id="networkaclquintuplenetworkaclquintuplesetegress">
+Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress<pulumi-choosable type="language" values="python,go" class="inline">, Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Egress<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -960,8 +1072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -969,8 +1080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -978,8 +1088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_csharp" style="color: inherit; text-decoration: inherit;">Destination<wbr>Cidr</a>
@@ -987,8 +1096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_csharp" style="color: inherit; text-decoration: inherit;">Destination<wbr>Port</a>
@@ -996,8 +1104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Direction</a>
@@ -1005,8 +1112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1014,8 +1120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1023,8 +1128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1032,8 +1136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Cidr</a>
@@ -1041,8 +1144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Source CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Port</a>
@@ -1050,8 +1152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd></dl>
+    <dd>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1074,8 +1174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1083,8 +1182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_go" style="color: inherit; text-decoration: inherit;">Destination<wbr>Cidr</a>
@@ -1092,8 +1190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_go" style="color: inherit; text-decoration: inherit;">Destination<wbr>Port</a>
@@ -1101,8 +1198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Direction</a>
@@ -1110,8 +1206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1119,8 +1214,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1128,8 +1222,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1137,8 +1230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Cidr</a>
@@ -1146,8 +1238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Source CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Port</a>
@@ -1155,8 +1246,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd></dl>
+    <dd>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destination_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_cidr_hcl" style="color: inherit; text-decoration: inherit;">destination_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Destination CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destination_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_port_hcl" style="color: inherit; text-decoration: inherit;">destination_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="network_acl_direction_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_direction_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>direction</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="network_acl_quintuple_entry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_quintuple_entry_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>quintuple_<wbr>entry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_cidr_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Source CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_port_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1170,8 +1354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1179,8 +1362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1188,8 +1370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_java" style="color: inherit; text-decoration: inherit;">destination<wbr>Cidr</a>
@@ -1197,8 +1378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_java" style="color: inherit; text-decoration: inherit;">destination<wbr>Port</a>
@@ -1206,8 +1386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_java" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Direction</a>
@@ -1215,8 +1394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1224,8 +1402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1233,8 +1410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1242,8 +1418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_java" style="color: inherit; text-decoration: inherit;">source<wbr>Cidr</a>
@@ -1251,8 +1426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Source CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_java" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -1260,8 +1434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd></dl>
+    <dd>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1275,8 +1448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1284,8 +1456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1293,8 +1464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_nodejs" style="color: inherit; text-decoration: inherit;">destination<wbr>Cidr</a>
@@ -1302,8 +1472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_nodejs" style="color: inherit; text-decoration: inherit;">destination<wbr>Port</a>
@@ -1311,8 +1480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Direction</a>
@@ -1320,8 +1488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1329,8 +1496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1338,8 +1504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1347,8 +1512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Cidr</a>
@@ -1356,8 +1520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Source CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -1365,8 +1528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd></dl>
+    <dd>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1380,8 +1542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1389,8 +1550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1398,8 +1558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destination_cidr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_cidr_python" style="color: inherit; text-decoration: inherit;">destination_<wbr>cidr</a>
@@ -1407,8 +1566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destination_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_port_python" style="color: inherit; text-decoration: inherit;">destination_<wbr>port</a>
@@ -1416,8 +1574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="network_acl_direction_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_direction_python" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>direction</a>
@@ -1425,8 +1582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="network_acl_quintuple_entry_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_quintuple_entry_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>quintuple_<wbr>entry_<wbr>id</a>
@@ -1434,8 +1590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1443,8 +1598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1452,8 +1606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_cidr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_cidr_python" style="color: inherit; text-decoration: inherit;">source_<wbr>cidr</a>
@@ -1461,8 +1614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Source CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Source CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_port_python" style="color: inherit; text-decoration: inherit;">source_<wbr>port</a>
@@ -1470,8 +1622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd></dl>
+    <dd>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1485,8 +1636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1494,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1503,8 +1652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_yaml" style="color: inherit; text-decoration: inherit;">destination<wbr>Cidr</a>
@@ -1512,8 +1660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_yaml" style="color: inherit; text-decoration: inherit;">destination<wbr>Port</a>
@@ -1521,8 +1668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Direction</a>
@@ -1530,8 +1676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1539,8 +1684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1548,8 +1692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1557,8 +1700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Cidr</a>
@@ -1566,8 +1708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Source CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -1575,12 +1716,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd></dl>
+    <dd>Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="networkaclquintuplenetworkaclquintuplesetingress">Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress</h4>
+<h4 id="networkaclquintuplenetworkaclquintuplesetingress">
+Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress<pulumi-choosable type="language" values="python,go" class="inline">, Network<wbr>Acl<wbr>Quintuple<wbr>Network<wbr>Acl<wbr>Quintuple<wbr>Set<wbr>Ingress<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1592,8 +1734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1601,8 +1742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1610,8 +1750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_csharp" style="color: inherit; text-decoration: inherit;">Destination<wbr>Cidr</a>
@@ -1619,8 +1758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_csharp" style="color: inherit; text-decoration: inherit;">Destination<wbr>Port</a>
@@ -1628,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Direction</a>
@@ -1637,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1646,8 +1782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1655,8 +1790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1664,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Cidr</a>
@@ -1673,8 +1806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>源CIDR。.</p>
-</dd><dt class="property-optional"
+    <dd>源CIDR。.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Port</a>
@@ -1682,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</p>
-</dd></dl>
+    <dd>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1697,8 +1828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1706,8 +1836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1715,8 +1844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_go" style="color: inherit; text-decoration: inherit;">Destination<wbr>Cidr</a>
@@ -1724,8 +1852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_go" style="color: inherit; text-decoration: inherit;">Destination<wbr>Port</a>
@@ -1733,8 +1860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Direction</a>
@@ -1742,8 +1868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1751,8 +1876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1760,8 +1884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1769,8 +1892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Cidr</a>
@@ -1778,8 +1900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>源CIDR。.</p>
-</dd><dt class="property-optional"
+    <dd>源CIDR。.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Port</a>
@@ -1787,8 +1908,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</p>
-</dd></dl>
+    <dd>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destination_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_cidr_hcl" style="color: inherit; text-decoration: inherit;">destination_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Destination CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destination_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_port_hcl" style="color: inherit; text-decoration: inherit;">destination_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="network_acl_direction_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_direction_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>direction</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="network_acl_quintuple_entry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_quintuple_entry_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>quintuple_<wbr>entry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_cidr_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>源CIDR。.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_port_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1802,8 +2016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1811,8 +2024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1820,8 +2032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_java" style="color: inherit; text-decoration: inherit;">destination<wbr>Cidr</a>
@@ -1829,8 +2040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_java" style="color: inherit; text-decoration: inherit;">destination<wbr>Port</a>
@@ -1838,8 +2048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_java" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Direction</a>
@@ -1847,8 +2056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1856,8 +2064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1865,8 +2072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1874,8 +2080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_java" style="color: inherit; text-decoration: inherit;">source<wbr>Cidr</a>
@@ -1883,8 +2088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>源CIDR。.</p>
-</dd><dt class="property-optional"
+    <dd>源CIDR。.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_java" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -1892,8 +2096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</p>
-</dd></dl>
+    <dd>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1907,8 +2110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1916,8 +2118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1925,8 +2126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_nodejs" style="color: inherit; text-decoration: inherit;">destination<wbr>Cidr</a>
@@ -1934,8 +2134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_nodejs" style="color: inherit; text-decoration: inherit;">destination<wbr>Port</a>
@@ -1943,8 +2142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Direction</a>
@@ -1952,8 +2150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -1961,8 +2158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1970,8 +2166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1979,8 +2174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Cidr</a>
@@ -1988,8 +2182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>源CIDR。.</p>
-</dd><dt class="property-optional"
+    <dd>源CIDR。.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -1997,8 +2190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</p>
-</dd></dl>
+    <dd>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2012,8 +2204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2021,8 +2212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2030,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destination_cidr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_cidr_python" style="color: inherit; text-decoration: inherit;">destination_<wbr>cidr</a>
@@ -2039,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destination_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destination_port_python" style="color: inherit; text-decoration: inherit;">destination_<wbr>port</a>
@@ -2048,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="network_acl_direction_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_direction_python" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>direction</a>
@@ -2057,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="network_acl_quintuple_entry_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_acl_quintuple_entry_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>acl_<wbr>quintuple_<wbr>entry_<wbr>id</a>
@@ -2066,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -2075,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2084,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_cidr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_cidr_python" style="color: inherit; text-decoration: inherit;">source_<wbr>cidr</a>
@@ -2093,8 +2276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>源CIDR。.</p>
-</dd><dt class="property-optional"
+    <dd>源CIDR。.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_port_python" style="color: inherit; text-decoration: inherit;">source_<wbr>port</a>
@@ -2102,8 +2284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</p>
-</dd></dl>
+    <dd>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2117,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, ACCEPT or DROP.</p>
-</dd><dt class="property-optional"
+    <dd>Action, ACCEPT or DROP.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2126,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2135,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationcidr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationcidr_yaml" style="color: inherit; text-decoration: inherit;">destination<wbr>Cidr</a>
@@ -2144,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>Destination CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="destinationport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinationport_yaml" style="color: inherit; text-decoration: inherit;">destination<wbr>Port</a>
@@ -2153,8 +2330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</p>
-</dd><dt class="property-optional"
+    <dd>Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkacldirection_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkacldirection_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Direction</a>
@@ -2162,8 +2338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</p>
-</dd><dt class="property-optional"
+    <dd>Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.</dd><dt class="property-optional"
             title="Optional">
         <span id="networkaclquintupleentryid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkaclquintupleentryid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Acl<wbr>Quintuple<wbr>Entry<wbr>Id</a>
@@ -2171,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique ID of a network ACL entry.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of a network ACL entry.</dd><dt class="property-optional"
             title="Optional">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -2180,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Priority, starting from 1.</p>
-</dd><dt class="property-optional"
+    <dd>Priority, starting from 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2189,8 +2362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, value: TCP,UDP, ICMP, ALL.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, value: TCP,UDP, ICMP, ALL.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcecidr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcecidr_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Cidr</a>
@@ -2198,8 +2370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>源CIDR。.</p>
-</dd><dt class="property-optional"
+    <dd>源CIDR。.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourceport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -2207,8 +2378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</p>
-</dd></dl>
+    <dd>source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2220,7 +2390,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getCcHttpPolicies"
 title_tag: "tencentcloud.Dayu.getCcHttpPolicies"
-meta_desc: "Documentation for the tencentcloud.Dayu.getCcHttpPolicies function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query dayu CC http policies"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,79 +18,70 @@ Use this data source to query dayu CC http policies
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const idTest = tencentcloud.Dayu.getCcHttpPolicies({
-    resourceType: tencentcloud_dayu_cc_http_policy.test_policy.resource_type,
-    resourceId: tencentcloud_dayu_cc_http_policy.test_policy.resource_id,
-    policyId: tencentcloud_dayu_cc_http_policy.test_policy.policy_id,
+const idTest = tencentcloud.dayu.getCcHttpPolicies({
+    resourceType: testPolicy.resourceType,
+    resourceId: testPolicy.resourceId,
+    policyId: testPolicy.policyId,
 });
-const nameTest = tencentcloud.Dayu.getCcHttpPolicies({
-    resourceType: tencentcloud_dayu_cc_http_policy.test_policy.resource_type,
-    resourceId: tencentcloud_dayu_cc_http_policy.test_policy.resource_id,
-    name: tencentcloud_dayu_cc_http_policy.test_policy.name,
+const nameTest = tencentcloud.dayu.getCcHttpPolicies({
+    resourceType: testPolicy.resourceType,
+    resourceId: testPolicy.resourceId,
+    name: testPolicy.name,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-id_test = tencentcloud.Dayu.get_cc_http_policies(resource_type=tencentcloud_dayu_cc_http_policy["test_policy"]["resource_type"],
-    resource_id=tencentcloud_dayu_cc_http_policy["test_policy"]["resource_id"],
-    policy_id=tencentcloud_dayu_cc_http_policy["test_policy"]["policy_id"])
-name_test = tencentcloud.Dayu.get_cc_http_policies(resource_type=tencentcloud_dayu_cc_http_policy["test_policy"]["resource_type"],
-    resource_id=tencentcloud_dayu_cc_http_policy["test_policy"]["resource_id"],
-    name=tencentcloud_dayu_cc_http_policy["test_policy"]["name"])
+id_test = tencentcloud.dayu.get_cc_http_policies(resource_type=test_policy["resourceType"],
+    resource_id=test_policy["resourceId"],
+    policy_id=test_policy["policyId"])
+name_test = tencentcloud.dayu.get_cc_http_policies(resource_type=test_policy["resourceType"],
+    resource_id=test_policy["resourceId"],
+    name=test_policy["name"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var idTest = Tencentcloud.Dayu.GetCcHttpPolicies.Invoke(new()
-    {
-        ResourceType = tencentcloud_dayu_cc_http_policy.Test_policy.Resource_type,
-        ResourceId = tencentcloud_dayu_cc_http_policy.Test_policy.Resource_id,
-        PolicyId = tencentcloud_dayu_cc_http_policy.Test_policy.Policy_id,
-    });
-
-    var nameTest = Tencentcloud.Dayu.GetCcHttpPolicies.Invoke(new()
-    {
-        ResourceType = tencentcloud_dayu_cc_http_policy.Test_policy.Resource_type,
-        ResourceId = tencentcloud_dayu_cc_http_policy.Test_policy.Resource_id,
-        Name = tencentcloud_dayu_cc_http_policy.Test_policy.Name,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.GetCcHttpPolicies(ctx, &dayu.GetCcHttpPoliciesArgs{
-			ResourceType: tencentcloud_dayu_cc_http_policy.Test_policy.Resource_type,
-			ResourceId:   tencentcloud_dayu_cc_http_policy.Test_policy.Resource_id,
-			PolicyId:     pulumi.StringRef(tencentcloud_dayu_cc_http_policy.Test_policy.Policy_id),
+		_, err := dayu.GetCcHttpPolicies(ctx, &dayu.GetCcHttpPoliciesArgs{
+			ResourceType: testPolicy.ResourceType,
+			ResourceId:   testPolicy.ResourceId,
+			PolicyId:     pulumi.StringRef(testPolicy.PolicyId),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = Dayu.GetCcHttpPolicies(ctx, &dayu.GetCcHttpPoliciesArgs{
-			ResourceType: tencentcloud_dayu_cc_http_policy.Test_policy.Resource_type,
-			ResourceId:   tencentcloud_dayu_cc_http_policy.Test_policy.Resource_id,
-			Name:         pulumi.StringRef(tencentcloud_dayu_cc_http_policy.Test_policy.Name),
+		_, err = dayu.GetCcHttpPolicies(ctx, &dayu.GetCcHttpPoliciesArgs{
+			ResourceType: testPolicy.ResourceType,
+			ResourceId:   testPolicy.ResourceId,
+			Name:         pulumi.StringRef(testPolicy.Name),
 		}, nil)
 		if err != nil {
 			return err
@@ -97,6 +90,40 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var idTest = Tencentcloud.Dayu.GetCcHttpPolicies.Invoke(new()
+    {
+        ResourceType = testPolicy.ResourceType,
+        ResourceId = testPolicy.ResourceId,
+        PolicyId = testPolicy.PolicyId,
+    });
+
+    var nameTest = Tencentcloud.Dayu.GetCcHttpPolicies.Invoke(new()
+    {
+        ResourceType = testPolicy.ResourceType,
+        ResourceId = testPolicy.ResourceId,
+        Name = testPolicy.Name,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -105,8 +132,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.DayuFunctions;
 import com.pulumi.tencentcloud.Dayu.inputs.GetCcHttpPoliciesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -119,39 +146,76 @@ public class App {
 
     public static void stack(Context ctx) {
         final var idTest = DayuFunctions.getCcHttpPolicies(GetCcHttpPoliciesArgs.builder()
-            .resourceType(tencentcloud_dayu_cc_http_policy.test_policy().resource_type())
-            .resourceId(tencentcloud_dayu_cc_http_policy.test_policy().resource_id())
-            .policyId(tencentcloud_dayu_cc_http_policy.test_policy().policy_id())
+            .resourceType(testPolicy.resourceType())
+            .resourceId(testPolicy.resourceId())
+            .policyId(testPolicy.policyId())
             .build());
 
         final var nameTest = DayuFunctions.getCcHttpPolicies(GetCcHttpPoliciesArgs.builder()
-            .resourceType(tencentcloud_dayu_cc_http_policy.test_policy().resource_type())
-            .resourceId(tencentcloud_dayu_cc_http_policy.test_policy().resource_id())
-            .name(tencentcloud_dayu_cc_http_policy.test_policy().name())
+            .resourceType(testPolicy.resourceType())
+            .resourceId(testPolicy.resourceId())
+            .name(testPolicy.name())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   idTest:
     fn::invoke:
-      Function: tencentcloud:Dayu:getCcHttpPolicies
-      Arguments:
-        resourceType: ${tencentcloud_dayu_cc_http_policy.test_policy.resource_type}
-        resourceId: ${tencentcloud_dayu_cc_http_policy.test_policy.resource_id}
-        policyId: ${tencentcloud_dayu_cc_http_policy.test_policy.policy_id}
+      function: tencentcloud:Dayu:getCcHttpPolicies
+      arguments:
+        resourceType: ${testPolicy.resourceType}
+        resourceId: ${testPolicy.resourceId}
+        policyId: ${testPolicy.policyId}
   nameTest:
     fn::invoke:
-      Function: tencentcloud:Dayu:getCcHttpPolicies
-      Arguments:
-        resourceType: ${tencentcloud_dayu_cc_http_policy.test_policy.resource_type}
-        resourceId: ${tencentcloud_dayu_cc_http_policy.test_policy.resource_id}
-        name: ${tencentcloud_dayu_cc_http_policy.test_policy.name}
+      function: tencentcloud:Dayu:getCcHttpPolicies
+      arguments:
+        resourceType: ${testPolicy.resourceType}
+        resourceId: ${testPolicy.resourceId}
+        name: ${testPolicy.name}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dayu_getcchttppolicies" "idTest" {
+  resource_type = testPolicy.resourceType
+  resource_id   = testPolicy.resourceId
+  policy_id     = testPolicy.policyId
+}
+data "tencentcloud_dayu_getcchttppolicies" "nameTest" {
+  resource_type = testPolicy.resourceType
+  resource_id   = testPolicy.resourceId
+  name          = testPolicy.name
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
 
 
 
@@ -163,7 +227,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -171,9 +235,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCcHttpPolicies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCcHttpPoliciesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>></span
+><span class="k">function </span>getCcHttpPolicies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCcHttpPoliciesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>></span
 ><span class="k">
-function </span>getCcHttpPoliciesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCcHttpPoliciesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>></span
+function </span>getCcHttpPoliciesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCcHttpPoliciesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -189,12 +253,12 @@ function </span>getCcHttpPoliciesOutput<span class="p">(</span><span class="nx">
                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetCcHttpPoliciesResult</span
 ><span class="k">
-def </span>get_cc_http_policies_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCcHttpPoliciesResult]</span
+def </span>get_cc_http_policies_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCcHttpPoliciesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -219,7 +283,8 @@ func </span>GetCcHttpPoliciesOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCcHttpPolicies </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetCcHttpPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCcHttpPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCcHttpPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCcHttpPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -228,7 +293,8 @@ func </span>GetCcHttpPoliciesOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>> </span>getCcHttpPolicies<span class="p">(</span><span class="nx">GetCcHttpPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>> </span>getCcHttpPolicies<span class="p">(</span><span class="nx">GetCcHttpPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCcHttpPoliciesResult</a></span>> </span>getCcHttpPolicies<span class="p">(</span><span class="nx">GetCcHttpPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -240,6 +306,15 @@ func </span>GetCcHttpPoliciesOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dayu/getCcHttpPolicies:getCcHttpPolicies
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dayu_get_cc_http_policies&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -258,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -267,8 +341,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -276,8 +349,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -285,8 +357,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -294,8 +365,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -309,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -318,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -327,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -336,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -345,8 +411,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -360,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -369,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -378,8 +487,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -387,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -396,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -411,8 +517,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -420,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -429,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -438,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -447,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -462,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -471,8 +571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -480,8 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -489,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -498,8 +595,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -513,8 +609,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -522,8 +617,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -531,8 +625,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -540,8 +633,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -549,8 +641,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -573,8 +664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -582,8 +672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Outputs.<wbr>Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CC http policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CC http policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -591,8 +680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -600,8 +688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -609,8 +696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Name of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -618,8 +704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -641,8 +726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -650,8 +734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslist">[]Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List</a></span>
     </dt>
-    <dd><p>A list of CC http policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CC http policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -659,8 +742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -668,8 +750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -677,8 +758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Name of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -686,11 +766,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcchttppolicieslist">list(object)</a></span>
+    </dt>
+    <dd>A list of CC http policies. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-"
+            title="">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the CC self-define http policy works for.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CC self-define http policy.</dd><dt class="property-"
+            title="">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CC self-define http policy.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -709,8 +850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -718,8 +858,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslist">List&lt;Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CC http policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CC http policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -727,8 +866,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -736,8 +874,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -745,8 +882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Name of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -754,8 +890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -777,8 +912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -786,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslist">Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of CC http policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CC http policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -795,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -804,8 +936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -813,8 +944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Name of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -822,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -845,17 +974,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcchttppolicieslist">Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List]</a></span>
+        <span class="property-type"><a href="#getcchttppolicieslist">Sequence[Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of CC http policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CC http policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -863,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -872,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -881,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Name of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -890,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -913,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -922,8 +1044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of CC http policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CC http policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -931,8 +1052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>ID of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -940,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC self-define http policy works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the CC self-define http policy works for.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -949,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>Name of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -958,8 +1076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CC self-define http policy.</p>
-</dd><dt class="property-"
+    <dd>ID of the CC self-define http policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -991,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode.</p>
-</dd><dt class="property-required"
+    <dd>Action mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1000,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_csharp" style="color: inherit; text-decoration: inherit;">Frequency</a>
@@ -1009,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute.</p>
-</dd><dt class="property-required"
+    <dd>Max frequency per minute.</dd><dt class="property-required"
             title="Required">
         <span id="iplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Lists</a>
@@ -1018,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>IP of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>IP of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1027,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1036,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1045,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1054,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
@@ -1063,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslistrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Rule list of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="smode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_csharp" style="color: inherit; text-decoration: inherit;">Smode</a>
@@ -1072,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode.</p>
-</dd><dt class="property-required"
+    <dd>Match mode.</dd><dt class="property-required"
             title="Required">
         <span id="switch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_csharp" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -1081,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1096,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode.</p>
-</dd><dt class="property-required"
+    <dd>Action mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1105,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_go" style="color: inherit; text-decoration: inherit;">Frequency</a>
@@ -1114,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute.</p>
-</dd><dt class="property-required"
+    <dd>Max frequency per minute.</dd><dt class="property-required"
             title="Required">
         <span id="iplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Lists</a>
@@ -1123,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>IP of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>IP of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1132,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1141,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1150,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1159,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
@@ -1168,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslistrulelist">[]Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List<wbr>Rule<wbr>List</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Rule list of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="smode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_go" style="color: inherit; text-decoration: inherit;">Smode</a>
@@ -1177,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode.</p>
-</dd><dt class="property-required"
+    <dd>Match mode.</dd><dt class="property-required"
             title="Required">
         <span id="switch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_go" style="color: inherit; text-decoration: inherit;">Switch</a>
@@ -1186,8 +1282,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_hcl" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max frequency per minute.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_lists_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IP of the CC self-define http policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_lists_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcchttppolicieslistrulelist">list(object)</a></span>
+    </dt>
+    <dd>Rule list of the CC self-define http policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="smode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_hcl" style="color: inherit; text-decoration: inherit;">smode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Match mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1201,8 +1390,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode.</p>
-</dd><dt class="property-required"
+    <dd>Action mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1210,8 +1398,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_java" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -1219,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max frequency per minute.</p>
-</dd><dt class="property-required"
+    <dd>Max frequency per minute.</dd><dt class="property-required"
             title="Required">
         <span id="iplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -1228,8 +1414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IP of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>IP of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1237,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1246,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1255,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1264,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -1273,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslistrulelist">List&lt;Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Rule list of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="smode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_java" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -1282,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Match mode.</p>
-</dd><dt class="property-required"
+    <dd>Match mode.</dd><dt class="property-required"
             title="Required">
         <span id="switch__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch__java" style="color: inherit; text-decoration: inherit;">switch_</a>
@@ -1291,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1306,8 +1484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action mode.</p>
-</dd><dt class="property-required"
+    <dd>Action mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1315,8 +1492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_nodejs" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -1324,8 +1500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max frequency per minute.</p>
-</dd><dt class="property-required"
+    <dd>Max frequency per minute.</dd><dt class="property-required"
             title="Required">
         <span id="iplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -1333,8 +1508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>IP of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>IP of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1342,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1351,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1360,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1369,8 +1540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -1378,8 +1548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslistrulelist">Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List<wbr>Rule<wbr>List[]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Rule list of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="smode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_nodejs" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -1387,8 +1556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match mode.</p>
-</dd><dt class="property-required"
+    <dd>Match mode.</dd><dt class="property-required"
             title="Required">
         <span id="switch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_nodejs" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1396,8 +1564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1411,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action mode.</p>
-</dd><dt class="property-required"
+    <dd>Action mode.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1420,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_python" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -1429,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max frequency per minute.</p>
-</dd><dt class="property-required"
+    <dd>Max frequency per minute.</dd><dt class="property-required"
             title="Required">
         <span id="ip_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_lists_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>lists</a>
@@ -1438,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>IP of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>IP of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1447,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1456,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -1465,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1474,17 +1634,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rule_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_lists_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcchttppolicieslistrulelist">Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List<wbr>Rule<wbr>List]</a></span>
+        <span class="property-type"><a href="#getcchttppolicieslistrulelist">Sequence[Get<wbr>Cc<wbr>Http<wbr>Policies<wbr>List<wbr>Rule<wbr>List]</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Rule list of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="smode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_python" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -1492,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Match mode.</p>
-</dd><dt class="property-required"
+    <dd>Match mode.</dd><dt class="property-required"
             title="Required">
         <span id="switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_python" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1501,8 +1658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1516,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action mode.</p>
-</dd><dt class="property-required"
+    <dd>Action mode.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1525,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_yaml" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -1534,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max frequency per minute.</p>
-</dd><dt class="property-required"
+    <dd>Max frequency per minute.</dd><dt class="property-required"
             title="Required">
         <span id="iplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iplists_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Lists</a>
@@ -1543,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IP of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>IP of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1552,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1561,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the CC http policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Id of the CC http policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1570,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the CC http policy works for.</p>
-</dd><dt class="property-required"
+    <dd>ID of the resource that the CC http policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1579,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the CC http policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rulelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -1588,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcchttppolicieslistrulelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule list of the CC self-define http policy.</p>
-</dd><dt class="property-required"
+    <dd>Rule list of the CC self-define http policy.</dd><dt class="property-required"
             title="Required">
         <span id="smode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#smode_yaml" style="color: inherit; text-decoration: inherit;">smode</a>
@@ -1597,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Match mode.</p>
-</dd><dt class="property-required"
+    <dd>Match mode.</dd><dt class="property-required"
             title="Required">
         <span id="switch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_yaml" style="color: inherit; text-decoration: inherit;">switch</a>
@@ -1606,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate the CC self-define http policy takes effect or not.</p>
-</dd></dl>
+    <dd>Indicate the CC self-define http policy takes effect or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1625,8 +1770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="skey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_csharp" style="color: inherit; text-decoration: inherit;">Skey</a>
@@ -1634,8 +1778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1643,8 +1786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value.</p>
-</dd></dl>
+    <dd>Rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1658,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="skey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_go" style="color: inherit; text-decoration: inherit;">Skey</a>
@@ -1667,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1676,8 +1816,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value.</p>
-</dd></dl>
+    <dd>Rule value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operator of the rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="skey_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_hcl" style="color: inherit; text-decoration: inherit;">skey</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1691,8 +1860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="skey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_java" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -1700,8 +1868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1709,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule value.</p>
-</dd></dl>
+    <dd>Rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1724,8 +1890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="skey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_nodejs" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -1733,8 +1898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1742,8 +1906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule value.</p>
-</dd></dl>
+    <dd>Rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1757,8 +1920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="skey_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_python" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -1766,8 +1928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1775,8 +1936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule value.</p>
-</dd></dl>
+    <dd>Rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1790,8 +1950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Operator of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="skey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#skey_yaml" style="color: inherit; text-decoration: inherit;">skey</a>
@@ -1799,8 +1958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Key of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1808,8 +1966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule value.</p>
-</dd></dl>
+    <dd>Rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1824,7 +1981,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

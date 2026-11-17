@@ -2,9 +2,11 @@
 ---
 title: "Provider"
 title_tag: "tencentcloud.Provider"
-meta_desc: "Documentation for the tencentcloud.Provider resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "The provider type for the tencentcloud package. By default, resources use package-wide configuration settings, however an explicit Provider instance may."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -21,68 +23,91 @@ construction to achieve fine-grained programmatic control over provider settings
 
 
 ## Create Provider Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ProviderArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ProviderArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ProviderArgs]</a></span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">allowed_account_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
              <span class="nx">assume_role</span><span class="p">:</span> <span class="nx">Optional[ProviderAssumeRoleArgs]</span> = None<span class="p">,</span>
+             <span class="nx">assume_role_with_saml</span><span class="p">:</span> <span class="nx">Optional[ProviderAssumeRoleWithSamlArgs]</span> = None<span class="p">,</span>
+             <span class="nx">assume_role_with_web_identity</span><span class="p">:</span> <span class="nx">Optional[ProviderAssumeRoleWithWebIdentityArgs]</span> = None<span class="p">,</span>
+             <span class="nx">cam_role_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">cos_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">enable_pod_oidc</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">forbidden_account_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+             <span class="nx">mfa_certification</span><span class="p">:</span> <span class="nx">Optional[ProviderMfaCertificationArgs]</span> = None<span class="p">,</span>
              <span class="nx">profile</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">secret_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">secret_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">security_token</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">shared_credentials_dir</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ProviderArgs]</a></span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">shared_credentials_dir</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProvider</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ProviderArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Provider</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProvider</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ProviderArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Provider</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProviderArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProviderArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProviderArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Provider</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProviderArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">pulumi:providers:tencentcloud</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">pulumi:providers:tencentcloud</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;pulumi_providers_tencentcloud&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -103,7 +128,7 @@ construction to achieve fine-grained programmatic control over provider settings
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -220,11 +245,19 @@ construction to achieve fine-grained programmatic control over provider settings
 </pulumi-choosable>
 </div>
 
+
+
 ## Provider Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Provider resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -234,14 +267,53 @@ The Provider resource accepts the following [input](/docs/intro/concepts/inputs-
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="allowedaccountids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedaccountids_csharp" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>forbiddenAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
         <span id="assumerole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerole_csharp" style="color: inherit; text-decoration: inherit;">Assume<wbr>Role</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#providerassumerole">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Inputs.<wbr>Provider<wbr>Assume<wbr>Role<wbr>Args</a></span>
+        <span class="property-type"><a href="#providerassumerole">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Inputs.<wbr>Provider<wbr>Assume<wbr>Role</a></span>
     </dt>
-    <dd><p>The <code>assume_role</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</p>
-</dd><dt class="property-optional"
+    <dd>The <code>assumeRole</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithsaml_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithsaml_csharp" style="color: inherit; text-decoration: inherit;">Assume<wbr>Role<wbr>With<wbr>Saml</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithsaml">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Inputs.<wbr>Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Saml</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithSaml</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithwebidentity_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithwebidentity_csharp" style="color: inherit; text-decoration: inherit;">Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithwebidentity">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Inputs.<wbr>Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithWebIdentity</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="camrolename_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_csharp" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the CVM instance CAM role. It can be sourced from the <code>TENCENTCLOUD_CAM_ROLE_NAME</code> environment variable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosdomain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosdomain_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The cos domain of the API request, Default is <code>https://cos.{region}.myqcloud.com</code>, Other Examples: <code>https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -249,8 +321,31 @@ The Provider resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablepodoidc_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepodoidc_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Pod<wbr>Oidc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable pod oidc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forbiddenaccountids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forbiddenaccountids_csharp" style="color: inherit; text-decoration: inherit;">Forbidden<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>allowedAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mfacertification_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mfacertification_csharp" style="color: inherit; text-decoration: inherit;">Mfa<wbr>Certification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providermfacertification">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Inputs.<wbr>Provider<wbr>Mfa<wbr>Certification</a></span>
+    </dt>
+    <dd>The <code>mfaCertification</code> block. If provided, terraform will attempt to use the provided credentials for MFA authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="profile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profile_csharp" style="color: inherit; text-decoration: inherit;">Profile</a>
@@ -258,9 +353,7 @@ The Provider resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment
-variable. If not set, the default profile created with <code>tccli configure</code> will be used.</p>
-</dd><dt class="property-optional"
+    <dd>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment variable. If not set, the default profile created with <code>tccli configure</code> will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -268,8 +361,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -277,10 +369,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud region. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_REGION</code>
-environment variables. The default input value is ap-guangzhou.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud region. It can also be sourced from the <code>TENCENTCLOUD_REGION</code> environment variables. The default input value is ap-guangzhou. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></dd><dt class="property-optional"
             title="Optional">
         <span id="secretid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Id</a>
@@ -288,10 +377,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud access key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud access key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="secretkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Key</a>
@@ -299,10 +385,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud secret key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud secret key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="securitytoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytoken_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Token</a>
@@ -310,11 +393,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code>
-environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported
-products</a>.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></p>
-</dd><dt class="property-optional"
+    <dd>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code> environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported products</a>. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></dd><dt class="property-optional"
             title="Optional">
         <span id="sharedcredentialsdir_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharedcredentialsdir_csharp" style="color: inherit; text-decoration: inherit;">Shared<wbr>Credentials<wbr>Dir</a>
@@ -322,9 +401,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code>
-environment variable. If not set this defaults to ~/.tccli.</p>
-</dd></dl>
+    <dd>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code> environment variable. If not set this defaults to ~/.tccli.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -332,14 +409,53 @@ environment variable. If not set this defaults to ~/.tccli.</p>
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="allowedaccountids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedaccountids_go" style="color: inherit; text-decoration: inherit;">Allowed<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>forbiddenAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
         <span id="assumerole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerole_go" style="color: inherit; text-decoration: inherit;">Assume<wbr>Role</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#providerassumerole">Provider<wbr>Assume<wbr>Role<wbr>Args</a></span>
     </dt>
-    <dd><p>The <code>assume_role</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</p>
-</dd><dt class="property-optional"
+    <dd>The <code>assumeRole</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithsaml_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithsaml_go" style="color: inherit; text-decoration: inherit;">Assume<wbr>Role<wbr>With<wbr>Saml</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithsaml">Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Saml<wbr>Args</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithSaml</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithwebidentity_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithwebidentity_go" style="color: inherit; text-decoration: inherit;">Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithwebidentity">Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity<wbr>Args</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithWebIdentity</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="camrolename_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_go" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the CVM instance CAM role. It can be sourced from the <code>TENCENTCLOUD_CAM_ROLE_NAME</code> environment variable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosdomain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosdomain_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The cos domain of the API request, Default is <code>https://cos.{region}.myqcloud.com</code>, Other Examples: <code>https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -347,8 +463,31 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablepodoidc_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepodoidc_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Pod<wbr>Oidc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable pod oidc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forbiddenaccountids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forbiddenaccountids_go" style="color: inherit; text-decoration: inherit;">Forbidden<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>allowedAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mfacertification_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mfacertification_go" style="color: inherit; text-decoration: inherit;">Mfa<wbr>Certification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providermfacertification">Provider<wbr>Mfa<wbr>Certification<wbr>Args</a></span>
+    </dt>
+    <dd>The <code>mfaCertification</code> block. If provided, terraform will attempt to use the provided credentials for MFA authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="profile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profile_go" style="color: inherit; text-decoration: inherit;">Profile</a>
@@ -356,9 +495,7 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment
-variable. If not set, the default profile created with <code>tccli configure</code> will be used.</p>
-</dd><dt class="property-optional"
+    <dd>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment variable. If not set, the default profile created with <code>tccli configure</code> will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -366,8 +503,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -375,10 +511,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud region. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_REGION</code>
-environment variables. The default input value is ap-guangzhou.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud region. It can also be sourced from the <code>TENCENTCLOUD_REGION</code> environment variables. The default input value is ap-guangzhou. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></dd><dt class="property-optional"
             title="Optional">
         <span id="secretid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Id</a>
@@ -386,10 +519,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud access key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud access key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="secretkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Key</a>
@@ -397,10 +527,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud secret key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud secret key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="securitytoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytoken_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Token</a>
@@ -408,11 +535,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code>
-environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported
-products</a>.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></p>
-</dd><dt class="property-optional"
+    <dd>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code> environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported products</a>. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></dd><dt class="property-optional"
             title="Optional">
         <span id="sharedcredentialsdir_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharedcredentialsdir_go" style="color: inherit; text-decoration: inherit;">Shared<wbr>Credentials<wbr>Dir</a>
@@ -420,9 +543,149 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code>
-environment variable. If not set this defaults to ~/.tccli.</p>
-</dd></dl>
+    <dd>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code> environment variable. If not set this defaults to ~/.tccli.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="allowed_account_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_account_ids_hcl" style="color: inherit; text-decoration: inherit;">allowed_<wbr>account_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>forbiddenAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assume_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assume_role_hcl" style="color: inherit; text-decoration: inherit;">assume_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerole">object</a></span>
+    </dt>
+    <dd>The <code>assumeRole</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assume_role_with_saml_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assume_role_with_saml_hcl" style="color: inherit; text-decoration: inherit;">assume_<wbr>role_<wbr>with_<wbr>saml</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithsaml">object</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithSaml</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assume_role_with_web_identity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assume_role_with_web_identity_hcl" style="color: inherit; text-decoration: inherit;">assume_<wbr>role_<wbr>with_<wbr>web_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithwebidentity">object</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithWebIdentity</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cam_role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_hcl" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the CVM instance CAM role. It can be sourced from the <code>TENCENTCLOUD_CAM_ROLE_NAME</code> environment variable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_domain_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The cos domain of the API request, Default is <code>https://cos.{region}.myqcloud.com</code>, Other Examples: <code>https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_pod_oidc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_pod_oidc_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>pod_<wbr>oidc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable pod oidc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forbidden_account_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forbidden_account_ids_hcl" style="color: inherit; text-decoration: inherit;">forbidden_<wbr>account_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>allowedAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mfa_certification_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mfa_certification_hcl" style="color: inherit; text-decoration: inherit;">mfa_<wbr>certification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providermfacertification">object</a></span>
+    </dt>
+    <dd>The <code>mfaCertification</code> block. If provided, terraform will attempt to use the provided credentials for MFA authentication.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="profile_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profile_hcl" style="color: inherit; text-decoration: inherit;">profile</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment variable. If not set, the default profile created with <code>tccli configure</code> will be used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This is the TencentCloud region. It can also be sourced from the <code>TENCENTCLOUD_REGION</code> environment variables. The default input value is ap-guangzhou. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_id_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This is the TencentCloud access key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="secret_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_key_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This is the TencentCloud secret key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="security_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_token_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code> environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported products</a>. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></dd><dt class="property-optional"
+            title="Optional">
+        <span id="shared_credentials_dir_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shared_credentials_dir_hcl" style="color: inherit; text-decoration: inherit;">shared_<wbr>credentials_<wbr>dir</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code> environment variable. If not set this defaults to ~/.tccli.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -430,14 +693,53 @@ environment variable. If not set this defaults to ~/.tccli.</p>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="allowedaccountids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedaccountids_java" style="color: inherit; text-decoration: inherit;">allowed<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>forbiddenAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
         <span id="assumerole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerole_java" style="color: inherit; text-decoration: inherit;">assume<wbr>Role</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#providerassumerole">Provider<wbr>Assume<wbr>Role<wbr>Args</a></span>
+        <span class="property-type"><a href="#providerassumerole">Provider<wbr>Assume<wbr>Role</a></span>
     </dt>
-    <dd><p>The <code>assume_role</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</p>
-</dd><dt class="property-optional"
+    <dd>The <code>assumeRole</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithsaml_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithsaml_java" style="color: inherit; text-decoration: inherit;">assume<wbr>Role<wbr>With<wbr>Saml</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithsaml">Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Saml</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithSaml</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithwebidentity_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithwebidentity_java" style="color: inherit; text-decoration: inherit;">assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithwebidentity">Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithWebIdentity</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="camrolename_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_java" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The name of the CVM instance CAM role. It can be sourced from the <code>TENCENTCLOUD_CAM_ROLE_NAME</code> environment variable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosdomain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosdomain_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The cos domain of the API request, Default is <code>https://cos.{region}.myqcloud.com</code>, Other Examples: <code>https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -445,8 +747,31 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablepodoidc_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepodoidc_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Pod<wbr>Oidc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable pod oidc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forbiddenaccountids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forbiddenaccountids_java" style="color: inherit; text-decoration: inherit;">forbidden<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>allowedAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mfacertification_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mfacertification_java" style="color: inherit; text-decoration: inherit;">mfa<wbr>Certification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providermfacertification">Provider<wbr>Mfa<wbr>Certification</a></span>
+    </dt>
+    <dd>The <code>mfaCertification</code> block. If provided, terraform will attempt to use the provided credentials for MFA authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="profile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profile_java" style="color: inherit; text-decoration: inherit;">profile</a>
@@ -454,9 +779,7 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment
-variable. If not set, the default profile created with <code>tccli configure</code> will be used.</p>
-</dd><dt class="property-optional"
+    <dd>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment variable. If not set, the default profile created with <code>tccli configure</code> will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -464,8 +787,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -473,10 +795,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This is the TencentCloud region. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_REGION</code>
-environment variables. The default input value is ap-guangzhou.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud region. It can also be sourced from the <code>TENCENTCLOUD_REGION</code> environment variables. The default input value is ap-guangzhou. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></dd><dt class="property-optional"
             title="Optional">
         <span id="secretid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -484,10 +803,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This is the TencentCloud access key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud access key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="secretkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -495,10 +811,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This is the TencentCloud secret key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud secret key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="securitytoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytoken_java" style="color: inherit; text-decoration: inherit;">security<wbr>Token</a>
@@ -506,11 +819,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code>
-environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported
-products</a>.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></p>
-</dd><dt class="property-optional"
+    <dd>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code> environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported products</a>. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></dd><dt class="property-optional"
             title="Optional">
         <span id="sharedcredentialsdir_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharedcredentialsdir_java" style="color: inherit; text-decoration: inherit;">shared<wbr>Credentials<wbr>Dir</a>
@@ -518,9 +827,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code>
-environment variable. If not set this defaults to ~/.tccli.</p>
-</dd></dl>
+    <dd>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code> environment variable. If not set this defaults to ~/.tccli.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -528,14 +835,53 @@ environment variable. If not set this defaults to ~/.tccli.</p>
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="allowedaccountids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedaccountids_nodejs" style="color: inherit; text-decoration: inherit;">allowed<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>forbiddenAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
         <span id="assumerole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerole_nodejs" style="color: inherit; text-decoration: inherit;">assume<wbr>Role</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#providerassumerole">Provider<wbr>Assume<wbr>Role<wbr>Args</a></span>
+        <span class="property-type"><a href="#providerassumerole">Provider<wbr>Assume<wbr>Role</a></span>
     </dt>
-    <dd><p>The <code>assume_role</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</p>
-</dd><dt class="property-optional"
+    <dd>The <code>assumeRole</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithsaml_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithsaml_nodejs" style="color: inherit; text-decoration: inherit;">assume<wbr>Role<wbr>With<wbr>Saml</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithsaml">Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Saml</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithSaml</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithwebidentity_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithwebidentity_nodejs" style="color: inherit; text-decoration: inherit;">assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithwebidentity">Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithWebIdentity</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="camrolename_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_nodejs" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the CVM instance CAM role. It can be sourced from the <code>TENCENTCLOUD_CAM_ROLE_NAME</code> environment variable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosdomain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosdomain_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The cos domain of the API request, Default is <code>https://cos.{region}.myqcloud.com</code>, Other Examples: <code>https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -543,8 +889,31 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablepodoidc_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepodoidc_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Pod<wbr>Oidc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable pod oidc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forbiddenaccountids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forbiddenaccountids_nodejs" style="color: inherit; text-decoration: inherit;">forbidden<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>allowedAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mfacertification_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mfacertification_nodejs" style="color: inherit; text-decoration: inherit;">mfa<wbr>Certification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providermfacertification">Provider<wbr>Mfa<wbr>Certification</a></span>
+    </dt>
+    <dd>The <code>mfaCertification</code> block. If provided, terraform will attempt to use the provided credentials for MFA authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="profile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profile_nodejs" style="color: inherit; text-decoration: inherit;">profile</a>
@@ -552,9 +921,7 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment
-variable. If not set, the default profile created with <code>tccli configure</code> will be used.</p>
-</dd><dt class="property-optional"
+    <dd>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment variable. If not set, the default profile created with <code>tccli configure</code> will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -562,8 +929,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -571,10 +937,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud region. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_REGION</code>
-environment variables. The default input value is ap-guangzhou.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud region. It can also be sourced from the <code>TENCENTCLOUD_REGION</code> environment variables. The default input value is ap-guangzhou. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></dd><dt class="property-optional"
             title="Optional">
         <span id="secretid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -582,10 +945,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud access key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud access key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="secretkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -593,10 +953,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This is the TencentCloud secret key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud secret key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="securitytoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytoken_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Token</a>
@@ -604,11 +961,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code>
-environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported
-products</a>.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></p>
-</dd><dt class="property-optional"
+    <dd>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code> environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported products</a>. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></dd><dt class="property-optional"
             title="Optional">
         <span id="sharedcredentialsdir_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharedcredentialsdir_nodejs" style="color: inherit; text-decoration: inherit;">shared<wbr>Credentials<wbr>Dir</a>
@@ -616,9 +969,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code>
-environment variable. If not set this defaults to ~/.tccli.</p>
-</dd></dl>
+    <dd>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code> environment variable. If not set this defaults to ~/.tccli.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -626,14 +977,53 @@ environment variable. If not set this defaults to ~/.tccli.</p>
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="allowed_account_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowed_account_ids_python" style="color: inherit; text-decoration: inherit;">allowed_<wbr>account_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>forbiddenAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
         <span id="assume_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assume_role_python" style="color: inherit; text-decoration: inherit;">assume_<wbr>role</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#providerassumerole">Provider<wbr>Assume<wbr>Role<wbr>Args</a></span>
     </dt>
-    <dd><p>The <code>assume_role</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</p>
-</dd><dt class="property-optional"
+    <dd>The <code>assumeRole</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assume_role_with_saml_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assume_role_with_saml_python" style="color: inherit; text-decoration: inherit;">assume_<wbr>role_<wbr>with_<wbr>saml</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithsaml">Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Saml<wbr>Args</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithSaml</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assume_role_with_web_identity_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assume_role_with_web_identity_python" style="color: inherit; text-decoration: inherit;">assume_<wbr>role_<wbr>with_<wbr>web_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithwebidentity">Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity<wbr>Args</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithWebIdentity</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cam_role_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_python" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The name of the CVM instance CAM role. It can be sourced from the <code>TENCENTCLOUD_CAM_ROLE_NAME</code> environment variable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_domain_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The cos domain of the API request, Default is <code>https://cos.{region}.myqcloud.com</code>, Other Examples: <code>https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -641,8 +1031,31 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_pod_oidc_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_pod_oidc_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>pod_<wbr>oidc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable pod oidc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forbidden_account_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forbidden_account_ids_python" style="color: inherit; text-decoration: inherit;">forbidden_<wbr>account_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>allowedAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mfa_certification_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mfa_certification_python" style="color: inherit; text-decoration: inherit;">mfa_<wbr>certification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providermfacertification">Provider<wbr>Mfa<wbr>Certification<wbr>Args</a></span>
+    </dt>
+    <dd>The <code>mfaCertification</code> block. If provided, terraform will attempt to use the provided credentials for MFA authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="profile_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profile_python" style="color: inherit; text-decoration: inherit;">profile</a>
@@ -650,9 +1063,7 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment
-variable. If not set, the default profile created with <code>tccli configure</code> will be used.</p>
-</dd><dt class="property-optional"
+    <dd>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment variable. If not set, the default profile created with <code>tccli configure</code> will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -660,8 +1071,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -669,10 +1079,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This is the TencentCloud region. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_REGION</code>
-environment variables. The default input value is ap-guangzhou.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud region. It can also be sourced from the <code>TENCENTCLOUD_REGION</code> environment variables. The default input value is ap-guangzhou. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></dd><dt class="property-optional"
             title="Optional">
         <span id="secret_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_id_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>id</a>
@@ -680,10 +1087,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This is the TencentCloud access key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud access key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="secret_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_key_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>key</a>
@@ -691,10 +1095,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This is the TencentCloud secret key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud secret key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="security_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_token_python" style="color: inherit; text-decoration: inherit;">security_<wbr>token</a>
@@ -702,11 +1103,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code>
-environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported
-products</a>.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></p>
-</dd><dt class="property-optional"
+    <dd>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code> environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported products</a>. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></dd><dt class="property-optional"
             title="Optional">
         <span id="shared_credentials_dir_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shared_credentials_dir_python" style="color: inherit; text-decoration: inherit;">shared_<wbr>credentials_<wbr>dir</a>
@@ -714,9 +1111,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code>
-environment variable. If not set this defaults to ~/.tccli.</p>
-</dd></dl>
+    <dd>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code> environment variable. If not set this defaults to ~/.tccli.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -724,14 +1119,53 @@ environment variable. If not set this defaults to ~/.tccli.</p>
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="allowedaccountids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowedaccountids_yaml" style="color: inherit; text-decoration: inherit;">allowed<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>forbiddenAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
         <span id="assumerole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerole_yaml" style="color: inherit; text-decoration: inherit;">assume<wbr>Role</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#providerassumerole">Property Map</a></span>
     </dt>
-    <dd><p>The <code>assume_role</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</p>
-</dd><dt class="property-optional"
+    <dd>The <code>assumeRole</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithsaml_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithsaml_yaml" style="color: inherit; text-decoration: inherit;">assume<wbr>Role<wbr>With<wbr>Saml</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithsaml">Property Map</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithSaml</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="assumerolewithwebidentity_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assumerolewithwebidentity_yaml" style="color: inherit; text-decoration: inherit;">assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providerassumerolewithwebidentity">Property Map</a></span>
+    </dt>
+    <dd>The <code>assumeRoleWithWebIdentity</code> block. If provided, terraform will attempt to assume this role using the supplied credentials.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="camrolename_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_yaml" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The name of the CVM instance CAM role. It can be sourced from the <code>TENCENTCLOUD_CAM_ROLE_NAME</code> environment variable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cosdomain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosdomain_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The cos domain of the API request, Default is <code>https://cos.{region}.myqcloud.com</code>, Other Examples: <code>https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -739,8 +1173,31 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The root domain of the API request, Default is <code>tencentcloudapi.com</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enablepodoidc_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepodoidc_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Pod<wbr>Oidc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable pod oidc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forbiddenaccountids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forbiddenaccountids_yaml" style="color: inherit; text-decoration: inherit;">forbidden<wbr>Account<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with <code>allowedAccountIds</code>, If use <code>assumeRoleWithSaml</code> or <code>assumeRoleWithWebIdentity</code>, it is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mfacertification_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mfacertification_yaml" style="color: inherit; text-decoration: inherit;">mfa<wbr>Certification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#providermfacertification">Property Map</a></span>
+    </dt>
+    <dd>The <code>mfaCertification</code> block. If provided, terraform will attempt to use the provided credentials for MFA authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="profile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profile_yaml" style="color: inherit; text-decoration: inherit;">profile</a>
@@ -748,9 +1205,7 @@ environment variable. If not set this defaults to ~/.tccli.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment
-variable. If not set, the default profile created with <code>tccli configure</code> will be used.</p>
-</dd><dt class="property-optional"
+    <dd>The profile name as set in the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_PROFILE</code> environment variable. If not set, the default profile created with <code>tccli configure</code> will be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -758,8 +1213,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of the API request. Valid values: <code>HTTP</code> and <code>HTTPS</code>. Default is <code>HTTPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -767,10 +1221,7 @@ variable. If not set, the default profile created with <code>tccli configure</co
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This is the TencentCloud region. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_REGION</code>
-environment variables. The default input value is ap-guangzhou.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud region. It can also be sourced from the <code>TENCENTCLOUD_REGION</code> environment variables. The default input value is ap-guangzhou. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_REGION</code></dd><dt class="property-optional"
             title="Optional">
         <span id="secretid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -778,10 +1229,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This is the TencentCloud access key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud access key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_ID</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_ID</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="secretkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -789,10 +1237,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This is the TencentCloud secret key. It must be provided, but it can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code>
-environment variable.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></p>
-</dd><dt class="property-optional"
+    <dd>This is the TencentCloud secret key. It can also be sourced from the <code>TENCENTCLOUD_SECRET_KEY</code> environment variable. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECRET_KEY</code></dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="securitytoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytoken_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Token</a>
@@ -800,11 +1245,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code>
-environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported
-products</a>.
-It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></p>
-</dd><dt class="property-optional"
+    <dd>TencentCloud Security Token of temporary access credentials. It can be sourced from the <code>TENCENTCLOUD_SECURITY_TOKEN</code> environment variable. Notice: for supported products, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10588">temporary key supported products</a>. It can also be sourced from the following environment variable: <code>TENCENTCLOUD_SECURITY_TOKEN</code></dd><dt class="property-optional"
             title="Optional">
         <span id="sharedcredentialsdir_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sharedcredentialsdir_yaml" style="color: inherit; text-decoration: inherit;">shared<wbr>Credentials<wbr>Dir</a>
@@ -812,9 +1253,7 @@ It can also be sourced from the following environment variable: <code>TENCENTCLO
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code>
-environment variable. If not set this defaults to ~/.tccli.</p>
-</dd></dl>
+    <dd>The directory of the shared credentials. It can also be sourced from the <code>TENCENTCLOUD_SHARED_CREDENTIALS_DIR</code> environment variable. If not set this defaults to ~/.tccli.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -835,8 +1274,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -850,8 +1288,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +1316,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -880,8 +1330,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -895,8 +1344,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -910,10 +1358,157 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
+
+
+## Provider Resource Methods {#methods}
+
+
+### TerraformConfig Method {#method_TerraformConfig}
+
+This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.
+
+
+#### Using TerraformConfig
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript">terraformConfig<span class="p">(</span><span class="p">): Output&lt;<span class="nx"><a href="#method_TerraformConfig_result">Provider.TerraformConfigResult</a></span>&gt;</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="python">
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def </span>terraform_config(</span><span class="p">) -&gt;</span> Output[<span class="nx"><a href="#method_TerraformConfig_result">Provider.Terraform_configResult</a></span>]</code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="go">
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func</span> <span class="p">(r *Provider)</span> TerraformConfig<span class="p">(</span><span class="p">) (<span class="nx"><a href="#method_TerraformConfig_result">ProviderTerraformConfigResultOutput</a></span>, error)</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span>Output&lt;<span class="nx"><a href="#method_TerraformConfig_result">Provider.TerraformConfigResult</a></span>&gt; <span class="nx">TerraformConfig</span><span class="p">()</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+
+
+#### TerraformConfig Result {#method_TerraformConfig_result}
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="terraformConfig_result_result_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terraformConfig_result_result_csharp" style="color: inherit; text-decoration: inherit;">Result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="terraformConfig_result_result_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terraformConfig_result_result_go" style="color: inherit; text-decoration: inherit;">Result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]interface{}</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="terraformConfig_result_result_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terraformConfig_result_result_hcl" style="color: inherit; text-decoration: inherit;">result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(any)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="terraformConfig_result_result_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terraformConfig_result_result_java" style="color: inherit; text-decoration: inherit;">result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,Object&gt;</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="terraformConfig_result_result_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terraformConfig_result_result_nodejs" style="color: inherit; text-decoration: inherit;">result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: any}</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="terraformConfig_result_result_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terraformConfig_result_result_python" style="color: inherit; text-decoration: inherit;">result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, Any]</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="terraformConfig_result_result_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terraformConfig_result_result_yaml" style="color: inherit; text-decoration: inherit;">result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;Any&gt;</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
 
 
 
@@ -925,7 +1520,9 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 
 
-<h4 id="providerassumerole">Provider<wbr>Assume<wbr>Role</h4>
+<h4 id="providerassumerole">
+Provider<wbr>Assume<wbr>Role<pulumi-choosable type="language" values="python,go" class="inline">, Provider<wbr>Assume<wbr>Role<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -937,8 +1534,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</p>
-</dd><dt class="property-required"
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionduration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Duration</a>
@@ -946,8 +1542,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Name</a>
@@ -955,8 +1550,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="externalid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externalid_csharp" style="color: inherit; text-decoration: inherit;">External<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_csharp" style="color: inherit; text-decoration: inherit;">Policy</a>
@@ -964,8 +1566,31 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</p>
-</dd></dl>
+    <dd>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="serialnumber_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_csharp" style="color: inherit; text-decoration: inherit;">Serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SERIAL_NUMBER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceidentity_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceidentity_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Caller identity uin. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SOURCE_IDENTITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokencode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_csharp" style="color: inherit; text-decoration: inherit;">Token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_TOKEN_CODE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -979,8 +1604,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</p>
-</dd><dt class="property-required"
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionduration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Duration</a>
@@ -988,8 +1612,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Name</a>
@@ -997,8 +1620,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="externalid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externalid_go" style="color: inherit; text-decoration: inherit;">External<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_go" style="color: inherit; text-decoration: inherit;">Policy</a>
@@ -1006,8 +1636,101 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</p>
-</dd></dl>
+    <dd>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="serialnumber_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_go" style="color: inherit; text-decoration: inherit;">Serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SERIAL_NUMBER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceidentity_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceidentity_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Caller identity uin. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SOURCE_IDENTITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokencode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_go" style="color: inherit; text-decoration: inherit;">Token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_TOKEN_CODE</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="role_arn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_duration_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_name_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="external_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#external_id_hcl" style="color: inherit; text-decoration: inherit;">external_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_hcl" style="color: inherit; text-decoration: inherit;">policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="serial_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serial_number_hcl" style="color: inherit; text-decoration: inherit;">serial_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SERIAL_NUMBER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_identity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_identity_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Caller identity uin. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SOURCE_IDENTITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="token_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_code_hcl" style="color: inherit; text-decoration: inherit;">token_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_TOKEN_CODE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1021,8 +1744,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</p>
-</dd><dt class="property-required"
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionduration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_java" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
@@ -1030,8 +1752,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_java" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
@@ -1039,8 +1760,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="externalid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externalid_java" style="color: inherit; text-decoration: inherit;">external<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_java" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -1048,8 +1776,31 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</p>
-</dd></dl>
+    <dd>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="serialnumber_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_java" style="color: inherit; text-decoration: inherit;">serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SERIAL_NUMBER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceidentity_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceidentity_java" style="color: inherit; text-decoration: inherit;">source<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Caller identity uin. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SOURCE_IDENTITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokencode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_java" style="color: inherit; text-decoration: inherit;">token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_TOKEN_CODE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1063,8 +1814,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</p>
-</dd><dt class="property-required"
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionduration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
@@ -1072,8 +1822,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
@@ -1081,8 +1830,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="externalid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externalid_nodejs" style="color: inherit; text-decoration: inherit;">external<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_nodejs" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -1090,8 +1846,31 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</p>
-</dd></dl>
+    <dd>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="serialnumber_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_nodejs" style="color: inherit; text-decoration: inherit;">serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SERIAL_NUMBER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceidentity_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceidentity_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Caller identity uin. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SOURCE_IDENTITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokencode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_nodejs" style="color: inherit; text-decoration: inherit;">token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_TOKEN_CODE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1105,8 +1884,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</p>
-</dd><dt class="property-required"
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="session_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_duration_python" style="color: inherit; text-decoration: inherit;">session_<wbr>duration</a>
@@ -1114,8 +1892,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
             title="Required">
         <span id="session_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_name_python" style="color: inherit; text-decoration: inherit;">session_<wbr>name</a>
@@ -1123,8 +1900,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="external_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#external_id_python" style="color: inherit; text-decoration: inherit;">external_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_python" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -1132,8 +1916,31 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</p>
-</dd></dl>
+    <dd>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="serial_number_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serial_number_python" style="color: inherit; text-decoration: inherit;">serial_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SERIAL_NUMBER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_identity_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_identity_python" style="color: inherit; text-decoration: inherit;">source_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Caller identity uin. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SOURCE_IDENTITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="token_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_code_python" style="color: inherit; text-decoration: inherit;">token_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_TOKEN_CODE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1147,8 +1954,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</p>
-</dd><dt class="property-required"
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionduration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
@@ -1156,8 +1962,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
@@ -1165,8 +1970,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="externalid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externalid_yaml" style="color: inherit; text-decoration: inherit;">external<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_yaml" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -1174,8 +1986,1009 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</p>
-</dd></dl>
+    <dd>A more restrictive policy when making the AssumeRole call. Its content must not contains <code>principal</code> elements. Notice: more syntax references, please refer to: <a href="https://intl.cloud.tencent.com/document/product/598/10603">policies syntax logic</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="serialnumber_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_yaml" style="color: inherit; text-decoration: inherit;">serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SERIAL_NUMBER</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sourceidentity_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceidentity_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Caller identity uin. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SOURCE_IDENTITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokencode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_yaml" style="color: inherit; text-decoration: inherit;">token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_TOKEN_CODE</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="providerassumerolewithsaml">
+Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Saml<pulumi-choosable type="language" values="python,go" class="inline">, Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Saml<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="principalarn_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalarn_csharp" style="color: inherit; text-decoration: inherit;">Principal<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Player Access Description Name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PRINCIPAL_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="rolearn_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="samlassertion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samlassertion_csharp" style="color: inherit; text-decoration: inherit;">Saml<wbr>Assertion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML assertion information encoded in base64. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SAML_ASSERTION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="principalarn_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalarn_go" style="color: inherit; text-decoration: inherit;">Principal<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Player Access Description Name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PRINCIPAL_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="rolearn_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="samlassertion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samlassertion_go" style="color: inherit; text-decoration: inherit;">Saml<wbr>Assertion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML assertion information encoded in base64. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SAML_ASSERTION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="principal_arn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_arn_hcl" style="color: inherit; text-decoration: inherit;">principal_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Player Access Description Name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PRINCIPAL_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="role_arn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="saml_assertion_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#saml_assertion_hcl" style="color: inherit; text-decoration: inherit;">saml_<wbr>assertion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML assertion information encoded in base64. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SAML_ASSERTION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_duration_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_name_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="principalarn_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalarn_java" style="color: inherit; text-decoration: inherit;">principal<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Player Access Description Name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PRINCIPAL_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="rolearn_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_java" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="samlassertion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samlassertion_java" style="color: inherit; text-decoration: inherit;">saml<wbr>Assertion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>SAML assertion information encoded in base64. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SAML_ASSERTION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_java" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_java" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="principalarn_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalarn_nodejs" style="color: inherit; text-decoration: inherit;">principal<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Player Access Description Name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PRINCIPAL_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="rolearn_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="samlassertion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samlassertion_nodejs" style="color: inherit; text-decoration: inherit;">saml<wbr>Assertion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML assertion information encoded in base64. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SAML_ASSERTION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="principal_arn_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_arn_python" style="color: inherit; text-decoration: inherit;">principal_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Player Access Description Name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PRINCIPAL_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="role_arn_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_python" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="saml_assertion_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#saml_assertion_python" style="color: inherit; text-decoration: inherit;">saml_<wbr>assertion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>SAML assertion information encoded in base64. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SAML_ASSERTION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_duration_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_duration_python" style="color: inherit; text-decoration: inherit;">session_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_name_python" style="color: inherit; text-decoration: inherit;">session_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="principalarn_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalarn_yaml" style="color: inherit; text-decoration: inherit;">principal<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Player Access Description Name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PRINCIPAL_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="rolearn_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="samlassertion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samlassertion_yaml" style="color: inherit; text-decoration: inherit;">saml<wbr>Assertion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>SAML assertion information encoded in base64. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SAML_ASSERTION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="providerassumerolewithwebidentity">
+Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity<pulumi-choosable type="language" values="python,go" class="inline">, Provider<wbr>Assume<wbr>Role<wbr>With<wbr>Web<wbr>Identity<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="providerid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#providerid_csharp" style="color: inherit; text-decoration: inherit;">Provider<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity provider name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID</code>, Default is OIDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearn_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearnfile_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearnfile_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File containin the ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytoken_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytoken_csharp" style="color: inherit; text-decoration: inherit;">Web<wbr>Identity<wbr>Token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>OIDC token issued by IdP. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytokenfile_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytokenfile_csharp" style="color: inherit; text-decoration: inherit;">Web<wbr>Identity<wbr>Token<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="providerid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#providerid_go" style="color: inherit; text-decoration: inherit;">Provider<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity provider name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID</code>, Default is OIDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearn_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearnfile_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearnfile_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File containin the ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytoken_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytoken_go" style="color: inherit; text-decoration: inherit;">Web<wbr>Identity<wbr>Token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>OIDC token issued by IdP. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytokenfile_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytokenfile_go" style="color: inherit; text-decoration: inherit;">Web<wbr>Identity<wbr>Token<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="session_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_duration_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_name_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="provider_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#provider_id_hcl" style="color: inherit; text-decoration: inherit;">provider_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity provider name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID</code>, Default is OIDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_arn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_arn_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_file_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>arn_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File containin the ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="web_identity_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_identity_token_hcl" style="color: inherit; text-decoration: inherit;">web_<wbr>identity_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>OIDC token issued by IdP. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="web_identity_token_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_identity_token_file_hcl" style="color: inherit; text-decoration: inherit;">web_<wbr>identity_<wbr>token_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_java" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_java" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="providerid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#providerid_java" style="color: inherit; text-decoration: inherit;">provider<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Identity provider name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID</code>, Default is OIDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearn_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_java" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearnfile_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearnfile_java" style="color: inherit; text-decoration: inherit;">role<wbr>Arn<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>File containin the ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytoken_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytoken_java" style="color: inherit; text-decoration: inherit;">web<wbr>Identity<wbr>Token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>OIDC token issued by IdP. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytokenfile_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytokenfile_java" style="color: inherit; text-decoration: inherit;">web<wbr>Identity<wbr>Token<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="providerid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#providerid_nodejs" style="color: inherit; text-decoration: inherit;">provider<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity provider name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID</code>, Default is OIDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearn_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearnfile_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearnfile_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Arn<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File containin the ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytoken_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytoken_nodejs" style="color: inherit; text-decoration: inherit;">web<wbr>Identity<wbr>Token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>OIDC token issued by IdP. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytokenfile_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytokenfile_nodejs" style="color: inherit; text-decoration: inherit;">web<wbr>Identity<wbr>Token<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="session_duration_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_duration_python" style="color: inherit; text-decoration: inherit;">session_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_name_python" style="color: inherit; text-decoration: inherit;">session_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="provider_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#provider_id_python" style="color: inherit; text-decoration: inherit;">provider_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Identity provider name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID</code>, Default is OIDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_arn_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_python" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_arn_file_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_file_python" style="color: inherit; text-decoration: inherit;">role_<wbr>arn_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>File containin the ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="web_identity_token_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_identity_token_python" style="color: inherit; text-decoration: inherit;">web_<wbr>identity_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>OIDC token issued by IdP. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="web_identity_token_file_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_identity_token_file_python" style="color: inherit; text-decoration: inherit;">web_<wbr>identity_<wbr>token_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="sessionduration_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionduration_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sessionname_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The session name to use when making the AssumeRole call. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="providerid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#providerid_yaml" style="color: inherit; text-decoration: inherit;">provider<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Identity provider name. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID</code>, Default is OIDC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearn_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARN</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rolearnfile_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearnfile_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Arn<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>File containin the ARN of the role to assume. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE</code>. One of <code>roleArn</code> or <code>roleArnFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytoken_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytoken_yaml" style="color: inherit; text-decoration: inherit;">web<wbr>Identity<wbr>Token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>OIDC token issued by IdP. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="webidentitytokenfile_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webidentitytokenfile_yaml" style="color: inherit; text-decoration: inherit;">web<wbr>Identity<wbr>Token<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the <code>TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE</code>. One of <code>webIdentityToken</code> or <code>webIdentityTokenFile</code> is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="providermfacertification">
+Provider<wbr>Mfa<wbr>Certification<pulumi-choosable type="language" values="python,go" class="inline">, Provider<wbr>Mfa<wbr>Certification<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="serialnumber_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_csharp" style="color: inherit; text-decoration: inherit;">Serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_SERIAL_NUMBER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tokencode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_csharp" style="color: inherit; text-decoration: inherit;">Token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_TOKEN_CODE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="durationseconds_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#durationseconds_csharp" style="color: inherit; text-decoration: inherit;">Duration<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Specify the validity period of the temporary certificate. The main account can be set to a maximum validity period of 7200 seconds, and the sub account can be set to a maximum validity period of 129600 seconds, and default is 1800 seconds. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_DURATION_SECONDS</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="serialnumber_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_go" style="color: inherit; text-decoration: inherit;">Serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_SERIAL_NUMBER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tokencode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_go" style="color: inherit; text-decoration: inherit;">Token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_TOKEN_CODE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="durationseconds_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#durationseconds_go" style="color: inherit; text-decoration: inherit;">Duration<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Specify the validity period of the temporary certificate. The main account can be set to a maximum validity period of 7200 seconds, and the sub account can be set to a maximum validity period of 129600 seconds, and default is 1800 seconds. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_DURATION_SECONDS</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="serial_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serial_number_hcl" style="color: inherit; text-decoration: inherit;">serial_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_SERIAL_NUMBER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="token_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_code_hcl" style="color: inherit; text-decoration: inherit;">token_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_TOKEN_CODE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="duration_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_seconds_hcl" style="color: inherit; text-decoration: inherit;">duration_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify the validity period of the temporary certificate. The main account can be set to a maximum validity period of 7200 seconds, and the sub account can be set to a maximum validity period of 129600 seconds, and default is 1800 seconds. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_DURATION_SECONDS</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="serialnumber_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_java" style="color: inherit; text-decoration: inherit;">serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_SERIAL_NUMBER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tokencode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_java" style="color: inherit; text-decoration: inherit;">token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_TOKEN_CODE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="durationseconds_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#durationseconds_java" style="color: inherit; text-decoration: inherit;">duration<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Specify the validity period of the temporary certificate. The main account can be set to a maximum validity period of 7200 seconds, and the sub account can be set to a maximum validity period of 129600 seconds, and default is 1800 seconds. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_DURATION_SECONDS</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="serialnumber_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_nodejs" style="color: inherit; text-decoration: inherit;">serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_SERIAL_NUMBER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tokencode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_nodejs" style="color: inherit; text-decoration: inherit;">token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_TOKEN_CODE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="durationseconds_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#durationseconds_nodejs" style="color: inherit; text-decoration: inherit;">duration<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify the validity period of the temporary certificate. The main account can be set to a maximum validity period of 7200 seconds, and the sub account can be set to a maximum validity period of 129600 seconds, and default is 1800 seconds. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_DURATION_SECONDS</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="serial_number_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serial_number_python" style="color: inherit; text-decoration: inherit;">serial_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_SERIAL_NUMBER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="token_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_code_python" style="color: inherit; text-decoration: inherit;">token_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_TOKEN_CODE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="duration_seconds_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_seconds_python" style="color: inherit; text-decoration: inherit;">duration_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Specify the validity period of the temporary certificate. The main account can be set to a maximum validity period of 7200 seconds, and the sub account can be set to a maximum validity period of 129600 seconds, and default is 1800 seconds. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_DURATION_SECONDS</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="serialnumber_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serialnumber_yaml" style="color: inherit; text-decoration: inherit;">serial<wbr>Number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>MFA serial number, the identification number of the MFA device associated with the calling CAM user. Format qcs: cam:uin/${ownerUin}::mfa/${mfaType}. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_SERIAL_NUMBER</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tokencode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokencode_yaml" style="color: inherit; text-decoration: inherit;">token<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>MFA authentication code. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_TOKEN_CODE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="durationseconds_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#durationseconds_yaml" style="color: inherit; text-decoration: inherit;">duration<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Specify the validity period of the temporary certificate. The main account can be set to a maximum validity period of 7200 seconds, and the sub account can be set to a maximum validity period of 129600 seconds, and default is 1800 seconds. It can be sourced from the <code>TENCENTCLOUD_MFA_CERTIFICATION_DURATION_SECONDS</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1187,7 +3000,6 @@ All [input](#inputs) properties are implicitly available as output properties. A
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

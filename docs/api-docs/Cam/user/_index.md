@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Cam.User"
 meta_desc: "Documentation for the tencentcloud.Cam.User resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,94 +18,85 @@ Provides a resource to manage CAM user.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.cam.User("foo", {
+const example = new tencentcloud.cam.User("example", {
+    name: "tf-example",
+    remark: "Remark.",
     consoleLogin: true,
-    countryCode: "86",
-    email: "hello@test.com",
-    forceDelete: true,
-    needResetPassword: true,
-    password: "Gail@1234",
-    phoneNum: "12345678910",
-    remark: "tf_user_test",
-    tags: {
-        test: "tf_cam_user",
-    },
     useApi: true,
+    needResetPassword: true,
+    password: "Password@123",
+    phoneNum: "189********",
+    email: "example@qq.com",
+    countryCode: "86",
+    forceDelete: true,
+    tags: {
+        createBy: "Terraform",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.cam.User("foo",
+example = tencentcloud.cam.User("example",
+    name="tf-example",
+    remark="Remark.",
     console_login=True,
-    country_code="86",
-    email="hello@test.com",
-    force_delete=True,
+    use_api=True,
     need_reset_password=True,
-    password="Gail@1234",
-    phone_num="12345678910",
-    remark="tf_user_test",
+    password="Password@123",
+    phone_num="189********",
+    email="example@qq.com",
+    country_code="86",
+    force_delete=True,
     tags={
-        "test": "tf_cam_user",
-    },
-    use_api=True)
+        "createBy": "Terraform",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Cam.User("foo", new()
-    {
-        ConsoleLogin = true,
-        CountryCode = "86",
-        Email = "hello@test.com",
-        ForceDelete = true,
-        NeedResetPassword = true,
-        Password = "Gail@1234",
-        PhoneNum = "12345678910",
-        Remark = "tf_user_test",
-        Tags = 
-        {
-            { "test", "tf_cam_user" },
-        },
-        UseApi = true,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cam.NewUser(ctx, "foo", &Cam.UserArgs{
+		_, err := cam.NewUser(ctx, "example", &cam.UserArgs{
+			Name:              pulumi.String("tf-example"),
+			Remark:            pulumi.String("Remark."),
 			ConsoleLogin:      pulumi.Bool(true),
-			CountryCode:       pulumi.String("86"),
-			Email:             pulumi.String("hello@test.com"),
-			ForceDelete:       pulumi.Bool(true),
+			UseApi:            pulumi.Bool(true),
 			NeedResetPassword: pulumi.Bool(true),
-			Password:          pulumi.String("Gail@1234"),
-			PhoneNum:          pulumi.String("12345678910"),
-			Remark:            pulumi.String("tf_user_test"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf_cam_user"),
+			Password:          pulumi.String("Password@123"),
+			PhoneNum:          pulumi.String("189********"),
+			Email:             pulumi.String("example@qq.com"),
+			CountryCode:       pulumi.String("86"),
+			ForceDelete:       pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
 			},
-			UseApi: pulumi.Bool(true),
 		})
 		if err != nil {
 			return err
@@ -112,6 +105,44 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cam.User("example", new()
+    {
+        Name = "tf-example",
+        Remark = "Remark.",
+        ConsoleLogin = true,
+        UseApi = true,
+        NeedResetPassword = true,
+        Password = "Password@123",
+        PhoneNum = "189********",
+        Email = "example@qq.com",
+        CountryCode = "86",
+        ForceDelete = true,
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -120,8 +151,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cam.User;
 import com.pulumi.tencentcloud.Cam.UserArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -133,58 +164,122 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new User("foo", UserArgs.builder()        
+        var example = new User("example", UserArgs.builder()
+            .name("tf-example")
+            .remark("Remark.")
             .consoleLogin(true)
-            .countryCode("86")
-            .email("hello@test.com")
-            .forceDelete(true)
-            .needResetPassword(true)
-            .password("Gail@1234")
-            .phoneNum("12345678910")
-            .remark("tf_user_test")
-            .tags(Map.of("test", "tf_cam_user"))
             .useApi(true)
+            .needResetPassword(true)
+            .password("Password@123")
+            .phoneNum("189********")
+            .email("example@qq.com")
+            .countryCode("86")
+            .forceDelete(true)
+            .tags(Map.of("createBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Cam:User
     properties:
+      name: tf-example
+      remark: Remark.
       consoleLogin: true
-      countryCode: '86'
-      email: hello@test.com
-      forceDelete: true
-      needResetPassword: true
-      password: Gail@1234
-      phoneNum: '12345678910'
-      remark: tf_user_test
-      tags:
-        test: tf_cam_user
       useApi: true
+      needResetPassword: true
+      password: Password@123
+      phoneNum: 189********
+      email: example@qq.com
+      countryCode: '86'
+      forceDelete: true
+      tags:
+        createBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cam_user" "example" {
+  name                = "tf-example"
+  remark              = "Remark."
+  console_login       = true
+  use_api             = true
+  need_reset_password = true
+  password            = "Password@123"
+  phone_num           = "189********"
+  email               = "example@qq.com"
+  country_code        = "86"
+  force_delete        = true
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AddUser](https://www.tencentcloud.com/document/api/598/32265)
+  - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+* Update:
+  - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpdateUser](https://www.tencentcloud.com/document/api/598/32252)
+* Delete: [DeleteUser](https://www.tencentcloud.com/document/api/598/32261)
 
 
 ## Create User Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">User</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">User</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">User</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[UserArgs]</a></span> = None<span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">User</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
          <span class="nx">console_login</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
@@ -196,45 +291,51 @@ resources:
          <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">phone_num</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-         <span class="nx">use_api</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">User</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[UserArgs]</a></span> = None<span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+         <span class="nx">use_api</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUser</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">User</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUser</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">User</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">User</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">User</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">User</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">User</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cam:User</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cam:User</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cam_user&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -255,7 +356,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -372,11 +473,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## User Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The User resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -392,8 +501,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_csharp" style="color: inherit; text-decoration: inherit;">Country<wbr>Code</a>
@@ -401,8 +509,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_csharp" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -410,8 +517,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -419,8 +525,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -428,8 +533,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="needresetpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needresetpassword_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Reset<wbr>Password</a>
@@ -437,8 +541,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -446,8 +549,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -455,8 +557,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -464,17 +565,15 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="useapi_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useapi_csharp" style="color: inherit; text-decoration: inherit;">Use<wbr>Api</a>
@@ -482,8 +581,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -497,8 +595,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_go" style="color: inherit; text-decoration: inherit;">Country<wbr>Code</a>
@@ -506,8 +603,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_go" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -515,8 +611,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -524,8 +619,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -533,8 +627,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="needresetpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needresetpassword_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Reset<wbr>Password</a>
@@ -542,8 +635,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -551,8 +643,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -560,8 +651,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -569,17 +659,15 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="useapi_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useapi_go" style="color: inherit; text-decoration: inherit;">Use<wbr>Api</a>
@@ -587,8 +675,101 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="console_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#console_login_hcl" style="color: inherit; text-decoration: inherit;">console_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="country_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#country_code_hcl" style="color: inherit; text-decoration: inherit;">country_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_hcl" style="color: inherit; text-decoration: inherit;">email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="need_reset_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_reset_password_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>reset_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="phone_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_num_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="use_api_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#use_api_hcl" style="color: inherit; text-decoration: inherit;">use_<wbr>api</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -602,8 +783,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_java" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -611,8 +791,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_java" style="color: inherit; text-decoration: inherit;">email</a>
@@ -620,8 +799,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -629,8 +807,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -638,8 +815,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="needresetpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needresetpassword_java" style="color: inherit; text-decoration: inherit;">need<wbr>Reset<wbr>Password</a>
@@ -647,8 +823,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -656,8 +831,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -665,8 +839,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -674,17 +847,15 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="useapi_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useapi_java" style="color: inherit; text-decoration: inherit;">use<wbr>Api</a>
@@ -692,8 +863,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -707,8 +877,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_nodejs" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -716,8 +885,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_nodejs" style="color: inherit; text-decoration: inherit;">email</a>
@@ -725,8 +893,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -734,8 +901,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -743,8 +909,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="needresetpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needresetpassword_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Reset<wbr>Password</a>
@@ -752,8 +917,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -761,8 +925,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -770,8 +933,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -779,17 +941,15 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="useapi_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useapi_nodejs" style="color: inherit; text-decoration: inherit;">use<wbr>Api</a>
@@ -797,8 +957,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -812,8 +971,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="country_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#country_code_python" style="color: inherit; text-decoration: inherit;">country_<wbr>code</a>
@@ -821,8 +979,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_python" style="color: inherit; text-decoration: inherit;">email</a>
@@ -830,8 +987,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -839,8 +995,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -848,8 +1003,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="need_reset_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_reset_password_python" style="color: inherit; text-decoration: inherit;">need_<wbr>reset_<wbr>password</a>
@@ -857,8 +1011,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -866,8 +1019,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_num_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
@@ -875,8 +1027,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -884,17 +1035,15 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="use_api_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#use_api_python" style="color: inherit; text-decoration: inherit;">use_<wbr>api</a>
@@ -902,8 +1051,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -917,8 +1065,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_yaml" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -926,8 +1073,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_yaml" style="color: inherit; text-decoration: inherit;">email</a>
@@ -935,8 +1081,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -944,8 +1089,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -953,8 +1097,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="needresetpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needresetpassword_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Reset<wbr>Password</a>
@@ -962,8 +1105,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -971,8 +1113,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -980,8 +1121,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -989,17 +1129,15 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="useapi_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useapi_yaml" style="color: inherit; text-decoration: inherit;">use<wbr>Api</a>
@@ -1007,8 +1145,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1029,8 +1166,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property- property-secret"
             title="">
         <span id="secretid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Id</a>
@@ -1038,8 +1174,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret ID of the CAM user.</dd><dt class="property- property-secret"
             title="">
         <span id="secretkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Key</a>
@@ -1047,8 +1182,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret key of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_csharp" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -1056,8 +1190,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>ID of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1065,8 +1198,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd></dl>
+    <dd>Uin of the CAM User.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1080,8 +1212,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property- property-secret"
             title="">
         <span id="secretid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Id</a>
@@ -1089,8 +1220,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret ID of the CAM user.</dd><dt class="property- property-secret"
             title="">
         <span id="secretkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Key</a>
@@ -1098,8 +1228,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret key of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_go" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -1107,8 +1236,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>ID of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1116,8 +1244,53 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd></dl>
+    <dd>Uin of the CAM User.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property- property-secret"
+            title="">
+        <span id="secret_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_id_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret ID of the CAM user.</dd><dt class="property- property-secret"
+            title="">
+        <span id="secret_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_key_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret key of the CAM user.</dd><dt class="property-"
+            title="">
+        <span id="uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the CAM user.</dd><dt class="property-"
+            title="">
+        <span id="uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uin of the CAM User.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1131,8 +1304,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property- property-secret"
             title="">
         <span id="secretid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -1140,8 +1312,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret ID of the CAM user.</dd><dt class="property- property-secret"
             title="">
         <span id="secretkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -1149,8 +1320,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret key of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_java" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1158,8 +1328,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>ID of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1167,8 +1336,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd></dl>
+    <dd>Uin of the CAM User.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1182,8 +1350,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property- property-secret"
             title="">
         <span id="secretid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -1191,8 +1358,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret ID of the CAM user.</dd><dt class="property- property-secret"
             title="">
         <span id="secretkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -1200,8 +1366,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret key of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_nodejs" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1209,8 +1374,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>ID of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1218,8 +1382,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd></dl>
+    <dd>Uin of the CAM User.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1233,8 +1396,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property- property-secret"
             title="">
         <span id="secret_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_id_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>id</a>
@@ -1242,8 +1404,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret ID of the CAM user.</dd><dt class="property- property-secret"
             title="">
         <span id="secret_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_key_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>key</a>
@@ -1251,8 +1412,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret key of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_python" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1260,8 +1420,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>ID of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1269,8 +1428,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd></dl>
+    <dd>Uin of the CAM User.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1284,8 +1442,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property- property-secret"
             title="">
         <span id="secretid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -1293,8 +1450,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret ID of the CAM user.</dd><dt class="property- property-secret"
             title="">
         <span id="secretkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -1302,8 +1458,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Secret key of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_yaml" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1311,8 +1466,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>ID of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1320,8 +1474,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd></dl>
+    <dd>Uin of the CAM User.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1331,18 +1484,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing User resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UserState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">User</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UserState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">User</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1357,108 +1510,147 @@ Get an existing User resource's state with the given name, ID, and optional extr
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">secret_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">secret_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">uid</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">uin</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">use_api</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">) -&gt;</span> User</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUser<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UserState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">User</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUser<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UserState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">User</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">User</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">User</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">User</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">User</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingUser</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cam:User</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cam_user</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1466,28 +1658,31 @@ Get an existing User resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1495,28 +1690,31 @@ Get an existing User resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1536,8 +1734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_countrycode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_countrycode_csharp" style="color: inherit; text-decoration: inherit;">Country<wbr>Code</a>
@@ -1545,8 +1742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_csharp" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -1554,8 +1750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -1563,8 +1758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1572,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needresetpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needresetpassword_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Reset<wbr>Password</a>
@@ -1581,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -1590,8 +1782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phonenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phonenum_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -1599,8 +1790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1608,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretid_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Id</a>
@@ -1617,8 +1806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret ID of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretkey_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Key</a>
@@ -1626,17 +1814,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret key of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_csharp" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -1644,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1653,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd><dt class="property-optional"
+    <dd>Uin of the CAM User.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useapi_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useapi_csharp" style="color: inherit; text-decoration: inherit;">Use<wbr>Api</a>
@@ -1662,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1677,8 +1860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_countrycode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_countrycode_go" style="color: inherit; text-decoration: inherit;">Country<wbr>Code</a>
@@ -1686,8 +1868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_go" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -1695,8 +1876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -1704,8 +1884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1713,8 +1892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needresetpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needresetpassword_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Reset<wbr>Password</a>
@@ -1722,8 +1900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -1731,8 +1908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phonenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phonenum_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -1740,8 +1916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1749,8 +1924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretid_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Id</a>
@@ -1758,8 +1932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret ID of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretkey_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Key</a>
@@ -1767,17 +1940,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret key of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_go" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -1785,8 +1956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1794,8 +1964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd><dt class="property-optional"
+    <dd>Uin of the CAM User.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useapi_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useapi_go" style="color: inherit; text-decoration: inherit;">Use<wbr>Api</a>
@@ -1803,8 +1972,133 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_console_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_console_login_hcl" style="color: inherit; text-decoration: inherit;">console_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_country_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_country_code_hcl" style="color: inherit; text-decoration: inherit;">country_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_hcl" style="color: inherit; text-decoration: inherit;">email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_need_reset_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_need_reset_password_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>reset_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_phone_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_num_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark of the CAM user.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_secret_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_id_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret ID of the CAM user.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_secret_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_key_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret key of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the CAM user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uin of the CAM User.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_use_api_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_use_api_hcl" style="color: inherit; text-decoration: inherit;">use_<wbr>api</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1818,8 +2112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_countrycode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_countrycode_java" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -1827,8 +2120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_java" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1836,8 +2128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1845,8 +2136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1854,8 +2144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needresetpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needresetpassword_java" style="color: inherit; text-decoration: inherit;">need<wbr>Reset<wbr>Password</a>
@@ -1863,8 +2152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1872,8 +2160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phonenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phonenum_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -1881,8 +2168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1890,8 +2176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretid_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -1899,8 +2184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret ID of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretkey_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -1908,17 +2192,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret key of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_java" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1926,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1935,8 +2216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd><dt class="property-optional"
+    <dd>Uin of the CAM User.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useapi_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useapi_java" style="color: inherit; text-decoration: inherit;">use<wbr>Api</a>
@@ -1944,8 +2224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1959,8 +2238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_countrycode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_countrycode_nodejs" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -1968,8 +2246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_nodejs" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1977,8 +2254,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1986,8 +2262,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1995,8 +2270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needresetpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needresetpassword_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Reset<wbr>Password</a>
@@ -2004,8 +2278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2013,8 +2286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phonenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phonenum_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -2022,8 +2294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2031,8 +2302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretid_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -2040,8 +2310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret ID of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretkey_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -2049,17 +2318,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret key of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_nodejs" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -2067,8 +2334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -2076,8 +2342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd><dt class="property-optional"
+    <dd>Uin of the CAM User.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useapi_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useapi_nodejs" style="color: inherit; text-decoration: inherit;">use<wbr>Api</a>
@@ -2085,8 +2350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2100,8 +2364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_country_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_country_code_python" style="color: inherit; text-decoration: inherit;">country_<wbr>code</a>
@@ -2109,8 +2372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_python" style="color: inherit; text-decoration: inherit;">email</a>
@@ -2118,8 +2380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -2127,8 +2388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2136,8 +2396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_need_reset_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_need_reset_password_python" style="color: inherit; text-decoration: inherit;">need_<wbr>reset_<wbr>password</a>
@@ -2145,8 +2404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2154,8 +2412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phone_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_num_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
@@ -2163,8 +2420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2172,8 +2428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secret_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_id_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>id</a>
@@ -2181,8 +2436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret ID of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secret_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_key_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>key</a>
@@ -2190,17 +2444,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret key of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_python" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -2208,8 +2460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -2217,8 +2468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd><dt class="property-optional"
+    <dd>Uin of the CAM User.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_use_api_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_use_api_python" style="color: inherit; text-decoration: inherit;">use_<wbr>api</a>
@@ -2226,8 +2476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2241,8 +2490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user can login to the web console or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user can login to the web console or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_countrycode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_countrycode_yaml" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -2250,8 +2498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the phone number, for example: '86'.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the phone number, for example: '86'.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_yaml" style="color: inherit; text-decoration: inherit;">email</a>
@@ -2259,8 +2506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -2268,8 +2514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2277,8 +2522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needresetpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needresetpassword_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Reset<wbr>Password</a>
@@ -2286,8 +2530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM user need to reset the password when first logins.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the CAM user need to reset the password when first logins.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2295,8 +2538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>console_login</code> is true. If not set, a random password will be automatically generated.</p>
-</dd><dt class="property-optional"
+    <dd>The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when <code>consoleLogin</code> is true. If not set, a random password will be automatically generated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phonenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phonenum_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -2304,8 +2546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone number of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Phone number of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2313,8 +2554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretid_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -2322,8 +2562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret ID of the CAM user.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_secretkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretkey_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -2331,17 +2570,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret key of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>Secret key of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_yaml" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -2349,8 +2586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the CAM user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CAM user.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -2358,8 +2594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uin of the CAM User.</p>
-</dd><dt class="property-optional"
+    <dd>Uin of the CAM User.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useapi_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useapi_yaml" style="color: inherit; text-decoration: inherit;">use<wbr>Api</a>
@@ -2367,8 +2602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to generate the API secret key or not.</p>
-</dd></dl>
+    <dd>Indicate whether to generate the API secret key or not.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2386,9 +2620,12 @@ The following state arguments are supported:
 CAM user can be imported using the user name, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Cam/user:User foo cam-user-test
+$ pulumi import tencentcloud:Cam/user:User example tf-example
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2400,7 +2637,6 @@ $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getTokens"
 title_tag: "tencentcloud.Tcr.getTokens"
-meta_desc: "Documentation for the tencentcloud.Tcr.getTokens function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of TCR tokens."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of TCR tokens.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const name = tencentcloud.Tcr.getTokens({
+const name = tencentcloud.tcr.getTokens({
     instanceId: "cls-satg5125",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-name = tencentcloud.Tcr.get_tokens(instance_id="cls-satg5125")
+name = tencentcloud.tcr.get_tokens(instance_id="cls-satg5125")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcr.GetTokens(ctx, &tcr.GetTokensArgs{
+			InstanceId: "cls-satg5125",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcr.GetTokens(ctx, &tcr.GetTokensArgs{
-			InstanceId: "cls-satg5125",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcr.TcrFunctions;
 import com.pulumi.tencentcloud.Tcr.inputs.GetTokensArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   name:
     fn::invoke:
-      Function: tencentcloud:Tcr:getTokens
-      Arguments:
+      function: tencentcloud:Tcr:getTokens
+      arguments:
         instanceId: cls-satg5125
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tcr_gettokens" "name" {
+  instance_id = "cls-satg5125"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeInstanceToken](https://www.tencentcloud.com/document/api/1051/50704)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getTokens<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTokensArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>></span
+><span class="k">function </span>getTokens<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTokensArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>></span
 ><span class="k">
-function </span>getTokensOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTokensOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>></span
+function </span>getTokensOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTokensOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -139,10 +196,10 @@ function </span>getTokensOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">token_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetTokensResult</span
 ><span class="k">
-def </span>get_tokens_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">token_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTokensResult]</span
+def </span>get_tokens_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">token_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTokensResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -167,7 +224,8 @@ func </span>GetTokensOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetTokens </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetTokensArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTokensInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTokensInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTokensInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -176,7 +234,8 @@ func </span>GetTokensOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>> </span>getTokens<span class="p">(</span><span class="nx">GetTokensArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>> </span>getTokens<span class="p">(</span><span class="nx">GetTokensArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTokensResult</a></span>> </span>getTokens<span class="p">(</span><span class="nx">GetTokensArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -188,6 +247,15 @@ func </span>GetTokensOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcr/getTokens:getTokens
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcr_get_tokens&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -206,8 +274,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance that the token belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the token belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -215,8 +282,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_csharp" style="color: inherit; text-decoration: inherit;">Token<wbr>Id</a>
@@ -224,8 +290,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -239,8 +304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance that the token belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the token belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -248,8 +312,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_go" style="color: inherit; text-decoration: inherit;">Token<wbr>Id</a>
@@ -257,8 +320,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the instance that the token belongs to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="token_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_id_hcl" style="color: inherit; text-decoration: inherit;">token_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -272,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance that the token belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the token belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -281,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_java" style="color: inherit; text-decoration: inherit;">token<wbr>Id</a>
@@ -290,8 +380,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -305,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instance that the token belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the token belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -314,8 +402,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_nodejs" style="color: inherit; text-decoration: inherit;">token<wbr>Id</a>
@@ -323,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -338,8 +424,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the instance that the token belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the token belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -347,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="token_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_id_python" style="color: inherit; text-decoration: inherit;">token_<wbr>id</a>
@@ -356,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -371,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instance that the token belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance that the token belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -380,8 +462,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_yaml" style="color: inherit; text-decoration: inherit;">token<wbr>Id</a>
@@ -389,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -413,8 +493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -430,8 +509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettokenstokenlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Outputs.<wbr>Get<wbr>Tokens<wbr>Token<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR tokens.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR tokens.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -447,8 +525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of TCR token.</p>
-</dd></dl>
+    <dd>Id of TCR token.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -462,8 +539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -479,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettokenstokenlist">[]Get<wbr>Tokens<wbr>Token<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR tokens.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR tokens.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -496,8 +571,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of TCR token.</p>
-</dd></dl>
+    <dd>Id of TCR token.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="token_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_lists_hcl" style="color: inherit; text-decoration: inherit;">token_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettokenstokenlist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the dedicated TCR tokens.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="token_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_id_hcl" style="color: inherit; text-decoration: inherit;">token_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of TCR token.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -511,8 +631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -528,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettokenstokenlist">List&lt;Get<wbr>Tokens<wbr>Token<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR tokens.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR tokens.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -545,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of TCR token.</p>
-</dd></dl>
+    <dd>Id of TCR token.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -560,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -577,8 +693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettokenstokenlist">Get<wbr>Tokens<wbr>Token<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR tokens.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR tokens.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -594,8 +709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of TCR token.</p>
-</dd></dl>
+    <dd>Id of TCR token.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -624,10 +737,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_lists_python" style="color: inherit; text-decoration: inherit;">token_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettokenstokenlist">Get<wbr>Tokens<wbr>Token<wbr>List]</a></span>
+        <span class="property-type"><a href="#gettokenstokenlist">Sequence[Get<wbr>Tokens<wbr>Token<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR tokens.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR tokens.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -643,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of TCR token.</p>
-</dd></dl>
+    <dd>Id of TCR token.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -658,8 +769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -675,8 +785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettokenstokenlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated TCR tokens.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated TCR tokens.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -692,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of TCR token.</p>
-</dd></dl>
+    <dd>Id of TCR token.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -717,8 +825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -726,8 +833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the token.</p>
-</dd><dt class="property-required"
+    <dd>Description of the token.</dd><dt class="property-required"
             title="Required">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -735,8 +841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the token is enabled or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the token is enabled or not.</dd><dt class="property-required"
             title="Required">
         <span id="tokenid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_csharp" style="color: inherit; text-decoration: inherit;">Token<wbr>Id</a>
@@ -744,8 +849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -759,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -768,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the token.</p>
-</dd><dt class="property-required"
+    <dd>Description of the token.</dd><dt class="property-required"
             title="Required">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -777,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the token is enabled or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the token is enabled or not.</dd><dt class="property-required"
             title="Required">
         <span id="tokenid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_go" style="color: inherit; text-decoration: inherit;">Token<wbr>Id</a>
@@ -786,8 +887,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the token.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate that the token is enabled or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="token_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_id_hcl" style="color: inherit; text-decoration: inherit;">token_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -801,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -810,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the token.</p>
-</dd><dt class="property-required"
+    <dd>Description of the token.</dd><dt class="property-required"
             title="Required">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -819,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the token is enabled or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the token is enabled or not.</dd><dt class="property-required"
             title="Required">
         <span id="tokenid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_java" style="color: inherit; text-decoration: inherit;">token<wbr>Id</a>
@@ -828,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -843,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -852,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the token.</p>
-</dd><dt class="property-required"
+    <dd>Description of the token.</dd><dt class="property-required"
             title="Required">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -861,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate that the token is enabled or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the token is enabled or not.</dd><dt class="property-required"
             title="Required">
         <span id="tokenid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_nodejs" style="color: inherit; text-decoration: inherit;">token<wbr>Id</a>
@@ -870,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -885,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -894,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the token.</p>
-</dd><dt class="property-required"
+    <dd>Description of the token.</dd><dt class="property-required"
             title="Required">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -903,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the token is enabled or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the token is enabled or not.</dd><dt class="property-required"
             title="Required">
         <span id="token_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_id_python" style="color: inherit; text-decoration: inherit;">token_<wbr>id</a>
@@ -912,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -927,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -936,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the token.</p>
-</dd><dt class="property-required"
+    <dd>Description of the token.</dd><dt class="property-required"
             title="Required">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -945,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the token is enabled or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate that the token is enabled or not.</dd><dt class="property-required"
             title="Required">
         <span id="tokenid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenid_yaml" style="color: inherit; text-decoration: inherit;">token<wbr>Id</a>
@@ -954,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR token to query.</p>
-</dd></dl>
+    <dd>ID of the TCR token to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -970,7 +1092,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

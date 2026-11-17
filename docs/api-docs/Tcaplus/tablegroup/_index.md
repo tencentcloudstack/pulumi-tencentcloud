@@ -2,9 +2,11 @@
 ---
 title: "Tablegroup"
 title_tag: "tencentcloud.Tcaplus.Tablegroup"
-meta_desc: "Documentation for the tencentcloud.Tcaplus.Tablegroup resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create TcaplusDB table group."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,136 +20,92 @@ Use this resource to create TcaplusDB table group.
 
 ### Create a tcaplusdb table group
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const config = new pulumi.Config();
-const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
-const vpc = tencentcloud.Vpc.getSubnets({
-    isDefault: true,
-    availabilityZone: availabilityZone,
-});
-const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
-const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
-const exampleCluster = new tencentcloud.tcaplus.Cluster("exampleCluster", {
+const example = new tencentcloud.tcaplus.Cluster("example", {
     idlType: "PROTO",
     clusterName: "tf_example_tcaplus_cluster",
-    vpcId: vpcId,
-    subnetId: subnetId,
-    password: "your_pw_123111",
+    vpcId: "vpc-i5yyodl9",
+    subnetId: "subnet-hhi88a58",
+    password: "Password@2026",
     oldPasswordExpireLast: 3600,
 });
-const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("exampleTablegroup", {
-    clusterId: exampleCluster.id,
+const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("example", {
+    clusterId: example.id,
     tablegroupName: "tf_example_group_name",
+    resourceTags: [{
+        tagKey: "CreatedBy",
+        tagValue: "Terraform",
+    }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
-import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-config = pulumi.Config()
-availability_zone = config.get("availabilityZone")
-if availability_zone is None:
-    availability_zone = "ap-guangzhou-3"
-vpc = tencentcloud.Vpc.get_subnets(is_default=True,
-    availability_zone=availability_zone)
-vpc_id = vpc.instance_lists[0].vpc_id
-subnet_id = vpc.instance_lists[0].subnet_id
-example_cluster = tencentcloud.tcaplus.Cluster("exampleCluster",
+example = tencentcloud.tcaplus.Cluster("example",
     idl_type="PROTO",
     cluster_name="tf_example_tcaplus_cluster",
-    vpc_id=vpc_id,
-    subnet_id=subnet_id,
-    password="your_pw_123111",
+    vpc_id="vpc-i5yyodl9",
+    subnet_id="subnet-hhi88a58",
+    password="Password@2026",
     old_password_expire_last=3600)
-example_tablegroup = tencentcloud.tcaplus.Tablegroup("exampleTablegroup",
-    cluster_id=example_cluster.id,
-    tablegroup_name="tf_example_group_name")
+example_tablegroup = tencentcloud.tcaplus.Tablegroup("example",
+    cluster_id=example.id,
+    tablegroup_name="tf_example_group_name",
+    resource_tags=[{
+        "tag_key": "CreatedBy",
+        "tag_value": "Terraform",
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    {
-        IsDefault = true,
-        AvailabilityZone = availabilityZone,
-    });
-
-    var vpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
-
-    var subnetId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
-
-    var exampleCluster = new Tencentcloud.Tcaplus.Cluster("exampleCluster", new()
-    {
-        IdlType = "PROTO",
-        ClusterName = "tf_example_tcaplus_cluster",
-        VpcId = vpcId,
-        SubnetId = subnetId,
-        Password = "your_pw_123111",
-        OldPasswordExpireLast = 3600,
-    });
-
-    var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("exampleTablegroup", new()
-    {
-        ClusterId = exampleCluster.Id,
-        TablegroupName = "tf_example_group_name",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcaplus"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-3"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-			IsDefault:        pulumi.BoolRef(true),
-			AvailabilityZone: pulumi.StringRef(availabilityZone),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpcId := vpc.InstanceLists[0].VpcId
-		subnetId := vpc.InstanceLists[0].SubnetId
-		exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
+		example, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
 			IdlType:               pulumi.String("PROTO"),
 			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
-			VpcId:                 pulumi.String(vpcId),
-			SubnetId:              pulumi.String(subnetId),
-			Password:              pulumi.String("your_pw_123111"),
+			VpcId:                 pulumi.String("vpc-i5yyodl9"),
+			SubnetId:              pulumi.String("subnet-hhi88a58"),
+			Password:              pulumi.String("Password@2026"),
 			OldPasswordExpireLast: pulumi.Int(3600),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
-			ClusterId:      exampleCluster.ID(),
+		_, err = tcaplus.NewTablegroup(ctx, "example", &tcaplus.TablegroupArgs{
+			ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
 			TablegroupName: pulumi.String("tf_example_group_name"),
+			ResourceTags: tcaplus.TablegroupResourceTagArray{
+				&tcaplus.TablegroupResourceTagArgs{
+					TagKey:   pulumi.String("CreatedBy"),
+					TagValue: pulumi.String("Terraform"),
+				},
+			},
 		})
 		if err != nil {
 			return err
@@ -156,20 +114,63 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Tcaplus.Cluster("example", new()
+    {
+        IdlType = "PROTO",
+        ClusterName = "tf_example_tcaplus_cluster",
+        VpcId = "vpc-i5yyodl9",
+        SubnetId = "subnet-hhi88a58",
+        Password = "Password@2026",
+        OldPasswordExpireLast = 3600,
+    });
+
+    var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("example", new()
+    {
+        ClusterId = example.Id,
+        TablegroupName = "tf_example_group_name",
+        ResourceTags = new[]
+        {
+            new Tencentcloud.Tcaplus.Inputs.TablegroupResourceTagArgs
+            {
+                TagKey = "CreatedBy",
+                TagValue = "Terraform",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.VpcFunctions;
-import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
 import com.pulumi.tencentcloud.Tcaplus.Cluster;
 import com.pulumi.tencentcloud.Tcaplus.ClusterArgs;
 import com.pulumi.tencentcloud.Tcaplus.Tablegroup;
 import com.pulumi.tencentcloud.Tcaplus.TablegroupArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Tcaplus.inputs.TablegroupResourceTagArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -181,125 +182,431 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var config = ctx.config();
-        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
-        final var vpc = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
-            .isDefault(true)
-            .availabilityZone(availabilityZone)
-            .build());
-
-        final var vpcId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId());
-
-        final var subnetId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].subnetId());
-
-        var exampleCluster = new Cluster("exampleCluster", ClusterArgs.builder()        
+        var example = new Cluster("example", ClusterArgs.builder()
             .idlType("PROTO")
             .clusterName("tf_example_tcaplus_cluster")
-            .vpcId(vpcId)
-            .subnetId(subnetId)
-            .password("your_pw_123111")
+            .vpcId("vpc-i5yyodl9")
+            .subnetId("subnet-hhi88a58")
+            .password("Password@2026")
             .oldPasswordExpireLast(3600)
             .build());
 
-        var exampleTablegroup = new Tablegroup("exampleTablegroup", TablegroupArgs.builder()        
-            .clusterId(exampleCluster.id())
+        var exampleTablegroup = new Tablegroup("exampleTablegroup", TablegroupArgs.builder()
+            .clusterId(example.id())
             .tablegroupName("tf_example_group_name")
+            .resourceTags(TablegroupResourceTagArgs.builder()
+                .tagKey("CreatedBy")
+                .tagValue("Terraform")
+                .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
-configuration:
-  availabilityZone:
-    type: string
-    default: ap-guangzhou-3
 resources:
-  exampleCluster:
+  example:
     type: tencentcloud:Tcaplus:Cluster
     properties:
       idlType: PROTO
       clusterName: tf_example_tcaplus_cluster
-      vpcId: ${vpcId}
-      subnetId: ${subnetId}
-      password: your_pw_123111
+      vpcId: vpc-i5yyodl9
+      subnetId: subnet-hhi88a58
+      password: Password@2026
       oldPasswordExpireLast: 3600
   exampleTablegroup:
     type: tencentcloud:Tcaplus:Tablegroup
+    name: example
     properties:
-      clusterId: ${exampleCluster.id}
+      clusterId: ${example.id}
       tablegroupName: tf_example_group_name
-variables:
-  vpcId: ${vpc.instanceLists[0].vpcId}
-  subnetId: ${vpc.instanceLists[0].subnetId}
-  vpc:
-    fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
-        isDefault: true
-        availabilityZone: ${availabilityZone}
+      resourceTags:
+        - tagKey: CreatedBy
+          tagValue: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcaplus_cluster" "example" {
+  idl_type                 = "PROTO"
+  cluster_name             = "tf_example_tcaplus_cluster"
+  vpc_id                   = "vpc-i5yyodl9"
+  subnet_id                = "subnet-hhi88a58"
+  password                 = "Password@2026"
+  old_password_expire_last = 3600
+}
+resource "tencentcloud_tcaplus_tablegroup" "example" {
+  cluster_id      = tencentcloud_tcaplus_cluster.example.id
+  tablegroup_name = "tf_example_group_name"
+  resource_tags {
+    tag_key   = "CreatedBy"
+    tag_value = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
 
 
+### Create a tcaplusdb table group with user-specified table group id
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.tcaplus.Cluster("example", {
+    idlType: "PROTO",
+    clusterName: "tf_example_tcaplus_cluster",
+    vpcId: "vpc-i5yyodl9",
+    subnetId: "subnet-hhi88a58",
+    password: "Password@2026",
+    oldPasswordExpireLast: 3600,
+});
+const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("example", {
+    clusterId: example.id,
+    tablegroupName: "tf_example_group_name",
+    tableGroupId: "109",
+    resourceTags: [{
+        tagKey: "CreatedBy",
+        tagValue: "Terraform",
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.tcaplus.Cluster("example",
+    idl_type="PROTO",
+    cluster_name="tf_example_tcaplus_cluster",
+    vpc_id="vpc-i5yyodl9",
+    subnet_id="subnet-hhi88a58",
+    password="Password@2026",
+    old_password_expire_last=3600)
+example_tablegroup = tencentcloud.tcaplus.Tablegroup("example",
+    cluster_id=example.id,
+    tablegroup_name="tf_example_group_name",
+    table_group_id="109",
+    resource_tags=[{
+        "tag_key": "CreatedBy",
+        "tag_value": "Terraform",
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcaplus"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
+			IdlType:               pulumi.String("PROTO"),
+			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
+			VpcId:                 pulumi.String("vpc-i5yyodl9"),
+			SubnetId:              pulumi.String("subnet-hhi88a58"),
+			Password:              pulumi.String("Password@2026"),
+			OldPasswordExpireLast: pulumi.Int(3600),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = tcaplus.NewTablegroup(ctx, "example", &tcaplus.TablegroupArgs{
+			ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
+			TablegroupName: pulumi.String("tf_example_group_name"),
+			TableGroupId:   pulumi.String("109"),
+			ResourceTags: tcaplus.TablegroupResourceTagArray{
+				&tcaplus.TablegroupResourceTagArgs{
+					TagKey:   pulumi.String("CreatedBy"),
+					TagValue: pulumi.String("Terraform"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Tcaplus.Cluster("example", new()
+    {
+        IdlType = "PROTO",
+        ClusterName = "tf_example_tcaplus_cluster",
+        VpcId = "vpc-i5yyodl9",
+        SubnetId = "subnet-hhi88a58",
+        Password = "Password@2026",
+        OldPasswordExpireLast = 3600,
+    });
+
+    var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("example", new()
+    {
+        ClusterId = example.Id,
+        TablegroupName = "tf_example_group_name",
+        TableGroupId = "109",
+        ResourceTags = new[]
+        {
+            new Tencentcloud.Tcaplus.Inputs.TablegroupResourceTagArgs
+            {
+                TagKey = "CreatedBy",
+                TagValue = "Terraform",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Tcaplus.Cluster;
+import com.pulumi.tencentcloud.Tcaplus.ClusterArgs;
+import com.pulumi.tencentcloud.Tcaplus.Tablegroup;
+import com.pulumi.tencentcloud.Tcaplus.TablegroupArgs;
+import com.pulumi.tencentcloud.Tcaplus.inputs.TablegroupResourceTagArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Cluster("example", ClusterArgs.builder()
+            .idlType("PROTO")
+            .clusterName("tf_example_tcaplus_cluster")
+            .vpcId("vpc-i5yyodl9")
+            .subnetId("subnet-hhi88a58")
+            .password("Password@2026")
+            .oldPasswordExpireLast(3600)
+            .build());
+
+        var exampleTablegroup = new Tablegroup("exampleTablegroup", TablegroupArgs.builder()
+            .clusterId(example.id())
+            .tablegroupName("tf_example_group_name")
+            .tableGroupId("109")
+            .resourceTags(TablegroupResourceTagArgs.builder()
+                .tagKey("CreatedBy")
+                .tagValue("Terraform")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Tcaplus:Cluster
+    properties:
+      idlType: PROTO
+      clusterName: tf_example_tcaplus_cluster
+      vpcId: vpc-i5yyodl9
+      subnetId: subnet-hhi88a58
+      password: Password@2026
+      oldPasswordExpireLast: 3600
+  exampleTablegroup:
+    type: tencentcloud:Tcaplus:Tablegroup
+    name: example
+    properties:
+      clusterId: ${example.id}
+      tablegroupName: tf_example_group_name
+      tableGroupId: '109'
+      resourceTags:
+        - tagKey: CreatedBy
+          tagValue: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcaplus_cluster" "example" {
+  idl_type                 = "PROTO"
+  cluster_name             = "tf_example_tcaplus_cluster"
+  vpc_id                   = "vpc-i5yyodl9"
+  subnet_id                = "subnet-hhi88a58"
+  password                 = "Password@2026"
+  old_password_expire_last = 3600
+}
+resource "tencentcloud_tcaplus_tablegroup" "example" {
+  cluster_id      = tencentcloud_tcaplus_cluster.example.id
+  tablegroup_name = "tf_example_group_name"
+  table_group_id  = "109"
+  resource_tags {
+    tag_key   = "CreatedBy"
+    tag_value = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateTableGroup](https://www.tencentcloud.com/document/api/1016/35027)
+* Read:
+  - [DescribeTableGroupTags](https://www.tencentcloud.com/document/api/1016/36900)
+  - [DescribeTableGroups](https://www.tencentcloud.com/document/api/1016/35025)
+* Update:
+  - [DescribeTasks](https://www.tencentcloud.com/document/api/1016/35045)
+  - [ModifyTableGroupName](https://www.tencentcloud.com/document/api/1016/35024)
+  - [ModifyTableGroupTags](https://www.tencentcloud.com/document/api/1016/36899)
+* Delete:
+  - [DeleteTableGroup](https://www.tencentcloud.com/document/api/1016/35026)
+  - [DescribeTableGroups](https://www.tencentcloud.com/document/api/1016/35025)
 
 
 ## Create Tablegroup Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">tablegroup_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">tablegroup_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">resource_tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[TablegroupResourceTagArgs]]</span> = None<span class="p">,</span>
+               <span class="nx">table_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTablegroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Tablegroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTablegroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Tablegroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Tablegroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TablegroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcaplus:Tablegroup</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcaplus:Tablegroup</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcaplus_tablegroup&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -320,7 +627,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -437,11 +744,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Tablegroup Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Tablegroup resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -457,8 +772,7 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -466,8 +780,23 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd></dl>
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resourcetags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetags_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcaplus.<wbr>Inputs.<wbr>Tablegroup<wbr>Resource<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="tablegroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -481,8 +810,7 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -490,8 +818,61 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd></dl>
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resourcetags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetags_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">[]Tablegroup<wbr>Resource<wbr>Tag<wbr>Args</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="tablegroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="tablegroup_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_name_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resource_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_tags_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">list(object)</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="table_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_group_id_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -505,8 +886,7 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -514,8 +894,23 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd></dl>
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resourcetags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetags_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">List&lt;Tablegroup<wbr>Resource<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="tablegroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_java" style="color: inherit; text-decoration: inherit;">table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -529,8 +924,7 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -538,8 +932,23 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd></dl>
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resourcetags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetags_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">Tablegroup<wbr>Resource<wbr>Tag[]</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="tablegroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -553,8 +962,7 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroup_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_name_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
@@ -562,8 +970,23 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd></dl>
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resource_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_tags_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">Sequence[Tablegroup<wbr>Resource<wbr>Tag<wbr>Args]</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="table_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_group_id_python" style="color: inherit; text-decoration: inherit;">table_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -577,8 +1000,7 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -586,8 +1008,23 @@ The Tablegroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd></dl>
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resourcetags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetags_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="tablegroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -608,8 +1045,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -617,8 +1053,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tablecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Count</a>
@@ -626,8 +1061,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-"
+    <dd>Number of tables.</dd><dt class="property-"
             title="">
         <span id="totalsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Size</a>
@@ -635,8 +1069,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -650,8 +1083,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -659,8 +1091,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tablecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Count</a>
@@ -668,8 +1099,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-"
+    <dd>Number of tables.</dd><dt class="property-"
             title="">
         <span id="totalsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Size</a>
@@ -677,8 +1107,45 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="table_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_count_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of tables.</dd><dt class="property-"
+            title="">
+        <span id="total_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_size_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -692,8 +1159,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -701,8 +1167,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tablecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_java" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -710,8 +1175,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-"
+    <dd>Number of tables.</dd><dt class="property-"
             title="">
         <span id="totalsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_java" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -719,8 +1183,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -734,8 +1197,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -743,8 +1205,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tablecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -752,8 +1213,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-"
+    <dd>Number of tables.</dd><dt class="property-"
             title="">
         <span id="totalsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -761,8 +1221,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -776,8 +1235,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -785,8 +1243,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="table_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_count_python" style="color: inherit; text-decoration: inherit;">table_<wbr>count</a>
@@ -794,8 +1251,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-"
+    <dd>Number of tables.</dd><dt class="property-"
             title="">
         <span id="total_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_size_python" style="color: inherit; text-decoration: inherit;">total_<wbr>size</a>
@@ -803,8 +1259,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -818,8 +1273,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -827,8 +1281,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tablecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -836,8 +1289,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-"
+    <dd>Number of tables.</dd><dt class="property-"
             title="">
         <span id="totalsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -845,8 +1297,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -856,124 +1307,165 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Tablegroup resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TablegroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Tablegroup</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TablegroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Tablegroup</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">resource_tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[TablegroupResourceTagArgs]]</span> = None<span class="p">,</span>
         <span class="nx">table_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">table_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">tablegroup_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">total_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Tablegroup</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTablegroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TablegroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Tablegroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTablegroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TablegroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Tablegroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Tablegroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TablegroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Tablegroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TablegroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Tablegroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TablegroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Tablegroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TablegroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTablegroup</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcaplus:Tablegroup</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcaplus_tablegroup</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TablegroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TablegroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -981,28 +1473,31 @@ Get an existing Tablegroup resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TablegroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1010,28 +1505,31 @@ Get an existing Tablegroup resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TablegroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1051,8 +1549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1060,8 +1557,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourcetags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetags_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcaplus.<wbr>Inputs.<wbr>Tablegroup<wbr>Resource<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablecount_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Count</a>
@@ -1069,8 +1573,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Number of tables.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_tablegroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablegroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupname_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -1078,8 +1589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd><dt class="property-optional"
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_totalsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_totalsize_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Size</a>
@@ -1087,8 +1597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1102,8 +1611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1111,8 +1619,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourcetags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetags_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">[]Tablegroup<wbr>Resource<wbr>Tag<wbr>Args</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablecount_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Count</a>
@@ -1120,8 +1635,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Number of tables.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_tablegroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablegroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupname_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -1129,8 +1651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd><dt class="property-optional"
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_totalsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_totalsize_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Size</a>
@@ -1138,8 +1659,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_tags_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">list(object)</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_table_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_count_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of tables.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_table_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_group_id_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tablegroup_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroup_name_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_total_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_total_size_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1153,8 +1735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1162,8 +1743,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourcetags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetags_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">List&lt;Tablegroup<wbr>Resource<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablecount_java" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -1171,8 +1759,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Number of tables.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_tablegroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_java" style="color: inherit; text-decoration: inherit;">table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablegroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupname_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -1180,8 +1775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd><dt class="property-optional"
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_totalsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_totalsize_java" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -1189,8 +1783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1204,8 +1797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1213,8 +1805,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourcetags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetags_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">Tablegroup<wbr>Resource<wbr>Tag[]</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablecount_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -1222,8 +1821,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Number of tables.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_tablegroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablegroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupname_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -1231,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd><dt class="property-optional"
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_totalsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_totalsize_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -1240,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1255,8 +1859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1264,8 +1867,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_tags_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">Sequence[Tablegroup<wbr>Resource<wbr>Tag<wbr>Args]</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_table_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_count_python" style="color: inherit; text-decoration: inherit;">table_<wbr>count</a>
@@ -1273,8 +1883,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Number of tables.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_table_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_group_id_python" style="color: inherit; text-decoration: inherit;">table_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablegroup_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroup_name_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
@@ -1282,8 +1899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd><dt class="property-optional"
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_total_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_total_size_python" style="color: inherit; text-decoration: inherit;">total_<wbr>size</a>
@@ -1291,8 +1907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1306,8 +1921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1315,8 +1929,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table group.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the TcaplusDB table group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourcetags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetags_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tablegroupresourcetag">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Set of table group tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablecount_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -1324,8 +1945,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Number of tables.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_tablegroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tablegroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupname_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -1333,8 +1961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table group. Name length should be between 1 and 30.</p>
-</dd><dt class="property-optional"
+    <dd>Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_totalsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_totalsize_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -1342,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1351,6 +1977,184 @@ The following state arguments are supported:
 
 
 
+
+
+
+## Supporting Types
+
+
+
+<h4 id="tablegroupresourcetag">
+Tablegroup<wbr>Resource<wbr>Tag<pulumi-choosable type="language" values="python,go" class="inline">, Tablegroup<wbr>Resource<wbr>Tag<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+## Import
+
+
+
+TcaplusDB table group can be imported using the clusterId:tableGroupId, e.g.
+
+```sh
+$ pulumi import tencentcloud:Tcaplus/tablegroup:Tablegroup example 5516511420:52
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1362,7 +2166,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

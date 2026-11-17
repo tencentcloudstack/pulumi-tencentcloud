@@ -2,9 +2,11 @@
 ---
 title: "getBus"
 title_tag: "tencentcloud.Eb.getBus"
-meta_desc: "Documentation for the tencentcloud.Eb.getBus function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of eb bus"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,121 +18,90 @@ Use this data source to query detailed information of eb bus
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.eb.EventBus("foo", {
-    eventBusName: "tf-event_bus",
-    description: "event bus desc",
-    enableStore: false,
-    saveDays: 1,
-    tags: {
-        createdBy: "terraform",
-    },
-});
-const bus = tencentcloud.Eb.getBus({
-    orderBy: "AddTime",
+const _this = tencentcloud.eb.getBus({
+    orderBy: "created_at",
     order: "DESC",
-    filters: [{
-        values: ["Custom"],
-        name: "Type",
-    }],
+    filters: [
+        {
+            name: "Type",
+            values: [
+                "Cloud",
+                "Platform",
+            ],
+        },
+        {
+            name: "EventBusName",
+            values: ["default"],
+        },
+    ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
-import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.eb.EventBus("foo",
-    event_bus_name="tf-event_bus",
-    description="event bus desc",
-    enable_store=False,
-    save_days=1,
-    tags={
-        "createdBy": "terraform",
-    })
-bus = tencentcloud.Eb.get_bus(order_by="AddTime",
+this = tencentcloud.eb.get_bus(order_by="created_at",
     order="DESC",
-    filters=[tencentcloud.eb.GetBusFilterArgs(
-        values=["Custom"],
-        name="Type",
-    )])
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Eb.EventBus("foo", new()
-    {
-        EventBusName = "tf-event_bus",
-        Description = "event bus desc",
-        EnableStore = false,
-        SaveDays = 1,
-        Tags = 
+    filters=[
         {
-            { "createdBy", "terraform" },
+            "name": "Type",
+            "values": [
+                "Cloud",
+                "Platform",
+            ],
         },
-    });
-
-    var bus = Tencentcloud.Eb.GetBus.Invoke(new()
-    {
-        OrderBy = "AddTime",
-        Order = "DESC",
-        Filters = new[]
         {
-            new Tencentcloud.Eb.Inputs.GetBusFilterInputArgs
-            {
-                Values = new[]
-                {
-                    "Custom",
-                },
-                Name = "Type",
-            },
+            "name": "EventBusName",
+            "values": ["default"],
         },
-    });
-
-});
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
-			EventBusName: pulumi.String("tf-event_bus"),
-			Description:  pulumi.String("event bus desc"),
-			EnableStore:  pulumi.Bool(false),
-			SaveDays:     pulumi.Int(1),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Eb.GetBus(ctx, &eb.GetBusArgs{
-			OrderBy: pulumi.StringRef("AddTime"),
+		_, err := eb.GetBus(ctx, &eb.GetBusArgs{
+			OrderBy: pulumi.StringRef("created_at"),
 			Order:   pulumi.StringRef("DESC"),
 			Filters: []eb.GetBusFilter{
 				{
-					Values: []string{
-						"Custom",
-					},
 					Name: "Type",
+					Values: []string{
+						"Cloud",
+						"Platform",
+					},
+				},
+				{
+					Name: "EventBusName",
+					Values: []string{
+						"default",
+					},
 				},
 			},
 		}, nil)
@@ -141,18 +112,63 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var @this = Tencentcloud.Eb.GetBus.Invoke(new()
+    {
+        OrderBy = "created_at",
+        Order = "DESC",
+        Filters = new[]
+        {
+            new Tencentcloud.Eb.Inputs.GetBusFilterInputArgs
+            {
+                Name = "Type",
+                Values = new[]
+                {
+                    "Cloud",
+                    "Platform",
+                },
+            },
+            new Tencentcloud.Eb.Inputs.GetBusFilterInputArgs
+            {
+                Name = "EventBusName",
+                Values = new[]
+                {
+                    "default",
+                },
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Eb.EventBus;
-import com.pulumi.tencentcloud.Eb.EventBusArgs;
 import com.pulumi.tencentcloud.Eb.EbFunctions;
 import com.pulumi.tencentcloud.Eb.inputs.GetBusArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Eb.inputs.GetBusFilterArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -164,51 +180,83 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new EventBus("foo", EventBusArgs.builder()        
-            .eventBusName("tf-event_bus")
-            .description("event bus desc")
-            .enableStore(false)
-            .saveDays(1)
-            .tags(Map.of("createdBy", "terraform"))
-            .build());
-
-        final var bus = EbFunctions.getBus(GetBusArgs.builder()
-            .orderBy("AddTime")
+        final var this = EbFunctions.getBus(GetBusArgs.builder()
+            .orderBy("created_at")
             .order("DESC")
-            .filters(GetBusFilterArgs.builder()
-                .values("Custom")
-                .name("Type")
-                .build())
+            .filters(            
+                GetBusFilterArgs.builder()
+                    .name("Type")
+                    .values(                    
+                        "Cloud",
+                        "Platform")
+                    .build(),
+                GetBusFilterArgs.builder()
+                    .name("EventBusName")
+                    .values("default")
+                    .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
-resources:
-  foo:
-    type: tencentcloud:Eb:EventBus
-    properties:
-      eventBusName: tf-event_bus
-      description: event bus desc
-      enableStore: false
-      saveDays: 1
-      tags:
-        createdBy: terraform
 variables:
-  bus:
+  this:
     fn::invoke:
-      Function: tencentcloud:Eb:getBus
-      Arguments:
-        orderBy: AddTime
+      function: tencentcloud:Eb:getBus
+      arguments:
+        orderBy: created_at
         order: DESC
         filters:
-          - values:
-              - Custom
-            name: Type
+          - name: Type
+            values:
+              - Cloud
+              - Platform
+          - name: EventBusName
+            values:
+              - default
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_eb_getbus" "this" {
+  order_by = "created_at"
+  order    = "DESC"
+  filters {
+    name   = "Type"
+    values = ["Cloud", "Platform"]
+  }
+  filters {
+    name   = "EventBusName"
+    values = ["default"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
 
 
 
@@ -220,7 +268,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -228,9 +276,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBus<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBusArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBusResult</a></span>></span
+><span class="k">function </span>getBus<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBusArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBusResult</a></span>></span
 ><span class="k">
-function </span>getBusOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBusOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBusResult</a></span>></span
+function </span>getBusOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBusOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBusResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -239,17 +287,17 @@ function </span>getBusOutput<span class="p">(</span><span class="nx">args</span>
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_bus<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_eb.GetBusFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_bus<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetBusFilter]]</span> = None<span class="p">,</span>
             <span class="nx">order</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBusResult</span
 ><span class="k">
-def </span>get_bus_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_eb.GetBusFilterArgs]]]]</span> = None<span class="p">,</span>
-            <span class="nx">order</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBusResult]</span
+def </span>get_bus_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetBusFilterArgs]]]]</span> = None<span class="p">,</span>
+            <span class="nx">order</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">order_by</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBusResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -274,7 +322,8 @@ func </span>GetBusOutput<span class="p">(</span><span class="nx">ctx</span><span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBus </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBusResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -283,7 +332,8 @@ func </span>GetBusOutput<span class="p">(</span><span class="nx">ctx</span><span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBusResult</a></span>> </span>getBus<span class="p">(</span><span class="nx">GetBusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBusResult</a></span>> </span>getBus<span class="p">(</span><span class="nx">GetBusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBusResult</a></span>> </span>getBus<span class="p">(</span><span class="nx">GetBusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -295,6 +345,15 @@ func </span>GetBusOutput<span class="p">(</span><span class="nx">ctx</span><span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Eb/getBus:getBus
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_eb_get_bus&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -313,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbusfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eb.<wbr>Inputs.<wbr>Get<wbr>Bus<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_csharp" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -322,8 +380,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -331,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>According to which field to sort the returned results, the following fields are supported: AddTime (creation time), ModTime (modification time).</p>
-</dd><dt class="property-optional"
+    <dd>According to which field to sort the returned results, the following fields are supported: <code>createdAt</code> (creation time), <code>updatedAt</code> (modification time).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -340,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -355,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbusfilter">[]Get<wbr>Bus<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_go" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -364,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -373,8 +426,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>According to which field to sort the returned results, the following fields are supported: AddTime (creation time), ModTime (modification time).</p>
-</dd><dt class="property-optional"
+    <dd>According to which field to sort the returned results, the following fields are supported: <code>createdAt</code> (creation time), <code>updatedAt</code> (modification time).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -382,8 +434,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbusfilter">list(object)</a></span>
+    </dt>
+    <dd>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>According to which field to sort the returned results, the following fields are supported: <code>createdAt</code> (creation time), <code>updatedAt</code> (modification time).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -397,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbusfilter">List&lt;Get<wbr>Bus<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_java" style="color: inherit; text-decoration: inherit;">order</a>
@@ -406,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_java" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -415,8 +502,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>According to which field to sort the returned results, the following fields are supported: AddTime (creation time), ModTime (modification time).</p>
-</dd><dt class="property-optional"
+    <dd>According to which field to sort the returned results, the following fields are supported: <code>createdAt</code> (creation time), <code>updatedAt</code> (modification time).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -424,8 +510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -439,8 +524,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbusfilter">Get<wbr>Bus<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_nodejs" style="color: inherit; text-decoration: inherit;">order</a>
@@ -448,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -457,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>According to which field to sort the returned results, the following fields are supported: AddTime (creation time), ModTime (modification time).</p>
-</dd><dt class="property-optional"
+    <dd>According to which field to sort the returned results, the following fields are supported: <code>createdAt</code> (creation time), <code>updatedAt</code> (modification time).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -466,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -479,10 +560,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbusfilter">Get<wbr>Bus<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getbusfilter">Sequence[Get<wbr>Bus<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_python" style="color: inherit; text-decoration: inherit;">order</a>
@@ -490,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="order_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
@@ -499,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>According to which field to sort the returned results, the following fields are supported: AddTime (creation time), ModTime (modification time).</p>
-</dd><dt class="property-optional"
+    <dd>According to which field to sort the returned results, the following fields are supported: <code>createdAt</code> (creation time), <code>updatedAt</code> (modification time).</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -508,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -523,8 +600,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbusfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_yaml" style="color: inherit; text-decoration: inherit;">order</a>
@@ -532,8 +608,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -541,8 +616,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>According to which field to sort the returned results, the following fields are supported: AddTime (creation time), ModTime (modification time).</p>
-</dd><dt class="property-optional"
+    <dd>According to which field to sort the returned results, the following fields are supported: <code>createdAt</code> (creation time), <code>updatedAt</code> (modification time).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -550,8 +624,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -574,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbus">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eb.<wbr>Outputs.<wbr>Get<wbr>Bus<wbr>Event<wbr>Bus&gt;</a></span>
     </dt>
-    <dd><p>event set information.</p>
-</dd><dt class="property-"
+    <dd>event set information.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -583,8 +655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -630,8 +701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbus">[]Get<wbr>Bus<wbr>Event<wbr>Bus</a></span>
     </dt>
-    <dd><p>event set information.</p>
-</dd><dt class="property-"
+    <dd>event set information.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -639,8 +709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -677,6 +746,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="event_buses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_buses_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>buses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbuseventbus">list(object)</a></span>
+    </dt>
+    <dd>event set information.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbusfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -686,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbus">List&lt;Get<wbr>Bus<wbr>Event<wbr>Bus&gt;</a></span>
     </dt>
-    <dd><p>event set information.</p>
-</dd><dt class="property-"
+    <dd>event set information.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -695,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -742,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbus">Get<wbr>Bus<wbr>Event<wbr>Bus[]</a></span>
     </dt>
-    <dd><p>event set information.</p>
-</dd><dt class="property-"
+    <dd>event set information.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -751,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -796,10 +915,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_buses_python" style="color: inherit; text-decoration: inherit;">event_<wbr>buses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbuseventbus">Get<wbr>Bus<wbr>Event<wbr>Bus]</a></span>
+        <span class="property-type"><a href="#getbuseventbus">Sequence[Get<wbr>Bus<wbr>Event<wbr>Bus]</a></span>
     </dt>
-    <dd><p>event set information.</p>
-</dd><dt class="property-"
+    <dd>event set information.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -807,14 +925,13 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbusfilter">Get<wbr>Bus<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getbusfilter">Sequence[Get<wbr>Bus<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -854,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbus">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>event set information.</p>
-</dd><dt class="property-"
+    <dd>event set information.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -863,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -920,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="connectionbriefs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionbriefs_csharp" style="color: inherit; text-decoration: inherit;">Connection<wbr>Briefs</a>
@@ -929,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbusconnectionbrief">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eb.<wbr>Inputs.<wbr>Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Connection<wbr>Brief&gt;</a></span>
     </dt>
-    <dd><p>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -938,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event set description, unlimited character type, description within 200 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set description, unlimited character type, description within 200 characters.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusid_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Bus<wbr>Id</a>
@@ -947,8 +1059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus Id.</p>
-</dd><dt class="property-required"
+    <dd>event bus Id.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusname_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Bus<wbr>Name</a>
@@ -956,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_csharp" style="color: inherit; text-decoration: inherit;">Mod<wbr>Time</a>
@@ -965,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-required"
+    <dd>update time.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Mode</a>
@@ -974,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="targetbriefs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetbriefs_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Briefs</a>
@@ -983,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbustargetbrief">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eb.<wbr>Inputs.<wbr>Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Target<wbr>Brief&gt;</a></span>
     </dt>
-    <dd><p>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -992,8 +1099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="connectionbriefs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionbriefs_go" style="color: inherit; text-decoration: inherit;">Connection<wbr>Briefs</a>
@@ -1016,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbusconnectionbrief">[]Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Connection<wbr>Brief</a></span>
     </dt>
-    <dd><p>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1025,8 +1129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event set description, unlimited character type, description within 200 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set description, unlimited character type, description within 200 characters.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusid_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Bus<wbr>Id</a>
@@ -1034,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus Id.</p>
-</dd><dt class="property-required"
+    <dd>event bus Id.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusname_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Bus<wbr>Name</a>
@@ -1043,8 +1145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_go" style="color: inherit; text-decoration: inherit;">Mod<wbr>Time</a>
@@ -1052,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-required"
+    <dd>update time.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Mode</a>
@@ -1061,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="targetbriefs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetbriefs_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Briefs</a>
@@ -1070,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbustargetbrief">[]Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Target<wbr>Brief</a></span>
     </dt>
-    <dd><p>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1079,8 +1177,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="add_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#add_time_hcl" style="color: inherit; text-decoration: inherit;">add_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="connection_briefs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connection_briefs_hcl" style="color: inherit; text-decoration: inherit;">connection_<wbr>briefs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbuseventbusconnectionbrief">list(object)</a></span>
+    </dt>
+    <dd>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event set description, unlimited character type, description within 200 characters.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_bus_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_bus_id_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>bus_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>event bus Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_bus_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_bus_name_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>bus_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</dd><dt class="property-required"
+            title="Required">
+        <span id="mod_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mod_time_hcl" style="color: inherit; text-decoration: inherit;">mod_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>update time.</dd><dt class="property-required"
+            title="Required">
+        <span id="pay_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_mode_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_briefs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_briefs_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>briefs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbuseventbustargetbrief">list(object)</a></span>
+    </dt>
+    <dd>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1094,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="connectionbriefs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionbriefs_java" style="color: inherit; text-decoration: inherit;">connection<wbr>Briefs</a>
@@ -1103,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbusconnectionbrief">List&lt;Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Connection<wbr>Brief&gt;</a></span>
     </dt>
-    <dd><p>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1112,8 +1285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event set description, unlimited character type, description within 200 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set description, unlimited character type, description within 200 characters.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusid_java" style="color: inherit; text-decoration: inherit;">event<wbr>Bus<wbr>Id</a>
@@ -1121,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event bus Id.</p>
-</dd><dt class="property-required"
+    <dd>event bus Id.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusname_java" style="color: inherit; text-decoration: inherit;">event<wbr>Bus<wbr>Name</a>
@@ -1130,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_java" style="color: inherit; text-decoration: inherit;">mod<wbr>Time</a>
@@ -1139,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-required"
+    <dd>update time.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -1148,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="targetbriefs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetbriefs_java" style="color: inherit; text-decoration: inherit;">target<wbr>Briefs</a>
@@ -1157,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbustargetbrief">List&lt;Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Target<wbr>Brief&gt;</a></span>
     </dt>
-    <dd><p>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1166,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1181,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="connectionbriefs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionbriefs_nodejs" style="color: inherit; text-decoration: inherit;">connection<wbr>Briefs</a>
@@ -1190,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbusconnectionbrief">Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Connection<wbr>Brief[]</a></span>
     </dt>
-    <dd><p>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1199,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event set description, unlimited character type, description within 200 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set description, unlimited character type, description within 200 characters.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusid_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Bus<wbr>Id</a>
@@ -1208,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus Id.</p>
-</dd><dt class="property-required"
+    <dd>event bus Id.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusname_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Bus<wbr>Name</a>
@@ -1217,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_nodejs" style="color: inherit; text-decoration: inherit;">mod<wbr>Time</a>
@@ -1226,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-required"
+    <dd>update time.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -1235,8 +1395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="targetbriefs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetbriefs_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Briefs</a>
@@ -1244,8 +1403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbustargetbrief">Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Target<wbr>Brief[]</a></span>
     </dt>
-    <dd><p>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1253,8 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1268,17 +1425,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="connection_briefs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connection_briefs_python" style="color: inherit; text-decoration: inherit;">connection_<wbr>briefs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbuseventbusconnectionbrief">Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Connection<wbr>Brief]</a></span>
+        <span class="property-type"><a href="#getbuseventbusconnectionbrief">Sequence[Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Connection<wbr>Brief]</a></span>
     </dt>
-    <dd><p>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1286,8 +1441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event set description, unlimited character type, description within 200 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set description, unlimited character type, description within 200 characters.</dd><dt class="property-required"
             title="Required">
         <span id="event_bus_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_bus_id_python" style="color: inherit; text-decoration: inherit;">event_<wbr>bus_<wbr>id</a>
@@ -1295,8 +1449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>event bus Id.</p>
-</dd><dt class="property-required"
+    <dd>event bus Id.</dd><dt class="property-required"
             title="Required">
         <span id="event_bus_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_bus_name_python" style="color: inherit; text-decoration: inherit;">event_<wbr>bus_<wbr>name</a>
@@ -1304,8 +1457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</dd><dt class="property-required"
             title="Required">
         <span id="mod_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mod_time_python" style="color: inherit; text-decoration: inherit;">mod_<wbr>time</a>
@@ -1313,8 +1465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-required"
+    <dd>update time.</dd><dt class="property-required"
             title="Required">
         <span id="pay_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_mode_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>mode</a>
@@ -1322,17 +1473,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="target_briefs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_briefs_python" style="color: inherit; text-decoration: inherit;">target_<wbr>briefs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbuseventbustargetbrief">Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Target<wbr>Brief]</a></span>
+        <span class="property-type"><a href="#getbuseventbustargetbrief">Sequence[Get<wbr>Bus<wbr>Event<wbr>Bus<wbr>Target<wbr>Brief]</a></span>
     </dt>
-    <dd><p>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1340,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1355,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="connectionbriefs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionbriefs_yaml" style="color: inherit; text-decoration: inherit;">connection<wbr>Briefs</a>
@@ -1364,8 +1511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbusconnectionbrief">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector basic information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1373,8 +1519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event set description, unlimited character type, description within 200 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set description, unlimited character type, description within 200 characters.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusid_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Bus<wbr>Id</a>
@@ -1382,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event bus Id.</p>
-</dd><dt class="property-required"
+    <dd>event bus Id.</dd><dt class="property-required"
             title="Required">
         <span id="eventbusname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventbusname_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Bus<wbr>Name</a>
@@ -1391,8 +1535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</p>
-</dd><dt class="property-required"
+    <dd>Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_yaml" style="color: inherit; text-decoration: inherit;">mod<wbr>Time</a>
@@ -1400,8 +1543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd><dt class="property-required"
+    <dd>update time.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -1409,8 +1551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="targetbriefs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetbriefs_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Briefs</a>
@@ -1418,8 +1559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbuseventbustargetbrief">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Target brief information, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1427,8 +1567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1446,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connector status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1455,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1470,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connector status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1479,8 +1615,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Connector status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1494,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Connector status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1503,8 +1659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1518,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Connector status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1527,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1542,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Connector status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1551,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1566,8 +1717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Connector status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Connector status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1575,8 +1725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1594,8 +1743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target ID.</p>
-</dd><dt class="property-required"
+    <dd>Target ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1603,8 +1751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1618,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target ID.</p>
-</dd><dt class="property-required"
+    <dd>Target ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1627,8 +1773,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="target_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1642,8 +1809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target ID.</p>
-</dd><dt class="property-required"
+    <dd>Target ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1651,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1666,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target ID.</p>
-</dd><dt class="property-required"
+    <dd>Target ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1675,8 +1839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1690,8 +1853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Target ID.</p>
-</dd><dt class="property-required"
+    <dd>Target ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1699,8 +1861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1714,8 +1875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target ID.</p>
-</dd><dt class="property-required"
+    <dd>Target ID.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1723,8 +1883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>event bus type.</p>
-</dd></dl>
+    <dd>event bus type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1742,8 +1901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter key.</p>
-</dd><dt class="property-required"
+    <dd>The name of the filter key.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1751,8 +1909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>One or more filter values.</p>
-</dd></dl>
+    <dd>One or more filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1766,8 +1923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter key.</p>
-</dd><dt class="property-required"
+    <dd>The name of the filter key.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1775,8 +1931,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>One or more filter values.</p>
-</dd></dl>
+    <dd>One or more filter values.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the filter key.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>One or more filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1790,8 +1967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the filter key.</p>
-</dd><dt class="property-required"
+    <dd>The name of the filter key.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1799,8 +1975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>One or more filter values.</p>
-</dd></dl>
+    <dd>One or more filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1814,8 +1989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter key.</p>
-</dd><dt class="property-required"
+    <dd>The name of the filter key.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1823,8 +1997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>One or more filter values.</p>
-</dd></dl>
+    <dd>One or more filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1838,8 +2011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the filter key.</p>
-</dd><dt class="property-required"
+    <dd>The name of the filter key.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1847,8 +2019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>One or more filter values.</p>
-</dd></dl>
+    <dd>One or more filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1862,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the filter key.</p>
-</dd><dt class="property-required"
+    <dd>The name of the filter key.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1871,8 +2041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>One or more filter values.</p>
-</dd></dl>
+    <dd>One or more filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1887,7 +2056,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

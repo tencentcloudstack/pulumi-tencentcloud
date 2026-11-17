@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Reserved.getInstances"
-meta_desc: "Documentation for the tencentcloud.Reserved.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query reserved instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query reserved instances.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const instances = tencentcloud.Reserved.getInstances({
+const instances = tencentcloud.reserved.getInstances({
     availabilityZone: "na-siliconvalley-1",
     instanceType: "S2.MEDIUM8",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-instances = tencentcloud.Reserved.get_instances(availability_zone="na-siliconvalley-1",
+instances = tencentcloud.reserved.get_instances(availability_zone="na-siliconvalley-1",
     instance_type="S2.MEDIUM8")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/reserved"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := reserved.GetInstances(ctx, &reserved.GetInstancesArgs{
+			AvailabilityZone: pulumi.StringRef("na-siliconvalley-1"),
+			InstanceType:     pulumi.StringRef("S2.MEDIUM8"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Reserved.GetInstances(ctx, &reserved.GetInstancesArgs{
-			AvailabilityZone: pulumi.StringRef("na-siliconvalley-1"),
-			InstanceType:     pulumi.StringRef("S2.MEDIUM8"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Reserved.ReservedFunctions;
 import com.pulumi.tencentcloud.Reserved.inputs.GetInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   instances:
     fn::invoke:
-      Function: tencentcloud:Reserved:getInstances
-      Arguments:
+      function: tencentcloud:Reserved:getInstances
+      arguments:
         availabilityZone: na-siliconvalley-1
         instanceType: S2.MEDIUM8
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_reserved_getinstances" "instances" {
+  availability_zone = "na-siliconvalley-1"
+  instance_type     = "S2.MEDIUM8"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeReservedInstances](https://www.tencentcloud.com/document/api/213/68457)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -146,11 +204,11 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">reserved_instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">reserved_instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -175,7 +233,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,7 +243,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -196,6 +256,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Reserved/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_reserved_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -214,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -223,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of reserved instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="reservedinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Instance<wbr>Id</a>
@@ -232,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -241,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -256,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -265,8 +329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of reserved instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="reservedinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Instance<wbr>Id</a>
@@ -274,8 +337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -283,8 +345,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of reserved instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reserved_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_instance_id_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -307,8 +405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of reserved instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="reservedinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -316,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -325,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -340,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -349,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of reserved instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="reservedinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -358,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -367,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -382,8 +473,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -391,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of reserved instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="reserved_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_instance_id_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>instance_<wbr>id</a>
@@ -400,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -409,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -424,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -433,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-optional"
+    <dd>The type of reserved instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="reservedinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -442,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -451,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -475,8 +558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="reservedinstancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstancelists_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Instance<wbr>Lists</a>
@@ -484,8 +566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesreservedinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Reserved.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Reserved<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of reserved instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of reserved instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -493,8 +574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>Availability zone of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -502,8 +582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-"
+    <dd>The type of reserved instance.</dd><dt class="property-"
             title="">
         <span id="reservedinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Instance<wbr>Id</a>
@@ -511,8 +590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -534,8 +612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="reservedinstancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstancelists_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Instance<wbr>Lists</a>
@@ -543,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesreservedinstancelist">[]Get<wbr>Instances<wbr>Reserved<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of reserved instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of reserved instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -552,8 +628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>Availability zone of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -561,8 +636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-"
+    <dd>The type of reserved instance.</dd><dt class="property-"
             title="">
         <span id="reservedinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Instance<wbr>Id</a>
@@ -570,11 +644,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="reserved_instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_instance_lists_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesreservedinstancelist">list(object)</a></span>
+    </dt>
+    <dd>An information list of reserved instance. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone of the reserved instance.</dd><dt class="property-"
+            title="">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of reserved instance.</dd><dt class="property-"
+            title="">
+        <span id="reserved_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_instance_id_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the reserved instance.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -593,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="reservedinstancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstancelists_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Lists</a>
@@ -602,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesreservedinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of reserved instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of reserved instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -611,8 +736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>Availability zone of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -620,8 +744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-"
+    <dd>The type of reserved instance.</dd><dt class="property-"
             title="">
         <span id="reservedinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -629,8 +752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -652,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="reservedinstancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstancelists_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Lists</a>
@@ -661,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesreservedinstancelist">Get<wbr>Instances<wbr>Reserved<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of reserved instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of reserved instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -670,8 +790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>Availability zone of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -679,8 +798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-"
+    <dd>The type of reserved instance.</dd><dt class="property-"
             title="">
         <span id="reservedinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -688,8 +806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -711,17 +828,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="reserved_instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_instance_lists_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesreservedinstancelist">Get<wbr>Instances<wbr>Reserved<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesreservedinstancelist">Sequence[Get<wbr>Instances<wbr>Reserved<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of reserved instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of reserved instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -729,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>Availability zone of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -738,8 +852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-"
+    <dd>The type of reserved instance.</dd><dt class="property-"
             title="">
         <span id="reserved_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_instance_id_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>instance_<wbr>id</a>
@@ -747,8 +860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -770,8 +882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="reservedinstancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstancelists_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Lists</a>
@@ -779,8 +890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesreservedinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of reserved instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of reserved instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -788,8 +898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>Availability zone of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -797,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-"
+    <dd>The type of reserved instance.</dd><dt class="property-"
             title="">
         <span id="reservedinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -806,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the reserved instance.</p>
-</dd><dt class="property-"
+    <dd>ID of the reserved instance.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -839,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -848,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expiry time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Expiry time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -857,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -866,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>The type of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="reservedinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Instance<wbr>Id</a>
@@ -875,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -884,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Start time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -893,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the reserved instance.</p>
-</dd></dl>
+    <dd>Status of the reserved instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -908,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -917,8 +1016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expiry time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Expiry time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -926,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -935,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>The type of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="reservedinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Instance<wbr>Id</a>
@@ -944,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -953,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Start time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -962,8 +1056,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the reserved instance.</p>
-</dd></dl>
+    <dd>Status of the reserved instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expiry time of the reserved instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of reserved instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of reserved instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="reserved_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_instance_id_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start time of the reserved instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the reserved instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -977,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -986,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expiry time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Expiry time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -995,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1004,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>The type of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="reservedinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -1013,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1022,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Start time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1031,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the reserved instance.</p>
-</dd></dl>
+    <dd>Status of the reserved instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1046,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1055,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expiry time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Expiry time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1064,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1073,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>The type of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="reservedinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -1082,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1091,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Start time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1100,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the reserved instance.</p>
-</dd></dl>
+    <dd>Status of the reserved instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1115,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1124,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expiry time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Expiry time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -1133,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1142,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>The type of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="reserved_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_instance_id_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>instance_<wbr>id</a>
@@ -1151,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1160,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Start time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1169,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the reserved instance.</p>
-</dd></dl>
+    <dd>Status of the reserved instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1184,8 +1318,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the reserved instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the reserved instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1193,8 +1326,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expiry time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Expiry time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1202,8 +1334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1211,8 +1342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>The type of reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="reservedinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedinstanceid_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Instance<wbr>Id</a>
@@ -1220,8 +1350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the reserved instance to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the reserved instance to be query.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1229,8 +1358,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the reserved instance.</p>
-</dd><dt class="property-required"
+    <dd>Start time of the reserved instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1238,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the reserved instance.</p>
-</dd></dl>
+    <dd>Status of the reserved instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1254,7 +1381,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

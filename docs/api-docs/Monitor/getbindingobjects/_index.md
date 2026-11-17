@@ -2,9 +2,11 @@
 ---
 title: "getBindingObjects"
 title_tag: "tencentcloud.Monitor.getBindingObjects"
-meta_desc: "Documentation for the tencentcloud.Monitor.getBindingObjects function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query policy group binding objects."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,30 +18,76 @@ Use this data source to query policy group binding objects.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const name = tencentcloud.Monitor.getPolicyGroups({
+const name = tencentcloud.monitor.getPolicyGroups({
     name: "test",
 });
-const objects = name.then(name => tencentcloud.Monitor.getBindingObjects({
+const objects = name.then(name => tencentcloud.monitor.getBindingObjects({
     groupId: name.lists?.[0]?.groupId,
 }));
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-name = tencentcloud.Monitor.get_policy_groups(name="test")
-objects = tencentcloud.Monitor.get_binding_objects(group_id=name.lists[0].group_id)
+name = tencentcloud.monitor.get_policy_groups(name="test")
+objects = tencentcloud.monitor.get_binding_objects(group_id=name.lists[0].group_id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		name, err := monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
+			Name: pulumi.StringRef("test"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = monitor.GetBindingObjects(ctx, &monitor.GetBindingObjectsArgs{
+			GroupId: name.Lists[0].GroupId,
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -55,32 +103,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		name, err := Monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
-			Name: pulumi.StringRef("test"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_, err = Monitor.GetBindingObjects(ctx, &monitor.GetBindingObjectsArgs{
-			GroupId: name.Lists[0].GroupId,
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -90,8 +117,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Monitor.MonitorFunctions;
 import com.pulumi.tencentcloud.Monitor.inputs.GetPolicyGroupsArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.GetBindingObjectsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -108,27 +135,60 @@ public class App {
             .build());
 
         final var objects = MonitorFunctions.getBindingObjects(GetBindingObjectsArgs.builder()
-            .groupId(name.applyValue(getPolicyGroupsResult -> getPolicyGroupsResult.lists()[0].groupId()))
+            .groupId(name.lists()[0].groupId())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   name:
     fn::invoke:
-      Function: tencentcloud:Monitor:getPolicyGroups
-      Arguments:
+      function: tencentcloud:Monitor:getPolicyGroups
+      arguments:
         name: test
   objects:
     fn::invoke:
-      Function: tencentcloud:Monitor:getBindingObjects
-      Arguments:
+      function: tencentcloud:Monitor:getBindingObjects
+      arguments:
         groupId: ${name.lists[0].groupId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_monitor_getpolicygroups" "name" {
+  name = "test"
+}
+data "tencentcloud_monitor_getbindingobjects" "objects" {
+  group_id = data.tencentcloud_monitor_getpolicygroups.name.lists[0].group_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
 
 
 
@@ -140,7 +200,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -148,9 +208,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBindingObjects<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBindingObjectsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>></span
+><span class="k">function </span>getBindingObjects<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBindingObjectsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>></span
 ><span class="k">
-function </span>getBindingObjectsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBindingObjectsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>></span
+function </span>getBindingObjectsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBindingObjectsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -163,9 +223,9 @@ function </span>getBindingObjectsOutput<span class="p">(</span><span class="nx">
                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBindingObjectsResult</span
 ><span class="k">
-def </span>get_binding_objects_output<span class="p">(</span><span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBindingObjectsResult]</span
+def </span>get_binding_objects_output<span class="p">(</span><span class="nx">group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBindingObjectsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,7 +250,8 @@ func </span>GetBindingObjectsOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBindingObjects </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBindingObjectsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBindingObjectsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBindingObjectsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBindingObjectsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -199,7 +260,8 @@ func </span>GetBindingObjectsOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>> </span>getBindingObjects<span class="p">(</span><span class="nx">GetBindingObjectsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>> </span>getBindingObjects<span class="p">(</span><span class="nx">GetBindingObjectsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBindingObjectsResult</a></span>> </span>getBindingObjects<span class="p">(</span><span class="nx">GetBindingObjectsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -211,6 +273,15 @@ func </span>GetBindingObjectsOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Monitor/getBindingObjects:getBindingObjects
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_monitor_get_binding_objects&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -229,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -238,8 +308,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -253,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -262,8 +330,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Policy group ID for query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -277,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Policy group ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -286,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -301,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Policy group ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -310,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -325,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -334,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -349,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Policy group ID for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -358,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -390,8 +471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -399,8 +479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbindingobjectslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Outputs.<wbr>Get<wbr>Binding<wbr>Objects<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -430,8 +509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -439,11 +517,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbindingobjectslist">[]Get<wbr>Binding<wbr>Objects<wbr>List</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbindingobjectslist">list(object)</a></span>
+    </dt>
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -470,8 +585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -479,8 +593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbindingobjectslist">List&lt;Get<wbr>Binding<wbr>Objects<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -510,8 +623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -519,8 +631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbindingobjectslist">Get<wbr>Binding<wbr>Objects<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -550,17 +661,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbindingobjectslist">Get<wbr>Binding<wbr>Objects<wbr>List]</a></span>
+        <span class="property-type"><a href="#getbindingobjectslist">Sequence[Get<wbr>Binding<wbr>Objects<wbr>List]</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -590,8 +699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -599,8 +707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbindingobjectslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -632,8 +739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.</p>
-</dd><dt class="property-required"
+    <dd>Represents a collection of dimensions of an object instance, json format.</dd><dt class="property-required"
             title="Required">
         <span id="isshielded_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isshielded_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Shielded</a>
@@ -641,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</p>
-</dd><dt class="property-required"
+    <dd>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -650,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the object is located.</p>
-</dd><dt class="property-required"
+    <dd>The region where the object is located.</dd><dt class="property-required"
             title="Required">
         <span id="uniqueid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_csharp" style="color: inherit; text-decoration: inherit;">Unique<wbr>Id</a>
@@ -659,8 +763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -674,8 +777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.</p>
-</dd><dt class="property-required"
+    <dd>Represents a collection of dimensions of an object instance, json format.</dd><dt class="property-required"
             title="Required">
         <span id="isshielded_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isshielded_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Shielded</a>
@@ -683,8 +785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</p>
-</dd><dt class="property-required"
+    <dd>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -692,8 +793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the object is located.</p>
-</dd><dt class="property-required"
+    <dd>The region where the object is located.</dd><dt class="property-required"
             title="Required">
         <span id="uniqueid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_go" style="color: inherit; text-decoration: inherit;">Unique<wbr>Id</a>
@@ -701,8 +801,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="dimensions_json_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_json_hcl" style="color: inherit; text-decoration: inherit;">dimensions_<wbr>json</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Represents a collection of dimensions of an object instance, json format.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_shielded_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_shielded_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>shielded</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region where the object is located.</dd><dt class="property-required"
+            title="Required">
+        <span id="unique_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unique_id_hcl" style="color: inherit; text-decoration: inherit;">unique_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -716,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.</p>
-</dd><dt class="property-required"
+    <dd>Represents a collection of dimensions of an object instance, json format.</dd><dt class="property-required"
             title="Required">
         <span id="isshielded_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isshielded_java" style="color: inherit; text-decoration: inherit;">is<wbr>Shielded</a>
@@ -725,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</p>
-</dd><dt class="property-required"
+    <dd>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -734,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region where the object is located.</p>
-</dd><dt class="property-required"
+    <dd>The region where the object is located.</dd><dt class="property-required"
             title="Required">
         <span id="uniqueid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_java" style="color: inherit; text-decoration: inherit;">unique<wbr>Id</a>
@@ -743,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -758,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.</p>
-</dd><dt class="property-required"
+    <dd>Represents a collection of dimensions of an object instance, json format.</dd><dt class="property-required"
             title="Required">
         <span id="isshielded_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isshielded_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Shielded</a>
@@ -767,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</p>
-</dd><dt class="property-required"
+    <dd>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -776,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region where the object is located.</p>
-</dd><dt class="property-required"
+    <dd>The region where the object is located.</dd><dt class="property-required"
             title="Required">
         <span id="uniqueid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_nodejs" style="color: inherit; text-decoration: inherit;">unique<wbr>Id</a>
@@ -785,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -800,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.</p>
-</dd><dt class="property-required"
+    <dd>Represents a collection of dimensions of an object instance, json format.</dd><dt class="property-required"
             title="Required">
         <span id="is_shielded_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_shielded_python" style="color: inherit; text-decoration: inherit;">is_<wbr>shielded</a>
@@ -809,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</p>
-</dd><dt class="property-required"
+    <dd>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -818,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The region where the object is located.</p>
-</dd><dt class="property-required"
+    <dd>The region where the object is located.</dd><dt class="property-required"
             title="Required">
         <span id="unique_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unique_id_python" style="color: inherit; text-decoration: inherit;">unique_<wbr>id</a>
@@ -827,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -842,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.</p>
-</dd><dt class="property-required"
+    <dd>Represents a collection of dimensions of an object instance, json format.</dd><dt class="property-required"
             title="Required">
         <span id="isshielded_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isshielded_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Shielded</a>
@@ -851,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</p>
-</dd><dt class="property-required"
+    <dd>Whether the object is shielded or not, <code>0</code> means unshielded and <code>1</code> means shielded.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -860,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region where the object is located.</p>
-</dd><dt class="property-required"
+    <dd>The region where the object is located.</dd><dt class="property-required"
             title="Required">
         <span id="uniqueid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_yaml" style="color: inherit; text-decoration: inherit;">unique<wbr>Id</a>
@@ -869,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -885,7 +1006,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

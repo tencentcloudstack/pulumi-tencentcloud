@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Key.Pair"
 meta_desc: "Documentation for the tencentcloud.Key.Pair resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,79 @@ Provides a key pair resource.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.key.Pair("foo", {keyName: "terraform_test"});
+export const privateKey = foo.privateKey;
+export const createTime = foo.createdTime;
 const foo1 = new tencentcloud.key.Pair("foo1", {
     keyName: "terraform_test",
     publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.key.Pair("foo", key_name="terraform_test")
+pulumi.export("privateKey", foo.private_key)
+pulumi.export("createTime", foo.created_time)
 foo1 = tencentcloud.key.Pair("foo1",
     key_name="terraform_test",
     public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/key"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		foo, err := key.NewPair(ctx, "foo", &key.PairArgs{
+			KeyName: pulumi.String("terraform_test"),
+		})
+		if err != nil {
+			return err
+		}
+		ctx.Export("privateKey", foo.PrivateKey)
+		ctx.Export("createTime", foo.CreatedTime)
+		_, err = key.NewPair(ctx, "foo1", &key.PairArgs{
+			KeyName:   pulumi.String("terraform_test"),
+			PublicKey: pulumi.String("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw=="),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -55,35 +110,18 @@ return await Deployment.RunAsync(() =>
         PublicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==",
     });
 
+    return new Dictionary<string, object?>
+    {
+        ["privateKey"] = foo.PrivateKey,
+        ["createTime"] = foo.CreatedTime,
+    };
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Key.NewPair(ctx, "foo", &Key.PairArgs{
-			KeyName: pulumi.String("terraform_test"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Key.NewPair(ctx, "foo1", &Key.PairArgs{
-			KeyName:   pulumi.String("terraform_test"),
-			PublicKey: pulumi.String("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw=="),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -92,8 +130,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Key.Pair;
 import com.pulumi.tencentcloud.Key.PairArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -105,11 +143,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Pair("foo", PairArgs.builder()        
+        var foo = new Pair("foo", PairArgs.builder()
             .keyName("terraform_test")
             .build());
 
-        var foo1 = new Pair("foo1", PairArgs.builder()        
+        ctx.export("privateKey", foo.privateKey());
+        ctx.export("createTime", foo.createdTime());
+        var foo1 = new Pair("foo1", PairArgs.builder()
             .keyName("terraform_test")
             .publicKey("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==")
             .build());
@@ -117,6 +157,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
@@ -128,69 +173,136 @@ resources:
     properties:
       keyName: terraform_test
       publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==
+outputs:
+  privateKey: ${foo.privateKey}
+  createTime: ${foo.createdTime}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_key_pair" "foo" {
+  key_name = "terraform_test"
+}
+resource "tencentcloud_key_pair" "foo1" {
+  key_name   = "terraform_test"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw=="
+}
+output "privateKey" {
+  value = tencentcloud_key_pair.foo.private_key
+}
+output "createTime" {
+  value = tencentcloud_key_pair.foo.created_time
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateKeyPair](https://www.tencentcloud.com/document/api/213/33231)
+  - [ImportKeyPair](https://www.tencentcloud.com/document/api/213/33227)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyKeyPairAttribute](https://www.tencentcloud.com/document/api/213/33226)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete:
+  - [DeleteKeyPairs](https://www.tencentcloud.com/document/api/213/33230)
+  - [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
+  - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33228)
 
 
 ## Create Pair Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PairArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PairArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PairArgs</a></span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
          <span class="nx">key_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">force_stop</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
          <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
          <span class="nx">public_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PairArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPair</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PairArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Pair</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPair</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PairArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Pair</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PairArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PairArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PairArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Pair</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PairArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Key:Pair</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Key:Pair</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_key_pair&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -211,7 +323,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -328,11 +440,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Pair Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -348,8 +468,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcestop_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcestop_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -357,8 +484,7 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="publickey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Key</a>
@@ -366,17 +492,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -390,8 +514,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcestop_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcestop_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -399,8 +530,7 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="publickey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Key</a>
@@ -408,17 +538,61 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_stop_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_stop_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="public_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_key_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -432,8 +606,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcestop_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcestop_java" style="color: inherit; text-decoration: inherit;">force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -441,8 +622,7 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="publickey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_java" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -450,17 +630,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -474,8 +652,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcestop_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcestop_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -483,8 +668,7 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="publickey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -492,17 +676,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -516,8 +698,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_stop_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_stop_python" style="color: inherit; text-decoration: inherit;">force_<wbr>stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -525,8 +714,7 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="public_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_key_python" style="color: inherit; text-decoration: inherit;">public_<wbr>key</a>
@@ -534,17 +722,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -558,8 +744,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forcestop_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcestop_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -567,8 +760,7 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="publickey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publickey_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -576,17 +768,15 @@ The Pair resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -601,14 +791,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="createdtime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-"
+            title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="privatekey_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -616,14 +821,59 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="createdtime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_go" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-"
+            title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="privatekey_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="private_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_key_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -631,14 +881,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="createdtime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_java" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-"
+            title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="privatekey_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_java" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -646,14 +911,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="createdtime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-"
+            title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="privatekey_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -661,14 +941,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="created_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_python" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-"
+            title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="private_key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_key_python" style="color: inherit; text-decoration: inherit;">private_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -676,14 +971,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="createdtime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-"
+            title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="privatekey_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privatekey_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -693,123 +1003,165 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Pair resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PairState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Pair</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PairState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Pair</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">created_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">force_stop</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">key_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">private_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">public_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> Pair</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> Pair</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPair<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PairState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Pair</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPair<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PairState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Pair</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Pair</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PairState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Pair</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PairState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Pair</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PairState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Pair</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PairState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingPair</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Key:Pair</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_key_pair</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PairState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PairState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -817,28 +1169,31 @@ Get an existing Pair resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PairState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -846,28 +1201,31 @@ Get an existing Pair resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PairState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -881,14 +1239,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_createdtime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcestop_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcestop_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_keyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_privatekey_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privatekey_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -896,8 +1277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publickey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publickey_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Key</a>
@@ -905,17 +1285,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -923,14 +1301,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_createdtime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_go" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcestop_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcestop_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_keyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_privatekey_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privatekey_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -938,8 +1339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publickey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publickey_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Key</a>
@@ -947,17 +1347,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_stop_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_stop_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_private_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_key_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_public_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_key_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -965,14 +1425,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_createdtime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_java" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcestop_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcestop_java" style="color: inherit; text-decoration: inherit;">force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_keyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_java" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_privatekey_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privatekey_java" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -980,8 +1463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publickey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publickey_java" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -989,17 +1471,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,14 +1487,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_createdtime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcestop_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcestop_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_keyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_privatekey_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privatekey_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1022,8 +1525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publickey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publickey_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -1031,17 +1533,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1049,14 +1549,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_created_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_created_time_python" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_stop_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_stop_python" style="color: inherit; text-decoration: inherit;">force_<wbr>stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_name_python" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_private_key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_key_python" style="color: inherit; text-decoration: inherit;">private_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1064,8 +1587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_public_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_key_python" style="color: inherit; text-decoration: inherit;">public_<wbr>key</a>
@@ -1073,17 +1595,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1091,14 +1611,37 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_createdtime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Creation time, which follows the <code>ISO8601</code> standard and uses <code>UTC</code> time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forcestop_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcestop_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_keyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key pair's name. It is the only in one TencentCloud account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The key pair's name. It is the only in one TencentCloud account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_privatekey_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privatekey_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1106,8 +1649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifys to which project the key pair belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys to which project the key pair belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publickey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publickey_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Key</a>
@@ -1115,17 +1657,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>You can import an existing public key and using TencentCloud key pair to manage it.</p>
-</dd><dt class="property-optional"
+    <dd>You can import an existing public key and using TencentCloud key pair to manage it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the key pair.</p>
-</dd></dl>
+    <dd>Tags of the key pair.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1148,6 +1688,9 @@ $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1157,7 +1700,6 @@ $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

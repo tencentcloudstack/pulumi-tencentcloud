@@ -2,9 +2,11 @@
 ---
 title: "getResourcesByTag"
 title_tag: "tencentcloud.Gaap.getResourcesByTag"
-meta_desc: "Documentation for the tencentcloud.Gaap.getResourcesByTag function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap resources by tag"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query detailed information of gaap resources by tag
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const resourcesByTag = tencentcloud.Gaap.getResourcesByTag({
+const resourcesByTag = tencentcloud.gaap.getResourcesByTag({
     tagKey: "tagKey",
     tagValue: "tagValue",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-resources_by_tag = tencentcloud.Gaap.get_resources_by_tag(tag_key="tagKey",
+resources_by_tag = tencentcloud.gaap.get_resources_by_tag(tag_key="tagKey",
     tag_value="tagValue")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetResourcesByTag(ctx, &gaap.GetResourcesByTagArgs{
+			TagKey:   "tagKey",
+			TagValue: "tagValue",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetResourcesByTag(ctx, &gaap.GetResourcesByTagArgs{
-			TagKey:   "tagKey",
-			TagValue: "tagValue",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetResourcesByTagArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   resourcesByTag:
     fn::invoke:
-      Function: tencentcloud:Gaap:getResourcesByTag
-      Arguments:
+      function: tencentcloud:Gaap:getResourcesByTag
+      arguments:
         tagKey: tagKey
         tagValue: tagValue
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getresourcesbytag" "resourcesByTag" {
+  tag_key   = "tagKey"
+  tag_value = "tagValue"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getResourcesByTag<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetResourcesByTagArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>></span
+><span class="k">function </span>getResourcesByTag<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetResourcesByTagArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>></span
 ><span class="k">
-function </span>getResourcesByTagOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetResourcesByTagOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>></span
+function </span>getResourcesByTagOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetResourcesByTagOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -146,11 +204,11 @@ function </span>getResourcesByTagOutput<span class="p">(</span><span class="nx">
                          <span class="nx">tag_value</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetResourcesByTagResult</span
 ><span class="k">
-def </span>get_resources_by_tag_output<span class="p">(</span><span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">tag_value</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetResourcesByTagResult]</span
+def </span>get_resources_by_tag_output<span class="p">(</span><span class="nx">resource_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">tag_value</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetResourcesByTagResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -175,7 +233,8 @@ func </span>GetResourcesByTagOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetResourcesByTag </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetResourcesByTagArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetResourcesByTagInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetResourcesByTagInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetResourcesByTagInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,7 +243,8 @@ func </span>GetResourcesByTagOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>> </span>getResourcesByTag<span class="p">(</span><span class="nx">GetResourcesByTagArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>> </span>getResourcesByTag<span class="p">(</span><span class="nx">GetResourcesByTagArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetResourcesByTagResult</a></span>> </span>getResourcesByTag<span class="p">(</span><span class="nx">GetResourcesByTagArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -196,6 +256,15 @@ func </span>GetResourcesByTagOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getResourcesByTag:getResourcesByTag
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_resources_by_tag&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -214,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -223,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -232,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -241,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -256,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -265,8 +329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -274,8 +337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -283,8 +345,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -307,8 +405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -316,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -325,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -340,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -349,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -358,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -367,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -382,8 +473,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -391,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -400,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -409,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -424,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -433,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd><dt class="property-optional"
+    <dd>Tag value.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -442,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -451,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -475,8 +558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Sets</a>
@@ -484,8 +566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesbytagresourceset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Resources<wbr>By<wbr>Tag<wbr>Resource<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of resources corresponding to labels.</p>
-</dd><dt class="property-"
+    <dd>List of resources corresponding to labels.</dd><dt class="property-"
             title="">
         <span id="tagkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -509,8 +590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</p>
-</dd><dt class="property-"
+    <dd>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -532,8 +612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Sets</a>
@@ -541,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesbytagresourceset">[]Get<wbr>Resources<wbr>By<wbr>Tag<wbr>Resource<wbr>Set</a></span>
     </dt>
-    <dd><p>List of resources corresponding to labels.</p>
-</dd><dt class="property-"
+    <dd>List of resources corresponding to labels.</dd><dt class="property-"
             title="">
         <span id="tagkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -566,11 +644,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</p>
-</dd><dt class="property-"
+    <dd>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resource_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_sets_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getresourcesbytagresourceset">list(object)</a></span>
+    </dt>
+    <dd>List of resources corresponding to labels.</dd><dt class="property-"
+            title="">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -589,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Sets</a>
@@ -598,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesbytagresourceset">List&lt;Get<wbr>Resources<wbr>By<wbr>Tag<wbr>Resource<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of resources corresponding to labels.</p>
-</dd><dt class="property-"
+    <dd>List of resources corresponding to labels.</dd><dt class="property-"
             title="">
         <span id="tagkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -623,8 +752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</p>
-</dd><dt class="property-"
+    <dd>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -646,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Sets</a>
@@ -655,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesbytagresourceset">Get<wbr>Resources<wbr>By<wbr>Tag<wbr>Resource<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of resources corresponding to labels.</p>
-</dd><dt class="property-"
+    <dd>List of resources corresponding to labels.</dd><dt class="property-"
             title="">
         <span id="tagkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -680,8 +806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</p>
-</dd><dt class="property-"
+    <dd>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -703,17 +828,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resource_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_sets_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getresourcesbytagresourceset">Get<wbr>Resources<wbr>By<wbr>Tag<wbr>Resource<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getresourcesbytagresourceset">Sequence[Get<wbr>Resources<wbr>By<wbr>Tag<wbr>Resource<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of resources corresponding to labels.</p>
-</dd><dt class="property-"
+    <dd>List of resources corresponding to labels.</dd><dt class="property-"
             title="">
         <span id="tag_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
@@ -737,8 +860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</p>
-</dd><dt class="property-"
+    <dd>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -760,8 +882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourcesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Sets</a>
@@ -769,8 +890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesbytagresourceset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of resources corresponding to labels.</p>
-</dd><dt class="property-"
+    <dd>List of resources corresponding to labels.</dd><dt class="property-"
             title="">
         <span id="tagkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -794,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</p>
-</dd><dt class="property-"
+    <dd>Resource type, where:Proxy represents the proxy,ProxyGroup represents a proxy group,RealServer represents the real server.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -827,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Id.</p>
-</dd><dt class="property-required"
+    <dd>Resource Id.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -836,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd></dl>
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Id.</p>
-</dd><dt class="property-required"
+    <dd>Resource Id.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -860,8 +976,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd></dl>
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -875,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Id.</p>
-</dd><dt class="property-required"
+    <dd>Resource Id.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -884,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd></dl>
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -899,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource Id.</p>
-</dd><dt class="property-required"
+    <dd>Resource Id.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -908,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd></dl>
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -923,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource Id.</p>
-</dd><dt class="property-required"
+    <dd>Resource Id.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -932,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd></dl>
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource Id.</p>
-</dd><dt class="property-required"
+    <dd>Resource Id.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -956,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</p>
-</dd></dl>
+    <dd>Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -972,7 +1101,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

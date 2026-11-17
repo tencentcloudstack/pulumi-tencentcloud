@@ -2,9 +2,11 @@
 ---
 title: "PayCertificate"
 title_tag: "tencentcloud.Ssl.PayCertificate"
-meta_desc: "Documentation for the tencentcloud.Ssl.PayCertificate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a payment SSL. NOTE: Provides the creation of a paid certificate, including the submission of certificate information and."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -25,76 +27,143 @@ Tencent Cloud Support.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.ssl.PayCertificate("example", {
-    alias: "ssl desc.",
+    productId: 33,
     domainNum: 1,
+    alias: "ssl desc.",
+    projectId: 0,
     information: {
-        adminEmail: "test@tencent.com",
+        csrType: "online",
+        certificateDomain: "www.example.com",
+        organizationName: "Tencent",
+        organizationDivision: "Qcloud",
+        organizationAddress: "广东省深圳市南山区腾讯大厦1000号",
+        organizationCountry: "CN",
+        organizationCity: "深圳市",
+        organizationRegion: "广东省",
+        postalCode: "0755",
+        phoneAreaCode: "0755",
+        phoneNumber: "86013388",
+        verifyType: "DNS",
         adminFirstName: "test",
         adminLastName: "test",
         adminPhoneNum: "12345678901",
+        adminEmail: "test@tencent.com",
         adminPosition: "developer",
-        certificateDomain: "www.example.com",
-        contactEmail: "test@tencent.com",
         contactFirstName: "test",
         contactLastName: "test",
+        contactEmail: "test@tencent.com",
         contactNumber: "12345678901",
         contactPosition: "developer",
-        csrType: "online",
-        organizationAddress: "广东省深圳市南山区腾讯大厦1000号",
-        organizationCity: "深圳市",
-        organizationCountry: "CN",
-        organizationDivision: "Qcloud",
-        organizationName: "Tencent",
-        organizationRegion: "广东省",
-        phoneAreaCode: "0755",
-        phoneNumber: "86013388",
-        postalCode: "0755",
-        verifyType: "DNS",
     },
-    productId: 33,
-    projectId: 0,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.ssl.PayCertificate("example",
-    alias="ssl desc.",
-    domain_num=1,
-    information=tencentcloud.ssl.PayCertificateInformationArgs(
-        admin_email="test@tencent.com",
-        admin_first_name="test",
-        admin_last_name="test",
-        admin_phone_num="12345678901",
-        admin_position="developer",
-        certificate_domain="www.example.com",
-        contact_email="test@tencent.com",
-        contact_first_name="test",
-        contact_last_name="test",
-        contact_number="12345678901",
-        contact_position="developer",
-        csr_type="online",
-        organization_address="广东省深圳市南山区腾讯大厦1000号",
-        organization_city="深圳市",
-        organization_country="CN",
-        organization_division="Qcloud",
-        organization_name="Tencent",
-        organization_region="广东省",
-        phone_area_code="0755",
-        phone_number="86013388",
-        postal_code="0755",
-        verify_type="DNS",
-    ),
     product_id=33,
-    project_id=0)
+    domain_num=1,
+    alias="ssl desc.",
+    project_id=0,
+    information={
+        "csr_type": "online",
+        "certificate_domain": "www.example.com",
+        "organization_name": "Tencent",
+        "organization_division": "Qcloud",
+        "organization_address": "广东省深圳市南山区腾讯大厦1000号",
+        "organization_country": "CN",
+        "organization_city": "深圳市",
+        "organization_region": "广东省",
+        "postal_code": "0755",
+        "phone_area_code": "0755",
+        "phone_number": "86013388",
+        "verify_type": "DNS",
+        "admin_first_name": "test",
+        "admin_last_name": "test",
+        "admin_phone_num": "12345678901",
+        "admin_email": "test@tencent.com",
+        "admin_position": "developer",
+        "contact_first_name": "test",
+        "contact_last_name": "test",
+        "contact_email": "test@tencent.com",
+        "contact_number": "12345678901",
+        "contact_position": "developer",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssl"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ssl.NewPayCertificate(ctx, "example", &ssl.PayCertificateArgs{
+			ProductId: pulumi.Int(33),
+			DomainNum: pulumi.Int(1),
+			Alias:     pulumi.String("ssl desc."),
+			ProjectId: pulumi.Int(0),
+			Information: &ssl.PayCertificateInformationArgs{
+				CsrType:              pulumi.String("online"),
+				CertificateDomain:    pulumi.String("www.example.com"),
+				OrganizationName:     pulumi.String("Tencent"),
+				OrganizationDivision: pulumi.String("Qcloud"),
+				OrganizationAddress:  pulumi.String("广东省深圳市南山区腾讯大厦1000号"),
+				OrganizationCountry:  pulumi.String("CN"),
+				OrganizationCity:     pulumi.String("深圳市"),
+				OrganizationRegion:   pulumi.String("广东省"),
+				PostalCode:           pulumi.String("0755"),
+				PhoneAreaCode:        pulumi.String("0755"),
+				PhoneNumber:          pulumi.String("86013388"),
+				VerifyType:           pulumi.String("DNS"),
+				AdminFirstName:       pulumi.String("test"),
+				AdminLastName:        pulumi.String("test"),
+				AdminPhoneNum:        pulumi.String("12345678901"),
+				AdminEmail:           pulumi.String("test@tencent.com"),
+				AdminPosition:        pulumi.String("developer"),
+				ContactFirstName:     pulumi.String("test"),
+				ContactLastName:      pulumi.String("test"),
+				ContactEmail:         pulumi.String("test@tencent.com"),
+				ContactNumber:        pulumi.String("12345678901"),
+				ContactPosition:      pulumi.String("developer"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -105,86 +174,44 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Ssl.PayCertificate("example", new()
     {
-        Alias = "ssl desc.",
+        ProductId = 33,
         DomainNum = 1,
+        Alias = "ssl desc.",
+        ProjectId = 0,
         Information = new Tencentcloud.Ssl.Inputs.PayCertificateInformationArgs
         {
-            AdminEmail = "test@tencent.com",
+            CsrType = "online",
+            CertificateDomain = "www.example.com",
+            OrganizationName = "Tencent",
+            OrganizationDivision = "Qcloud",
+            OrganizationAddress = "广东省深圳市南山区腾讯大厦1000号",
+            OrganizationCountry = "CN",
+            OrganizationCity = "深圳市",
+            OrganizationRegion = "广东省",
+            PostalCode = "0755",
+            PhoneAreaCode = "0755",
+            PhoneNumber = "86013388",
+            VerifyType = "DNS",
             AdminFirstName = "test",
             AdminLastName = "test",
             AdminPhoneNum = "12345678901",
+            AdminEmail = "test@tencent.com",
             AdminPosition = "developer",
-            CertificateDomain = "www.example.com",
-            ContactEmail = "test@tencent.com",
             ContactFirstName = "test",
             ContactLastName = "test",
+            ContactEmail = "test@tencent.com",
             ContactNumber = "12345678901",
             ContactPosition = "developer",
-            CsrType = "online",
-            OrganizationAddress = "广东省深圳市南山区腾讯大厦1000号",
-            OrganizationCity = "深圳市",
-            OrganizationCountry = "CN",
-            OrganizationDivision = "Qcloud",
-            OrganizationName = "Tencent",
-            OrganizationRegion = "广东省",
-            PhoneAreaCode = "0755",
-            PhoneNumber = "86013388",
-            PostalCode = "0755",
-            VerifyType = "DNS",
         },
-        ProductId = 33,
-        ProjectId = 0,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ssl.NewPayCertificate(ctx, "example", &Ssl.PayCertificateArgs{
-			Alias:     pulumi.String("ssl desc."),
-			DomainNum: pulumi.Int(1),
-			Information: &ssl.PayCertificateInformationArgs{
-				AdminEmail:           pulumi.String("test@tencent.com"),
-				AdminFirstName:       pulumi.String("test"),
-				AdminLastName:        pulumi.String("test"),
-				AdminPhoneNum:        pulumi.String("12345678901"),
-				AdminPosition:        pulumi.String("developer"),
-				CertificateDomain:    pulumi.String("www.example.com"),
-				ContactEmail:         pulumi.String("test@tencent.com"),
-				ContactFirstName:     pulumi.String("test"),
-				ContactLastName:      pulumi.String("test"),
-				ContactNumber:        pulumi.String("12345678901"),
-				ContactPosition:      pulumi.String("developer"),
-				CsrType:              pulumi.String("online"),
-				OrganizationAddress:  pulumi.String("广东省深圳市南山区腾讯大厦1000号"),
-				OrganizationCity:     pulumi.String("深圳市"),
-				OrganizationCountry:  pulumi.String("CN"),
-				OrganizationDivision: pulumi.String("Qcloud"),
-				OrganizationName:     pulumi.String("Tencent"),
-				OrganizationRegion:   pulumi.String("广东省"),
-				PhoneAreaCode:        pulumi.String("0755"),
-				PhoneNumber:          pulumi.String("86013388"),
-				PostalCode:           pulumi.String("0755"),
-				VerifyType:           pulumi.String("DNS"),
-			},
-			ProductId: pulumi.Int(33),
-			ProjectId: pulumi.Int(0),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -194,8 +221,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ssl.PayCertificate;
 import com.pulumi.tencentcloud.Ssl.PayCertificateArgs;
 import com.pulumi.tencentcloud.Ssl.inputs.PayCertificateInformationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -207,139 +234,219 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new PayCertificate("example", PayCertificateArgs.builder()        
-            .alias("ssl desc.")
+        var example = new PayCertificate("example", PayCertificateArgs.builder()
+            .productId(33)
             .domainNum(1)
+            .alias("ssl desc.")
+            .projectId(0)
             .information(PayCertificateInformationArgs.builder()
-                .adminEmail("test@tencent.com")
+                .csrType("online")
+                .certificateDomain("www.example.com")
+                .organizationName("Tencent")
+                .organizationDivision("Qcloud")
+                .organizationAddress("广东省深圳市南山区腾讯大厦1000号")
+                .organizationCountry("CN")
+                .organizationCity("深圳市")
+                .organizationRegion("广东省")
+                .postalCode("0755")
+                .phoneAreaCode("0755")
+                .phoneNumber("86013388")
+                .verifyType("DNS")
                 .adminFirstName("test")
                 .adminLastName("test")
                 .adminPhoneNum("12345678901")
+                .adminEmail("test@tencent.com")
                 .adminPosition("developer")
-                .certificateDomain("www.example.com")
-                .contactEmail("test@tencent.com")
                 .contactFirstName("test")
                 .contactLastName("test")
+                .contactEmail("test@tencent.com")
                 .contactNumber("12345678901")
                 .contactPosition("developer")
-                .csrType("online")
-                .organizationAddress("广东省深圳市南山区腾讯大厦1000号")
-                .organizationCity("深圳市")
-                .organizationCountry("CN")
-                .organizationDivision("Qcloud")
-                .organizationName("Tencent")
-                .organizationRegion("广东省")
-                .phoneAreaCode("0755")
-                .phoneNumber("86013388")
-                .postalCode("0755")
-                .verifyType("DNS")
                 .build())
-            .productId(33)
-            .projectId(0)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Ssl:PayCertificate
     properties:
-      alias: ssl desc.
+      productId: 33
       domainNum: 1
+      alias: ssl desc.
+      projectId: 0
       information:
-        adminEmail: test@tencent.com
+        csrType: online
+        certificateDomain: www.example.com
+        organizationName: Tencent
+        organizationDivision: Qcloud
+        organizationAddress: 广东省深圳市南山区腾讯大厦1000号
+        organizationCountry: CN
+        organizationCity: 深圳市
+        organizationRegion: 广东省
+        postalCode: '0755'
+        phoneAreaCode: '0755'
+        phoneNumber: '86013388'
+        verifyType: DNS
         adminFirstName: test
         adminLastName: test
         adminPhoneNum: '12345678901'
+        adminEmail: test@tencent.com
         adminPosition: developer
-        certificateDomain: www.example.com
-        contactEmail: test@tencent.com
         contactFirstName: test
         contactLastName: test
+        contactEmail: test@tencent.com
         contactNumber: '12345678901'
         contactPosition: developer
-        csrType: online
-        organizationAddress: 广东省深圳市南山区腾讯大厦1000号
-        organizationCity: 深圳市
-        organizationCountry: CN
-        organizationDivision: Qcloud
-        organizationName: Tencent
-        organizationRegion: 广东省
-        phoneAreaCode: '0755'
-        phoneNumber: '86013388'
-        postalCode: '0755'
-        verifyType: DNS
-      productId: 33
-      projectId: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ssl_paycertificate" "example" {
+  product_id = 33
+  domain_num = 1
+  alias      = "ssl desc."
+  project_id = 0
+  information = {
+    csr_type              = "online"
+    certificate_domain    = "www.example.com"
+    organization_name     = "Tencent"
+    organization_division = "Qcloud"
+    organization_address  = "广东省深圳市南山区腾讯大厦1000号"
+    organization_country  = "CN"
+    organization_city     = "深圳市"
+    organization_region   = "广东省"
+    postal_code           = "0755"
+    phone_area_code       = "0755"
+    phone_number          = "86013388"
+    verify_type           = "DNS"
+    admin_first_name      = "test"
+    admin_last_name       = "test"
+    admin_phone_num       = "12345678901"
+    admin_email           = "test@tencent.com"
+    admin_position        = "developer"
+    contact_first_name    = "test"
+    contact_last_name     = "test"
+    contact_email         = "test@tencent.com"
+    contact_number        = "12345678901"
+    contact_position      = "developer"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateCertificate](https://www.tencentcloud.com/document/api/1007/55888)
+* Read: [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+* Update:
+  - [CertificateOrderSubmit](https://www.tencentcloud.com/document/api/1007/79656)
+  - [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+  - [ModifyCertificateAlias](https://www.tencentcloud.com/document/api/1007/36583)
+  - [ModifyCertificateProject](https://www.tencentcloud.com/document/api/1007/36582)
+  - [SubmitCertificateInformation](https://www.tencentcloud.com/document/api/1007/36580)
+  - [UploadConfirmLetter](https://www.tencentcloud.com/document/api/1007/55887)
+* Delete: [CancelCertificateOrder](https://www.tencentcloud.com/document/api/1007/36591)
 
 
 ## Create PayCertificate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                   <span class="nx">alias</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">confirm_letter</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">domain_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">dv_auths</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ssl.PayCertificateDvAuthArgs]]</span> = None<span class="p">,</span>
-                   <span class="nx">information</span><span class="p">:</span> <span class="nx">Optional[_ssl.PayCertificateInformationArgs]</span> = None<span class="p">,</span>
-                   <span class="nx">product_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                   <span class="nx">domain_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">information</span><span class="p">:</span> <span class="nx">Optional[PayCertificateInformationArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">product_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">alias</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">confirm_letter</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPayCertificate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PayCertificate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPayCertificate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PayCertificate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">PayCertificate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PayCertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssl:PayCertificate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssl:PayCertificate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ssl_pay_certificate&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -360,7 +467,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -477,11 +584,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## PayCertificate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The PayCertificate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -497,17 +612,15 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="information_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#information_csharp" style="color: inherit; text-decoration: inherit;">Information</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificateinformation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
+        <span class="property-type"><a href="#paycertificateinformation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Pay<wbr>Certificate<wbr>Information</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Certificate information.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="productid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productid_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Id</a>
@@ -515,8 +628,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
@@ -524,8 +636,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="confirmletter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmletter_csharp" style="color: inherit; text-decoration: inherit;">Confirm<wbr>Letter</a>
@@ -533,17 +644,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="dvauths_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args&gt;</a></span>
-    </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -551,8 +652,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -560,8 +660,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -575,8 +674,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="information_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#information_go" style="color: inherit; text-decoration: inherit;">Information</a>
@@ -584,8 +682,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Certificate information.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="productid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productid_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Id</a>
@@ -593,8 +690,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
@@ -602,8 +698,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="confirmletter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmletter_go" style="color: inherit; text-decoration: inherit;">Confirm<wbr>Letter</a>
@@ -611,17 +706,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="dvauths_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">[]Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args</a></span>
-    </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -629,8 +714,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -638,8 +722,69 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_num_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="information_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#information_hcl" style="color: inherit; text-decoration: inherit;">information</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificateinformation">object</a></span>
+    </dt>
+    <dd>Certificate information.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="product_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_id_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="confirm_letter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirm_letter_hcl" style="color: inherit; text-decoration: inherit;">confirm_<wbr>letter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of project.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_span_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -653,17 +798,15 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="information_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#information_java" style="color: inherit; text-decoration: inherit;">information</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
+        <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Certificate information.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="productid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productid_java" style="color: inherit; text-decoration: inherit;">product<wbr>Id</a>
@@ -671,8 +814,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
@@ -680,8 +822,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="confirmletter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmletter_java" style="color: inherit; text-decoration: inherit;">confirm<wbr>Letter</a>
@@ -689,17 +830,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="dvauths_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args&gt;</a></span>
-    </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -707,8 +838,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_java" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -716,8 +846,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,17 +860,15 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="information_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#information_nodejs" style="color: inherit; text-decoration: inherit;">information</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
+        <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Certificate information.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="productid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productid_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Id</a>
@@ -749,8 +876,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
@@ -758,8 +884,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="confirmletter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmletter_nodejs" style="color: inherit; text-decoration: inherit;">confirm<wbr>Letter</a>
@@ -767,17 +892,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="dvauths_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args[]</a></span>
-    </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -785,8 +900,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -794,8 +908,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -809,8 +922,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="information_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#information_python" style="color: inherit; text-decoration: inherit;">information</a>
@@ -818,8 +930,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Certificate information.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="product_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_id_python" style="color: inherit; text-decoration: inherit;">product_<wbr>id</a>
@@ -827,8 +938,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
@@ -836,8 +946,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="confirm_letter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirm_letter_python" style="color: inherit; text-decoration: inherit;">confirm_<wbr>letter</a>
@@ -845,17 +954,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="dv_auths_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auths_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args]</a></span>
-    </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -863,8 +962,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_span_python" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
@@ -872,8 +970,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +984,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="information_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#information_yaml" style="color: inherit; text-decoration: inherit;">information</a>
@@ -896,8 +992,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paycertificateinformation">Property Map</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Certificate information.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="productid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productid_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Id</a>
@@ -905,8 +1000,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="alias_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
@@ -914,8 +1008,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="confirmletter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmletter_yaml" style="color: inherit; text-decoration: inherit;">confirm<wbr>Letter</a>
@@ -923,17 +1016,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional"
-            title="Optional">
-        <span id="dvauths_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Property Map&gt;</a></span>
-    </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -941,8 +1024,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -950,8 +1032,7 @@ The PayCertificate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -972,8 +1053,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-"
+    <dd>Returned certificate ID.</dd><dt class="property-"
+            title="">
+        <span id="dvauths_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Outputs.<wbr>Pay<wbr>Certificate<wbr>Dv<wbr>Auth&gt;</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -981,8 +1069,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="orderid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderid_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Id</a>
@@ -990,8 +1077,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-"
+    <dd>Order ID returned.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -999,8 +1085,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd></dl>
+    <dd>SSL certificate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1014,8 +1099,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-"
+    <dd>Returned certificate ID.</dd><dt class="property-"
+            title="">
+        <span id="dvauths_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificatedvauth">[]Pay<wbr>Certificate<wbr>Dv<wbr>Auth</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1023,8 +1115,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="orderid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderid_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Id</a>
@@ -1032,8 +1123,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-"
+    <dd>Order ID returned.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1041,8 +1131,53 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd></dl>
+    <dd>SSL certificate status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Returned certificate ID.</dd><dt class="property-"
+            title="">
+        <span id="dv_auths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auths_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificatedvauth">list(object)</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="order_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_id_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Order ID returned.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SSL certificate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1056,8 +1191,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-"
+    <dd>Returned certificate ID.</dd><dt class="property-"
+            title="">
+        <span id="dvauths_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Pay<wbr>Certificate<wbr>Dv<wbr>Auth&gt;</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1065,8 +1207,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="orderid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderid_java" style="color: inherit; text-decoration: inherit;">order<wbr>Id</a>
@@ -1074,8 +1215,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-"
+    <dd>Order ID returned.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1083,8 +1223,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd></dl>
+    <dd>SSL certificate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1098,8 +1237,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-"
+    <dd>Returned certificate ID.</dd><dt class="property-"
+            title="">
+        <span id="dvauths_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificatedvauth">Pay<wbr>Certificate<wbr>Dv<wbr>Auth[]</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1107,8 +1253,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="orderid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderid_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Id</a>
@@ -1116,8 +1261,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-"
+    <dd>Order ID returned.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1125,8 +1269,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd></dl>
+    <dd>SSL certificate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1140,8 +1283,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-"
+    <dd>Returned certificate ID.</dd><dt class="property-"
+            title="">
+        <span id="dv_auths_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auths_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificatedvauth">Sequence[Pay<wbr>Certificate<wbr>Dv<wbr>Auth]</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1149,8 +1299,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="order_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_id_python" style="color: inherit; text-decoration: inherit;">order_<wbr>id</a>
@@ -1158,8 +1307,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-"
+    <dd>Order ID returned.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1167,8 +1315,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd></dl>
+    <dd>SSL certificate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1182,8 +1329,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-"
+    <dd>Returned certificate ID.</dd><dt class="property-"
+            title="">
+        <span id="dvauths_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauths_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1191,8 +1345,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="orderid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderid_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Id</a>
@@ -1200,8 +1353,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-"
+    <dd>Order ID returned.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1209,8 +1361,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd></dl>
+    <dd>SSL certificate status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1220,18 +1371,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing PayCertificate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PayCertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PayCertificate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PayCertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PayCertificate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1239,111 +1390,150 @@ Get an existing PayCertificate resource's state with the given name, ID, and opt
         <span class="nx">certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">confirm_letter</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">domain_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">dv_auths</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ssl.PayCertificateDvAuthArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">information</span><span class="p">:</span> <span class="nx">Optional[_ssl.PayCertificateInformationArgs]</span> = None<span class="p">,</span>
+        <span class="nx">dv_auths</span><span class="p">:</span> <span class="nx">Optional[Sequence[PayCertificateDvAuthArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">information</span><span class="p">:</span> <span class="nx">Optional[PayCertificateInformationArgs]</span> = None<span class="p">,</span>
         <span class="nx">order_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">product_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> PayCertificate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPayCertificate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PayCertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PayCertificate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPayCertificate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PayCertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PayCertificate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PayCertificate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PayCertificateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PayCertificate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PayCertificateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PayCertificate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PayCertificateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PayCertificate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PayCertificateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingPayCertificate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ssl:PayCertificate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ssl_pay_certificate</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PayCertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PayCertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1351,28 +1541,31 @@ Get an existing PayCertificate resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PayCertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1380,28 +1573,31 @@ Get an existing PayCertificate resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PayCertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1421,8 +1617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1430,8 +1625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>Returned certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_confirmletter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmletter_csharp" style="color: inherit; text-decoration: inherit;">Confirm<wbr>Letter</a>
@@ -1439,8 +1633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domainnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnum_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Num</a>
@@ -1448,26 +1641,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Pay<wbr>Certificate<wbr>Dv<wbr>Auth&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_information_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_information_csharp" style="color: inherit; text-decoration: inherit;">Information</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificateinformation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
+        <span class="property-type"><a href="#paycertificateinformation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssl.<wbr>Inputs.<wbr>Pay<wbr>Certificate<wbr>Information</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orderid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderid_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Id</a>
@@ -1475,8 +1665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Order ID returned.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_productid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productid_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Id</a>
@@ -1484,8 +1673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1493,8 +1681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1502,8 +1689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd><dt class="property-optional"
+    <dd>SSL certificate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -1511,8 +1697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1526,8 +1711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1535,8 +1719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>Returned certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_confirmletter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmletter_go" style="color: inherit; text-decoration: inherit;">Confirm<wbr>Letter</a>
@@ -1544,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domainnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnum_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Num</a>
@@ -1553,8 +1735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auths</a>
@@ -1562,8 +1743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paycertificatedvauth">[]Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_information_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_information_go" style="color: inherit; text-decoration: inherit;">Information</a>
@@ -1571,8 +1751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orderid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderid_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Id</a>
@@ -1580,8 +1759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Order ID returned.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_productid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productid_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Id</a>
@@ -1589,8 +1767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1598,8 +1775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1607,8 +1783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd><dt class="property-optional"
+    <dd>SSL certificate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -1616,8 +1791,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Returned certificate ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_confirm_letter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirm_letter_hcl" style="color: inherit; text-decoration: inherit;">confirm_<wbr>letter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_num_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dv_auths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dv_auths_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificatedvauth">list(object)</a></span>
+    </dt>
+    <dd>DV certification information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_information_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_information_hcl" style="color: inherit; text-decoration: inherit;">information</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paycertificateinformation">object</a></span>
+    </dt>
+    <dd>Certificate information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_order_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_order_id_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Order ID returned.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_product_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_id_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of project.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SSL certificate status.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_span_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1631,8 +1899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1640,8 +1907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>Returned certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_confirmletter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmletter_java" style="color: inherit; text-decoration: inherit;">confirm<wbr>Letter</a>
@@ -1649,8 +1915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domainnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnum_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Num</a>
@@ -1658,26 +1923,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paycertificatedvauth">List&lt;Pay<wbr>Certificate<wbr>Dv<wbr>Auth&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_information_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_information_java" style="color: inherit; text-decoration: inherit;">information</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
+        <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orderid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderid_java" style="color: inherit; text-decoration: inherit;">order<wbr>Id</a>
@@ -1685,8 +1947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Order ID returned.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_productid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productid_java" style="color: inherit; text-decoration: inherit;">product<wbr>Id</a>
@@ -1694,8 +1955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1703,8 +1963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1712,8 +1971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd><dt class="property-optional"
+    <dd>SSL certificate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_java" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1721,8 +1979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1736,8 +1993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1745,8 +2001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>Returned certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_confirmletter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmletter_nodejs" style="color: inherit; text-decoration: inherit;">confirm<wbr>Letter</a>
@@ -1754,8 +2009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domainnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnum_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Num</a>
@@ -1763,26 +2017,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#paycertificatedvauth">Pay<wbr>Certificate<wbr>Dv<wbr>Auth[]</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_information_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_information_nodejs" style="color: inherit; text-decoration: inherit;">information</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
+        <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orderid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderid_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Id</a>
@@ -1790,8 +2041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Order ID returned.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_productid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productid_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Id</a>
@@ -1799,8 +2049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1808,8 +2057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1817,8 +2065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd><dt class="property-optional"
+    <dd>SSL certificate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1826,8 +2073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1841,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -1850,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>Returned certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_confirm_letter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirm_letter_python" style="color: inherit; text-decoration: inherit;">confirm_<wbr>letter</a>
@@ -1859,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_num_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>num</a>
@@ -1868,17 +2111,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dv_auths_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dv_auths_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paycertificatedvauth">Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args]</a></span>
+        <span class="property-type"><a href="#paycertificatedvauth">Sequence[Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args]</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_information_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_information_python" style="color: inherit; text-decoration: inherit;">information</a>
@@ -1886,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paycertificateinformation">Pay<wbr>Certificate<wbr>Information<wbr>Args</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_order_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_order_id_python" style="color: inherit; text-decoration: inherit;">order_<wbr>id</a>
@@ -1895,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Order ID returned.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_product_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_id_python" style="color: inherit; text-decoration: inherit;">product_<wbr>id</a>
@@ -1904,8 +2143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1913,8 +2151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1922,8 +2159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd><dt class="property-optional"
+    <dd>SSL certificate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_span_python" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
@@ -1931,8 +2167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1946,8 +2181,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark name.</p>
-</dd><dt class="property-optional"
+    <dd>Remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1955,8 +2189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Returned certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>Returned certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_confirmletter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmletter_yaml" style="color: inherit; text-decoration: inherit;">confirm<wbr>Letter</a>
@@ -1964,8 +2197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domainnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnum_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Num</a>
@@ -1973,8 +2205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of domain names included in the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Number of domain names included in the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dvauths_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dvauths_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auths</a>
@@ -1982,8 +2213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paycertificatedvauth">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>DV certification information.</p>
-</dd><dt class="property-optional"
+    <dd>DV certification information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_information_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_information_yaml" style="color: inherit; text-decoration: inherit;">information</a>
@@ -1991,8 +2221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paycertificateinformation">Property Map</a></span>
     </dt>
-    <dd><p>Certificate information.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_orderid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderid_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Id</a>
@@ -2000,8 +2229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order ID returned.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Order ID returned.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_productid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productid_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Id</a>
@@ -2009,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate commodity ID. Valid value ranges: (3~42). <code>3</code> means SecureSite enhanced Enterprise Edition (EV Pro), <code>4</code> means SecureSite enhanced (EV), <code>5</code> means SecureSite Enterprise Professional Edition (OV Pro), <code>6</code> means SecureSite Enterprise (OV), <code>7</code> means SecureSite Enterprise Type (OV) wildcard, <code>8</code> means Geotrust enhanced (EV), <code>9</code> means Geotrust enterprise (OV), <code>10</code> means Geotrust enterprise (OV) wildcard, <code>11</code> means TrustAsia domain type multi-domain SSL certificate, <code>12</code> means TrustAsia domain type ( DV) wildcard, <code>13</code> means TrustAsia enterprise wildcard (OV) SSL certificate (D3), <code>14</code> means TrustAsia enterprise (OV) SSL certificate (D3), <code>15</code> means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), <code>16</code> means TrustAsia Enhanced (EV) SSL Certificate (D3), <code>17</code> means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), <code>18</code> means GlobalSign Enterprise (OV) SSL Certificate, <code>19</code> means GlobalSign Enterprise Wildcard (OV) SSL Certificate, <code>20</code> means GlobalSign Enhanced (EV) SSL Certificate, <code>21</code> means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), <code>22</code> means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, <code>23</code> means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, <code>24</code> means GlobalSign enhanced multi-domain (EV) SSL certificate, <code>25</code> means Wotrus domain type certificate, <code>26</code> means Wotrus domain type multi-domain certificate, <code>27</code> means Wotrus domain type wildcard certificate, <code>28</code> means Wotrus enterprise type certificate, <code>29</code> means Wotrus enterprise multi-domain certificate, <code>30</code> means Wotrus enterprise wildcard certificate, <code>31</code> means Wotrus enhanced certificate, <code>32</code> means Wotrus enhanced multi-domain certificate, <code>33</code> means WoTrus National Secret Domain name Certificate, <code>34</code> means WoTrus National Secret Domain name Certificate (multiple domain names), <code>35</code> WoTrus National Secret Domain name Certificate (wildcard), <code>37</code> means WoTrus State Secret Enterprise Certificate, <code>38</code> means WoTrus State Secret Enterprise Certificate (multiple domain names), <code>39</code> means WoTrus State Secret Enterprise Certificate (wildcard), <code>40</code> means WoTrus National secret enhanced certificate, <code>41</code> means WoTrus National Secret enhanced Certificate (multiple domain names), <code>42</code> means TrustAsia- Domain name Certificate (wildcard multiple domain names), <code>43</code> means DNSPod Enterprise (OV) SSL Certificate, <code>44</code> means DNSPod- Enterprise (OV) wildcard SSL certificate, <code>45</code> means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, <code>46</code> means DNSPod enhanced (EV) SSL certificate, <code>47</code> means DNSPod enhanced (EV) multi-domain name SSL certificate, <code>48</code> means DNSPod Domain name Type (DV) SSL Certificate, <code>49</code> means DNSPod Domain name Type (DV) wildcard SSL certificate, <code>50</code> means DNSPod domain name type (DV) multi-domain name SSL certificate, <code>51</code> means DNSPod (State Secret) Enterprise (OV) SSL certificate, <code>52</code> DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, <code>53</code> means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, <code>54</code> means DNSPod (National Secret) Domain Name (DV) SSL certificate, <code>55</code> means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, <code>56</code> means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2018,8 +2245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of project.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of project.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2027,8 +2253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SSL certificate status.</p>
-</dd><dt class="property-optional"
+    <dd>SSL certificate status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -2036,8 +2261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Certificate period, currently only supports 1 year certificate purchase.</p>
-</dd></dl>
+    <dd>Certificate period, currently only supports 1 year certificate purchase.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2052,7 +2276,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="paycertificatedvauth">Pay<wbr>Certificate<wbr>Dv<wbr>Auth</h4>
+<h4 id="paycertificatedvauth">
+Pay<wbr>Certificate<wbr>Dv<wbr>Auth<pulumi-choosable type="language" values="python,go" class="inline">, Pay<wbr>Certificate<wbr>Dv<wbr>Auth<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2064,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Value</a>
@@ -2073,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_csharp" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -2082,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2097,8 +2320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Value</a>
@@ -2106,8 +2328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_go" style="color: inherit; text-decoration: inherit;">Dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -2115,8 +2336,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dv_auth_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_key_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DV authentication key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dv_auth_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_value_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DV authentication value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dv_auth_verify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_verify_type_hcl" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>verify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2130,8 +2380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Value</a>
@@ -2139,8 +2388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_java" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -2148,8 +2396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2163,8 +2410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Value</a>
@@ -2172,8 +2418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_nodejs" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -2181,8 +2426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2196,8 +2440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dv_auth_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_value_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>value</a>
@@ -2205,8 +2448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dv_auth_verify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dv_auth_verify_type_python" style="color: inherit; text-decoration: inherit;">dv_<wbr>auth_<wbr>verify_<wbr>type</a>
@@ -2214,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2229,8 +2470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication key.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication key.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthvalue_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Value</a>
@@ -2238,8 +2478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication value.</p>
-</dd><dt class="property-optional"
+    <dd>DV authentication value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dvauthverifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dvauthverifytype_yaml" style="color: inherit; text-decoration: inherit;">dv<wbr>Auth<wbr>Verify<wbr>Type</a>
@@ -2247,12 +2486,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DV authentication type.</p>
-</dd></dl>
+    <dd>DV authentication type.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="paycertificateinformation">Pay<wbr>Certificate<wbr>Information</h4>
+<h4 id="paycertificateinformation">
+Pay<wbr>Certificate<wbr>Information<pulumi-choosable type="language" values="python,go" class="inline">, Pay<wbr>Certificate<wbr>Information<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2264,8 +2504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The administrator's email address.</p>
-</dd><dt class="property-required"
+    <dd>The administrator's email address.</dd><dt class="property-required"
             title="Required">
         <span id="adminfirstname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminfirstname_csharp" style="color: inherit; text-decoration: inherit;">Admin<wbr>First<wbr>Name</a>
@@ -2273,8 +2512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The first name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The first name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminlastname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminlastname_csharp" style="color: inherit; text-decoration: inherit;">Admin<wbr>Last<wbr>Name</a>
@@ -2282,8 +2520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The last name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminphonenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminphonenum_csharp" style="color: inherit; text-decoration: inherit;">Admin<wbr>Phone<wbr>Num</a>
@@ -2291,8 +2528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Manager mobile phone number.</p>
-</dd><dt class="property-required"
+    <dd>Manager mobile phone number.</dd><dt class="property-required"
             title="Required">
         <span id="adminposition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminposition_csharp" style="color: inherit; text-decoration: inherit;">Admin<wbr>Position</a>
@@ -2300,8 +2536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Manager position.</p>
-</dd><dt class="property-required"
+    <dd>Manager position.</dd><dt class="property-required"
             title="Required">
         <span id="certificatedomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatedomain_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Domain</a>
@@ -2309,8 +2544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name for binding certificate.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for binding certificate.</dd><dt class="property-required"
             title="Required">
         <span id="contactemail_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>Email</a>
@@ -2318,8 +2552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact email address.</p>
-</dd><dt class="property-required"
+    <dd>Contact email address.</dd><dt class="property-required"
             title="Required">
         <span id="contactfirstname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactfirstname_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>First<wbr>Name</a>
@@ -2327,8 +2560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact first name.</p>
-</dd><dt class="property-required"
+    <dd>Contact first name.</dd><dt class="property-required"
             title="Required">
         <span id="contactlastname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactlastname_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>Last<wbr>Name</a>
@@ -2336,8 +2568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact last name.</p>
-</dd><dt class="property-required"
+    <dd>Contact last name.</dd><dt class="property-required"
             title="Required">
         <span id="contactnumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactnumber_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>Number</a>
@@ -2345,8 +2576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact phone number.</p>
-</dd><dt class="property-required"
+    <dd>Contact phone number.</dd><dt class="property-required"
             title="Required">
         <span id="contactposition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactposition_csharp" style="color: inherit; text-decoration: inherit;">Contact<wbr>Position</a>
@@ -2354,8 +2584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact position.</p>
-</dd><dt class="property-required"
+    <dd>Contact position.</dd><dt class="property-required"
             title="Required">
         <span id="organizationaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationaddress_csharp" style="color: inherit; text-decoration: inherit;">Organization<wbr>Address</a>
@@ -2363,8 +2592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company address.</p>
-</dd><dt class="property-required"
+    <dd>Company address.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcity_csharp" style="color: inherit; text-decoration: inherit;">Organization<wbr>City</a>
@@ -2372,8 +2600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company city.</p>
-</dd><dt class="property-required"
+    <dd>Company city.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcountry_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcountry_csharp" style="color: inherit; text-decoration: inherit;">Organization<wbr>Country</a>
@@ -2381,8 +2608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country name, such as China: CN.</p>
-</dd><dt class="property-required"
+    <dd>Country name, such as China: CN.</dd><dt class="property-required"
             title="Required">
         <span id="organizationdivision_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationdivision_csharp" style="color: inherit; text-decoration: inherit;">Organization<wbr>Division</a>
@@ -2390,8 +2616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department name.</p>
-</dd><dt class="property-required"
+    <dd>Department name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationname_csharp" style="color: inherit; text-decoration: inherit;">Organization<wbr>Name</a>
@@ -2399,8 +2624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company name.</p>
-</dd><dt class="property-required"
+    <dd>Company name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationregion_csharp" style="color: inherit; text-decoration: inherit;">Organization<wbr>Region</a>
@@ -2408,8 +2632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The province where the company is located.</p>
-</dd><dt class="property-required"
+    <dd>The province where the company is located.</dd><dt class="property-required"
             title="Required">
         <span id="phoneareacode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneareacode_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Area<wbr>Code</a>
@@ -2417,8 +2640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company landline area code.</p>
-</dd><dt class="property-required"
+    <dd>Company landline area code.</dd><dt class="property-required"
             title="Required">
         <span id="phonenumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenumber_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Number</a>
@@ -2426,8 +2648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company landline number.</p>
-</dd><dt class="property-required"
+    <dd>Company landline number.</dd><dt class="property-required"
             title="Required">
         <span id="postalcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postalcode_csharp" style="color: inherit; text-decoration: inherit;">Postal<wbr>Code</a>
@@ -2435,8 +2656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company postal code.</p>
-</dd><dt class="property-required"
+    <dd>Company postal code.</dd><dt class="property-required"
             title="Required">
         <span id="verifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_csharp" style="color: inherit; text-decoration: inherit;">Verify<wbr>Type</a>
@@ -2444,8 +2664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrcontent_csharp" style="color: inherit; text-decoration: inherit;">Csr<wbr>Content</a>
@@ -2453,8 +2672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CSR content uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>CSR content uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrtype_csharp" style="color: inherit; text-decoration: inherit;">Csr<wbr>Type</a>
@@ -2462,8 +2680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</p>
-</dd><dt class="property-optional"
+    <dd>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainlists_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Lists</a>
@@ -2471,8 +2688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Array of uploaded domain names, multi-domain certificates can be uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>Array of uploaded domain names, multi-domain certificates can be uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="keypassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypassword_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Password</a>
@@ -2480,8 +2696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private key password.</p>
-</dd></dl>
+    <dd>Private key password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2495,8 +2710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The administrator's email address.</p>
-</dd><dt class="property-required"
+    <dd>The administrator's email address.</dd><dt class="property-required"
             title="Required">
         <span id="adminfirstname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminfirstname_go" style="color: inherit; text-decoration: inherit;">Admin<wbr>First<wbr>Name</a>
@@ -2504,8 +2718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The first name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The first name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminlastname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminlastname_go" style="color: inherit; text-decoration: inherit;">Admin<wbr>Last<wbr>Name</a>
@@ -2513,8 +2726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The last name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminphonenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminphonenum_go" style="color: inherit; text-decoration: inherit;">Admin<wbr>Phone<wbr>Num</a>
@@ -2522,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Manager mobile phone number.</p>
-</dd><dt class="property-required"
+    <dd>Manager mobile phone number.</dd><dt class="property-required"
             title="Required">
         <span id="adminposition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminposition_go" style="color: inherit; text-decoration: inherit;">Admin<wbr>Position</a>
@@ -2531,8 +2742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Manager position.</p>
-</dd><dt class="property-required"
+    <dd>Manager position.</dd><dt class="property-required"
             title="Required">
         <span id="certificatedomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatedomain_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Domain</a>
@@ -2540,8 +2750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name for binding certificate.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for binding certificate.</dd><dt class="property-required"
             title="Required">
         <span id="contactemail_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>Email</a>
@@ -2549,8 +2758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact email address.</p>
-</dd><dt class="property-required"
+    <dd>Contact email address.</dd><dt class="property-required"
             title="Required">
         <span id="contactfirstname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactfirstname_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>First<wbr>Name</a>
@@ -2558,8 +2766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact first name.</p>
-</dd><dt class="property-required"
+    <dd>Contact first name.</dd><dt class="property-required"
             title="Required">
         <span id="contactlastname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactlastname_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>Last<wbr>Name</a>
@@ -2567,8 +2774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact last name.</p>
-</dd><dt class="property-required"
+    <dd>Contact last name.</dd><dt class="property-required"
             title="Required">
         <span id="contactnumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactnumber_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>Number</a>
@@ -2576,8 +2782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact phone number.</p>
-</dd><dt class="property-required"
+    <dd>Contact phone number.</dd><dt class="property-required"
             title="Required">
         <span id="contactposition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactposition_go" style="color: inherit; text-decoration: inherit;">Contact<wbr>Position</a>
@@ -2585,8 +2790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact position.</p>
-</dd><dt class="property-required"
+    <dd>Contact position.</dd><dt class="property-required"
             title="Required">
         <span id="organizationaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationaddress_go" style="color: inherit; text-decoration: inherit;">Organization<wbr>Address</a>
@@ -2594,8 +2798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company address.</p>
-</dd><dt class="property-required"
+    <dd>Company address.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcity_go" style="color: inherit; text-decoration: inherit;">Organization<wbr>City</a>
@@ -2603,8 +2806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company city.</p>
-</dd><dt class="property-required"
+    <dd>Company city.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcountry_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcountry_go" style="color: inherit; text-decoration: inherit;">Organization<wbr>Country</a>
@@ -2612,8 +2814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country name, such as China: CN.</p>
-</dd><dt class="property-required"
+    <dd>Country name, such as China: CN.</dd><dt class="property-required"
             title="Required">
         <span id="organizationdivision_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationdivision_go" style="color: inherit; text-decoration: inherit;">Organization<wbr>Division</a>
@@ -2621,8 +2822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department name.</p>
-</dd><dt class="property-required"
+    <dd>Department name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationname_go" style="color: inherit; text-decoration: inherit;">Organization<wbr>Name</a>
@@ -2630,8 +2830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company name.</p>
-</dd><dt class="property-required"
+    <dd>Company name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationregion_go" style="color: inherit; text-decoration: inherit;">Organization<wbr>Region</a>
@@ -2639,8 +2838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The province where the company is located.</p>
-</dd><dt class="property-required"
+    <dd>The province where the company is located.</dd><dt class="property-required"
             title="Required">
         <span id="phoneareacode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneareacode_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Area<wbr>Code</a>
@@ -2648,8 +2846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company landline area code.</p>
-</dd><dt class="property-required"
+    <dd>Company landline area code.</dd><dt class="property-required"
             title="Required">
         <span id="phonenumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenumber_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Number</a>
@@ -2657,8 +2854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company landline number.</p>
-</dd><dt class="property-required"
+    <dd>Company landline number.</dd><dt class="property-required"
             title="Required">
         <span id="postalcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postalcode_go" style="color: inherit; text-decoration: inherit;">Postal<wbr>Code</a>
@@ -2666,8 +2862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company postal code.</p>
-</dd><dt class="property-required"
+    <dd>Company postal code.</dd><dt class="property-required"
             title="Required">
         <span id="verifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_go" style="color: inherit; text-decoration: inherit;">Verify<wbr>Type</a>
@@ -2675,8 +2870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrcontent_go" style="color: inherit; text-decoration: inherit;">Csr<wbr>Content</a>
@@ -2684,8 +2878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CSR content uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>CSR content uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrtype_go" style="color: inherit; text-decoration: inherit;">Csr<wbr>Type</a>
@@ -2693,8 +2886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</p>
-</dd><dt class="property-optional"
+    <dd>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainlists_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Lists</a>
@@ -2702,8 +2894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Array of uploaded domain names, multi-domain certificates can be uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>Array of uploaded domain names, multi-domain certificates can be uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="keypassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypassword_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Password</a>
@@ -2711,8 +2902,213 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private key password.</p>
-</dd></dl>
+    <dd>Private key password.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="admin_email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_email_hcl" style="color: inherit; text-decoration: inherit;">admin_<wbr>email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The administrator's email address.</dd><dt class="property-required"
+            title="Required">
+        <span id="admin_first_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_first_name_hcl" style="color: inherit; text-decoration: inherit;">admin_<wbr>first_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The first name of the administrator.</dd><dt class="property-required"
+            title="Required">
+        <span id="admin_last_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_last_name_hcl" style="color: inherit; text-decoration: inherit;">admin_<wbr>last_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The last name of the administrator.</dd><dt class="property-required"
+            title="Required">
+        <span id="admin_phone_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_phone_num_hcl" style="color: inherit; text-decoration: inherit;">admin_<wbr>phone_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Manager mobile phone number.</dd><dt class="property-required"
+            title="Required">
+        <span id="admin_position_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_position_hcl" style="color: inherit; text-decoration: inherit;">admin_<wbr>position</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Manager position.</dd><dt class="property-required"
+            title="Required">
+        <span id="certificate_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_domain_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name for binding certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="contact_email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_email_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Contact email address.</dd><dt class="property-required"
+            title="Required">
+        <span id="contact_first_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_first_name_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>first_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Contact first name.</dd><dt class="property-required"
+            title="Required">
+        <span id="contact_last_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_last_name_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>last_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Contact last name.</dd><dt class="property-required"
+            title="Required">
+        <span id="contact_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_number_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Contact phone number.</dd><dt class="property-required"
+            title="Required">
+        <span id="contact_position_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_position_hcl" style="color: inherit; text-decoration: inherit;">contact_<wbr>position</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Contact position.</dd><dt class="property-required"
+            title="Required">
+        <span id="organization_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_address_hcl" style="color: inherit; text-decoration: inherit;">organization_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Company address.</dd><dt class="property-required"
+            title="Required">
+        <span id="organization_city_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_city_hcl" style="color: inherit; text-decoration: inherit;">organization_<wbr>city</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Company city.</dd><dt class="property-required"
+            title="Required">
+        <span id="organization_country_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_country_hcl" style="color: inherit; text-decoration: inherit;">organization_<wbr>country</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Country name, such as China: CN.</dd><dt class="property-required"
+            title="Required">
+        <span id="organization_division_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_division_hcl" style="color: inherit; text-decoration: inherit;">organization_<wbr>division</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Department name.</dd><dt class="property-required"
+            title="Required">
+        <span id="organization_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_name_hcl" style="color: inherit; text-decoration: inherit;">organization_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Company name.</dd><dt class="property-required"
+            title="Required">
+        <span id="organization_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_region_hcl" style="color: inherit; text-decoration: inherit;">organization_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The province where the company is located.</dd><dt class="property-required"
+            title="Required">
+        <span id="phone_area_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_area_code_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>area_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Company landline area code.</dd><dt class="property-required"
+            title="Required">
+        <span id="phone_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_number_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Company landline number.</dd><dt class="property-required"
+            title="Required">
+        <span id="postal_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postal_code_hcl" style="color: inherit; text-decoration: inherit;">postal_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Company postal code.</dd><dt class="property-required"
+            title="Required">
+        <span id="verify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_type_hcl" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="csr_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_content_hcl" style="color: inherit; text-decoration: inherit;">csr_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CSR content uploaded.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="csr_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_type_hcl" style="color: inherit; text-decoration: inherit;">csr_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="domain_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_lists_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Array of uploaded domain names, multi-domain certificates can be uploaded.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_password_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private key password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2726,8 +3122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The administrator's email address.</p>
-</dd><dt class="property-required"
+    <dd>The administrator's email address.</dd><dt class="property-required"
             title="Required">
         <span id="adminfirstname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminfirstname_java" style="color: inherit; text-decoration: inherit;">admin<wbr>First<wbr>Name</a>
@@ -2735,8 +3130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The first name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The first name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminlastname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminlastname_java" style="color: inherit; text-decoration: inherit;">admin<wbr>Last<wbr>Name</a>
@@ -2744,8 +3138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The last name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The last name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminphonenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminphonenum_java" style="color: inherit; text-decoration: inherit;">admin<wbr>Phone<wbr>Num</a>
@@ -2753,8 +3146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Manager mobile phone number.</p>
-</dd><dt class="property-required"
+    <dd>Manager mobile phone number.</dd><dt class="property-required"
             title="Required">
         <span id="adminposition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminposition_java" style="color: inherit; text-decoration: inherit;">admin<wbr>Position</a>
@@ -2762,8 +3154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Manager position.</p>
-</dd><dt class="property-required"
+    <dd>Manager position.</dd><dt class="property-required"
             title="Required">
         <span id="certificatedomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatedomain_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Domain</a>
@@ -2771,8 +3162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name for binding certificate.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for binding certificate.</dd><dt class="property-required"
             title="Required">
         <span id="contactemail_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_java" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -2780,8 +3170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact email address.</p>
-</dd><dt class="property-required"
+    <dd>Contact email address.</dd><dt class="property-required"
             title="Required">
         <span id="contactfirstname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactfirstname_java" style="color: inherit; text-decoration: inherit;">contact<wbr>First<wbr>Name</a>
@@ -2789,8 +3178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact first name.</p>
-</dd><dt class="property-required"
+    <dd>Contact first name.</dd><dt class="property-required"
             title="Required">
         <span id="contactlastname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactlastname_java" style="color: inherit; text-decoration: inherit;">contact<wbr>Last<wbr>Name</a>
@@ -2798,8 +3186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact last name.</p>
-</dd><dt class="property-required"
+    <dd>Contact last name.</dd><dt class="property-required"
             title="Required">
         <span id="contactnumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactnumber_java" style="color: inherit; text-decoration: inherit;">contact<wbr>Number</a>
@@ -2807,8 +3194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact phone number.</p>
-</dd><dt class="property-required"
+    <dd>Contact phone number.</dd><dt class="property-required"
             title="Required">
         <span id="contactposition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactposition_java" style="color: inherit; text-decoration: inherit;">contact<wbr>Position</a>
@@ -2816,8 +3202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact position.</p>
-</dd><dt class="property-required"
+    <dd>Contact position.</dd><dt class="property-required"
             title="Required">
         <span id="organizationaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationaddress_java" style="color: inherit; text-decoration: inherit;">organization<wbr>Address</a>
@@ -2825,8 +3210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company address.</p>
-</dd><dt class="property-required"
+    <dd>Company address.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcity_java" style="color: inherit; text-decoration: inherit;">organization<wbr>City</a>
@@ -2834,8 +3218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company city.</p>
-</dd><dt class="property-required"
+    <dd>Company city.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcountry_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcountry_java" style="color: inherit; text-decoration: inherit;">organization<wbr>Country</a>
@@ -2843,8 +3226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country name, such as China: CN.</p>
-</dd><dt class="property-required"
+    <dd>Country name, such as China: CN.</dd><dt class="property-required"
             title="Required">
         <span id="organizationdivision_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationdivision_java" style="color: inherit; text-decoration: inherit;">organization<wbr>Division</a>
@@ -2852,8 +3234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department name.</p>
-</dd><dt class="property-required"
+    <dd>Department name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationname_java" style="color: inherit; text-decoration: inherit;">organization<wbr>Name</a>
@@ -2861,8 +3242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company name.</p>
-</dd><dt class="property-required"
+    <dd>Company name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationregion_java" style="color: inherit; text-decoration: inherit;">organization<wbr>Region</a>
@@ -2870,8 +3250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The province where the company is located.</p>
-</dd><dt class="property-required"
+    <dd>The province where the company is located.</dd><dt class="property-required"
             title="Required">
         <span id="phoneareacode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneareacode_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Area<wbr>Code</a>
@@ -2879,8 +3258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company landline area code.</p>
-</dd><dt class="property-required"
+    <dd>Company landline area code.</dd><dt class="property-required"
             title="Required">
         <span id="phonenumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenumber_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Number</a>
@@ -2888,8 +3266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company landline number.</p>
-</dd><dt class="property-required"
+    <dd>Company landline number.</dd><dt class="property-required"
             title="Required">
         <span id="postalcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postalcode_java" style="color: inherit; text-decoration: inherit;">postal<wbr>Code</a>
@@ -2897,8 +3274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company postal code.</p>
-</dd><dt class="property-required"
+    <dd>Company postal code.</dd><dt class="property-required"
             title="Required">
         <span id="verifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_java" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -2906,8 +3282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrcontent_java" style="color: inherit; text-decoration: inherit;">csr<wbr>Content</a>
@@ -2915,8 +3290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CSR content uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>CSR content uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrtype_java" style="color: inherit; text-decoration: inherit;">csr<wbr>Type</a>
@@ -2924,8 +3298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</p>
-</dd><dt class="property-optional"
+    <dd>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainlists_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Lists</a>
@@ -2933,8 +3306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Array of uploaded domain names, multi-domain certificates can be uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>Array of uploaded domain names, multi-domain certificates can be uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="keypassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypassword_java" style="color: inherit; text-decoration: inherit;">key<wbr>Password</a>
@@ -2942,8 +3314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private key password.</p>
-</dd></dl>
+    <dd>Private key password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2957,8 +3328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The administrator's email address.</p>
-</dd><dt class="property-required"
+    <dd>The administrator's email address.</dd><dt class="property-required"
             title="Required">
         <span id="adminfirstname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminfirstname_nodejs" style="color: inherit; text-decoration: inherit;">admin<wbr>First<wbr>Name</a>
@@ -2966,8 +3336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The first name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The first name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminlastname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminlastname_nodejs" style="color: inherit; text-decoration: inherit;">admin<wbr>Last<wbr>Name</a>
@@ -2975,8 +3344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The last name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminphonenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminphonenum_nodejs" style="color: inherit; text-decoration: inherit;">admin<wbr>Phone<wbr>Num</a>
@@ -2984,8 +3352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Manager mobile phone number.</p>
-</dd><dt class="property-required"
+    <dd>Manager mobile phone number.</dd><dt class="property-required"
             title="Required">
         <span id="adminposition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminposition_nodejs" style="color: inherit; text-decoration: inherit;">admin<wbr>Position</a>
@@ -2993,8 +3360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Manager position.</p>
-</dd><dt class="property-required"
+    <dd>Manager position.</dd><dt class="property-required"
             title="Required">
         <span id="certificatedomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatedomain_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Domain</a>
@@ -3002,8 +3368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name for binding certificate.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for binding certificate.</dd><dt class="property-required"
             title="Required">
         <span id="contactemail_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -3011,8 +3376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact email address.</p>
-</dd><dt class="property-required"
+    <dd>Contact email address.</dd><dt class="property-required"
             title="Required">
         <span id="contactfirstname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactfirstname_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>First<wbr>Name</a>
@@ -3020,8 +3384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact first name.</p>
-</dd><dt class="property-required"
+    <dd>Contact first name.</dd><dt class="property-required"
             title="Required">
         <span id="contactlastname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactlastname_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>Last<wbr>Name</a>
@@ -3029,8 +3392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact last name.</p>
-</dd><dt class="property-required"
+    <dd>Contact last name.</dd><dt class="property-required"
             title="Required">
         <span id="contactnumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactnumber_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>Number</a>
@@ -3038,8 +3400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact phone number.</p>
-</dd><dt class="property-required"
+    <dd>Contact phone number.</dd><dt class="property-required"
             title="Required">
         <span id="contactposition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactposition_nodejs" style="color: inherit; text-decoration: inherit;">contact<wbr>Position</a>
@@ -3047,8 +3408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Contact position.</p>
-</dd><dt class="property-required"
+    <dd>Contact position.</dd><dt class="property-required"
             title="Required">
         <span id="organizationaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationaddress_nodejs" style="color: inherit; text-decoration: inherit;">organization<wbr>Address</a>
@@ -3056,8 +3416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company address.</p>
-</dd><dt class="property-required"
+    <dd>Company address.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcity_nodejs" style="color: inherit; text-decoration: inherit;">organization<wbr>City</a>
@@ -3065,8 +3424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company city.</p>
-</dd><dt class="property-required"
+    <dd>Company city.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcountry_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcountry_nodejs" style="color: inherit; text-decoration: inherit;">organization<wbr>Country</a>
@@ -3074,8 +3432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country name, such as China: CN.</p>
-</dd><dt class="property-required"
+    <dd>Country name, such as China: CN.</dd><dt class="property-required"
             title="Required">
         <span id="organizationdivision_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationdivision_nodejs" style="color: inherit; text-decoration: inherit;">organization<wbr>Division</a>
@@ -3083,8 +3440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department name.</p>
-</dd><dt class="property-required"
+    <dd>Department name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationname_nodejs" style="color: inherit; text-decoration: inherit;">organization<wbr>Name</a>
@@ -3092,8 +3448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company name.</p>
-</dd><dt class="property-required"
+    <dd>Company name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationregion_nodejs" style="color: inherit; text-decoration: inherit;">organization<wbr>Region</a>
@@ -3101,8 +3456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The province where the company is located.</p>
-</dd><dt class="property-required"
+    <dd>The province where the company is located.</dd><dt class="property-required"
             title="Required">
         <span id="phoneareacode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneareacode_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Area<wbr>Code</a>
@@ -3110,8 +3464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company landline area code.</p>
-</dd><dt class="property-required"
+    <dd>Company landline area code.</dd><dt class="property-required"
             title="Required">
         <span id="phonenumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenumber_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Number</a>
@@ -3119,8 +3472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company landline number.</p>
-</dd><dt class="property-required"
+    <dd>Company landline number.</dd><dt class="property-required"
             title="Required">
         <span id="postalcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postalcode_nodejs" style="color: inherit; text-decoration: inherit;">postal<wbr>Code</a>
@@ -3128,8 +3480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Company postal code.</p>
-</dd><dt class="property-required"
+    <dd>Company postal code.</dd><dt class="property-required"
             title="Required">
         <span id="verifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_nodejs" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -3137,8 +3488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrcontent_nodejs" style="color: inherit; text-decoration: inherit;">csr<wbr>Content</a>
@@ -3146,8 +3496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CSR content uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>CSR content uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrtype_nodejs" style="color: inherit; text-decoration: inherit;">csr<wbr>Type</a>
@@ -3155,8 +3504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</p>
-</dd><dt class="property-optional"
+    <dd>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainlists_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Lists</a>
@@ -3164,8 +3512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Array of uploaded domain names, multi-domain certificates can be uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>Array of uploaded domain names, multi-domain certificates can be uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="keypassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypassword_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Password</a>
@@ -3173,8 +3520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private key password.</p>
-</dd></dl>
+    <dd>Private key password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3188,8 +3534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The administrator's email address.</p>
-</dd><dt class="property-required"
+    <dd>The administrator's email address.</dd><dt class="property-required"
             title="Required">
         <span id="admin_first_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_first_name_python" style="color: inherit; text-decoration: inherit;">admin_<wbr>first_<wbr>name</a>
@@ -3197,8 +3542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The first name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The first name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="admin_last_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_last_name_python" style="color: inherit; text-decoration: inherit;">admin_<wbr>last_<wbr>name</a>
@@ -3206,8 +3550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The last name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The last name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="admin_phone_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_phone_num_python" style="color: inherit; text-decoration: inherit;">admin_<wbr>phone_<wbr>num</a>
@@ -3215,8 +3558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Manager mobile phone number.</p>
-</dd><dt class="property-required"
+    <dd>Manager mobile phone number.</dd><dt class="property-required"
             title="Required">
         <span id="admin_position_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_position_python" style="color: inherit; text-decoration: inherit;">admin_<wbr>position</a>
@@ -3224,8 +3566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Manager position.</p>
-</dd><dt class="property-required"
+    <dd>Manager position.</dd><dt class="property-required"
             title="Required">
         <span id="certificate_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_domain_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>domain</a>
@@ -3233,8 +3574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name for binding certificate.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for binding certificate.</dd><dt class="property-required"
             title="Required">
         <span id="contact_email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_email_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>email</a>
@@ -3242,8 +3582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Contact email address.</p>
-</dd><dt class="property-required"
+    <dd>Contact email address.</dd><dt class="property-required"
             title="Required">
         <span id="contact_first_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_first_name_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>first_<wbr>name</a>
@@ -3251,8 +3590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Contact first name.</p>
-</dd><dt class="property-required"
+    <dd>Contact first name.</dd><dt class="property-required"
             title="Required">
         <span id="contact_last_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_last_name_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>last_<wbr>name</a>
@@ -3260,8 +3598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Contact last name.</p>
-</dd><dt class="property-required"
+    <dd>Contact last name.</dd><dt class="property-required"
             title="Required">
         <span id="contact_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_number_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>number</a>
@@ -3269,8 +3606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Contact phone number.</p>
-</dd><dt class="property-required"
+    <dd>Contact phone number.</dd><dt class="property-required"
             title="Required">
         <span id="contact_position_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contact_position_python" style="color: inherit; text-decoration: inherit;">contact_<wbr>position</a>
@@ -3278,8 +3614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Contact position.</p>
-</dd><dt class="property-required"
+    <dd>Contact position.</dd><dt class="property-required"
             title="Required">
         <span id="organization_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_address_python" style="color: inherit; text-decoration: inherit;">organization_<wbr>address</a>
@@ -3287,8 +3622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Company address.</p>
-</dd><dt class="property-required"
+    <dd>Company address.</dd><dt class="property-required"
             title="Required">
         <span id="organization_city_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_city_python" style="color: inherit; text-decoration: inherit;">organization_<wbr>city</a>
@@ -3296,8 +3630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Company city.</p>
-</dd><dt class="property-required"
+    <dd>Company city.</dd><dt class="property-required"
             title="Required">
         <span id="organization_country_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_country_python" style="color: inherit; text-decoration: inherit;">organization_<wbr>country</a>
@@ -3305,8 +3638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Country name, such as China: CN.</p>
-</dd><dt class="property-required"
+    <dd>Country name, such as China: CN.</dd><dt class="property-required"
             title="Required">
         <span id="organization_division_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_division_python" style="color: inherit; text-decoration: inherit;">organization_<wbr>division</a>
@@ -3314,8 +3646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Department name.</p>
-</dd><dt class="property-required"
+    <dd>Department name.</dd><dt class="property-required"
             title="Required">
         <span id="organization_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_name_python" style="color: inherit; text-decoration: inherit;">organization_<wbr>name</a>
@@ -3323,8 +3654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Company name.</p>
-</dd><dt class="property-required"
+    <dd>Company name.</dd><dt class="property-required"
             title="Required">
         <span id="organization_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_region_python" style="color: inherit; text-decoration: inherit;">organization_<wbr>region</a>
@@ -3332,8 +3662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The province where the company is located.</p>
-</dd><dt class="property-required"
+    <dd>The province where the company is located.</dd><dt class="property-required"
             title="Required">
         <span id="phone_area_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_area_code_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>area_<wbr>code</a>
@@ -3341,8 +3670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Company landline area code.</p>
-</dd><dt class="property-required"
+    <dd>Company landline area code.</dd><dt class="property-required"
             title="Required">
         <span id="phone_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_number_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>number</a>
@@ -3350,8 +3678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Company landline number.</p>
-</dd><dt class="property-required"
+    <dd>Company landline number.</dd><dt class="property-required"
             title="Required">
         <span id="postal_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postal_code_python" style="color: inherit; text-decoration: inherit;">postal_<wbr>code</a>
@@ -3359,8 +3686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Company postal code.</p>
-</dd><dt class="property-required"
+    <dd>Company postal code.</dd><dt class="property-required"
             title="Required">
         <span id="verify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_type_python" style="color: inherit; text-decoration: inherit;">verify_<wbr>type</a>
@@ -3368,8 +3694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="csr_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_content_python" style="color: inherit; text-decoration: inherit;">csr_<wbr>content</a>
@@ -3377,8 +3702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CSR content uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>CSR content uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="csr_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csr_type_python" style="color: inherit; text-decoration: inherit;">csr_<wbr>type</a>
@@ -3386,8 +3710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</p>
-</dd><dt class="property-optional"
+    <dd>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_lists_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>lists</a>
@@ -3395,8 +3718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Array of uploaded domain names, multi-domain certificates can be uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>Array of uploaded domain names, multi-domain certificates can be uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_password_python" style="color: inherit; text-decoration: inherit;">key_<wbr>password</a>
@@ -3404,8 +3726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private key password.</p>
-</dd></dl>
+    <dd>Private key password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3419,8 +3740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The administrator's email address.</p>
-</dd><dt class="property-required"
+    <dd>The administrator's email address.</dd><dt class="property-required"
             title="Required">
         <span id="adminfirstname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminfirstname_yaml" style="color: inherit; text-decoration: inherit;">admin<wbr>First<wbr>Name</a>
@@ -3428,8 +3748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The first name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The first name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminlastname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminlastname_yaml" style="color: inherit; text-decoration: inherit;">admin<wbr>Last<wbr>Name</a>
@@ -3437,8 +3756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The last name of the administrator.</p>
-</dd><dt class="property-required"
+    <dd>The last name of the administrator.</dd><dt class="property-required"
             title="Required">
         <span id="adminphonenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminphonenum_yaml" style="color: inherit; text-decoration: inherit;">admin<wbr>Phone<wbr>Num</a>
@@ -3446,8 +3764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Manager mobile phone number.</p>
-</dd><dt class="property-required"
+    <dd>Manager mobile phone number.</dd><dt class="property-required"
             title="Required">
         <span id="adminposition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminposition_yaml" style="color: inherit; text-decoration: inherit;">admin<wbr>Position</a>
@@ -3455,8 +3772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Manager position.</p>
-</dd><dt class="property-required"
+    <dd>Manager position.</dd><dt class="property-required"
             title="Required">
         <span id="certificatedomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatedomain_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Domain</a>
@@ -3464,8 +3780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name for binding certificate.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for binding certificate.</dd><dt class="property-required"
             title="Required">
         <span id="contactemail_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactemail_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>Email</a>
@@ -3473,8 +3788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact email address.</p>
-</dd><dt class="property-required"
+    <dd>Contact email address.</dd><dt class="property-required"
             title="Required">
         <span id="contactfirstname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactfirstname_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>First<wbr>Name</a>
@@ -3482,8 +3796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact first name.</p>
-</dd><dt class="property-required"
+    <dd>Contact first name.</dd><dt class="property-required"
             title="Required">
         <span id="contactlastname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactlastname_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>Last<wbr>Name</a>
@@ -3491,8 +3804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact last name.</p>
-</dd><dt class="property-required"
+    <dd>Contact last name.</dd><dt class="property-required"
             title="Required">
         <span id="contactnumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactnumber_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>Number</a>
@@ -3500,8 +3812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact phone number.</p>
-</dd><dt class="property-required"
+    <dd>Contact phone number.</dd><dt class="property-required"
             title="Required">
         <span id="contactposition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contactposition_yaml" style="color: inherit; text-decoration: inherit;">contact<wbr>Position</a>
@@ -3509,8 +3820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Contact position.</p>
-</dd><dt class="property-required"
+    <dd>Contact position.</dd><dt class="property-required"
             title="Required">
         <span id="organizationaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationaddress_yaml" style="color: inherit; text-decoration: inherit;">organization<wbr>Address</a>
@@ -3518,8 +3828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company address.</p>
-</dd><dt class="property-required"
+    <dd>Company address.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcity_yaml" style="color: inherit; text-decoration: inherit;">organization<wbr>City</a>
@@ -3527,8 +3836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company city.</p>
-</dd><dt class="property-required"
+    <dd>Company city.</dd><dt class="property-required"
             title="Required">
         <span id="organizationcountry_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationcountry_yaml" style="color: inherit; text-decoration: inherit;">organization<wbr>Country</a>
@@ -3536,8 +3844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country name, such as China: CN.</p>
-</dd><dt class="property-required"
+    <dd>Country name, such as China: CN.</dd><dt class="property-required"
             title="Required">
         <span id="organizationdivision_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationdivision_yaml" style="color: inherit; text-decoration: inherit;">organization<wbr>Division</a>
@@ -3545,8 +3852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department name.</p>
-</dd><dt class="property-required"
+    <dd>Department name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationname_yaml" style="color: inherit; text-decoration: inherit;">organization<wbr>Name</a>
@@ -3554,8 +3860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company name.</p>
-</dd><dt class="property-required"
+    <dd>Company name.</dd><dt class="property-required"
             title="Required">
         <span id="organizationregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organizationregion_yaml" style="color: inherit; text-decoration: inherit;">organization<wbr>Region</a>
@@ -3563,8 +3868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The province where the company is located.</p>
-</dd><dt class="property-required"
+    <dd>The province where the company is located.</dd><dt class="property-required"
             title="Required">
         <span id="phoneareacode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneareacode_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Area<wbr>Code</a>
@@ -3572,8 +3876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company landline area code.</p>
-</dd><dt class="property-required"
+    <dd>Company landline area code.</dd><dt class="property-required"
             title="Required">
         <span id="phonenumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenumber_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Number</a>
@@ -3581,8 +3884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company landline number.</p>
-</dd><dt class="property-required"
+    <dd>Company landline number.</dd><dt class="property-required"
             title="Required">
         <span id="postalcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postalcode_yaml" style="color: inherit; text-decoration: inherit;">postal<wbr>Code</a>
@@ -3590,8 +3892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Company postal code.</p>
-</dd><dt class="property-required"
+    <dd>Company postal code.</dd><dt class="property-required"
             title="Required">
         <span id="verifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verifytype_yaml" style="color: inherit; text-decoration: inherit;">verify<wbr>Type</a>
@@ -3599,8 +3900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate verification method. Valid values: <code>DNS_AUTO</code>, <code>DNS</code>, <code>FILE</code>. <code>DNS_AUTO</code> means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, <code>DNS</code> means manual DNS verification, <code>FILE</code> means file verification.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrcontent_yaml" style="color: inherit; text-decoration: inherit;">csr<wbr>Content</a>
@@ -3608,8 +3908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CSR content uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>CSR content uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="csrtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csrtype_yaml" style="color: inherit; text-decoration: inherit;">csr<wbr>Type</a>
@@ -3617,8 +3916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</p>
-</dd><dt class="property-optional"
+    <dd>CSR generation method. Valid values: <code>online</code>, <code>parse</code>. <code>online</code> means online generation, <code>parse</code> means manual upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainlists_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Lists</a>
@@ -3626,8 +3924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Array of uploaded domain names, multi-domain certificates can be uploaded.</p>
-</dd><dt class="property-optional"
+    <dd>Array of uploaded domain names, multi-domain certificates can be uploaded.</dd><dt class="property-optional"
             title="Optional">
         <span id="keypassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keypassword_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Password</a>
@@ -3635,8 +3932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private key password.</p>
-</dd></dl>
+    <dd>Private key password.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3644,12 +3940,15 @@ The following state arguments are supported:
 
 
 
-payment SSL instance can be imported, e.g.
+payment SSL instance can be imported certificateId#productId#domainNum#timeSpan, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+$ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate example iPQNn61x#33#1#1
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -3661,7 +3960,6 @@ $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

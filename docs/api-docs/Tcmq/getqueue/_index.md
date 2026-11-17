@@ -2,9 +2,11 @@
 ---
 title: "getQueue"
 title_tag: "tencentcloud.Tcmq.getQueue"
-meta_desc: "Documentation for the tencentcloud.Tcmq.getQueue function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tcmq queue"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of tcmq queue
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const queue = tencentcloud.Tcmq.getQueue({
+const queue = tencentcloud.tcmq.getQueue({
     queueName: "queue_name",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-queue = tencentcloud.Tcmq.get_queue(queue_name="queue_name")
+queue = tencentcloud.tcmq.get_queue(queue_name="queue_name")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcmq"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcmq.GetQueue(ctx, &tcmq.GetQueueArgs{
+			QueueName: pulumi.StringRef("queue_name"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcmq"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcmq.GetQueue(ctx, &tcmq.GetQueueArgs{
-			QueueName: pulumi.StringRef("queue_name"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcmq.TcmqFunctions;
 import com.pulumi.tencentcloud.Tcmq.inputs.GetQueueArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   queue:
     fn::invoke:
-      Function: tencentcloud:Tcmq:getQueue
-      Arguments:
+      function: tencentcloud:Tcmq:getQueue
+      arguments:
         queueName: queue_name
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tcmq_getqueue" "queue" {
+  queue_name = "queue_name"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCmqQueues](https://www.tencentcloud.com/search/?wd=DescribeCmqQueues&type=document&lang=en)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getQueue<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetQueueArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>></span
+><span class="k">function </span>getQueue<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetQueueArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>></span
 ><span class="k">
-function </span>getQueueOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetQueueOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>></span
+function </span>getQueueOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetQueueOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -134,7 +191,7 @@ function </span>getQueueOutput<span class="p">(</span><span class="nx">args</spa
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_queue<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcmq.GetQueueFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_queue<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetQueueFilter]]</span> = None<span class="p">,</span>
               <span class="nx">is_tag_filter</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
               <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
               <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -143,14 +200,14 @@ function </span>getQueueOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetQueueResult</span
 ><span class="k">
-def </span>get_queue_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_tcmq.GetQueueFilterArgs]]]]</span> = None<span class="p">,</span>
-              <span class="nx">is_tag_filter</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-              <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">queue_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">queue_name_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetQueueResult]</span
+def </span>get_queue_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetQueueFilterArgs]]]]</span> = None<span class="p">,</span>
+              <span class="nx">is_tag_filter</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+              <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">queue_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">queue_name_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetQueueResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -159,12 +216,12 @@ def </span>get_queue_output<span class="p">(</span><span class="nx">filters</spa
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetQueue<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetQueueArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetQueueResult</a></span>, error)</span
+><span class="k">func </span>LookupQueue<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupQueueArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupQueueResult</a></span>, error)</span
 ><span class="k">
-func </span>GetQueueOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetQueueOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetQueueResultOutput</span
+func </span>LookupQueueOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupQueueOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupQueueResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetQueue` in the Go SDK.
+&gt; Note: This function is named `LookupQueue` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -175,7 +232,8 @@ func </span>GetQueueOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetQueue </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetQueueArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetQueueInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetQueueInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetQueueInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,7 +242,8 @@ func </span>GetQueueOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>> </span>getQueue<span class="p">(</span><span class="nx">GetQueueArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>> </span>getQueue<span class="p">(</span><span class="nx">GetQueueArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetQueueResult</a></span>> </span>getQueue<span class="p">(</span><span class="nx">GetQueueArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -196,6 +255,15 @@ func </span>GetQueueOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcmq/getQueue:getQueue
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcmq_get_queue&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -214,8 +282,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuefilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Inputs.<wbr>Get<wbr>Queue<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Tag<wbr>Filter</a>
@@ -223,8 +290,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -232,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -241,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name</a>
@@ -250,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by QueueName.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuenamelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name<wbr>Lists</a>
@@ -259,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Filter by CMQ queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by CMQ queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -268,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -283,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuefilter">[]Get<wbr>Queue<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Tag<wbr>Filter</a>
@@ -292,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -301,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -310,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name</a>
@@ -319,8 +376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by QueueName.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuenamelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name<wbr>Lists</a>
@@ -328,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Filter by CMQ queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by CMQ queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -337,8 +392,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getqueuefilter">list(object)</a></span>
+    </dt>
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_tag_filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_tag_filter_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>tag_<wbr>filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by QueueName.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="queue_name_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_lists_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>name_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Filter by CMQ queue name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -352,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuefilter">List&lt;Get<wbr>Queue<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_java" style="color: inherit; text-decoration: inherit;">is<wbr>Tag<wbr>Filter</a>
@@ -361,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -370,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -379,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -388,8 +500,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by QueueName.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuenamelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Name<wbr>Lists</a>
@@ -397,8 +508,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter by CMQ queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by CMQ queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -406,8 +516,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -421,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuefilter">Get<wbr>Queue<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Tag<wbr>Filter</a>
@@ -430,8 +538,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -439,8 +546,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -448,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -457,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by QueueName.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuenamelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Name<wbr>Lists</a>
@@ -466,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Filter by CMQ queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by CMQ queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -475,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -488,10 +590,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getqueuefilter">Get<wbr>Queue<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getqueuefilter">Sequence[Get<wbr>Queue<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_tag_filter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_tag_filter_python" style="color: inherit; text-decoration: inherit;">is_<wbr>tag_<wbr>filter</a>
@@ -499,8 +600,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -508,8 +608,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -517,8 +616,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="queue_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
@@ -526,8 +624,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by QueueName.</dd><dt class="property-optional"
             title="Optional">
         <span id="queue_name_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_lists_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>name_<wbr>lists</a>
@@ -535,8 +632,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Filter by CMQ queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by CMQ queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -544,8 +640,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -559,8 +654,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuefilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. Currently, you can filter by tag. The tag name must be prefixed with <code>tag:</code>, such as <code>tag: owner</code>, <code>tag: environment</code>, or <code>tag: business</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="istagfilter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#istagfilter_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Tag<wbr>Filter</a>
@@ -568,8 +662,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>For filtering by tag, this parameter must be set to <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>For filtering by tag, this parameter must be set to <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -577,8 +670,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -586,8 +678,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -595,8 +686,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by QueueName.</dd><dt class="property-optional"
             title="Optional">
         <span id="queuenamelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Name<wbr>Lists</a>
@@ -604,8 +694,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter by CMQ queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by CMQ queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +702,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -637,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="queuelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuelists_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Lists</a>
@@ -646,8 +733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Outputs.<wbr>Get<wbr>Queue<wbr>Queue<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Queue list.</p>
-</dd><dt class="property-"
+    <dd>Queue list.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -687,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue name.</p>
-</dd><dt class="property-"
+    <dd>Message queue name.</dd><dt class="property-"
             title="">
         <span id="queuenamelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name<wbr>Lists</a>
@@ -718,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="queuelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuelists_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Lists</a>
@@ -727,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelist">[]Get<wbr>Queue<wbr>Queue<wbr>List</a></span>
     </dt>
-    <dd><p>Queue list.</p>
-</dd><dt class="property-"
+    <dd>Queue list.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -768,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue name.</p>
-</dd><dt class="property-"
+    <dd>Message queue name.</dd><dt class="property-"
             title="">
         <span id="queuenamelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name<wbr>Lists</a>
@@ -790,6 +872,84 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="queue_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_lists_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getqueuequeuelist">list(object)</a></span>
+    </dt>
+    <dd>Queue list.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getqueuefilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="is_tag_filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_tag_filter_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>tag_<wbr>filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Message queue name.</dd><dt class="property-"
+            title="">
+        <span id="queue_name_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_lists_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>name_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -799,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="queuelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuelists_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Lists</a>
@@ -808,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelist">List&lt;Get<wbr>Queue<wbr>Queue<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Queue list.</p>
-</dd><dt class="property-"
+    <dd>Queue list.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -849,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message queue name.</p>
-</dd><dt class="property-"
+    <dd>Message queue name.</dd><dt class="property-"
             title="">
         <span id="queuenamelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Name<wbr>Lists</a>
@@ -880,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="queuelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuelists_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Lists</a>
@@ -889,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelist">Get<wbr>Queue<wbr>Queue<wbr>List[]</a></span>
     </dt>
-    <dd><p>Queue list.</p>
-</dd><dt class="property-"
+    <dd>Queue list.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -930,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue name.</p>
-</dd><dt class="property-"
+    <dd>Message queue name.</dd><dt class="property-"
             title="">
         <span id="queuenamelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Name<wbr>Lists</a>
@@ -961,23 +1115,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="queue_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_lists_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getqueuequeuelist">Get<wbr>Queue<wbr>Queue<wbr>List]</a></span>
+        <span class="property-type"><a href="#getqueuequeuelist">Sequence[Get<wbr>Queue<wbr>Queue<wbr>List]</a></span>
     </dt>
-    <dd><p>Queue list.</p>
-</dd><dt class="property-"
+    <dd>Queue list.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getqueuefilter">Get<wbr>Queue<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getqueuefilter">Sequence[Get<wbr>Queue<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -1011,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Message queue name.</p>
-</dd><dt class="property-"
+    <dd>Message queue name.</dd><dt class="property-"
             title="">
         <span id="queue_name_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_lists_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>name_<wbr>lists</a>
@@ -1042,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="queuelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuelists_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Lists</a>
@@ -1051,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Queue list.</p>
-</dd><dt class="property-"
+    <dd>Queue list.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -1092,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message queue name.</p>
-</dd><dt class="property-"
+    <dd>Message queue name.</dd><dt class="property-"
             title="">
         <span id="queuenamelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuenamelists_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Name<wbr>Lists</a>
@@ -1133,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1142,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1166,8 +1311,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter parameter name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1181,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1190,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1205,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1214,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1238,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1253,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter parameter name.</p>
-</dd><dt class="property-optional"
+    <dd>Filter parameter name.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1262,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1281,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="bps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bps_csharp" style="color: inherit; text-decoration: inherit;">Bps</a>
@@ -1290,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth limit.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth limit.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1299,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Uin</a>
@@ -1308,8 +1463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deadletterpolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterpolicies_csharp" style="color: inherit; text-decoration: inherit;">Dead<wbr>Letter<wbr>Policies</a>
@@ -1317,8 +1471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadletterpolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Inputs.<wbr>Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue policy.</dd><dt class="property-required"
             title="Required">
         <span id="deadlettersources_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlettersources_csharp" style="color: inherit; text-decoration: inherit;">Dead<wbr>Letter<wbr>Sources</a>
@@ -1326,8 +1479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadlettersource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Inputs.<wbr>Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Source&gt;</a></span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="delaymsgnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaymsgnum_csharp" style="color: inherit; text-decoration: inherit;">Delay<wbr>Msg<wbr>Num</a>
@@ -1335,8 +1487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of delayed messages.</p>
-</dd><dt class="property-required"
+    <dd>Number of delayed messages.</dd><dt class="property-required"
             title="Required">
         <span id="inactivemsgnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inactivemsgnum_csharp" style="color: inherit; text-decoration: inherit;">Inactive<wbr>Msg<wbr>Num</a>
@@ -1344,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_csharp" style="color: inherit; text-decoration: inherit;">Last<wbr>Modify<wbr>Time</a>
@@ -1353,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelayseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelayseconds_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Delay<wbr>Seconds</a>
@@ -1362,8 +1511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum retention period for inflight messages.</p>
-</dd><dt class="property-required"
+    <dd>Maximum retention period for inflight messages.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgbacklogsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgbacklogsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Backlog<wbr>Size</a>
@@ -1371,8 +1519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of heaped messages in bytes.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of heaped messages in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgheapnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -1380,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Size</a>
@@ -1389,8 +1535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-required"
             title="Required">
         <span id="maxunackedmsgnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxunackedmsgnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Unacked<wbr>Msg<wbr>Num</a>
@@ -1398,8 +1543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of unacknowledged messages.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of unacknowledged messages.</dd><dt class="property-required"
             title="Required">
         <span id="minmsgtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minmsgtime_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Msg<wbr>Time</a>
@@ -1407,8 +1551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum unconsumed time of message in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Minimum unconsumed time of message in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Retention<wbr>Seconds</a>
@@ -1416,8 +1559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-required"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1425,8 +1567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="pollingwaitseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_csharp" style="color: inherit; text-decoration: inherit;">Polling<wbr>Wait<wbr>Seconds</a>
@@ -1434,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-required"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-required"
             title="Required">
         <span id="qps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_csharp" style="color: inherit; text-decoration: inherit;">Qps</a>
@@ -1443,8 +1583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</p>
-</dd><dt class="property-required"
+    <dd>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</dd><dt class="property-required"
             title="Required">
         <span id="queueid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queueid_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Id</a>
@@ -1452,8 +1591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name</a>
@@ -1461,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-required"
+    <dd>Filter by QueueName.</dd><dt class="property-required"
             title="Required">
         <span id="retentionsizeinmb_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_csharp" style="color: inherit; text-decoration: inherit;">Retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -1470,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="rewindmsgnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindmsgnum_csharp" style="color: inherit; text-decoration: inherit;">Rewind<wbr>Msg<wbr>Num</a>
@@ -1479,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</p>
-</dd><dt class="property-required"
+    <dd>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</dd><dt class="property-required"
             title="Required">
         <span id="rewindseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_csharp" style="color: inherit; text-decoration: inherit;">Rewind<wbr>Seconds</a>
@@ -1488,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1497,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1506,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Inputs.<wbr>Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_csharp" style="color: inherit; text-decoration: inherit;">Tenant<wbr>Id</a>
@@ -1515,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="trace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_csharp" style="color: inherit; text-decoration: inherit;">Trace</a>
@@ -1524,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Message trace. true: enabled; false: not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="transaction_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_csharp" style="color: inherit; text-decoration: inherit;">Transaction</a>
@@ -1533,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-required"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-required"
             title="Required">
         <span id="transactionpolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transactionpolicies_csharp" style="color: inherit; text-decoration: inherit;">Transaction<wbr>Policies</a>
@@ -1542,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttransactionpolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcmq.<wbr>Inputs.<wbr>Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Transaction<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Transaction message policy.</p>
-</dd><dt class="property-required"
+    <dd>Transaction message policy.</dd><dt class="property-required"
             title="Required">
         <span id="visibilitytimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_csharp" style="color: inherit; text-decoration: inherit;">Visibility<wbr>Timeout</a>
@@ -1551,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1566,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="bps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bps_go" style="color: inherit; text-decoration: inherit;">Bps</a>
@@ -1575,8 +1701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth limit.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth limit.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1584,8 +1709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Uin</a>
@@ -1593,8 +1717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deadletterpolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterpolicies_go" style="color: inherit; text-decoration: inherit;">Dead<wbr>Letter<wbr>Policies</a>
@@ -1602,8 +1725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadletterpolicy">[]Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Policy</a></span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue policy.</dd><dt class="property-required"
             title="Required">
         <span id="deadlettersources_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlettersources_go" style="color: inherit; text-decoration: inherit;">Dead<wbr>Letter<wbr>Sources</a>
@@ -1611,8 +1733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadlettersource">[]Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Source</a></span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="delaymsgnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaymsgnum_go" style="color: inherit; text-decoration: inherit;">Delay<wbr>Msg<wbr>Num</a>
@@ -1620,8 +1741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of delayed messages.</p>
-</dd><dt class="property-required"
+    <dd>Number of delayed messages.</dd><dt class="property-required"
             title="Required">
         <span id="inactivemsgnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inactivemsgnum_go" style="color: inherit; text-decoration: inherit;">Inactive<wbr>Msg<wbr>Num</a>
@@ -1629,8 +1749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_go" style="color: inherit; text-decoration: inherit;">Last<wbr>Modify<wbr>Time</a>
@@ -1638,8 +1757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelayseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelayseconds_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Delay<wbr>Seconds</a>
@@ -1647,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum retention period for inflight messages.</p>
-</dd><dt class="property-required"
+    <dd>Maximum retention period for inflight messages.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgbacklogsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgbacklogsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Backlog<wbr>Size</a>
@@ -1656,8 +1773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of heaped messages in bytes.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of heaped messages in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgheapnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -1665,8 +1781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Size</a>
@@ -1674,8 +1789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-required"
             title="Required">
         <span id="maxunackedmsgnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxunackedmsgnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Unacked<wbr>Msg<wbr>Num</a>
@@ -1683,8 +1797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of unacknowledged messages.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of unacknowledged messages.</dd><dt class="property-required"
             title="Required">
         <span id="minmsgtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minmsgtime_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Msg<wbr>Time</a>
@@ -1692,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum unconsumed time of message in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Minimum unconsumed time of message in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Retention<wbr>Seconds</a>
@@ -1701,8 +1813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-required"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1710,8 +1821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="pollingwaitseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_go" style="color: inherit; text-decoration: inherit;">Polling<wbr>Wait<wbr>Seconds</a>
@@ -1719,8 +1829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-required"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-required"
             title="Required">
         <span id="qps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_go" style="color: inherit; text-decoration: inherit;">Qps</a>
@@ -1728,8 +1837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</p>
-</dd><dt class="property-required"
+    <dd>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</dd><dt class="property-required"
             title="Required">
         <span id="queueid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queueid_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Id</a>
@@ -1737,8 +1845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name</a>
@@ -1746,8 +1853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-required"
+    <dd>Filter by QueueName.</dd><dt class="property-required"
             title="Required">
         <span id="retentionsizeinmb_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_go" style="color: inherit; text-decoration: inherit;">Retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -1755,8 +1861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="rewindmsgnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindmsgnum_go" style="color: inherit; text-decoration: inherit;">Rewind<wbr>Msg<wbr>Num</a>
@@ -1764,8 +1869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</p>
-</dd><dt class="property-required"
+    <dd>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</dd><dt class="property-required"
             title="Required">
         <span id="rewindseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_go" style="color: inherit; text-decoration: inherit;">Rewind<wbr>Seconds</a>
@@ -1773,8 +1877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1782,8 +1885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1791,8 +1893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttag">[]Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Tag</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_go" style="color: inherit; text-decoration: inherit;">Tenant<wbr>Id</a>
@@ -1800,8 +1901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="trace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_go" style="color: inherit; text-decoration: inherit;">Trace</a>
@@ -1809,8 +1909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Message trace. true: enabled; false: not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="transaction_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_go" style="color: inherit; text-decoration: inherit;">Transaction</a>
@@ -1818,8 +1917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-required"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-required"
             title="Required">
         <span id="transactionpolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transactionpolicies_go" style="color: inherit; text-decoration: inherit;">Transaction<wbr>Policies</a>
@@ -1827,8 +1925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttransactionpolicy">[]Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Transaction<wbr>Policy</a></span>
     </dt>
-    <dd><p>Transaction message policy.</p>
-</dd><dt class="property-required"
+    <dd>Transaction message policy.</dd><dt class="property-required"
             title="Required">
         <span id="visibilitytimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_go" style="color: inherit; text-decoration: inherit;">Visibility<wbr>Timeout</a>
@@ -1836,8 +1933,261 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="active_msg_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#active_msg_num_hcl" style="color: inherit; text-decoration: inherit;">active_<wbr>msg_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</dd><dt class="property-required"
+            title="Required">
+        <span id="bps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bps_hcl" style="color: inherit; text-decoration: inherit;">bps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bandwidth limit.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_uin_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Creator <code>Uin</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="dead_letter_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_letter_policies_hcl" style="color: inherit; text-decoration: inherit;">dead_<wbr>letter_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getqueuequeuelistdeadletterpolicy">list(object)</a></span>
+    </dt>
+    <dd>Dead letter queue policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="dead_letter_sources_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_letter_sources_hcl" style="color: inherit; text-decoration: inherit;">dead_<wbr>letter_<wbr>sources</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getqueuequeuelistdeadlettersource">list(object)</a></span>
+    </dt>
+    <dd>Dead letter queue.</dd><dt class="property-required"
+            title="Required">
+        <span id="delay_msg_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delay_msg_num_hcl" style="color: inherit; text-decoration: inherit;">delay_<wbr>msg_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of delayed messages.</dd><dt class="property-required"
+            title="Required">
+        <span id="inactive_msg_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inactive_msg_num_hcl" style="color: inherit; text-decoration: inherit;">inactive_<wbr>msg_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</dd><dt class="property-required"
+            title="Required">
+        <span id="last_modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_modify_time_hcl" style="color: inherit; text-decoration: inherit;">last_<wbr>modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_delay_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_delay_seconds_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>delay_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum retention period for inflight messages.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_msg_backlog_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_backlog_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>backlog_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum size of heaped messages in bytes.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_msg_heap_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_heap_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>heap_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_msg_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_unacked_msg_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_unacked_msg_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>unacked_<wbr>msg_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of unacknowledged messages.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_msg_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_msg_time_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>msg_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum unconsumed time of message in seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_retention_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_retention_seconds_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>retention_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace name.</dd><dt class="property-required"
+            title="Required">
+        <span id="polling_wait_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#polling_wait_seconds_hcl" style="color: inherit; text-decoration: inherit;">polling_<wbr>wait_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-required"
+            title="Required">
+        <span id="qps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_hcl" style="color: inherit; text-decoration: inherit;">qps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</dd><dt class="property-required"
+            title="Required">
+        <span id="queue_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_id_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Message queue ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by QueueName.</dd><dt class="property-required"
+            title="Required">
+        <span id="retention_size_in_mb_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_size_in_mb_hcl" style="color: inherit; text-decoration: inherit;">retention_<wbr>size_<wbr>in_<wbr>mb</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="rewind_msg_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewind_msg_num_hcl" style="color: inherit; text-decoration: inherit;">rewind_<wbr>msg_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</dd><dt class="property-required"
+            title="Required">
+        <span id="rewind_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewind_seconds_hcl" style="color: inherit; text-decoration: inherit;">rewind_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getqueuequeuelisttag">list(object)</a></span>
+    </dt>
+    <dd>Associated tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="tenant_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenant_id_hcl" style="color: inherit; text-decoration: inherit;">tenant_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tenant ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="trace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_hcl" style="color: inherit; text-decoration: inherit;">trace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Message trace. true: enabled; false: not enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="transaction_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_hcl" style="color: inherit; text-decoration: inherit;">transaction</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-required"
+            title="Required">
+        <span id="transaction_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_policies_hcl" style="color: inherit; text-decoration: inherit;">transaction_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getqueuequeuelisttransactionpolicy">list(object)</a></span>
+    </dt>
+    <dd>Transaction message policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="visibility_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibility_timeout_hcl" style="color: inherit; text-decoration: inherit;">visibility_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1851,8 +2201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="bps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bps_java" style="color: inherit; text-decoration: inherit;">bps</a>
@@ -1860,8 +2209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bandwidth limit.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth limit.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1869,8 +2217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_java" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -1878,8 +2225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deadletterpolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterpolicies_java" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Policies</a>
@@ -1887,8 +2233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadletterpolicy">List&lt;Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue policy.</dd><dt class="property-required"
             title="Required">
         <span id="deadlettersources_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlettersources_java" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Sources</a>
@@ -1896,8 +2241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadlettersource">List&lt;Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Source&gt;</a></span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="delaymsgnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaymsgnum_java" style="color: inherit; text-decoration: inherit;">delay<wbr>Msg<wbr>Num</a>
@@ -1905,8 +2249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of delayed messages.</p>
-</dd><dt class="property-required"
+    <dd>Number of delayed messages.</dd><dt class="property-required"
             title="Required">
         <span id="inactivemsgnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inactivemsgnum_java" style="color: inherit; text-decoration: inherit;">inactive<wbr>Msg<wbr>Num</a>
@@ -1914,8 +2257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_java" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -1923,8 +2265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelayseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelayseconds_java" style="color: inherit; text-decoration: inherit;">max<wbr>Delay<wbr>Seconds</a>
@@ -1932,8 +2273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum retention period for inflight messages.</p>
-</dd><dt class="property-required"
+    <dd>Maximum retention period for inflight messages.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgbacklogsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgbacklogsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Backlog<wbr>Size</a>
@@ -1941,8 +2281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum size of heaped messages in bytes.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of heaped messages in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgheapnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -1950,8 +2289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -1959,8 +2297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-required"
             title="Required">
         <span id="maxunackedmsgnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxunackedmsgnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Unacked<wbr>Msg<wbr>Num</a>
@@ -1968,8 +2305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of unacknowledged messages.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of unacknowledged messages.</dd><dt class="property-required"
             title="Required">
         <span id="minmsgtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minmsgtime_java" style="color: inherit; text-decoration: inherit;">min<wbr>Msg<wbr>Time</a>
@@ -1977,8 +2313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum unconsumed time of message in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Minimum unconsumed time of message in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -1986,8 +2321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-required"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -1995,8 +2329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="pollingwaitseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_java" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -2004,8 +2337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-required"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-required"
             title="Required">
         <span id="qps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_java" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -2013,8 +2345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</p>
-</dd><dt class="property-required"
+    <dd>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</dd><dt class="property-required"
             title="Required">
         <span id="queueid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queueid_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Id</a>
@@ -2022,8 +2353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -2031,8 +2361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-required"
+    <dd>Filter by QueueName.</dd><dt class="property-required"
             title="Required">
         <span id="retentionsizeinmb_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_java" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -2040,8 +2369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="rewindmsgnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindmsgnum_java" style="color: inherit; text-decoration: inherit;">rewind<wbr>Msg<wbr>Num</a>
@@ -2049,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</p>
-</dd><dt class="property-required"
+    <dd>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</dd><dt class="property-required"
             title="Required">
         <span id="rewindseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_java" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -2058,8 +2385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2067,8 +2393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2076,8 +2401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttag">List&lt;Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_java" style="color: inherit; text-decoration: inherit;">tenant<wbr>Id</a>
@@ -2085,8 +2409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="trace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_java" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2094,8 +2417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Message trace. true: enabled; false: not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="transaction_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_java" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -2103,8 +2425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-required"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-required"
             title="Required">
         <span id="transactionpolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transactionpolicies_java" style="color: inherit; text-decoration: inherit;">transaction<wbr>Policies</a>
@@ -2112,8 +2433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttransactionpolicy">List&lt;Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Transaction<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Transaction message policy.</p>
-</dd><dt class="property-required"
+    <dd>Transaction message policy.</dd><dt class="property-required"
             title="Required">
         <span id="visibilitytimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_java" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -2121,8 +2441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2136,8 +2455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="bps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bps_nodejs" style="color: inherit; text-decoration: inherit;">bps</a>
@@ -2145,8 +2463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bandwidth limit.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth limit.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2154,8 +2471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -2163,8 +2479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deadletterpolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterpolicies_nodejs" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Policies</a>
@@ -2172,8 +2487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadletterpolicy">Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue policy.</dd><dt class="property-required"
             title="Required">
         <span id="deadlettersources_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlettersources_nodejs" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Sources</a>
@@ -2181,8 +2495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadlettersource">Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Source[]</a></span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="delaymsgnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaymsgnum_nodejs" style="color: inherit; text-decoration: inherit;">delay<wbr>Msg<wbr>Num</a>
@@ -2190,8 +2503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of delayed messages.</p>
-</dd><dt class="property-required"
+    <dd>Number of delayed messages.</dd><dt class="property-required"
             title="Required">
         <span id="inactivemsgnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inactivemsgnum_nodejs" style="color: inherit; text-decoration: inherit;">inactive<wbr>Msg<wbr>Num</a>
@@ -2199,8 +2511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_nodejs" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -2208,8 +2519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelayseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelayseconds_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Delay<wbr>Seconds</a>
@@ -2217,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum retention period for inflight messages.</p>
-</dd><dt class="property-required"
+    <dd>Maximum retention period for inflight messages.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgbacklogsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgbacklogsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Backlog<wbr>Size</a>
@@ -2226,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum size of heaped messages in bytes.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of heaped messages in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgheapnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -2235,8 +2543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -2244,8 +2551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-required"
             title="Required">
         <span id="maxunackedmsgnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxunackedmsgnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Unacked<wbr>Msg<wbr>Num</a>
@@ -2253,8 +2559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of unacknowledged messages.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of unacknowledged messages.</dd><dt class="property-required"
             title="Required">
         <span id="minmsgtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minmsgtime_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Msg<wbr>Time</a>
@@ -2262,8 +2567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum unconsumed time of message in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Minimum unconsumed time of message in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -2271,8 +2575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-required"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2280,8 +2583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="pollingwaitseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_nodejs" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -2289,8 +2591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-required"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-required"
             title="Required">
         <span id="qps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_nodejs" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -2298,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</p>
-</dd><dt class="property-required"
+    <dd>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</dd><dt class="property-required"
             title="Required">
         <span id="queueid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queueid_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Id</a>
@@ -2307,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -2316,8 +2615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-required"
+    <dd>Filter by QueueName.</dd><dt class="property-required"
             title="Required">
         <span id="retentionsizeinmb_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_nodejs" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -2325,8 +2623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="rewindmsgnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindmsgnum_nodejs" style="color: inherit; text-decoration: inherit;">rewind<wbr>Msg<wbr>Num</a>
@@ -2334,8 +2631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</p>
-</dd><dt class="property-required"
+    <dd>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</dd><dt class="property-required"
             title="Required">
         <span id="rewindseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_nodejs" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -2343,8 +2639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2352,8 +2647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2361,8 +2655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttag">Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Tag[]</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_nodejs" style="color: inherit; text-decoration: inherit;">tenant<wbr>Id</a>
@@ -2370,8 +2663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="trace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_nodejs" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2379,8 +2671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Message trace. true: enabled; false: not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="transaction_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_nodejs" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -2388,8 +2679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-required"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-required"
             title="Required">
         <span id="transactionpolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transactionpolicies_nodejs" style="color: inherit; text-decoration: inherit;">transaction<wbr>Policies</a>
@@ -2397,8 +2687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttransactionpolicy">Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Transaction<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>Transaction message policy.</p>
-</dd><dt class="property-required"
+    <dd>Transaction message policy.</dd><dt class="property-required"
             title="Required">
         <span id="visibilitytimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_nodejs" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -2406,8 +2695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2421,8 +2709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="bps_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bps_python" style="color: inherit; text-decoration: inherit;">bps</a>
@@ -2430,8 +2717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth limit.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth limit.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2439,8 +2725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="create_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_uin_python" style="color: inherit; text-decoration: inherit;">create_<wbr>uin</a>
@@ -2448,26 +2733,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dead_letter_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_letter_policies_python" style="color: inherit; text-decoration: inherit;">dead_<wbr>letter_<wbr>policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getqueuequeuelistdeadletterpolicy">Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Policy]</a></span>
+        <span class="property-type"><a href="#getqueuequeuelistdeadletterpolicy">Sequence[Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Policy]</a></span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue policy.</dd><dt class="property-required"
             title="Required">
         <span id="dead_letter_sources_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_letter_sources_python" style="color: inherit; text-decoration: inherit;">dead_<wbr>letter_<wbr>sources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getqueuequeuelistdeadlettersource">Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Source]</a></span>
+        <span class="property-type"><a href="#getqueuequeuelistdeadlettersource">Sequence[Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Dead<wbr>Letter<wbr>Source]</a></span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="delay_msg_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delay_msg_num_python" style="color: inherit; text-decoration: inherit;">delay_<wbr>msg_<wbr>num</a>
@@ -2475,8 +2757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of delayed messages.</p>
-</dd><dt class="property-required"
+    <dd>Number of delayed messages.</dd><dt class="property-required"
             title="Required">
         <span id="inactive_msg_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inactive_msg_num_python" style="color: inherit; text-decoration: inherit;">inactive_<wbr>msg_<wbr>num</a>
@@ -2484,8 +2765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="last_modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_modify_time_python" style="color: inherit; text-decoration: inherit;">last_<wbr>modify_<wbr>time</a>
@@ -2493,8 +2773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="max_delay_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_delay_seconds_python" style="color: inherit; text-decoration: inherit;">max_<wbr>delay_<wbr>seconds</a>
@@ -2502,8 +2781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum retention period for inflight messages.</p>
-</dd><dt class="property-required"
+    <dd>Maximum retention period for inflight messages.</dd><dt class="property-required"
             title="Required">
         <span id="max_msg_backlog_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_backlog_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>backlog_<wbr>size</a>
@@ -2511,8 +2789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of heaped messages in bytes.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of heaped messages in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="max_msg_heap_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_heap_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>heap_<wbr>num</a>
@@ -2520,8 +2797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-required"
             title="Required">
         <span id="max_msg_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>size</a>
@@ -2529,8 +2805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-required"
             title="Required">
         <span id="max_unacked_msg_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_unacked_msg_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>unacked_<wbr>msg_<wbr>num</a>
@@ -2538,8 +2813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of unacknowledged messages.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of unacknowledged messages.</dd><dt class="property-required"
             title="Required">
         <span id="min_msg_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_msg_time_python" style="color: inherit; text-decoration: inherit;">min_<wbr>msg_<wbr>time</a>
@@ -2547,8 +2821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum unconsumed time of message in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Minimum unconsumed time of message in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="msg_retention_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_retention_seconds_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>retention_<wbr>seconds</a>
@@ -2556,8 +2829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-required"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-required"
             title="Required">
         <span id="namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -2565,8 +2837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="polling_wait_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#polling_wait_seconds_python" style="color: inherit; text-decoration: inherit;">polling_<wbr>wait_<wbr>seconds</a>
@@ -2574,8 +2845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-required"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-required"
             title="Required">
         <span id="qps_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_python" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -2583,8 +2853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</p>
-</dd><dt class="property-required"
+    <dd>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</dd><dt class="property-required"
             title="Required">
         <span id="queue_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_id_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>id</a>
@@ -2592,8 +2861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queue_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
@@ -2601,8 +2869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-required"
+    <dd>Filter by QueueName.</dd><dt class="property-required"
             title="Required">
         <span id="retention_size_in_mb_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_size_in_mb_python" style="color: inherit; text-decoration: inherit;">retention_<wbr>size_<wbr>in_<wbr>mb</a>
@@ -2610,8 +2877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="rewind_msg_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewind_msg_num_python" style="color: inherit; text-decoration: inherit;">rewind_<wbr>msg_<wbr>num</a>
@@ -2619,8 +2885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</p>
-</dd><dt class="property-required"
+    <dd>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</dd><dt class="property-required"
             title="Required">
         <span id="rewind_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewind_seconds_python" style="color: inherit; text-decoration: inherit;">rewind_<wbr>seconds</a>
@@ -2628,8 +2893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2637,17 +2901,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getqueuequeuelisttag">Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Tag]</a></span>
+        <span class="property-type"><a href="#getqueuequeuelisttag">Sequence[Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Tag]</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenant_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenant_id_python" style="color: inherit; text-decoration: inherit;">tenant_<wbr>id</a>
@@ -2655,8 +2917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="trace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_python" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2664,8 +2925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Message trace. true: enabled; false: not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="transaction_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_python" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -2673,17 +2933,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-required"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-required"
             title="Required">
         <span id="transaction_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_policies_python" style="color: inherit; text-decoration: inherit;">transaction_<wbr>policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getqueuequeuelisttransactionpolicy">Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Transaction<wbr>Policy]</a></span>
+        <span class="property-type"><a href="#getqueuequeuelisttransactionpolicy">Sequence[Get<wbr>Queue<wbr>Queue<wbr>List<wbr>Transaction<wbr>Policy]</a></span>
     </dt>
-    <dd><p>Transaction message policy.</p>
-</dd><dt class="property-required"
+    <dd>Transaction message policy.</dd><dt class="property-required"
             title="Required">
         <span id="visibility_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibility_timeout_python" style="color: inherit; text-decoration: inherit;">visibility_<wbr>timeout</a>
@@ -2691,8 +2949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2706,8 +2963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Active</code> status (i.e., unconsumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="bps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bps_yaml" style="color: inherit; text-decoration: inherit;">bps</a>
@@ -2715,8 +2971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bandwidth limit.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth limit.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2724,8 +2979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="createuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuin_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Uin</a>
@@ -2733,8 +2987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Creator <code>Uin</code>.</p>
-</dd><dt class="property-required"
+    <dd>Creator <code>Uin</code>.</dd><dt class="property-required"
             title="Required">
         <span id="deadletterpolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterpolicies_yaml" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Policies</a>
@@ -2742,8 +2995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadletterpolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue policy.</dd><dt class="property-required"
             title="Required">
         <span id="deadlettersources_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlettersources_yaml" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Sources</a>
@@ -2751,8 +3003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelistdeadlettersource">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="delaymsgnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaymsgnum_yaml" style="color: inherit; text-decoration: inherit;">delay<wbr>Msg<wbr>Num</a>
@@ -2760,8 +3011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of delayed messages.</p>
-</dd><dt class="property-required"
+    <dd>Number of delayed messages.</dd><dt class="property-required"
             title="Required">
         <span id="inactivemsgnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inactivemsgnum_yaml" style="color: inherit; text-decoration: inherit;">inactive<wbr>Msg<wbr>Num</a>
@@ -2769,8 +3019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</p>
-</dd><dt class="property-required"
+    <dd>Total number of messages in <code>Inactive</code> status (i.e., being consumed) in the queue, which is an approximate value.</dd><dt class="property-required"
             title="Required">
         <span id="lastmodifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastmodifytime_yaml" style="color: inherit; text-decoration: inherit;">last<wbr>Modify<wbr>Time</a>
@@ -2778,8 +3027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</p>
-</dd><dt class="property-required"
+    <dd>Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelayseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelayseconds_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Delay<wbr>Seconds</a>
@@ -2787,8 +3035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum retention period for inflight messages.</p>
-</dd><dt class="property-required"
+    <dd>Maximum retention period for inflight messages.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgbacklogsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgbacklogsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Backlog<wbr>Size</a>
@@ -2796,8 +3043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum size of heaped messages in bytes.</p>
-</dd><dt class="property-required"
+    <dd>Maximum size of heaped messages in bytes.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgheapnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -2805,8 +3051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-required"
             title="Required">
         <span id="maxmsgsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -2814,8 +3059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-required"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-required"
             title="Required">
         <span id="maxunackedmsgnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxunackedmsgnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Unacked<wbr>Msg<wbr>Num</a>
@@ -2823,8 +3067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of unacknowledged messages.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of unacknowledged messages.</dd><dt class="property-required"
             title="Required">
         <span id="minmsgtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minmsgtime_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Msg<wbr>Time</a>
@@ -2832,8 +3075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum unconsumed time of message in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Minimum unconsumed time of message in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="msgretentionseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -2841,8 +3083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-required"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2850,8 +3091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace name.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="pollingwaitseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_yaml" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -2859,8 +3099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-required"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-required"
             title="Required">
         <span id="qps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_yaml" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -2868,8 +3107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</p>
-</dd><dt class="property-required"
+    <dd>Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.</dd><dt class="property-required"
             title="Required">
         <span id="queueid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queueid_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Id</a>
@@ -2877,8 +3115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -2886,8 +3123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd><dt class="property-required"
+    <dd>Filter by QueueName.</dd><dt class="property-required"
             title="Required">
         <span id="retentionsizeinmb_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_yaml" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -2895,8 +3131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="rewindmsgnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindmsgnum_yaml" style="color: inherit; text-decoration: inherit;">rewind<wbr>Msg<wbr>Num</a>
@@ -2904,8 +3139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</p>
-</dd><dt class="property-required"
+    <dd>Number of retained messages which have been deleted by the <code>DelMsg</code> API but are still within their rewind time range.</dd><dt class="property-required"
             title="Required">
         <span id="rewindseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_yaml" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -2913,8 +3147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2922,8 +3155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</p>
-</dd><dt class="property-required"
+    <dd>Cluster status. <code>0</code>: creating; <code>1</code>: normal; <code>2</code>: terminating; <code>3</code>: deleted; <code>4</code>: isolated; <code>5</code>: creation failed; <code>6</code>: deletion failed.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2931,8 +3163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttag">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Associated tag.</p>
-</dd><dt class="property-required"
+    <dd>Associated tag.</dd><dt class="property-required"
             title="Required">
         <span id="tenantid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tenantid_yaml" style="color: inherit; text-decoration: inherit;">tenant<wbr>Id</a>
@@ -2940,8 +3171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tenant ID.</p>
-</dd><dt class="property-required"
+    <dd>Tenant ID.</dd><dt class="property-required"
             title="Required">
         <span id="trace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_yaml" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2949,8 +3179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Message trace. true: enabled; false: not enabled.</p>
-</dd><dt class="property-required"
+    <dd>Message trace. true: enabled; false: not enabled.</dd><dt class="property-required"
             title="Required">
         <span id="transaction_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_yaml" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -2958,8 +3187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-required"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-required"
             title="Required">
         <span id="transactionpolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transactionpolicies_yaml" style="color: inherit; text-decoration: inherit;">transaction<wbr>Policies</a>
@@ -2967,8 +3195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getqueuequeuelisttransactionpolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Transaction message policy.</p>
-</dd><dt class="property-required"
+    <dd>Transaction message policy.</dd><dt class="property-required"
             title="Required">
         <span id="visibilitytimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_yaml" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -2976,8 +3203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2995,8 +3221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="maxreceivecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Receive<wbr>Count</a>
@@ -3004,8 +3229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of receipts.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of receipts.</dd><dt class="property-required"
             title="Required">
         <span id="maxtimetolive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Time<wbr>To<wbr>Live</a>
@@ -3013,8 +3237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-required"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-required"
             title="Required">
         <span id="policy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_csharp" style="color: inherit; text-decoration: inherit;">Policy</a>
@@ -3022,8 +3245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd></dl>
+    <dd>Dead letter queue policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3037,8 +3259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="maxreceivecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Receive<wbr>Count</a>
@@ -3046,8 +3267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of receipts.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of receipts.</dd><dt class="property-required"
             title="Required">
         <span id="maxtimetolive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Time<wbr>To<wbr>Live</a>
@@ -3055,8 +3275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-required"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-required"
             title="Required">
         <span id="policy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_go" style="color: inherit; text-decoration: inherit;">Policy</a>
@@ -3064,8 +3283,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd></dl>
+    <dd>Dead letter queue policy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="dead_letter_queue_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_letter_queue_hcl" style="color: inherit; text-decoration: inherit;">dead_<wbr>letter_<wbr>queue</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dead letter queue.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_receive_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_receive_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>receive_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of receipts.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_time_to_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_time_to_live_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>time_<wbr>to_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_hcl" style="color: inherit; text-decoration: inherit;">policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Dead letter queue policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3079,8 +3335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="maxreceivecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -3088,8 +3343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of receipts.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of receipts.</dd><dt class="property-required"
             title="Required">
         <span id="maxtimetolive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_java" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -3097,8 +3351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-required"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-required"
             title="Required">
         <span id="policy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_java" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -3106,8 +3359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd></dl>
+    <dd>Dead letter queue policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3121,8 +3373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="maxreceivecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -3130,8 +3381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of receipts.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of receipts.</dd><dt class="property-required"
             title="Required">
         <span id="maxtimetolive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -3139,8 +3389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-required"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-required"
             title="Required">
         <span id="policy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_nodejs" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -3148,8 +3397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd></dl>
+    <dd>Dead letter queue policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3163,8 +3411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="max_receive_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_receive_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>receive_<wbr>count</a>
@@ -3172,8 +3419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of receipts.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of receipts.</dd><dt class="property-required"
             title="Required">
         <span id="max_time_to_live_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_time_to_live_python" style="color: inherit; text-decoration: inherit;">max_<wbr>time_<wbr>to_<wbr>live</a>
@@ -3181,8 +3427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-required"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-required"
             title="Required">
         <span id="policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_python" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -3190,8 +3435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd></dl>
+    <dd>Dead letter queue policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3205,8 +3449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Dead letter queue.</p>
-</dd><dt class="property-required"
+    <dd>Dead letter queue.</dd><dt class="property-required"
             title="Required">
         <span id="maxreceivecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -3214,8 +3457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of receipts.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of receipts.</dd><dt class="property-required"
             title="Required">
         <span id="maxtimetolive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -3223,8 +3465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-required"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>Policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>MsgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-required"
             title="Required">
         <span id="policy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_yaml" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -3232,8 +3473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Dead letter queue policy.</p>
-</dd></dl>
+    <dd>Dead letter queue policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3251,8 +3491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name</a>
@@ -3260,8 +3499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd></dl>
+    <dd>Filter by QueueName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3275,8 +3513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name</a>
@@ -3284,8 +3521,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd></dl>
+    <dd>Filter by QueueName.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="queue_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_id_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Message queue ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by QueueName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3299,8 +3557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -3308,8 +3565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd></dl>
+    <dd>Filter by QueueName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3323,8 +3579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -3332,8 +3587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd></dl>
+    <dd>Filter by QueueName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3347,8 +3601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queue_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
@@ -3356,8 +3609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd></dl>
+    <dd>Filter by QueueName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3371,8 +3623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message queue ID.</p>
-</dd><dt class="property-required"
+    <dd>Message queue ID.</dd><dt class="property-required"
             title="Required">
         <span id="queuename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queuename_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -3380,8 +3631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by QueueName.</p>
-</dd></dl>
+    <dd>Filter by QueueName.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3399,8 +3649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -3408,8 +3657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3423,8 +3671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -3432,8 +3679,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of the tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3447,8 +3715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -3456,8 +3723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3471,8 +3737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -3480,8 +3745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3495,8 +3759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -3504,8 +3767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3519,8 +3781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the tag key.</p>
-</dd><dt class="property-required"
+    <dd>Value of the tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -3528,8 +3789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the tag value.</p>
-</dd></dl>
+    <dd>Value of the tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3547,8 +3807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback time.</p>
-</dd><dt class="property-required"
+    <dd>First lookback time.</dd><dt class="property-required"
             title="Required">
         <span id="maxquerycount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Query<wbr>Count</a>
@@ -3556,8 +3815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of queries.</p>
-</dd></dl>
+    <dd>Maximum number of queries.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3571,8 +3829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback time.</p>
-</dd><dt class="property-required"
+    <dd>First lookback time.</dd><dt class="property-required"
             title="Required">
         <span id="maxquerycount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Query<wbr>Count</a>
@@ -3580,8 +3837,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of queries.</p>
-</dd></dl>
+    <dd>Maximum number of queries.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="first_query_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#first_query_interval_hcl" style="color: inherit; text-decoration: inherit;">first_<wbr>query_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>First lookback time.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_query_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_query_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>query_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of queries.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3595,8 +3873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>First lookback time.</p>
-</dd><dt class="property-required"
+    <dd>First lookback time.</dd><dt class="property-required"
             title="Required">
         <span id="maxquerycount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -3604,8 +3881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of queries.</p>
-</dd></dl>
+    <dd>Maximum number of queries.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3619,8 +3895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>First lookback time.</p>
-</dd><dt class="property-required"
+    <dd>First lookback time.</dd><dt class="property-required"
             title="Required">
         <span id="maxquerycount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -3628,8 +3903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of queries.</p>
-</dd></dl>
+    <dd>Maximum number of queries.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3643,8 +3917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback time.</p>
-</dd><dt class="property-required"
+    <dd>First lookback time.</dd><dt class="property-required"
             title="Required">
         <span id="max_query_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_query_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>query_<wbr>count</a>
@@ -3652,8 +3925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of queries.</p>
-</dd></dl>
+    <dd>Maximum number of queries.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3667,8 +3939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>First lookback time.</p>
-</dd><dt class="property-required"
+    <dd>First lookback time.</dd><dt class="property-required"
             title="Required">
         <span id="maxquerycount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -3676,8 +3947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of queries.</p>
-</dd></dl>
+    <dd>Maximum number of queries.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3692,7 +3962,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

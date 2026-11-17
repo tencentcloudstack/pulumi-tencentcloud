@@ -2,9 +2,11 @@
 ---
 title: "getTypes"
 title_tag: "tencentcloud.Instance.getTypes"
-meta_desc: "Documentation for the tencentcloud.Instance.getTypes function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query instances type."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,30 +18,72 @@ Use this data source to query instances type.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Instance.getTypes({
+const example = tencentcloud.instance.getTypes({
     availabilityZone: "ap-guangzhou-6",
     cpuCoreCount: 4,
     memorySize: 8,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Instance.get_types(availability_zone="ap-guangzhou-6",
+example = tencentcloud.instance.get_types(availability_zone="ap-guangzhou-6",
     cpu_core_count=4,
     memory_size=8)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/instance"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := instance.GetTypes(ctx, &instance.GetTypesArgs{
+			AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
+			CpuCoreCount:     pulumi.IntRef(4),
+			MemorySize:       pulumi.IntRef(8),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -52,28 +96,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
-			AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
-			CpuCoreCount:     pulumi.IntRef(4),
-			MemorySize:       pulumi.IntRef(8),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Instance.InstanceFunctions;
 import com.pulumi.tencentcloud.Instance.inputs.GetTypesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,27 +131,60 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Instance:getTypes
-      Arguments:
+      function: tencentcloud:Instance:getTypes
+      arguments:
         availabilityZone: ap-guangzhou-6
         cpuCoreCount: 4
         memorySize: 8
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_instance_gettypes" "example" {
+  availability_zone = "ap-guangzhou-6"
+  cpu_core_count    = 4
+  memory_size       = 8
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Complete Example
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Instance.getTypes({
+const example = tencentcloud.instance.getTypes({
     cpuCoreCount: 4,
+    memorySize: 8,
     excludeSoldOut: true,
     filters: [
         {
@@ -136,38 +196,89 @@ const example = tencentcloud.Instance.getTypes({
             values: ["ap-guangzhou-6"],
         },
     ],
-    memorySize: 8,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Instance.get_types(cpu_core_count=4,
+example = tencentcloud.instance.get_types(cpu_core_count=4,
+    memory_size=8,
     exclude_sold_out=True,
     filters=[
-        tencentcloud.instance.GetTypesFilterArgs(
-            name="instance-family",
-            values=["SA2"],
-        ),
-        tencentcloud.instance.GetTypesFilterArgs(
-            name="zone",
-            values=["ap-guangzhou-6"],
-        ),
-    ],
-    memory_size=8)
+        {
+            "name": "instance-family",
+            "values": ["SA2"],
+        },
+        {
+            "name": "zone",
+            "values": ["ap-guangzhou-6"],
+        },
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/instance"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := instance.GetTypes(ctx, &instance.GetTypesArgs{
+			CpuCoreCount:   pulumi.IntRef(4),
+			MemorySize:     pulumi.IntRef(8),
+			ExcludeSoldOut: pulumi.BoolRef(true),
+			Filters: []instance.GetTypesFilter{
+				{
+					Name: "instance-family",
+					Values: []string{
+						"SA2",
+					},
+				},
+				{
+					Name: "zone",
+					Values: []string{
+						"ap-guangzhou-6",
+					},
+				},
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var example = Tencentcloud.Instance.GetTypes.Invoke(new()
     {
         CpuCoreCount = 4,
+        MemorySize = 8,
         ExcludeSoldOut = true,
         Filters = new[]
         {
@@ -188,47 +299,15 @@ return await Deployment.RunAsync(() =>
                 },
             },
         },
-        MemorySize = 8,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
-			CpuCoreCount:   pulumi.IntRef(4),
-			ExcludeSoldOut: pulumi.BoolRef(true),
-			Filters: []instance.GetTypesFilter{
-				{
-					Name: "instance-family",
-					Values: []string{
-						"SA2",
-					},
-				},
-				{
-					Name: "zone",
-					Values: []string{
-						"ap-guangzhou-6",
-					},
-				},
-			},
-			MemorySize: pulumi.IntRef(8),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -237,8 +316,9 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Instance.InstanceFunctions;
 import com.pulumi.tencentcloud.Instance.inputs.GetTypesArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Instance.inputs.GetTypesFilterArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -252,6 +332,7 @@ public class App {
     public static void stack(Context ctx) {
         final var example = InstanceFunctions.getTypes(GetTypesArgs.builder()
             .cpuCoreCount(4)
+            .memorySize(8)
             .excludeSoldOut(true)
             .filters(            
                 GetTypesFilterArgs.builder()
@@ -262,19 +343,24 @@ public class App {
                     .name("zone")
                     .values("ap-guangzhou-6")
                     .build())
-            .memorySize(8)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Instance:getTypes
-      Arguments:
+      function: tencentcloud:Instance:getTypes
+      arguments:
         cpuCoreCount: 4
+        memorySize: 8
         excludeSoldOut: true
         filters:
           - name: instance-family
@@ -283,10 +369,580 @@ variables:
           - name: zone
             values:
               - ap-guangzhou-6
-        memorySize: 8
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_instance_gettypes" "example" {
+  cpu_core_count   = 4
+  memory_size      = 8
+  exclude_sold_out = true
+  filters {
+    name   = "instance-family"
+    values = ["SA2"]
+  }
+  filters {
+    name   = "zone"
+    values = ["ap-guangzhou-6"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query with Network and Performance Requirements
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const highNetwork = tencentcloud.instance.getTypes({
+    availabilityZone: "ap-guangzhou-6",
+    cpuCoreCount: 8,
+    memorySize: 16,
+});
+export const instanceDetails = highNetwork.then(highNetwork => .map(instance => ({
+    type: instance.instanceType,
+    typeName: instance.typeName,
+    networkCard: instance.networkCard,
+    bandwidth: instance.instanceBandwidth,
+    pps: instance.instancePps,
+    cpuType: instance.cpuType,
+    frequency: instance.frequency,
+    statusCategory: instance.statusCategory,
+})));
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+high_network = tencentcloud.instance.get_types(availability_zone="ap-guangzhou-6",
+    cpu_core_count=8,
+    memory_size=16)
+pulumi.export("instanceDetails", [{
+    "type": instance.instance_type,
+    "typeName": instance.type_name,
+    "networkCard": instance.network_card,
+    "bandwidth": instance.instance_bandwidth,
+    "pps": instance.instance_pps,
+    "cpuType": instance.cpu_type,
+    "frequency": instance.frequency,
+    "statusCategory": instance.status_category,
+} for instance in high_network.instance_types])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var highNetwork = Tencentcloud.Instance.GetTypes.Invoke(new()
+    {
+        AvailabilityZone = "ap-guangzhou-6",
+        CpuCoreCount = 8,
+        MemorySize = 16,
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["instanceDetails"] = .Select(instance => 
+        {
+            return 
+            {
+                { "type", instance.InstanceType },
+                { "typeName", instance.TypeName },
+                { "networkCard", instance.NetworkCard },
+                { "bandwidth", instance.InstanceBandwidth },
+                { "pps", instance.InstancePps },
+                { "cpuType", instance.CpuType },
+                { "frequency", instance.Frequency },
+                { "statusCategory", instance.StatusCategory },
+            };
+        }).ToList(),
+    };
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_instance_gettypes" "highNetwork" {
+  availability_zone = "ap-guangzhou-6"
+  cpu_core_count    = 8
+  memory_size       = 16
+}
+
+output "instanceDetails" {
+  value = [for instance in data.tencentcloud_instance_gettypes.highNetwork.instance_types : {
+    "type"           = instance.instanceType
+    "typeName"       = instance.typeName
+    "networkCard"    = instance.networkCard
+    "bandwidth"      = instance.instanceBandwidth
+    "pps"            = instance.instancePps
+    "cpuType"        = instance.cpuType
+    "frequency"      = instance.frequency
+    "statusCategory" = instance.statusCategory
+  } ]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query GPU Instances
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const gpuInstances = tencentcloud.instance.getTypes({
+    gpuCoreCount: 1,
+    filters: [{
+        name: "zone",
+        values: ["ap-guangzhou-6"],
+    }],
+});
+export const gpuDetails = gpuInstances.then(gpuInstances => .map(instance => ({
+    type: instance.instanceType,
+    gpuCount: instance.gpuCount,
+    fpga: instance.fpga,
+})));
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+gpu_instances = tencentcloud.instance.get_types(gpu_core_count=1,
+    filters=[{
+        "name": "zone",
+        "values": ["ap-guangzhou-6"],
+    }])
+pulumi.export("gpuDetails", [{
+    "type": instance.instance_type,
+    "gpuCount": instance.gpu_count,
+    "fpga": instance.fpga,
+} for instance in gpu_instances.instance_types])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var gpuInstances = Tencentcloud.Instance.GetTypes.Invoke(new()
+    {
+        GpuCoreCount = 1,
+        Filters = new[]
+        {
+            new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+            {
+                Name = "zone",
+                Values = new[]
+                {
+                    "ap-guangzhou-6",
+                },
+            },
+        },
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["gpuDetails"] = .Select(instance => 
+        {
+            return 
+            {
+                { "type", instance.InstanceType },
+                { "gpuCount", instance.GpuCount },
+                { "fpga", instance.Fpga },
+            };
+        }).ToList(),
+    };
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_instance_gettypes" "gpuInstances" {
+  gpu_core_count = 1
+  filters {
+    name   = "zone"
+    values = ["ap-guangzhou-6"]
+  }
+}
+
+output "gpuDetails" {
+  value = [for instance in data.tencentcloud_instance_gettypes.gpuInstances.instance_types : {
+    "type"     = instance.instanceType
+    "gpuCount" = instance.gpuCount
+    "fpga"     = instance.fpga
+  } ]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query with Local Disk Support
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const localDisk = tencentcloud.instance.getTypes({
+    availabilityZone: "ap-guangzhou-6",
+    cpuCoreCount: 4,
+});
+export const localDiskTypes = localDisk.then(localDisk => .filter(instance => instance.localDiskTypeList.length > 0).map(instance => (instance.localDiskTypeList)));
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+local_disk = tencentcloud.instance.get_types(availability_zone="ap-guangzhou-6",
+    cpu_core_count=4)
+pulumi.export("localDiskTypes", [instance.local_disk_type_list for instance in local_disk.instance_types if len(instance.local_disk_type_list) > 0])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var localDisk = Tencentcloud.Instance.GetTypes.Invoke(new()
+    {
+        AvailabilityZone = "ap-guangzhou-6",
+        CpuCoreCount = 4,
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["localDiskTypes"] = .Where(instance => instance.LocalDiskTypeList.Length > 0).Select(instance => 
+        {
+            return instance.LocalDiskTypeList;
+        }).ToList(),
+    };
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_instance_gettypes" "localDisk" {
+  availability_zone = "ap-guangzhou-6"
+  cpu_core_count    = 4
+}
+
+output "localDiskTypes" {
+  value = [for instance in data.tencentcloud_instance_gettypes.localDisk.instance_types : instance.localDiskTypeList if length(instance.localDiskTypeList) > 0]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query Price Information
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const withPricing = tencentcloud.instance.getTypes({
+    availabilityZone: "ap-guangzhou-6",
+    cpuCoreCount: 2,
+    memorySize: 4,
+});
+export const pricingInfo = withPricing.then(withPricing => .map(instance => ({
+    type: instance.instanceType,
+    price: instance.price.length > 0 ? instance.price[0] : null,
+})));
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+with_pricing = tencentcloud.instance.get_types(availability_zone="ap-guangzhou-6",
+    cpu_core_count=2,
+    memory_size=4)
+pulumi.export("pricingInfo", [{
+    "type": instance.instance_type,
+    "price": instance.price[0] if len(instance.price) > 0 else None,
+} for instance in with_pricing.instance_types])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var withPricing = Tencentcloud.Instance.GetTypes.Invoke(new()
+    {
+        AvailabilityZone = "ap-guangzhou-6",
+        CpuCoreCount = 2,
+        MemorySize = 4,
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["pricingInfo"] = .Select(instance => 
+        {
+            return 
+            {
+                { "type", instance.InstanceType },
+                { "price", instance.Price.Length > 0 ? instance.Price[0] : null },
+            };
+        }).ToList(),
+    };
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_instance_gettypes" "withPricing" {
+  availability_zone = "ap-guangzhou-6"
+  cpu_core_count    = 2
+  memory_size       = 4
+}
+
+output "pricingInfo" {
+  value = [for instance in data.tencentcloud_instance_gettypes.withPricing.instance_types : {
+    "type"  = instance.instanceType
+    "price" = length(instance.price) > 0 ? instance.price[0] : null
+  } ]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+  - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
 
 
 
@@ -298,7 +954,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -306,9 +962,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getTypes<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTypesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>></span
+><span class="k">function </span>getTypes<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTypesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>></span
 ><span class="k">
-function </span>getTypesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTypesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>></span
+function </span>getTypesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTypesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -318,22 +974,24 @@ function </span>getTypesOutput<span class="p">(</span><span class="nx">args</spa
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_types<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">cbs_filter</span><span class="p">:</span> <span class="nx">Optional[GetTypesCbsFilter]</span> = None<span class="p">,</span>
               <span class="nx">cpu_core_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
               <span class="nx">exclude_sold_out</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-              <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_instance.GetTypesFilter]]</span> = None<span class="p">,</span>
+              <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetTypesFilter]]</span> = None<span class="p">,</span>
               <span class="nx">gpu_core_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
               <span class="nx">memory_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetTypesResult</span
 ><span class="k">
-def </span>get_types_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">cpu_core_count</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">exclude_sold_out</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-              <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_instance.GetTypesFilterArgs]]]]</span> = None<span class="p">,</span>
-              <span class="nx">gpu_core_count</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">memory_size</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTypesResult]</span
+def </span>get_types_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">cbs_filter</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[GetTypesCbsFilterArgs]]</span> = None<span class="p">,</span>
+              <span class="nx">cpu_core_count</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">exclude_sold_out</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+              <span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetTypesFilterArgs]]]]</span> = None<span class="p">,</span>
+              <span class="nx">gpu_core_count</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">memory_size</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTypesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -358,7 +1016,8 @@ func </span>GetTypesOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetTypes </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetTypesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTypesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTypesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTypesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -367,7 +1026,8 @@ func </span>GetTypesOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>> </span>getTypes<span class="p">(</span><span class="nx">GetTypesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>> </span>getTypes<span class="p">(</span><span class="nx">GetTypesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTypesResult</a></span>> </span>getTypes<span class="p">(</span><span class="nx">GetTypesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -379,6 +1039,15 @@ func </span>GetTypesOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Instance/getTypes:getTypes
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_instance_get_types&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -397,8 +1066,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cbsfilter_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_csharp" style="color: inherit; text-decoration: inherit;">Cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Inputs.<wbr>Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd>Cbs filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpucorecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Core<wbr>Count</a>
@@ -406,8 +1082,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludesoldout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Sold<wbr>Out</a>
@@ -415,8 +1090,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to filter instances types that is sold out or not, default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to filter instances types that is sold out or not, default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -424,8 +1098,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Inputs.<wbr>Get<wbr>Types<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter. This field is conflict with <code>availability_zone</code>.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter. This field is conflict with <code>availabilityZone</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="gpucorecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_csharp" style="color: inherit; text-decoration: inherit;">Gpu<wbr>Core<wbr>Count</a>
@@ -433,8 +1106,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Size</a>
@@ -442,8 +1114,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -451,8 +1122,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -466,8 +1136,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cbsfilter_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_go" style="color: inherit; text-decoration: inherit;">Cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd>Cbs filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpucorecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Core<wbr>Count</a>
@@ -475,8 +1152,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludesoldout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Sold<wbr>Out</a>
@@ -484,8 +1160,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to filter instances types that is sold out or not, default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to filter instances types that is sold out or not, default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -493,8 +1168,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesfilter">[]Get<wbr>Types<wbr>Filter</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter. This field is conflict with <code>availability_zone</code>.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter. This field is conflict with <code>availabilityZone</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="gpucorecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_go" style="color: inherit; text-decoration: inherit;">Gpu<wbr>Core<wbr>Count</a>
@@ -502,8 +1176,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Size</a>
@@ -511,8 +1184,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -520,8 +1192,77 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cbs_filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbs_filter_hcl" style="color: inherit; text-decoration: inherit;">cbs_<wbr>filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">object</a></span>
+    </dt>
+    <dd>Cbs filter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_core_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_core_count_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>core_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exclude_sold_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_sold_out_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>sold_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to filter instances types that is sold out or not, default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesfilter">list(object)</a></span>
+    </dt>
+    <dd>One or more name/value pairs to filter. This field is conflict with <code>availabilityZone</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gpu_core_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_core_count_hcl" style="color: inherit; text-decoration: inherit;">gpu_<wbr>core_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_size_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -535,8 +1276,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cbsfilter_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_java" style="color: inherit; text-decoration: inherit;">cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd>Cbs filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpucorecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -544,8 +1292,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludesoldout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Sold<wbr>Out</a>
@@ -553,8 +1300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to filter instances types that is sold out or not, default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to filter instances types that is sold out or not, default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -562,8 +1308,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesfilter">List&lt;Get<wbr>Types<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter. This field is conflict with <code>availability_zone</code>.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter. This field is conflict with <code>availabilityZone</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="gpucorecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_java" style="color: inherit; text-decoration: inherit;">gpu<wbr>Core<wbr>Count</a>
@@ -571,8 +1316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -580,8 +1324,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -589,8 +1332,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -604,8 +1346,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cbsfilter_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_nodejs" style="color: inherit; text-decoration: inherit;">cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd>Cbs filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpucorecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -613,8 +1362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludesoldout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Sold<wbr>Out</a>
@@ -622,8 +1370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to filter instances types that is sold out or not, default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to filter instances types that is sold out or not, default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -631,8 +1378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesfilter">Get<wbr>Types<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter. This field is conflict with <code>availability_zone</code>.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter. This field is conflict with <code>availabilityZone</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="gpucorecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_nodejs" style="color: inherit; text-decoration: inherit;">gpu<wbr>Core<wbr>Count</a>
@@ -640,8 +1386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -649,8 +1394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -658,8 +1402,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -673,8 +1416,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cbs_filter_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbs_filter_python" style="color: inherit; text-decoration: inherit;">cbs_<wbr>filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd>Cbs filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_core_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_core_count_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>core_<wbr>count</a>
@@ -682,8 +1432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="exclude_sold_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_sold_out_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>sold_<wbr>out</a>
@@ -691,17 +1440,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to filter instances types that is sold out or not, default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to filter instances types that is sold out or not, default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettypesfilter">Get<wbr>Types<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#gettypesfilter">Sequence[Get<wbr>Types<wbr>Filter]</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter. This field is conflict with <code>availability_zone</code>.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter. This field is conflict with <code>availabilityZone</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="gpu_core_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_core_count_python" style="color: inherit; text-decoration: inherit;">gpu_<wbr>core_<wbr>count</a>
@@ -709,8 +1456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_size_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>size</a>
@@ -718,8 +1464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -727,8 +1472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -742,8 +1486,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cbsfilter_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_yaml" style="color: inherit; text-decoration: inherit;">cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Property Map</a></span>
+    </dt>
+    <dd>Cbs filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpucorecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -751,8 +1502,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludesoldout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Sold<wbr>Out</a>
@@ -760,8 +1510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to filter instances types that is sold out or not, default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to filter instances types that is sold out or not, default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -769,8 +1518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter. This field is conflict with <code>availability_zone</code>.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter. This field is conflict with <code>availabilityZone</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="gpucorecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_yaml" style="color: inherit; text-decoration: inherit;">gpu<wbr>Core<wbr>Count</a>
@@ -778,8 +1526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="memorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -787,8 +1534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -796,8 +1542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -820,8 +1565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Types</a>
@@ -829,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesinstancetype">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Outputs.<wbr>Get<wbr>Types<wbr>Instance<wbr>Type&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -838,8 +1581,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="cbsfilter_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_csharp" style="color: inherit; text-decoration: inherit;">Cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Outputs.<wbr>Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="cpucorecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Core<wbr>Count</a>
@@ -847,8 +1597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="excludesoldout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Sold<wbr>Out</a>
@@ -872,8 +1621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="memorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Size</a>
@@ -881,8 +1629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -904,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Types</a>
@@ -913,8 +1659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesinstancetype">[]Get<wbr>Types<wbr>Instance<wbr>Type</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -922,8 +1667,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="cbsfilter_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_go" style="color: inherit; text-decoration: inherit;">Cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="cpucorecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Core<wbr>Count</a>
@@ -931,8 +1683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="excludesoldout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Sold<wbr>Out</a>
@@ -956,8 +1707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="memorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Size</a>
@@ -965,11 +1715,96 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_types_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetype">list(object)</a></span>
+    </dt>
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="cbs_filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbs_filter_hcl" style="color: inherit; text-decoration: inherit;">cbs_<wbr>filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">object</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="cpu_core_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_core_count_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>core_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-"
+            title="">
+        <span id="exclude_sold_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_sold_out_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>sold_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="gpu_core_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_core_count_hcl" style="color: inherit; text-decoration: inherit;">gpu_<wbr>core_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-"
+            title="">
+        <span id="memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_size_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -988,8 +1823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -997,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesinstancetype">List&lt;Get<wbr>Types<wbr>Type&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1006,8 +1839,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="cbsfilter_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_java" style="color: inherit; text-decoration: inherit;">cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="cpucorecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -1015,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="excludesoldout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Sold<wbr>Out</a>
@@ -1040,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="memorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -1049,8 +1887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1072,8 +1909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -1081,8 +1917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesinstancetype">Get<wbr>Types<wbr>Instance<wbr>Type[]</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1090,8 +1925,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="cbsfilter_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_nodejs" style="color: inherit; text-decoration: inherit;">cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="cpucorecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -1099,8 +1941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="excludesoldout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Sold<wbr>Out</a>
@@ -1124,8 +1965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="memorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -1133,8 +1973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1156,17 +1995,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_types_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>types</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettypesinstancetype">Get<wbr>Types<wbr>Instance<wbr>Type]</a></span>
+        <span class="property-type"><a href="#gettypesinstancetype">Sequence[Get<wbr>Types<wbr>Instance<wbr>Type]</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1174,8 +2011,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="cbs_filter_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbs_filter_python" style="color: inherit; text-decoration: inherit;">cbs_<wbr>filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="cpu_core_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_core_count_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>core_<wbr>count</a>
@@ -1183,8 +2027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="exclude_sold_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_sold_out_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>sold_<wbr>out</a>
@@ -1198,7 +2041,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettypesfilter">Get<wbr>Types<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#gettypesfilter">Sequence[Get<wbr>Types<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -1208,8 +2051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_size_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>size</a>
@@ -1217,8 +2059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1240,8 +2081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -1249,8 +2089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettypesinstancetype">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1258,8 +2097,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="cbsfilter_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsfilter_yaml" style="color: inherit; text-decoration: inherit;">cbs<wbr>Filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypescbsfilter">Property Map</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="cpucorecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -1267,8 +2113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="excludesoldout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludesoldout_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Sold<wbr>Out</a>
@@ -1292,8 +2137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-"
             title="">
         <span id="memorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -1301,8 +2145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1320,6 +2163,318 @@ The following output properties are available:
 ## Supporting Types
 
 
+<h4 id="gettypescbsfilter">Get<wbr>Types<wbr>Cbs<wbr>Filter</h4>
+
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="diskchargetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disktypes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypes_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="diskusage_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk or data disk. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="diskchargetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disktypes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypes_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="diskusage_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk or data disk. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="disk_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_charge_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_types_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk or data disk. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="diskchargetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disktypes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypes_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="diskusage_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>System disk or data disk. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="diskchargetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disktypes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypes_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="diskusage_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk or data disk. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="disk_charge_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_charge_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_types_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_types_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_usage_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>System disk or data disk. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="diskchargetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disktypes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypes_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="diskusage_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>System disk or data disk. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
 <h4 id="gettypesfilter">Get<wbr>Types<wbr>Filter</h4>
 
 
@@ -1334,8 +2489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The filter name. Valid values: <code>zone</code>, <code>instance-family</code> and <code>instance-charge-type</code>.</p>
-</dd><dt class="property-required"
+    <dd>The filter name. Valid values: <code>zone</code>, <code>instance-family</code>, <code>instance-type</code>, <code>instance-charge-type</code> and <code>sort-keys</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1343,8 +2497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The filter values.</p>
-</dd></dl>
+    <dd>The filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1358,8 +2511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The filter name. Valid values: <code>zone</code>, <code>instance-family</code> and <code>instance-charge-type</code>.</p>
-</dd><dt class="property-required"
+    <dd>The filter name. Valid values: <code>zone</code>, <code>instance-family</code>, <code>instance-type</code>, <code>instance-charge-type</code> and <code>sort-keys</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1367,8 +2519,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The filter values.</p>
-</dd></dl>
+    <dd>The filter values.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The filter name. Valid values: <code>zone</code>, <code>instance-family</code>, <code>instance-type</code>, <code>instance-charge-type</code> and <code>sort-keys</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1382,8 +2555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The filter name. Valid values: <code>zone</code>, <code>instance-family</code> and <code>instance-charge-type</code>.</p>
-</dd><dt class="property-required"
+    <dd>The filter name. Valid values: <code>zone</code>, <code>instance-family</code>, <code>instance-type</code>, <code>instance-charge-type</code> and <code>sort-keys</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1391,8 +2563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The filter values.</p>
-</dd></dl>
+    <dd>The filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1406,8 +2577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The filter name. Valid values: <code>zone</code>, <code>instance-family</code> and <code>instance-charge-type</code>.</p>
-</dd><dt class="property-required"
+    <dd>The filter name. Valid values: <code>zone</code>, <code>instance-family</code>, <code>instance-type</code>, <code>instance-charge-type</code> and <code>sort-keys</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1415,8 +2585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The filter values.</p>
-</dd></dl>
+    <dd>The filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1430,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The filter name. Valid values: <code>zone</code>, <code>instance-family</code> and <code>instance-charge-type</code>.</p>
-</dd><dt class="property-required"
+    <dd>The filter name. Valid values: <code>zone</code>, <code>instance-family</code>, <code>instance-type</code>, <code>instance-charge-type</code> and <code>sort-keys</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1439,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The filter values.</p>
-</dd></dl>
+    <dd>The filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1454,8 +2621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The filter name. Valid values: <code>zone</code>, <code>instance-family</code> and <code>instance-charge-type</code>.</p>
-</dd><dt class="property-required"
+    <dd>The filter name. Valid values: <code>zone</code>, <code>instance-family</code>, <code>instance-type</code>, <code>instance-charge-type</code> and <code>sort-keys</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1463,8 +2629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The filter values.</p>
-</dd></dl>
+    <dd>The filter values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1482,8 +2647,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cbsconfigs_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsconfigs_csharp" style="color: inherit; text-decoration: inherit;">Cbs<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypecbsconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Inputs.<wbr>Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Cbs<wbr>Config&gt;</a></span>
+    </dt>
+    <dd>CBS config. The cbsConfigs is populated when the cbsFilter is added.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Core<wbr>Count</a>
@@ -1491,8 +2663,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cputype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputype_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Processor model.</dd><dt class="property-required"
+            title="Required">
+        <span id="externals_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externals_csharp" style="color: inherit; text-decoration: inherit;">Externals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternal">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Inputs.<wbr>Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External&gt;</a></span>
+    </dt>
+    <dd>Extended attributes.</dd><dt class="property-required"
             title="Required">
         <span id="family_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#family_csharp" style="color: inherit; text-decoration: inherit;">Family</a>
@@ -1500,8 +2687,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type series of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type series of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="fpga_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_csharp" style="color: inherit; text-decoration: inherit;">Fpga</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of FPGA cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_csharp" style="color: inherit; text-decoration: inherit;">Frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CPU frequency information.</dd><dt class="property-required"
             title="Required">
         <span id="gpucorecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_csharp" style="color: inherit; text-decoration: inherit;">Gpu<wbr>Core<wbr>Count</a>
@@ -1509,8 +2711,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpucount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucount_csharp" style="color: inherit; text-decoration: inherit;">Gpu<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancebandwidth_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancebandwidth_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Internal network bandwidth, unit: Gbps.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -1518,8 +2735,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancepps_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancepps_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Pps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Network packet forwarding capacity, unit: 10K PPS.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1527,8 +2751,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="localdisktypelists_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localdisktypelists_csharp" style="color: inherit; text-decoration: inherit;">Local<wbr>Disk<wbr>Type<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypelocaldisktypelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Inputs.<wbr>Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Local<wbr>Disk<wbr>Type<wbr>List&gt;</a></span>
+    </dt>
+    <dd>List of local disk specifications. Empty if instance type does not support local disks.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Size</a>
@@ -1536,8 +2767,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="networkcard_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkcard_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Card</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Network card type, for example: 25 represents 25G network card.</dd><dt class="property-required"
+            title="Required">
+        <span id="prices_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_csharp" style="color: inherit; text-decoration: inherit;">Prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeprice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Inputs.<wbr>Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Price&gt;</a></span>
+    </dt>
+    <dd>Instance pricing information.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance remark information.</dd><dt class="property-required"
+            title="Required">
+        <span id="soldoutreason_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldoutreason_csharp" style="color: inherit; text-decoration: inherit;">Sold<wbr>Out<wbr>Reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for sold out status.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1545,8 +2807,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sell status of the instance.</p>
-</dd></dl>
+    <dd>Sell status of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="statuscategory_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuscategory_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockamount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockamount_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Block<wbr>Amount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of local storage blocks.</dd><dt class="property-required"
+            title="Required">
+        <span id="typename_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typename_csharp" style="color: inherit; text-decoration: inherit;">Type<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type display name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1560,8 +2845,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cbsconfigs_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsconfigs_go" style="color: inherit; text-decoration: inherit;">Cbs<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypecbsconfig">[]Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Cbs<wbr>Config</a></span>
+    </dt>
+    <dd>CBS config. The cbsConfigs is populated when the cbsFilter is added.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Core<wbr>Count</a>
@@ -1569,8 +2861,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cputype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputype_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Processor model.</dd><dt class="property-required"
+            title="Required">
+        <span id="externals_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externals_go" style="color: inherit; text-decoration: inherit;">Externals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternal">[]Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External</a></span>
+    </dt>
+    <dd>Extended attributes.</dd><dt class="property-required"
             title="Required">
         <span id="family_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#family_go" style="color: inherit; text-decoration: inherit;">Family</a>
@@ -1578,8 +2885,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type series of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type series of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="fpga_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_go" style="color: inherit; text-decoration: inherit;">Fpga</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of FPGA cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_go" style="color: inherit; text-decoration: inherit;">Frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CPU frequency information.</dd><dt class="property-required"
             title="Required">
         <span id="gpucorecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_go" style="color: inherit; text-decoration: inherit;">Gpu<wbr>Core<wbr>Count</a>
@@ -1587,8 +2909,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpucount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucount_go" style="color: inherit; text-decoration: inherit;">Gpu<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancebandwidth_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancebandwidth_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Internal network bandwidth, unit: Gbps.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -1596,8 +2933,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancepps_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancepps_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Pps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Network packet forwarding capacity, unit: 10K PPS.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1605,8 +2949,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="localdisktypelists_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localdisktypelists_go" style="color: inherit; text-decoration: inherit;">Local<wbr>Disk<wbr>Type<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypelocaldisktypelist">[]Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Local<wbr>Disk<wbr>Type<wbr>List</a></span>
+    </dt>
+    <dd>List of local disk specifications. Empty if instance type does not support local disks.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Size</a>
@@ -1614,8 +2965,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="networkcard_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkcard_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Card</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Network card type, for example: 25 represents 25G network card.</dd><dt class="property-required"
+            title="Required">
+        <span id="prices_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_go" style="color: inherit; text-decoration: inherit;">Prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeprice">[]Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Price</a></span>
+    </dt>
+    <dd>Instance pricing information.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance remark information.</dd><dt class="property-required"
+            title="Required">
+        <span id="soldoutreason_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldoutreason_go" style="color: inherit; text-decoration: inherit;">Sold<wbr>Out<wbr>Reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for sold out status.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1623,8 +3005,229 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sell status of the instance.</p>
-</dd></dl>
+    <dd>Sell status of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="statuscategory_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuscategory_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockamount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockamount_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Block<wbr>Amount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of local storage blocks.</dd><dt class="property-required"
+            title="Required">
+        <span id="typename_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typename_go" style="color: inherit; text-decoration: inherit;">Type<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type display name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cbs_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbs_configs_hcl" style="color: inherit; text-decoration: inherit;">cbs_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypecbsconfig">list(object)</a></span>
+    </dt>
+    <dd>CBS config. The cbsConfigs is populated when the cbsFilter is added.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_core_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_core_count_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>core_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_type_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Processor model.</dd><dt class="property-required"
+            title="Required">
+        <span id="externals_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externals_hcl" style="color: inherit; text-decoration: inherit;">externals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternal">list(object)</a></span>
+    </dt>
+    <dd>Extended attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="family_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#family_hcl" style="color: inherit; text-decoration: inherit;">family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type series of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="fpga_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_hcl" style="color: inherit; text-decoration: inherit;">fpga</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of FPGA cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_hcl" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CPU frequency information.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpu_core_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_core_count_hcl" style="color: inherit; text-decoration: inherit;">gpu_<wbr>core_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpu_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_count_hcl" style="color: inherit; text-decoration: inherit;">gpu_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_bandwidth_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Internal network bandwidth, unit: Gbps.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_pps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_pps_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>pps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Network packet forwarding capacity, unit: 10K PPS.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="local_disk_type_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_disk_type_lists_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>disk_<wbr>type_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypelocaldisktypelist">list(object)</a></span>
+    </dt>
+    <dd>List of local disk specifications. Empty if instance type does not support local disks.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_size_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_card_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_card_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>card</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Network card type, for example: 25 represents 25G network card.</dd><dt class="property-required"
+            title="Required">
+        <span id="prices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_hcl" style="color: inherit; text-decoration: inherit;">prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeprice">list(object)</a></span>
+    </dt>
+    <dd>Instance pricing information.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance remark information.</dd><dt class="property-required"
+            title="Required">
+        <span id="sold_out_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sold_out_reason_hcl" style="color: inherit; text-decoration: inherit;">sold_<wbr>out_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for sold out status.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sell status of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_category_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_category_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_block_amount_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_block_amount_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>block_<wbr>amount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of local storage blocks.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_name_hcl" style="color: inherit; text-decoration: inherit;">type_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type display name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1638,8 +3241,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cbsconfigs_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsconfigs_java" style="color: inherit; text-decoration: inherit;">cbs<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypecbsconfig">List&lt;Get<wbr>Types<wbr>Type<wbr>Cbs<wbr>Config&gt;</a></span>
+    </dt>
+    <dd>CBS config. The cbsConfigs is populated when the cbsFilter is added.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -1647,8 +3257,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cputype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputype_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Processor model.</dd><dt class="property-required"
+            title="Required">
+        <span id="externals_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externals_java" style="color: inherit; text-decoration: inherit;">externals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternal">List&lt;Get<wbr>Types<wbr>Type<wbr>External&gt;</a></span>
+    </dt>
+    <dd>Extended attributes.</dd><dt class="property-required"
             title="Required">
         <span id="family_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#family_java" style="color: inherit; text-decoration: inherit;">family</a>
@@ -1656,8 +3281,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type series of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type series of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="fpga_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_java" style="color: inherit; text-decoration: inherit;">fpga</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Number of FPGA cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_java" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CPU frequency information.</dd><dt class="property-required"
             title="Required">
         <span id="gpucorecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_java" style="color: inherit; text-decoration: inherit;">gpu<wbr>Core<wbr>Count</a>
@@ -1665,8 +3305,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpucount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucount_java" style="color: inherit; text-decoration: inherit;">gpu<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancebandwidth_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancebandwidth_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Internal network bandwidth, unit: Gbps.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -1674,8 +3329,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancepps_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancepps_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Pps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Network packet forwarding capacity, unit: 10K PPS.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1683,8 +3345,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="localdisktypelists_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localdisktypelists_java" style="color: inherit; text-decoration: inherit;">local<wbr>Disk<wbr>Type<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypelocaldisktypelist">List&lt;Get<wbr>Types<wbr>Type<wbr>Local<wbr>Disk<wbr>Type<wbr>List&gt;</a></span>
+    </dt>
+    <dd>List of local disk specifications. Empty if instance type does not support local disks.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -1692,8 +3361,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="networkcard_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkcard_java" style="color: inherit; text-decoration: inherit;">network<wbr>Card</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Network card type, for example: 25 represents 25G network card.</dd><dt class="property-required"
+            title="Required">
+        <span id="prices_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_java" style="color: inherit; text-decoration: inherit;">prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeprice">List&lt;Get<wbr>Types<wbr>Type<wbr>Price&gt;</a></span>
+    </dt>
+    <dd>Instance pricing information.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance remark information.</dd><dt class="property-required"
+            title="Required">
+        <span id="soldoutreason_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldoutreason_java" style="color: inherit; text-decoration: inherit;">sold<wbr>Out<wbr>Reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Reason for sold out status.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1701,8 +3401,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sell status of the instance.</p>
-</dd></dl>
+    <dd>Sell status of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="statuscategory_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuscategory_java" style="color: inherit; text-decoration: inherit;">status<wbr>Category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockamount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockamount_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Block<wbr>Amount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Number of local storage blocks.</dd><dt class="property-required"
+            title="Required">
+        <span id="typename_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typename_java" style="color: inherit; text-decoration: inherit;">type<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance type display name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1716,8 +3439,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cbsconfigs_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsconfigs_nodejs" style="color: inherit; text-decoration: inherit;">cbs<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypecbsconfig">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Cbs<wbr>Config[]</a></span>
+    </dt>
+    <dd>CBS config. The cbsConfigs is populated when the cbsFilter is added.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -1725,8 +3455,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cputype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputype_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Processor model.</dd><dt class="property-required"
+            title="Required">
+        <span id="externals_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externals_nodejs" style="color: inherit; text-decoration: inherit;">externals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternal">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External[]</a></span>
+    </dt>
+    <dd>Extended attributes.</dd><dt class="property-required"
             title="Required">
         <span id="family_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#family_nodejs" style="color: inherit; text-decoration: inherit;">family</a>
@@ -1734,8 +3479,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type series of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type series of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="fpga_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_nodejs" style="color: inherit; text-decoration: inherit;">fpga</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of FPGA cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_nodejs" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CPU frequency information.</dd><dt class="property-required"
             title="Required">
         <span id="gpucorecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_nodejs" style="color: inherit; text-decoration: inherit;">gpu<wbr>Core<wbr>Count</a>
@@ -1743,8 +3503,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpucount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucount_nodejs" style="color: inherit; text-decoration: inherit;">gpu<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancebandwidth_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancebandwidth_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Internal network bandwidth, unit: Gbps.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -1752,8 +3527,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancepps_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancepps_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Pps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Network packet forwarding capacity, unit: 10K PPS.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1761,8 +3543,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="localdisktypelists_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localdisktypelists_nodejs" style="color: inherit; text-decoration: inherit;">local<wbr>Disk<wbr>Type<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypelocaldisktypelist">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Local<wbr>Disk<wbr>Type<wbr>List[]</a></span>
+    </dt>
+    <dd>List of local disk specifications. Empty if instance type does not support local disks.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -1770,8 +3559,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="networkcard_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkcard_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Card</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Network card type, for example: 25 represents 25G network card.</dd><dt class="property-required"
+            title="Required">
+        <span id="prices_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_nodejs" style="color: inherit; text-decoration: inherit;">prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeprice">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Price[]</a></span>
+    </dt>
+    <dd>Instance pricing information.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance remark information.</dd><dt class="property-required"
+            title="Required">
+        <span id="soldoutreason_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldoutreason_nodejs" style="color: inherit; text-decoration: inherit;">sold<wbr>Out<wbr>Reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for sold out status.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1779,8 +3599,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sell status of the instance.</p>
-</dd></dl>
+    <dd>Sell status of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="statuscategory_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuscategory_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockamount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockamount_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Block<wbr>Amount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of local storage blocks.</dd><dt class="property-required"
+            title="Required">
+        <span id="typename_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typename_nodejs" style="color: inherit; text-decoration: inherit;">type<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type display name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1794,8 +3637,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cbs_configs_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbs_configs_python" style="color: inherit; text-decoration: inherit;">cbs_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypecbsconfig">Sequence[Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Cbs<wbr>Config]</a></span>
+    </dt>
+    <dd>CBS config. The cbsConfigs is populated when the cbsFilter is added.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_core_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_core_count_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>core_<wbr>count</a>
@@ -1803,8 +3653,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_type_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Processor model.</dd><dt class="property-required"
+            title="Required">
+        <span id="externals_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externals_python" style="color: inherit; text-decoration: inherit;">externals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternal">Sequence[Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External]</a></span>
+    </dt>
+    <dd>Extended attributes.</dd><dt class="property-required"
             title="Required">
         <span id="family_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#family_python" style="color: inherit; text-decoration: inherit;">family</a>
@@ -1812,8 +3677,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type series of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type series of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="fpga_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_python" style="color: inherit; text-decoration: inherit;">fpga</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of FPGA cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_python" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CPU frequency information.</dd><dt class="property-required"
             title="Required">
         <span id="gpu_core_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_core_count_python" style="color: inherit; text-decoration: inherit;">gpu_<wbr>core_<wbr>count</a>
@@ -1821,8 +3701,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpu_count_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_count_python" style="color: inherit; text-decoration: inherit;">gpu_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_bandwidth_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_bandwidth_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Internal network bandwidth, unit: Gbps.</dd><dt class="property-required"
             title="Required">
         <span id="instance_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
@@ -1830,8 +3725,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_pps_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_pps_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>pps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Network packet forwarding capacity, unit: 10K PPS.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1839,8 +3741,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="local_disk_type_lists_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_disk_type_lists_python" style="color: inherit; text-decoration: inherit;">local_<wbr>disk_<wbr>type_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypelocaldisktypelist">Sequence[Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Local<wbr>Disk<wbr>Type<wbr>List]</a></span>
+    </dt>
+    <dd>List of local disk specifications. Empty if instance type does not support local disks.</dd><dt class="property-required"
             title="Required">
         <span id="memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_size_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>size</a>
@@ -1848,8 +3757,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_card_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_card_python" style="color: inherit; text-decoration: inherit;">network_<wbr>card</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Network card type, for example: 25 represents 25G network card.</dd><dt class="property-required"
+            title="Required">
+        <span id="prices_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_python" style="color: inherit; text-decoration: inherit;">prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeprice">Sequence[Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Price]</a></span>
+    </dt>
+    <dd>Instance pricing information.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance remark information.</dd><dt class="property-required"
+            title="Required">
+        <span id="sold_out_reason_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sold_out_reason_python" style="color: inherit; text-decoration: inherit;">sold_<wbr>out_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Reason for sold out status.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1857,8 +3797,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sell status of the instance.</p>
-</dd></dl>
+    <dd>Sell status of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_category_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_category_python" style="color: inherit; text-decoration: inherit;">status_<wbr>category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_block_amount_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_block_amount_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>block_<wbr>amount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of local storage blocks.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_name_python" style="color: inherit; text-decoration: inherit;">type_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance type display name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1872,8 +3835,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at. This field is conflict with <code>filter</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cbsconfigs_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cbsconfigs_yaml" style="color: inherit; text-decoration: inherit;">cbs<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypecbsconfig">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>CBS config. The cbsConfigs is populated when the cbsFilter is added.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -1881,8 +3851,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="cputype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cputype_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Processor model.</dd><dt class="property-required"
+            title="Required">
+        <span id="externals_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externals_yaml" style="color: inherit; text-decoration: inherit;">externals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternal">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Extended attributes.</dd><dt class="property-required"
             title="Required">
         <span id="family_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#family_yaml" style="color: inherit; text-decoration: inherit;">family</a>
@@ -1890,8 +3875,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type series of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type series of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="fpga_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_yaml" style="color: inherit; text-decoration: inherit;">fpga</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Number of FPGA cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_yaml" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CPU frequency information.</dd><dt class="property-required"
             title="Required">
         <span id="gpucorecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucorecount_yaml" style="color: inherit; text-decoration: inherit;">gpu<wbr>Core<wbr>Count</a>
@@ -1899,8 +3899,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of GPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpucount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpucount_yaml" style="color: inherit; text-decoration: inherit;">gpu<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancebandwidth_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancebandwidth_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Internal network bandwidth, unit: Gbps.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -1908,8 +3923,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancepps_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancepps_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Pps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Network packet forwarding capacity, unit: 10K PPS.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1917,8 +3939,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="localdisktypelists_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localdisktypelists_yaml" style="color: inherit; text-decoration: inherit;">local<wbr>Disk<wbr>Type<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypelocaldisktypelist">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>List of local disk specifications. Empty if instance type does not support local disks.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -1926,8 +3955,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="networkcard_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkcard_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Card</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Network card type, for example: 25 represents 25G network card.</dd><dt class="property-required"
+            title="Required">
+        <span id="prices_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_yaml" style="color: inherit; text-decoration: inherit;">prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeprice">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Instance pricing information.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance remark information.</dd><dt class="property-required"
+            title="Required">
+        <span id="soldoutreason_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldoutreason_yaml" style="color: inherit; text-decoration: inherit;">sold<wbr>Out<wbr>Reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Reason for sold out status.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1935,8 +3995,2151 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sell status of the instance.</p>
-</dd></dl>
+    <dd>Sell status of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="statuscategory_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuscategory_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockamount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockamount_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Block<wbr>Amount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Number of local storage blocks.</dd><dt class="property-required"
+            title="Required">
+        <span id="typename_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typename_yaml" style="color: inherit; text-decoration: inherit;">type<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance type display name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="gettypesinstancetypecbsconfig">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Cbs<wbr>Config</h4>
+
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_csharp" style="color: inherit; text-decoration: inherit;">Available</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the configuration is available.</dd><dt class="property-required"
+            title="Required">
+        <span id="deviceclass_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceclass_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Device class.</dd><dt class="property-required"
+            title="Required">
+        <span id="diskchargetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disktype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="diskusage_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud disk type. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="extraperformanceranges_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraperformanceranges_csharp" style="color: inherit; text-decoration: inherit;">Extra<wbr>Performance<wbr>Ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;int&gt;</span>
+    </dt>
+    <dd>Extra performance range.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancefamily_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance family.</dd><dt class="property-required"
+            title="Required">
+        <span id="maxdisksize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The maximum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="mindisksize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindisksize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The minimum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="stepsize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepsize_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum step size change in cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone to which the Cloud Block Storage belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_go" style="color: inherit; text-decoration: inherit;">Available</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the configuration is available.</dd><dt class="property-required"
+            title="Required">
+        <span id="deviceclass_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceclass_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Device class.</dd><dt class="property-required"
+            title="Required">
+        <span id="diskchargetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disktype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="diskusage_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud disk type. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="extraperformanceranges_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraperformanceranges_go" style="color: inherit; text-decoration: inherit;">Extra<wbr>Performance<wbr>Ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]int</span>
+    </dt>
+    <dd>Extra performance range.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancefamily_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance family.</dd><dt class="property-required"
+            title="Required">
+        <span id="maxdisksize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The maximum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="mindisksize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindisksize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The minimum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="stepsize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepsize_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum step size change in cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone to which the Cloud Block Storage belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_hcl" style="color: inherit; text-decoration: inherit;">available</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the configuration is available.</dd><dt class="property-required"
+            title="Required">
+        <span id="device_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_class_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Device class.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_charge_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disk_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud disk type. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="extra_performance_ranges_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_performance_ranges_hcl" style="color: inherit; text-decoration: inherit;">extra_<wbr>performance_<wbr>ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Extra performance range.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_family_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_family_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance family.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_disk_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_disk_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The minimum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_size_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum step size change in cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone to which the Cloud Block Storage belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_java" style="color: inherit; text-decoration: inherit;">available</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the configuration is available.</dd><dt class="property-required"
+            title="Required">
+        <span id="deviceclass_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceclass_java" style="color: inherit; text-decoration: inherit;">device<wbr>Class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Device class.</dd><dt class="property-required"
+            title="Required">
+        <span id="diskchargetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disktype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="diskusage_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cloud disk type. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="extraperformanceranges_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraperformanceranges_java" style="color: inherit; text-decoration: inherit;">extra<wbr>Performance<wbr>Ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;Integer&gt;</span>
+    </dt>
+    <dd>Extra performance range.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancefamily_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance family.</dd><dt class="property-required"
+            title="Required">
+        <span id="maxdisksize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The maximum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="mindisksize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindisksize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The minimum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="stepsize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepsize_java" style="color: inherit; text-decoration: inherit;">step<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Minimum step size change in cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The availability zone to which the Cloud Block Storage belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_nodejs" style="color: inherit; text-decoration: inherit;">available</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the configuration is available.</dd><dt class="property-required"
+            title="Required">
+        <span id="deviceclass_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceclass_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Device class.</dd><dt class="property-required"
+            title="Required">
+        <span id="diskchargetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disktype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="diskusage_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cloud disk type. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="extraperformanceranges_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraperformanceranges_nodejs" style="color: inherit; text-decoration: inherit;">extra<wbr>Performance<wbr>Ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number[]</span>
+    </dt>
+    <dd>Extra performance range.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancefamily_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance family.</dd><dt class="property-required"
+            title="Required">
+        <span id="maxdisksize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="mindisksize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindisksize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The minimum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="stepsize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepsize_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum step size change in cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone to which the Cloud Block Storage belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_python" style="color: inherit; text-decoration: inherit;">available</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the configuration is available.</dd><dt class="property-required"
+            title="Required">
+        <span id="device_class_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_class_python" style="color: inherit; text-decoration: inherit;">device_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Device class.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_charge_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_charge_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disk_usage_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Cloud disk type. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="extra_performance_ranges_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_performance_ranges_python" style="color: inherit; text-decoration: inherit;">extra_<wbr>performance_<wbr>ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[int]</span>
+    </dt>
+    <dd>Extra performance range.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_family_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_family_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance family.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_disk_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_disk_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The maximum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_disk_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_disk_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The minimum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_size_python" style="color: inherit; text-decoration: inherit;">step_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum step size change in cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The availability zone to which the Cloud Block Storage belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_yaml" style="color: inherit; text-decoration: inherit;">available</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the configuration is available.</dd><dt class="property-required"
+            title="Required">
+        <span id="deviceclass_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceclass_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Device class.</dd><dt class="property-required"
+            title="Required">
+        <span id="diskchargetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargetype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Payment model. Value range:</p>
+<ul>
+<li>PREPAID: Prepaid;</li>
+<li>POSTPAID_BY_HOUR: Post-payment.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="disktype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Hard disk media type. Value range:</p>
+<ul>
+<li>CLOUD_BASIC: Represents ordinary Cloud Block Storage;</li>
+<li>CLOUD_PREMIUM: Represents high-performance Cloud Block Storage;</li>
+<li>CLOUD_SSD: Represents SSD Cloud Block Storage;</li>
+<li>CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="diskusage_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Cloud disk type. Value range:</p>
+<ul>
+<li>SYSTEM_DISK: Represents the system disk;</li>
+<li>DATA_DISK: Represents the data disk.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="extraperformanceranges_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraperformanceranges_yaml" style="color: inherit; text-decoration: inherit;">extra<wbr>Performance<wbr>Ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;Number&gt;</span>
+    </dt>
+    <dd>Extra performance range.</dd><dt class="property-required"
+            title="Required">
+        <span id="instancefamily_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance family.</dd><dt class="property-required"
+            title="Required">
+        <span id="maxdisksize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The maximum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="mindisksize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mindisksize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Disk<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The minimum configurable cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="stepsize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepsize_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Minimum step size change in cloud disk size, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The availability zone to which the Cloud Block Storage belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="gettypesinstancetypeexternal">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External</h4>
+
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="releaseaddress_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseaddress_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to release address.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockattrs_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockattrs_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Block<wbr>Attrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternalstorageblockattr">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instance.<wbr>Inputs.<wbr>Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External<wbr>Storage<wbr>Block<wbr>Attr&gt;</a></span>
+    </dt>
+    <dd>HDD local storage attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="unsupportnetworks_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unsupportnetworks_csharp" style="color: inherit; text-decoration: inherit;">Unsupport<wbr>Networks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="releaseaddress_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseaddress_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to release address.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockattrs_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockattrs_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Block<wbr>Attrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternalstorageblockattr">[]Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External<wbr>Storage<wbr>Block<wbr>Attr</a></span>
+    </dt>
+    <dd>HDD local storage attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="unsupportnetworks_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unsupportnetworks_go" style="color: inherit; text-decoration: inherit;">Unsupport<wbr>Networks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="release_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_address_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to release address.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_block_attrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_block_attrs_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>block_<wbr>attrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternalstorageblockattr">list(object)</a></span>
+    </dt>
+    <dd>HDD local storage attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="unsupport_networks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unsupport_networks_hcl" style="color: inherit; text-decoration: inherit;">unsupport_<wbr>networks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="releaseaddress_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseaddress_java" style="color: inherit; text-decoration: inherit;">release<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to release address.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockattrs_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockattrs_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Block<wbr>Attrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternalstorageblockattr">List&lt;Get<wbr>Types<wbr>Type<wbr>External<wbr>Storage<wbr>Block<wbr>Attr&gt;</a></span>
+    </dt>
+    <dd>HDD local storage attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="unsupportnetworks_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unsupportnetworks_java" style="color: inherit; text-decoration: inherit;">unsupport<wbr>Networks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="releaseaddress_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseaddress_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to release address.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockattrs_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockattrs_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Block<wbr>Attrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternalstorageblockattr">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External<wbr>Storage<wbr>Block<wbr>Attr[]</a></span>
+    </dt>
+    <dd>HDD local storage attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="unsupportnetworks_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unsupportnetworks_nodejs" style="color: inherit; text-decoration: inherit;">unsupport<wbr>Networks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="release_address_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_address_python" style="color: inherit; text-decoration: inherit;">release_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to release address.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_block_attrs_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_block_attrs_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>block_<wbr>attrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternalstorageblockattr">Sequence[Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External<wbr>Storage<wbr>Block<wbr>Attr]</a></span>
+    </dt>
+    <dd>HDD local storage attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="unsupport_networks_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unsupport_networks_python" style="color: inherit; text-decoration: inherit;">unsupport_<wbr>networks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="releaseaddress_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaseaddress_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to release address.</dd><dt class="property-required"
+            title="Required">
+        <span id="storageblockattrs_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageblockattrs_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Block<wbr>Attrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettypesinstancetypeexternalstorageblockattr">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>HDD local storage attributes.</dd><dt class="property-required"
+            title="Required">
+        <span id="unsupportnetworks_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unsupportnetworks_yaml" style="color: inherit; text-decoration: inherit;">unsupport<wbr>Networks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="gettypesinstancetypeexternalstorageblockattr">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>External<wbr>Storage<wbr>Block<wbr>Attr</h4>
+
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="max_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="gettypesinstancetypelocaldisktypelist">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Local<wbr>Disk<wbr>Type<wbr>List</h4>
+
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="partitiontype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitiontype_csharp" style="color: inherit; text-decoration: inherit;">Partition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk partition type.</dd><dt class="property-required"
+            title="Required">
+        <span id="required_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_csharp" style="color: inherit; text-decoration: inherit;">Required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="partitiontype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitiontype_go" style="color: inherit; text-decoration: inherit;">Partition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk partition type.</dd><dt class="property-required"
+            title="Required">
+        <span id="required_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_go" style="color: inherit; text-decoration: inherit;">Required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="partition_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_type_hcl" style="color: inherit; text-decoration: inherit;">partition_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk partition type.</dd><dt class="property-required"
+            title="Required">
+        <span id="required_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_hcl" style="color: inherit; text-decoration: inherit;">required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="partitiontype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitiontype_java" style="color: inherit; text-decoration: inherit;">partition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Local disk partition type.</dd><dt class="property-required"
+            title="Required">
+        <span id="required_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_java" style="color: inherit; text-decoration: inherit;">required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="partitiontype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitiontype_nodejs" style="color: inherit; text-decoration: inherit;">partition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk partition type.</dd><dt class="property-required"
+            title="Required">
+        <span id="required_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_nodejs" style="color: inherit; text-decoration: inherit;">required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="max_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="partition_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_type_python" style="color: inherit; text-decoration: inherit;">partition_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Local disk partition type.</dd><dt class="property-required"
+            title="Required">
+        <span id="required_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_python" style="color: inherit; text-decoration: inherit;">required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="maxsize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Maximum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="minsize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Minimum size of local disk, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="partitiontype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitiontype_yaml" style="color: inherit; text-decoration: inherit;">partition<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Local disk partition type.</dd><dt class="property-required"
+            title="Required">
+        <span id="required_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#required_yaml" style="color: inherit; text-decoration: inherit;">required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Local disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="gettypesinstancetypeprice">Get<wbr>Types<wbr>Instance<wbr>Type<wbr>Price</h4>
+
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="chargeunit_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeunit_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subsequent billing unit. Valid values: HOUR, GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_csharp" style="color: inherit; text-decoration: inherit;">Discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Discount rate. For example, 20.0 means 20% off.</dd><dt class="property-required"
+            title="Required">
+        <span id="discountprice_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_csharp" style="color: inherit; text-decoration: inherit;">Discount<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Discount price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="originalprice_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_csharp" style="color: inherit; text-decoration: inherit;">Original<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Original price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitprice_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprice_csharp" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Subsequent unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscount_csharp" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Subsequent discount unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountsecondstep_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountsecondstep_csharp" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Discount<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountthirdstep_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountthirdstep_csharp" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Discount<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricesecondstep_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricesecondstep_csharp" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricethirdstep_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricethirdstep_csharp" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="chargeunit_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeunit_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subsequent billing unit. Valid values: HOUR, GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_go" style="color: inherit; text-decoration: inherit;">Discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Discount rate. For example, 20.0 means 20% off.</dd><dt class="property-required"
+            title="Required">
+        <span id="discountprice_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_go" style="color: inherit; text-decoration: inherit;">Discount<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Discount price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="originalprice_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_go" style="color: inherit; text-decoration: inherit;">Original<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Original price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitprice_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprice_go" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Subsequent unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscount_go" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Subsequent discount unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountsecondstep_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountsecondstep_go" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Discount<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountthirdstep_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountthirdstep_go" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Discount<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricesecondstep_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricesecondstep_go" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricethirdstep_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricethirdstep_go" style="color: inherit; text-decoration: inherit;">Unit<wbr>Price<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="charge_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_unit_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subsequent billing unit. Valid values: HOUR, GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_hcl" style="color: inherit; text-decoration: inherit;">discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Discount rate. For example, 20.0 means 20% off.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_price_hcl" style="color: inherit; text-decoration: inherit;">discount_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Discount price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="original_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_price_hcl" style="color: inherit; text-decoration: inherit;">original_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Original price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_hcl" style="color: inherit; text-decoration: inherit;">unit_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subsequent unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_discount_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_discount_hcl" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subsequent discount unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_discount_second_step_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_discount_second_step_hcl" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>discount_<wbr>second_<wbr>step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_discount_third_step_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_discount_third_step_hcl" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>discount_<wbr>third_<wbr>step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_second_step_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_second_step_hcl" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>second_<wbr>step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_third_step_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_third_step_hcl" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>third_<wbr>step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="chargeunit_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeunit_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Subsequent billing unit. Valid values: HOUR, GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_java" style="color: inherit; text-decoration: inherit;">discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Discount rate. For example, 20.0 means 20% off.</dd><dt class="property-required"
+            title="Required">
+        <span id="discountprice_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_java" style="color: inherit; text-decoration: inherit;">discount<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Discount price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="originalprice_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_java" style="color: inherit; text-decoration: inherit;">original<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Original price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitprice_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprice_java" style="color: inherit; text-decoration: inherit;">unit<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Subsequent unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscount_java" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Subsequent discount unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountsecondstep_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountsecondstep_java" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountthirdstep_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountthirdstep_java" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricesecondstep_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricesecondstep_java" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricethirdstep_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricethirdstep_java" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="chargeunit_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeunit_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subsequent billing unit. Valid values: HOUR, GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_nodejs" style="color: inherit; text-decoration: inherit;">discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Discount rate. For example, 20.0 means 20% off.</dd><dt class="property-required"
+            title="Required">
+        <span id="discountprice_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_nodejs" style="color: inherit; text-decoration: inherit;">discount<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Discount price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="originalprice_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_nodejs" style="color: inherit; text-decoration: inherit;">original<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Original price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitprice_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprice_nodejs" style="color: inherit; text-decoration: inherit;">unit<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subsequent unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscount_nodejs" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subsequent discount unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountsecondstep_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountsecondstep_nodejs" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountthirdstep_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountthirdstep_nodejs" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricesecondstep_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricesecondstep_nodejs" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricethirdstep_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricethirdstep_nodejs" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="charge_unit_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_unit_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Subsequent billing unit. Valid values: HOUR, GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_python" style="color: inherit; text-decoration: inherit;">discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Discount rate. For example, 20.0 means 20% off.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_price_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_price_python" style="color: inherit; text-decoration: inherit;">discount_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Discount price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="original_price_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_price_python" style="color: inherit; text-decoration: inherit;">original_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Original price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_python" style="color: inherit; text-decoration: inherit;">unit_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Subsequent unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_discount_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_discount_python" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Subsequent discount unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_discount_second_step_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_discount_second_step_python" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>discount_<wbr>second_<wbr>step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_discount_third_step_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_discount_third_step_python" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>discount_<wbr>third_<wbr>step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_second_step_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_second_step_python" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>second_<wbr>step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_price_third_step_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_price_third_step_python" style="color: inherit; text-decoration: inherit;">unit_<wbr>price_<wbr>third_<wbr>step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="chargeunit_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeunit_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Subsequent billing unit. Valid values: HOUR, GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_yaml" style="color: inherit; text-decoration: inherit;">discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Discount rate. For example, 20.0 means 20% off.</dd><dt class="property-required"
+            title="Required">
+        <span id="discountprice_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_yaml" style="color: inherit; text-decoration: inherit;">discount<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Discount price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="originalprice_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_yaml" style="color: inherit; text-decoration: inherit;">original<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Original price for prepaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitprice_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprice_yaml" style="color: inherit; text-decoration: inherit;">unit<wbr>Price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Subsequent unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscount_yaml" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Subsequent discount unit price, used in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountsecondstep_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountsecondstep_yaml" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricediscountthirdstep_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricediscountthirdstep_yaml" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Discount<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricesecondstep_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricesecondstep_yaml" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Second<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.</dd><dt class="property-required"
+            title="Required">
+        <span id="unitpricethirdstep_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitpricethirdstep_yaml" style="color: inherit; text-decoration: inherit;">unit<wbr>Price<wbr>Third<wbr>Step</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1951,7 +6154,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "UserGroup"
 title_tag: "tencentcloud.Ciam.UserGroup"
-meta_desc: "Documentation for the tencentcloud.Ciam.UserGroup resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a ciam user group"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,70 +18,61 @@ Provides a resource to create a ciam user group
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const userStore = new tencentcloud.ciam.UserStore("userStore", {
+const userStore = new tencentcloud.ciam.UserStore("user_store", {
     userPoolName: "tf_user_store",
     userPoolDesc: "for terraform test",
     userPoolLogo: "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png",
 });
-const userGroup = new tencentcloud.ciam.UserGroup("userGroup", {
+const userGroup = new tencentcloud.ciam.UserGroup("user_group", {
     displayName: "tf_user_group",
     userStoreId: userStore.id,
     description: "for terrafrom test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-user_store = tencentcloud.ciam.UserStore("userStore",
+user_store = tencentcloud.ciam.UserStore("user_store",
     user_pool_name="tf_user_store",
     user_pool_desc="for terraform test",
     user_pool_logo="https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png")
-user_group = tencentcloud.ciam.UserGroup("userGroup",
+user_group = tencentcloud.ciam.UserGroup("user_group",
     display_name="tf_user_group",
     user_store_id=user_store.id,
     description="for terrafrom test")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var userStore = new Tencentcloud.Ciam.UserStore("userStore", new()
-    {
-        UserPoolName = "tf_user_store",
-        UserPoolDesc = "for terraform test",
-        UserPoolLogo = "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png",
-    });
-
-    var userGroup = new Tencentcloud.Ciam.UserGroup("userGroup", new()
-    {
-        DisplayName = "tf_user_group",
-        UserStoreId = userStore.Id,
-        Description = "for terrafrom test",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ciam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ciam"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		userStore, err := Ciam.NewUserStore(ctx, "userStore", &Ciam.UserStoreArgs{
+		userStore, err := ciam.NewUserStore(ctx, "user_store", &ciam.UserStoreArgs{
 			UserPoolName: pulumi.String("tf_user_store"),
 			UserPoolDesc: pulumi.String("for terraform test"),
 			UserPoolLogo: pulumi.String("https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png"),
@@ -87,9 +80,9 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_, err = Ciam.NewUserGroup(ctx, "userGroup", &Ciam.UserGroupArgs{
+		_, err = ciam.NewUserGroup(ctx, "user_group", &ciam.UserGroupArgs{
 			DisplayName: pulumi.String("tf_user_group"),
-			UserStoreId: userStore.ID(),
+			UserStoreId: userStore.ID().ToIDOutput().ToStringOutput(),
 			Description: pulumi.String("for terrafrom test"),
 		})
 		if err != nil {
@@ -99,6 +92,40 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var userStore = new Tencentcloud.Ciam.UserStore("user_store", new()
+    {
+        UserPoolName = "tf_user_store",
+        UserPoolDesc = "for terraform test",
+        UserPoolLogo = "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png",
+    });
+
+    var userGroup = new Tencentcloud.Ciam.UserGroup("user_group", new()
+    {
+        DisplayName = "tf_user_group",
+        UserStoreId = userStore.Id,
+        Description = "for terrafrom test",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -109,8 +136,8 @@ import com.pulumi.tencentcloud.Ciam.UserStore;
 import com.pulumi.tencentcloud.Ciam.UserStoreArgs;
 import com.pulumi.tencentcloud.Ciam.UserGroup;
 import com.pulumi.tencentcloud.Ciam.UserGroupArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -122,13 +149,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var userStore = new UserStore("userStore", UserStoreArgs.builder()        
+        var userStore = new UserStore("userStore", UserStoreArgs.builder()
             .userPoolName("tf_user_store")
             .userPoolDesc("for terraform test")
             .userPoolLogo("https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png")
             .build());
 
-        var userGroup = new UserGroup("userGroup", UserGroupArgs.builder()        
+        var userGroup = new UserGroup("userGroup", UserGroupArgs.builder()
             .displayName("tf_user_group")
             .userStoreId(userStore.id())
             .description("for terrafrom test")
@@ -137,82 +164,139 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   userStore:
     type: tencentcloud:Ciam:UserStore
+    name: user_store
     properties:
       userPoolName: tf_user_store
       userPoolDesc: for terraform test
       userPoolLogo: https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png
   userGroup:
     type: tencentcloud:Ciam:UserGroup
+    name: user_group
     properties:
       displayName: tf_user_group
       userStoreId: ${userStore.id}
       description: for terrafrom test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ciam_userstore" "user_store" {
+  user_pool_name = "tf_user_store"
+  user_pool_desc = "for terraform test"
+  user_pool_logo = "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png"
+}
+resource "tencentcloud_ciam_usergroup" "user_group" {
+  display_name  = "tf_user_group"
+  user_store_id = tencentcloud_ciam_userstore.user_store.id
+  description   = "for terrafrom test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateUserGroup](https://www.tencentcloud.com/search/?wd=CreateUserGroup&type=document&lang=en)
+* Read: [ListUserGroups](https://www.tencentcloud.com/search/?wd=ListUserGroups&type=document&lang=en)
+* Update: [UpdateUserGroup](https://www.tencentcloud.com/search/?wd=UpdateUserGroup&type=document&lang=en)
+* Delete: [DeleteUserGroups](https://www.tencentcloud.com/search/?wd=DeleteUserGroups&type=document&lang=en)
 
 
 ## Create UserGroup Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-              <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">display_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">user_store_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+              <span class="nx">display_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">user_store_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUserGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UserGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUserGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UserGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">UserGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ciam:UserGroup</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ciam:UserGroup</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ciam_user_group&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -233,7 +317,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -350,11 +434,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## UserGroup Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -370,8 +462,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-required"
+    <dd>User Group Name.</dd><dt class="property-required"
             title="Required">
         <span id="userstoreid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userstoreid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Store<wbr>Id</a>
@@ -379,8 +470,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd><dt class="property-optional"
+    <dd>User Store ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -388,8 +478,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd></dl>
+    <dd>User Group Description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -403,8 +492,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-required"
+    <dd>User Group Name.</dd><dt class="property-required"
             title="Required">
         <span id="userstoreid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userstoreid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Store<wbr>Id</a>
@@ -412,8 +500,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd><dt class="property-optional"
+    <dd>User Store ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -421,8 +508,37 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd></dl>
+    <dd>User Group Description.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User Group Name.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_store_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_store_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>store_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User Store ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User Group Description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -436,8 +552,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-required"
+    <dd>User Group Name.</dd><dt class="property-required"
             title="Required">
         <span id="userstoreid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userstoreid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Store<wbr>Id</a>
@@ -445,8 +560,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd><dt class="property-optional"
+    <dd>User Store ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -454,8 +568,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd></dl>
+    <dd>User Group Description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -469,8 +582,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-required"
+    <dd>User Group Name.</dd><dt class="property-required"
             title="Required">
         <span id="userstoreid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userstoreid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Store<wbr>Id</a>
@@ -478,8 +590,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd><dt class="property-optional"
+    <dd>User Store ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -487,8 +598,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd></dl>
+    <dd>User Group Description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -502,8 +612,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-required"
+    <dd>User Group Name.</dd><dt class="property-required"
             title="Required">
         <span id="user_store_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_store_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>store_<wbr>id</a>
@@ -511,8 +620,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd><dt class="property-optional"
+    <dd>User Store ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -520,8 +628,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd></dl>
+    <dd>User Group Description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -535,8 +642,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-required"
+    <dd>User Group Name.</dd><dt class="property-required"
             title="Required">
         <span id="userstoreid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userstoreid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Store<wbr>Id</a>
@@ -544,8 +650,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd><dt class="property-optional"
+    <dd>User Store ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -553,8 +658,7 @@ The UserGroup resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd></dl>
+    <dd>User Group Description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -575,8 +679,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -590,8 +693,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +721,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -620,8 +735,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -635,8 +749,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -650,8 +763,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -661,122 +773,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing UserGroup resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UserGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">UserGroup</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UserGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">UserGroup</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">display_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">user_store_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> UserGroup</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUserGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UserGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UserGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUserGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UserGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UserGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">UserGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">UserGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">UserGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">UserGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingUserGroup</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ciam:UserGroup</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ciam_user_group</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -784,28 +935,31 @@ Get an existing UserGroup resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -813,28 +967,31 @@ Get an existing UserGroup resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -854,8 +1011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_csharp" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -863,8 +1019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userstoreid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userstoreid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Store<wbr>Id</a>
@@ -872,8 +1027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd></dl>
+    <dd>User Store ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +1041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_go" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -896,8 +1049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userstoreid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userstoreid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Store<wbr>Id</a>
@@ -905,8 +1057,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd></dl>
+    <dd>User Store ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User Group Description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User Group Name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_store_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_store_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>store_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User Store ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -920,8 +1101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_java" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -929,8 +1109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userstoreid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userstoreid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Store<wbr>Id</a>
@@ -938,8 +1117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd></dl>
+    <dd>User Store ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -953,8 +1131,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_nodejs" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -962,8 +1139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userstoreid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userstoreid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Store<wbr>Id</a>
@@ -971,8 +1147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd></dl>
+    <dd>User Store ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -986,8 +1161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_display_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_display_name_python" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
@@ -995,8 +1169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_store_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_store_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>store_<wbr>id</a>
@@ -1004,8 +1177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd></dl>
+    <dd>User Store ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1019,8 +1191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Group Description.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_displayname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_displayname_yaml" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -1028,8 +1199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Group Name.</p>
-</dd><dt class="property-optional"
+    <dd>User Group Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userstoreid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userstoreid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Store<wbr>Id</a>
@@ -1037,8 +1207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User Store ID.</p>
-</dd></dl>
+    <dd>User Store ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1053,12 +1222,15 @@ The following state arguments are supported:
 
 
 
-ciam user_group can be imported using the id, e.g.
+ciam userGroup can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1070,7 +1242,6 @@ $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#use
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

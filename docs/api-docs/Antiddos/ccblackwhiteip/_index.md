@@ -2,9 +2,11 @@
 ---
 title: "CcBlackWhiteIp"
 title_tag: "tencentcloud.Antiddos.CcBlackWhiteIp"
-meta_desc: "Documentation for the tencentcloud.Antiddos.CcBlackWhiteIp resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a antiddos cc black white ip"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,82 +18,73 @@ Provides a resource to create a antiddos cc black white ip
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const ccBlackWhiteIp = new tencentcloud.antiddos.CcBlackWhiteIp("ccBlackWhiteIp", {
+const ccBlackWhiteIp = new tencentcloud.antiddos.CcBlackWhiteIp("cc_black_white_ip", {
+    instanceId: "bgpip-xxxxxx",
     blackWhiteIp: {
         ip: "1.2.3.5",
         mask: 0,
     },
-    domain: "t.baidu.com",
-    instanceId: "bgpip-xxxxxx",
-    ip: "xxx.xxx.xxx.xxx",
-    protocol: "http",
     type: "black",
+    ip: "xxx.xxx.xxx.xxx",
+    domain: "t.baidu.com",
+    protocol: "http",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-cc_black_white_ip = tencentcloud.antiddos.CcBlackWhiteIp("ccBlackWhiteIp",
-    black_white_ip=tencentcloud.antiddos.CcBlackWhiteIpBlackWhiteIpArgs(
-        ip="1.2.3.5",
-        mask=0,
-    ),
-    domain="t.baidu.com",
+cc_black_white_ip = tencentcloud.antiddos.CcBlackWhiteIp("cc_black_white_ip",
     instance_id="bgpip-xxxxxx",
+    black_white_ip={
+        "ip": "1.2.3.5",
+        "mask": 0,
+    },
+    type="black",
     ip="xxx.xxx.xxx.xxx",
-    protocol="http",
-    type="black")
+    domain="t.baidu.com",
+    protocol="http")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var ccBlackWhiteIp = new Tencentcloud.Antiddos.CcBlackWhiteIp("ccBlackWhiteIp", new()
-    {
-        BlackWhiteIp = new Tencentcloud.Antiddos.Inputs.CcBlackWhiteIpBlackWhiteIpArgs
-        {
-            Ip = "1.2.3.5",
-            Mask = 0,
-        },
-        Domain = "t.baidu.com",
-        InstanceId = "bgpip-xxxxxx",
-        Ip = "xxx.xxx.xxx.xxx",
-        Protocol = "http",
-        Type = "black",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/antiddos"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Antiddos.NewCcBlackWhiteIp(ctx, "ccBlackWhiteIp", &Antiddos.CcBlackWhiteIpArgs{
+		_, err := antiddos.NewCcBlackWhiteIp(ctx, "cc_black_white_ip", &antiddos.CcBlackWhiteIpArgs{
+			InstanceId: pulumi.String("bgpip-xxxxxx"),
 			BlackWhiteIp: &antiddos.CcBlackWhiteIpBlackWhiteIpArgs{
 				Ip:   pulumi.String("1.2.3.5"),
 				Mask: pulumi.Int(0),
 			},
-			Domain:     pulumi.String("t.baidu.com"),
-			InstanceId: pulumi.String("bgpip-xxxxxx"),
-			Ip:         pulumi.String("xxx.xxx.xxx.xxx"),
-			Protocol:   pulumi.String("http"),
-			Type:       pulumi.String("black"),
+			Type:     pulumi.String("black"),
+			Ip:       pulumi.String("xxx.xxx.xxx.xxx"),
+			Domain:   pulumi.String("t.baidu.com"),
+			Protocol: pulumi.String("http"),
 		})
 		if err != nil {
 			return err
@@ -100,6 +93,40 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var ccBlackWhiteIp = new Tencentcloud.Antiddos.CcBlackWhiteIp("cc_black_white_ip", new()
+    {
+        InstanceId = "bgpip-xxxxxx",
+        BlackWhiteIp = new Tencentcloud.Antiddos.Inputs.CcBlackWhiteIpBlackWhiteIpArgs
+        {
+            Ip = "1.2.3.5",
+            Mask = 0,
+        },
+        Type = "black",
+        Ip = "xxx.xxx.xxx.xxx",
+        Domain = "t.baidu.com",
+        Protocol = "http",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -109,8 +136,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Antiddos.CcBlackWhiteIp;
 import com.pulumi.tencentcloud.Antiddos.CcBlackWhiteIpArgs;
 import com.pulumi.tencentcloud.Antiddos.inputs.CcBlackWhiteIpBlackWhiteIpArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -122,99 +149,157 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var ccBlackWhiteIp = new CcBlackWhiteIp("ccBlackWhiteIp", CcBlackWhiteIpArgs.builder()        
+        var ccBlackWhiteIp = new CcBlackWhiteIp("ccBlackWhiteIp", CcBlackWhiteIpArgs.builder()
+            .instanceId("bgpip-xxxxxx")
             .blackWhiteIp(CcBlackWhiteIpBlackWhiteIpArgs.builder()
                 .ip("1.2.3.5")
                 .mask(0)
                 .build())
-            .domain("t.baidu.com")
-            .instanceId("bgpip-xxxxxx")
-            .ip("xxx.xxx.xxx.xxx")
-            .protocol("http")
             .type("black")
+            .ip("xxx.xxx.xxx.xxx")
+            .domain("t.baidu.com")
+            .protocol("http")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   ccBlackWhiteIp:
     type: tencentcloud:Antiddos:CcBlackWhiteIp
+    name: cc_black_white_ip
     properties:
+      instanceId: bgpip-xxxxxx
       blackWhiteIp:
         ip: 1.2.3.5
         mask: 0
-      domain: t.baidu.com
-      instanceId: bgpip-xxxxxx
-      ip: xxx.xxx.xxx.xxx
-      protocol: http
       type: black
+      ip: xxx.xxx.xxx.xxx
+      domain: t.baidu.com
+      protocol: http
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_antiddos_ccblackwhiteip" "cc_black_white_ip" {
+  instance_id = "bgpip-xxxxxx"
+  black_white_ip = {
+    ip   = "1.2.3.5"
+    mask = 0
+  }
+  type     = "black"
+  ip       = "xxx.xxx.xxx.xxx"
+  domain   = "t.baidu.com"
+  protocol = "http"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61383)
+  - [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+* Read: [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+* Delete: [DeleteCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61374)
 
 
 ## Create CcBlackWhiteIp Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                   <span class="nx">black_white_ip</span><span class="p">:</span> <span class="nx">Optional[_antiddos.CcBlackWhiteIpBlackWhiteIpArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">black_white_ip</span><span class="p">:</span> <span class="nx">Optional[CcBlackWhiteIpBlackWhiteIpArgs]</span> = None<span class="p">,</span>
                    <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCcBlackWhiteIp</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcBlackWhiteIp</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCcBlackWhiteIp</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcBlackWhiteIp</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">CcBlackWhiteIp</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcBlackWhiteIpArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:CcBlackWhiteIp</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:CcBlackWhiteIp</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_antiddos_cc_black_white_ip&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -235,7 +320,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -352,11 +437,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## CcBlackWhiteIp Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -370,10 +463,9 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackwhiteip_csharp" style="color: inherit; text-decoration: inherit;">Black<wbr>White<wbr>Ip</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
+        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Black white ip.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -381,8 +473,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -390,8 +481,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -399,8 +489,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip address.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -408,8 +497,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>protocol.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -417,8 +505,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -432,8 +519,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Black white ip.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -441,8 +527,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -450,8 +535,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -459,8 +543,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip address.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -468,8 +551,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>protocol.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -477,8 +559,61 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="black_white_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#black_white_ip_hcl" style="color: inherit; text-decoration: inherit;">black_<wbr>white_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">object</a></span>
+    </dt>
+    <dd>Black white ip.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>domain.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ip address.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>protocol.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -490,10 +625,9 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackwhiteip_java" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ip</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
+        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Black white ip.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -501,8 +635,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -510,8 +643,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -519,8 +651,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip address.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -528,8 +659,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>protocol.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -537,8 +667,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -550,10 +679,9 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackwhiteip_nodejs" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ip</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
+        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Black white ip.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -561,8 +689,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -570,8 +697,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -579,8 +705,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip address.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -588,8 +713,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>protocol.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -597,8 +721,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -612,8 +735,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Black white ip.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -621,8 +743,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -630,8 +751,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -639,8 +759,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip address.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -648,8 +767,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>protocol.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -657,8 +775,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -672,8 +789,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Property Map</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Black white ip.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -681,8 +797,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -690,8 +805,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -699,8 +813,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip address.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -708,8 +821,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>protocol.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -717,8 +829,7 @@ The CcBlackWhiteIp resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -739,8 +850,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -754,8 +864,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -769,8 +892,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -784,8 +906,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -799,8 +920,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -814,8 +934,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -825,125 +944,164 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing CcBlackWhiteIp resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CcBlackWhiteIpState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CcBlackWhiteIp</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CcBlackWhiteIpState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CcBlackWhiteIp</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">black_white_ip</span><span class="p">:</span> <span class="nx">Optional[_antiddos.CcBlackWhiteIpBlackWhiteIpArgs]</span> = None<span class="p">,</span>
+        <span class="nx">black_white_ip</span><span class="p">:</span> <span class="nx">Optional[CcBlackWhiteIpBlackWhiteIpArgs]</span> = None<span class="p">,</span>
         <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> CcBlackWhiteIp</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCcBlackWhiteIp<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CcBlackWhiteIpState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcBlackWhiteIp</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCcBlackWhiteIp<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CcBlackWhiteIpState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcBlackWhiteIp</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CcBlackWhiteIp</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcBlackWhiteIpState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CcBlackWhiteIp</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcBlackWhiteIpState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CcBlackWhiteIp</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcBlackWhiteIpState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CcBlackWhiteIp</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcBlackWhiteIpState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCcBlackWhiteIp</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Antiddos:CcBlackWhiteIp</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_antiddos_cc_black_white_ip</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcBlackWhiteIpState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcBlackWhiteIpState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -951,28 +1109,31 @@ Get an existing CcBlackWhiteIp resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcBlackWhiteIpState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -980,28 +1141,31 @@ Get an existing CcBlackWhiteIp resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcBlackWhiteIpState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1019,10 +1183,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blackwhiteip_csharp" style="color: inherit; text-decoration: inherit;">Black<wbr>White<wbr>Ip</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
+        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Black white ip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1030,8 +1193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1039,8 +1201,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1048,8 +1209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ip address.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1057,8 +1217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1066,8 +1225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1081,8 +1239,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Black white ip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1090,8 +1247,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1099,8 +1255,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1108,8 +1263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ip address.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1117,8 +1271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1126,8 +1279,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_black_white_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_black_white_ip_hcl" style="color: inherit; text-decoration: inherit;">black_<wbr>white_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">object</a></span>
+    </dt>
+    <dd>Black white ip.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>domain.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ip address.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,10 +1345,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blackwhiteip_java" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ip</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
+        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Black white ip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1150,8 +1355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1159,8 +1363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1168,8 +1371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ip address.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1177,8 +1379,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1186,8 +1387,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1199,10 +1399,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blackwhiteip_nodejs" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ip</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
+        <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Black white ip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1210,8 +1409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1219,8 +1417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1228,8 +1425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ip address.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1237,8 +1433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1246,8 +1441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1261,8 +1455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Black white ip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1270,8 +1463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1279,8 +1471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1288,8 +1479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ip address.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1297,8 +1487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1306,8 +1495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1321,8 +1509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccblackwhiteipblackwhiteip">Property Map</a></span>
     </dt>
-    <dd><p>Black white ip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Black white ip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1330,8 +1517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1339,8 +1525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1348,8 +1533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ip address.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1357,8 +1541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1366,8 +1549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white(whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [black(blacklist IP), white(whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1382,7 +1564,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="ccblackwhiteipblackwhiteip">Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip</h4>
+<h4 id="ccblackwhiteipblackwhiteip">
+Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Black<wbr>White<wbr>Ip<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1394,8 +1578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required"
+    <dd>ip address.</dd><dt class="property-required"
             title="Required">
         <span id="mask_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mask_csharp" style="color: inherit; text-decoration: inherit;">Mask</a>
@@ -1403,8 +1586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ip mask.</p>
-</dd></dl>
+    <dd>ip mask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1418,8 +1600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required"
+    <dd>ip address.</dd><dt class="property-required"
             title="Required">
         <span id="mask_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mask_go" style="color: inherit; text-decoration: inherit;">Mask</a>
@@ -1427,8 +1608,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ip mask.</p>
-</dd></dl>
+    <dd>ip mask.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ip address.</dd><dt class="property-required"
+            title="Required">
+        <span id="mask_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mask_hcl" style="color: inherit; text-decoration: inherit;">mask</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ip mask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1442,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required"
+    <dd>ip address.</dd><dt class="property-required"
             title="Required">
         <span id="mask_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mask_java" style="color: inherit; text-decoration: inherit;">mask</a>
@@ -1451,8 +1652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ip mask.</p>
-</dd></dl>
+    <dd>ip mask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1466,8 +1666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required"
+    <dd>ip address.</dd><dt class="property-required"
             title="Required">
         <span id="mask_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mask_nodejs" style="color: inherit; text-decoration: inherit;">mask</a>
@@ -1475,8 +1674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ip mask.</p>
-</dd></dl>
+    <dd>ip mask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1490,8 +1688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required"
+    <dd>ip address.</dd><dt class="property-required"
             title="Required">
         <span id="mask_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mask_python" style="color: inherit; text-decoration: inherit;">mask</a>
@@ -1499,8 +1696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ip mask.</p>
-</dd></dl>
+    <dd>ip mask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1514,8 +1710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip address.</p>
-</dd><dt class="property-required"
+    <dd>ip address.</dd><dt class="property-required"
             title="Required">
         <span id="mask_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mask_yaml" style="color: inherit; text-decoration: inherit;">mask</a>
@@ -1523,8 +1718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ip mask.</p>
-</dd></dl>
+    <dd>ip mask.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1532,12 +1726,15 @@ The following state arguments are supported:
 
 
 
-antiddos cc_black_white_ip can be imported using the id, e.g.
+antiddos ccBlackWhiteIp can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1549,7 +1746,6 @@ $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_whi
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

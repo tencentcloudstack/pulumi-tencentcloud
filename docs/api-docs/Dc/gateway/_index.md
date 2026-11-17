@@ -2,9 +2,11 @@
 ---
 title: "Gateway"
 title_tag: "tencentcloud.Dc.Gateway"
-meta_desc: "Documentation for the tencentcloud.Dc.Gateway resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to creating direct connect gateway instance. NOTE: Currently, it is not supported to set cnnRouteType to BGP simultaneously during the."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,73 +16,97 @@ no_edit_this_page: true
 
 Provides a resource to creating direct connect gateway instance.
 
+> **NOTE:** Currently, it is not supported to set `cnnRouteType` to `BGP` simultaneously during the creation of resource `tencentcloud.Dc.Gateway`(only configuration modification is supported); This feature requires contacting the VPC product team to be added to the whitelist.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### If networkType is VPC
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const main = new tencentcloud.vpc.Instance("main", {cidrBlock: "10.0.0.0/16"});
-const vpcMain = new tencentcloud.dc.Gateway("vpcMain", {
-    networkInstanceId: main.id,
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
+});
+// create dc gateway
+const example = new tencentcloud.dc.Gateway("example", {
+    name: "tf-example",
+    networkInstanceId: vpc.id,
     networkType: "VPC",
-    gatewayType: "NAT",
+    gatewayType: "NORMAL",
+    tags: {
+        Environment: "production",
+        Owner: "ops-team",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-main = tencentcloud.vpc.Instance("main", cidr_block="10.0.0.0/16")
-vpc_main = tencentcloud.dc.Gateway("vpcMain",
-    network_instance_id=main.id,
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create dc gateway
+example = tencentcloud.dc.Gateway("example",
+    name="tf-example",
+    network_instance_id=vpc.id,
     network_type="VPC",
-    gateway_type="NAT")
+    gateway_type="NORMAL",
+    tags={
+        "Environment": "production",
+        "Owner": "ops-team",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var main = new Tencentcloud.Vpc.Instance("main", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var vpcMain = new Tencentcloud.Dc.Gateway("vpcMain", new()
-    {
-        NetworkInstanceId = main.Id,
-        NetworkType = "VPC",
-        GatewayType = "NAT",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		main, err := Vpc.NewInstance(ctx, "main", &Vpc.InstanceArgs{
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Dc.NewGateway(ctx, "vpcMain", &Dc.GatewayArgs{
-			NetworkInstanceId: main.ID(),
+		// create dc gateway
+		_, err = dc.NewGateway(ctx, "example", &dc.GatewayArgs{
+			Name:              pulumi.String("tf-example"),
+			NetworkInstanceId: vpc2.ID().ToIDOutput().ToStringOutput(),
 			NetworkType:       pulumi.String("VPC"),
-			GatewayType:       pulumi.String("NAT"),
+			GatewayType:       pulumi.String("NORMAL"),
+			Tags: pulumi.StringMap{
+				"Environment": pulumi.String("production"),
+				"Owner":       pulumi.String("ops-team"),
+			},
 		})
 		if err != nil {
 			return err
@@ -89,6 +115,47 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create dc gateway
+    var example = new Tencentcloud.Dc.Gateway("example", new()
+    {
+        Name = "tf-example",
+        NetworkInstanceId = vpc.Id,
+        NetworkType = "VPC",
+        GatewayType = "NORMAL",
+        Tags = 
+        {
+            { "Environment", "production" },
+            { "Owner", "ops-team" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -99,8 +166,8 @@ import com.pulumi.tencentcloud.Vpc.Instance;
 import com.pulumi.tencentcloud.Vpc.InstanceArgs;
 import com.pulumi.tencentcloud.Dc.Gateway;
 import com.pulumi.tencentcloud.Dc.GatewayArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -112,94 +179,658 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var main = new Instance("main", InstanceArgs.builder()        
+        // create vpc
+        var vpc = new Instance("vpc", InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("vpc")
             .build());
 
-        var vpcMain = new Gateway("vpcMain", GatewayArgs.builder()        
-            .networkInstanceId(main.id())
+        // create dc gateway
+        var example = new Gateway("example", GatewayArgs.builder()
+            .name("tf-example")
+            .networkInstanceId(vpc.id())
             .networkType("VPC")
-            .gatewayType("NAT")
+            .gatewayType("NORMAL")
+            .tags(Map.ofEntries(
+                Map.entry("Environment", "production"),
+                Map.entry("Owner", "ops-team")
+            ))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  main:
+  # create vpc
+  vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
-  vpcMain:
+      name: vpc
+  # create dc gateway
+  example:
     type: tencentcloud:Dc:Gateway
     properties:
-      networkInstanceId: ${main.id}
+      name: tf-example
+      networkInstanceId: ${vpc.id}
       networkType: VPC
-      gatewayType: NAT
+      gatewayType: NORMAL
+      tags:
+        Environment: production
+        Owner: ops-team
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create dc gateway
+resource "tencentcloud_dc_gateway" "example" {
+  name                = "tf-example"
+  network_instance_id = tencentcloud_vpc_instance.vpc.id
+  network_type        = "VPC"
+  gateway_type        = "NORMAL"
+  tags = {
+    "Environment" = "production"
+    "Owner"       = "ops-team"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### If networkType is CCN
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+// create ccn
+const ccn = new tencentcloud.ccn.Instance("ccn", {
+    name: "tf-example",
+    description: "desc.",
+    qos: "AG",
+    chargeType: "PREPAID",
+    bandwidthLimitType: "INTER_REGION_LIMIT",
+    tags: {
+        createBy: "terraform",
+    },
+});
+// create dc gateway
+const example = new tencentcloud.dc.Gateway("example", {
+    name: "tf-example",
+    networkInstanceId: ccn.id,
+    networkType: "CCN",
+    gatewayType: "NORMAL",
+    tags: {
+        Team: "networking",
+        Purpose: "production",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+# create ccn
+ccn = tencentcloud.ccn.Instance("ccn",
+    name="tf-example",
+    description="desc.",
+    qos="AG",
+    charge_type="PREPAID",
+    bandwidth_limit_type="INTER_REGION_LIMIT",
+    tags={
+        "createBy": "terraform",
+    })
+# create dc gateway
+example = tencentcloud.dc.Gateway("example",
+    name="tf-example",
+    network_instance_id=ccn.id,
+    network_type="CCN",
+    gateway_type="NORMAL",
+    tags={
+        "Team": "networking",
+        "Purpose": "production",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		// create ccn
+		ccn2, err := ccn.NewInstance(ctx, "ccn", &ccn.InstanceArgs{
+			Name:               pulumi.String("tf-example"),
+			Description:        pulumi.String("desc."),
+			Qos:                pulumi.String("AG"),
+			ChargeType:         pulumi.String("PREPAID"),
+			BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create dc gateway
+		_, err = dc.NewGateway(ctx, "example", &dc.GatewayArgs{
+			Name:              pulumi.String("tf-example"),
+			NetworkInstanceId: ccn2.ID().ToIDOutput().ToStringOutput(),
+			NetworkType:       pulumi.String("CCN"),
+			GatewayType:       pulumi.String("NORMAL"),
+			Tags: pulumi.StringMap{
+				"Team":    pulumi.String("networking"),
+				"Purpose": pulumi.String("production"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    // create ccn
+    var ccn = new Tencentcloud.Ccn.Instance("ccn", new()
+    {
+        Name = "tf-example",
+        Description = "desc.",
+        Qos = "AG",
+        ChargeType = "PREPAID",
+        BandwidthLimitType = "INTER_REGION_LIMIT",
+        Tags = 
+        {
+            { "createBy", "terraform" },
+        },
+    });
+
+    // create dc gateway
+    var example = new Tencentcloud.Dc.Gateway("example", new()
+    {
+        Name = "tf-example",
+        NetworkInstanceId = ccn.Id,
+        NetworkType = "CCN",
+        GatewayType = "NORMAL",
+        Tags = 
+        {
+            { "Team", "networking" },
+            { "Purpose", "production" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Ccn.Instance;
+import com.pulumi.tencentcloud.Ccn.InstanceArgs;
+import com.pulumi.tencentcloud.Dc.Gateway;
+import com.pulumi.tencentcloud.Dc.GatewayArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        // create ccn
+        var ccn = new Instance("ccn", InstanceArgs.builder()
+            .name("tf-example")
+            .description("desc.")
+            .qos("AG")
+            .chargeType("PREPAID")
+            .bandwidthLimitType("INTER_REGION_LIMIT")
+            .tags(Map.of("createBy", "terraform"))
+            .build());
+
+        // create dc gateway
+        var example = new Gateway("example", GatewayArgs.builder()
+            .name("tf-example")
+            .networkInstanceId(ccn.id())
+            .networkType("CCN")
+            .gatewayType("NORMAL")
+            .tags(Map.ofEntries(
+                Map.entry("Team", "networking"),
+                Map.entry("Purpose", "production")
+            ))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  # create ccn
+  ccn:
+    type: tencentcloud:Ccn:Instance
+    properties:
+      name: tf-example
+      description: desc.
+      qos: AG
+      chargeType: PREPAID
+      bandwidthLimitType: INTER_REGION_LIMIT
+      tags:
+        createBy: terraform
+  # create dc gateway
+  example:
+    type: tencentcloud:Dc:Gateway
+    properties:
+      name: tf-example
+      networkInstanceId: ${ccn.id}
+      networkType: CCN
+      gatewayType: NORMAL
+      tags:
+        Team: networking
+        Purpose: production
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+// create ccn
+resource "tencentcloud_ccn_instance" "ccn" {
+  name                 = "tf-example"
+  description          = "desc."
+  qos                  = "AG"
+  charge_type          = "PREPAID"
+  bandwidth_limit_type = "INTER_REGION_LIMIT"
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+// create dc gateway
+resource "tencentcloud_dc_gateway" "example" {
+  name                = "tf-example"
+  network_instance_id = tencentcloud_ccn_instance.ccn.id
+  network_type        = "CCN"
+  gateway_type        = "NORMAL"
+  tags = {
+    "Team"    = "networking"
+    "Purpose" = "production"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Update tags
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.dc.Gateway("example", {
+    name: "tf-example",
+    networkInstanceId: ccn.id,
+    networkType: "CCN",
+    gatewayType: "NORMAL",
+    tags: {
+        Environment: "staging",
+        Team: "devops",
+        CostCenter: "IT-001",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.dc.Gateway("example",
+    name="tf-example",
+    network_instance_id=ccn["id"],
+    network_type="CCN",
+    gateway_type="NORMAL",
+    tags={
+        "Environment": "staging",
+        "Team": "devops",
+        "CostCenter": "IT-001",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dc.NewGateway(ctx, "example", &dc.GatewayArgs{
+			Name:              pulumi.String("tf-example"),
+			NetworkInstanceId: pulumi.Any(ccn.Id),
+			NetworkType:       pulumi.String("CCN"),
+			GatewayType:       pulumi.String("NORMAL"),
+			Tags: pulumi.StringMap{
+				"Environment": pulumi.String("staging"),
+				"Team":        pulumi.String("devops"),
+				"CostCenter":  pulumi.String("IT-001"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Dc.Gateway("example", new()
+    {
+        Name = "tf-example",
+        NetworkInstanceId = ccn.Id,
+        NetworkType = "CCN",
+        GatewayType = "NORMAL",
+        Tags = 
+        {
+            { "Environment", "staging" },
+            { "Team", "devops" },
+            { "CostCenter", "IT-001" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Dc.Gateway;
+import com.pulumi.tencentcloud.Dc.GatewayArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Gateway("example", GatewayArgs.builder()
+            .name("tf-example")
+            .networkInstanceId(ccn.id())
+            .networkType("CCN")
+            .gatewayType("NORMAL")
+            .tags(Map.ofEntries(
+                Map.entry("Environment", "staging"),
+                Map.entry("Team", "devops"),
+                Map.entry("CostCenter", "IT-001")
+            ))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Dc:Gateway
+    properties:
+      name: tf-example
+      networkInstanceId: ${ccn.id}
+      networkType: CCN
+      gatewayType: NORMAL
+      tags:
+        Environment: staging
+        Team: devops
+        CostCenter: IT-001
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dc_gateway" "example" {
+  name                = "tf-example"
+  network_instance_id = ccn.id
+  network_type        = "CCN"
+  gateway_type        = "NORMAL"
+  tags = {
+    "Environment" = "staging"
+    "Team"        = "devops"
+    "CostCenter"  = "IT-001"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDirectConnectGateway](https://www.tencentcloud.com/document/api/215/36915)
+  - [ModifyDirectConnectGatewayAttribute](https://www.tencentcloud.com/document/api/215/36912)
+* Read:
+  - [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyDirectConnectGatewayAttribute](https://www.tencentcloud.com/document/api/215/36912)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete: [DeleteDirectConnectGateway](https://www.tencentcloud.com/document/api/215/36914)
 
 
 ## Create Gateway Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-            <span class="nx">gateway_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">network_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+            <span class="nx">network_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">cnn_route_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">gateway_asn</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+            <span class="nx">gateway_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">ha_zone_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">mode_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+            <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGateway</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGateway</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dc:Gateway</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dc:Gateway</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dc_gateway&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -220,7 +851,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -337,11 +968,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Gateway Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -357,8 +996,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -366,8 +1004,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cnnroutetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_csharp" style="color: inherit; text-decoration: inherit;">Cnn<wbr>Route<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gatewayasn_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayasn_csharp" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gatewaytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_csharp" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Type</a>
@@ -375,8 +1028,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="hazonegroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hazonegroupid_csharp" style="color: inherit; text-decoration: inherit;">Ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modetype_csharp" style="color: inherit; text-decoration: inherit;">Mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -384,8 +1052,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd></dl>
+    <dd>Name of the DCG.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -399,8 +1082,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -408,8 +1090,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cnnroutetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_go" style="color: inherit; text-decoration: inherit;">Cnn<wbr>Route<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gatewayasn_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayasn_go" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gatewaytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_go" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Type</a>
@@ -417,8 +1114,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="hazonegroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hazonegroupid_go" style="color: inherit; text-decoration: inherit;">Ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modetype_go" style="color: inherit; text-decoration: inherit;">Mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -426,8 +1138,109 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd></dl>
+    <dd>Name of the DCG.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="network_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_instance_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cnn_route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnn_route_type_hcl" style="color: inherit; text-decoration: inherit;">cnn_<wbr>route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gateway_asn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_asn_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gateway_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_type_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="ha_zone_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ha_zone_group_id_hcl" style="color: inherit; text-decoration: inherit;">ha_<wbr>zone_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mode_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_type_hcl" style="color: inherit; text-decoration: inherit;">mode_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DCG.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -441,8 +1254,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -450,8 +1262,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cnnroutetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_java" style="color: inherit; text-decoration: inherit;">cnn<wbr>Route<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gatewayasn_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayasn_java" style="color: inherit; text-decoration: inherit;">gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gatewaytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_java" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -459,8 +1286,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="hazonegroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hazonegroupid_java" style="color: inherit; text-decoration: inherit;">ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modetype_java" style="color: inherit; text-decoration: inherit;">mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -468,8 +1310,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd></dl>
+    <dd>Name of the DCG.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +1340,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -492,8 +1348,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cnnroutetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_nodejs" style="color: inherit; text-decoration: inherit;">cnn<wbr>Route<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gatewayasn_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayasn_nodejs" style="color: inherit; text-decoration: inherit;">gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gatewaytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_nodejs" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -501,8 +1372,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="hazonegroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hazonegroupid_nodejs" style="color: inherit; text-decoration: inherit;">ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modetype_nodejs" style="color: inherit; text-decoration: inherit;">mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -510,8 +1396,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd></dl>
+    <dd>Name of the DCG.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +1426,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -534,8 +1434,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cnn_route_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnn_route_type_python" style="color: inherit; text-decoration: inherit;">cnn_<wbr>route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gateway_asn_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_asn_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gateway_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_type_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>type</a>
@@ -543,8 +1458,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="ha_zone_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ha_zone_group_id_python" style="color: inherit; text-decoration: inherit;">ha_<wbr>zone_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mode_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_type_python" style="color: inherit; text-decoration: inherit;">mode_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -552,8 +1482,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd></dl>
+    <dd>Name of the DCG.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -567,8 +1512,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -576,8 +1520,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cnnroutetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_yaml" style="color: inherit; text-decoration: inherit;">cnn<wbr>Route<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gatewayasn_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayasn_yaml" style="color: inherit; text-decoration: inherit;">gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gatewaytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewaytype_yaml" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -585,8 +1544,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="hazonegroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hazonegroupid_yaml" style="color: inherit; text-decoration: inherit;">ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modetype_yaml" style="color: inherit; text-decoration: inherit;">mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -594,8 +1568,23 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd></dl>
+    <dd>Name of the DCG.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -610,23 +1599,13 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-"
             title="">
-        <span id="cnnroutetype_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_csharp" style="color: inherit; text-decoration: inherit;">Cnn<wbr>Route<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-"
-            title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="enablebgp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Bgp</a>
@@ -634,8 +1613,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -643,8 +1621,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -652,23 +1629,13 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-"
             title="">
-        <span id="cnnroutetype_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_go" style="color: inherit; text-decoration: inherit;">Cnn<wbr>Route<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-"
-            title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="enablebgp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Bgp</a>
@@ -676,8 +1643,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -685,8 +1651,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-"
+            title="">
+        <span id="enable_bgp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_bgp_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -694,23 +1689,13 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
-        <span id="cnnroutetype_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_java" style="color: inherit; text-decoration: inherit;">cnn<wbr>Route<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-"
-            title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="enablebgp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -718,8 +1703,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -727,8 +1711,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -736,23 +1719,13 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-"
             title="">
-        <span id="cnnroutetype_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_nodejs" style="color: inherit; text-decoration: inherit;">cnn<wbr>Route<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-"
-            title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="enablebgp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -760,8 +1733,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -769,8 +1741,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,23 +1749,13 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-"
             title="">
-        <span id="cnn_route_type_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnn_route_type_python" style="color: inherit; text-decoration: inherit;">cnn_<wbr>route_<wbr>type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-"
-            title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="enable_bgp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_bgp_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>bgp</a>
@@ -802,8 +1763,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -811,8 +1771,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -820,23 +1779,13 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-"
             title="">
-        <span id="cnnroutetype_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnnroutetype_yaml" style="color: inherit; text-decoration: inherit;">cnn<wbr>Route<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-"
-            title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="enablebgp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablebgp_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -844,8 +1793,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -853,8 +1801,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -864,126 +1811,170 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Gateway resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Gateway</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Gateway</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">cnn_route_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">enable_bgp</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">gateway_asn</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">gateway_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">ha_zone_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">mode_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">network_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Gateway</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+        <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Gateway</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGateway<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGateway<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingGateway</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dc:Gateway</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dc_gateway</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -991,28 +1982,31 @@ Get an existing Gateway resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1020,28 +2014,31 @@ Get an existing Gateway resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1061,8 +2058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1070,8 +2066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablebgp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablebgp_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Bgp</a>
@@ -1079,8 +2074,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_gatewayasn_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewayasn_csharp" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_gatewaytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewaytype_csharp" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Type</a>
@@ -1088,8 +2090,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_hazonegroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hazonegroupid_csharp" style="color: inherit; text-decoration: inherit;">Ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_modetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modetype_csharp" style="color: inherit; text-decoration: inherit;">Mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1097,8 +2114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the DCG.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Instance<wbr>Id</a>
@@ -1106,8 +2122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1115,8 +2130,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd></dl>
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1130,8 +2160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1139,8 +2168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablebgp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablebgp_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Bgp</a>
@@ -1148,8 +2176,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_gatewayasn_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewayasn_go" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_gatewaytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewaytype_go" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Type</a>
@@ -1157,8 +2192,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_hazonegroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hazonegroupid_go" style="color: inherit; text-decoration: inherit;">Ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_modetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modetype_go" style="color: inherit; text-decoration: inherit;">Mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1166,8 +2216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the DCG.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinstanceid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Instance<wbr>Id</a>
@@ -1175,8 +2224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1184,8 +2232,125 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd></dl>
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cnn_route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cnn_route_type_hcl" style="color: inherit; text-decoration: inherit;">cnn_<wbr>route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_bgp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_bgp_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_gateway_asn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gateway_asn_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_gateway_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gateway_type_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_ha_zone_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ha_zone_group_id_hcl" style="color: inherit; text-decoration: inherit;">ha_<wbr>zone_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mode_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_type_hcl" style="color: inherit; text-decoration: inherit;">mode_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DCG.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_network_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_instance_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1199,8 +2364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1208,8 +2372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablebgp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablebgp_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -1217,8 +2380,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_gatewayasn_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewayasn_java" style="color: inherit; text-decoration: inherit;">gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_gatewaytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewaytype_java" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -1226,8 +2396,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_hazonegroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hazonegroupid_java" style="color: inherit; text-decoration: inherit;">ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_modetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modetype_java" style="color: inherit; text-decoration: inherit;">mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1235,8 +2420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the DCG.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinstanceid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Instance<wbr>Id</a>
@@ -1244,8 +2428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1253,8 +2436,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd></dl>
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1268,8 +2466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1277,8 +2474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablebgp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablebgp_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -1286,8 +2482,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_gatewayasn_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewayasn_nodejs" style="color: inherit; text-decoration: inherit;">gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_gatewaytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewaytype_nodejs" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -1295,8 +2498,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_hazonegroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hazonegroupid_nodejs" style="color: inherit; text-decoration: inherit;">ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_modetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modetype_nodejs" style="color: inherit; text-decoration: inherit;">mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1304,8 +2522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the DCG.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Instance<wbr>Id</a>
@@ -1313,8 +2530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1322,8 +2538,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd></dl>
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1337,8 +2568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1346,8 +2576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_bgp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_bgp_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>bgp</a>
@@ -1355,8 +2584,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_gateway_asn_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gateway_asn_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_gateway_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gateway_type_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>type</a>
@@ -1364,8 +2600,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_ha_zone_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ha_zone_group_id_python" style="color: inherit; text-decoration: inherit;">ha_<wbr>zone_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mode_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mode_type_python" style="color: inherit; text-decoration: inherit;">mode_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1373,8 +2624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the DCG.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_network_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_instance_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>instance_<wbr>id</a>
@@ -1382,8 +2632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -1391,8 +2640,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd></dl>
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1406,8 +2670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CCN route. Valid value: <code>BGP</code> and <code>STATIC</code>. The property is available when the DCG type is CCN gateway and BGP enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1415,8 +2678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablebgp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablebgp_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Bgp</a>
@@ -1424,8 +2686,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the BGP is enabled.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether the BGP is enabled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_gatewayasn_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewayasn_yaml" style="color: inherit; text-decoration: inherit;">gateway<wbr>Asn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_gatewaytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_gatewaytype_yaml" style="color: inherit; text-decoration: inherit;">gateway<wbr>Type</a>
@@ -1433,8 +2702,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the gateway. Valid value: <code>NORMAL</code> and <code>NAT</code>. Default is <code>NORMAL</code>. NOTES: CCN only supports <code>NORMAL</code> and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_hazonegroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hazonegroupid_yaml" style="color: inherit; text-decoration: inherit;">ha<wbr>Zone<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of DC highly available placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_modetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modetype_yaml" style="color: inherit; text-decoration: inherit;">mode<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1442,8 +2726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DCG.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the DCG.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinstanceid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Instance<wbr>Id</a>
@@ -1451,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the <code>network_type</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>network_type</code> value is <code>CCN</code>, the available value is CCN instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>If the <code>networkType</code> value is <code>VPC</code>, the available value is VPC ID. But when the <code>networkType</code> value is <code>CCN</code>, the available value is CCN instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1460,8 +2742,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</p>
-</dd></dl>
+    <dd>Type of associated network. Valid value: <code>VPC</code> and <code>CCN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the DC gateway. Multiple tags can be set.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Availability zone where the direct connect gateway resides.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1476,12 +2773,15 @@ The following state arguments are supported:
 
 
 
-Direct connect gateway instance can be imported, e.g.
+Direct connect gateway instance can be imported, e.g. Tags will be imported automatically.
 
 ```sh
-$ pulumi import tencentcloud:Dc/gateway:Gateway instance dcg-id
+$ pulumi import tencentcloud:Dc/gateway:Gateway example dcg-dr1y0hu7
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1493,7 +2793,6 @@ $ pulumi import tencentcloud:Dc/gateway:Gateway instance dcg-id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

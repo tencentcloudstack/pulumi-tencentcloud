@@ -2,9 +2,11 @@
 ---
 title: "Secret"
 title_tag: "tencentcloud.Ssm.Secret"
-meta_desc: "Documentation for the tencentcloud.Ssm.Secret resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a SSM secret."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,34 +20,80 @@ Provide a resource to create a SSM secret.
 
 ### Create user defined secret
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.ssm.Secret("example", {
+    secretName: "tf-example",
     description: "desc.",
     isEnabled: true,
     recoveryWindowInDays: 0,
-    secretName: "tf-example",
     tags: {
         createBy: "terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.ssm.Secret("example",
+    secret_name="tf-example",
     description="desc.",
     is_enabled=True,
     recovery_window_in_days=0,
-    secret_name="tf-example",
     tags={
         "createBy": "terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ssm.NewSecret(ctx, "example", &ssm.SecretArgs{
+			SecretName:           pulumi.String("tf-example"),
+			Description:          pulumi.String("desc."),
+			IsEnabled:            pulumi.Bool(true),
+			RecoveryWindowInDays: pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -56,10 +104,10 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Ssm.Secret("example", new()
     {
+        SecretName = "tf-example",
         Description = "desc.",
         IsEnabled = true,
         RecoveryWindowInDays = 0,
-        SecretName = "tf-example",
         Tags = 
         {
             { "createBy", "terraform" },
@@ -68,32 +116,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ssm.NewSecret(ctx, "example", &Ssm.SecretArgs{
-			Description:          pulumi.String("desc."),
-			IsEnabled:            pulumi.Bool(true),
-			RecoveryWindowInDays: pulumi.Int(0),
-			SecretName:           pulumi.String("tf-example"),
-			Tags: pulumi.Map{
-				"createBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -102,8 +129,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ssm.Secret;
 import com.pulumi.tencentcloud.Ssm.SecretArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -115,60 +142,287 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Secret("example", SecretArgs.builder()        
+        var example = new Secret("example", SecretArgs.builder()
+            .secretName("tf-example")
             .description("desc.")
             .isEnabled(true)
             .recoveryWindowInDays(0)
-            .secretName("tf-example")
             .tags(Map.of("createBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Ssm:Secret
     properties:
+      secretName: tf-example
       description: desc.
       isEnabled: true
       recoveryWindowInDays: 0
-      secretName: tf-example
       tags:
         createBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Create redis secret
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_ssm_secret" "example" {
+  secret_name             = "tf-example"
+  description             = "desc."
+  is_enabled              = true
+  recovery_window_in_days = 0
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create user defined secret with soft key encryption
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.ssm.Secret("example", {
+    secretName: "tf-example",
+    description: "desc.",
+    isEnabled: true,
+    encryptType: 1,
+    recoveryWindowInDays: 0,
+    tags: {
+        createBy: "terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.ssm.Secret("example",
+    secret_name="tf-example",
+    description="desc.",
+    is_enabled=True,
+    encrypt_type=1,
+    recovery_window_in_days=0,
+    tags={
+        "createBy": "terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ssm.NewSecret(ctx, "example", &ssm.SecretArgs{
+			SecretName:           pulumi.String("tf-example"),
+			Description:          pulumi.String("desc."),
+			IsEnabled:            pulumi.Bool(true),
+			EncryptType:          pulumi.Int(1),
+			RecoveryWindowInDays: pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Ssm.Secret("example", new()
+    {
+        SecretName = "tf-example",
+        Description = "desc.",
+        IsEnabled = true,
+        EncryptType = 1,
+        RecoveryWindowInDays = 0,
+        Tags = 
+        {
+            { "createBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Ssm.Secret;
+import com.pulumi.tencentcloud.Ssm.SecretArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Secret("example", SecretArgs.builder()
+            .secretName("tf-example")
+            .description("desc.")
+            .isEnabled(true)
+            .encryptType(1)
+            .recoveryWindowInDays(0)
+            .tags(Map.of("createBy", "terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Ssm:Secret
+    properties:
+      secretName: tf-example
+      description: desc.
+      isEnabled: true
+      encryptType: 1
+      recoveryWindowInDays: 0
+      tags:
+        createBy: terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ssm_secret" "example" {
+  secret_name             = "tf-example"
+  description             = "desc."
+  is_enabled              = true
+  encrypt_type            = 1
+  recovery_window_in_days = 0
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create redis secret
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zone = tencentcloud.Redis.getZoneConfig({
+const zone = tencentcloud.redis.getZoneConfig({
     typeId: 8,
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
     availabilityZone: zone.then(zone => zone.lists?.[3]?.zone),
+    name: "subnet-example",
     cidrBlock: "10.0.0.0/16",
 });
-const exampleInstance = new tencentcloud.redis.Instance("exampleInstance", {
+const example = new tencentcloud.redis.Instance("example", {
     availabilityZone: zone.then(zone => zone.lists?.[3]?.zone),
     typeId: zone.then(zone => zone.lists?.[3]?.typeId),
     password: "Qwer@234",
     memSize: zone.then(zone => zone.lists?.[3]?.memSizes?.[0]),
     redisShardNum: zone.then(zone => zone.lists?.[3]?.redisShardNums?.[0]),
     redisReplicasNum: zone.then(zone => zone.lists?.[3]?.redisReplicasNums?.[0]),
+    name: "tf_example",
     port: 6379,
     vpcId: vpc.id,
     subnetId: subnet.id,
 });
-const exampleSecret = new tencentcloud.ssm.Secret("exampleSecret", {
+const exampleSecret = new tencentcloud.ssm.Secret("example", {
     secretName: "tf-example",
     description: "redis desc.",
     isEnabled: true,
@@ -176,7 +430,7 @@ const exampleSecret = new tencentcloud.ssm.Secret("exampleSecret", {
     additionalConfig: pulumi.jsonStringify({
         Region: "ap-guangzhou",
         Privilege: "r",
-        InstanceId: exampleInstance.id,
+        InstanceId: example.id,
         ReadonlyPolicy: ["master"],
         Remark: "for tf test",
     }),
@@ -186,29 +440,38 @@ const exampleSecret = new tencentcloud.ssm.Secret("exampleSecret", {
     recoveryWindowInDays: 0,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import json
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zone = tencentcloud.Redis.get_zone_config(type_id=8)
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zone = tencentcloud.redis.get_zone_config(type_id=8)
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
     availability_zone=zone.lists[3].zone,
+    name="subnet-example",
     cidr_block="10.0.0.0/16")
-example_instance = tencentcloud.redis.Instance("exampleInstance",
+example = tencentcloud.redis.Instance("example",
     availability_zone=zone.lists[3].zone,
     type_id=zone.lists[3].type_id,
     password="Qwer@234",
     mem_size=zone.lists[3].mem_sizes[0],
     redis_shard_num=zone.lists[3].redis_shard_nums[0],
     redis_replicas_num=zone.lists[3].redis_replicas_nums[0],
+    name="tf_example",
     port=6379,
     vpc_id=vpc.id,
     subnet_id=subnet.id)
-example_secret = tencentcloud.ssm.Secret("exampleSecret",
+example_secret = tencentcloud.ssm.Secret("example",
     secret_name="tf-example",
     description="redis desc.",
     is_enabled=True,
@@ -216,7 +479,7 @@ example_secret = tencentcloud.ssm.Secret("exampleSecret",
     additional_config=pulumi.Output.json_dumps({
         "Region": "ap-guangzhou",
         "Privilege": "r",
-        "InstanceId": example_instance.id,
+        "InstanceId": example.id,
         "ReadonlyPolicy": ["master"],
         "Remark": "for tf test",
     }),
@@ -225,72 +488,11 @@ example_secret = tencentcloud.ssm.Secret("exampleSecret",
     },
     recovery_window_in_days=0)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
-    {
-        TypeId = 8,
-    });
-
-    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
-    {
-        VpcId = vpc.Id,
-        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.Zone),
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var exampleInstance = new Tencentcloud.Redis.Instance("exampleInstance", new()
-    {
-        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.Zone),
-        TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.TypeId),
-        Password = "Qwer@234",
-        MemSize = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.MemSizes[0]),
-        RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.RedisShardNums[0]),
-        RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.RedisReplicasNums[0]),
-        Port = 6379,
-        VpcId = vpc.Id,
-        SubnetId = subnet.Id,
-    });
-
-    var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new()
-    {
-        SecretName = "tf-example",
-        Description = "redis desc.",
-        IsEnabled = true,
-        SecretType = 4,
-        AdditionalConfig = Output.JsonSerialize(Output.Create(new Dictionary<string, object?>
-        {
-            ["Region"] = "ap-guangzhou",
-            ["Privilege"] = "r",
-            ["InstanceId"] = exampleInstance.Id,
-            ["ReadonlyPolicy"] = new[]
-            {
-                "master",
-            },
-            ["Remark"] = "for tf test",
-        })),
-        Tags = 
-        {
-            { "createdBy", "terraform" },
-        },
-        RecoveryWindowInDays = 0,
-    });
-
-});
-```
 ```go
 package main
 
@@ -298,54 +500,57 @@ import (
 	"encoding/json"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
 			TypeId: pulumi.IntRef(8),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
 			CidrBlock: pulumi.String("10.0.0.0/16"),
 		})
 		if err != nil {
 			return err
 		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 			AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
+			Name:             pulumi.String("subnet-example"),
 			CidrBlock:        pulumi.String("10.0.0.0/16"),
 		})
 		if err != nil {
 			return err
 		}
-		exampleInstance, err := Redis.NewInstance(ctx, "exampleInstance", &Redis.InstanceArgs{
+		example, err := redis.NewInstance(ctx, "example", &redis.InstanceArgs{
 			AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
 			TypeId:           pulumi.Int(zone.Lists[3].TypeId),
 			Password:         pulumi.String("Qwer@234"),
 			MemSize:          pulumi.Int(zone.Lists[3].MemSizes[0]),
 			RedisShardNum:    pulumi.Int(zone.Lists[3].RedisShardNums[0]),
 			RedisReplicasNum: pulumi.Int(zone.Lists[3].RedisReplicasNums[0]),
+			Name:             pulumi.String("tf_example"),
 			Port:             pulumi.Int(6379),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
+		_, err = ssm.NewSecret(ctx, "example", &ssm.SecretArgs{
 			SecretName:  pulumi.String("tf-example"),
 			Description: pulumi.String("redis desc."),
 			IsEnabled:   pulumi.Bool(true),
 			SecretType:  pulumi.Int(4),
-			AdditionalConfig: exampleInstance.ID().ApplyT(func(id string) (pulumi.String, error) {
+			AdditionalConfig: example.ID().ApplyT(func(id pulumi.ID) (pulumi.String, error) {
 				var _zero pulumi.String
 				tmpJSON0, err := json.Marshal(map[string]interface{}{
 					"Region":     "ap-guangzhou",
@@ -362,8 +567,8 @@ func main() {
 				json0 := string(tmpJSON0)
 				return pulumi.String(json0), nil
 			}).(pulumi.StringOutput),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
 			},
 			RecoveryWindowInDays: pulumi.Int(0),
 		})
@@ -374,6 +579,84 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
+    {
+        TypeId = 8,
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc-example",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.Zone),
+        Name = "subnet-example",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    var example = new Tencentcloud.Redis.Instance("example", new()
+    {
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.Zone),
+        TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.TypeId),
+        Password = "Qwer@234",
+        MemSize = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.MemSizes[0]),
+        RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.RedisShardNums[0]),
+        RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[3]?.RedisReplicasNums[0]),
+        Name = "tf_example",
+        Port = 6379,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+    });
+
+    var exampleSecret = new Tencentcloud.Ssm.Secret("example", new()
+    {
+        SecretName = "tf-example",
+        Description = "redis desc.",
+        IsEnabled = true,
+        SecretType = 4,
+        AdditionalConfig = Output.JsonSerialize(Output.Create(new Dictionary<string, object?>
+        {
+            ["Region"] = "ap-guangzhou",
+            ["Privilege"] = "r",
+            ["InstanceId"] = example.Id,
+            ["ReadonlyPolicy"] = new[]
+            {
+                "master",
+            },
+            ["Remark"] = "for tf test",
+        })),
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+        RecoveryWindowInDays = 0,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -382,17 +665,11 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Redis.RedisFunctions;
 import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Redis.Instance;
-import com.pulumi.tencentcloud.Redis.InstanceArgs;
 import com.pulumi.tencentcloud.Ssm.Secret;
 import com.pulumi.tencentcloud.Ssm.SecretArgs;
 import static com.pulumi.codegen.internal.Serialization.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -408,38 +685,41 @@ public class App {
             .typeId(8)
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[3].zone()))
+            .availabilityZone(zone.lists()[3].zone())
+            .name("subnet-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[3].zone()))
-            .typeId(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[3].typeId()))
+        var example = new com.pulumi.tencentcloud.Redis.Instance("example", com.pulumi.tencentcloud.Redis.InstanceArgs.builder()
+            .availabilityZone(zone.lists()[3].zone())
+            .typeId(zone.lists()[3].typeId())
             .password("Qwer@234")
-            .memSize(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[3].memSizes()[0]))
-            .redisShardNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[3].redisShardNums()[0]))
-            .redisReplicasNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[3].redisReplicasNums()[0]))
+            .memSize(zone.lists()[3].memSizes()[0])
+            .redisShardNum(zone.lists()[3].redisShardNums()[0])
+            .redisReplicasNum(zone.lists()[3].redisReplicasNums()[0])
+            .name("tf_example")
             .port(6379)
             .vpcId(vpc.id())
             .subnetId(subnet.id())
             .build());
 
-        var exampleSecret = new Secret("exampleSecret", SecretArgs.builder()        
+        var exampleSecret = new Secret("exampleSecret", SecretArgs.builder()
             .secretName("tf-example")
             .description("redis desc.")
             .isEnabled(true)
             .secretType(4)
-            .additionalConfig(exampleInstance.id().applyValue(id -> serializeJson(
+            .additionalConfig(example.id().applyValue(_id -> serializeJson(
                 jsonObject(
                     jsonProperty("Region", "ap-guangzhou"),
                     jsonProperty("Privilege", "r"),
-                    jsonProperty("InstanceId", id),
+                    jsonProperty("InstanceId", _id),
                     jsonProperty("ReadonlyPolicy", jsonArray("master")),
                     jsonProperty("Remark", "for tf test")
                 ))))
@@ -450,19 +730,26 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${zone.lists[3].zone}
+      name: subnet-example
       cidrBlock: 10.0.0.0/16
-  exampleInstance:
+  example:
     type: tencentcloud:Redis:Instance
     properties:
       availabilityZone: ${zone.lists[3].zone}
@@ -471,11 +758,13 @@ resources:
       memSize: ${zone.lists[3].memSizes[0]}
       redisShardNum: ${zone.lists[3].redisShardNums[0]}
       redisReplicasNum: ${zone.lists[3].redisReplicasNums[0]}
+      name: tf_example
       port: 6379
       vpcId: ${vpc.id}
       subnetId: ${subnet.id}
   exampleSecret:
     type: tencentcloud:Ssm:Secret
+    name: example
     properties:
       secretName: tf-example
       description: redis desc.
@@ -485,7 +774,7 @@ resources:
         fn::toJSON:
           Region: ap-guangzhou
           Privilege: r
-          InstanceId: ${exampleInstance.id}
+          InstanceId: ${example.id}
           ReadonlyPolicy:
             - master
           Remark: for tf test
@@ -495,76 +784,173 @@ resources:
 variables:
   zone:
     fn::invoke:
-      Function: tencentcloud:Redis:getZoneConfig
-      Arguments:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
         typeId: 8
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 8
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_redis_getzoneconfig.zone.lists[3].zone
+  name              = "subnet-example"
+  cidr_block        = "10.0.0.0/16"
+}
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_redis_getzoneconfig.zone.lists[3].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[3].type_id
+  password           = "Qwer@234"
+  mem_size           = data.tencentcloud_redis_getzoneconfig.zone.lists[3].mem_sizes[0]
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[3].redis_shard_nums[0]
+  redis_replicas_num = data.tencentcloud_redis_getzoneconfig.zone.lists[3].redis_replicas_nums[0]
+  name               = "tf_example"
+  port               = 6379
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+}
+resource "tencentcloud_ssm_secret" "example" {
+  secret_name = "tf-example"
+  description = "redis desc."
+  is_enabled  = true
+  secret_type = 4
+  additional_config = jsonencode({
+    "Region"         = "ap-guangzhou"
+    "Privilege"      = "r"
+    "InstanceId"     = tencentcloud_redis_instance.example.id
+    "ReadonlyPolicy" = ["master"]
+    "Remark"         = "for tf test"
+  })
+  tags = {
+    "createdBy" = "terraform"
+  }
+  recovery_window_in_days = 0
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateSecret](https://www.tencentcloud.com/document/api/1078/38656)
+  - [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+* Update:
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpdateDescription](https://www.tencentcloud.com/document/api/1078/38643)
+* Delete:
+  - [DeleteSecret](https://www.tencentcloud.com/document/api/1078/38655)
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
 
 
 ## Create Secret Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+           <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">additional_config</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">encrypt_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
            <span class="nx">is_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
            <span class="nx">kms_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">recovery_window_in_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">secret_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSecret</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Secret</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSecret</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Secret</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Secret</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SecretArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssm:Secret</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssm:Secret</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ssm_secret&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -585,7 +971,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -702,11 +1088,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Secret Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Secret resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -722,8 +1116,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="additionalconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#additionalconfig_csharp" style="color: inherit; text-decoration: inherit;">Additional<wbr>Config</a>
@@ -731,8 +1124,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -740,8 +1132,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypttype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypttype_csharp" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -749,8 +1148,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="kmskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -758,8 +1156,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="recoverywindowindays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recoverywindowindays_csharp" style="color: inherit; text-decoration: inherit;">Recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -767,8 +1164,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -776,17 +1172,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -800,8 +1194,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="additionalconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#additionalconfig_go" style="color: inherit; text-decoration: inherit;">Additional<wbr>Config</a>
@@ -809,8 +1202,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -818,8 +1210,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypttype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypttype_go" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -827,8 +1226,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="kmskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -836,8 +1234,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="recoverywindowindays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recoverywindowindays_go" style="color: inherit; text-decoration: inherit;">Recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -845,8 +1242,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -854,17 +1250,93 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="additional_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#additional_config_hcl" style="color: inherit; text-decoration: inherit;">additional_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypt_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_type_hcl" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_enabled_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recovery_window_in_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recovery_window_in_days_hcl" style="color: inherit; text-decoration: inherit;">recovery_<wbr>window_<wbr>in_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -878,8 +1350,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="additionalconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#additionalconfig_java" style="color: inherit; text-decoration: inherit;">additional<wbr>Config</a>
@@ -887,8 +1358,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -896,8 +1366,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypttype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypttype_java" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_java" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -905,8 +1382,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="kmskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -914,8 +1390,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="recoverywindowindays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recoverywindowindays_java" style="color: inherit; text-decoration: inherit;">recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -923,8 +1398,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -932,17 +1406,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -956,8 +1428,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="additionalconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#additionalconfig_nodejs" style="color: inherit; text-decoration: inherit;">additional<wbr>Config</a>
@@ -965,8 +1436,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -974,8 +1444,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypttype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypttype_nodejs" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -983,8 +1460,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="kmskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -992,8 +1468,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="recoverywindowindays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recoverywindowindays_nodejs" style="color: inherit; text-decoration: inherit;">recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -1001,8 +1476,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1010,17 +1484,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1034,8 +1506,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="additional_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#additional_config_python" style="color: inherit; text-decoration: inherit;">additional_<wbr>config</a>
@@ -1043,8 +1514,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1052,8 +1522,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypt_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_type_python" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_enabled_python" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
@@ -1061,8 +1538,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="kms_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
@@ -1070,8 +1546,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="recovery_window_in_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recovery_window_in_days_python" style="color: inherit; text-decoration: inherit;">recovery_<wbr>window_<wbr>in_<wbr>days</a>
@@ -1079,8 +1554,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
@@ -1088,17 +1562,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1112,8 +1584,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="additionalconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#additionalconfig_yaml" style="color: inherit; text-decoration: inherit;">additional<wbr>Config</a>
@@ -1121,8 +1592,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1130,8 +1600,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypttype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypttype_yaml" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -1139,8 +1616,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="kmskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1148,8 +1624,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="recoverywindowindays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recoverywindowindays_yaml" style="color: inherit; text-decoration: inherit;">recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -1157,8 +1632,7 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional"
             title="Optional">
         <span id="secrettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1166,17 +1640,15 @@ The Secret resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1197,8 +1669,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1206,8 +1677,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd></dl>
+    <dd>Status of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1221,8 +1691,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1230,8 +1699,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd></dl>
+    <dd>Status of secret.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1245,8 +1735,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1254,8 +1743,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd></dl>
+    <dd>Status of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1269,8 +1757,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1278,8 +1765,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd></dl>
+    <dd>Status of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1293,8 +1779,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1302,8 +1787,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd></dl>
+    <dd>Status of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1317,8 +1801,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1326,8 +1809,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd></dl>
+    <dd>Status of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1337,128 +1819,168 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Secret resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SecretState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Secret</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SecretState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Secret</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">additional_config</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">encrypt_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">is_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">kms_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">recovery_window_in_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">secret_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> Secret</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> Secret</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSecret<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SecretState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Secret</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSecret<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SecretState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Secret</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Secret</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SecretState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Secret</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SecretState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Secret</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SecretState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Secret</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SecretState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ssm:Secret</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ssm_secret</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SecretState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SecretState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1466,28 +1988,31 @@ Get an existing Secret resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SecretState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1495,28 +2020,31 @@ Get an existing Secret resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SecretState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1536,8 +2064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1545,8 +2072,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypttype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypttype_csharp" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -1554,8 +2088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_kmskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1563,8 +2096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recoverywindowindays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recoverywindowindays_csharp" style="color: inherit; text-decoration: inherit;">Recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -1572,8 +2104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1581,8 +2112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -1590,8 +2120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1599,17 +2128,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-optional"
+    <dd>Status of secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1623,8 +2150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1632,8 +2158,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypttype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypttype_go" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -1641,8 +2174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_kmskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1650,8 +2182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recoverywindowindays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recoverywindowindays_go" style="color: inherit; text-decoration: inherit;">Recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -1659,8 +2190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1668,8 +2198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -1677,8 +2206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1686,17 +2214,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-optional"
+    <dd>Status of secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_additional_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_additional_config_hcl" style="color: inherit; text-decoration: inherit;">additional_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypt_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_type_hcl" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_enabled_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recovery_window_in_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recovery_window_in_days_hcl" style="color: inherit; text-decoration: inherit;">recovery_<wbr>window_<wbr>in_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_secret_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_type_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of secret.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1710,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1719,8 +2330,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypttype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypttype_java" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_java" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -1728,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_kmskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1737,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recoverywindowindays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recoverywindowindays_java" style="color: inherit; text-decoration: inherit;">recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -1746,8 +2362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1755,8 +2370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1764,8 +2378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1773,17 +2386,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-optional"
+    <dd>Status of secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1797,8 +2408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1806,8 +2416,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypttype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypttype_nodejs" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -1815,8 +2432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_kmskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1824,8 +2440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recoverywindowindays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recoverywindowindays_nodejs" style="color: inherit; text-decoration: inherit;">recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -1833,8 +2448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1842,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1851,8 +2464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1860,17 +2472,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-optional"
+    <dd>Status of secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1884,8 +2494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1893,8 +2502,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypt_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_type_python" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_enabled_python" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
@@ -1902,8 +2518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_kms_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
@@ -1911,8 +2526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recovery_window_in_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recovery_window_in_days_python" style="color: inherit; text-decoration: inherit;">recovery_<wbr>window_<wbr>in_<wbr>days</a>
@@ -1920,8 +2534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -1929,8 +2542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secret_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_type_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
@@ -1938,8 +2550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1947,17 +2558,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-optional"
+    <dd>Status of secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1971,8 +2580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Additional config for specific secret types in JSON string format.</p>
-</dd><dt class="property-optional"
+    <dd>Additional config for specific secret types in JSON string format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1980,8 +2588,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of secret. The maximum is 2048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of secret. The maximum is 2048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypttype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypttype_yaml" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Encryption type of secret. <code>0</code>: KMS key encryption. <code>1</code>: soft key encryption. Default is <code>0</code>. Once created, it cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -1989,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable secret. Default value is <code>true</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable secret. Default value is <code>true</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_kmskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1998,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recoverywindowindays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recoverywindowindays_yaml" style="color: inherit; text-decoration: inherit;">recovery<wbr>Window<wbr>In<wbr>Days</a>
@@ -2007,8 +2620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify the scheduled deletion date. Default value is <code>0</code> that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -2016,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -2025,8 +2636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of secret. <code>0</code>: user-defined secret. <code>4</code>: redis secret. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2034,17 +2644,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of secret.</p>
-</dd><dt class="property-optional"
+    <dd>Status of secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2060,11 +2668,34 @@ The following state arguments are supported:
 
 
 SSM secret can be imported using the secretName, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Ssm/secret:Secret foo test
 ```
 
+Argument Reference
+
+The following arguments are supported:
+
+* `secretName` - (Required, ForceNew) Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+* `description` - (Optional) Description of secret. The maximum is 2048 bytes.
+* `kmsKeyId` - (Optional, ForceNew, Computed) KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+* `secretType` - (Optional, Computed) Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
+* `additionalConfig` - (Optional) Additional config for specific secret types in JSON string format.
+* `encryptType` - (Optional, Computed) Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+* `isEnabled` - (Optional) Specify whether to enable secret. Default value is `true`.
+* `recoveryWindowInDays` - (Optional) Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
+* `tags` - (Optional) Tags of secret.
+
+Attributes Reference
+
+The following attributes are exported:
+
+* `status` - Status of secret.
+* `id` - Secret name.
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2076,7 +2707,6 @@ $ pulumi import tencentcloud:Ssm/secret:Secret foo test
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

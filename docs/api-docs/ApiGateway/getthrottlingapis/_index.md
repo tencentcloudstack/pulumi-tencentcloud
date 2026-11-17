@@ -2,9 +2,11 @@
 ---
 title: "getThrottlingApis"
 title_tag: "tencentcloud.ApiGateway.getThrottlingApis"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.getThrottlingApis function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query API gateway throttling APIs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,10 +18,14 @@ Use this data source to query API gateway throttling APIs.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const service = new tencentcloud.apigateway.Service("service", {
@@ -68,23 +74,28 @@ const api = new tencentcloud.apigateway.Api("api", {
     preLimit: 100,
     testLimit: 100,
 });
-const id = tencentcloud.ApiGateway.getThrottlingApis({
-    serviceId: tencentcloud_api_gateway_api.service_id,
+const id = tencentcloud.apigateway.getThrottlingApis({
+    serviceId: serviceId,
 });
-const foo = tencentcloud.ApiGateway.getThrottlingApis({
-    serviceId: tencentcloud_api_gateway_api.service.service_id,
+const foo = tencentcloud.apigateway.getThrottlingApis({
+    serviceId: serviceTencentcloudApiGatewayApi.serviceId,
     environmentNames: [
         "release",
         "test",
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-service = tencentcloud.api_gateway.Service("service",
+service = tencentcloud.apigateway.Service("service",
     service_name="niceservice",
     protocol="http&https",
     service_desc="your nice service",
@@ -93,7 +104,7 @@ service = tencentcloud.api_gateway.Service("service",
         "OUTER",
     ],
     ip_version="IPv4")
-api = tencentcloud.api_gateway.Api("api",
+api = tencentcloud.apigateway.Api("api",
     service_id=service.id,
     api_name="tf_example",
     api_desc="my hello api update",
@@ -102,14 +113,14 @@ api = tencentcloud.api_gateway.Api("api",
     enable_cors=True,
     request_config_path="/user/info",
     request_config_method="POST",
-    request_parameters=[tencentcloud.api_gateway.ApiRequestParameterArgs(
-        name="email",
-        position="QUERY",
-        type="string",
-        desc="your email please?",
-        default_value="tom@qq.com",
-        required=True,
-    )],
+    request_parameters=[{
+        "name": "email",
+        "position": "QUERY",
+        "type": "string",
+        "desc": "your email please?",
+        "default_value": "tom@qq.com",
+        "required": True,
+    }],
     service_config_type="HTTP",
     service_config_timeout=10,
     service_config_url="http://www.tencent.com",
@@ -118,28 +129,123 @@ api = tencentcloud.api_gateway.Api("api",
     response_type="XML",
     response_success_example="<note>success</note>",
     response_fail_example="<note>fail</note>",
-    response_error_codes=[tencentcloud.api_gateway.ApiResponseErrorCodeArgs(
-        code=10,
-        msg="system error",
-        desc="system error code",
-        converted_code=-10,
-        need_convert=True,
-    )],
+    response_error_codes=[{
+        "code": 10,
+        "msg": "system error",
+        "desc": "system error code",
+        "converted_code": -10,
+        "need_convert": True,
+    }],
     release_limit=100,
     pre_limit=100,
     test_limit=100)
-id = tencentcloud.ApiGateway.get_throttling_apis(service_id=tencentcloud_api_gateway_api["service_id"])
-foo = tencentcloud.ApiGateway.get_throttling_apis(service_id=tencentcloud_api_gateway_api["service"]["service_id"],
+id = tencentcloud.apigateway.get_throttling_apis(service_id=service_id)
+foo = tencentcloud.apigateway.get_throttling_apis(service_id=service_tencentcloud_api_gateway_api["serviceId"],
     environment_names=[
         "release",
         "test",
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		service, err := apigateway.NewService(ctx, "service", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("niceservice"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("your nice service"),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.NewApi(ctx, "api", &apigateway.ApiArgs{
+			ServiceId:           service.ID().ToIDOutput().ToStringOutput(),
+			ApiName:             pulumi.String("tf_example"),
+			ApiDesc:             pulumi.String("my hello api update"),
+			AuthType:            pulumi.String("SECRET"),
+			Protocol:            pulumi.String("HTTP"),
+			EnableCors:          pulumi.Bool(true),
+			RequestConfigPath:   pulumi.String("/user/info"),
+			RequestConfigMethod: pulumi.String("POST"),
+			RequestParameters: apigateway.ApiRequestParameterArray{
+				&apigateway.ApiRequestParameterArgs{
+					Name:         pulumi.String("email"),
+					Position:     pulumi.String("QUERY"),
+					Type:         pulumi.String("string"),
+					Desc:         pulumi.String("your email please?"),
+					DefaultValue: pulumi.String("tom@qq.com"),
+					Required:     pulumi.Bool(true),
+				},
+			},
+			ServiceConfigType:      pulumi.String("HTTP"),
+			ServiceConfigTimeout:   pulumi.Int(10),
+			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
+			ServiceConfigPath:      pulumi.String("/user"),
+			ServiceConfigMethod:    pulumi.String("POST"),
+			ResponseType:           pulumi.String("XML"),
+			ResponseSuccessExample: pulumi.String("<note>success</note>"),
+			ResponseFailExample:    pulumi.String("<note>fail</note>"),
+			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+				&apigateway.ApiResponseErrorCodeArgs{
+					Code:          pulumi.Int(10),
+					Msg:           pulumi.String("system error"),
+					Desc:          pulumi.String("system error code"),
+					ConvertedCode: pulumi.Int(-10),
+					NeedConvert:   pulumi.Bool(true),
+				},
+			},
+			ReleaseLimit: pulumi.Int(100),
+			PreLimit:     pulumi.Int(100),
+			TestLimit:    pulumi.Int(100),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.GetThrottlingApis(ctx, &apigateway.GetThrottlingApisArgs{
+			ServiceId: pulumi.StringRef(serviceId),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.GetThrottlingApis(ctx, &apigateway.GetThrottlingApisArgs{
+			ServiceId: pulumi.StringRef(serviceTencentcloudApiGatewayApi.ServiceId),
+			EnvironmentNames: []string{
+				"release",
+				"test",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -205,12 +311,12 @@ return await Deployment.RunAsync(() =>
 
     var id = Tencentcloud.ApiGateway.GetThrottlingApis.Invoke(new()
     {
-        ServiceId = tencentcloud_api_gateway_api.Service_id,
+        ServiceId = serviceId,
     });
 
     var foo = Tencentcloud.ApiGateway.GetThrottlingApis.Invoke(new()
     {
-        ServiceId = tencentcloud_api_gateway_api.Service.Service_id,
+        ServiceId = serviceTencentcloudApiGatewayApi.ServiceId,
         EnvironmentNames = new[]
         {
             "release",
@@ -220,92 +326,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("niceservice"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("your nice service"),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion: pulumi.String("IPv4"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
-			ServiceId:           service.ID(),
-			ApiName:             pulumi.String("tf_example"),
-			ApiDesc:             pulumi.String("my hello api update"),
-			AuthType:            pulumi.String("SECRET"),
-			Protocol:            pulumi.String("HTTP"),
-			EnableCors:          pulumi.Bool(true),
-			RequestConfigPath:   pulumi.String("/user/info"),
-			RequestConfigMethod: pulumi.String("POST"),
-			RequestParameters: apigateway.ApiRequestParameterArray{
-				&apigateway.ApiRequestParameterArgs{
-					Name:         pulumi.String("email"),
-					Position:     pulumi.String("QUERY"),
-					Type:         pulumi.String("string"),
-					Desc:         pulumi.String("your email please?"),
-					DefaultValue: pulumi.String("tom@qq.com"),
-					Required:     pulumi.Bool(true),
-				},
-			},
-			ServiceConfigType:      pulumi.String("HTTP"),
-			ServiceConfigTimeout:   pulumi.Int(10),
-			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
-			ServiceConfigPath:      pulumi.String("/user"),
-			ServiceConfigMethod:    pulumi.String("POST"),
-			ResponseType:           pulumi.String("XML"),
-			ResponseSuccessExample: pulumi.String("<note>success</note>"),
-			ResponseFailExample:    pulumi.String("<note>fail</note>"),
-			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-				&apigateway.ApiResponseErrorCodeArgs{
-					Code:          pulumi.Int(10),
-					Msg:           pulumi.String("system error"),
-					Desc:          pulumi.String("system error code"),
-					ConvertedCode: -10,
-					NeedConvert:   pulumi.Bool(true),
-				},
-			},
-			ReleaseLimit: pulumi.Int(100),
-			PreLimit:     pulumi.Int(100),
-			TestLimit:    pulumi.Int(100),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = ApiGateway.GetThrottlingApis(ctx, &apigateway.GetThrottlingApisArgs{
-			ServiceId: pulumi.StringRef(tencentcloud_api_gateway_api.Service_id),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_, err = ApiGateway.GetThrottlingApis(ctx, &apigateway.GetThrottlingApisArgs{
-			ServiceId: pulumi.StringRef(tencentcloud_api_gateway_api.Service.Service_id),
-			EnvironmentNames: []string{
-				"release",
-				"test",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -320,8 +345,8 @@ import com.pulumi.tencentcloud.ApiGateway.inputs.ApiRequestParameterArgs;
 import com.pulumi.tencentcloud.ApiGateway.inputs.ApiResponseErrorCodeArgs;
 import com.pulumi.tencentcloud.ApiGateway.ApiGatewayFunctions;
 import com.pulumi.tencentcloud.ApiGateway.inputs.GetThrottlingApisArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -333,7 +358,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var service = new Service("service", ServiceArgs.builder()        
+        var service = new Service("service", ServiceArgs.builder()
             .serviceName("niceservice")
             .protocol("http&https")
             .serviceDesc("your nice service")
@@ -343,7 +368,7 @@ public class App {
             .ipVersion("IPv4")
             .build());
 
-        var api = new Api("api", ApiArgs.builder()        
+        var api = new Api("api", ApiArgs.builder()
             .serviceId(service.id())
             .apiName("tf_example")
             .apiDesc("my hello api update")
@@ -372,7 +397,7 @@ public class App {
                 .code(10)
                 .msg("system error")
                 .desc("system error code")
-                .convertedCode("TODO: GenUnaryOpExpression")
+                .convertedCode(-10)
                 .needConvert(true)
                 .build())
             .releaseLimit(100)
@@ -381,11 +406,11 @@ public class App {
             .build());
 
         final var id = ApiGatewayFunctions.getThrottlingApis(GetThrottlingApisArgs.builder()
-            .serviceId(tencentcloud_api_gateway_api.service_id())
+            .serviceId(serviceId)
             .build());
 
         final var foo = ApiGatewayFunctions.getThrottlingApis(GetThrottlingApisArgs.builder()
-            .serviceId(tencentcloud_api_gateway_api.service().service_id())
+            .serviceId(serviceTencentcloudApiGatewayApi.serviceId())
             .environmentNames(            
                 "release",
                 "test")
@@ -394,8 +419,150 @@ public class App {
     }
 }
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
 
+```yaml
+resources:
+  service:
+    type: tencentcloud:ApiGateway:Service
+    properties:
+      serviceName: niceservice
+      protocol: http&https
+      serviceDesc: your nice service
+      netTypes:
+        - INNER
+        - OUTER
+      ipVersion: IPv4
+  api:
+    type: tencentcloud:ApiGateway:Api
+    properties:
+      serviceId: ${service.id}
+      apiName: tf_example
+      apiDesc: my hello api update
+      authType: SECRET
+      protocol: HTTP
+      enableCors: true
+      requestConfigPath: /user/info
+      requestConfigMethod: POST
+      requestParameters:
+        - name: email
+          position: QUERY
+          type: string
+          desc: your email please?
+          defaultValue: tom@qq.com
+          required: true
+      serviceConfigType: HTTP
+      serviceConfigTimeout: 10
+      serviceConfigUrl: http://www.tencent.com
+      serviceConfigPath: /user
+      serviceConfigMethod: POST
+      responseType: XML
+      responseSuccessExample: <note>success</note>
+      responseFailExample: <note>fail</note>
+      responseErrorCodes:
+        - code: 10
+          msg: system error
+          desc: system error code
+          convertedCode: -10
+          needConvert: true
+      releaseLimit: 100
+      preLimit: 100
+      testLimit: 100
+variables:
+  id:
+    fn::invoke:
+      function: tencentcloud:ApiGateway:getThrottlingApis
+      arguments:
+        serviceId: ${serviceId}
+  foo:
+    fn::invoke:
+      function: tencentcloud:ApiGateway:getThrottlingApis
+      arguments:
+        serviceId: ${serviceTencentcloudApiGatewayApi.serviceId}
+        environmentNames:
+          - release
+          - test
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_apigateway_getthrottlingapis" "id" {
+  service_id = serviceId
+}
+data "tencentcloud_apigateway_getthrottlingapis" "foo" {
+  service_id        = serviceTencentcloudApiGatewayApi.serviceId
+  environment_names = ["release", "test"]
+}
+
+resource "tencentcloud_apigateway_service" "service" {
+  service_name = "niceservice"
+  protocol     = "http&https"
+  service_desc = "your nice service"
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+}
+resource "tencentcloud_apigateway_api" "api" {
+  service_id            = tencentcloud_apigateway_service.service.id
+  api_name              = "tf_example"
+  api_desc              = "my hello api update"
+  auth_type             = "SECRET"
+  protocol              = "HTTP"
+  enable_cors           = true
+  request_config_path   = "/user/info"
+  request_config_method = "POST"
+  request_parameters {
+    name          = "email"
+    position      = "QUERY"
+    type          = "string"
+    desc          = "your email please?"
+    default_value = "tom@qq.com"
+    required      = true
+  }
+  service_config_type      = "HTTP"
+  service_config_timeout   = 10
+  service_config_url       = "http://www.tencent.com"
+  service_config_path      = "/user"
+  service_config_method    = "POST"
+  response_type            = "XML"
+  response_success_example = "<note>success</note>"
+  response_fail_example    = "<note>fail</note>"
+  response_error_codes {
+    code           = 10
+    msg            = "system error"
+    desc           = "system error code"
+    converted_code = -10
+    need_convert   = true
+  }
+  release_limit = 100
+  pre_limit     = 100
+  test_limit    = 100
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&type=document&lang=en)
+  - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
 
 
 
@@ -407,7 +574,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -415,9 +582,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getThrottlingApis<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetThrottlingApisArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>></span
+><span class="k">function </span>getThrottlingApis<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetThrottlingApisArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>></span
 ><span class="k">
-function </span>getThrottlingApisOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetThrottlingApisOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>></span
+function </span>getThrottlingApisOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetThrottlingApisOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -431,10 +598,10 @@ function </span>getThrottlingApisOutput<span class="p">(</span><span class="nx">
                         <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetThrottlingApisResult</span
 ><span class="k">
-def </span>get_throttling_apis_output<span class="p">(</span><span class="nx">environment_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetThrottlingApisResult]</span
+def </span>get_throttling_apis_output<span class="p">(</span><span class="nx">environment_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">service_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetThrottlingApisResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -459,7 +626,8 @@ func </span>GetThrottlingApisOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetThrottlingApis </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetThrottlingApisArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetThrottlingApisInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetThrottlingApisInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetThrottlingApisInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -468,7 +636,8 @@ func </span>GetThrottlingApisOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>> </span>getThrottlingApis<span class="p">(</span><span class="nx">GetThrottlingApisArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>> </span>getThrottlingApis<span class="p">(</span><span class="nx">GetThrottlingApisArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetThrottlingApisResult</a></span>> </span>getThrottlingApis<span class="p">(</span><span class="nx">GetThrottlingApisArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -480,6 +649,15 @@ func </span>GetThrottlingApisOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:ApiGateway/getThrottlingApis:getThrottlingApis
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_api_gateway_get_throttling_apis&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -498,8 +676,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Environment list.</p>
-</dd><dt class="property-optional"
+    <dd>Environment list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -507,8 +684,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -516,8 +692,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -531,8 +706,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Environment list.</p>
-</dd><dt class="property-optional"
+    <dd>Environment list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -540,8 +714,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -549,8 +722,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="environment_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_names_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Environment list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -564,8 +766,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Environment list.</p>
-</dd><dt class="property-optional"
+    <dd>Environment list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -573,8 +774,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -582,8 +782,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -597,8 +796,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Environment list.</p>
-</dd><dt class="property-optional"
+    <dd>Environment list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -606,8 +804,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -615,8 +812,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -630,8 +826,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Environment list.</p>
-</dd><dt class="property-optional"
+    <dd>Environment list.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -639,8 +834,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -648,8 +842,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -663,8 +856,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Environment list.</p>
-</dd><dt class="property-optional"
+    <dd>Environment list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -672,8 +864,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -681,8 +872,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -705,8 +895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -714,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Get<wbr>Throttling<wbr>Apis<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of policies bound to API.</p>
-</dd><dt class="property-"
+    <dd>A list of policies bound to API.</dd><dt class="property-"
             title="">
         <span id="environmentnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentnames_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Names</a>
@@ -739,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -754,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -763,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislist">[]Get<wbr>Throttling<wbr>Apis<wbr>List</a></span>
     </dt>
-    <dd><p>A list of policies bound to API.</p>
-</dd><dt class="property-"
+    <dd>A list of policies bound to API.</dd><dt class="property-"
             title="">
         <span id="environmentnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentnames_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Names</a>
@@ -788,8 +973,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getthrottlingapislist">list(object)</a></span>
+    </dt>
+    <dd>A list of policies bound to API.</dd><dt class="property-"
+            title="">
+        <span id="environment_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_names_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -803,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -812,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislist">List&lt;Get<wbr>Throttling<wbr>Apis<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of policies bound to API.</p>
-</dd><dt class="property-"
+    <dd>A list of policies bound to API.</dd><dt class="property-"
             title="">
         <span id="environmentnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentnames_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Names</a>
@@ -837,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -852,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -861,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislist">Get<wbr>Throttling<wbr>Apis<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of policies bound to API.</p>
-</dd><dt class="property-"
+    <dd>A list of policies bound to API.</dd><dt class="property-"
             title="">
         <span id="environmentnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentnames_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Names</a>
@@ -886,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -901,17 +1125,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getthrottlingapislist">Get<wbr>Throttling<wbr>Apis<wbr>List]</a></span>
+        <span class="property-type"><a href="#getthrottlingapislist">Sequence[Get<wbr>Throttling<wbr>Apis<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of policies bound to API.</p>
-</dd><dt class="property-"
+    <dd>A list of policies bound to API.</dd><dt class="property-"
             title="">
         <span id="environment_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_names_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>names</a>
@@ -935,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -950,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -959,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of policies bound to API.</p>
-</dd><dt class="property-"
+    <dd>A list of policies bound to API.</dd><dt class="property-"
             title="">
         <span id="environmentnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentnames_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Names</a>
@@ -984,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1009,8 +1227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>List of throttling policies bound to API.</p>
-</dd><dt class="property-required"
+    <dd>List of throttling policies bound to API.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1018,8 +1235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1033,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategy">[]Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy</a></span>
     </dt>
-    <dd><p>List of throttling policies bound to API.</p>
-</dd><dt class="property-required"
+    <dd>List of throttling policies bound to API.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1042,8 +1257,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="api_environment_strategies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_environment_strategies_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>environment_<wbr>strategies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategy">list(object)</a></span>
+    </dt>
+    <dd>List of throttling policies bound to API.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1057,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategy">List&lt;Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>List of throttling policies bound to API.</p>
-</dd><dt class="property-required"
+    <dd>List of throttling policies bound to API.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1066,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1081,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategy">Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy[]</a></span>
     </dt>
-    <dd><p>List of throttling policies bound to API.</p>
-</dd><dt class="property-required"
+    <dd>List of throttling policies bound to API.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1090,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1103,10 +1335,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_environment_strategies_python" style="color: inherit; text-decoration: inherit;">api_<wbr>environment_<wbr>strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategy">Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy]</a></span>
+        <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategy">Sequence[Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy]</a></span>
     </dt>
-    <dd><p>List of throttling policies bound to API.</p>
-</dd><dt class="property-required"
+    <dd>List of throttling policies bound to API.</dd><dt class="property-required"
             title="Required">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -1114,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1129,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of throttling policies bound to API.</p>
-</dd><dt class="property-required"
+    <dd>List of throttling policies bound to API.</dd><dt class="property-required"
             title="Required">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1138,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service ID of API.</p>
-</dd></dl>
+    <dd>Unique service ID of API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique API ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -1166,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="method_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_csharp" style="color: inherit; text-decoration: inherit;">Method</a>
@@ -1175,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1184,8 +1409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API path.</p>
-</dd><dt class="property-required"
+    <dd>API path.</dd><dt class="property-required"
             title="Required">
         <span id="strategylists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategylists_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Lists</a>
@@ -1193,8 +1417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategystrategylist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy<wbr>Strategy<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Environment throttling information.</p>
-</dd></dl>
+    <dd>Environment throttling information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1208,8 +1431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique API ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -1217,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="method_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_go" style="color: inherit; text-decoration: inherit;">Method</a>
@@ -1226,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1235,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API path.</p>
-</dd><dt class="property-required"
+    <dd>API path.</dd><dt class="property-required"
             title="Required">
         <span id="strategylists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategylists_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Lists</a>
@@ -1244,8 +1463,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategystrategylist">[]Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy<wbr>Strategy<wbr>List</a></span>
     </dt>
-    <dd><p>Environment throttling information.</p>
-</dd></dl>
+    <dd>Environment throttling information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique API ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="api_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom API name.</dd><dt class="property-required"
+            title="Required">
+        <span id="method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_hcl" style="color: inherit; text-decoration: inherit;">method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API method.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>API path.</dd><dt class="property-required"
+            title="Required">
+        <span id="strategy_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_lists_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategystrategylist">list(object)</a></span>
+    </dt>
+    <dd>Environment throttling information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1259,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique API ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_java" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1268,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="method_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_java" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1277,8 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1286,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API path.</p>
-</dd><dt class="property-required"
+    <dd>API path.</dd><dt class="property-required"
             title="Required">
         <span id="strategylists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategylists_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Lists</a>
@@ -1295,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategystrategylist">List&lt;Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy<wbr>Strategy<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Environment throttling information.</p>
-</dd></dl>
+    <dd>Environment throttling information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1310,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique API ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1319,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="method_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_nodejs" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1328,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1337,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>API path.</p>
-</dd><dt class="property-required"
+    <dd>API path.</dd><dt class="property-required"
             title="Required">
         <span id="strategylists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategylists_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Lists</a>
@@ -1346,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategystrategylist">Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy<wbr>Strategy<wbr>List[]</a></span>
     </dt>
-    <dd><p>Environment throttling information.</p>
-</dd></dl>
+    <dd>Environment throttling information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1361,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique API ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique API ID.</dd><dt class="property-required"
             title="Required">
         <span id="api_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_python" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
@@ -1370,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_python" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1379,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1388,17 +1639,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>API path.</p>
-</dd><dt class="property-required"
+    <dd>API path.</dd><dt class="property-required"
             title="Required">
         <span id="strategy_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_lists_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategystrategylist">Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy<wbr>Strategy<wbr>List]</a></span>
+        <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategystrategylist">Sequence[Get<wbr>Throttling<wbr>Apis<wbr>List<wbr>Api<wbr>Environment<wbr>Strategy<wbr>Strategy<wbr>List]</a></span>
     </dt>
-    <dd><p>Environment throttling information.</p>
-</dd></dl>
+    <dd>Environment throttling information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1412,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique API ID.</p>
-</dd><dt class="property-required"
+    <dd>Unique API ID.</dd><dt class="property-required"
             title="Required">
         <span id="apiname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -1421,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom API name.</p>
-</dd><dt class="property-required"
+    <dd>Custom API name.</dd><dt class="property-required"
             title="Required">
         <span id="method_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_yaml" style="color: inherit; text-decoration: inherit;">method</a>
@@ -1430,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API method.</p>
-</dd><dt class="property-required"
+    <dd>API method.</dd><dt class="property-required"
             title="Required">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1439,8 +1685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>API path.</p>
-</dd><dt class="property-required"
+    <dd>API path.</dd><dt class="property-required"
             title="Required">
         <span id="strategylists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategylists_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Lists</a>
@@ -1448,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getthrottlingapislistapienvironmentstrategystrategylist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Environment throttling information.</p>
-</dd></dl>
+    <dd>Environment throttling information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1467,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment name.</p>
-</dd><dt class="property-required"
+    <dd>Environment name.</dd><dt class="property-required"
             title="Required">
         <span id="quota_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quota_csharp" style="color: inherit; text-decoration: inherit;">Quota</a>
@@ -1476,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Throttling value.</p>
-</dd></dl>
+    <dd>Throttling value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1491,8 +1733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment name.</p>
-</dd><dt class="property-required"
+    <dd>Environment name.</dd><dt class="property-required"
             title="Required">
         <span id="quota_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quota_go" style="color: inherit; text-decoration: inherit;">Quota</a>
@@ -1500,8 +1741,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Throttling value.</p>
-</dd></dl>
+    <dd>Throttling value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="environment_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_name_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Environment name.</dd><dt class="property-required"
+            title="Required">
+        <span id="quota_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quota_hcl" style="color: inherit; text-decoration: inherit;">quota</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Throttling value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1515,8 +1777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environment name.</p>
-</dd><dt class="property-required"
+    <dd>Environment name.</dd><dt class="property-required"
             title="Required">
         <span id="quota_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quota_java" style="color: inherit; text-decoration: inherit;">quota</a>
@@ -1524,8 +1785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Throttling value.</p>
-</dd></dl>
+    <dd>Throttling value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1539,8 +1799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment name.</p>
-</dd><dt class="property-required"
+    <dd>Environment name.</dd><dt class="property-required"
             title="Required">
         <span id="quota_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quota_nodejs" style="color: inherit; text-decoration: inherit;">quota</a>
@@ -1548,8 +1807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Throttling value.</p>
-</dd></dl>
+    <dd>Throttling value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1563,8 +1821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Environment name.</p>
-</dd><dt class="property-required"
+    <dd>Environment name.</dd><dt class="property-required"
             title="Required">
         <span id="quota_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quota_python" style="color: inherit; text-decoration: inherit;">quota</a>
@@ -1572,8 +1829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Throttling value.</p>
-</dd></dl>
+    <dd>Throttling value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1587,8 +1843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environment name.</p>
-</dd><dt class="property-required"
+    <dd>Environment name.</dd><dt class="property-required"
             title="Required">
         <span id="quota_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#quota_yaml" style="color: inherit; text-decoration: inherit;">quota</a>
@@ -1596,8 +1851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Throttling value.</p>
-</dd></dl>
+    <dd>Throttling value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1612,7 +1866,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Ccn.Instance"
-meta_desc: "Documentation for the tencentcloud.Ccn.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CCN instance. NOTE: routeOverlapFlag currently does not support setting to false."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,281 +16,85 @@ no_edit_this_page: true
 
 Provides a resource to create a CCN instance.
 
+> **NOTE:** `routeOverlapFlag` currently does not support setting to `false`.
+
 ## Example Usage
 
-### Create a prepaid CCN
+### Create a PREPAID CCN
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const main = new tencentcloud.ccn.Instance("main", {
-    bandwidthLimitType: "INTER_REGION_LIMIT",
+const example = new tencentcloud.ccn.Instance("example", {
+    name: "tf-example",
+    description: "desc.",
+    qos: "AG",
     chargeType: "PREPAID",
-    description: "ci-temp-test-ccn-des",
-    qos: "AG",
-});
-```
-```python
-import pulumi
-import tencentcloud_iac_pulumi as tencentcloud
-
-main = tencentcloud.ccn.Instance("main",
-    bandwidth_limit_type="INTER_REGION_LIMIT",
-    charge_type="PREPAID",
-    description="ci-temp-test-ccn-des",
-    qos="AG")
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var main = new Tencentcloud.Ccn.Instance("main", new()
-    {
-        BandwidthLimitType = "INTER_REGION_LIMIT",
-        ChargeType = "PREPAID",
-        Description = "ci-temp-test-ccn-des",
-        Qos = "AG",
-    });
-
-});
-```
-```go
-package main
-
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-			BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
-			ChargeType:         pulumi.String("PREPAID"),
-			Description:        pulumi.String("ci-temp-test-ccn-des"),
-			Qos:                pulumi.String("AG"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
-```java
-package generated_program;
-
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Ccn.Instance;
-import com.pulumi.tencentcloud.Ccn.InstanceArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        var main = new Instance("main", InstanceArgs.builder()        
-            .bandwidthLimitType("INTER_REGION_LIMIT")
-            .chargeType("PREPAID")
-            .description("ci-temp-test-ccn-des")
-            .qos("AG")
-            .build());
-
-    }
-}
-```
-```yaml
-resources:
-  main:
-    type: tencentcloud:Ccn:Instance
-    properties:
-      bandwidthLimitType: INTER_REGION_LIMIT
-      chargeType: PREPAID
-      description: ci-temp-test-ccn-des
-      qos: AG
-```
-<!--End PulumiCodeChooser -->
-
-### Create a post-paid regional export speed limit type CCN
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const main = new tencentcloud.ccn.Instance("main", {
-    bandwidthLimitType: "OUTER_REGION_LIMIT",
-    chargeType: "POSTPAID",
-    description: "ci-temp-test-ccn-des",
-    qos: "AG",
-});
-```
-```python
-import pulumi
-import tencentcloud_iac_pulumi as tencentcloud
-
-main = tencentcloud.ccn.Instance("main",
-    bandwidth_limit_type="OUTER_REGION_LIMIT",
-    charge_type="POSTPAID",
-    description="ci-temp-test-ccn-des",
-    qos="AG")
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var main = new Tencentcloud.Ccn.Instance("main", new()
-    {
-        BandwidthLimitType = "OUTER_REGION_LIMIT",
-        ChargeType = "POSTPAID",
-        Description = "ci-temp-test-ccn-des",
-        Qos = "AG",
-    });
-
-});
-```
-```go
-package main
-
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-			BandwidthLimitType: pulumi.String("OUTER_REGION_LIMIT"),
-			ChargeType:         pulumi.String("POSTPAID"),
-			Description:        pulumi.String("ci-temp-test-ccn-des"),
-			Qos:                pulumi.String("AG"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
-```java
-package generated_program;
-
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Ccn.Instance;
-import com.pulumi.tencentcloud.Ccn.InstanceArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        var main = new Instance("main", InstanceArgs.builder()        
-            .bandwidthLimitType("OUTER_REGION_LIMIT")
-            .chargeType("POSTPAID")
-            .description("ci-temp-test-ccn-des")
-            .qos("AG")
-            .build());
-
-    }
-}
-```
-```yaml
-resources:
-  main:
-    type: tencentcloud:Ccn:Instance
-    properties:
-      bandwidthLimitType: OUTER_REGION_LIMIT
-      chargeType: POSTPAID
-      description: ci-temp-test-ccn-des
-      qos: AG
-```
-<!--End PulumiCodeChooser -->
-
-### Create a post-paid inter-regional rate limit type CNN
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const main = new tencentcloud.ccn.Instance("main", {
     bandwidthLimitType: "INTER_REGION_LIMIT",
-    chargeType: "POSTPAID",
-    description: "ci-temp-test-ccn-des",
-    qos: "AG",
+    instanceMeteringType: "BANDWIDTH",
+    routeEcmpFlag: true,
+    routeOverlapFlag: true,
+    tags: {
+        createBy: "Terraform",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-main = tencentcloud.ccn.Instance("main",
+example = tencentcloud.ccn.Instance("example",
+    name="tf-example",
+    description="desc.",
+    qos="AG",
+    charge_type="PREPAID",
     bandwidth_limit_type="INTER_REGION_LIMIT",
-    charge_type="POSTPAID",
-    description="ci-temp-test-ccn-des",
-    qos="AG")
+    instance_metering_type="BANDWIDTH",
+    route_ecmp_flag=True,
+    route_overlap_flag=True,
+    tags={
+        "createBy": "Terraform",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var main = new Tencentcloud.Ccn.Instance("main", new()
-    {
-        BandwidthLimitType = "INTER_REGION_LIMIT",
-        ChargeType = "POSTPAID",
-        Description = "ci-temp-test-ccn-des",
-        Qos = "AG",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-			BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
-			ChargeType:         pulumi.String("POSTPAID"),
-			Description:        pulumi.String("ci-temp-test-ccn-des"),
-			Qos:                pulumi.String("AG"),
+		_, err := ccn.NewInstance(ctx, "example", &ccn.InstanceArgs{
+			Name:                 pulumi.String("tf-example"),
+			Description:          pulumi.String("desc."),
+			Qos:                  pulumi.String("AG"),
+			ChargeType:           pulumi.String("PREPAID"),
+			BandwidthLimitType:   pulumi.String("INTER_REGION_LIMIT"),
+			InstanceMeteringType: pulumi.String("BANDWIDTH"),
+			RouteEcmpFlag:        pulumi.Bool(true),
+			RouteOverlapFlag:     pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
 		})
 		if err != nil {
 			return err
@@ -297,6 +103,42 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Ccn.Instance("example", new()
+    {
+        Name = "tf-example",
+        Description = "desc.",
+        Qos = "AG",
+        ChargeType = "PREPAID",
+        BandwidthLimitType = "INTER_REGION_LIMIT",
+        InstanceMeteringType = "BANDWIDTH",
+        RouteEcmpFlag = true,
+        RouteOverlapFlag = true,
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -305,8 +147,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ccn.Instance;
 import com.pulumi.tencentcloud.Ccn.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -318,90 +160,541 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var main = new Instance("main", InstanceArgs.builder()        
-            .bandwidthLimitType("INTER_REGION_LIMIT")
-            .chargeType("POSTPAID")
-            .description("ci-temp-test-ccn-des")
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example")
+            .description("desc.")
             .qos("AG")
+            .chargeType("PREPAID")
+            .bandwidthLimitType("INTER_REGION_LIMIT")
+            .instanceMeteringType("BANDWIDTH")
+            .routeEcmpFlag(true)
+            .routeOverlapFlag(true)
+            .tags(Map.of("createBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  main:
+  example:
     type: tencentcloud:Ccn:Instance
     properties:
-      bandwidthLimitType: INTER_REGION_LIMIT
-      chargeType: POSTPAID
-      description: ci-temp-test-ccn-des
+      name: tf-example
+      description: desc.
       qos: AG
+      chargeType: PREPAID
+      bandwidthLimitType: INTER_REGION_LIMIT
+      instanceMeteringType: BANDWIDTH
+      routeEcmpFlag: true
+      routeOverlapFlag: true
+      tags:
+        createBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ccn_instance" "example" {
+  name                   = "tf-example"
+  description            = "desc."
+  qos                    = "AG"
+  charge_type            = "PREPAID"
+  bandwidth_limit_type   = "INTER_REGION_LIMIT"
+  instance_metering_type = "BANDWIDTH"
+  route_ecmp_flag        = true
+  route_overlap_flag     = true
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a POSTPAID regional export speed limit type CCN
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.ccn.Instance("example", {
+    name: "tf-example",
+    description: "desc.",
+    qos: "AG",
+    chargeType: "POSTPAID",
+    bandwidthLimitType: "OUTER_REGION_LIMIT",
+    routeEcmpFlag: false,
+    routeOverlapFlag: true,
+    tags: {
+        createBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.ccn.Instance("example",
+    name="tf-example",
+    description="desc.",
+    qos="AG",
+    charge_type="POSTPAID",
+    bandwidth_limit_type="OUTER_REGION_LIMIT",
+    route_ecmp_flag=False,
+    route_overlap_flag=True,
+    tags={
+        "createBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ccn.NewInstance(ctx, "example", &ccn.InstanceArgs{
+			Name:               pulumi.String("tf-example"),
+			Description:        pulumi.String("desc."),
+			Qos:                pulumi.String("AG"),
+			ChargeType:         pulumi.String("POSTPAID"),
+			BandwidthLimitType: pulumi.String("OUTER_REGION_LIMIT"),
+			RouteEcmpFlag:      pulumi.Bool(false),
+			RouteOverlapFlag:   pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Ccn.Instance("example", new()
+    {
+        Name = "tf-example",
+        Description = "desc.",
+        Qos = "AG",
+        ChargeType = "POSTPAID",
+        BandwidthLimitType = "OUTER_REGION_LIMIT",
+        RouteEcmpFlag = false,
+        RouteOverlapFlag = true,
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Ccn.Instance;
+import com.pulumi.tencentcloud.Ccn.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example")
+            .description("desc.")
+            .qos("AG")
+            .chargeType("POSTPAID")
+            .bandwidthLimitType("OUTER_REGION_LIMIT")
+            .routeEcmpFlag(false)
+            .routeOverlapFlag(true)
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Ccn:Instance
+    properties:
+      name: tf-example
+      description: desc.
+      qos: AG
+      chargeType: POSTPAID
+      bandwidthLimitType: OUTER_REGION_LIMIT
+      routeEcmpFlag: false
+      routeOverlapFlag: true
+      tags:
+        createBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ccn_instance" "example" {
+  name                 = "tf-example"
+  description          = "desc."
+  qos                  = "AG"
+  charge_type          = "POSTPAID"
+  bandwidth_limit_type = "OUTER_REGION_LIMIT"
+  route_ecmp_flag      = false
+  route_overlap_flag   = true
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a POSTPAID inter-regional rate limit type CNN
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.ccn.Instance("example", {
+    name: "tf-example",
+    description: "desc.",
+    qos: "AG",
+    chargeType: "POSTPAID",
+    bandwidthLimitType: "INTER_REGION_LIMIT",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.ccn.Instance("example",
+    name="tf-example",
+    description="desc.",
+    qos="AG",
+    charge_type="POSTPAID",
+    bandwidth_limit_type="INTER_REGION_LIMIT")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ccn.NewInstance(ctx, "example", &ccn.InstanceArgs{
+			Name:               pulumi.String("tf-example"),
+			Description:        pulumi.String("desc."),
+			Qos:                pulumi.String("AG"),
+			ChargeType:         pulumi.String("POSTPAID"),
+			BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Ccn.Instance("example", new()
+    {
+        Name = "tf-example",
+        Description = "desc.",
+        Qos = "AG",
+        ChargeType = "POSTPAID",
+        BandwidthLimitType = "INTER_REGION_LIMIT",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Ccn.Instance;
+import com.pulumi.tencentcloud.Ccn.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example")
+            .description("desc.")
+            .qos("AG")
+            .chargeType("POSTPAID")
+            .bandwidthLimitType("INTER_REGION_LIMIT")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Ccn:Instance
+    properties:
+      name: tf-example
+      description: desc.
+      qos: AG
+      chargeType: POSTPAID
+      bandwidthLimitType: INTER_REGION_LIMIT
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ccn_instance" "example" {
+  name                 = "tf-example"
+  description          = "desc."
+  qos                  = "AG"
+  charge_type          = "POSTPAID"
+  bandwidth_limit_type = "INTER_REGION_LIMIT"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateCcn](https://www.tencentcloud.com/document/api/215/34791)
+  - [ModifyCcnAttribute](https://www.tencentcloud.com/document/api/215/34783)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyCcnAttribute](https://www.tencentcloud.com/document/api/215/34783)
+  - [ModifyCcnRegionBandwidthLimitsType](https://www.tencentcloud.com/document/api/215/34782)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete:
+  - [DeleteCcn](https://www.tencentcloud.com/document/api/215/34790)
+  - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[InstanceArgs]</a></span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">bandwidth_limit_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">instance_metering_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">qos</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[InstanceArgs]</a></span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">route_ecmp_flag</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">route_overlap_flag</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ccn:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ccn:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ccn_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -422,7 +715,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -539,11 +832,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -559,8 +860,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -568,8 +868,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -577,8 +876,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancemeteringtype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemeteringtype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -586,8 +892,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="qos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_csharp" style="color: inherit; text-decoration: inherit;">Qos</a>
@@ -595,17 +900,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeecmpflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeecmpflag_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeoverlapflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeoverlapflag_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -619,8 +938,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -628,8 +946,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -637,8 +954,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancemeteringtype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemeteringtype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -646,8 +970,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="qos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_go" style="color: inherit; text-decoration: inherit;">Qos</a>
@@ -655,17 +978,109 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeecmpflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeecmpflag_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeoverlapflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeoverlapflag_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_limit_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_limit_type_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>limit_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_metering_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_metering_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>metering_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="qos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_hcl" style="color: inherit; text-decoration: inherit;">qos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="route_ecmp_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_ecmp_flag_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>ecmp_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="route_overlap_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_overlap_flag_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>overlap_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -679,8 +1094,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -688,8 +1102,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -697,8 +1110,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancemeteringtype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemeteringtype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -706,8 +1126,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="qos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_java" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -715,17 +1134,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeecmpflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeecmpflag_java" style="color: inherit; text-decoration: inherit;">route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeoverlapflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeoverlapflag_java" style="color: inherit; text-decoration: inherit;">route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -739,8 +1172,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -748,8 +1180,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -757,8 +1188,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancemeteringtype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemeteringtype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -766,8 +1204,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="qos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_nodejs" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -775,17 +1212,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeecmpflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeecmpflag_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeoverlapflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeoverlapflag_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -799,8 +1250,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -808,8 +1258,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -817,8 +1266,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_metering_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_metering_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>metering_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -826,8 +1282,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="qos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_python" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -835,17 +1290,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="route_ecmp_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_ecmp_flag_python" style="color: inherit; text-decoration: inherit;">route_<wbr>ecmp_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="route_overlap_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_overlap_flag_python" style="color: inherit; text-decoration: inherit;">route_<wbr>overlap_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -859,8 +1328,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -868,8 +1336,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -877,8 +1344,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancemeteringtype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemeteringtype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -886,8 +1360,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="qos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qos_yaml" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -895,17 +1368,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeecmpflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeecmpflag_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="routeoverlapflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeoverlapflag_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -926,8 +1413,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -935,8 +1421,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -944,8 +1429,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-"
+    <dd>Number of attached instances.</dd><dt class="property-"
             title="">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -953,8 +1437,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd></dl>
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -968,8 +1451,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -977,8 +1459,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -986,8 +1467,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-"
+    <dd>Number of attached instances.</dd><dt class="property-"
             title="">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -995,8 +1475,45 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd></dl>
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of attached instances.</dd><dt class="property-"
+            title="">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1010,8 +1527,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1019,8 +1535,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1028,8 +1543,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-"
+    <dd>Number of attached instances.</dd><dt class="property-"
             title="">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1037,8 +1551,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd></dl>
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1052,8 +1565,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1061,8 +1573,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1070,8 +1581,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-"
+    <dd>Number of attached instances.</dd><dt class="property-"
             title="">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1079,8 +1589,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd></dl>
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1094,8 +1603,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1103,8 +1611,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -1112,8 +1619,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-"
+    <dd>Number of attached instances.</dd><dt class="property-"
             title="">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1121,8 +1627,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd></dl>
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1136,8 +1641,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1145,8 +1649,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1154,8 +1657,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-"
+    <dd>Number of attached instances.</dd><dt class="property-"
             title="">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1163,8 +1665,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd></dl>
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1174,18 +1675,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1194,108 +1695,150 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">instance_metering_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">qos</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">route_ecmp_flag</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">route_overlap_flag</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">state</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ccn:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ccn_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1303,28 +1846,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1332,28 +1878,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1373,8 +1922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1382,8 +1930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1391,8 +1938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1400,8 +1946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1409,8 +1954,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of attached instances.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancemeteringtype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemeteringtype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1418,8 +1970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_qos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qos_csharp" style="color: inherit; text-decoration: inherit;">Qos</a>
@@ -1427,8 +1978,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeecmpflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeecmpflag_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeoverlapflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeoverlapflag_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1436,17 +2002,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1460,8 +2024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1469,8 +2032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1478,8 +2040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1487,8 +2048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1496,8 +2056,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of attached instances.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancemeteringtype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemeteringtype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1505,8 +2072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_qos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qos_go" style="color: inherit; text-decoration: inherit;">Qos</a>
@@ -1514,8 +2080,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeecmpflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeecmpflag_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeoverlapflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeoverlapflag_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1523,17 +2104,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_limit_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_limit_type_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>limit_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of attached instances.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_metering_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_metering_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>metering_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_qos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qos_hcl" style="color: inherit; text-decoration: inherit;">qos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_route_ecmp_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_ecmp_flag_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>ecmp_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_route_overlap_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_overlap_flag_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>overlap_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1547,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1556,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1565,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1574,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1583,8 +2260,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of attached instances.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancemeteringtype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemeteringtype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1592,8 +2276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_qos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qos_java" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -1601,8 +2284,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeecmpflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeecmpflag_java" style="color: inherit; text-decoration: inherit;">route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeoverlapflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeoverlapflag_java" style="color: inherit; text-decoration: inherit;">route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1610,17 +2308,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1634,8 +2330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1643,8 +2338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1652,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1661,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1670,8 +2362,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of attached instances.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancemeteringtype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemeteringtype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1679,8 +2378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_qos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qos_nodejs" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -1688,8 +2386,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeecmpflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeecmpflag_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeoverlapflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeoverlapflag_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1697,17 +2410,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1721,8 +2432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1730,8 +2440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1739,8 +2448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1748,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -1757,8 +2464,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of attached instances.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_metering_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_metering_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>metering_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1766,8 +2480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_qos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qos_python" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -1775,8 +2488,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_route_ecmp_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_ecmp_flag_python" style="color: inherit; text-decoration: inherit;">route_<wbr>ecmp_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_route_overlap_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_overlap_flag_python" style="color: inherit; text-decoration: inherit;">route_<wbr>overlap_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1784,17 +2512,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1808,8 +2534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The speed limit type. Valid values: <code>INTER_REGION_LIMIT</code>, <code>OUTER_REGION_LIMIT</code>. <code>OUTER_REGION_LIMIT</code> represents the regional export speed limit, <code>INTER_REGION_LIMIT</code> is the inter-regional speed limit. The default is <code>OUTER_REGION_LIMIT</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1817,8 +2542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</p>
-</dd><dt class="property-optional"
+    <dd>Billing mode. Valid values: <code>PREPAID</code>, <code>POSTPAID</code>. <code>PREPAID</code> means prepaid, which means annual and monthly subscription, <code>POSTPAID</code> means post-payment, which means billing by volume. The default is <code>POSTPAID</code>. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1826,8 +2550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1835,8 +2558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CCN, and maximum length does not exceed 100 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CCN, and maximum length does not exceed 100 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1844,8 +2566,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of attached instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of attached instances.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancemeteringtype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemeteringtype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Metering<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance metering type. Valid values: <code>BANDWIDTH</code> (bandwidth billing), <code>TRAFFIC</code> (traffic billing). This parameter cannot be modified after creation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1853,8 +2582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CCN to be queried, and maximum length does not exceed 60 bytes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_qos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qos_yaml" style="color: inherit; text-decoration: inherit;">qos</a>
@@ -1862,8 +2590,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service quality of CCN. Valid values: <code>PT</code>, <code>AU</code>, <code>AG</code>. The default is <code>AU</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeecmpflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeecmpflag_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Ecmp<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable the equivalent routing function. <code>true</code>: enabled, <code>false</code>: disabled. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeoverlapflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeoverlapflag_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Overlap<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable the routing overlap function. <code>true</code>: enabled, <code>false</code>: disabled. Default is true, cannot set to false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1871,17 +2614,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>States of instance. Valid values: <code>ISOLATED</code>(arrears) and <code>AVAILABLE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance tag.</p>
-</dd></dl>
+    <dd>Instance tag.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1899,9 +2640,12 @@ The following state arguments are supported:
 Ccn instance can be imported, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+$ pulumi import tencentcloud:Ccn/instance:Instance example ccn-al70jo89
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1913,7 +2657,6 @@ $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

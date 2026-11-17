@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Ckafka.getInstances"
-meta_desc: "Documentation for the tencentcloud.Ckafka.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed instance information of Ckafka"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,54 +18,47 @@ Use this data source to query detailed instance information of Ckafka
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all Ckafka instances
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Ckafka.getInstances({
-    instanceIds: ["ckafka-vv7wpvae"],
-});
+const example = tencentcloud.ckafka.getInstances({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Ckafka.get_instances(instance_ids=["ckafka-vv7wpvae"])
+example = tencentcloud.ckafka.get_instances()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Ckafka.GetInstances.Invoke(new()
-    {
-        InstanceIds = new[]
-        {
-            "ckafka-vv7wpvae",
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ckafka.GetInstances(ctx, &ckafka.GetInstancesArgs{
-			InstanceIds: []string{
-				"ckafka-vv7wpvae",
-			},
-		}, nil)
+		_, err := ckafka.GetInstances(ctx, &ckafka.GetInstancesArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -71,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Ckafka.GetInstances.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -79,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ckafka.CkafkaFunctions;
 import com.pulumi.tencentcloud.Ckafka.inputs.GetInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +109,277 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var foo = CkafkaFunctions.getInstances(GetInstancesArgs.builder()
-            .instanceIds("ckafka-vv7wpvae")
+        final var example = CkafkaFunctions.getInstances(GetInstancesArgs.builder()
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  foo:
+  example:
     fn::invoke:
-      Function: tencentcloud:Ckafka:getInstances
-      Arguments:
-        instanceIds:
-          - ckafka-vv7wpvae
+      function: tencentcloud:Ckafka:getInstances
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ckafka_getinstances" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query Ckafka instances by filters
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.ckafka.getInstances({
+    instanceIds: [
+        "ckafka-7k5nbnem",
+        "ckafka-8j4raxv8",
+    ],
+    statuses: [
+        0,
+        1,
+        2,
+    ],
+    filters: [{
+        name: "InstanceType",
+        values: ["profession"],
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.ckafka.get_instances(instance_ids=[
+        "ckafka-7k5nbnem",
+        "ckafka-8j4raxv8",
+    ],
+    statuses=[
+        0,
+        1,
+        2,
+    ],
+    filters=[{
+        "name": "InstanceType",
+        "values": ["profession"],
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ckafka.GetInstances(ctx, &ckafka.GetInstancesArgs{
+			InstanceIds: []string{
+				"ckafka-7k5nbnem",
+				"ckafka-8j4raxv8",
+			},
+			Statuses: []int{
+				0,
+				1,
+				2,
+			},
+			Filters: []ckafka.GetInstancesFilter{
+				{
+					Name: "InstanceType",
+					Values: []string{
+						"profession",
+					},
+				},
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Ckafka.GetInstances.Invoke(new()
+    {
+        InstanceIds = new[]
+        {
+            "ckafka-7k5nbnem",
+            "ckafka-8j4raxv8",
+        },
+        Statuses = new[]
+        {
+            0,
+            1,
+            2,
+        },
+        Filters = new[]
+        {
+            new Tencentcloud.Ckafka.Inputs.GetInstancesFilterInputArgs
+            {
+                Name = "InstanceType",
+                Values = new[]
+                {
+                    "profession",
+                },
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Ckafka.CkafkaFunctions;
+import com.pulumi.tencentcloud.Ckafka.inputs.GetInstancesArgs;
+import com.pulumi.tencentcloud.Ckafka.inputs.GetInstancesFilterArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = CkafkaFunctions.getInstances(GetInstancesArgs.builder()
+            .instanceIds(            
+                "ckafka-7k5nbnem",
+                "ckafka-8j4raxv8")
+            .statuses(            
+                0,
+                1,
+                2)
+            .filters(GetInstancesFilterArgs.builder()
+                .name("InstanceType")
+                .values("profession")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Ckafka:getInstances
+      arguments:
+        instanceIds:
+          - ckafka-7k5nbnem
+          - ckafka-8j4raxv8
+        statuses:
+          - 0
+          - 1
+          - 2
+        filters:
+          - name: InstanceType
+            values:
+              - profession
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ckafka_getinstances" "example" {
+  instance_ids = ["ckafka-7k5nbnem", "ckafka-8j4raxv8"]
+  statuses     = [0, 1, 2]
+  filters {
+    name   = "InstanceType"
+    values = ["profession"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeInstancesDetail](https://www.tencentcloud.com/document/api/597/35356)
 
 
 
@@ -121,7 +391,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +399,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -140,7 +410,7 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_instances<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ckafka.GetInstancesFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_instances<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetInstancesFilter]]</span> = None<span class="p">,</span>
                   <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                   <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -150,15 +420,15 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_ckafka.GetInstancesFilterArgs]]]]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                  <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">search_word</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">statuses</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
-                  <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetInstancesFilterArgs]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">search_word</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">statuses</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">tag_key</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -183,7 +453,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,7 +463,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -204,6 +476,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ckafka/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ckafka_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -231,26 +511,23 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Filter by instance ID.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Filter by instance ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is <code>10</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is <code>0</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -258,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_csharp" style="color: inherit; text-decoration: inherit;">Search<wbr>Word</a>
@@ -267,8 +543,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by instance name, support fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by instance name, support fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_csharp" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -276,8 +551,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-optional"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -285,8 +559,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd></dl>
+    <dd>Matches the tag key value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +573,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">[]Get<wbr>Instances<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -309,26 +581,23 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Filter by instance ID.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Filter by instance ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is <code>10</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is <code>0</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -336,8 +605,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_go" style="color: inherit; text-decoration: inherit;">Search<wbr>Word</a>
@@ -345,8 +613,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by instance name, support fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by instance name, support fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_go" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -354,8 +621,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-optional"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -363,8 +629,77 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd></dl>
+    <dd>Matches the tag key value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesfilter">list(object)</a></span>
+    </dt>
+    <dd>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Filter by instance ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is <code>10</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is <code>0</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="search_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by instance name, support fuzzy query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Matches the tag key value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -378,8 +713,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">List&lt;Get<wbr>Instances<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -387,26 +721,23 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter by instance ID.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Filter by instance ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is <code>10</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is <code>0</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -414,8 +745,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_java" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -423,8 +753,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by instance name, support fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by instance name, support fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_java" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -432,8 +761,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-optional"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -441,8 +769,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd></dl>
+    <dd>Matches the tag key value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -456,8 +783,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">Get<wbr>Instances<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -465,26 +791,23 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Filter by instance ID.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Filter by instance ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is <code>10</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is <code>0</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -492,8 +815,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_nodejs" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -501,8 +823,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by instance name, support fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by instance name, support fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_nodejs" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -510,8 +831,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-optional"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -519,8 +839,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd></dl>
+    <dd>Matches the tag key value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -532,10 +851,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesfilter">Get<wbr>Instances<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getinstancesfilter">Sequence[Get<wbr>Instances<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -543,26 +861,23 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Filter by instance ID.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Filter by instance ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is <code>10</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is <code>0</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -570,8 +885,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="search_word_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_python" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
@@ -579,8 +893,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by instance name, support fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by instance name, support fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_python" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -588,8 +901,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-optional"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
@@ -597,8 +909,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd></dl>
+    <dd>Matches the tag key value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -612,8 +923,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</p>
-</dd><dt class="property-optional"
+    <dd>Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -621,26 +931,23 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter by instance ID.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Filter by instance ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of pages, default is <code>10</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is <code>10</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The page start offset, default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is <code>0</code>.<p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -648,8 +955,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_yaml" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -657,8 +963,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by instance name, support fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Filter by instance name, support fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_yaml" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -666,8 +971,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-optional"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -675,8 +979,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd></dl>
+    <dd>Matches the tag key value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -699,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -708,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -725,23 +1026,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd></dd><dt class="property-"
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -765,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</p>
-</dd><dt class="property-"
+    <dd>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</dd><dt class="property-"
             title="">
         <span id="tagkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -774,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd></dl>
+    <dd>Tag Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -789,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -798,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">[]Get<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -815,23 +1112,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd></dd><dt class="property-"
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -855,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</p>
-</dd><dt class="property-"
+    <dd>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</dd><dt class="property-"
             title="">
         <span id="tagkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
@@ -864,8 +1160,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd></dl>
+    <dd>Tag Key.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="search_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</dd><dt class="property-"
+            title="">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -879,8 +1260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -888,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -905,23 +1284,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd></dd><dt class="property-"
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -945,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</p>
-</dd><dt class="property-"
+    <dd>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</dd><dt class="property-"
             title="">
         <span id="tagkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -954,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd></dl>
+    <dd>Tag Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -969,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -978,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -995,23 +1370,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd></dd><dt class="property-"
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1035,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</p>
-</dd><dt class="property-"
+    <dd>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</dd><dt class="property-"
             title="">
         <span id="tagkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -1044,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd></dl>
+    <dd>Tag Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1059,23 +1432,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesfilter">Get<wbr>Instances<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getinstancesfilter">Sequence[Get<wbr>Instances<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -1085,23 +1456,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd></dd><dt class="property-"
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1125,8 +1496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</p>
-</dd><dt class="property-"
+    <dd>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</dd><dt class="property-"
             title="">
         <span id="tag_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
@@ -1134,8 +1504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd></dl>
+    <dd>Tag Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1149,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1158,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -1175,23 +1542,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd></dd><dt class="property-"
-            title="">
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd></dd><dt class="property-"
+    <dd><p class="property-message">Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1215,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</p>
-</dd><dt class="property-"
+    <dd>The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.</dd><dt class="property-"
             title="">
         <span id="tagkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
@@ -1224,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Key.</p>
-</dd></dl>
+    <dd>Tag Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1249,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The field that needs to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>The field that needs to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1258,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The filtered value of the field.</p>
-</dd></dl>
+    <dd>The filtered value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1273,8 +1636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The field that needs to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>The field that needs to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1282,8 +1644,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The filtered value of the field.</p>
-</dd></dl>
+    <dd>The filtered value of the field.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The field that needs to be filtered.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The filtered value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1297,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The field that needs to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>The field that needs to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1306,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The filtered value of the field.</p>
-</dd></dl>
+    <dd>The filtered value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1321,8 +1702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The field that needs to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>The field that needs to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1330,8 +1710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The filtered value of the field.</p>
-</dd></dl>
+    <dd>The filtered value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1345,8 +1724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The field that needs to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>The field that needs to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1354,8 +1732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The filtered value of the field.</p>
-</dd></dl>
+    <dd>The filtered value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1369,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The field that needs to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>The field that needs to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1378,8 +1754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The filtered value of the field.</p>
-</dd></dl>
+    <dd>The filtered value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1397,8 +1772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Instance bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1406,8 +1780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance was created.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_csharp" style="color: inherit; text-decoration: inherit;">Cvm</a>
@@ -1415,8 +1788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1424,8 +1796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The storage size of the instance, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The storage size of the instance, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1433,8 +1804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_csharp" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
@@ -1442,8 +1812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The instance expiration time.</p>
-</dd><dt class="property-required"
+    <dd>The instance expiration time.</dd><dt class="property-required"
             title="Required">
         <span id="healthy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_csharp" style="color: inherit; text-decoration: inherit;">Healthy</a>
@@ -1451,8 +1820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</p>
-</dd><dt class="property-required"
+    <dd>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</dd><dt class="property-required"
             title="Required">
         <span id="healthymessage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthymessage_csharp" style="color: inherit; text-decoration: inherit;">Healthy<wbr>Message</a>
@@ -1460,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance status information.</p>
-</dd><dt class="property-required"
+    <dd>Instance status information.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1469,8 +1836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID.</p>
-</dd><dt class="property-required"
+    <dd>The instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1478,8 +1844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance name.</p>
-</dd><dt class="property-required"
+    <dd>The instance name.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1487,8 +1852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="isinternal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternal_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Internal</a>
@@ -1496,8 +1860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is an internal customer. A value of 1 indicates an internal customer.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is an internal customer. A value of 1 indicates an internal customer.</dd><dt class="property-required"
             title="Required">
         <span id="maxpartitionnumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxpartitionnumber_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Partition<wbr>Number</a>
@@ -1505,8 +1868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnumber_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Topic<wbr>Number</a>
@@ -1514,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="partitionnumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnumber_csharp" style="color: inherit; text-decoration: inherit;">Partition<wbr>Number</a>
@@ -1523,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Network</a>
@@ -1532,8 +1892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworkchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworkchargetype_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Network<wbr>Charge<wbr>Type</a>
@@ -1541,8 +1900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="rebalancetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rebalancetime_csharp" style="color: inherit; text-decoration: inherit;">Rebalance<wbr>Time</a>
@@ -1550,8 +1908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -1559,8 +1916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</p>
-</dd><dt class="property-required"
+    <dd>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1568,8 +1924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-required"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1577,8 +1932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1586,8 +1940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelisttag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Tag information.</p>
-</dd><dt class="property-required"
+    <dd>Tag information.</dd><dt class="property-required"
             title="Required">
         <span id="topicnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnum_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Num</a>
@@ -1595,8 +1948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of topics.</p>
-</dd><dt class="property-required"
+    <dd>The number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1604,8 +1956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1613,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="viplist_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplist_csharp" style="color: inherit; text-decoration: inherit;">Vip<wbr>List</a>
@@ -1622,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistviplist">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Vip<wbr>List</a></span>
     </dt>
-    <dd><p>Virtual IP entities.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP entities.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1631,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VpcId, if empty, indicates that it is the underlying network.</p>
-</dd><dt class="property-required"
+    <dd>VpcId, if empty, indicates that it is the underlying network.</dd><dt class="property-required"
             title="Required">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -1640,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd><dt class="property-required"
+    <dd>Virtual PORT.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1649,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability Zone ID.</p>
-</dd><dt class="property-required"
+    <dd>Availability Zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Ids</a>
@@ -1658,8 +2004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1673,8 +2018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Instance bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1682,8 +2026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance was created.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_go" style="color: inherit; text-decoration: inherit;">Cvm</a>
@@ -1691,8 +2034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1700,8 +2042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The storage size of the instance, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The storage size of the instance, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1709,8 +2050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_go" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
@@ -1718,8 +2058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The instance expiration time.</p>
-</dd><dt class="property-required"
+    <dd>The instance expiration time.</dd><dt class="property-required"
             title="Required">
         <span id="healthy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_go" style="color: inherit; text-decoration: inherit;">Healthy</a>
@@ -1727,8 +2066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</p>
-</dd><dt class="property-required"
+    <dd>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</dd><dt class="property-required"
             title="Required">
         <span id="healthymessage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthymessage_go" style="color: inherit; text-decoration: inherit;">Healthy<wbr>Message</a>
@@ -1736,8 +2074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance status information.</p>
-</dd><dt class="property-required"
+    <dd>Instance status information.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1745,8 +2082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID.</p>
-</dd><dt class="property-required"
+    <dd>The instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1754,8 +2090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance name.</p>
-</dd><dt class="property-required"
+    <dd>The instance name.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1763,8 +2098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="isinternal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternal_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Internal</a>
@@ -1772,8 +2106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is an internal customer. A value of 1 indicates an internal customer.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is an internal customer. A value of 1 indicates an internal customer.</dd><dt class="property-required"
             title="Required">
         <span id="maxpartitionnumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxpartitionnumber_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Partition<wbr>Number</a>
@@ -1781,8 +2114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnumber_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Topic<wbr>Number</a>
@@ -1790,8 +2122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="partitionnumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnumber_go" style="color: inherit; text-decoration: inherit;">Partition<wbr>Number</a>
@@ -1799,8 +2130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Network</a>
@@ -1808,8 +2138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworkchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworkchargetype_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Network<wbr>Charge<wbr>Type</a>
@@ -1817,8 +2146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="rebalancetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rebalancetime_go" style="color: inherit; text-decoration: inherit;">Rebalance<wbr>Time</a>
@@ -1826,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -1835,8 +2162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</p>
-</dd><dt class="property-required"
+    <dd>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1844,8 +2170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-required"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1853,8 +2178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1862,8 +2186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelisttag">[]Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Tag</a></span>
     </dt>
-    <dd><p>Tag information.</p>
-</dd><dt class="property-required"
+    <dd>Tag information.</dd><dt class="property-required"
             title="Required">
         <span id="topicnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnum_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Num</a>
@@ -1871,8 +2194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of topics.</p>
-</dd><dt class="property-required"
+    <dd>The number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1880,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1889,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="viplist_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplist_go" style="color: inherit; text-decoration: inherit;">Vip<wbr>List</a>
@@ -1898,8 +2218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistviplist">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Vip<wbr>List</a></span>
     </dt>
-    <dd><p>Virtual IP entities.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP entities.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1907,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VpcId, if empty, indicates that it is the underlying network.</p>
-</dd><dt class="property-required"
+    <dd>VpcId, if empty, indicates that it is the underlying network.</dd><dt class="property-required"
             title="Required">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -1916,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd><dt class="property-required"
+    <dd>Virtual PORT.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1925,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability Zone ID.</p>
-</dd><dt class="property-required"
+    <dd>Availability Zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Ids</a>
@@ -1934,8 +2250,253 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance bandwidth, in Mbps.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The time when the instance was created.</dd><dt class="property-required"
+            title="Required">
+        <span id="cvm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_hcl" style="color: inherit; text-decoration: inherit;">cvm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The storage size of the instance, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
+            title="Required">
+        <span id="expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The instance expiration time.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_hcl" style="color: inherit; text-decoration: inherit;">healthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthy_message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_message_hcl" style="color: inherit; text-decoration: inherit;">healthy_<wbr>message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance status information.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The instance name.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_internal_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_internal_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>internal</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether it is an internal customer. A value of 1 indicates an internal customer.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_partition_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_partition_number_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>partition_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_topic_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_topic_number_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>topic_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
+            title="Required">
+        <span id="partition_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_number_hcl" style="color: inherit; text-decoration: inherit;">partition_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
+            title="Required">
+        <span id="public_network_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>network</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
+            title="Required">
+        <span id="public_network_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_charge_type_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>network_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
+            title="Required">
+        <span id="rebalance_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rebalance_time_hcl" style="color: inherit; text-decoration: inherit;">rebalance_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
+            title="Required">
+        <span id="renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelisttag">list(object)</a></span>
+    </dt>
+    <dd>Tag information.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_num_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of topics.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
+            title="Required">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="vip_list_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_list_hcl" style="color: inherit; text-decoration: inherit;">vip_<wbr>list</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelistviplist">object</a></span>
+    </dt>
+    <dd>Virtual IP entities.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VpcId, if empty, indicates that it is the underlying network.</dd><dt class="property-required"
+            title="Required">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual PORT.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Availability Zone ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_ids_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1949,8 +2510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Instance bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1958,8 +2518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance was created.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_java" style="color: inherit; text-decoration: inherit;">cvm</a>
@@ -1967,8 +2526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1976,8 +2534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The storage size of the instance, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The storage size of the instance, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1985,8 +2542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_java" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -1994,8 +2550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The instance expiration time.</p>
-</dd><dt class="property-required"
+    <dd>The instance expiration time.</dd><dt class="property-required"
             title="Required">
         <span id="healthy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_java" style="color: inherit; text-decoration: inherit;">healthy</a>
@@ -2003,8 +2558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</p>
-</dd><dt class="property-required"
+    <dd>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</dd><dt class="property-required"
             title="Required">
         <span id="healthymessage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthymessage_java" style="color: inherit; text-decoration: inherit;">healthy<wbr>Message</a>
@@ -2012,8 +2566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance status information.</p>
-</dd><dt class="property-required"
+    <dd>Instance status information.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2021,8 +2574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance ID.</p>
-</dd><dt class="property-required"
+    <dd>The instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2030,8 +2582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance name.</p>
-</dd><dt class="property-required"
+    <dd>The instance name.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -2039,8 +2590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="isinternal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternal_java" style="color: inherit; text-decoration: inherit;">is<wbr>Internal</a>
@@ -2048,8 +2598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether it is an internal customer. A value of 1 indicates an internal customer.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is an internal customer. A value of 1 indicates an internal customer.</dd><dt class="property-required"
             title="Required">
         <span id="maxpartitionnumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxpartitionnumber_java" style="color: inherit; text-decoration: inherit;">max<wbr>Partition<wbr>Number</a>
@@ -2057,8 +2606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnumber_java" style="color: inherit; text-decoration: inherit;">max<wbr>Topic<wbr>Number</a>
@@ -2066,8 +2614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="partitionnumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnumber_java" style="color: inherit; text-decoration: inherit;">partition<wbr>Number</a>
@@ -2075,8 +2622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_java" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -2084,8 +2630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworkchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworkchargetype_java" style="color: inherit; text-decoration: inherit;">public<wbr>Network<wbr>Charge<wbr>Type</a>
@@ -2093,8 +2638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="rebalancetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rebalancetime_java" style="color: inherit; text-decoration: inherit;">rebalance<wbr>Time</a>
@@ -2102,8 +2646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2111,8 +2654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</p>
-</dd><dt class="property-required"
+    <dd>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2120,8 +2662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-required"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2129,8 +2670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2138,8 +2678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelisttag">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Tag information.</p>
-</dd><dt class="property-required"
+    <dd>Tag information.</dd><dt class="property-required"
             title="Required">
         <span id="topicnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnum_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Num</a>
@@ -2147,8 +2686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of topics.</p>
-</dd><dt class="property-required"
+    <dd>The number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2156,8 +2694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2165,8 +2702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="viplist_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplist_java" style="color: inherit; text-decoration: inherit;">vip<wbr>List</a>
@@ -2174,8 +2710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistviplist">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Vip<wbr>List</a></span>
     </dt>
-    <dd><p>Virtual IP entities.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP entities.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2183,8 +2718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VpcId, if empty, indicates that it is the underlying network.</p>
-</dd><dt class="property-required"
+    <dd>VpcId, if empty, indicates that it is the underlying network.</dd><dt class="property-required"
             title="Required">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2192,8 +2726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd><dt class="property-required"
+    <dd>Virtual PORT.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2201,8 +2734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Availability Zone ID.</p>
-</dd><dt class="property-required"
+    <dd>Availability Zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Ids</a>
@@ -2210,8 +2742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2225,8 +2756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Instance bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2234,8 +2764,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance was created.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_nodejs" style="color: inherit; text-decoration: inherit;">cvm</a>
@@ -2243,8 +2772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2252,8 +2780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The storage size of the instance, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The storage size of the instance, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2261,8 +2788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_nodejs" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -2270,8 +2796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The instance expiration time.</p>
-</dd><dt class="property-required"
+    <dd>The instance expiration time.</dd><dt class="property-required"
             title="Required">
         <span id="healthy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_nodejs" style="color: inherit; text-decoration: inherit;">healthy</a>
@@ -2279,8 +2804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</p>
-</dd><dt class="property-required"
+    <dd>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</dd><dt class="property-required"
             title="Required">
         <span id="healthymessage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthymessage_nodejs" style="color: inherit; text-decoration: inherit;">healthy<wbr>Message</a>
@@ -2288,8 +2812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance status information.</p>
-</dd><dt class="property-required"
+    <dd>Instance status information.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2297,8 +2820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID.</p>
-</dd><dt class="property-required"
+    <dd>The instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2306,8 +2828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance name.</p>
-</dd><dt class="property-required"
+    <dd>The instance name.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -2315,8 +2836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="isinternal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternal_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Internal</a>
@@ -2324,8 +2844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether it is an internal customer. A value of 1 indicates an internal customer.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is an internal customer. A value of 1 indicates an internal customer.</dd><dt class="property-required"
             title="Required">
         <span id="maxpartitionnumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxpartitionnumber_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Partition<wbr>Number</a>
@@ -2333,8 +2852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnumber_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Topic<wbr>Number</a>
@@ -2342,8 +2860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="partitionnumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnumber_nodejs" style="color: inherit; text-decoration: inherit;">partition<wbr>Number</a>
@@ -2351,8 +2868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -2360,8 +2876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworkchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworkchargetype_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Network<wbr>Charge<wbr>Type</a>
@@ -2369,8 +2884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="rebalancetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rebalancetime_nodejs" style="color: inherit; text-decoration: inherit;">rebalance<wbr>Time</a>
@@ -2378,8 +2892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2387,8 +2900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</p>
-</dd><dt class="property-required"
+    <dd>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2396,8 +2908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-required"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2405,8 +2916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2414,8 +2924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelisttag">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Tag[]</a></span>
     </dt>
-    <dd><p>Tag information.</p>
-</dd><dt class="property-required"
+    <dd>Tag information.</dd><dt class="property-required"
             title="Required">
         <span id="topicnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnum_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Num</a>
@@ -2423,8 +2932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of topics.</p>
-</dd><dt class="property-required"
+    <dd>The number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2432,8 +2940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2441,8 +2948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="viplist_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplist_nodejs" style="color: inherit; text-decoration: inherit;">vip<wbr>List</a>
@@ -2450,8 +2956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistviplist">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Vip<wbr>List</a></span>
     </dt>
-    <dd><p>Virtual IP entities.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP entities.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2459,8 +2964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VpcId, if empty, indicates that it is the underlying network.</p>
-</dd><dt class="property-required"
+    <dd>VpcId, if empty, indicates that it is the underlying network.</dd><dt class="property-required"
             title="Required">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2468,8 +2972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd><dt class="property-required"
+    <dd>Virtual PORT.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2477,8 +2980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Availability Zone ID.</p>
-</dd><dt class="property-required"
+    <dd>Availability Zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Ids</a>
@@ -2486,8 +2988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2501,8 +3002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Instance bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2510,8 +3010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance was created.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_python" style="color: inherit; text-decoration: inherit;">cvm</a>
@@ -2519,8 +3018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -2528,8 +3026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The storage size of the instance, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The storage size of the instance, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -2537,8 +3034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="expire_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_python" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
@@ -2546,8 +3042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The instance expiration time.</p>
-</dd><dt class="property-required"
+    <dd>The instance expiration time.</dd><dt class="property-required"
             title="Required">
         <span id="healthy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_python" style="color: inherit; text-decoration: inherit;">healthy</a>
@@ -2555,8 +3050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</p>
-</dd><dt class="property-required"
+    <dd>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</dd><dt class="property-required"
             title="Required">
         <span id="healthy_message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_message_python" style="color: inherit; text-decoration: inherit;">healthy_<wbr>message</a>
@@ -2564,8 +3058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance status information.</p>
-</dd><dt class="property-required"
+    <dd>Instance status information.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2573,8 +3066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The instance ID.</p>
-</dd><dt class="property-required"
+    <dd>The instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -2582,8 +3074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The instance name.</p>
-</dd><dt class="property-required"
+    <dd>The instance name.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -2591,8 +3082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="is_internal_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_internal_python" style="color: inherit; text-decoration: inherit;">is_<wbr>internal</a>
@@ -2600,8 +3090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is an internal customer. A value of 1 indicates an internal customer.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is an internal customer. A value of 1 indicates an internal customer.</dd><dt class="property-required"
             title="Required">
         <span id="max_partition_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_partition_number_python" style="color: inherit; text-decoration: inherit;">max_<wbr>partition_<wbr>number</a>
@@ -2609,8 +3098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="max_topic_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_topic_number_python" style="color: inherit; text-decoration: inherit;">max_<wbr>topic_<wbr>number</a>
@@ -2618,8 +3106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="partition_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_number_python" style="color: inherit; text-decoration: inherit;">partition_<wbr>number</a>
@@ -2627,8 +3114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="public_network_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_python" style="color: inherit; text-decoration: inherit;">public_<wbr>network</a>
@@ -2636,8 +3122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="public_network_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_charge_type_python" style="color: inherit; text-decoration: inherit;">public_<wbr>network_<wbr>charge_<wbr>type</a>
@@ -2645,8 +3130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="rebalance_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rebalance_time_python" style="color: inherit; text-decoration: inherit;">rebalance_<wbr>time</a>
@@ -2654,8 +3138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -2663,8 +3146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</p>
-</dd><dt class="property-required"
+    <dd>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2672,8 +3154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-required"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2681,17 +3162,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelisttag">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Tag]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelisttag">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Tag]</a></span>
     </dt>
-    <dd><p>Tag information.</p>
-</dd><dt class="property-required"
+    <dd>Tag information.</dd><dt class="property-required"
             title="Required">
         <span id="topic_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_num_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>num</a>
@@ -2699,8 +3178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of topics.</p>
-</dd><dt class="property-required"
+    <dd>The number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2708,8 +3186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2717,8 +3194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="vip_list_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_list_python" style="color: inherit; text-decoration: inherit;">vip_<wbr>list</a>
@@ -2726,8 +3202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistviplist">Get<wbr>Instances<wbr>Instance<wbr>List<wbr>Vip<wbr>List</a></span>
     </dt>
-    <dd><p>Virtual IP entities.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP entities.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2735,8 +3210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VpcId, if empty, indicates that it is the underlying network.</p>
-</dd><dt class="property-required"
+    <dd>VpcId, if empty, indicates that it is the underlying network.</dd><dt class="property-required"
             title="Required">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2744,8 +3218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd><dt class="property-required"
+    <dd>Virtual PORT.</dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -2753,8 +3226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability Zone ID.</p>
-</dd><dt class="property-required"
+    <dd>Availability Zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="zone_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_ids_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>ids</a>
@@ -2762,8 +3234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2777,8 +3248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Instance bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2786,8 +3256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance was created.</dd><dt class="property-required"
             title="Required">
         <span id="cvm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvm_yaml" style="color: inherit; text-decoration: inherit;">cvm</a>
@@ -2795,8 +3264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2804,8 +3272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The storage size of the instance, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The storage size of the instance, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2813,8 +3280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_yaml" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -2822,8 +3288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The instance expiration time.</p>
-</dd><dt class="property-required"
+    <dd>The instance expiration time.</dd><dt class="property-required"
             title="Required">
         <span id="healthy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_yaml" style="color: inherit; text-decoration: inherit;">healthy</a>
@@ -2831,8 +3296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</p>
-</dd><dt class="property-required"
+    <dd>Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.</dd><dt class="property-required"
             title="Required">
         <span id="healthymessage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthymessage_yaml" style="color: inherit; text-decoration: inherit;">healthy<wbr>Message</a>
@@ -2840,8 +3304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance status information.</p>
-</dd><dt class="property-required"
+    <dd>Instance status information.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2849,8 +3312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance ID.</p>
-</dd><dt class="property-required"
+    <dd>The instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2858,8 +3320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance name.</p>
-</dd><dt class="property-required"
+    <dd>The instance name.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -2867,8 +3328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="isinternal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternal_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Internal</a>
@@ -2876,8 +3336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether it is an internal customer. A value of 1 indicates an internal customer.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is an internal customer. A value of 1 indicates an internal customer.</dd><dt class="property-required"
             title="Required">
         <span id="maxpartitionnumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxpartitionnumber_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Partition<wbr>Number</a>
@@ -2885,8 +3344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="maxtopicnumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtopicnumber_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Topic<wbr>Number</a>
@@ -2894,8 +3352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="partitionnumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnumber_yaml" style="color: inherit; text-decoration: inherit;">partition<wbr>Number</a>
@@ -2903,8 +3360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -2912,8 +3368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworkchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworkchargetype_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Network<wbr>Charge<wbr>Type</a>
@@ -2921,8 +3376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="rebalancetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rebalancetime_yaml" style="color: inherit; text-decoration: inherit;">rebalance<wbr>Time</a>
@@ -2930,8 +3384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-required"
+    <dd>Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-required"
             title="Required">
         <span id="renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2939,8 +3392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</p>
-</dd><dt class="property-required"
+    <dd>Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2948,8 +3400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</p>
-</dd><dt class="property-required"
+    <dd>(Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2957,8 +3408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2966,8 +3416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelisttag">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Tag information.</p>
-</dd><dt class="property-required"
+    <dd>Tag information.</dd><dt class="property-required"
             title="Required">
         <span id="topicnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicnum_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Num</a>
@@ -2975,8 +3424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of topics.</p>
-</dd><dt class="property-required"
+    <dd>The number of topics.</dd><dt class="property-required"
             title="Required">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2984,8 +3432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2993,8 +3440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="viplist_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplist_yaml" style="color: inherit; text-decoration: inherit;">vip<wbr>List</a>
@@ -3002,8 +3448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelistviplist">Property Map</a></span>
     </dt>
-    <dd><p>Virtual IP entities.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP entities.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3011,8 +3456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VpcId, if empty, indicates that it is the underlying network.</p>
-</dd><dt class="property-required"
+    <dd>VpcId, if empty, indicates that it is the underlying network.</dd><dt class="property-required"
             title="Required">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3020,8 +3464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd><dt class="property-required"
+    <dd>Virtual PORT.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -3029,8 +3472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Availability Zone ID.</p>
-</dd><dt class="property-required"
+    <dd>Availability Zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Ids</a>
@@ -3038,8 +3480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3057,8 +3498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd><dt class="property-required"
+    <dd>Matches the tag key value.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -3066,8 +3506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3081,8 +3520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd><dt class="property-required"
+    <dd>Matches the tag key value.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -3090,8 +3528,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Matches the tag key value.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3105,8 +3564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd><dt class="property-required"
+    <dd>Matches the tag key value.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -3114,8 +3572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3129,8 +3586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd><dt class="property-required"
+    <dd>Matches the tag key value.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -3138,8 +3594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3153,8 +3608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd><dt class="property-required"
+    <dd>Matches the tag key value.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -3162,8 +3616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3177,8 +3630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Matches the tag key value.</p>
-</dd><dt class="property-required"
+    <dd>Matches the tag key value.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -3186,8 +3638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag Value.</p>
-</dd></dl>
+    <dd>Tag Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3205,8 +3656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -3214,8 +3664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd></dl>
+    <dd>Virtual PORT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3229,8 +3678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -3238,8 +3686,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd></dl>
+    <dd>Virtual PORT.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual PORT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3253,8 +3722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3262,8 +3730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd></dl>
+    <dd>Virtual PORT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3277,8 +3744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3286,8 +3752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd></dl>
+    <dd>Virtual PORT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3301,8 +3766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3310,8 +3774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd></dl>
+    <dd>Virtual PORT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3325,8 +3788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP.</dd><dt class="property-required"
             title="Required">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3334,8 +3796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual PORT.</p>
-</dd></dl>
+    <dd>Virtual PORT.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3350,7 +3811,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

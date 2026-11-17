@@ -2,9 +2,11 @@
 ---
 title: "Certificate"
 title_tag: "tencentcloud.Gaap.Certificate"
-meta_desc: "Documentation for the tencentcloud.Gaap.Certificate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a certificate of GAAP."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,68 @@ Provides a resource to create a certificate of GAAP.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.gaap.Certificate("foo", {
-    content: "test:tx2KGdo3zJg/.",
     type: "BASIC",
+    content: "test:tx2KGdo3zJg/.",
+    name: "test_certificate",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.gaap.Certificate("foo",
+    type="BASIC",
     content="test:tx2KGdo3zJg/.",
-    type="BASIC")
+    name="test_certificate")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.NewCertificate(ctx, "foo", &gaap.CertificateArgs{
+			Type:    pulumi.String("BASIC"),
+			Content: pulumi.String("test:tx2KGdo3zJg/."),
+			Name:    pulumi.String("test_certificate"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -44,33 +90,18 @@ return await Deployment.RunAsync(() =>
 {
     var foo = new Tencentcloud.Gaap.Certificate("foo", new()
     {
-        Content = "test:tx2KGdo3zJg/.",
         Type = "BASIC",
+        Content = "test:tx2KGdo3zJg/.",
+        Name = "test_certificate",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.NewCertificate(ctx, "foo", &Gaap.CertificateArgs{
-			Content: pulumi.String("test:tx2KGdo3zJg/."),
-			Type:    pulumi.String("BASIC"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +110,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.Certificate;
 import com.pulumi.tencentcloud.Gaap.CertificateArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,84 +123,136 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Certificate("foo", CertificateArgs.builder()        
-            .content("test:tx2KGdo3zJg/.")
+        var foo = new Certificate("foo", CertificateArgs.builder()
             .type("BASIC")
+            .content("test:tx2KGdo3zJg/.")
+            .name("test_certificate")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Gaap:Certificate
     properties:
-      content: test:tx2KGdo3zJg/.
       type: BASIC
+      content: test:tx2KGdo3zJg/.
+      name: test_certificate
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_gaap_certificate" "foo" {
+  type    = "BASIC"
+  content = "test:tx2KGdo3zJg/."
+  name    = "test_certificate"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateCertificate](https://www.tencentcloud.com/document/api/608/33118)
+* Read: [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/608/33116)
+* Update: [ModifyCertificateAttributes](https://www.tencentcloud.com/document/api/608/33114)
+* Delete: [DeleteCertificate](https://www.tencentcloud.com/document/api/608/33117)
 
 
 ## Create Certificate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                 <span class="nx">content</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCertificate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Certificate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCertificate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Certificate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:Certificate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:Certificate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_gaap_certificate&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -190,7 +273,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -307,11 +390,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Certificate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Certificate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -327,8 +418,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -336,8 +426,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -345,8 +434,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -354,8 +442,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd></dl>
+    <dd>Name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -369,8 +456,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -378,8 +464,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -387,8 +472,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -396,8 +480,45 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd></dl>
+    <dd>Name of the certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -411,8 +532,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -420,8 +540,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -429,8 +548,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -438,8 +556,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd></dl>
+    <dd>Name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -453,8 +570,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -462,8 +578,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -471,8 +586,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -480,8 +594,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd></dl>
+    <dd>Name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -495,8 +608,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -504,8 +616,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -513,8 +624,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -522,8 +632,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd></dl>
+    <dd>Name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -537,8 +646,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -546,8 +654,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -555,8 +662,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -564,8 +670,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd></dl>
+    <dd>Name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -586,8 +691,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -595,8 +699,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -604,8 +707,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the certificate.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -613,8 +715,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="issuercn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_csharp" style="color: inherit; text-decoration: inherit;">Issuer<wbr>Cn</a>
@@ -622,8 +723,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Issuer name of the certificate.</dd><dt class="property-"
             title="">
         <span id="subjectcn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_csharp" style="color: inherit; text-decoration: inherit;">Subject<wbr>Cn</a>
@@ -631,8 +731,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd></dl>
+    <dd>Subject name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -646,8 +745,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -655,8 +753,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -664,8 +761,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the certificate.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -673,8 +769,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="issuercn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_go" style="color: inherit; text-decoration: inherit;">Issuer<wbr>Cn</a>
@@ -682,8 +777,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Issuer name of the certificate.</dd><dt class="property-"
             title="">
         <span id="subjectcn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_go" style="color: inherit; text-decoration: inherit;">Subject<wbr>Cn</a>
@@ -691,8 +785,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd></dl>
+    <dd>Subject name of the certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Beginning time of the certificate.</dd><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the certificate.</dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ending time of the certificate.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="issuer_cn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_cn_hcl" style="color: inherit; text-decoration: inherit;">issuer_<wbr>cn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Issuer name of the certificate.</dd><dt class="property-"
+            title="">
+        <span id="subject_cn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_cn_hcl" style="color: inherit; text-decoration: inherit;">subject_<wbr>cn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subject name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -706,8 +853,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -715,8 +861,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -724,8 +869,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the certificate.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -733,8 +877,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="issuercn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_java" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -742,8 +885,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Issuer name of the certificate.</dd><dt class="property-"
             title="">
         <span id="subjectcn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_java" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -751,8 +893,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd></dl>
+    <dd>Subject name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -766,8 +907,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -775,8 +915,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -784,8 +923,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the certificate.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -793,8 +931,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="issuercn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_nodejs" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -802,8 +939,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Issuer name of the certificate.</dd><dt class="property-"
             title="">
         <span id="subjectcn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_nodejs" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -811,8 +947,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd></dl>
+    <dd>Subject name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -826,8 +961,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the certificate.</dd><dt class="property-"
             title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -835,8 +969,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the certificate.</dd><dt class="property-"
             title="">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -844,8 +977,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the certificate.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -853,8 +985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="issuer_cn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_cn_python" style="color: inherit; text-decoration: inherit;">issuer_<wbr>cn</a>
@@ -862,8 +993,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Issuer name of the certificate.</dd><dt class="property-"
             title="">
         <span id="subject_cn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_cn_python" style="color: inherit; text-decoration: inherit;">subject_<wbr>cn</a>
@@ -871,8 +1001,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd></dl>
+    <dd>Subject name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -886,8 +1015,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -895,8 +1023,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -904,8 +1031,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the certificate.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -913,8 +1039,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="issuercn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_yaml" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -922,8 +1047,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Issuer name of the certificate.</dd><dt class="property-"
             title="">
         <span id="subjectcn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_yaml" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -931,8 +1055,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd></dl>
+    <dd>Subject name of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -942,18 +1065,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Certificate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Certificate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Certificate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -966,104 +1089,143 @@ Get an existing Certificate resource's state with the given name, ID, and option
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subject_cn</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Certificate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCertificate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Certificate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCertificate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Certificate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Certificate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CertificateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Certificate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CertificateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Certificate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CertificateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Certificate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CertificateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCertificate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Gaap:Certificate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_gaap_certificate</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1071,28 +1233,31 @@ Get an existing Certificate resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1100,28 +1265,31 @@ Get an existing Certificate resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1141,8 +1309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_content_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_csharp" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -1150,8 +1317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1159,8 +1325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1168,8 +1333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Ending time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuercn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuercn_csharp" style="color: inherit; text-decoration: inherit;">Issuer<wbr>Cn</a>
@@ -1177,8 +1341,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Issuer name of the certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -1186,8 +1349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1195,8 +1357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectcn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectcn_csharp" style="color: inherit; text-decoration: inherit;">Subject<wbr>Cn</a>
@@ -1204,8 +1365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subject name of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1213,8 +1373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1228,8 +1387,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_content_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_go" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -1237,8 +1395,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1246,8 +1403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1255,8 +1411,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Ending time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuercn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuercn_go" style="color: inherit; text-decoration: inherit;">Issuer<wbr>Cn</a>
@@ -1264,8 +1419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Issuer name of the certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -1273,8 +1427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1282,8 +1435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectcn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectcn_go" style="color: inherit; text-decoration: inherit;">Subject<wbr>Cn</a>
@@ -1291,8 +1443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subject name of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1300,8 +1451,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Beginning time of the certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ending time of the certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_issuer_cn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_cn_hcl" style="color: inherit; text-decoration: inherit;">issuer_<wbr>cn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Issuer name of the certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
+        <span id="state_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subject_cn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subject_cn_hcl" style="color: inherit; text-decoration: inherit;">subject_<wbr>cn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subject name of the certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1315,8 +1543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_content_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_java" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1324,8 +1551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1333,8 +1559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1342,8 +1567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Ending time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuercn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuercn_java" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -1351,8 +1575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Issuer name of the certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1360,8 +1583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1369,8 +1591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectcn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectcn_java" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -1378,8 +1599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subject name of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1387,8 +1607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1402,8 +1621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_content_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_nodejs" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1411,8 +1629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1420,8 +1637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1429,8 +1645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Ending time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuercn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuercn_nodejs" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -1438,8 +1653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Issuer name of the certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1447,8 +1661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1456,8 +1669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectcn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectcn_nodejs" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -1465,8 +1677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subject name of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1474,8 +1685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1489,8 +1699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_python" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1498,8 +1707,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1507,8 +1715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1516,8 +1723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Ending time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuer_cn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_cn_python" style="color: inherit; text-decoration: inherit;">issuer_<wbr>cn</a>
@@ -1525,8 +1731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Issuer name of the certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1534,8 +1739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1543,8 +1747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subject_cn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subject_cn_python" style="color: inherit; text-decoration: inherit;">subject_<wbr>cn</a>
@@ -1552,8 +1755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subject name of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1561,8 +1763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1576,8 +1777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_content_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_yaml" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1585,8 +1785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the certificate, and URL encoding. When the certificate is basic authentication, use the <code>user:xxx password:xxx</code> format, where the password is encrypted with <code>htpasswd</code> or <code>openssl</code>; When the certificate is <code>CA</code> or <code>SSL</code>, the format is <code>pem</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1594,8 +1793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1603,8 +1801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Ending time of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuercn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuercn_yaml" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -1612,8 +1809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Issuer name of the certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1621,8 +1817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the <code>SSL</code> certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the <code>SSL</code> certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1630,8 +1825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectcn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectcn_yaml" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -1639,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subject name of the certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1648,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate. Valid value: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1667,9 +1859,12 @@ The following state arguments are supported:
 GAAP certificate can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+  $ pulumi import tencentcloud:Gaap/certificate:Certificate foo cert-d5y6ei3b
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1681,7 +1876,6 @@ $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_cert
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

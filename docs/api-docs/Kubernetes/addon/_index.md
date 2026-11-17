@@ -2,9 +2,11 @@
 ---
 title: "Addon"
 title_tag: "tencentcloud.Kubernetes.Addon"
-meta_desc: "Documentation for the tencentcloud.Kubernetes.Addon resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to configure kubernetes cluster app addons."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,114 +18,103 @@ Provide a resource to configure kubernetes cluster app addons.
 
 ## Example Usage
 
-### Install cos addon
+### Install tcr addon
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = new tencentcloud.kubernetes.Cluster("example", {
-    vpcId: "vpc-xxxxxxxx",
-    clusterCidr: "10.31.0.0/16",
-    clusterMaxPodNum: 32,
-    clusterName: "tf_example_cluster",
-    clusterDesc: "example for tke cluster",
-    clusterMaxServiceNum: 32,
-    clusterInternet: false,
-    clusterVersion: "1.22.5",
-    clusterDeployType: "MANAGED_CLUSTER",
-});
-// without any worker config
-const kubernetesAddon = new tencentcloud.kubernetes.Addon("kubernetesAddon", {
-    clusterId: example.id,
-    addonName: "cos",
-    addonVersion: "2018-05-25",
-    rawValues: "e30=",
+const example = new tencentcloud.kubernetes.Addon("example", {
+    clusterId: "cls-k2o1ws9g",
+    addonName: "tcr",
+    rawValues: JSON.stringify({
+        global: {
+            imagePullSecretsCrs: [{
+                name: "tcr-h3ff76s9",
+                namespaces: "*",
+                serviceAccounts: "*",
+                type: "docker",
+                dockerUsername: "100038911322",
+                dockerPassword: "eyJhbGciOiJSUzI1NiIsImtpZCI6************",
+                dockerServer: "testcd.tencentcloudcr.com",
+            }],
+        },
+    }),
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
+import json
 import tencentcloud_iac_pulumi as tencentcloud
 
-example = tencentcloud.kubernetes.Cluster("example",
-    vpc_id="vpc-xxxxxxxx",
-    cluster_cidr="10.31.0.0/16",
-    cluster_max_pod_num=32,
-    cluster_name="tf_example_cluster",
-    cluster_desc="example for tke cluster",
-    cluster_max_service_num=32,
-    cluster_internet=False,
-    cluster_version="1.22.5",
-    cluster_deploy_type="MANAGED_CLUSTER")
-# without any worker config
-kubernetes_addon = tencentcloud.kubernetes.Addon("kubernetesAddon",
-    cluster_id=example.id,
-    addon_name="cos",
-    addon_version="2018-05-25",
-    raw_values="e30=")
+example = tencentcloud.kubernetes.Addon("example",
+    cluster_id="cls-k2o1ws9g",
+    addon_name="tcr",
+    raw_values=json.dumps({
+        "global": {
+            "imagePullSecretsCrs": [{
+                "name": "tcr-h3ff76s9",
+                "namespaces": "*",
+                "serviceAccounts": "*",
+                "type": "docker",
+                "dockerUsername": "100038911322",
+                "dockerPassword": "eyJhbGciOiJSUzI1NiIsImtpZCI6************",
+                "dockerServer": "testcd.tencentcloudcr.com",
+            }],
+        },
+    }))
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = new Tencentcloud.Kubernetes.Cluster("example", new()
-    {
-        VpcId = "vpc-xxxxxxxx",
-        ClusterCidr = "10.31.0.0/16",
-        ClusterMaxPodNum = 32,
-        ClusterName = "tf_example_cluster",
-        ClusterDesc = "example for tke cluster",
-        ClusterMaxServiceNum = 32,
-        ClusterInternet = false,
-        ClusterVersion = "1.22.5",
-        ClusterDeployType = "MANAGED_CLUSTER",
-    });
-
-    // without any worker config
-    var kubernetesAddon = new Tencentcloud.Kubernetes.Addon("kubernetesAddon", new()
-    {
-        ClusterId = example.Id,
-        AddonName = "cos",
-        AddonVersion = "2018-05-25",
-        RawValues = "e30=",
-    });
-
-});
-```
 ```go
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		example, err := Kubernetes.NewCluster(ctx, "example", &Kubernetes.ClusterArgs{
-			VpcId:                pulumi.String("vpc-xxxxxxxx"),
-			ClusterCidr:          pulumi.String("10.31.0.0/16"),
-			ClusterMaxPodNum:     pulumi.Int(32),
-			ClusterName:          pulumi.String("tf_example_cluster"),
-			ClusterDesc:          pulumi.String("example for tke cluster"),
-			ClusterMaxServiceNum: pulumi.Int(32),
-			ClusterInternet:      pulumi.Bool(false),
-			ClusterVersion:       pulumi.String("1.22.5"),
-			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+		tmpJSON0, err := json.Marshal(map[string]map[string][]map[string]string{
+			"global": map[string][]map[string]string{
+				"imagePullSecretsCrs": []map[string]string{
+					{
+						"name":            "tcr-h3ff76s9",
+						"namespaces":      "*",
+						"serviceAccounts": "*",
+						"type":            "docker",
+						"dockerUsername":  "100038911322",
+						"dockerPassword":  "eyJhbGciOiJSUzI1NiIsImtpZCI6************",
+						"dockerServer":    "testcd.tencentcloudcr.com",
+					},
+				},
+			},
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Kubernetes.NewAddon(ctx, "kubernetesAddon", &Kubernetes.AddonArgs{
-			ClusterId:    example.ID(),
-			AddonName:    pulumi.String("cos"),
-			AddonVersion: pulumi.String("2018-05-25"),
-			RawValues:    pulumi.String("e30="),
+		json0 := string(tmpJSON0)
+		_, err = kubernetes.NewAddon(ctx, "example", &kubernetes.AddonArgs{
+			ClusterId: pulumi.String("cls-k2o1ws9g"),
+			AddonName: pulumi.String("tcr"),
+			RawValues: pulumi.String(json0),
 		})
 		if err != nil {
 			return err
@@ -132,18 +123,63 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kubernetes.Addon("example", new()
+    {
+        ClusterId = "cls-k2o1ws9g",
+        AddonName = "tcr",
+        RawValues = JsonSerializer.Serialize(new Dictionary<string, object?>
+        {
+            ["global"] = new Dictionary<string, object?>
+            {
+                ["imagePullSecretsCrs"] = new[]
+                {
+                    new Dictionary<string, object?>
+                    {
+                        ["name"] = "tcr-h3ff76s9",
+                        ["namespaces"] = "*",
+                        ["serviceAccounts"] = "*",
+                        ["type"] = "docker",
+                        ["dockerUsername"] = "100038911322",
+                        ["dockerPassword"] = "eyJhbGciOiJSUzI1NiIsImtpZCI6************",
+                        ["dockerServer"] = "testcd.tencentcloudcr.com",
+                    },
+                },
+            },
+        }),
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Kubernetes.Cluster;
-import com.pulumi.tencentcloud.Kubernetes.ClusterArgs;
 import com.pulumi.tencentcloud.Kubernetes.Addon;
 import com.pulumi.tencentcloud.Kubernetes.AddonArgs;
-import java.util.List;
+import static com.pulumi.codegen.internal.Serialization.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -155,114 +191,177 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Cluster("example", ClusterArgs.builder()        
-            .vpcId("vpc-xxxxxxxx")
-            .clusterCidr("10.31.0.0/16")
-            .clusterMaxPodNum(32)
-            .clusterName("tf_example_cluster")
-            .clusterDesc("example for tke cluster")
-            .clusterMaxServiceNum(32)
-            .clusterInternet(false)
-            .clusterVersion("1.22.5")
-            .clusterDeployType("MANAGED_CLUSTER")
-            .build());
-
-        // without any worker config
-        var kubernetesAddon = new Addon("kubernetesAddon", AddonArgs.builder()        
-            .clusterId(example.id())
-            .addonName("cos")
-            .addonVersion("2018-05-25")
-            .rawValues("e30=")
+        var example = new Addon("example", AddonArgs.builder()
+            .clusterId("cls-k2o1ws9g")
+            .addonName("tcr")
+            .rawValues(serializeJson(
+                jsonObject(
+                    jsonProperty("global", jsonObject(
+                        jsonProperty("imagePullSecretsCrs", jsonArray(jsonObject(
+                            jsonProperty("name", "tcr-h3ff76s9"),
+                            jsonProperty("namespaces", "*"),
+                            jsonProperty("serviceAccounts", "*"),
+                            jsonProperty("type", "docker"),
+                            jsonProperty("dockerUsername", "100038911322"),
+                            jsonProperty("dockerPassword", "eyJhbGciOiJSUzI1NiIsImtpZCI6************"),
+                            jsonProperty("dockerServer", "testcd.tencentcloudcr.com")
+                        )))
+                    ))
+                )))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
-    type: tencentcloud:Kubernetes:Cluster
-    properties:
-      vpcId: vpc-xxxxxxxx
-      clusterCidr: 10.31.0.0/16
-      clusterMaxPodNum: 32
-      clusterName: tf_example_cluster
-      clusterDesc: example for tke cluster
-      clusterMaxServiceNum: 32
-      clusterInternet: false
-      # (can be ignored) open it after the nodes added
-      clusterVersion: 1.22.5
-      clusterDeployType: MANAGED_CLUSTER
-  kubernetesAddon:
     type: tencentcloud:Kubernetes:Addon
     properties:
-      clusterId: ${example.id}
-      addonName: cos
-      addonVersion: 2018-05-25
-      rawValues: e30=
+      clusterId: cls-k2o1ws9g
+      addonName: tcr
+      rawValues:
+        fn::toJSON:
+          global:
+            imagePullSecretsCrs:
+              - name: tcr-h3ff76s9
+                namespaces: '*'
+                serviceAccounts: '*'
+                type: docker
+                dockerUsername: '100038911322'
+                dockerPassword: eyJhbGciOiJSUzI1NiIsImtpZCI6************
+                dockerServer: testcd.tencentcloudcr.com
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kubernetes_addon" "example" {
+  cluster_id = "cls-k2o1ws9g"
+  addon_name = "tcr"
+  raw_values = jsonencode({
+    "global" = {
+      "imagePullSecretsCrs" = [{
+        "name"            = "tcr-h3ff76s9"
+        "namespaces"      = "*"
+        "serviceAccounts" = "*"
+        "type"            = "docker"
+        "dockerUsername"  = "100038911322"
+        "dockerPassword"  = "eyJhbGciOiJSUzI1NiIsImtpZCI6************"
+        "dockerServer"    = "testcd.tencentcloudcr.com"
+      }]
+    }
+  })
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+  - [InstallAddon](https://www.tencentcloud.com/document/api/457/56951)
+* Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+* Update:
+  - [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+  - [UpdateAddon](https://www.tencentcloud.com/document/api/457/56950)
+* Delete:
+  - [DeleteAddon](https://www.tencentcloud.com/document/api/457/56954)
+  - [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
 
 
 ## Create Addon Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
           <span class="nx">addon_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">addon_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">raw_values</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">addon_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">raw_values</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAddon</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Addon</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAddon</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Addon</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Addon</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AddonArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kubernetes:Addon</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kubernetes:Addon</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_kubernetes_addon&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -283,7 +382,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -400,11 +499,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Addon Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Addon resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -420,8 +527,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of addon.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -429,8 +535,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="addonversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addonversion_csharp" style="color: inherit; text-decoration: inherit;">Addon<wbr>Version</a>
@@ -438,8 +543,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawvalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawvalues_csharp" style="color: inherit; text-decoration: inherit;">Raw<wbr>Values</a>
@@ -447,8 +551,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd></dl>
+    <dd>Params of addon, base64 encoded json format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -462,8 +565,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of addon.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -471,8 +573,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="addonversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addonversion_go" style="color: inherit; text-decoration: inherit;">Addon<wbr>Version</a>
@@ -480,8 +581,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawvalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawvalues_go" style="color: inherit; text-decoration: inherit;">Raw<wbr>Values</a>
@@ -489,8 +589,45 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd></dl>
+    <dd>Params of addon, base64 encoded json format.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="addon_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addon_name_hcl" style="color: inherit; text-decoration: inherit;">addon_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of addon.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="addon_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addon_version_hcl" style="color: inherit; text-decoration: inherit;">addon_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="raw_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#raw_values_hcl" style="color: inherit; text-decoration: inherit;">raw_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Params of addon, base64 encoded json format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -504,8 +641,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of addon.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -513,8 +649,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="addonversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addonversion_java" style="color: inherit; text-decoration: inherit;">addon<wbr>Version</a>
@@ -522,8 +657,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawvalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawvalues_java" style="color: inherit; text-decoration: inherit;">raw<wbr>Values</a>
@@ -531,8 +665,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd></dl>
+    <dd>Params of addon, base64 encoded json format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -546,8 +679,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of addon.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -555,8 +687,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="addonversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addonversion_nodejs" style="color: inherit; text-decoration: inherit;">addon<wbr>Version</a>
@@ -564,8 +695,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawvalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawvalues_nodejs" style="color: inherit; text-decoration: inherit;">raw<wbr>Values</a>
@@ -573,8 +703,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd></dl>
+    <dd>Params of addon, base64 encoded json format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -588,8 +717,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of addon.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -597,8 +725,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="addon_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addon_version_python" style="color: inherit; text-decoration: inherit;">addon_<wbr>version</a>
@@ -606,8 +733,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="raw_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#raw_values_python" style="color: inherit; text-decoration: inherit;">raw_<wbr>values</a>
@@ -615,8 +741,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd></dl>
+    <dd>Params of addon, base64 encoded json format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -630,8 +755,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of addon.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -639,8 +763,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="addonversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addonversion_yaml" style="color: inherit; text-decoration: inherit;">addon<wbr>Version</a>
@@ -648,8 +771,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rawvalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rawvalues_yaml" style="color: inherit; text-decoration: inherit;">raw<wbr>Values</a>
@@ -657,8 +779,7 @@ The Addon resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd></dl>
+    <dd>Params of addon, base64 encoded json format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -679,8 +800,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="phase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phase_csharp" style="color: inherit; text-decoration: inherit;">Phase</a>
@@ -688,8 +808,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-"
+    <dd>Status of addon.</dd><dt class="property-"
             title="">
         <span id="reason_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reason_csharp" style="color: inherit; text-decoration: inherit;">Reason</a>
@@ -697,8 +816,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -712,8 +830,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="phase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phase_go" style="color: inherit; text-decoration: inherit;">Phase</a>
@@ -721,8 +838,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-"
+    <dd>Status of addon.</dd><dt class="property-"
             title="">
         <span id="reason_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reason_go" style="color: inherit; text-decoration: inherit;">Reason</a>
@@ -730,8 +846,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="phase_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phase_hcl" style="color: inherit; text-decoration: inherit;">phase</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of addon.</dd><dt class="property-"
+            title="">
+        <span id="reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reason_hcl" style="color: inherit; text-decoration: inherit;">reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -745,8 +890,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="phase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phase_java" style="color: inherit; text-decoration: inherit;">phase</a>
@@ -754,8 +898,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-"
+    <dd>Status of addon.</dd><dt class="property-"
             title="">
         <span id="reason_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reason_java" style="color: inherit; text-decoration: inherit;">reason</a>
@@ -763,8 +906,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,8 +920,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="phase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phase_nodejs" style="color: inherit; text-decoration: inherit;">phase</a>
@@ -787,8 +928,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-"
+    <dd>Status of addon.</dd><dt class="property-"
             title="">
         <span id="reason_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reason_nodejs" style="color: inherit; text-decoration: inherit;">reason</a>
@@ -796,8 +936,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -811,8 +950,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="phase_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phase_python" style="color: inherit; text-decoration: inherit;">phase</a>
@@ -820,8 +958,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-"
+    <dd>Status of addon.</dd><dt class="property-"
             title="">
         <span id="reason_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reason_python" style="color: inherit; text-decoration: inherit;">reason</a>
@@ -829,8 +966,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -844,8 +980,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="phase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phase_yaml" style="color: inherit; text-decoration: inherit;">phase</a>
@@ -853,8 +988,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-"
+    <dd>Status of addon.</dd><dt class="property-"
             title="">
         <span id="reason_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reason_yaml" style="color: inherit; text-decoration: inherit;">reason</a>
@@ -862,8 +996,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -873,18 +1006,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Addon resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AddonState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Addon</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AddonState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Addon</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -894,104 +1027,143 @@ Get an existing Addon resource's state with the given name, ID, and optional ext
         <span class="nx">phase</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">raw_values</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">reason</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Addon</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAddon<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AddonState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Addon</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAddon<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AddonState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Addon</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Addon</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AddonState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Addon</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AddonState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Addon</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AddonState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Addon</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AddonState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAddon</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Kubernetes:Addon</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_kubernetes_addon</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AddonState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AddonState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -999,28 +1171,31 @@ Get an existing Addon resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AddonState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1028,28 +1203,31 @@ Get an existing Addon resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AddonState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1069,8 +1247,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Name of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addonversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addonversion_csharp" style="color: inherit; text-decoration: inherit;">Addon<wbr>Version</a>
@@ -1078,8 +1255,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1087,8 +1263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phase_csharp" style="color: inherit; text-decoration: inherit;">Phase</a>
@@ -1096,8 +1271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Status of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawvalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawvalues_csharp" style="color: inherit; text-decoration: inherit;">Raw<wbr>Values</a>
@@ -1105,8 +1279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd><dt class="property-optional"
+    <dd>Params of addon, base64 encoded json format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reason_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reason_csharp" style="color: inherit; text-decoration: inherit;">Reason</a>
@@ -1114,8 +1287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1129,8 +1301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Name of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addonversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addonversion_go" style="color: inherit; text-decoration: inherit;">Addon<wbr>Version</a>
@@ -1138,8 +1309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1147,8 +1317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phase_go" style="color: inherit; text-decoration: inherit;">Phase</a>
@@ -1156,8 +1325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Status of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawvalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawvalues_go" style="color: inherit; text-decoration: inherit;">Raw<wbr>Values</a>
@@ -1165,8 +1333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd><dt class="property-optional"
+    <dd>Params of addon, base64 encoded json format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reason_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reason_go" style="color: inherit; text-decoration: inherit;">Reason</a>
@@ -1174,8 +1341,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_addon_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addon_name_hcl" style="color: inherit; text-decoration: inherit;">addon_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of addon.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_addon_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addon_version_hcl" style="color: inherit; text-decoration: inherit;">addon_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_phase_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phase_hcl" style="color: inherit; text-decoration: inherit;">phase</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of addon.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_raw_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_raw_values_hcl" style="color: inherit; text-decoration: inherit;">raw_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Params of addon, base64 encoded json format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reason_hcl" style="color: inherit; text-decoration: inherit;">reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1189,8 +1409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Name of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addonversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addonversion_java" style="color: inherit; text-decoration: inherit;">addon<wbr>Version</a>
@@ -1198,8 +1417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1207,8 +1425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phase_java" style="color: inherit; text-decoration: inherit;">phase</a>
@@ -1216,8 +1433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Status of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawvalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawvalues_java" style="color: inherit; text-decoration: inherit;">raw<wbr>Values</a>
@@ -1225,8 +1441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd><dt class="property-optional"
+    <dd>Params of addon, base64 encoded json format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reason_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reason_java" style="color: inherit; text-decoration: inherit;">reason</a>
@@ -1234,8 +1449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1249,8 +1463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Name of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addonversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addonversion_nodejs" style="color: inherit; text-decoration: inherit;">addon<wbr>Version</a>
@@ -1258,8 +1471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1267,8 +1479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phase_nodejs" style="color: inherit; text-decoration: inherit;">phase</a>
@@ -1276,8 +1487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Status of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawvalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawvalues_nodejs" style="color: inherit; text-decoration: inherit;">raw<wbr>Values</a>
@@ -1285,8 +1495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd><dt class="property-optional"
+    <dd>Params of addon, base64 encoded json format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reason_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reason_nodejs" style="color: inherit; text-decoration: inherit;">reason</a>
@@ -1294,8 +1503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1309,8 +1517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Name of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addon_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addon_version_python" style="color: inherit; text-decoration: inherit;">addon_<wbr>version</a>
@@ -1318,8 +1525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1327,8 +1533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phase_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phase_python" style="color: inherit; text-decoration: inherit;">phase</a>
@@ -1336,8 +1541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Status of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_raw_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_raw_values_python" style="color: inherit; text-decoration: inherit;">raw_<wbr>values</a>
@@ -1345,8 +1549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd><dt class="property-optional"
+    <dd>Params of addon, base64 encoded json format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reason_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reason_python" style="color: inherit; text-decoration: inherit;">reason</a>
@@ -1354,8 +1557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1369,8 +1571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Name of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_addonversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_addonversion_yaml" style="color: inherit; text-decoration: inherit;">addon<wbr>Version</a>
@@ -1378,8 +1579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of addon.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of addon. If no set, the latest version will be installed by default.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1387,8 +1587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phase_yaml" style="color: inherit; text-decoration: inherit;">phase</a>
@@ -1396,8 +1595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of addon.</p>
-</dd><dt class="property-optional"
+    <dd>Status of addon.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rawvalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rawvalues_yaml" style="color: inherit; text-decoration: inherit;">raw<wbr>Values</a>
@@ -1405,8 +1603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Params of addon, base64 encoded json format.</p>
-</dd><dt class="property-optional"
+    <dd>Params of addon, base64 encoded json format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reason_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reason_yaml" style="color: inherit; text-decoration: inherit;">reason</a>
@@ -1414,8 +1611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason of addon failed.</p>
-</dd></dl>
+    <dd>Reason of addon failed.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1430,12 +1626,14 @@ The following state arguments are supported:
 
 
 
-Addon can be imported by using cluster_id#addon_name
-
+kubernetes cluster app addons can be imported using the id, e.g.
 ```sh
-$ pulumi import tencentcloud:Kubernetes/addon:Addon addon_cos cls-xxx#addon_name
+$ pulumi import tencentcloud:Kubernetes/addon:Addon example cls-k2o1ws9g#tcr
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1447,7 +1645,6 @@ $ pulumi import tencentcloud:Kubernetes/addon:Addon addon_cos cls-xxx#addon_name
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

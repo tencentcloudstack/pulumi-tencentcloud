@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Eni.Instance"
 meta_desc: "Documentation for the tencentcloud.Eni.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,23 +18,32 @@ Provides a resource to create an ENI.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "vpc",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+    name: "subnet-example",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
 const example1 = new tencentcloud.security.Group("example1", {
+    name: "tf-example-sg1",
     description: "sg desc.",
     projectId: 0,
     tags: {
@@ -40,6 +51,7 @@ const example1 = new tencentcloud.security.Group("example1", {
     },
 });
 const example2 = new tencentcloud.security.Group("example2", {
+    name: "tf-example-sg2",
     description: "sg desc.",
     projectId: 0,
     tags: {
@@ -47,55 +59,153 @@ const example2 = new tencentcloud.security.Group("example2", {
     },
 });
 const example = new tencentcloud.eni.Instance("example", {
+    name: "tf-example-eni",
     vpcId: vpc.id,
     subnetId: subnet.id,
     description: "eni desc.",
     ipv4Count: 1,
-    securityGroups: [
+    orderlySecurityGroups: [
         example1.id,
         example2.id,
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="vpc")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="vpc")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[0].name,
+    name="subnet-example",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
 example1 = tencentcloud.security.Group("example1",
+    name="tf-example-sg1",
     description="sg desc.",
     project_id=0,
     tags={
         "example": "test",
     })
 example2 = tencentcloud.security.Group("example2",
+    name="tf-example-sg2",
     description="sg desc.",
     project_id=0,
     tags={
         "example": "test",
     })
 example = tencentcloud.eni.Instance("example",
+    name="tf-example-eni",
     vpc_id=vpc.id,
     subnet_id=subnet.id,
     description="eni desc.",
     ipv4_count=1,
-    security_groups=[
+    orderly_security_groups=[
         example1.id,
         example2.id,
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eni"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "vpc",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			Name:             pulumi.String("subnet-example"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		example1, err := security.NewGroup(ctx, "example1", &security.GroupArgs{
+			Name:        pulumi.String("tf-example-sg1"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		example2, err := security.NewGroup(ctx, "example2", &security.GroupArgs{
+			Name:        pulumi.String("tf-example-sg2"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = eni.NewInstance(ctx, "example", &eni.InstanceArgs{
+			Name:        pulumi.String("tf-example-eni"),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
+			Description: pulumi.String("eni desc."),
+			Ipv4Count:   pulumi.Int(1),
+			OrderlySecurityGroups: pulumi.StringArray{
+				example1.ID().ToIDOutput().ToStringOutput(),
+				example2.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -107,12 +217,14 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "subnet-example",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
@@ -120,6 +232,7 @@ return await Deployment.RunAsync(() =>
 
     var example1 = new Tencentcloud.Security.Group("example1", new()
     {
+        Name = "tf-example-sg1",
         Description = "sg desc.",
         ProjectId = 0,
         Tags = 
@@ -130,6 +243,7 @@ return await Deployment.RunAsync(() =>
 
     var example2 = new Tencentcloud.Security.Group("example2", new()
     {
+        Name = "tf-example-sg2",
         Description = "sg desc.",
         ProjectId = 0,
         Tags = 
@@ -140,11 +254,12 @@ return await Deployment.RunAsync(() =>
 
     var example = new Tencentcloud.Eni.Instance("example", new()
     {
+        Name = "tf-example-eni",
         VpcId = vpc.Id,
         SubnetId = subnet.Id,
         Description = "eni desc.",
         Ipv4Count = 1,
-        SecurityGroups = new[]
+        OrderlySecurityGroups = new[]
         {
             example1.Id,
             example2.Id,
@@ -153,78 +268,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eni"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "vpc",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		example1, err := Security.NewGroup(ctx, "example1", &Security.GroupArgs{
-			Description: pulumi.String("sg desc."),
-			ProjectId:   pulumi.Int(0),
-			Tags: pulumi.Map{
-				"example": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		example2, err := Security.NewGroup(ctx, "example2", &Security.GroupArgs{
-			Description: pulumi.String("sg desc."),
-			ProjectId:   pulumi.Int(0),
-			Tags: pulumi.Map{
-				"example": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Eni.NewInstance(ctx, "example", &Eni.InstanceArgs{
-			VpcId:       vpc.ID(),
-			SubnetId:    subnet.ID(),
-			Description: pulumi.String("eni desc."),
-			Ipv4Count:   pulumi.Int(1),
-			SecurityGroups: pulumi.StringArray{
-				example1.ID(),
-				example2.ID(),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -233,16 +281,10 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
-import com.pulumi.tencentcloud.Eni.Instance;
-import com.pulumi.tencentcloud.Eni.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -258,35 +300,40 @@ public class App {
             .product("vpc")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[0].name())
+            .name("subnet-example")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var example1 = new Group("example1", GroupArgs.builder()        
+        var example1 = new Group("example1", GroupArgs.builder()
+            .name("tf-example-sg1")
             .description("sg desc.")
             .projectId(0)
             .tags(Map.of("example", "test"))
             .build());
 
-        var example2 = new Group("example2", GroupArgs.builder()        
+        var example2 = new Group("example2", GroupArgs.builder()
+            .name("tf-example-sg2")
             .description("sg desc.")
             .projectId(0)
             .tags(Map.of("example", "test"))
             .build());
 
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Eni.Instance("example", com.pulumi.tencentcloud.Eni.InstanceArgs.builder()
+            .name("tf-example-eni")
             .vpcId(vpc.id())
             .subnetId(subnet.id())
             .description("eni desc.")
             .ipv4Count(1)
-            .securityGroups(            
+            .orderlySecurityGroups(            
                 example1.id(),
                 example2.id())
             .build());
@@ -294,22 +341,30 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[0].name}
+      name: subnet-example
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   example1:
     type: tencentcloud:Security:Group
     properties:
+      name: tf-example-sg1
       description: sg desc.
       projectId: 0
       tags:
@@ -317,6 +372,7 @@ resources:
   example2:
     type: tencentcloud:Security:Group
     properties:
+      name: tf-example-sg2
       description: sg desc.
       projectId: 0
       tags:
@@ -324,86 +380,177 @@ resources:
   example:
     type: tencentcloud:Eni:Instance
     properties:
+      name: tf-example-eni
       vpcId: ${vpc.id}
       subnetId: ${subnet.id}
       description: eni desc.
       ipv4Count: 1
-      securityGroups:
+      orderlySecurityGroups:
         - ${example1.id}
         - ${example2.id}
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: vpc
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "vpc"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  name              = "subnet-example"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "example1" {
+  name        = "tf-example-sg1"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+resource "tencentcloud_security_group" "example2" {
+  name        = "tf-example-sg2"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+resource "tencentcloud_eni_instance" "example" {
+  name                    = "tf-example-eni"
+  vpc_id                  = tencentcloud_vpc_instance.vpc.id
+  subnet_id               = tencentcloud_subnet_instance.subnet.id
+  description             = "eni desc."
+  ipv4_count              = 1
+  orderly_security_groups = [tencentcloud_security_group.example1.id, tencentcloud_security_group.example2.id]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AssignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15813)
+  - [CreateNetworkInterface](https://www.tencentcloud.com/document/api/215/15818)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+* Update:
+  - [AssignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15813)
+  - [ModifyNetworkInterfaceAttribute](https://www.tencentcloud.com/document/api/215/15815)
+  - [ModifyPrivateIpAddressesAttribute](https://www.tencentcloud.com/document/api/215/15823)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UnassignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15814)
+* Delete:
+  - [DeleteNetworkInterface](https://www.tencentcloud.com/document/api/215/15822)
+  - [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">ipv4_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">ipv4s</span><span class="p">:</span> <span class="nx">Optional[Sequence[_eni.InstanceIpv4Args]]</span> = None<span class="p">,</span>
-             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">ipv4_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">ipv4s</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceIpv4Args]]</span> = None<span class="p">,</span>
+             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">orderly_security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+             <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Eni:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Eni:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_eni_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -424,7 +571,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -541,11 +688,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -561,8 +716,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -570,8 +724,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -579,8 +732,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4count_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4count_csharp" style="color: inherit; text-decoration: inherit;">Ipv4Count</a>
@@ -588,17 +740,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4s_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_csharp" style="color: inherit; text-decoration: inherit;">Ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eni.<wbr>Inputs.<wbr>Instance<wbr>Ipv4Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceipv4">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eni.<wbr>Inputs.<wbr>Instance<wbr>Ipv4&gt;</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -606,26 +756,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
+        <span id="orderlysecuritygroups_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroups_csharp" style="color: inherit; text-decoration: inherit;">Orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd></dl>
+    <dd>Tags of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -639,8 +794,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -648,8 +802,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -657,8 +810,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4count_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4count_go" style="color: inherit; text-decoration: inherit;">Ipv4Count</a>
@@ -666,8 +818,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4s_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_go" style="color: inherit; text-decoration: inherit;">Ipv4s</a>
@@ -675,8 +826,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4">[]Instance<wbr>Ipv4Args</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -684,26 +834,109 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
+        <span id="orderlysecuritygroups_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroups_go" style="color: inherit; text-decoration: inherit;">Orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd></dl>
+    <dd>Tags of the ENI.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_count_hcl" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4s_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_hcl" style="color: inherit; text-decoration: inherit;">ipv4s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceipv4">list(object)</a></span>
+    </dt>
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="orderly_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderly_security_groups_hcl" style="color: inherit; text-decoration: inherit;">orderly_<wbr>security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -717,8 +950,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -726,8 +958,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -735,8 +966,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4count_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4count_java" style="color: inherit; text-decoration: inherit;">ipv4Count</a>
@@ -744,17 +974,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4s_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_java" style="color: inherit; text-decoration: inherit;">ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4">List&lt;Instance<wbr>Ipv4Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceipv4">List&lt;Instance<wbr>Ipv4&gt;</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -762,26 +990,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
+        <span id="orderlysecuritygroups_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroups_java" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd></dl>
+    <dd>Tags of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -795,8 +1028,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -804,8 +1036,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -813,8 +1044,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4count_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4count_nodejs" style="color: inherit; text-decoration: inherit;">ipv4Count</a>
@@ -822,17 +1052,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4s_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_nodejs" style="color: inherit; text-decoration: inherit;">ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4">Instance<wbr>Ipv4Args[]</a></span>
+        <span class="property-type"><a href="#instanceipv4">Instance<wbr>Ipv4[]</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -840,26 +1068,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
+        <span id="orderlysecuritygroups_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroups_nodejs" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd></dl>
+    <dd>Tags of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -873,8 +1106,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -882,8 +1114,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -891,8 +1122,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_count_python" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>count</a>
@@ -900,17 +1130,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4s_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_python" style="color: inherit; text-decoration: inherit;">ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4">Instance<wbr>Ipv4Args]</a></span>
+        <span class="property-type"><a href="#instanceipv4">Sequence[Instance<wbr>Ipv4Args]</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -918,26 +1146,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
+        <span id="orderly_security_groups_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderly_security_groups_python" style="color: inherit; text-decoration: inherit;">orderly_<wbr>security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd></dl>
+    <dd>Tags of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -951,8 +1184,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -960,8 +1192,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -969,8 +1200,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4count_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4count_yaml" style="color: inherit; text-decoration: inherit;">ipv4Count</a>
@@ -978,8 +1208,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv4s_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4s_yaml" style="color: inherit; text-decoration: inherit;">ipv4s</a>
@@ -987,8 +1216,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -996,26 +1224,31 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
+        <span id="orderlysecuritygroups_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroups_yaml" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd></dl>
+    <dd>Tags of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1030,14 +1263,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-"
+            title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the ENI.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1045,8 +1285,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv4infos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4infos_csharp" style="color: inherit; text-decoration: inherit;">Ipv4Infos</a>
@@ -1054,8 +1293,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4info">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eni.<wbr>Outputs.<wbr>Instance<wbr>Ipv4Info&gt;</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mac_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_csharp" style="color: inherit; text-decoration: inherit;">Mac</a>
@@ -1063,8 +1301,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-"
+    <dd>MAC address.</dd><dt class="property-"
             title="">
         <span id="primary_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_csharp" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -1072,8 +1309,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-"
             title="">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1081,8 +1317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd></dl>
+    <dd>State of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1090,14 +1325,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-"
+            title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the ENI.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1105,8 +1347,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv4infos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4infos_go" style="color: inherit; text-decoration: inherit;">Ipv4Infos</a>
@@ -1114,8 +1355,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4info">[]Instance<wbr>Ipv4Info</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mac_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_go" style="color: inherit; text-decoration: inherit;">Mac</a>
@@ -1123,8 +1363,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-"
+    <dd>MAC address.</dd><dt class="property-"
             title="">
         <span id="primary_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_go" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -1132,8 +1371,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-"
             title="">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1141,8 +1379,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd></dl>
+    <dd>State of the ENI.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the ENI.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="ipv4_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_infos_hcl" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceipv4info">list(object)</a></span>
+    </dt>
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="mac_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_hcl" style="color: inherit; text-decoration: inherit;">mac</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MAC address.</dd><dt class="property-"
+            title="">
+        <span id="primary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_hcl" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-"
+            title="">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1150,14 +1449,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-"
+            title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the ENI.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1165,8 +1471,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv4infos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4infos_java" style="color: inherit; text-decoration: inherit;">ipv4Infos</a>
@@ -1174,8 +1479,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4info">List&lt;Instance<wbr>Ipv4Info&gt;</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mac_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_java" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -1183,8 +1487,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-"
+    <dd>MAC address.</dd><dt class="property-"
             title="">
         <span id="primary_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_java" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -1192,8 +1495,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-"
             title="">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1201,8 +1503,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd></dl>
+    <dd>State of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1210,14 +1511,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-"
+            title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the ENI.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1225,8 +1533,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv4infos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4infos_nodejs" style="color: inherit; text-decoration: inherit;">ipv4Infos</a>
@@ -1234,8 +1541,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4info">Instance<wbr>Ipv4Info[]</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mac_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_nodejs" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -1243,8 +1549,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-"
+    <dd>MAC address.</dd><dt class="property-"
             title="">
         <span id="primary_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_nodejs" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -1252,8 +1557,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-"
             title="">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1261,8 +1565,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd></dl>
+    <dd>State of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1270,14 +1573,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-"
+            title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the ENI.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1285,17 +1595,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv4_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_infos_python" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4info">Instance<wbr>Ipv4Info]</a></span>
+        <span class="property-type"><a href="#instanceipv4info">Sequence[Instance<wbr>Ipv4Info]</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mac_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_python" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -1303,8 +1611,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-"
+    <dd>MAC address.</dd><dt class="property-"
             title="">
         <span id="primary_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_python" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -1312,8 +1619,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-"
             title="">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1321,8 +1627,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd></dl>
+    <dd>State of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1330,14 +1635,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-"
+            title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the ENI.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1345,8 +1657,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipv4infos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4infos_yaml" style="color: inherit; text-decoration: inherit;">ipv4Infos</a>
@@ -1354,8 +1665,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4info">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mac_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mac_yaml" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -1363,8 +1673,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-"
+    <dd>MAC address.</dd><dt class="property-"
             title="">
         <span id="primary_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_yaml" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -1372,8 +1681,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-"
             title="">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1381,8 +1689,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd></dl>
+    <dd>State of the ENI.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1392,132 +1699,173 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ipv4_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">ipv4_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_eni.InstanceIpv4InfoArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">ipv4s</span><span class="p">:</span> <span class="nx">Optional[Sequence[_eni.InstanceIpv4Args]]</span> = None<span class="p">,</span>
+        <span class="nx">ipv4_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceIpv4InfoArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">ipv4s</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceIpv4Args]]</span> = None<span class="p">,</span>
         <span class="nx">mac</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">orderly_security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">primary</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">state</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Eni:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_eni_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1525,28 +1873,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1554,28 +1905,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1589,14 +1943,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the ENI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1604,8 +1965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4count_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4count_csharp" style="color: inherit; text-decoration: inherit;">Ipv4Count</a>
@@ -1613,26 +1973,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4infos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4infos_csharp" style="color: inherit; text-decoration: inherit;">Ipv4Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4info">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eni.<wbr>Inputs.<wbr>Instance<wbr>Ipv4Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceipv4info">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eni.<wbr>Inputs.<wbr>Instance<wbr>Ipv4Info&gt;</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4s_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4s_csharp" style="color: inherit; text-decoration: inherit;">Ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eni.<wbr>Inputs.<wbr>Instance<wbr>Ipv4Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceipv4">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eni.<wbr>Inputs.<wbr>Instance<wbr>Ipv4&gt;</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mac_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mac_csharp" style="color: inherit; text-decoration: inherit;">Mac</a>
@@ -1640,8 +1997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-optional"
+    <dd>MAC address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1649,8 +2005,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_orderlysecuritygroups_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderlysecuritygroups_csharp" style="color: inherit; text-decoration: inherit;">Orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_primary_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_primary_csharp" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -1658,17 +2021,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1676,8 +2037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1685,17 +2045,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1703,8 +2061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1712,14 +2069,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the ENI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1727,8 +2091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4count_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4count_go" style="color: inherit; text-decoration: inherit;">Ipv4Count</a>
@@ -1736,8 +2099,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4infos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4infos_go" style="color: inherit; text-decoration: inherit;">Ipv4Infos</a>
@@ -1745,8 +2107,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4info">[]Instance<wbr>Ipv4Info<wbr>Args</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4s_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4s_go" style="color: inherit; text-decoration: inherit;">Ipv4s</a>
@@ -1754,8 +2115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4">[]Instance<wbr>Ipv4Args</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mac_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mac_go" style="color: inherit; text-decoration: inherit;">Mac</a>
@@ -1763,8 +2123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-optional"
+    <dd>MAC address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1772,8 +2131,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_orderlysecuritygroups_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderlysecuritygroups_go" style="color: inherit; text-decoration: inherit;">Orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_primary_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_primary_go" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -1781,17 +2147,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1799,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1808,17 +2171,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1826,8 +2187,133 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the ENI.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4_count_hcl" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4_infos_hcl" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceipv4info">list(object)</a></span>
+    </dt>
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4s_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4s_hcl" style="color: inherit; text-decoration: inherit;">ipv4s</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceipv4">list(object)</a></span>
+    </dt>
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mac_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mac_hcl" style="color: inherit; text-decoration: inherit;">mac</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>MAC address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_orderly_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderly_security_groups_hcl" style="color: inherit; text-decoration: inherit;">orderly_<wbr>security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_primary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_primary_hcl" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the ENI.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the ENI.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1835,14 +2321,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the ENI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1850,8 +2343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4count_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4count_java" style="color: inherit; text-decoration: inherit;">ipv4Count</a>
@@ -1859,26 +2351,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4infos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4infos_java" style="color: inherit; text-decoration: inherit;">ipv4Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4info">List&lt;Instance<wbr>Ipv4Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceipv4info">List&lt;Instance<wbr>Ipv4Info&gt;</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4s_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4s_java" style="color: inherit; text-decoration: inherit;">ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4">List&lt;Instance<wbr>Ipv4Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceipv4">List&lt;Instance<wbr>Ipv4&gt;</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mac_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mac_java" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -1886,8 +2375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-optional"
+    <dd>MAC address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1895,8 +2383,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_orderlysecuritygroups_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderlysecuritygroups_java" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_primary_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_primary_java" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -1904,17 +2399,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1922,8 +2415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1931,17 +2423,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1949,8 +2439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1958,14 +2447,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the ENI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1973,8 +2469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4count_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4count_nodejs" style="color: inherit; text-decoration: inherit;">ipv4Count</a>
@@ -1982,26 +2477,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4infos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4infos_nodejs" style="color: inherit; text-decoration: inherit;">ipv4Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4info">Instance<wbr>Ipv4Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instanceipv4info">Instance<wbr>Ipv4Info[]</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4s_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4s_nodejs" style="color: inherit; text-decoration: inherit;">ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4">Instance<wbr>Ipv4Args[]</a></span>
+        <span class="property-type"><a href="#instanceipv4">Instance<wbr>Ipv4[]</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mac_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mac_nodejs" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -2009,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-optional"
+    <dd>MAC address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2018,8 +2509,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_orderlysecuritygroups_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderlysecuritygroups_nodejs" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_primary_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_primary_nodejs" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2027,17 +2525,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2045,8 +2541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2054,17 +2549,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2072,8 +2565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2081,14 +2573,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the ENI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2096,8 +2595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4_count_python" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>count</a>
@@ -2105,26 +2603,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4_infos_python" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4info">Instance<wbr>Ipv4Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instanceipv4info">Sequence[Instance<wbr>Ipv4Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4s_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4s_python" style="color: inherit; text-decoration: inherit;">ipv4s</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceipv4">Instance<wbr>Ipv4Args]</a></span>
+        <span class="property-type"><a href="#instanceipv4">Sequence[Instance<wbr>Ipv4Args]</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mac_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mac_python" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -2132,8 +2627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-optional"
+    <dd>MAC address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2141,8 +2635,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_orderly_security_groups_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderly_security_groups_python" style="color: inherit; text-decoration: inherit;">orderly_<wbr>security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_primary_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_primary_python" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2150,17 +2651,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2168,8 +2667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2177,17 +2675,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2195,8 +2691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2204,14 +2699,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC instance ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the ENI.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the ENI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2219,8 +2721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4count_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4count_yaml" style="color: inherit; text-decoration: inherit;">ipv4Count</a>
@@ -2228,8 +2729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with <code>ipv4s</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4infos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4infos_yaml" style="color: inherit; text-decoration: inherit;">ipv4Infos</a>
@@ -2237,8 +2737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4info">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of IPv4s. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>An information list of IPv4s. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv4s_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4s_yaml" style="color: inherit; text-decoration: inherit;">ipv4s</a>
@@ -2246,8 +2745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceipv4">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Applying for intranet IPv4s collection, conflict with <code>ipv4_count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Applying for intranet IPv4s collection, conflict with <code>ipv4Count</code>. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mac_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mac_yaml" style="color: inherit; text-decoration: inherit;">mac</a>
@@ -2255,8 +2753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>MAC address.</p>
-</dd><dt class="property-optional"
+    <dd>MAC address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2264,8 +2761,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the ENI, maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_orderlysecuritygroups_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_orderlysecuritygroups_yaml" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of security group IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_primary_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_primary_yaml" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2273,17 +2777,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A set of security group IDs.</p>
-</dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead. A set of security group IDs.<p class="property-message">Deprecated: It has been deprecated from version 1.82.15. Use <code>orderlySecurityGroups</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2291,8 +2793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2300,17 +2801,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the ENI.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the ENI.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2318,8 +2817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2334,7 +2832,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instanceipv4">Instance<wbr>Ipv4</h4>
+<h4 id="instanceipv4">
+Instance<wbr>Ipv4<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Ipv4<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2346,8 +2846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_csharp" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -2355,8 +2854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -2364,8 +2862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd></dl>
+    <dd>Description of the IP, maximum length 25.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2379,8 +2876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_go" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -2388,8 +2884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -2397,8 +2892,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd></dl>
+    <dd>Description of the IP, maximum length 25.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Intranet IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="primary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_hcl" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the IP, maximum length 25.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2412,8 +2936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_java" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2421,8 +2944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2430,8 +2952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd></dl>
+    <dd>Description of the IP, maximum length 25.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2445,8 +2966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_nodejs" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2454,8 +2974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2463,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd></dl>
+    <dd>Description of the IP, maximum length 25.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2478,8 +2996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_python" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2487,8 +3004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2496,8 +3012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd></dl>
+    <dd>Description of the IP, maximum length 25.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2511,8 +3026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-required"
+    <dd>Intranet IP.</dd><dt class="property-required"
             title="Required">
         <span id="primary_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_yaml" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2520,8 +3034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the IP is primary.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2529,12 +3042,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd></dl>
+    <dd>Description of the IP, maximum length 25.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instanceipv4info">Instance<wbr>Ipv4Info</h4>
+<h4 id="instanceipv4info">
+Instance<wbr>Ipv4Info<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Ipv4Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2546,8 +3060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2555,8 +3068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="primary_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_csharp" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -2564,8 +3076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2579,8 +3090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2588,8 +3098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="primary_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_go" style="color: inherit; text-decoration: inherit;">Primary</a>
@@ -2597,8 +3106,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Intranet IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="primary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_hcl" style="color: inherit; text-decoration: inherit;">primary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2612,8 +3150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2621,8 +3158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="primary_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_java" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2630,8 +3166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2645,8 +3180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2654,8 +3188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="primary_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_nodejs" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2663,8 +3196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2678,8 +3210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2687,8 +3218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="primary_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_python" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2696,8 +3226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2711,8 +3240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the IP, maximum length 25.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the ENI, maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2720,8 +3248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="primary_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_yaml" style="color: inherit; text-decoration: inherit;">primary</a>
@@ -2729,8 +3256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the IP is primary.</p>
-</dd></dl>
+    <dd>Indicates whether the IP is primary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2741,9 +3267,12 @@ The following state arguments are supported:
 ENI can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka182br
+  $ pulumi import tencentcloud:Eni/instance:Instance example eni-qka182br
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2755,7 +3284,6 @@ $ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka1
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

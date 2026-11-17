@@ -2,9 +2,11 @@
 ---
 title: "PublishSubscribe"
 title_tag: "tencentcloud.Sqlserver.PublishSubscribe"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.PublishSubscribe resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a SQL Server PublishSubscribe resource belongs to SQL Server instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,36 @@ Provides a SQL Server PublishSubscribe resource belongs to SQL Server instance.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "sqlserver",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+    name: "subnet-example",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
-const examplePubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", {
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-example",
+    description: "desc.",
+});
+const examplePub = new tencentcloud.sqlserver.GeneralCloudInstance("example_pub", {
+    name: "tf-example-pub",
     zone: zones.then(zones => zones.zones?.[4]?.name),
     memory: 4,
     storage: 100,
@@ -62,7 +76,8 @@ const examplePubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudIn
     collation: "Chinese_PRC_CI_AS",
     timeZone: "China Standard Time",
 });
-const exampleSubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", {
+const exampleSub = new tencentcloud.sqlserver.GeneralCloudInstance("example_sub", {
+    name: "tf-example-sub",
     zone: zones.then(zones => zones.zones?.[4]?.name),
     memory: 4,
     storage: 100,
@@ -91,19 +106,21 @@ const exampleSubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudIn
     collation: "Chinese_PRC_CI_AS",
     timeZone: "China Standard Time",
 });
-const examplePubDb = new tencentcloud.sqlserver.Db("examplePubDb", {
-    instanceId: examplePubGeneralCloudInstance.id,
+const examplePubDb = new tencentcloud.sqlserver.Db("example_pub", {
+    instanceId: examplePub.id,
+    name: "tf_example_db_pub",
     charset: "Chinese_PRC_BIN",
     remark: "test-remark",
 });
-const exampleSubDb = new tencentcloud.sqlserver.Db("exampleSubDb", {
-    instanceId: exampleSubGeneralCloudInstance.id,
+const exampleSubDb = new tencentcloud.sqlserver.Db("example_sub", {
+    instanceId: exampleSub.id,
+    name: "tf_example_db_sub",
     charset: "Chinese_PRC_BIN",
     remark: "test-remark",
 });
 const example = new tencentcloud.sqlserver.PublishSubscribe("example", {
-    publishInstanceId: examplePubGeneralCloudInstance.id,
-    subscribeInstanceId: exampleSubGeneralCloudInstance.id,
+    publishInstanceId: examplePub.id,
+    subscribeInstanceId: exampleSub.id,
     publishSubscribeName: "example",
     deleteSubscribeDb: false,
     databaseTuples: [{
@@ -112,20 +129,31 @@ const example = new tencentcloud.sqlserver.PublishSubscribe("example", {
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="sqlserver")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[4].name,
+    name="subnet-example",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="desc.")
-example_pub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance",
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-example",
+    description="desc.")
+example_pub = tencentcloud.sqlserver.GeneralCloudInstance("example_pub",
+    name="tf-example-pub",
     zone=zones.zones[4].name,
     memory=4,
     storage=100,
@@ -147,13 +175,14 @@ example_pub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance
     ],
     start_time="00:00",
     span=6,
-    resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
-        tag_key="test",
-        tag_value="test",
-    )],
+    resource_tags=[{
+        "tag_key": "test",
+        "tag_value": "test",
+    }],
     collation="Chinese_PRC_CI_AS",
     time_zone="China Standard Time")
-example_sub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance",
+example_sub = tencentcloud.sqlserver.GeneralCloudInstance("example_sub",
+    name="tf-example-sub",
     zone=zones.zones[4].name,
     memory=4,
     storage=100,
@@ -175,214 +204,83 @@ example_sub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance
     ],
     start_time="00:00",
     span=6,
-    resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
-        tag_key="test",
-        tag_value="test",
-    )],
+    resource_tags=[{
+        "tag_key": "test",
+        "tag_value": "test",
+    }],
     collation="Chinese_PRC_CI_AS",
     time_zone="China Standard Time")
-example_pub_db = tencentcloud.sqlserver.Db("examplePubDb",
-    instance_id=example_pub_general_cloud_instance.id,
+example_pub_db = tencentcloud.sqlserver.Db("example_pub",
+    instance_id=example_pub.id,
+    name="tf_example_db_pub",
     charset="Chinese_PRC_BIN",
     remark="test-remark")
-example_sub_db = tencentcloud.sqlserver.Db("exampleSubDb",
-    instance_id=example_sub_general_cloud_instance.id,
+example_sub_db = tencentcloud.sqlserver.Db("example_sub",
+    instance_id=example_sub.id,
+    name="tf_example_db_sub",
     charset="Chinese_PRC_BIN",
     remark="test-remark")
 example = tencentcloud.sqlserver.PublishSubscribe("example",
-    publish_instance_id=example_pub_general_cloud_instance.id,
-    subscribe_instance_id=example_sub_general_cloud_instance.id,
+    publish_instance_id=example_pub.id,
+    subscribe_instance_id=example_sub.id,
     publish_subscribe_name="example",
     delete_subscribe_db=False,
-    database_tuples=[tencentcloud.sqlserver.PublishSubscribeDatabaseTupleArgs(
-        publish_database=example_pub_db.name,
-        subscribe_database=example_sub_db.name,
-    )])
+    database_tuples=[{
+        "publish_database": example_pub_db.name,
+        "subscribe_database": example_sub_db.name,
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
-    {
-        Product = "sqlserver",
-    });
-
-    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
-    {
-        AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
-        VpcId = vpc.Id,
-        CidrBlock = "10.0.0.0/16",
-        IsMulticast = false,
-    });
-
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
-    {
-        Description = "desc.",
-    });
-
-    var examplePubGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", new()
-    {
-        Zone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
-        Memory = 4,
-        Storage = 100,
-        Cpu = 2,
-        MachineType = "CLOUD_HSSD",
-        InstanceChargeType = "POSTPAID",
-        ProjectId = 0,
-        SubnetId = subnet.Id,
-        VpcId = vpc.Id,
-        DbVersion = "2008R2",
-        SecurityGroupLists = new[]
-        {
-            securityGroup.Id,
-        },
-        Weeklies = new[]
-        {
-            1,
-            2,
-            3,
-            5,
-            6,
-            7,
-        },
-        StartTime = "00:00",
-        Span = 6,
-        ResourceTags = new[]
-        {
-            new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
-            {
-                TagKey = "test",
-                TagValue = "test",
-            },
-        },
-        Collation = "Chinese_PRC_CI_AS",
-        TimeZone = "China Standard Time",
-    });
-
-    var exampleSubGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", new()
-    {
-        Zone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
-        Memory = 4,
-        Storage = 100,
-        Cpu = 2,
-        MachineType = "CLOUD_HSSD",
-        InstanceChargeType = "POSTPAID",
-        ProjectId = 0,
-        SubnetId = subnet.Id,
-        VpcId = vpc.Id,
-        DbVersion = "2008R2",
-        SecurityGroupLists = new[]
-        {
-            securityGroup.Id,
-        },
-        Weeklies = new[]
-        {
-            1,
-            2,
-            3,
-            5,
-            6,
-            7,
-        },
-        StartTime = "00:00",
-        Span = 6,
-        ResourceTags = new[]
-        {
-            new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
-            {
-                TagKey = "test",
-                TagValue = "test",
-            },
-        },
-        Collation = "Chinese_PRC_CI_AS",
-        TimeZone = "China Standard Time",
-    });
-
-    var examplePubDb = new Tencentcloud.Sqlserver.Db("examplePubDb", new()
-    {
-        InstanceId = examplePubGeneralCloudInstance.Id,
-        Charset = "Chinese_PRC_BIN",
-        Remark = "test-remark",
-    });
-
-    var exampleSubDb = new Tencentcloud.Sqlserver.Db("exampleSubDb", new()
-    {
-        InstanceId = exampleSubGeneralCloudInstance.Id,
-        Charset = "Chinese_PRC_BIN",
-        Remark = "test-remark",
-    });
-
-    var example = new Tencentcloud.Sqlserver.PublishSubscribe("example", new()
-    {
-        PublishInstanceId = examplePubGeneralCloudInstance.Id,
-        SubscribeInstanceId = exampleSubGeneralCloudInstance.Id,
-        PublishSubscribeName = "example",
-        DeleteSubscribeDb = false,
-        DatabaseTuples = new[]
-        {
-            new Tencentcloud.Sqlserver.Inputs.PublishSubscribeDatabaseTupleArgs
-            {
-                PublishDatabase = examplePubDb.Name,
-                SubscribeDatabase = exampleSubDb.Name,
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
 			Product: "sqlserver",
 		}, nil)
 		if err != nil {
 			return err
 		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
 			CidrBlock: pulumi.String("10.0.0.0/16"),
 		})
 		if err != nil {
 			return err
 		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			VpcId:            vpc.ID(),
+			Name:             pulumi.String("subnet-example"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 			CidrBlock:        pulumi.String("10.0.0.0/16"),
 			IsMulticast:      pulumi.Bool(false),
 		})
 		if err != nil {
 			return err
 		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-example"),
 			Description: pulumi.String("desc."),
 		})
 		if err != nil {
 			return err
 		}
-		examplePubGeneralCloudInstance, err := Sqlserver.NewGeneralCloudInstance(ctx, "examplePubGeneralCloudInstance", &Sqlserver.GeneralCloudInstanceArgs{
+		examplePub, err := sqlserver.NewGeneralCloudInstance(ctx, "example_pub", &sqlserver.GeneralCloudInstanceArgs{
+			Name:               pulumi.String("tf-example-pub"),
 			Zone:               pulumi.String(zones.Zones[4].Name),
 			Memory:             pulumi.Int(4),
 			Storage:            pulumi.Int(100),
@@ -390,11 +288,11 @@ func main() {
 			MachineType:        pulumi.String("CLOUD_HSSD"),
 			InstanceChargeType: pulumi.String("POSTPAID"),
 			ProjectId:          pulumi.Int(0),
-			SubnetId:           subnet.ID(),
-			VpcId:              vpc.ID(),
+			SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
+			VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
 			DbVersion:          pulumi.String("2008R2"),
 			SecurityGroupLists: pulumi.StringArray{
-				securityGroup.ID(),
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
 			},
 			Weeklies: pulumi.IntArray{
 				pulumi.Int(1),
@@ -418,7 +316,8 @@ func main() {
 		if err != nil {
 			return err
 		}
-		exampleSubGeneralCloudInstance, err := Sqlserver.NewGeneralCloudInstance(ctx, "exampleSubGeneralCloudInstance", &Sqlserver.GeneralCloudInstanceArgs{
+		exampleSub, err := sqlserver.NewGeneralCloudInstance(ctx, "example_sub", &sqlserver.GeneralCloudInstanceArgs{
+			Name:               pulumi.String("tf-example-sub"),
 			Zone:               pulumi.String(zones.Zones[4].Name),
 			Memory:             pulumi.Int(4),
 			Storage:            pulumi.Int(100),
@@ -426,11 +325,11 @@ func main() {
 			MachineType:        pulumi.String("CLOUD_HSSD"),
 			InstanceChargeType: pulumi.String("POSTPAID"),
 			ProjectId:          pulumi.Int(0),
-			SubnetId:           subnet.ID(),
-			VpcId:              vpc.ID(),
+			SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
+			VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
 			DbVersion:          pulumi.String("2008R2"),
 			SecurityGroupLists: pulumi.StringArray{
-				securityGroup.ID(),
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
 			},
 			Weeklies: pulumi.IntArray{
 				pulumi.Int(1),
@@ -454,25 +353,27 @@ func main() {
 		if err != nil {
 			return err
 		}
-		examplePubDb, err := Sqlserver.NewDb(ctx, "examplePubDb", &Sqlserver.DbArgs{
-			InstanceId: examplePubGeneralCloudInstance.ID(),
+		examplePubDb, err := sqlserver.NewDb(ctx, "example_pub", &sqlserver.DbArgs{
+			InstanceId: examplePub.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_db_pub"),
 			Charset:    pulumi.String("Chinese_PRC_BIN"),
 			Remark:     pulumi.String("test-remark"),
 		})
 		if err != nil {
 			return err
 		}
-		exampleSubDb, err := Sqlserver.NewDb(ctx, "exampleSubDb", &Sqlserver.DbArgs{
-			InstanceId: exampleSubGeneralCloudInstance.ID(),
+		exampleSubDb, err := sqlserver.NewDb(ctx, "example_sub", &sqlserver.DbArgs{
+			InstanceId: exampleSub.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_db_sub"),
 			Charset:    pulumi.String("Chinese_PRC_BIN"),
 			Remark:     pulumi.String("test-remark"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Sqlserver.NewPublishSubscribe(ctx, "example", &Sqlserver.PublishSubscribeArgs{
-			PublishInstanceId:    examplePubGeneralCloudInstance.ID(),
-			SubscribeInstanceId:  exampleSubGeneralCloudInstance.ID(),
+		_, err = sqlserver.NewPublishSubscribe(ctx, "example", &sqlserver.PublishSubscribeArgs{
+			PublishInstanceId:    examplePub.ID().ToIDOutput().ToStringOutput(),
+			SubscribeInstanceId:  exampleSub.ID().ToIDOutput().ToStringOutput(),
 			PublishSubscribeName: pulumi.String("example"),
 			DeleteSubscribeDb:    pulumi.Bool(false),
 			DatabaseTuples: sqlserver.PublishSubscribeDatabaseTupleArray{
@@ -489,6 +390,164 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    {
+        Product = "sqlserver",
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc-example",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Name = "subnet-example",
+        VpcId = vpc.Id,
+        CidrBlock = "10.0.0.0/16",
+        IsMulticast = false,
+    });
+
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
+    {
+        Name = "sg-example",
+        Description = "desc.",
+    });
+
+    var examplePub = new Tencentcloud.Sqlserver.GeneralCloudInstance("example_pub", new()
+    {
+        Name = "tf-example-pub",
+        Zone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Memory = 4,
+        Storage = 100,
+        Cpu = 2,
+        MachineType = "CLOUD_HSSD",
+        InstanceChargeType = "POSTPAID",
+        ProjectId = 0,
+        SubnetId = subnet.Id,
+        VpcId = vpc.Id,
+        DbVersion = "2008R2",
+        SecurityGroupLists = new[]
+        {
+            securityGroup.Id,
+        },
+        Weeklies = new[]
+        {
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+        },
+        StartTime = "00:00",
+        Span = 6,
+        ResourceTags = new[]
+        {
+            new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+            {
+                TagKey = "test",
+                TagValue = "test",
+            },
+        },
+        Collation = "Chinese_PRC_CI_AS",
+        TimeZone = "China Standard Time",
+    });
+
+    var exampleSub = new Tencentcloud.Sqlserver.GeneralCloudInstance("example_sub", new()
+    {
+        Name = "tf-example-sub",
+        Zone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Memory = 4,
+        Storage = 100,
+        Cpu = 2,
+        MachineType = "CLOUD_HSSD",
+        InstanceChargeType = "POSTPAID",
+        ProjectId = 0,
+        SubnetId = subnet.Id,
+        VpcId = vpc.Id,
+        DbVersion = "2008R2",
+        SecurityGroupLists = new[]
+        {
+            securityGroup.Id,
+        },
+        Weeklies = new[]
+        {
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+        },
+        StartTime = "00:00",
+        Span = 6,
+        ResourceTags = new[]
+        {
+            new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+            {
+                TagKey = "test",
+                TagValue = "test",
+            },
+        },
+        Collation = "Chinese_PRC_CI_AS",
+        TimeZone = "China Standard Time",
+    });
+
+    var examplePubDb = new Tencentcloud.Sqlserver.Db("example_pub", new()
+    {
+        InstanceId = examplePub.Id,
+        Name = "tf_example_db_pub",
+        Charset = "Chinese_PRC_BIN",
+        Remark = "test-remark",
+    });
+
+    var exampleSubDb = new Tencentcloud.Sqlserver.Db("example_sub", new()
+    {
+        InstanceId = exampleSub.Id,
+        Name = "tf_example_db_sub",
+        Charset = "Chinese_PRC_BIN",
+        Remark = "test-remark",
+    });
+
+    var example = new Tencentcloud.Sqlserver.PublishSubscribe("example", new()
+    {
+        PublishInstanceId = examplePub.Id,
+        SubscribeInstanceId = exampleSub.Id,
+        PublishSubscribeName = "example",
+        DeleteSubscribeDb = false,
+        DatabaseTuples = new[]
+        {
+            new Tencentcloud.Sqlserver.Inputs.PublishSubscribeDatabaseTupleArgs
+            {
+                PublishDatabase = examplePubDb.Name,
+                SubscribeDatabase = exampleSubDb.Name,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -497,10 +556,6 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
 import com.pulumi.tencentcloud.Sqlserver.GeneralCloudInstance;
@@ -511,8 +566,8 @@ import com.pulumi.tencentcloud.Sqlserver.DbArgs;
 import com.pulumi.tencentcloud.Sqlserver.PublishSubscribe;
 import com.pulumi.tencentcloud.Sqlserver.PublishSubscribeArgs;
 import com.pulumi.tencentcloud.Sqlserver.inputs.PublishSubscribeDatabaseTupleArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -528,23 +583,27 @@ public class App {
             .product("sqlserver")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[4].name())
+            .name("subnet-example")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-example")
             .description("desc.")
             .build());
 
-        var examplePubGeneralCloudInstance = new GeneralCloudInstance("examplePubGeneralCloudInstance", GeneralCloudInstanceArgs.builder()        
-            .zone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var examplePub = new GeneralCloudInstance("examplePub", GeneralCloudInstanceArgs.builder()
+            .name("tf-example-pub")
+            .zone(zones.zones()[4].name())
             .memory(4)
             .storage(100)
             .cpu(2)
@@ -572,8 +631,9 @@ public class App {
             .timeZone("China Standard Time")
             .build());
 
-        var exampleSubGeneralCloudInstance = new GeneralCloudInstance("exampleSubGeneralCloudInstance", GeneralCloudInstanceArgs.builder()        
-            .zone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var exampleSub = new GeneralCloudInstance("exampleSub", GeneralCloudInstanceArgs.builder()
+            .name("tf-example-sub")
+            .zone(zones.zones()[4].name())
             .memory(4)
             .storage(100)
             .cpu(2)
@@ -601,21 +661,23 @@ public class App {
             .timeZone("China Standard Time")
             .build());
 
-        var examplePubDb = new Db("examplePubDb", DbArgs.builder()        
-            .instanceId(examplePubGeneralCloudInstance.id())
+        var examplePubDb = new Db("examplePubDb", DbArgs.builder()
+            .instanceId(examplePub.id())
+            .name("tf_example_db_pub")
             .charset("Chinese_PRC_BIN")
             .remark("test-remark")
             .build());
 
-        var exampleSubDb = new Db("exampleSubDb", DbArgs.builder()        
-            .instanceId(exampleSubGeneralCloudInstance.id())
+        var exampleSubDb = new Db("exampleSubDb", DbArgs.builder()
+            .instanceId(exampleSub.id())
+            .name("tf_example_db_sub")
             .charset("Chinese_PRC_BIN")
             .remark("test-remark")
             .build());
 
-        var example = new PublishSubscribe("example", PublishSubscribeArgs.builder()        
-            .publishInstanceId(examplePubGeneralCloudInstance.id())
-            .subscribeInstanceId(exampleSubGeneralCloudInstance.id())
+        var example = new PublishSubscribe("example", PublishSubscribeArgs.builder()
+            .publishInstanceId(examplePub.id())
+            .subscribeInstanceId(exampleSub.id())
             .publishSubscribeName("example")
             .deleteSubscribeDb(false)
             .databaseTuples(PublishSubscribeDatabaseTupleArgs.builder()
@@ -627,26 +689,37 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[4].name}
+      name: subnet-example
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-example
       description: desc.
-  examplePubGeneralCloudInstance:
+  examplePub:
     type: tencentcloud:Sqlserver:GeneralCloudInstance
+    name: example_pub
     properties:
+      name: tf-example-pub
       zone: ${zones.zones[4].name}
       memory: 4
       storage: 100
@@ -673,9 +746,11 @@ resources:
           tagValue: test
       collation: Chinese_PRC_CI_AS
       timeZone: China Standard Time
-  exampleSubGeneralCloudInstance:
+  exampleSub:
     type: tencentcloud:Sqlserver:GeneralCloudInstance
+    name: example_sub
     properties:
+      name: tf-example-sub
       zone: ${zones.zones[4].name}
       memory: 4
       storage: 100
@@ -704,21 +779,25 @@ resources:
       timeZone: China Standard Time
   examplePubDb:
     type: tencentcloud:Sqlserver:Db
+    name: example_pub
     properties:
-      instanceId: ${examplePubGeneralCloudInstance.id}
+      instanceId: ${examplePub.id}
+      name: tf_example_db_pub
       charset: Chinese_PRC_BIN
       remark: test-remark
   exampleSubDb:
     type: tencentcloud:Sqlserver:Db
+    name: example_sub
     properties:
-      instanceId: ${exampleSubGeneralCloudInstance.id}
+      instanceId: ${exampleSub.id}
+      name: tf_example_db_sub
       charset: Chinese_PRC_BIN
       remark: test-remark
   example:
     type: tencentcloud:Sqlserver:PublishSubscribe
     properties:
-      publishInstanceId: ${examplePubGeneralCloudInstance.id}
-      subscribeInstanceId: ${exampleSubGeneralCloudInstance.id}
+      publishInstanceId: ${examplePub.id}
+      subscribeInstanceId: ${exampleSub.id}
       publishSubscribeName: example
       deleteSubscribeDb: false
       databaseTuples:
@@ -727,73 +806,213 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: sqlserver
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "sqlserver"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  name              = "subnet-example"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-example"
+  description = "desc."
+}
+resource "tencentcloud_sqlserver_generalcloudinstance" "example_pub" {
+  name                 = "tf-example-pub"
+  zone                 = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  memory               = 4
+  storage              = 100
+  cpu                  = 2
+  machine_type         = "CLOUD_HSSD"
+  instance_charge_type = "POSTPAID"
+  project_id           = 0
+  subnet_id            = tencentcloud_subnet_instance.subnet.id
+  vpc_id               = tencentcloud_vpc_instance.vpc.id
+  db_version           = "2008R2"
+  security_group_lists = [tencentcloud_security_group.security_group.id]
+  weeklies             = [1, 2, 3, 5, 6, 7]
+  start_time           = "00:00"
+  span                 = 6
+  resource_tags {
+    tag_key   = "test"
+    tag_value = "test"
+  }
+  collation = "Chinese_PRC_CI_AS"
+  time_zone = "China Standard Time"
+}
+resource "tencentcloud_sqlserver_generalcloudinstance" "example_sub" {
+  name                 = "tf-example-sub"
+  zone                 = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  memory               = 4
+  storage              = 100
+  cpu                  = 2
+  machine_type         = "CLOUD_HSSD"
+  instance_charge_type = "POSTPAID"
+  project_id           = 0
+  subnet_id            = tencentcloud_subnet_instance.subnet.id
+  vpc_id               = tencentcloud_vpc_instance.vpc.id
+  db_version           = "2008R2"
+  security_group_lists = [tencentcloud_security_group.security_group.id]
+  weeklies             = [1, 2, 3, 5, 6, 7]
+  start_time           = "00:00"
+  span                 = 6
+  resource_tags {
+    tag_key   = "test"
+    tag_value = "test"
+  }
+  collation = "Chinese_PRC_CI_AS"
+  time_zone = "China Standard Time"
+}
+resource "tencentcloud_sqlserver_db" "example_pub" {
+  instance_id = tencentcloud_sqlserver_generalcloudinstance.example_pub.id
+  name        = "tf_example_db_pub"
+  charset     = "Chinese_PRC_BIN"
+  remark      = "test-remark"
+}
+resource "tencentcloud_sqlserver_db" "example_sub" {
+  instance_id = tencentcloud_sqlserver_generalcloudinstance.example_sub.id
+  name        = "tf_example_db_sub"
+  charset     = "Chinese_PRC_BIN"
+  remark      = "test-remark"
+}
+resource "tencentcloud_sqlserver_publishsubscribe" "example" {
+  publish_instance_id    = tencentcloud_sqlserver_generalcloudinstance.example_pub.id
+  subscribe_instance_id  = tencentcloud_sqlserver_generalcloudinstance.example_sub.id
+  publish_subscribe_name = "example"
+  delete_subscribe_db    = false
+  database_tuples {
+    publish_database   = tencentcloud_sqlserver_db.example_pub.name
+    subscribe_database = tencentcloud_sqlserver_db.example_sub.name
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreatePublishSubscribe](https://www.tencentcloud.com/document/api/238/72748)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+  - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+  - [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
+* Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
+* Update:
+  - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+  - [DeletePublishSubscribe](https://www.tencentcloud.com/document/api/238/72747)
+  - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+  - [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
+  - [ModifyPublishSubscribeName](https://www.tencentcloud.com/document/api/238/72744)
+* Delete:
+  - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+  - [DeletePublishSubscribe](https://www.tencentcloud.com/document/api/238/72747)
+  - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+  - [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
 
 
 ## Create PublishSubscribe Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                     <span class="nx">database_tuples</span><span class="p">:</span> <span class="nx">Optional[Sequence[_sqlserver.PublishSubscribeDatabaseTupleArgs]]</span> = None<span class="p">,</span>
-                     <span class="nx">delete_subscribe_db</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                     <span class="nx">publish_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">publish_subscribe_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">subscribe_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                     <span class="nx">database_tuples</span><span class="p">:</span> <span class="nx">Optional[Sequence[PublishSubscribeDatabaseTupleArgs]]</span> = None<span class="p">,</span>
+                     <span class="nx">publish_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">subscribe_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">delete_subscribe_db</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                     <span class="nx">publish_subscribe_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPublishSubscribe</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PublishSubscribe</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPublishSubscribe</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PublishSubscribe</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">PublishSubscribe</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PublishSubscribeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sqlserver:PublishSubscribe</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sqlserver:PublishSubscribe</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_sqlserver_publish_subscribe&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -814,7 +1033,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -931,11 +1150,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## PublishSubscribe Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The PublishSubscribe resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -949,10 +1176,9 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetuples_csharp" style="color: inherit; text-decoration: inherit;">Database<wbr>Tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Publish<wbr>Subscribe<wbr>Database<wbr>Tuple&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="publishinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Id</a>
@@ -960,8 +1186,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subscribeinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Id</a>
@@ -969,8 +1194,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletesubscribedb_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletesubscribedb_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Subscribe<wbr>Db</a>
@@ -978,8 +1202,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -987,8 +1210,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd></dl>
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1002,8 +1224,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#publishsubscribedatabasetuple">[]Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="publishinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Id</a>
@@ -1011,8 +1232,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subscribeinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_go" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Id</a>
@@ -1020,8 +1240,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletesubscribedb_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletesubscribedb_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Subscribe<wbr>Db</a>
@@ -1029,8 +1248,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -1038,8 +1256,53 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd></dl>
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="database_tuples_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_tuples_hcl" style="color: inherit; text-decoration: inherit;">database_<wbr>tuples</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">list(object)</a></span>
+    </dt>
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="publish_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_instance_id_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="subscribe_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_instance_id_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_subscribe_db_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_subscribe_db_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>subscribe_<wbr>db</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publish_subscribe_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_name_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1051,10 +1314,9 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetuples_java" style="color: inherit; text-decoration: inherit;">database<wbr>Tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Publish<wbr>Subscribe<wbr>Database<wbr>Tuple&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="publishinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -1062,8 +1324,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subscribeinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_java" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -1071,8 +1332,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletesubscribedb_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletesubscribedb_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Subscribe<wbr>Db</a>
@@ -1080,8 +1340,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1089,8 +1348,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd></dl>
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1102,10 +1360,9 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databasetuples_nodejs" style="color: inherit; text-decoration: inherit;">database<wbr>Tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#publishsubscribedatabasetuple">Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">Publish<wbr>Subscribe<wbr>Database<wbr>Tuple[]</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="publishinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -1113,8 +1370,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subscribeinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -1122,8 +1378,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletesubscribedb_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletesubscribedb_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Subscribe<wbr>Db</a>
@@ -1131,8 +1386,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1140,8 +1394,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd></dl>
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1153,10 +1406,9 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_tuples_python" style="color: inherit; text-decoration: inherit;">database_<wbr>tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#publishsubscribedatabasetuple">Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args]</a></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">Sequence[Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args]</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="publish_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_instance_id_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>id</a>
@@ -1164,8 +1416,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subscribe_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_instance_id_python" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>id</a>
@@ -1173,8 +1424,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="delete_subscribe_db_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_subscribe_db_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>subscribe_<wbr>db</a>
@@ -1182,8 +1432,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publish_subscribe_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_name_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
@@ -1191,8 +1440,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd></dl>
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1206,8 +1454,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="publishinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -1215,8 +1462,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="subscribeinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_yaml" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -1224,8 +1470,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletesubscribedb_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletesubscribedb_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Subscribe<wbr>Db</a>
@@ -1233,8 +1478,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1242,8 +1486,7 @@ The PublishSubscribe resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd></dl>
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1264,8 +1507,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1279,8 +1521,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1294,8 +1549,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1309,8 +1563,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1324,8 +1577,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1339,8 +1591,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1350,124 +1601,163 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing PublishSubscribe resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PublishSubscribeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PublishSubscribe</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PublishSubscribeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PublishSubscribe</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">database_tuples</span><span class="p">:</span> <span class="nx">Optional[Sequence[_sqlserver.PublishSubscribeDatabaseTupleArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">database_tuples</span><span class="p">:</span> <span class="nx">Optional[Sequence[PublishSubscribeDatabaseTupleArgs]]</span> = None<span class="p">,</span>
         <span class="nx">delete_subscribe_db</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">publish_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">publish_subscribe_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subscribe_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> PublishSubscribe</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPublishSubscribe<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PublishSubscribeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PublishSubscribe</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPublishSubscribe<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PublishSubscribeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PublishSubscribe</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PublishSubscribe</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PublishSubscribeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PublishSubscribe</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PublishSubscribeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PublishSubscribe</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PublishSubscribeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PublishSubscribe</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PublishSubscribeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingPublishSubscribe</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Sqlserver:PublishSubscribe</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_sqlserver_publish_subscribe</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PublishSubscribeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PublishSubscribeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1475,28 +1765,31 @@ Get an existing PublishSubscribe resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PublishSubscribeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1504,28 +1797,31 @@ Get an existing PublishSubscribe resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PublishSubscribeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1543,10 +1839,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databasetuples_csharp" style="color: inherit; text-decoration: inherit;">Database<wbr>Tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Publish<wbr>Subscribe<wbr>Database<wbr>Tuple&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletesubscribedb_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletesubscribedb_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Subscribe<wbr>Db</a>
@@ -1554,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publishinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Id</a>
@@ -1563,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publishsubscribename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishsubscribename_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -1572,8 +1865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subscribeinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscribeinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Id</a>
@@ -1581,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>ID of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1596,8 +1887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#publishsubscribedatabasetuple">[]Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletesubscribedb_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletesubscribedb_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Subscribe<wbr>Db</a>
@@ -1605,8 +1895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publishinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishinstanceid_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Id</a>
@@ -1614,8 +1903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publishsubscribename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishsubscribename_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -1623,8 +1911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subscribeinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscribeinstanceid_go" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Id</a>
@@ -1632,8 +1919,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>ID of the SQL Server instance which subscribe.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_database_tuples_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_database_tuples_hcl" style="color: inherit; text-decoration: inherit;">database_<wbr>tuples</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">list(object)</a></span>
+    </dt>
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_subscribe_db_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_subscribe_db_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>subscribe_<wbr>db</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_publish_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publish_instance_id_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_publish_subscribe_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publish_subscribe_name_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subscribe_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscribe_instance_id_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1645,10 +1977,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databasetuples_java" style="color: inherit; text-decoration: inherit;">database<wbr>Tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Publish<wbr>Subscribe<wbr>Database<wbr>Tuple&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletesubscribedb_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletesubscribedb_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Subscribe<wbr>Db</a>
@@ -1656,8 +1987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publishinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishinstanceid_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -1665,8 +1995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publishsubscribename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishsubscribename_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1674,8 +2003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subscribeinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscribeinstanceid_java" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -1683,8 +2011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>ID of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1696,10 +2023,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databasetuples_nodejs" style="color: inherit; text-decoration: inherit;">database<wbr>Tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#publishsubscribedatabasetuple">Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">Publish<wbr>Subscribe<wbr>Database<wbr>Tuple[]</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletesubscribedb_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletesubscribedb_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Subscribe<wbr>Db</a>
@@ -1707,8 +2033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publishinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -1716,8 +2041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publishsubscribename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishsubscribename_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1725,8 +2049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subscribeinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscribeinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -1734,8 +2057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>ID of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1747,10 +2069,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_database_tuples_python" style="color: inherit; text-decoration: inherit;">database_<wbr>tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#publishsubscribedatabasetuple">Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args]</a></span>
+        <span class="property-type"><a href="#publishsubscribedatabasetuple">Sequence[Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args]</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_delete_subscribe_db_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_subscribe_db_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>subscribe_<wbr>db</a>
@@ -1758,8 +2079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publish_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publish_instance_id_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>id</a>
@@ -1767,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publish_subscribe_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publish_subscribe_name_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
@@ -1776,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subscribe_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscribe_instance_id_python" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>id</a>
@@ -1785,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>ID of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1800,8 +2117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#publishsubscribedatabasetuple">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletesubscribedb_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletesubscribedb_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Subscribe<wbr>Db</a>
@@ -1809,8 +2125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to delete the subscriber database when deleting the Publish and Subscribe. <code>true</code> for deletes the subscribe database, <code>false</code> for does not delete the subscribe database. default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_publishinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishinstanceid_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -1818,8 +2133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publishsubscribename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publishsubscribename_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1827,8 +2141,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe. Default is <code>default_name</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the Publish and Subscribe. Default is <code>defaultName</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subscribeinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscribeinstanceid_yaml" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -1836,8 +2149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>ID of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1852,7 +2164,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="publishsubscribedatabasetuple">Publish<wbr>Subscribe<wbr>Database<wbr>Tuple</h4>
+<h4 id="publishsubscribedatabasetuple">
+Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<pulumi-choosable type="language" values="python,go" class="inline">, Publish<wbr>Subscribe<wbr>Database<wbr>Tuple<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1864,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Publish the database.</p>
-</dd><dt class="property-required"
+    <dd>Publish the database.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_csharp" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Database</a>
@@ -1873,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscribe the database.</p>
-</dd></dl>
+    <dd>Subscribe the database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1888,8 +2200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Publish the database.</p>
-</dd><dt class="property-required"
+    <dd>Publish the database.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_go" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Database</a>
@@ -1897,8 +2208,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscribe the database.</p>
-</dd></dl>
+    <dd>Subscribe the database.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="publish_database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_database_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Publish the database.</dd><dt class="property-required"
+            title="Required">
+        <span id="subscribe_database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_database_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subscribe the database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1912,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Publish the database.</p>
-</dd><dt class="property-required"
+    <dd>Publish the database.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_java" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -1921,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscribe the database.</p>
-</dd></dl>
+    <dd>Subscribe the database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1936,8 +2266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Publish the database.</p>
-</dd><dt class="property-required"
+    <dd>Publish the database.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_nodejs" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -1945,8 +2274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscribe the database.</p>
-</dd></dl>
+    <dd>Subscribe the database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1960,8 +2288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Publish the database.</p>
-</dd><dt class="property-required"
+    <dd>Publish the database.</dd><dt class="property-required"
             title="Required">
         <span id="subscribe_database_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_database_python" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>database</a>
@@ -1969,8 +2296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subscribe the database.</p>
-</dd></dl>
+    <dd>Subscribe the database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1984,8 +2310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Publish the database.</p>
-</dd><dt class="property-required"
+    <dd>Publish the database.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_yaml" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -1993,8 +2318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscribe the database.</p>
-</dd></dl>
+    <dd>Subscribe the database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2010,6 +2334,9 @@ $ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe example
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2019,7 +2346,6 @@ $ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe example
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Cluster"
 title_tag: "tencentcloud.Tsf.Cluster"
-meta_desc: "Documentation for the tencentcloud.Tsf.Cluster resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tsf cluster"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,44 +18,95 @@ Provides a resource to create a tsf cluster
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const cluster = new tencentcloud.tsf.Cluster("cluster", {
-    clusterCidr: "9.165.120.0/24",
-    clusterDesc: "test",
     clusterName: "terraform-test",
     clusterType: "C",
+    vpcId: "vpc-xxxxxx",
+    clusterCidr: "9.165.120.0/24",
+    clusterDesc: "test",
+    tsfRegionId: "ap-guangzhou",
     clusterVersion: "1.18.4",
-    maxClusterServiceNum: 128,
     maxNodePodNum: 32,
+    maxClusterServiceNum: 128,
     tags: {
         createdBy: "terraform",
     },
-    tsfRegionId: "ap-guangzhou",
-    vpcId: "vpc-xxxxxx",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 cluster = tencentcloud.tsf.Cluster("cluster",
-    cluster_cidr="9.165.120.0/24",
-    cluster_desc="test",
     cluster_name="terraform-test",
     cluster_type="C",
+    vpc_id="vpc-xxxxxx",
+    cluster_cidr="9.165.120.0/24",
+    cluster_desc="test",
+    tsf_region_id="ap-guangzhou",
     cluster_version="1.18.4",
-    max_cluster_service_num=128,
     max_node_pod_num=32,
+    max_cluster_service_num=128,
     tags={
         "createdBy": "terraform",
-    },
-    tsf_region_id="ap-guangzhou",
-    vpc_id="vpc-xxxxxx")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tsf.NewCluster(ctx, "cluster", &tsf.ClusterArgs{
+			ClusterName:          pulumi.String("terraform-test"),
+			ClusterType:          pulumi.String("C"),
+			VpcId:                pulumi.String("vpc-xxxxxx"),
+			ClusterCidr:          pulumi.String("9.165.120.0/24"),
+			ClusterDesc:          pulumi.String("test"),
+			TsfRegionId:          pulumi.String("ap-guangzhou"),
+			ClusterVersion:       pulumi.String("1.18.4"),
+			MaxNodePodNum:        pulumi.Int(32),
+			MaxClusterServiceNum: pulumi.Int(128),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -64,54 +117,28 @@ return await Deployment.RunAsync(() =>
 {
     var cluster = new Tencentcloud.Tsf.Cluster("cluster", new()
     {
-        ClusterCidr = "9.165.120.0/24",
-        ClusterDesc = "test",
         ClusterName = "terraform-test",
         ClusterType = "C",
+        VpcId = "vpc-xxxxxx",
+        ClusterCidr = "9.165.120.0/24",
+        ClusterDesc = "test",
+        TsfRegionId = "ap-guangzhou",
         ClusterVersion = "1.18.4",
-        MaxClusterServiceNum = 128,
         MaxNodePodNum = 32,
+        MaxClusterServiceNum = 128,
         Tags = 
         {
             { "createdBy", "terraform" },
         },
-        TsfRegionId = "ap-guangzhou",
-        VpcId = "vpc-xxxxxx",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.NewCluster(ctx, "cluster", &Tsf.ClusterArgs{
-			ClusterCidr:          pulumi.String("9.165.120.0/24"),
-			ClusterDesc:          pulumi.String("test"),
-			ClusterName:          pulumi.String("terraform-test"),
-			ClusterType:          pulumi.String("C"),
-			ClusterVersion:       pulumi.String("1.18.4"),
-			MaxClusterServiceNum: pulumi.Int(128),
-			MaxNodePodNum:        pulumi.Int(32),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-			TsfRegionId: pulumi.String("ap-guangzhou"),
-			VpcId:       pulumi.String("vpc-xxxxxx"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -120,8 +147,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.Cluster;
 import com.pulumi.tencentcloud.Tsf.ClusterArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -133,116 +160,182 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var cluster = new Cluster("cluster", ClusterArgs.builder()        
-            .clusterCidr("9.165.120.0/24")
-            .clusterDesc("test")
+        var cluster = new Cluster("cluster", ClusterArgs.builder()
             .clusterName("terraform-test")
             .clusterType("C")
-            .clusterVersion("1.18.4")
-            .maxClusterServiceNum(128)
-            .maxNodePodNum(32)
-            .tags(Map.of("createdBy", "terraform"))
-            .tsfRegionId("ap-guangzhou")
             .vpcId("vpc-xxxxxx")
+            .clusterCidr("9.165.120.0/24")
+            .clusterDesc("test")
+            .tsfRegionId("ap-guangzhou")
+            .clusterVersion("1.18.4")
+            .maxNodePodNum(32)
+            .maxClusterServiceNum(128)
+            .tags(Map.of("createdBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   cluster:
     type: tencentcloud:Tsf:Cluster
     properties:
-      clusterCidr: 9.165.120.0/24
-      clusterDesc: test
       clusterName: terraform-test
       clusterType: C
+      vpcId: vpc-xxxxxx
+      clusterCidr: 9.165.120.0/24
+      clusterDesc: test
+      tsfRegionId: ap-guangzhou
       clusterVersion: 1.18.4
-      maxClusterServiceNum: 128
       maxNodePodNum: 32
+      maxClusterServiceNum: 128
       tags:
         createdBy: terraform
-      tsfRegionId: ap-guangzhou
-      vpcId: vpc-xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tsf_cluster" "cluster" {
+  cluster_name            = "terraform-test"
+  cluster_type            = "C"
+  vpc_id                  = "vpc-xxxxxx"
+  cluster_cidr            = "9.165.120.0/24"
+  cluster_desc            = "test"
+  tsf_region_id           = "ap-guangzhou"
+  cluster_version         = "1.18.4"
+  max_node_pod_num        = 32
+  max_cluster_service_num = 128
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateCluster](https://www.tencentcloud.com/search/?wd=CreateCluster&type=document&lang=en)
+  - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&type=document&lang=en)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyCluster](https://www.tencentcloud.com/search/?wd=ModifyCluster&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete: [DeleteCluster](https://www.tencentcloud.com/search/?wd=DeleteCluster&type=document&lang=en)
 
 
 
 ## Create Cluster Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-            <span class="nx">cluster_cidr</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">cluster_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">cluster_remark_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">cluster_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">kubernete_native_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">max_node_pod_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">cluster_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">kubernete_api_server</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">kubernete_native_secret</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">kubernete_native_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">cluster_cidr</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">max_cluster_service_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-            <span class="nx">max_node_pod_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+            <span class="nx">cluster_remark_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">program_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
             <span class="nx">tsf_region_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">tsf_zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">cluster_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCluster</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Cluster</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCluster</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Cluster</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Cluster</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Cluster</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tsf_cluster&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -263,7 +356,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -380,11 +473,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Cluster Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -400,8 +501,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -409,8 +509,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -418,8 +517,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustercidr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Cidr</a>
@@ -427,8 +525,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Desc</a>
@@ -436,8 +533,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterremarkname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterremarkname_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Remark<wbr>Name</a>
@@ -445,8 +541,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -454,8 +549,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="kuberneteapiserver_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kuberneteapiserver_csharp" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Api<wbr>Server</a>
@@ -463,8 +557,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativesecret_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativesecret_csharp" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Native<wbr>Secret</a>
@@ -472,8 +565,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativetype_csharp" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Native<wbr>Type</a>
@@ -481,8 +573,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxclusterservicenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxclusterservicenum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -490,8 +581,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnodepodnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnodepodnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -499,8 +589,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -508,8 +597,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -517,8 +605,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -526,17 +613,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfregionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Id</a>
@@ -544,8 +629,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfzoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Id</a>
@@ -553,8 +637,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd></dl>
+    <dd>The TSF availability zone to which the cluster belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -568,8 +651,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -577,8 +659,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -586,8 +667,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustercidr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Cidr</a>
@@ -595,8 +675,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Desc</a>
@@ -604,8 +683,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterremarkname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterremarkname_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Remark<wbr>Name</a>
@@ -613,8 +691,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -622,8 +699,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="kuberneteapiserver_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kuberneteapiserver_go" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Api<wbr>Server</a>
@@ -631,8 +707,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativesecret_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativesecret_go" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Native<wbr>Secret</a>
@@ -640,8 +715,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativetype_go" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Native<wbr>Type</a>
@@ -649,8 +723,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxclusterservicenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxclusterservicenum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -658,8 +731,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnodepodnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnodepodnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -667,8 +739,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -676,8 +747,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -685,8 +755,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -694,17 +763,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfregionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Id</a>
@@ -712,8 +779,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfzoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Id</a>
@@ -721,8 +787,157 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd></dl>
+    <dd>The TSF availability zone to which the cluster belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster type.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_cidr_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_desc_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster notes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_remark_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_remark_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>remark_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster remark name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_version_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kubernete_api_server_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernete_api_server_hcl" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>api_<wbr>server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>api address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kubernete_native_secret_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernete_native_secret_hcl" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>native_<wbr>secret</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>native secret.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kubernete_native_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernete_native_type_hcl" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>native_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_cluster_service_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_cluster_service_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>cluster_<wbr>service_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_node_pod_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_node_pod_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>node_<wbr>pod_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="program_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Program id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tsf_region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_region_id_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tsf_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_zone_id_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The TSF availability zone to which the cluster belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -736,8 +951,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -745,8 +959,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -754,8 +967,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustercidr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -763,8 +975,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -772,8 +983,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterremarkname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterremarkname_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Remark<wbr>Name</a>
@@ -781,8 +991,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -790,8 +999,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="kuberneteapiserver_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kuberneteapiserver_java" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Api<wbr>Server</a>
@@ -799,8 +1007,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativesecret_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativesecret_java" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Secret</a>
@@ -808,8 +1015,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativetype_java" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Type</a>
@@ -817,8 +1023,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxclusterservicenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxclusterservicenum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -826,8 +1031,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnodepodnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnodepodnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -835,8 +1039,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -844,8 +1047,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -853,8 +1055,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -862,17 +1063,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfregionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -880,8 +1079,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfzoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -889,8 +1087,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd></dl>
+    <dd>The TSF availability zone to which the cluster belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -904,8 +1101,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -913,8 +1109,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -922,8 +1117,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustercidr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -931,8 +1125,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -940,8 +1133,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterremarkname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterremarkname_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Remark<wbr>Name</a>
@@ -949,8 +1141,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -958,8 +1149,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="kuberneteapiserver_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kuberneteapiserver_nodejs" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Api<wbr>Server</a>
@@ -967,8 +1157,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativesecret_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativesecret_nodejs" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Secret</a>
@@ -976,8 +1165,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativetype_nodejs" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Type</a>
@@ -985,8 +1173,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxclusterservicenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxclusterservicenum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -994,8 +1181,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnodepodnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnodepodnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -1003,8 +1189,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -1012,8 +1197,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1021,8 +1205,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1030,17 +1213,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfregionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -1048,8 +1229,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfzoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -1057,8 +1237,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd></dl>
+    <dd>The TSF availability zone to which the cluster belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1072,8 +1251,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -1081,8 +1259,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1090,8 +1267,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_cidr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_cidr_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>cidr</a>
@@ -1099,8 +1275,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_desc_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>desc</a>
@@ -1108,8 +1283,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_remark_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_remark_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>remark_<wbr>name</a>
@@ -1117,8 +1291,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_version_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
@@ -1126,8 +1299,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernete_api_server_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernete_api_server_python" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>api_<wbr>server</a>
@@ -1135,8 +1307,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernete_native_secret_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernete_native_secret_python" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>native_<wbr>secret</a>
@@ -1144,8 +1315,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernete_native_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernete_native_type_python" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>native_<wbr>type</a>
@@ -1153,8 +1323,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_cluster_service_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_cluster_service_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>cluster_<wbr>service_<wbr>num</a>
@@ -1162,8 +1331,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_node_pod_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_node_pod_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>node_<wbr>pod_<wbr>num</a>
@@ -1171,8 +1339,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="program_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
@@ -1180,8 +1347,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -1189,8 +1355,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1198,17 +1363,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsf_region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_region_id_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>id</a>
@@ -1216,8 +1379,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsf_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_zone_id_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>id</a>
@@ -1225,8 +1387,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd></dl>
+    <dd>The TSF availability zone to which the cluster belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1240,8 +1401,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1249,8 +1409,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1258,8 +1417,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustercidr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -1267,8 +1425,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -1276,8 +1433,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterremarkname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterremarkname_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Remark<wbr>Name</a>
@@ -1285,8 +1441,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -1294,8 +1449,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="kuberneteapiserver_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kuberneteapiserver_yaml" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Api<wbr>Server</a>
@@ -1303,8 +1457,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativesecret_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativesecret_yaml" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Secret</a>
@@ -1312,8 +1465,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubernetenativetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubernetenativetype_yaml" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Type</a>
@@ -1321,8 +1473,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxclusterservicenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxclusterservicenum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -1330,8 +1481,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnodepodnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnodepodnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -1339,8 +1489,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -1348,8 +1497,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1357,8 +1505,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1366,17 +1513,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfregionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -1384,8 +1529,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="tsfzoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -1393,8 +1537,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd></dl>
+    <dd>The TSF availability zone to which the cluster belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1415,8 +1558,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1424,8 +1566,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID.</dd><dt class="property-"
             title="">
         <span id="clusterlimitcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Cpu</a>
@@ -1433,8 +1574,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-"
             title="">
         <span id="clusterlimitmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Mem</a>
@@ -1442,8 +1582,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -1451,8 +1590,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-"
+    <dd>cluster status.</dd><dt class="property-"
             title="">
         <span id="clustertotalcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Cpu</a>
@@ -1460,8 +1598,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clustertotalmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Mem</a>
@@ -1469,8 +1606,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="clusterusedcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Cpu</a>
@@ -1478,8 +1614,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clusterusedmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Mem</a>
@@ -1487,8 +1622,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1496,8 +1630,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -1505,8 +1638,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-"
             title="">
         <span id="deleteflagreason_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag<wbr>Reason</a>
@@ -1514,8 +1646,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-"
             title="">
         <span id="groupcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupcount_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Count</a>
@@ -1523,8 +1654,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Total number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1532,8 +1662,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1541,8 +1670,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-"
+    <dd>Number of cluster machine instances.</dd><dt class="property-"
             title="">
         <span id="normalinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Normal<wbr>Instance<wbr>Count</a>
@@ -1550,8 +1678,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-"
             title="">
         <span id="operationinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Infos</a>
@@ -1559,8 +1686,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Outputs.<wbr>Cluster<wbr>Operation<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-"
             title="">
         <span id="rungroupcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rungroupcount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Group<wbr>Count</a>
@@ -1568,8 +1694,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-"
             title="">
         <span id="runinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Instance<wbr>Count</a>
@@ -1577,8 +1702,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-"
             title="">
         <span id="runserviceinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -1586,8 +1710,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-"
+    <dd>Number of running service instances.</dd><dt class="property-"
             title="">
         <span id="stopgroupcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stopgroupcount_csharp" style="color: inherit; text-decoration: inherit;">Stop<wbr>Group<wbr>Count</a>
@@ -1595,8 +1718,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-"
             title="">
         <span id="tsfregionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Name</a>
@@ -1604,8 +1726,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="tsfzonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Name</a>
@@ -1613,8 +1734,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1622,8 +1742,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1637,8 +1756,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1646,8 +1764,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID.</dd><dt class="property-"
             title="">
         <span id="clusterlimitcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Cpu</a>
@@ -1655,8 +1772,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-"
             title="">
         <span id="clusterlimitmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Mem</a>
@@ -1664,8 +1780,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -1673,8 +1788,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-"
+    <dd>cluster status.</dd><dt class="property-"
             title="">
         <span id="clustertotalcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Cpu</a>
@@ -1682,8 +1796,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clustertotalmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Mem</a>
@@ -1691,8 +1804,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="clusterusedcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Cpu</a>
@@ -1700,8 +1812,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clusterusedmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Mem</a>
@@ -1709,8 +1820,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1718,8 +1828,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -1727,8 +1836,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-"
             title="">
         <span id="deleteflagreason_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag<wbr>Reason</a>
@@ -1736,8 +1844,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-"
             title="">
         <span id="groupcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupcount_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Count</a>
@@ -1745,8 +1852,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Total number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1754,8 +1860,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1763,8 +1868,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-"
+    <dd>Number of cluster machine instances.</dd><dt class="property-"
             title="">
         <span id="normalinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_go" style="color: inherit; text-decoration: inherit;">Normal<wbr>Instance<wbr>Count</a>
@@ -1772,8 +1876,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-"
             title="">
         <span id="operationinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Infos</a>
@@ -1781,8 +1884,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfo">[]Cluster<wbr>Operation<wbr>Info</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-"
             title="">
         <span id="rungroupcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rungroupcount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Group<wbr>Count</a>
@@ -1790,8 +1892,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-"
             title="">
         <span id="runinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Instance<wbr>Count</a>
@@ -1799,8 +1900,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-"
             title="">
         <span id="runserviceinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -1808,8 +1908,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-"
+    <dd>Number of running service instances.</dd><dt class="property-"
             title="">
         <span id="stopgroupcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stopgroupcount_go" style="color: inherit; text-decoration: inherit;">Stop<wbr>Group<wbr>Count</a>
@@ -1817,8 +1916,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-"
             title="">
         <span id="tsfregionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Name</a>
@@ -1826,8 +1924,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="tsfzonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Name</a>
@@ -1835,8 +1932,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1844,8 +1940,205 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="abnormal_group_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abnormal_group_count_hcl" style="color: inherit; text-decoration: inherit;">abnormal_<wbr>group_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-"
+            title="">
+        <span id="cluster_limit_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-"
+            title="">
+        <span id="cluster_limit_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster remaining memory limit.</dd><dt class="property-"
+            title="">
+        <span id="cluster_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_status_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster status.</dd><dt class="property-"
+            title="">
+        <span id="cluster_total_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_total_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-"
+            title="">
+        <span id="cluster_total_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_total_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-"
+            title="">
+        <span id="cluster_used_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_used_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-"
+            title="">
+        <span id="cluster_used_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_used_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-"
+            title="">
+        <span id="delete_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-"
+            title="">
+        <span id="delete_flag_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_reason_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-"
+            title="">
+        <span id="group_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_count_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of deployment groups.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of cluster machine instances.</dd><dt class="property-"
+            title="">
+        <span id="normal_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normal_instance_count_hcl" style="color: inherit; text-decoration: inherit;">normal_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-"
+            title="">
+        <span id="operation_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_infos_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusteroperationinfo">list(object)</a></span>
+    </dt>
+    <dd>Control information for buttons on the front end.</dd><dt class="property-"
+            title="">
+        <span id="run_group_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_group_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>group_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-"
+            title="">
+        <span id="run_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_instance_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-"
+            title="">
+        <span id="run_service_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_service_instance_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>service_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of running service instances.</dd><dt class="property-"
+            title="">
+        <span id="stop_group_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stop_group_count_hcl" style="color: inherit; text-decoration: inherit;">stop_<wbr>group_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of deployment groups in stop.</dd><dt class="property-"
+            title="">
+        <span id="tsf_region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_region_name_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-"
+            title="">
+        <span id="tsf_zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_zone_name_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-"
+            title="">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1859,8 +2152,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1868,8 +2160,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID.</dd><dt class="property-"
             title="">
         <span id="clusterlimitcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -1877,8 +2168,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-"
             title="">
         <span id="clusterlimitmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -1886,8 +2176,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -1895,8 +2184,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-"
+    <dd>cluster status.</dd><dt class="property-"
             title="">
         <span id="clustertotalcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -1904,8 +2192,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clustertotalmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -1913,8 +2200,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="clusterusedcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -1922,8 +2208,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clusterusedmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -1931,8 +2216,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1940,8 +2224,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -1949,8 +2232,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-"
             title="">
         <span id="deleteflagreason_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -1958,8 +2240,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-"
             title="">
         <span id="groupcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupcount_java" style="color: inherit; text-decoration: inherit;">group<wbr>Count</a>
@@ -1967,8 +2248,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Total number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1976,8 +2256,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1985,8 +2264,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-"
+    <dd>Number of cluster machine instances.</dd><dt class="property-"
             title="">
         <span id="normalinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_java" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -1994,8 +2272,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-"
             title="">
         <span id="operationinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
@@ -2003,8 +2280,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfo">List&lt;Cluster<wbr>Operation<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-"
             title="">
         <span id="rungroupcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rungroupcount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Group<wbr>Count</a>
@@ -2012,8 +2288,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-"
             title="">
         <span id="runinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -2021,8 +2296,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-"
             title="">
         <span id="runserviceinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -2030,8 +2304,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-"
+    <dd>Number of running service instances.</dd><dt class="property-"
             title="">
         <span id="stopgroupcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stopgroupcount_java" style="color: inherit; text-decoration: inherit;">stop<wbr>Group<wbr>Count</a>
@@ -2039,8 +2312,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-"
             title="">
         <span id="tsfregionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -2048,8 +2320,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="tsfzonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -2057,8 +2328,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2066,8 +2336,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2081,8 +2350,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2090,8 +2358,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID.</dd><dt class="property-"
             title="">
         <span id="clusterlimitcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -2099,8 +2366,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-"
             title="">
         <span id="clusterlimitmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -2108,8 +2374,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -2117,8 +2382,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-"
+    <dd>cluster status.</dd><dt class="property-"
             title="">
         <span id="clustertotalcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -2126,8 +2390,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clustertotalmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -2135,8 +2398,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="clusterusedcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -2144,8 +2406,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clusterusedmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -2153,8 +2414,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2162,8 +2422,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -2171,8 +2430,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-"
             title="">
         <span id="deleteflagreason_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -2180,8 +2438,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-"
             title="">
         <span id="groupcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupcount_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Count</a>
@@ -2189,8 +2446,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Total number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2198,8 +2454,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -2207,8 +2462,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-"
+    <dd>Number of cluster machine instances.</dd><dt class="property-"
             title="">
         <span id="normalinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -2216,8 +2470,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-"
             title="">
         <span id="operationinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
@@ -2225,8 +2478,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfo">Cluster<wbr>Operation<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-"
             title="">
         <span id="rungroupcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rungroupcount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Group<wbr>Count</a>
@@ -2234,8 +2486,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-"
             title="">
         <span id="runinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -2243,8 +2494,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-"
             title="">
         <span id="runserviceinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -2252,8 +2502,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-"
+    <dd>Number of running service instances.</dd><dt class="property-"
             title="">
         <span id="stopgroupcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stopgroupcount_nodejs" style="color: inherit; text-decoration: inherit;">stop<wbr>Group<wbr>Count</a>
@@ -2261,8 +2510,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-"
             title="">
         <span id="tsfregionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -2270,8 +2518,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="tsfzonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -2279,8 +2526,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2288,8 +2534,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2303,8 +2548,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -2312,8 +2556,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID.</dd><dt class="property-"
             title="">
         <span id="cluster_limit_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>cpu</a>
@@ -2321,8 +2564,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-"
             title="">
         <span id="cluster_limit_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>mem</a>
@@ -2330,8 +2572,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-"
             title="">
         <span id="cluster_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_status_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
@@ -2339,8 +2580,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-"
+    <dd>cluster status.</dd><dt class="property-"
             title="">
         <span id="cluster_total_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_total_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>cpu</a>
@@ -2348,8 +2588,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="cluster_total_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_total_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>mem</a>
@@ -2357,8 +2596,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="cluster_used_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_used_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>cpu</a>
@@ -2366,8 +2604,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="cluster_used_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_used_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>mem</a>
@@ -2375,8 +2612,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2384,8 +2620,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="delete_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
@@ -2393,8 +2628,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-"
             title="">
         <span id="delete_flag_reason_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_reason_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag_<wbr>reason</a>
@@ -2402,8 +2636,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-"
             title="">
         <span id="group_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_count_python" style="color: inherit; text-decoration: inherit;">group_<wbr>count</a>
@@ -2411,8 +2644,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Total number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2420,8 +2652,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -2429,8 +2660,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-"
+    <dd>Number of cluster machine instances.</dd><dt class="property-"
             title="">
         <span id="normal_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normal_instance_count_python" style="color: inherit; text-decoration: inherit;">normal_<wbr>instance_<wbr>count</a>
@@ -2438,17 +2668,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-"
             title="">
         <span id="operation_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_infos_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusteroperationinfo">Cluster<wbr>Operation<wbr>Info]</a></span>
+        <span class="property-type"><a href="#clusteroperationinfo">Sequence[Cluster<wbr>Operation<wbr>Info]</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-"
             title="">
         <span id="run_group_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_group_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>group_<wbr>count</a>
@@ -2456,8 +2684,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-"
             title="">
         <span id="run_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_instance_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>instance_<wbr>count</a>
@@ -2465,8 +2692,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-"
             title="">
         <span id="run_service_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_service_instance_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>service_<wbr>instance_<wbr>count</a>
@@ -2474,8 +2700,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-"
+    <dd>Number of running service instances.</dd><dt class="property-"
             title="">
         <span id="stop_group_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stop_group_count_python" style="color: inherit; text-decoration: inherit;">stop_<wbr>group_<wbr>count</a>
@@ -2483,8 +2708,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-"
             title="">
         <span id="tsf_region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_region_name_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>name</a>
@@ -2492,8 +2716,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="tsf_zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_zone_name_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>name</a>
@@ -2501,8 +2724,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2510,8 +2732,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2525,8 +2746,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2534,8 +2754,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID.</dd><dt class="property-"
             title="">
         <span id="clusterlimitcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -2543,8 +2762,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-"
             title="">
         <span id="clusterlimitmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -2552,8 +2770,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -2561,8 +2778,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-"
+    <dd>cluster status.</dd><dt class="property-"
             title="">
         <span id="clustertotalcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -2570,8 +2786,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clustertotalmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -2579,8 +2794,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="clusterusedcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -2588,8 +2802,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-"
             title="">
         <span id="clusterusedmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -2597,8 +2810,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-"
             title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2606,8 +2818,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="deleteflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -2615,8 +2826,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-"
             title="">
         <span id="deleteflagreason_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -2624,8 +2834,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-"
             title="">
         <span id="groupcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupcount_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Count</a>
@@ -2633,8 +2842,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-"
+    <dd>Total number of deployment groups.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2642,8 +2850,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -2651,8 +2858,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-"
+    <dd>Number of cluster machine instances.</dd><dt class="property-"
             title="">
         <span id="normalinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_yaml" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -2660,8 +2866,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-"
             title="">
         <span id="operationinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
@@ -2669,8 +2874,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-"
             title="">
         <span id="rungroupcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rungroupcount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Group<wbr>Count</a>
@@ -2678,8 +2882,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-"
             title="">
         <span id="runinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -2687,8 +2890,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-"
             title="">
         <span id="runserviceinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -2696,8 +2898,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-"
+    <dd>Number of running service instances.</dd><dt class="property-"
             title="">
         <span id="stopgroupcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stopgroupcount_yaml" style="color: inherit; text-decoration: inherit;">stop<wbr>Group<wbr>Count</a>
@@ -2705,8 +2906,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-"
             title="">
         <span id="tsfregionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -2714,8 +2914,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="tsfzonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -2723,8 +2922,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-"
             title="">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2732,8 +2930,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2743,18 +2940,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Cluster resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ClusterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Cluster</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ClusterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Cluster</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -2784,7 +2981,7 @@ Get an existing Cluster resource's state with the given name, ID, and optional e
         <span class="nx">max_cluster_service_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">max_node_pod_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">normal_instance_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">operation_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tsf.ClusterOperationInfoArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">operation_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterOperationInfoArgs]]</span> = None<span class="p">,</span>
         <span class="nx">program_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">run_group_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -2792,111 +2989,150 @@ Get an existing Cluster resource's state with the given name, ID, and optional e
         <span class="nx">run_service_instance_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">stop_group_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">tsf_region_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">tsf_region_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">tsf_zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">tsf_zone_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">update_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Cluster</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCluster<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ClusterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Cluster</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCluster<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ClusterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Cluster</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Cluster</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClusterState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Cluster</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClusterState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Cluster</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClusterState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Cluster</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClusterState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCluster</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tsf:Cluster</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tsf_cluster</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClusterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClusterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2904,28 +3140,31 @@ Get an existing Cluster resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClusterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2933,28 +3172,31 @@ Get an existing Cluster resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClusterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2974,8 +3216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustercidr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustercidr_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Cidr</a>
@@ -2983,8 +3224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterdesc_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Desc</a>
@@ -2992,8 +3232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -3001,8 +3240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Cpu</a>
@@ -3010,8 +3248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Mem</a>
@@ -3019,8 +3256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -3028,8 +3264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterremarkname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterremarkname_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Remark<wbr>Name</a>
@@ -3037,8 +3272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -3046,8 +3280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-optional"
+    <dd>cluster status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Cpu</a>
@@ -3055,8 +3288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Mem</a>
@@ -3064,8 +3296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -3073,8 +3304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Cpu</a>
@@ -3082,8 +3312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Mem</a>
@@ -3091,8 +3320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterversion_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -3100,8 +3328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3109,8 +3336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -3118,8 +3344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflagreason_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflagreason_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag<wbr>Reason</a>
@@ -3127,8 +3352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupcount_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Count</a>
@@ -3136,8 +3360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -3145,8 +3368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of cluster machine instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kuberneteapiserver_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kuberneteapiserver_csharp" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Api<wbr>Server</a>
@@ -3154,8 +3376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativesecret_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativesecret_csharp" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Native<wbr>Secret</a>
@@ -3163,8 +3384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativetype_csharp" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Native<wbr>Type</a>
@@ -3172,8 +3392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxclusterservicenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxclusterservicenum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -3181,8 +3400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxnodepodnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxnodepodnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -3190,8 +3408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_normalinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_normalinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Normal<wbr>Instance<wbr>Count</a>
@@ -3199,17 +3416,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationinfos_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusteroperationinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Cluster<wbr>Operation<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusteroperationinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Cluster<wbr>Operation<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-optional"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -3217,8 +3432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -3226,8 +3440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rungroupcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rungroupcount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Group<wbr>Count</a>
@@ -3235,8 +3448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-optional"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Instance<wbr>Count</a>
@@ -3244,8 +3456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runserviceinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runserviceinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -3253,8 +3464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of running service instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_stopgroupcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stopgroupcount_csharp" style="color: inherit; text-decoration: inherit;">Stop<wbr>Group<wbr>Count</a>
@@ -3262,8 +3472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-optional"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3271,17 +3480,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionid_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Id</a>
@@ -3289,8 +3496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionname_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Name</a>
@@ -3298,8 +3504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzoneid_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Id</a>
@@ -3307,8 +3512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzonename_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Name</a>
@@ -3316,8 +3520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -3325,8 +3528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-optional"
+    <dd>Update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3334,8 +3536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3349,8 +3550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustercidr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustercidr_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Cidr</a>
@@ -3358,8 +3558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterdesc_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Desc</a>
@@ -3367,8 +3566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -3376,8 +3574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Cpu</a>
@@ -3385,8 +3582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Mem</a>
@@ -3394,8 +3590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -3403,8 +3598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterremarkname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterremarkname_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Remark<wbr>Name</a>
@@ -3412,8 +3606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -3421,8 +3614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-optional"
+    <dd>cluster status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Cpu</a>
@@ -3430,8 +3622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Mem</a>
@@ -3439,8 +3630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -3448,8 +3638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Cpu</a>
@@ -3457,8 +3646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Mem</a>
@@ -3466,8 +3654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterversion_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -3475,8 +3662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3484,8 +3670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -3493,8 +3678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflagreason_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflagreason_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag<wbr>Reason</a>
@@ -3502,8 +3686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupcount_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Count</a>
@@ -3511,8 +3694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -3520,8 +3702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of cluster machine instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kuberneteapiserver_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kuberneteapiserver_go" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Api<wbr>Server</a>
@@ -3529,8 +3710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativesecret_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativesecret_go" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Native<wbr>Secret</a>
@@ -3538,8 +3718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativetype_go" style="color: inherit; text-decoration: inherit;">Kubernete<wbr>Native<wbr>Type</a>
@@ -3547,8 +3726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxclusterservicenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxclusterservicenum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -3556,8 +3734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxnodepodnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxnodepodnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -3565,8 +3742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_normalinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_normalinstancecount_go" style="color: inherit; text-decoration: inherit;">Normal<wbr>Instance<wbr>Count</a>
@@ -3574,8 +3750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationinfos_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Infos</a>
@@ -3583,8 +3758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfo">[]Cluster<wbr>Operation<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-optional"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -3592,8 +3766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -3601,8 +3774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rungroupcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rungroupcount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Group<wbr>Count</a>
@@ -3610,8 +3782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-optional"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runinstancecount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Instance<wbr>Count</a>
@@ -3619,8 +3790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runserviceinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runserviceinstancecount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -3628,8 +3798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of running service instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_stopgroupcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stopgroupcount_go" style="color: inherit; text-decoration: inherit;">Stop<wbr>Group<wbr>Count</a>
@@ -3637,8 +3806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-optional"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3646,17 +3814,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionid_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Id</a>
@@ -3664,8 +3830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionname_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Name</a>
@@ -3673,8 +3838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzoneid_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Id</a>
@@ -3682,8 +3846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzonename_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Name</a>
@@ -3691,8 +3854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -3700,8 +3862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-optional"
+    <dd>Update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3709,8 +3870,341 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_abnormal_group_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_abnormal_group_count_hcl" style="color: inherit; text-decoration: inherit;">abnormal_<wbr>group_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_cidr_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_desc_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster notes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_limit_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_limit_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_limit_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_limit_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster remaining memory limit.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_remark_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_remark_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>remark_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster remark name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_status_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster status.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_total_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_total_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_total_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_total_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_used_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_used_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_used_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_used_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_version_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_flag_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_flag_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_flag_reason_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_group_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_count_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of deployment groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of cluster machine instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kubernete_api_server_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernete_api_server_hcl" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>api_<wbr>server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>api address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kubernete_native_secret_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernete_native_secret_hcl" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>native_<wbr>secret</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>native secret.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kubernete_native_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernete_native_type_hcl" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>native_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_cluster_service_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_cluster_service_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>cluster_<wbr>service_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_node_pod_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_node_pod_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>node_<wbr>pod_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_normal_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_normal_instance_count_hcl" style="color: inherit; text-decoration: inherit;">normal_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_operation_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_infos_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusteroperationinfo">list(object)</a></span>
+    </dt>
+    <dd>Control information for buttons on the front end.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_program_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Program id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_run_group_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_run_group_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>group_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_run_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_run_instance_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_run_service_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_run_service_instance_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>service_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of running service instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_stop_group_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stop_group_count_hcl" style="color: inherit; text-decoration: inherit;">stop_<wbr>group_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of deployment groups in stop.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tsf_region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsf_region_id_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tsf_region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsf_region_name_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tsf_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsf_zone_id_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tsf_zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsf_zone_name_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3724,8 +4218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustercidr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustercidr_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -3733,8 +4226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterdesc_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -3742,8 +4234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -3751,8 +4242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -3760,8 +4250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -3769,8 +4258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -3778,8 +4266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterremarkname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterremarkname_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Remark<wbr>Name</a>
@@ -3787,8 +4274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -3796,8 +4282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-optional"
+    <dd>cluster status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -3805,8 +4290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -3814,8 +4298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -3823,8 +4306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -3832,8 +4314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -3841,8 +4322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterversion_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -3850,8 +4330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3859,8 +4338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -3868,8 +4346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflagreason_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflagreason_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -3877,8 +4354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupcount_java" style="color: inherit; text-decoration: inherit;">group<wbr>Count</a>
@@ -3886,8 +4362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -3895,8 +4370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of cluster machine instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kuberneteapiserver_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kuberneteapiserver_java" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Api<wbr>Server</a>
@@ -3904,8 +4378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativesecret_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativesecret_java" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Secret</a>
@@ -3913,8 +4386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativetype_java" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Type</a>
@@ -3922,8 +4394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxclusterservicenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxclusterservicenum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -3931,8 +4402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxnodepodnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxnodepodnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -3940,8 +4410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_normalinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_normalinstancecount_java" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -3949,17 +4418,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationinfos_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusteroperationinfo">List&lt;Cluster<wbr>Operation<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusteroperationinfo">List&lt;Cluster<wbr>Operation<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-optional"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -3967,8 +4434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -3976,8 +4442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rungroupcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rungroupcount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Group<wbr>Count</a>
@@ -3985,8 +4450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-optional"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runinstancecount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -3994,8 +4458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runserviceinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runserviceinstancecount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -4003,8 +4466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of running service instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_stopgroupcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stopgroupcount_java" style="color: inherit; text-decoration: inherit;">stop<wbr>Group<wbr>Count</a>
@@ -4012,8 +4474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-optional"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4021,17 +4482,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionid_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -4039,8 +4498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionname_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -4048,8 +4506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzoneid_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -4057,8 +4514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzonename_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -4066,8 +4522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -4075,8 +4530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-optional"
+    <dd>Update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4084,8 +4538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4099,8 +4552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustercidr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustercidr_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -4108,8 +4560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterdesc_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -4117,8 +4568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -4126,8 +4576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -4135,8 +4584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -4144,8 +4592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -4153,8 +4600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterremarkname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterremarkname_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Remark<wbr>Name</a>
@@ -4162,8 +4608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -4171,8 +4616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-optional"
+    <dd>cluster status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -4180,8 +4624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -4189,8 +4632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -4198,8 +4640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -4207,8 +4648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -4216,8 +4656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterversion_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -4225,8 +4664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4234,8 +4672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -4243,8 +4680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflagreason_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflagreason_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -4252,8 +4688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupcount_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Count</a>
@@ -4261,8 +4696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -4270,8 +4704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of cluster machine instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kuberneteapiserver_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kuberneteapiserver_nodejs" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Api<wbr>Server</a>
@@ -4279,8 +4712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativesecret_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativesecret_nodejs" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Secret</a>
@@ -4288,8 +4720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativetype_nodejs" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Type</a>
@@ -4297,8 +4728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxclusterservicenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxclusterservicenum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -4306,8 +4736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxnodepodnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxnodepodnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -4315,8 +4744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_normalinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_normalinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -4324,17 +4752,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationinfos_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusteroperationinfo">Cluster<wbr>Operation<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#clusteroperationinfo">Cluster<wbr>Operation<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-optional"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -4342,8 +4768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -4351,8 +4776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rungroupcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rungroupcount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Group<wbr>Count</a>
@@ -4360,8 +4784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-optional"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -4369,8 +4792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runserviceinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runserviceinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -4378,8 +4800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of running service instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_stopgroupcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stopgroupcount_nodejs" style="color: inherit; text-decoration: inherit;">stop<wbr>Group<wbr>Count</a>
@@ -4387,8 +4808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-optional"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4396,17 +4816,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionid_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -4414,8 +4832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionname_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -4423,8 +4840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzoneid_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -4432,8 +4848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzonename_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -4441,8 +4856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -4450,8 +4864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-optional"
+    <dd>Update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4459,8 +4872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4474,8 +4886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_cidr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_cidr_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>cidr</a>
@@ -4483,8 +4894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_desc_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>desc</a>
@@ -4492,8 +4902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -4501,8 +4910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_limit_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_limit_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>cpu</a>
@@ -4510,8 +4918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_limit_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_limit_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>mem</a>
@@ -4519,8 +4926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -4528,8 +4934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_remark_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_remark_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>remark_<wbr>name</a>
@@ -4537,8 +4942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_status_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
@@ -4546,8 +4950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-optional"
+    <dd>cluster status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_total_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_total_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>cpu</a>
@@ -4555,8 +4958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_total_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_total_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>mem</a>
@@ -4564,8 +4966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -4573,8 +4974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_used_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_used_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>cpu</a>
@@ -4582,8 +4982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_used_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_used_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>mem</a>
@@ -4591,8 +4990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_version_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
@@ -4600,8 +4998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -4609,8 +5006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_delete_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_flag_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
@@ -4618,8 +5014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_delete_flag_reason_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_flag_reason_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag_<wbr>reason</a>
@@ -4627,8 +5022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_group_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_count_python" style="color: inherit; text-decoration: inherit;">group_<wbr>count</a>
@@ -4636,8 +5030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -4645,8 +5038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of cluster machine instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernete_api_server_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernete_api_server_python" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>api_<wbr>server</a>
@@ -4654,8 +5046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernete_native_secret_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernete_native_secret_python" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>native_<wbr>secret</a>
@@ -4663,8 +5054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernete_native_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernete_native_type_python" style="color: inherit; text-decoration: inherit;">kubernete_<wbr>native_<wbr>type</a>
@@ -4672,8 +5062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_cluster_service_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_cluster_service_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>cluster_<wbr>service_<wbr>num</a>
@@ -4681,8 +5070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_node_pod_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_node_pod_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>node_<wbr>pod_<wbr>num</a>
@@ -4690,8 +5078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_normal_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_normal_instance_count_python" style="color: inherit; text-decoration: inherit;">normal_<wbr>instance_<wbr>count</a>
@@ -4699,17 +5086,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operation_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_infos_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusteroperationinfo">Cluster<wbr>Operation<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#clusteroperationinfo">Sequence[Cluster<wbr>Operation<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-optional"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_program_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
@@ -4717,8 +5102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -4726,8 +5110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_run_group_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_run_group_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>group_<wbr>count</a>
@@ -4735,8 +5118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-optional"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_run_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_run_instance_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>instance_<wbr>count</a>
@@ -4744,8 +5126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_run_service_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_run_service_instance_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>service_<wbr>instance_<wbr>count</a>
@@ -4753,8 +5134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of running service instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_stop_group_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stop_group_count_python" style="color: inherit; text-decoration: inherit;">stop_<wbr>group_<wbr>count</a>
@@ -4762,8 +5142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-optional"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -4771,17 +5150,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsf_region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsf_region_id_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>id</a>
@@ -4789,8 +5166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsf_region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsf_region_name_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>name</a>
@@ -4798,8 +5174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsf_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsf_zone_id_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>id</a>
@@ -4807,8 +5182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsf_zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsf_zone_name_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>name</a>
@@ -4816,8 +5190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -4825,8 +5198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-optional"
+    <dd>Update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -4834,8 +5206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4849,8 +5220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Abnormal number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Abnormal number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustercidr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustercidr_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -4858,8 +5228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CIDR assigned to cluster containers and service IP.</p>
-</dd><dt class="property-optional"
+    <dd>CIDR assigned to cluster containers and service IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterdesc_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -4867,8 +5236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster notes.</p>
-</dd><dt class="property-optional"
+    <dd>cluster notes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -4876,8 +5244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -4885,8 +5252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster remaining cpu limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining cpu limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterlimitmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterlimitmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -4894,8 +5260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster remaining memory limit.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster remaining memory limit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -4903,8 +5268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterremarkname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterremarkname_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Remark<wbr>Name</a>
@@ -4912,8 +5276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster remark name.</p>
-</dd><dt class="property-optional"
+    <dd>cluster remark name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -4921,8 +5284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster status.</p>
-</dd><dt class="property-optional"
+    <dd>cluster status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -4930,8 +5292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total CPU of the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>The total CPU of the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertotalmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertotalmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -4939,8 +5300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total memory of the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The total memory of the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -4948,8 +5308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -4957,8 +5316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>CPU used by the cluster, unit: core.</p>
-</dd><dt class="property-optional"
+    <dd>CPU used by the cluster, unit: core.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterusedmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterusedmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -4966,8 +5324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The memory used by the cluster, unit: G.</p>
-</dd><dt class="property-optional"
+    <dd>The memory used by the cluster, unit: G.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterversion_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -4975,8 +5332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster version.</p>
-</dd><dt class="property-optional"
+    <dd>cluster version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4984,8 +5340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflag_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -4993,8 +5348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Delete flag: <code>true</code>: can be deleted; <code>false</code>: can not be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deleteflagreason_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteflagreason_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -5002,8 +5356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reasons why clusters cannot be deleted.</p>
-</dd><dt class="property-optional"
+    <dd>Reasons why clusters cannot be deleted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupcount_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Count</a>
@@ -5011,8 +5364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -5020,8 +5372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of cluster machine instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of cluster machine instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kuberneteapiserver_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kuberneteapiserver_yaml" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Api<wbr>Server</a>
@@ -5029,8 +5380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>api address.</p>
-</dd><dt class="property-optional"
+    <dd>api address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativesecret_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativesecret_yaml" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Secret</a>
@@ -5038,8 +5388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>native secret.</p>
-</dd><dt class="property-optional"
+    <dd>native secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kubernetenativetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kubernetenativetype_yaml" style="color: inherit; text-decoration: inherit;">kubernete<wbr>Native<wbr>Type</a>
@@ -5047,8 +5396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>K</code>:kubeconfig, <code>S</code>:service account.</p>
-</dd><dt class="property-optional"
+    <dd><code>K</code>:kubeconfig, <code>S</code>:service account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxclusterservicenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxclusterservicenum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Cluster<wbr>Service<wbr>Num</a>
@@ -5056,8 +5404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxnodepodnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxnodepodnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Node<wbr>Pod<wbr>Num</a>
@@ -5065,8 +5412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_normalinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_normalinstancecount_yaml" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -5074,8 +5420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of machine instances in the normal state of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The number of machine instances in the normal state of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationinfos_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
@@ -5083,8 +5428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Control information for buttons on the front end.</p>
-</dd><dt class="property-optional"
+    <dd>Control information for buttons on the front end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -5092,8 +5436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The dataset ID to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>The dataset ID to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -5101,8 +5444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rungroupcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rungroupcount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Group<wbr>Count</a>
@@ -5110,8 +5452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of Deployment Groups in progress.</p>
-</dd><dt class="property-optional"
+    <dd>Number of Deployment Groups in progress.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runinstancecount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -5119,8 +5460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of machine instances running in the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Number of machine instances running in the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runserviceinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runserviceinstancecount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -5128,8 +5468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of running service instances.</p>
-</dd><dt class="property-optional"
+    <dd>Number of running service instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_stopgroupcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stopgroupcount_yaml" style="color: inherit; text-decoration: inherit;">stop<wbr>Group<wbr>Count</a>
@@ -5137,8 +5476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of deployment groups in stop.</p>
-</dd><dt class="property-optional"
+    <dd>Number of deployment groups in stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5146,17 +5484,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionid_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -5164,8 +5500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfregionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfregionname_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -5173,8 +5508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TSF region to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TSF region to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzoneid_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -5182,8 +5516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsfzonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsfzonename_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -5191,8 +5524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the TSF availability zone to which the cluster belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the TSF availability zone to which the cluster belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -5200,8 +5532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-optional"
+    <dd>Update time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5209,8 +5540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -5225,7 +5555,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="clusteroperationinfo">Cluster<wbr>Operation<wbr>Info</h4>
+<h4 id="clusteroperationinfo">
+Cluster<wbr>Operation<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Operation<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5237,8 +5569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoaddinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>Add the control information of the instance button.</p>
-</dd><dt class="property-optional"
+    <dd>Add the control information of the instance button.</dd><dt class="property-optional"
             title="Optional">
         <span id="destroys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_csharp" style="color: inherit; text-decoration: inherit;">Destroys</a>
@@ -5246,8 +5577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfodestroy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Cluster<wbr>Operation<wbr>Info<wbr>Destroy&gt;</a></span>
     </dt>
-    <dd><p>Destroy the control information of the machine.</p>
-</dd><dt class="property-optional"
+    <dd>Destroy the control information of the machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="inits_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_csharp" style="color: inherit; text-decoration: inherit;">Inits</a>
@@ -5255,8 +5585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoinit">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Cluster<wbr>Operation<wbr>Info<wbr>Init&gt;</a></span>
     </dt>
-    <dd><p>Initialize the control information of the button.</p>
-</dd></dl>
+    <dd>Initialize the control information of the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5270,8 +5599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoaddinstance">[]Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance</a></span>
     </dt>
-    <dd><p>Add the control information of the instance button.</p>
-</dd><dt class="property-optional"
+    <dd>Add the control information of the instance button.</dd><dt class="property-optional"
             title="Optional">
         <span id="destroys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_go" style="color: inherit; text-decoration: inherit;">Destroys</a>
@@ -5279,8 +5607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfodestroy">[]Cluster<wbr>Operation<wbr>Info<wbr>Destroy</a></span>
     </dt>
-    <dd><p>Destroy the control information of the machine.</p>
-</dd><dt class="property-optional"
+    <dd>Destroy the control information of the machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="inits_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_go" style="color: inherit; text-decoration: inherit;">Inits</a>
@@ -5288,8 +5615,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoinit">[]Cluster<wbr>Operation<wbr>Info<wbr>Init</a></span>
     </dt>
-    <dd><p>Initialize the control information of the button.</p>
-</dd></dl>
+    <dd>Initialize the control information of the button.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="add_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#add_instances_hcl" style="color: inherit; text-decoration: inherit;">add_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusteroperationinfoaddinstance">list(object)</a></span>
+    </dt>
+    <dd>Add the control information of the instance button.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destroys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_hcl" style="color: inherit; text-decoration: inherit;">destroys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusteroperationinfodestroy">list(object)</a></span>
+    </dt>
+    <dd>Destroy the control information of the machine.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="inits_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_hcl" style="color: inherit; text-decoration: inherit;">inits</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusteroperationinfoinit">list(object)</a></span>
+    </dt>
+    <dd>Initialize the control information of the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5303,8 +5659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoaddinstance">List&lt;Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>Add the control information of the instance button.</p>
-</dd><dt class="property-optional"
+    <dd>Add the control information of the instance button.</dd><dt class="property-optional"
             title="Optional">
         <span id="destroys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_java" style="color: inherit; text-decoration: inherit;">destroys</a>
@@ -5312,8 +5667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfodestroy">List&lt;Cluster<wbr>Operation<wbr>Info<wbr>Destroy&gt;</a></span>
     </dt>
-    <dd><p>Destroy the control information of the machine.</p>
-</dd><dt class="property-optional"
+    <dd>Destroy the control information of the machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="inits_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_java" style="color: inherit; text-decoration: inherit;">inits</a>
@@ -5321,8 +5675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoinit">List&lt;Cluster<wbr>Operation<wbr>Info<wbr>Init&gt;</a></span>
     </dt>
-    <dd><p>Initialize the control information of the button.</p>
-</dd></dl>
+    <dd>Initialize the control information of the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5336,8 +5689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoaddinstance">Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>Add the control information of the instance button.</p>
-</dd><dt class="property-optional"
+    <dd>Add the control information of the instance button.</dd><dt class="property-optional"
             title="Optional">
         <span id="destroys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_nodejs" style="color: inherit; text-decoration: inherit;">destroys</a>
@@ -5345,8 +5697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfodestroy">Cluster<wbr>Operation<wbr>Info<wbr>Destroy[]</a></span>
     </dt>
-    <dd><p>Destroy the control information of the machine.</p>
-</dd><dt class="property-optional"
+    <dd>Destroy the control information of the machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="inits_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_nodejs" style="color: inherit; text-decoration: inherit;">inits</a>
@@ -5354,8 +5705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoinit">Cluster<wbr>Operation<wbr>Info<wbr>Init[]</a></span>
     </dt>
-    <dd><p>Initialize the control information of the button.</p>
-</dd></dl>
+    <dd>Initialize the control information of the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5367,28 +5717,25 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#add_instances_python" style="color: inherit; text-decoration: inherit;">add_<wbr>instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusteroperationinfoaddinstance">Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance]</a></span>
+        <span class="property-type"><a href="#clusteroperationinfoaddinstance">Sequence[Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance]</a></span>
     </dt>
-    <dd><p>Add the control information of the instance button.</p>
-</dd><dt class="property-optional"
+    <dd>Add the control information of the instance button.</dd><dt class="property-optional"
             title="Optional">
         <span id="destroys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_python" style="color: inherit; text-decoration: inherit;">destroys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusteroperationinfodestroy">Cluster<wbr>Operation<wbr>Info<wbr>Destroy]</a></span>
+        <span class="property-type"><a href="#clusteroperationinfodestroy">Sequence[Cluster<wbr>Operation<wbr>Info<wbr>Destroy]</a></span>
     </dt>
-    <dd><p>Destroy the control information of the machine.</p>
-</dd><dt class="property-optional"
+    <dd>Destroy the control information of the machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="inits_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_python" style="color: inherit; text-decoration: inherit;">inits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusteroperationinfoinit">Cluster<wbr>Operation<wbr>Info<wbr>Init]</a></span>
+        <span class="property-type"><a href="#clusteroperationinfoinit">Sequence[Cluster<wbr>Operation<wbr>Info<wbr>Init]</a></span>
     </dt>
-    <dd><p>Initialize the control information of the button.</p>
-</dd></dl>
+    <dd>Initialize the control information of the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5402,8 +5749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoaddinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Add the control information of the instance button.</p>
-</dd><dt class="property-optional"
+    <dd>Add the control information of the instance button.</dd><dt class="property-optional"
             title="Optional">
         <span id="destroys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_yaml" style="color: inherit; text-decoration: inherit;">destroys</a>
@@ -5411,8 +5757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfodestroy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Destroy the control information of the machine.</p>
-</dd><dt class="property-optional"
+    <dd>Destroy the control information of the machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="inits_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_yaml" style="color: inherit; text-decoration: inherit;">inits</a>
@@ -5420,12 +5765,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusteroperationinfoinit">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Initialize the control information of the button.</p>
-</dd></dl>
+    <dd>Initialize the control information of the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="clusteroperationinfoaddinstance">Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance</h4>
+<h4 id="clusteroperationinfoaddinstance">
+Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5437,8 +5783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -5446,8 +5791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_csharp" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -5455,8 +5799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5470,8 +5813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -5479,8 +5821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_go" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -5488,8 +5829,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="disabled_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disabled_reason_hcl" style="color: inherit; text-decoration: inherit;">disabled_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for not showing.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Is the button clickable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="supported_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_hcl" style="color: inherit; text-decoration: inherit;">supported</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5503,8 +5873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5512,8 +5881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_java" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5521,8 +5889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5536,8 +5903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5545,8 +5911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_nodejs" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5554,8 +5919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5569,8 +5933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5578,8 +5941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_python" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5587,8 +5949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5602,8 +5963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5611,8 +5971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_yaml" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5620,12 +5979,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="clusteroperationinfodestroy">Cluster<wbr>Operation<wbr>Info<wbr>Destroy</h4>
+<h4 id="clusteroperationinfodestroy">
+Cluster<wbr>Operation<wbr>Info<wbr>Destroy<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Operation<wbr>Info<wbr>Destroy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5637,8 +5997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -5646,8 +6005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_csharp" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -5655,8 +6013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5670,8 +6027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -5679,8 +6035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_go" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -5688,8 +6043,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="disabled_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disabled_reason_hcl" style="color: inherit; text-decoration: inherit;">disabled_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for not showing.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Is the button clickable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="supported_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_hcl" style="color: inherit; text-decoration: inherit;">supported</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5703,8 +6087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5712,8 +6095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_java" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5721,8 +6103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5736,8 +6117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5745,8 +6125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_nodejs" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5754,8 +6133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5769,8 +6147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5778,8 +6155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_python" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5787,8 +6163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5802,8 +6177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5811,8 +6185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_yaml" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5820,12 +6193,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="clusteroperationinfoinit">Cluster<wbr>Operation<wbr>Info<wbr>Init</h4>
+<h4 id="clusteroperationinfoinit">
+Cluster<wbr>Operation<wbr>Info<wbr>Init<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Operation<wbr>Info<wbr>Init<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5837,8 +6211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -5846,8 +6219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_csharp" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -5855,8 +6227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5870,8 +6241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -5879,8 +6249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_go" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -5888,8 +6257,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="disabled_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disabled_reason_hcl" style="color: inherit; text-decoration: inherit;">disabled_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for not showing.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Is the button clickable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="supported_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_hcl" style="color: inherit; text-decoration: inherit;">supported</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5903,8 +6301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5912,8 +6309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_java" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5921,8 +6317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5936,8 +6331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5945,8 +6339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_nodejs" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5954,8 +6347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5969,8 +6361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -5978,8 +6369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_python" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -5987,8 +6377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6002,8 +6391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not showing.</p>
-</dd><dt class="property-optional"
+    <dd>Reason for not showing.</dd><dt class="property-optional"
             title="Optional">
         <span id="enabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -6011,8 +6399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is the button clickable.</p>
-</dd><dt class="property-optional"
+    <dd>Is the button clickable.</dd><dt class="property-optional"
             title="Optional">
         <span id="supported_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_yaml" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -6020,8 +6407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to show the button.</p>
-</dd></dl>
+    <dd>whether to show the button.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6033,7 +6419,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

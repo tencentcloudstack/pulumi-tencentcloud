@@ -2,9 +2,11 @@
 ---
 title: "getWatermarks"
 title_tag: "tencentcloud.Css.getWatermarks"
-meta_desc: "Documentation for the tencentcloud.Css.getWatermarks function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of css watermarks"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of css watermarks
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const watermarks = tencentcloud.Css.getWatermarks({});
+const watermarks = tencentcloud.css.getWatermarks({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-watermarks = tencentcloud.Css.get_watermarks()
+watermarks = tencentcloud.css.get_watermarks()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var watermarks = Tencentcloud.Css.GetWatermarks.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/css"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Css.GetWatermarks(ctx, nil, nil)
+		_, err := css.GetWatermarks(ctx, &css.GetWatermarksArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var watermarks = Tencentcloud.Css.GetWatermarks.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Css.CssFunctions;
 import com.pulumi.tencentcloud.Css.inputs.GetWatermarksArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var watermarks = CssFunctions.getWatermarks();
+        final var watermarks = CssFunctions.getWatermarks(GetWatermarksArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   watermarks:
     fn::invoke:
-      Function: tencentcloud:Css:getWatermarks
-      Arguments: {}
+      function: tencentcloud:Css:getWatermarks
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_css_getwatermarks" "watermarks" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getWatermarks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWatermarksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>></span
+><span class="k">function </span>getWatermarks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWatermarksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>></span
 ><span class="k">
-function </span>getWatermarksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWatermarksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>></span
+function </span>getWatermarksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWatermarksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getWatermarksOutput<span class="p">(</span><span class="nx">args
 ><span class="k">def </span>get_watermarks<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetWatermarksResult</span
 ><span class="k">
-def </span>get_watermarks_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetWatermarksResult]</span
+def </span>get_watermarks_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetWatermarksResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetWatermarksOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetWatermarks </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetWatermarksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWatermarksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWatermarksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWatermarksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetWatermarksOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>> </span>getWatermarks<span class="p">(</span><span class="nx">GetWatermarksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>> </span>getWatermarks<span class="p">(</span><span class="nx">GetWatermarksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetWatermarksResult</a></span>> </span>getWatermarks<span class="p">(</span><span class="nx">GetWatermarksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetWatermarksOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Css/getWatermarks:getWatermarks
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_css_get_watermarks&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="watermarklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwatermarkswatermarklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Outputs.<wbr>Get<wbr>Watermarks<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Watermark information list.</p>
-</dd><dt class="property-"
+    <dd>Watermark information list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="watermarklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -332,11 +405,40 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwatermarkswatermarklist">[]Get<wbr>Watermarks<wbr>Watermark<wbr>List</a></span>
     </dt>
-    <dd><p>Watermark information list.</p>
-</dd><dt class="property-"
+    <dd>Watermark information list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="watermark_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getwatermarkswatermarklist">list(object)</a></span>
+    </dt>
+    <dd>Watermark information list.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -355,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="watermarklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -364,8 +465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwatermarkswatermarklist">List&lt;Get<wbr>Watermarks<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Watermark information list.</p>
-</dd><dt class="property-"
+    <dd>Watermark information list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="watermarklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -396,8 +495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwatermarkswatermarklist">Get<wbr>Watermarks<wbr>Watermark<wbr>List[]</a></span>
     </dt>
-    <dd><p>Watermark information list.</p>
-</dd><dt class="property-"
+    <dd>Watermark information list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +517,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="watermark_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getwatermarkswatermarklist">Get<wbr>Watermarks<wbr>Watermark<wbr>List]</a></span>
+        <span class="property-type"><a href="#getwatermarkswatermarklist">Sequence[Get<wbr>Watermarks<wbr>Watermark<wbr>List]</a></span>
     </dt>
-    <dd><p>Watermark information list.</p>
-</dd><dt class="property-"
+    <dd>Watermark information list.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -451,8 +547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="watermarklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -460,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwatermarkswatermarklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Watermark information list.</p>
-</dd><dt class="property-"
+    <dd>Watermark information list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</p>
-</dd><dt class="property-required"
+    <dd>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</dd><dt class="property-required"
             title="Required">
         <span id="height_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_csharp" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -502,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark height.</p>
-</dd><dt class="property-required"
+    <dd>Watermark height.</dd><dt class="property-required"
             title="Required">
         <span id="pictureurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pictureurl_csharp" style="color: inherit; text-decoration: inherit;">Picture<wbr>Url</a>
@@ -511,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark image URL.</p>
-</dd><dt class="property-required"
+    <dd>Watermark image URL.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -520,8 +611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current status. 0: not used. 1: in use.</p>
-</dd><dt class="property-required"
+    <dd>Current status. 0: not used. 1: in use.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkid_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Id</a>
@@ -529,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermark ID.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkname_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Name</a>
@@ -538,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark name.</p>
-</dd><dt class="property-required"
+    <dd>Watermark name.</dd><dt class="property-required"
             title="Required">
         <span id="width_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_csharp" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -547,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark width.</p>
-</dd><dt class="property-required"
+    <dd>Watermark width.</dd><dt class="property-required"
             title="Required">
         <span id="xposition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xposition_csharp" style="color: inherit; text-decoration: inherit;">XPosition</a>
@@ -556,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Display position: X-axis offset.</p>
-</dd><dt class="property-required"
+    <dd>Display position: X-axis offset.</dd><dt class="property-required"
             title="Required">
         <span id="yposition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#yposition_csharp" style="color: inherit; text-decoration: inherit;">YPosition</a>
@@ -565,8 +651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Display position: Y-axis offset.</p>
-</dd></dl>
+    <dd>Display position: Y-axis offset.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -580,8 +665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</p>
-</dd><dt class="property-required"
+    <dd>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</dd><dt class="property-required"
             title="Required">
         <span id="height_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_go" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -589,8 +673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark height.</p>
-</dd><dt class="property-required"
+    <dd>Watermark height.</dd><dt class="property-required"
             title="Required">
         <span id="pictureurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pictureurl_go" style="color: inherit; text-decoration: inherit;">Picture<wbr>Url</a>
@@ -598,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark image URL.</p>
-</dd><dt class="property-required"
+    <dd>Watermark image URL.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -607,8 +689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current status. 0: not used. 1: in use.</p>
-</dd><dt class="property-required"
+    <dd>Current status. 0: not used. 1: in use.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkid_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Id</a>
@@ -616,8 +697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermark ID.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkname_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Name</a>
@@ -625,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark name.</p>
-</dd><dt class="property-required"
+    <dd>Watermark name.</dd><dt class="property-required"
             title="Required">
         <span id="width_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_go" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -634,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark width.</p>
-</dd><dt class="property-required"
+    <dd>Watermark width.</dd><dt class="property-required"
             title="Required">
         <span id="xposition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xposition_go" style="color: inherit; text-decoration: inherit;">XPosition</a>
@@ -643,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Display position: X-axis offset.</p>
-</dd><dt class="property-required"
+    <dd>Display position: X-axis offset.</dd><dt class="property-required"
             title="Required">
         <span id="yposition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#yposition_go" style="color: inherit; text-decoration: inherit;">YPosition</a>
@@ -652,8 +729,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Display position: Y-axis offset.</p>
-</dd></dl>
+    <dd>Display position: Y-axis offset.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="height_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_hcl" style="color: inherit; text-decoration: inherit;">height</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Watermark height.</dd><dt class="property-required"
+            title="Required">
+        <span id="picture_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#picture_url_hcl" style="color: inherit; text-decoration: inherit;">picture_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermark image URL.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Current status. 0: not used. 1: in use.</dd><dt class="property-required"
+            title="Required">
+        <span id="watermark_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_id_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Watermark ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="watermark_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_name_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermark name.</dd><dt class="property-required"
+            title="Required">
+        <span id="width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_hcl" style="color: inherit; text-decoration: inherit;">width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Watermark width.</dd><dt class="property-required"
+            title="Required">
+        <span id="x_position_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#x_position_hcl" style="color: inherit; text-decoration: inherit;">x_<wbr>position</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Display position: X-axis offset.</dd><dt class="property-required"
+            title="Required">
+        <span id="y_position_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#y_position_hcl" style="color: inherit; text-decoration: inherit;">y_<wbr>position</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Display position: Y-axis offset.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</p>
-</dd><dt class="property-required"
+    <dd>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</dd><dt class="property-required"
             title="Required">
         <span id="height_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_java" style="color: inherit; text-decoration: inherit;">height</a>
@@ -676,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Watermark height.</p>
-</dd><dt class="property-required"
+    <dd>Watermark height.</dd><dt class="property-required"
             title="Required">
         <span id="pictureurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pictureurl_java" style="color: inherit; text-decoration: inherit;">picture<wbr>Url</a>
@@ -685,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark image URL.</p>
-</dd><dt class="property-required"
+    <dd>Watermark image URL.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -694,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Current status. 0: not used. 1: in use.</p>
-</dd><dt class="property-required"
+    <dd>Current status. 0: not used. 1: in use.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkid_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Id</a>
@@ -703,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Watermark ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermark ID.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkname_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Name</a>
@@ -712,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark name.</p>
-</dd><dt class="property-required"
+    <dd>Watermark name.</dd><dt class="property-required"
             title="Required">
         <span id="width_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_java" style="color: inherit; text-decoration: inherit;">width</a>
@@ -721,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Watermark width.</p>
-</dd><dt class="property-required"
+    <dd>Watermark width.</dd><dt class="property-required"
             title="Required">
         <span id="xposition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xposition_java" style="color: inherit; text-decoration: inherit;">x<wbr>Position</a>
@@ -730,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Display position: X-axis offset.</p>
-</dd><dt class="property-required"
+    <dd>Display position: X-axis offset.</dd><dt class="property-required"
             title="Required">
         <span id="yposition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#yposition_java" style="color: inherit; text-decoration: inherit;">y<wbr>Position</a>
@@ -739,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Display position: Y-axis offset.</p>
-</dd></dl>
+    <dd>Display position: Y-axis offset.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -754,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</p>
-</dd><dt class="property-required"
+    <dd>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</dd><dt class="property-required"
             title="Required">
         <span id="height_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_nodejs" style="color: inherit; text-decoration: inherit;">height</a>
@@ -763,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Watermark height.</p>
-</dd><dt class="property-required"
+    <dd>Watermark height.</dd><dt class="property-required"
             title="Required">
         <span id="pictureurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pictureurl_nodejs" style="color: inherit; text-decoration: inherit;">picture<wbr>Url</a>
@@ -772,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark image URL.</p>
-</dd><dt class="property-required"
+    <dd>Watermark image URL.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -781,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Current status. 0: not used. 1: in use.</p>
-</dd><dt class="property-required"
+    <dd>Current status. 0: not used. 1: in use.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkid_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Id</a>
@@ -790,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Watermark ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermark ID.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkname_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Name</a>
@@ -799,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark name.</p>
-</dd><dt class="property-required"
+    <dd>Watermark name.</dd><dt class="property-required"
             title="Required">
         <span id="width_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_nodejs" style="color: inherit; text-decoration: inherit;">width</a>
@@ -808,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Watermark width.</p>
-</dd><dt class="property-required"
+    <dd>Watermark width.</dd><dt class="property-required"
             title="Required">
         <span id="xposition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xposition_nodejs" style="color: inherit; text-decoration: inherit;">x<wbr>Position</a>
@@ -817,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Display position: X-axis offset.</p>
-</dd><dt class="property-required"
+    <dd>Display position: X-axis offset.</dd><dt class="property-required"
             title="Required">
         <span id="yposition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#yposition_nodejs" style="color: inherit; text-decoration: inherit;">y<wbr>Position</a>
@@ -826,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Display position: Y-axis offset.</p>
-</dd></dl>
+    <dd>Display position: Y-axis offset.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -841,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</p>
-</dd><dt class="property-required"
+    <dd>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</dd><dt class="property-required"
             title="Required">
         <span id="height_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_python" style="color: inherit; text-decoration: inherit;">height</a>
@@ -850,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark height.</p>
-</dd><dt class="property-required"
+    <dd>Watermark height.</dd><dt class="property-required"
             title="Required">
         <span id="picture_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#picture_url_python" style="color: inherit; text-decoration: inherit;">picture_<wbr>url</a>
@@ -859,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermark image URL.</p>
-</dd><dt class="property-required"
+    <dd>Watermark image URL.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -868,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current status. 0: not used. 1: in use.</p>
-</dd><dt class="property-required"
+    <dd>Current status. 0: not used. 1: in use.</dd><dt class="property-required"
             title="Required">
         <span id="watermark_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_id_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>id</a>
@@ -877,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermark ID.</dd><dt class="property-required"
             title="Required">
         <span id="watermark_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_name_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>name</a>
@@ -886,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermark name.</p>
-</dd><dt class="property-required"
+    <dd>Watermark name.</dd><dt class="property-required"
             title="Required">
         <span id="width_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_python" style="color: inherit; text-decoration: inherit;">width</a>
@@ -895,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark width.</p>
-</dd><dt class="property-required"
+    <dd>Watermark width.</dd><dt class="property-required"
             title="Required">
         <span id="x_position_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#x_position_python" style="color: inherit; text-decoration: inherit;">x_<wbr>position</a>
@@ -904,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Display position: X-axis offset.</p>
-</dd><dt class="property-required"
+    <dd>Display position: X-axis offset.</dd><dt class="property-required"
             title="Required">
         <span id="y_position_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#y_position_python" style="color: inherit; text-decoration: inherit;">y_<wbr>position</a>
@@ -913,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Display position: Y-axis offset.</p>
-</dd></dl>
+    <dd>Display position: Y-axis offset.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -928,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</p>
-</dd><dt class="property-required"
+    <dd>The time when the watermark was added.Note: Beijing time (UTC+8) is used.</dd><dt class="property-required"
             title="Required">
         <span id="height_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_yaml" style="color: inherit; text-decoration: inherit;">height</a>
@@ -937,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Watermark height.</p>
-</dd><dt class="property-required"
+    <dd>Watermark height.</dd><dt class="property-required"
             title="Required">
         <span id="pictureurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pictureurl_yaml" style="color: inherit; text-decoration: inherit;">picture<wbr>Url</a>
@@ -946,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark image URL.</p>
-</dd><dt class="property-required"
+    <dd>Watermark image URL.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -955,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Current status. 0: not used. 1: in use.</p>
-</dd><dt class="property-required"
+    <dd>Current status. 0: not used. 1: in use.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkid_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Id</a>
@@ -964,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Watermark ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermark ID.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkname_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Name</a>
@@ -973,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark name.</p>
-</dd><dt class="property-required"
+    <dd>Watermark name.</dd><dt class="property-required"
             title="Required">
         <span id="width_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_yaml" style="color: inherit; text-decoration: inherit;">width</a>
@@ -982,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Watermark width.</p>
-</dd><dt class="property-required"
+    <dd>Watermark width.</dd><dt class="property-required"
             title="Required">
         <span id="xposition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xposition_yaml" style="color: inherit; text-decoration: inherit;">x<wbr>Position</a>
@@ -991,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Display position: X-axis offset.</p>
-</dd><dt class="property-required"
+    <dd>Display position: X-axis offset.</dd><dt class="property-required"
             title="Required">
         <span id="yposition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#yposition_yaml" style="color: inherit; text-decoration: inherit;">y<wbr>Position</a>
@@ -1000,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Display position: Y-axis offset.</p>
-</dd></dl>
+    <dd>Display position: Y-axis offset.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1016,7 +1134,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

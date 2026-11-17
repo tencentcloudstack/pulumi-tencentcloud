@@ -2,9 +2,11 @@
 ---
 title: "getReceivers"
 title_tag: "tencentcloud.Ses.getReceivers"
-meta_desc: "Documentation for the tencentcloud.Ses.getReceivers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of ses receivers"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed information of ses receivers
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const receivers = tencentcloud.Ses.getReceivers({
-    keyWord: "keep",
+const receivers = tencentcloud.ses.getReceivers({
     status: 3,
+    keyWord: "keep",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-receivers = tencentcloud.Ses.get_receivers(key_word="keep",
-    status=3)
+receivers = tencentcloud.ses.get_receivers(status=3,
+    key_word="keep")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var receivers = Tencentcloud.Ses.GetReceivers.Invoke(new()
-    {
-        KeyWord = "keep",
-        Status = 3,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ses"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ses.GetReceivers(ctx, &ses.GetReceiversArgs{
-			KeyWord: pulumi.StringRef("keep"),
+		_, err := ses.GetReceivers(ctx, &ses.GetReceiversArgs{
 			Status:  pulumi.IntRef(3),
+			KeyWord: pulumi.StringRef("keep"),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var receivers = Tencentcloud.Ses.GetReceivers.Invoke(new()
+    {
+        Status = 3,
+        KeyWord = "keep",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ses.SesFunctions;
 import com.pulumi.tencentcloud.Ses.inputs.GetReceiversArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var receivers = SesFunctions.getReceivers(GetReceiversArgs.builder()
-            .keyWord("keep")
             .status(3)
+            .keyWord("keep")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   receivers:
     fn::invoke:
-      Function: tencentcloud:Ses:getReceivers
-      Arguments:
-        keyWord: keep
+      function: tencentcloud:Ses:getReceivers
+      arguments:
         status: 3
+        keyWord: keep
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ses_getreceivers" "receivers" {
+  status   = 3
+  key_word = "keep"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListReceivers](https://www.tencentcloud.com/document/api/1084/44866)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getReceivers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetReceiversArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>></span
+><span class="k">function </span>getReceivers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetReceiversArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>></span
 ><span class="k">
-function </span>getReceiversOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetReceiversOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>></span
+function </span>getReceiversOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetReceiversOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getReceiversOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetReceiversResult</span
 ><span class="k">
-def </span>get_receivers_output<span class="p">(</span><span class="nx">key_word</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetReceiversResult]</span
+def </span>get_receivers_output<span class="p">(</span><span class="nx">key_word</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">status</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetReceiversResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetReceiversOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetReceivers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetReceiversArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetReceiversInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetReceiversInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetReceiversInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetReceiversOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>> </span>getReceivers<span class="p">(</span><span class="nx">GetReceiversArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>> </span>getReceivers<span class="p">(</span><span class="nx">GetReceiversArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetReceiversResult</a></span>> </span>getReceivers<span class="p">(</span><span class="nx">GetReceiversArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetReceiversOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ses/getReceivers:getReceivers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ses_get_receivers&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group name keyword for fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Group name keyword for fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group name keyword for fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Group name keyword for fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_word_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group name keyword for fuzzy query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group name keyword for fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Group name keyword for fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group name keyword for fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Group name keyword for fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group name keyword for fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Group name keyword for fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group name keyword for fuzzy query.</p>
-</dd><dt class="property-optional"
+    <dd>Group name keyword for fuzzy query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code>: uploading; <code>3</code>: uploaded). To query groups in all states, do not pass in this parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreceiversdata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ses.<wbr>Outputs.<wbr>Get<wbr>Receivers<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>Data record.</p>
-</dd><dt class="property-"
+    <dd>Data record.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Word</a>
@@ -467,8 +546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreceiversdata">[]Get<wbr>Receivers<wbr>Data</a></span>
     </dt>
-    <dd><p>Data record.</p>
-</dd><dt class="property-"
+    <dd>Data record.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -476,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Word</a>
@@ -506,6 +583,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="datas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_hcl" style="color: inherit; text-decoration: inherit;">datas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getreceiversdata">list(object)</a></span>
+    </dt>
+    <dd>Data record.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="key_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_word_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -515,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreceiversdata">List&lt;Get<wbr>Receivers<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>Data record.</p>
-</dd><dt class="property-"
+    <dd>Data record.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -524,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_java" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
@@ -563,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreceiversdata">Get<wbr>Receivers<wbr>Data[]</a></span>
     </dt>
-    <dd><p>Data record.</p>
-</dd><dt class="property-"
+    <dd>Data record.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -572,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
@@ -609,10 +728,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_python" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getreceiversdata">Get<wbr>Receivers<wbr>Data]</a></span>
+        <span class="property-type"><a href="#getreceiversdata">Sequence[Get<wbr>Receivers<wbr>Data]</a></span>
     </dt>
-    <dd><p>Data record.</p>
-</dd><dt class="property-"
+    <dd>Data record.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -620,8 +738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_word_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_word_python" style="color: inherit; text-decoration: inherit;">key_<wbr>word</a>
@@ -659,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreceiversdata">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Data record.</p>
-</dd><dt class="property-"
+    <dd>Data record.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -668,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keyword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
@@ -717,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of recipient email addresses.</p>
-</dd><dt class="property-required"
+    <dd>Total number of recipient email addresses.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -726,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, such as 2021-09-28 16:40:35.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, such as 2021-09-28 16:40:35.</dd><dt class="property-required"
             title="Required">
         <span id="desc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_csharp" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -735,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</dd><dt class="property-required"
             title="Required">
         <span id="receiverid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiverid_csharp" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Id</a>
@@ -744,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recipient group ID.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group ID.</dd><dt class="property-required"
             title="Required">
         <span id="receiversname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_csharp" style="color: inherit; text-decoration: inherit;">Receivers<wbr>Name</a>
@@ -753,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group name.</dd><dt class="property-required"
             title="Required">
         <span id="receiversstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversstatus_csharp" style="color: inherit; text-decoration: inherit;">Receivers<wbr>Status</a>
@@ -762,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -777,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of recipient email addresses.</p>
-</dd><dt class="property-required"
+    <dd>Total number of recipient email addresses.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -786,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, such as 2021-09-28 16:40:35.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, such as 2021-09-28 16:40:35.</dd><dt class="property-required"
             title="Required">
         <span id="desc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_go" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -795,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</dd><dt class="property-required"
             title="Required">
         <span id="receiverid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiverid_go" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Id</a>
@@ -804,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recipient group ID.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group ID.</dd><dt class="property-required"
             title="Required">
         <span id="receiversname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_go" style="color: inherit; text-decoration: inherit;">Receivers<wbr>Name</a>
@@ -813,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group name.</dd><dt class="property-required"
             title="Required">
         <span id="receiversstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversstatus_go" style="color: inherit; text-decoration: inherit;">Receivers<wbr>Status</a>
@@ -822,8 +926,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_hcl" style="color: inherit; text-decoration: inherit;">count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of recipient email addresses.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time, such as 2021-09-28 16:40:35.</dd><dt class="property-required"
+            title="Required">
+        <span id="desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_hcl" style="color: inherit; text-decoration: inherit;">desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</dd><dt class="property-required"
+            title="Required">
+        <span id="receiver_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_id_hcl" style="color: inherit; text-decoration: inherit;">receiver_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recipient group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="receivers_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_name_hcl" style="color: inherit; text-decoration: inherit;">receivers_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recipient group name.</dd><dt class="property-required"
+            title="Required">
+        <span id="receivers_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_status_hcl" style="color: inherit; text-decoration: inherit;">receivers_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -837,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of recipient email addresses.</p>
-</dd><dt class="property-required"
+    <dd>Total number of recipient email addresses.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -846,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time, such as 2021-09-28 16:40:35.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, such as 2021-09-28 16:40:35.</dd><dt class="property-required"
             title="Required">
         <span id="desc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_java" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -855,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</dd><dt class="property-required"
             title="Required">
         <span id="receiverid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiverid_java" style="color: inherit; text-decoration: inherit;">receiver<wbr>Id</a>
@@ -864,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recipient group ID.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group ID.</dd><dt class="property-required"
             title="Required">
         <span id="receiversname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_java" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -873,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group name.</dd><dt class="property-required"
             title="Required">
         <span id="receiversstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversstatus_java" style="color: inherit; text-decoration: inherit;">receivers<wbr>Status</a>
@@ -882,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -897,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of recipient email addresses.</p>
-</dd><dt class="property-required"
+    <dd>Total number of recipient email addresses.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -906,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time, such as 2021-09-28 16:40:35.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, such as 2021-09-28 16:40:35.</dd><dt class="property-required"
             title="Required">
         <span id="desc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_nodejs" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -915,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</dd><dt class="property-required"
             title="Required">
         <span id="receiverid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiverid_nodejs" style="color: inherit; text-decoration: inherit;">receiver<wbr>Id</a>
@@ -924,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recipient group ID.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group ID.</dd><dt class="property-required"
             title="Required">
         <span id="receiversname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_nodejs" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -933,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group name.</dd><dt class="property-required"
             title="Required">
         <span id="receiversstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversstatus_nodejs" style="color: inherit; text-decoration: inherit;">receivers<wbr>Status</a>
@@ -942,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -957,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of recipient email addresses.</p>
-</dd><dt class="property-required"
+    <dd>Total number of recipient email addresses.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -966,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time, such as 2021-09-28 16:40:35.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, such as 2021-09-28 16:40:35.</dd><dt class="property-required"
             title="Required">
         <span id="desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_python" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -975,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</dd><dt class="property-required"
             title="Required">
         <span id="receiver_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_id_python" style="color: inherit; text-decoration: inherit;">receiver_<wbr>id</a>
@@ -984,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recipient group ID.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group ID.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_name_python" style="color: inherit; text-decoration: inherit;">receivers_<wbr>name</a>
@@ -993,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group name.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_status_python" style="color: inherit; text-decoration: inherit;">receivers_<wbr>status</a>
@@ -1002,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1017,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of recipient email addresses.</p>
-</dd><dt class="property-required"
+    <dd>Total number of recipient email addresses.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1026,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time, such as 2021-09-28 16:40:35.</p>
-</dd><dt class="property-required"
+    <dd>Creation time, such as 2021-09-28 16:40:35.</dd><dt class="property-required"
             title="Required">
         <span id="desc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_yaml" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1035,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group descriptionNote: This field may return <code>null</code>, indicating that no valid value can be found.</dd><dt class="property-required"
             title="Required">
         <span id="receiverid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiverid_yaml" style="color: inherit; text-decoration: inherit;">receiver<wbr>Id</a>
@@ -1044,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recipient group ID.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group ID.</dd><dt class="property-required"
             title="Required">
         <span id="receiversname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversname_yaml" style="color: inherit; text-decoration: inherit;">receivers<wbr>Name</a>
@@ -1053,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recipient group name.</p>
-</dd><dt class="property-required"
+    <dd>Recipient group name.</dd><dt class="property-required"
             title="Required">
         <span id="receiversstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiversstatus_yaml" style="color: inherit; text-decoration: inherit;">receivers<wbr>Status</a>
@@ -1062,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</p>
-</dd></dl>
+    <dd>Group status (<code>1</code>: to be uploaded; <code>2</code> uploading; <code>3</code> uploaded)Note: This field may return <code>null</code>, indicating that no valid value can be found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,7 +1211,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

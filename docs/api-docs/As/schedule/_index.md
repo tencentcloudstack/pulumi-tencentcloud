@@ -2,9 +2,11 @@
 ---
 title: "Schedule"
 title_tag: "tencentcloud.As.Schedule"
-meta_desc: "Documentation for the tencentcloud.As.Schedule resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource for an AS (Auto scaling) schedule."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,34 @@ Provides a resource for an AS (Auto scaling) schedule.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "as",
 });
-const image = tencentcloud.Images.getInstance({
+const image = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
     osName: "TencentOS Server 3.2 (Final)",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
+    name: "subnet-example",
     cidrBlock: "10.0.0.0/16",
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
 });
-const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+const example = new tencentcloud.as.ScalingConfig("example", {
     configurationName: "tf-example",
     imageId: image.then(image => image.images?.[0]?.imageId),
     instanceTypes: [
@@ -48,15 +58,15 @@ const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingCo
         instanceName: "test-ins-name",
     },
 });
-const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+const exampleScalingGroup = new tencentcloud.as.ScalingGroup("example", {
     scalingGroupName: "tf-example",
-    configurationId: exampleScalingConfig.id,
+    configurationId: example.id,
     maxSize: 1,
     minSize: 0,
     vpcId: vpc.id,
     subnetIds: [subnet.id],
 });
-const exampleSchedule = new tencentcloud.as.Schedule("exampleSchedule", {
+const exampleSchedule = new tencentcloud.as.Schedule("example", {
     scalingGroupId: exampleScalingGroup.id,
     scheduleActionName: "tf-as-schedule",
     maxSize: 10,
@@ -67,20 +77,28 @@ const exampleSchedule = new tencentcloud.as.Schedule("exampleSchedule", {
     recurrence: "0 0 * * *",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="as")
-image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+zones = tencentcloud.availability.get_zones_by_product(product="as")
+image = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
     os_name="TencentOS Server 3.2 (Final)")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
+    name="subnet-example",
     cidr_block="10.0.0.0/16",
     availability_zone=zones.zones[0].name)
-example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+example = tencentcloud.as_.ScalingConfig("example",
     configuration_name="tf-example",
     image_id=image.images[0].image_id,
     instance_types=[
@@ -89,17 +107,17 @@ example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
         "SA2.SMALL2",
         "SA2.SMALL4",
     ],
-    instance_name_settings=tencentcloud.as_.ScalingConfigInstanceNameSettingsArgs(
-        instance_name="test-ins-name",
-    ))
-example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+    instance_name_settings={
+        "instance_name": "test-ins-name",
+    })
+example_scaling_group = tencentcloud.as_.ScalingGroup("example",
     scaling_group_name="tf-example",
-    configuration_id=example_scaling_config.id,
+    configuration_id=example.id,
     max_size=1,
     min_size=0,
     vpc_id=vpc.id,
     subnet_ids=[subnet.id])
-example_schedule = tencentcloud.as_.Schedule("exampleSchedule",
+example_schedule = tencentcloud.as_.Schedule("example",
     scaling_group_id=example_scaling_group.id,
     schedule_action_name="tf-as-schedule",
     max_size=10,
@@ -109,11 +127,111 @@ example_schedule = tencentcloud.as_.Schedule("exampleSchedule",
     end_time="2019-12-01T00:00:00+08:00",
     recurrence="0 0 * * *")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "as",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			Name:             pulumi.String("subnet-example"),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(image.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA1.SMALL1"),
+				pulumi.String("SA2.SMALL1"),
+				pulumi.String("SA2.SMALL2"),
+				pulumi.String("SA2.SMALL4"),
+			},
+			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+				InstanceName: pulumi.String("test-ins-name"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
+			ScalingGroupName: pulumi.String("tf-example"),
+			ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
+			MaxSize:          pulumi.Int(1),
+			MinSize:          pulumi.Int(0),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetIds: pulumi.StringArray{
+				subnet2.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = as.NewSchedule(ctx, "example", &as.ScheduleArgs{
+			ScalingGroupId:     exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
+			ScheduleActionName: pulumi.String("tf-as-schedule"),
+			MaxSize:            pulumi.Int(10),
+			MinSize:            pulumi.Int(0),
+			DesiredCapacity:    pulumi.Int(0),
+			StartTime:          pulumi.String("2019-01-01T00:00:00+08:00"),
+			EndTime:            pulumi.String("2019-12-01T00:00:00+08:00"),
+			Recurrence:         pulumi.String("0 0 * * *"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -134,17 +252,19 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
+        Name = "subnet-example",
         CidrBlock = "10.0.0.0/16",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
     });
 
-    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    var example = new Tencentcloud.As.ScalingConfig("example", new()
     {
         ConfigurationName = "tf-example",
         ImageId = image.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
@@ -161,10 +281,10 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new()
+    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("example", new()
     {
         ScalingGroupName = "tf-example",
-        ConfigurationId = exampleScalingConfig.Id,
+        ConfigurationId = example.Id,
         MaxSize = 1,
         MinSize = 0,
         VpcId = vpc.Id,
@@ -174,7 +294,7 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleSchedule = new Tencentcloud.As.Schedule("exampleSchedule", new()
+    var exampleSchedule = new Tencentcloud.As.Schedule("example", new()
     {
         ScalingGroupId = exampleScalingGroup.Id,
         ScheduleActionName = "tf-as-schedule",
@@ -188,95 +308,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "as",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingConfig, err := As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-			ConfigurationName: pulumi.String("tf-example"),
-			ImageId:           pulumi.String(image.Images[0].ImageId),
-			InstanceTypes: pulumi.StringArray{
-				pulumi.String("SA1.SMALL1"),
-				pulumi.String("SA2.SMALL1"),
-				pulumi.String("SA2.SMALL2"),
-				pulumi.String("SA2.SMALL4"),
-			},
-			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
-				InstanceName: pulumi.String("test-ins-name"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingGroup, err := As.NewScalingGroup(ctx, "exampleScalingGroup", &As.ScalingGroupArgs{
-			ScalingGroupName: pulumi.String("tf-example"),
-			ConfigurationId:  exampleScalingConfig.ID(),
-			MaxSize:          pulumi.Int(1),
-			MinSize:          pulumi.Int(0),
-			VpcId:            vpc.ID(),
-			SubnetIds: pulumi.StringArray{
-				subnet.ID(),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = As.NewSchedule(ctx, "exampleSchedule", &As.ScheduleArgs{
-			ScalingGroupId:     exampleScalingGroup.ID(),
-			ScheduleActionName: pulumi.String("tf-as-schedule"),
-			MaxSize:            pulumi.Int(10),
-			MinSize:            pulumi.Int(0),
-			DesiredCapacity:    pulumi.Int(0),
-			StartTime:          pulumi.String("2019-01-01T00:00:00+08:00"),
-			EndTime:            pulumi.String("2019-12-01T00:00:00+08:00"),
-			Recurrence:         pulumi.String("0 0 * * *"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -287,10 +323,6 @@ import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.As.ScalingConfig;
 import com.pulumi.tencentcloud.As.ScalingConfigArgs;
 import com.pulumi.tencentcloud.As.inputs.ScalingConfigInstanceNameSettingsArgs;
@@ -298,8 +330,8 @@ import com.pulumi.tencentcloud.As.ScalingGroup;
 import com.pulumi.tencentcloud.As.ScalingGroupArgs;
 import com.pulumi.tencentcloud.As.Schedule;
 import com.pulumi.tencentcloud.As.ScheduleArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -320,19 +352,21 @@ public class App {
             .osName("TencentOS Server 3.2 (Final)")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
+            .name("subnet-example")
             .cidrBlock("10.0.0.0/16")
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(zones.zones()[0].name())
             .build());
 
-        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()        
+        var example = new ScalingConfig("example", ScalingConfigArgs.builder()
             .configurationName("tf-example")
-            .imageId(image.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
+            .imageId(image.images()[0].imageId())
             .instanceTypes(            
                 "SA1.SMALL1",
                 "SA2.SMALL1",
@@ -343,16 +377,16 @@ public class App {
                 .build())
             .build());
 
-        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()        
+        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()
             .scalingGroupName("tf-example")
-            .configurationId(exampleScalingConfig.id())
+            .configurationId(example.id())
             .maxSize(1)
             .minSize(0)
             .vpcId(vpc.id())
             .subnetIds(subnet.id())
             .build());
 
-        var exampleSchedule = new Schedule("exampleSchedule", ScheduleArgs.builder()        
+        var exampleSchedule = new Schedule("exampleSchedule", ScheduleArgs.builder()
             .scalingGroupId(exampleScalingGroup.id())
             .scheduleActionName("tf-as-schedule")
             .maxSize(10)
@@ -366,19 +400,26 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
+      name: subnet-example
       cidrBlock: 10.0.0.0/16
       availabilityZone: ${zones.zones[0].name}
-  exampleScalingConfig:
+  example:
     type: tencentcloud:As:ScalingConfig
     properties:
       configurationName: tf-example
@@ -392,9 +433,10 @@ resources:
         instanceName: test-ins-name
   exampleScalingGroup:
     type: tencentcloud:As:ScalingGroup
+    name: example
     properties:
       scalingGroupName: tf-example
-      configurationId: ${exampleScalingConfig.id}
+      configurationId: ${example.id}
       maxSize: 1
       minSize: 0
       vpcId: ${vpc.id}
@@ -402,6 +444,7 @@ resources:
         - ${subnet.id}
   exampleSchedule:
     type: tencentcloud:As:Schedule
+    name: example
     properties:
       scalingGroupId: ${exampleScalingGroup.id}
       scheduleActionName: tf-as-schedule
@@ -414,84 +457,168 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: as
   image:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
         osName: TencentOS Server 3.2 (Final)
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "as"
+}
+data "tencentcloud_images_getinstance" "image" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 3.2 (Final)"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  name              = "subnet-example"
+  cidr_block        = "10.0.0.0/16"
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+}
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name = "tf-example"
+  image_id           = data.tencentcloud_images_getinstance.image.images[0].image_id
+  instance_types     = ["SA1.SMALL1", "SA2.SMALL1", "SA2.SMALL2", "SA2.SMALL4"]
+  instance_name_settings = {
+    instance_name = "test-ins-name"
+  }
+}
+resource "tencentcloud_as_scalinggroup" "example" {
+  scaling_group_name = "tf-example"
+  configuration_id   = tencentcloud_as_scalingconfig.example.id
+  max_size           = 1
+  min_size           = 0
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_ids         = [tencentcloud_subnet_instance.subnet.id]
+}
+resource "tencentcloud_as_schedule" "example" {
+  scaling_group_id     = tencentcloud_as_scalinggroup.example.id
+  schedule_action_name = "tf-as-schedule"
+  max_size             = 10
+  min_size             = 0
+  desired_capacity     = 0
+  start_time           = "2019-01-01T00:00:00+08:00"
+  end_time             = "2019-12-01T00:00:00+08:00"
+  recurrence           = "0 0 * * *"
+}
+```
+</pulumi-choosable>
+</div>
 
 
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateScheduledAction](https://www.tencentcloud.com/document/api/377/30996)
+* Read: [DescribeScheduledActions](https://www.tencentcloud.com/document/api/377/30994)
+* Update: [ModifyScheduledAction](https://www.tencentcloud.com/document/api/377/30993)
+* Delete: [DeleteScheduledAction](https://www.tencentcloud.com/document/api/377/30995)
 
 
 ## Create Schedule Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">desired_capacity</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">min_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">recurrence</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">schedule_action_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">disable_update_desired_capacity</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">recurrence</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSchedule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Schedule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSchedule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Schedule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Schedule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScheduleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:Schedule</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:Schedule</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_as_schedule&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -512,7 +639,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -629,11 +756,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Schedule Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -649,8 +784,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -658,8 +792,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-required"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -667,8 +800,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -676,8 +808,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="scheduleactionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduleactionname_csharp" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Action<wbr>Name</a>
@@ -685,8 +816,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-required"
+    <dd>The name of this scaling action.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -694,8 +824,22 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disableupdatedesiredcapacity_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableupdatedesiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -703,8 +847,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_csharp" style="color: inherit; text-decoration: inherit;">Recurrence</a>
@@ -712,8 +855,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd></dl>
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -727,8 +869,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -736,8 +877,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-required"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -745,8 +885,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -754,8 +893,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="scheduleactionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduleactionname_go" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Action<wbr>Name</a>
@@ -763,8 +901,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-required"
+    <dd>The name of this scaling action.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -772,8 +909,22 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disableupdatedesiredcapacity_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableupdatedesiredcapacity_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -781,8 +932,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_go" style="color: inherit; text-decoration: inherit;">Recurrence</a>
@@ -790,8 +940,92 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd></dl>
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-required"
+            title="Required">
+        <span id="schedule_action_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedule_action_name_hcl" style="color: inherit; text-decoration: inherit;">schedule_<wbr>action_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of this scaling action.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_update_desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_update_desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>update_<wbr>desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recurrence_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_hcl" style="color: inherit; text-decoration: inherit;">recurrence</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -805,8 +1039,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -814,8 +1047,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-required"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -823,8 +1055,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -832,8 +1063,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="scheduleactionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduleactionname_java" style="color: inherit; text-decoration: inherit;">schedule<wbr>Action<wbr>Name</a>
@@ -841,8 +1071,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-required"
+    <dd>The name of this scaling action.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -850,8 +1079,22 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disableupdatedesiredcapacity_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableupdatedesiredcapacity_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -859,8 +1102,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_java" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -868,8 +1110,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd></dl>
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -883,8 +1124,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -892,8 +1132,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-required"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -901,8 +1140,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -910,8 +1148,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="scheduleactionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduleactionname_nodejs" style="color: inherit; text-decoration: inherit;">schedule<wbr>Action<wbr>Name</a>
@@ -919,8 +1156,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-required"
+    <dd>The name of this scaling action.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -928,8 +1164,22 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disableupdatedesiredcapacity_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableupdatedesiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -937,8 +1187,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_nodejs" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -946,8 +1195,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd></dl>
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -961,8 +1209,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-required"
             title="Required">
         <span id="max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -970,8 +1217,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-required"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="min_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
@@ -979,8 +1225,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -988,8 +1233,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="schedule_action_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedule_action_name_python" style="color: inherit; text-decoration: inherit;">schedule_<wbr>action_<wbr>name</a>
@@ -997,8 +1241,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-required"
+    <dd>The name of this scaling action.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1006,8 +1249,22 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_update_desired_capacity_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_update_desired_capacity_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>update_<wbr>desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1015,8 +1272,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_python" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -1024,8 +1280,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd></dl>
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1039,8 +1294,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1048,8 +1302,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-required"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1057,8 +1310,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1066,8 +1318,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="scheduleactionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduleactionname_yaml" style="color: inherit; text-decoration: inherit;">schedule<wbr>Action<wbr>Name</a>
@@ -1075,8 +1326,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-required"
+    <dd>The name of this scaling action.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1084,8 +1334,22 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disableupdatedesiredcapacity_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableupdatedesiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1093,8 +1357,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_yaml" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -1102,8 +1365,7 @@ The Schedule resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd></dl>
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1124,8 +1386,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,8 +1400,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1154,8 +1428,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1169,8 +1442,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1184,8 +1456,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1199,8 +1470,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1210,22 +1480,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Schedule resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScheduleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Schedule</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScheduleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Schedule</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">desired_capacity</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">disable_update_desired_capacity</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">min_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -1233,104 +1504,143 @@ Get an existing Schedule resource's state with the given name, ID, and optional 
         <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">schedule_action_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Schedule</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSchedule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScheduleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Schedule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSchedule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScheduleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Schedule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Schedule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScheduleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Schedule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScheduleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Schedule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScheduleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Schedule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScheduleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSchedule</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:As:Schedule</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_as_schedule</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScheduleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScheduleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1338,28 +1648,31 @@ Get an existing Schedule resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScheduleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1367,28 +1680,31 @@ Get an existing Schedule resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScheduleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1408,8 +1724,22 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-optional"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disableupdatedesiredcapacity_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disableupdatedesiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1417,8 +1747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -1426,8 +1755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -1435,8 +1763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recurrence_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recurrence_csharp" style="color: inherit; text-decoration: inherit;">Recurrence</a>
@@ -1444,8 +1771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1453,8 +1779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduleactionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduleactionname_csharp" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Action<wbr>Name</a>
@@ -1462,8 +1787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-optional"
+    <dd>The name of this scaling action.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1471,8 +1795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd></dl>
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1486,8 +1809,22 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-optional"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disableupdatedesiredcapacity_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disableupdatedesiredcapacity_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1495,8 +1832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -1504,8 +1840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -1513,8 +1848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recurrence_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recurrence_go" style="color: inherit; text-decoration: inherit;">Recurrence</a>
@@ -1522,8 +1856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1531,8 +1864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduleactionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduleactionname_go" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Action<wbr>Name</a>
@@ -1540,8 +1872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-optional"
+    <dd>The name of this scaling action.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1549,8 +1880,92 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd></dl>
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disable_update_desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disable_update_desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>update_<wbr>desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recurrence_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recurrence_hcl" style="color: inherit; text-decoration: inherit;">recurrence</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedule_action_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedule_action_name_hcl" style="color: inherit; text-decoration: inherit;">schedule_<wbr>action_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of this scaling action.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1564,8 +1979,22 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-optional"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disableupdatedesiredcapacity_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disableupdatedesiredcapacity_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1573,8 +2002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1582,8 +2010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1591,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recurrence_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recurrence_java" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -1600,8 +2026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1609,8 +2034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduleactionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduleactionname_java" style="color: inherit; text-decoration: inherit;">schedule<wbr>Action<wbr>Name</a>
@@ -1618,8 +2042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-optional"
+    <dd>The name of this scaling action.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1627,8 +2050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd></dl>
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1642,8 +2064,22 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-optional"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disableupdatedesiredcapacity_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disableupdatedesiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1651,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1660,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1669,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recurrence_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recurrence_nodejs" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -1678,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1687,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduleactionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduleactionname_nodejs" style="color: inherit; text-decoration: inherit;">schedule<wbr>Action<wbr>Name</a>
@@ -1696,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-optional"
+    <dd>The name of this scaling action.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1705,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd></dl>
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1720,8 +2149,22 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-optional"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disable_update_desired_capacity_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disable_update_desired_capacity_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>update_<wbr>desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1729,8 +2172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -1738,8 +2180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_min_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
@@ -1747,8 +2188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recurrence_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recurrence_python" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -1756,8 +2196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -1765,8 +2204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedule_action_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedule_action_name_python" style="color: inherit; text-decoration: inherit;">schedule_<wbr>action_<wbr>name</a>
@@ -1774,8 +2212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-optional"
+    <dd>The name of this scaling action.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1783,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd></dl>
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1798,8 +2234,22 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The desired number of CVM instances that should be running in the group.</p>
-</dd><dt class="property-optional"
+    <dd>The desired number of CVM instances that should be running in the group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disableupdatedesiredcapacity_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disableupdatedesiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Update<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:</p>
+<ul>
+<li>When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.</li>
+<li>When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1807,8 +2257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd><dt class="property-optional"
+    <dd>The time for this action to end, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1816,8 +2265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1825,8 +2273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The minimum size for the Auto Scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>The minimum size for the Auto Scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recurrence_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recurrence_yaml" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -1834,8 +2281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1843,8 +2289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduleactionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduleactionname_yaml" style="color: inherit; text-decoration: inherit;">schedule<wbr>Action<wbr>Name</a>
@@ -1852,8 +2297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this scaling action.</p>
-</dd><dt class="property-optional"
+    <dd>The name of this scaling action.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1861,8 +2305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</p>
-</dd></dl>
+    <dd>The time for this action to start, in &quot;YYYY-MM-DDThh:mm:ss+08:00&quot; format (UTC+8).</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1870,6 +2313,22 @@ The following state arguments are supported:
 
 
 
+
+
+
+## Import
+
+
+
+AS schedule can be imported using the id, e.g.
+
+```sh
+$ pulumi import tencentcloud:As/schedule:Schedule example asst-ezsey1r5
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1881,7 +2340,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

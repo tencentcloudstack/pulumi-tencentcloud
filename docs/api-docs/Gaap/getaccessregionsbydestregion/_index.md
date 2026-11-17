@@ -2,9 +2,11 @@
 ---
 title: "getAccessRegionsByDestRegion"
 title_tag: "tencentcloud.Gaap.getAccessRegionsByDestRegion"
-meta_desc: "Documentation for the tencentcloud.Gaap.getAccessRegionsByDestRegion function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap access regions by dest region"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of gaap access regions by des
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const accessRegionsByDestRegion = tencentcloud.Gaap.getAccessRegionsByDestRegion({
+const accessRegionsByDestRegion = tencentcloud.gaap.getAccessRegionsByDestRegion({
     destRegion: "SouthChina",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-access_regions_by_dest_region = tencentcloud.Gaap.get_access_regions_by_dest_region(dest_region="SouthChina")
+access_regions_by_dest_region = tencentcloud.gaap.get_access_regions_by_dest_region(dest_region="SouthChina")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetAccessRegionsByDestRegion(ctx, &gaap.GetAccessRegionsByDestRegionArgs{
+			DestRegion: "SouthChina",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetAccessRegionsByDestRegion(ctx, &gaap.GetAccessRegionsByDestRegionArgs{
-			DestRegion: "SouthChina",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetAccessRegionsByDestRegionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   accessRegionsByDestRegion:
     fn::invoke:
-      Function: tencentcloud:Gaap:getAccessRegionsByDestRegion
-      Arguments:
+      function: tencentcloud:Gaap:getAccessRegionsByDestRegion
+      arguments:
         destRegion: SouthChina
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getaccessregionsbydestregion" "accessRegionsByDestRegion" {
+  dest_region = "SouthChina"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAccessRegionsByDestRegion<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccessRegionsByDestRegionArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>></span
+><span class="k">function </span>getAccessRegionsByDestRegion<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccessRegionsByDestRegionArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>></span
 ><span class="k">
-function </span>getAccessRegionsByDestRegionOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccessRegionsByDestRegionOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>></span
+function </span>getAccessRegionsByDestRegionOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccessRegionsByDestRegionOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -140,11 +197,11 @@ function </span>getAccessRegionsByDestRegionOutput<span class="p">(</span><span 
                                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAccessRegionsByDestRegionResult</span
 ><span class="k">
-def </span>get_access_regions_by_dest_region_output<span class="p">(</span><span class="nx">dest_region</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                      <span class="nx">ip_address_version</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                      <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccessRegionsByDestRegionResult]</span
+def </span>get_access_regions_by_dest_region_output<span class="p">(</span><span class="nx">dest_region</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                      <span class="nx">ip_address_version</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                      <span class="nx">package_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccessRegionsByDestRegionResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -169,7 +226,8 @@ func </span>GetAccessRegionsByDestRegionOutput<span class="p">(</span><span clas
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAccessRegionsByDestRegion </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAccessRegionsByDestRegionArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccessRegionsByDestRegionInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccessRegionsByDestRegionInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccessRegionsByDestRegionInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -178,7 +236,8 @@ func </span>GetAccessRegionsByDestRegionOutput<span class="p">(</span><span clas
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>> </span>getAccessRegionsByDestRegion<span class="p">(</span><span class="nx">GetAccessRegionsByDestRegionArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>> </span>getAccessRegionsByDestRegion<span class="p">(</span><span class="nx">GetAccessRegionsByDestRegionArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccessRegionsByDestRegionResult</a></span>> </span>getAccessRegionsByDestRegion<span class="p">(</span><span class="nx">GetAccessRegionsByDestRegionArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,6 +249,15 @@ func </span>GetAccessRegionsByDestRegionOutput<span class="p">(</span><span clas
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getAccessRegionsByDestRegion:getAccessRegionsByDestRegion
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_access_regions_by_dest_region&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -208,8 +276,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin region.</p>
-</dd><dt class="property-optional"
+    <dd>Origin region.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -217,8 +284,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -226,8 +292,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -235,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -250,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin region.</p>
-</dd><dt class="property-optional"
+    <dd>Origin region.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -259,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -268,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -277,8 +338,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="dest_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dest_region_hcl" style="color: inherit; text-decoration: inherit;">dest_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Origin region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_address_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -292,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin region.</p>
-</dd><dt class="property-optional"
+    <dd>Origin region.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -301,8 +398,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_java" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -310,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -319,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -334,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin region.</p>
-</dd><dt class="property-optional"
+    <dd>Origin region.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -343,8 +436,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -352,8 +444,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -361,8 +452,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -376,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Origin region.</p>
-</dd><dt class="property-optional"
+    <dd>Origin region.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_address_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
@@ -385,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="package_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_python" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
@@ -394,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -403,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -418,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin region.</p>
-</dd><dt class="property-optional"
+    <dd>Origin region.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -427,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -436,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -445,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -469,8 +551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessregionsbydestregionaccessregionset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Access<wbr>Regions<wbr>By<wbr>Dest<wbr>Region<wbr>Access<wbr>Region<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of available acceleration zone information.</p>
-</dd><dt class="property-"
+    <dd>List of available acceleration zone information.</dd><dt class="property-"
             title="">
         <span id="destregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destregion_csharp" style="color: inherit; text-decoration: inherit;">Dest<wbr>Region</a>
@@ -486,8 +567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipaddressversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -525,8 +605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessregionsbydestregionaccessregionset">[]Get<wbr>Access<wbr>Regions<wbr>By<wbr>Dest<wbr>Region<wbr>Access<wbr>Region<wbr>Set</a></span>
     </dt>
-    <dd><p>List of available acceleration zone information.</p>
-</dd><dt class="property-"
+    <dd>List of available acceleration zone information.</dd><dt class="property-"
             title="">
         <span id="destregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destregion_go" style="color: inherit; text-decoration: inherit;">Dest<wbr>Region</a>
@@ -542,8 +621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipaddressversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -572,6 +650,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="access_region_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_sets_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>region_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getaccessregionsbydestregionaccessregionset">list(object)</a></span>
+    </dt>
+    <dd>List of available acceleration zone information.</dd><dt class="property-"
+            title="">
+        <span id="dest_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dest_region_hcl" style="color: inherit; text-decoration: inherit;">dest_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="ip_address_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -581,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessregionsbydestregionaccessregionset">List&lt;Get<wbr>Access<wbr>Regions<wbr>By<wbr>Dest<wbr>Region<wbr>Access<wbr>Region<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of available acceleration zone information.</p>
-</dd><dt class="property-"
+    <dd>List of available acceleration zone information.</dd><dt class="property-"
             title="">
         <span id="destregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destregion_java" style="color: inherit; text-decoration: inherit;">dest<wbr>Region</a>
@@ -598,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipaddressversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -637,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessregionsbydestregionaccessregionset">Get<wbr>Access<wbr>Regions<wbr>By<wbr>Dest<wbr>Region<wbr>Access<wbr>Region<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of available acceleration zone information.</p>
-</dd><dt class="property-"
+    <dd>List of available acceleration zone information.</dd><dt class="property-"
             title="">
         <span id="destregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destregion_nodejs" style="color: inherit; text-decoration: inherit;">dest<wbr>Region</a>
@@ -654,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipaddressversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -691,10 +819,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_sets_python" style="color: inherit; text-decoration: inherit;">access_<wbr>region_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getaccessregionsbydestregionaccessregionset">Get<wbr>Access<wbr>Regions<wbr>By<wbr>Dest<wbr>Region<wbr>Access<wbr>Region<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getaccessregionsbydestregionaccessregionset">Sequence[Get<wbr>Access<wbr>Regions<wbr>By<wbr>Dest<wbr>Region<wbr>Access<wbr>Region<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of available acceleration zone information.</p>
-</dd><dt class="property-"
+    <dd>List of available acceleration zone information.</dd><dt class="property-"
             title="">
         <span id="dest_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dest_region_python" style="color: inherit; text-decoration: inherit;">dest_<wbr>region</a>
@@ -710,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ip_address_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
@@ -749,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccessregionsbydestregionaccessregionset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of available acceleration zone information.</p>
-</dd><dt class="property-"
+    <dd>List of available acceleration zone information.</dd><dt class="property-"
             title="">
         <span id="destregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destregion_yaml" style="color: inherit; text-decoration: inherit;">dest<wbr>Region</a>
@@ -766,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ipaddressversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -815,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Optional bandwidth value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional bandwidth value array.</dd><dt class="property-required"
             title="Required">
         <span id="concurrentlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentlists_csharp" style="color: inherit; text-decoration: inherit;">Concurrent<wbr>Lists</a>
@@ -824,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Optional concurrency value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional concurrency value array.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_csharp" style="color: inherit; text-decoration: inherit;">Feature<wbr>Bitmap</a>
@@ -833,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_csharp" style="color: inherit; text-decoration: inherit;">Idc<wbr>Type</a>
@@ -842,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Area</a>
@@ -851,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Area<wbr>Name</a>
@@ -860,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -869,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region id.</p>
-</dd><dt class="property-required"
+    <dd>Region id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -878,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese or English name of the region.</p>
-</dd></dl>
+    <dd>Chinese or English name of the region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -893,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Optional bandwidth value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional bandwidth value array.</dd><dt class="property-required"
             title="Required">
         <span id="concurrentlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentlists_go" style="color: inherit; text-decoration: inherit;">Concurrent<wbr>Lists</a>
@@ -902,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Optional concurrency value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional concurrency value array.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_go" style="color: inherit; text-decoration: inherit;">Feature<wbr>Bitmap</a>
@@ -911,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_go" style="color: inherit; text-decoration: inherit;">Idc<wbr>Type</a>
@@ -920,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Area</a>
@@ -929,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Area<wbr>Name</a>
@@ -938,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -947,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region id.</p>
-</dd><dt class="property-required"
+    <dd>Region id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -956,8 +1065,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese or English name of the region.</p>
-</dd></dl>
+    <dd>Chinese or English name of the region.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_lists_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Optional bandwidth value array.</dd><dt class="property-required"
+            title="Required">
+        <span id="concurrent_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_lists_hcl" style="color: inherit; text-decoration: inherit;">concurrent_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Optional concurrency value array.</dd><dt class="property-required"
+            title="Required">
+        <span id="feature_bitmap_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#feature_bitmap_hcl" style="color: inherit; text-decoration: inherit;">feature_<wbr>bitmap</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</dd><dt class="property-required"
+            title="Required">
+        <span id="idc_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idc_type_hcl" style="color: inherit; text-decoration: inherit;">idc_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_area_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the computer room.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_area_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_area_name_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>area_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region name of the computer room.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region id.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Chinese or English name of the region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -971,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Optional bandwidth value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional bandwidth value array.</dd><dt class="property-required"
             title="Required">
         <span id="concurrentlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentlists_java" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Lists</a>
@@ -980,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Optional concurrency value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional concurrency value array.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_java" style="color: inherit; text-decoration: inherit;">feature<wbr>Bitmap</a>
@@ -989,8 +1165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_java" style="color: inherit; text-decoration: inherit;">idc<wbr>Type</a>
@@ -998,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_java" style="color: inherit; text-decoration: inherit;">region<wbr>Area</a>
@@ -1007,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_java" style="color: inherit; text-decoration: inherit;">region<wbr>Area<wbr>Name</a>
@@ -1016,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_java" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1025,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region id.</p>
-</dd><dt class="property-required"
+    <dd>Region id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_java" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -1034,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Chinese or English name of the region.</p>
-</dd></dl>
+    <dd>Chinese or English name of the region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1049,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Optional bandwidth value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional bandwidth value array.</dd><dt class="property-required"
             title="Required">
         <span id="concurrentlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentlists_nodejs" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Lists</a>
@@ -1058,8 +1227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Optional concurrency value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional concurrency value array.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_nodejs" style="color: inherit; text-decoration: inherit;">feature<wbr>Bitmap</a>
@@ -1067,8 +1235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_nodejs" style="color: inherit; text-decoration: inherit;">idc<wbr>Type</a>
@@ -1076,8 +1243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Area</a>
@@ -1085,8 +1251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Area<wbr>Name</a>
@@ -1094,8 +1259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1103,8 +1267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region id.</p>
-</dd><dt class="property-required"
+    <dd>Region id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -1112,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese or English name of the region.</p>
-</dd></dl>
+    <dd>Chinese or English name of the region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1127,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Optional bandwidth value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional bandwidth value array.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_lists_python" style="color: inherit; text-decoration: inherit;">concurrent_<wbr>lists</a>
@@ -1136,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Optional concurrency value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional concurrency value array.</dd><dt class="property-required"
             title="Required">
         <span id="feature_bitmap_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#feature_bitmap_python" style="color: inherit; text-decoration: inherit;">feature_<wbr>bitmap</a>
@@ -1145,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</dd><dt class="property-required"
             title="Required">
         <span id="idc_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idc_type_python" style="color: inherit; text-decoration: inherit;">idc_<wbr>type</a>
@@ -1154,8 +1313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="region_area_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_area_python" style="color: inherit; text-decoration: inherit;">region_<wbr>area</a>
@@ -1163,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="region_area_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_area_name_python" style="color: inherit; text-decoration: inherit;">region_<wbr>area_<wbr>name</a>
@@ -1172,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_python" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
@@ -1181,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region id.</p>
-</dd><dt class="property-required"
+    <dd>Region id.</dd><dt class="property-required"
             title="Required">
         <span id="region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_python" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
@@ -1190,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Chinese or English name of the region.</p>
-</dd></dl>
+    <dd>Chinese or English name of the region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1205,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Optional bandwidth value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional bandwidth value array.</dd><dt class="property-required"
             title="Required">
         <span id="concurrentlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentlists_yaml" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Lists</a>
@@ -1214,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Optional concurrency value array.</p>
-</dd><dt class="property-required"
+    <dd>Optional concurrency value array.</dd><dt class="property-required"
             title="Required">
         <span id="featurebitmap_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featurebitmap_yaml" style="color: inherit; text-decoration: inherit;">feature<wbr>Bitmap</a>
@@ -1223,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.</dd><dt class="property-required"
             title="Required">
         <span id="idctype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idctype_yaml" style="color: inherit; text-decoration: inherit;">idc<wbr>Type</a>
@@ -1232,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</p>
-</dd><dt class="property-required"
+    <dd>The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.</dd><dt class="property-required"
             title="Required">
         <span id="regionarea_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionarea_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Area</a>
@@ -1241,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionareaname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionareaname_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Area<wbr>Name</a>
@@ -1250,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region name of the computer room.</p>
-</dd><dt class="property-required"
+    <dd>Region name of the computer room.</dd><dt class="property-required"
             title="Required">
         <span id="regionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -1259,8 +1407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region id.</p>
-</dd><dt class="property-required"
+    <dd>Region id.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -1268,8 +1415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Chinese or English name of the region.</p>
-</dd></dl>
+    <dd>Chinese or English name of the region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1284,7 +1430,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

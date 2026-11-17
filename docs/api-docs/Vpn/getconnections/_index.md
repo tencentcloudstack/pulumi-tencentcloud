@@ -2,9 +2,11 @@
 ---
 title: "getConnections"
 title_tag: "tencentcloud.Vpn.getConnections"
-meta_desc: "Documentation for the tencentcloud.Vpn.getConnections function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of VPN connections."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,78 +18,47 @@ Use this data source to query detailed information of VPN connections.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all vpn connections
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Vpn.getConnections({
-    customerGatewayId: "",
-    id: "vpnx-xfqag",
-    name: "main",
-    tags: {
-        test: "tf",
-    },
-    vpcId: "cgw-xfqag",
-    vpnGatewayId: "vpngw-8ccsnclt",
-});
+const example = tencentcloud.vpn.getConnections({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Vpn.get_connections(customer_gateway_id="",
-    id="vpnx-xfqag",
-    name="main",
-    tags={
-        "test": "tf",
-    },
-    vpc_id="cgw-xfqag",
-    vpn_gateway_id="vpngw-8ccsnclt")
+example = tencentcloud.vpn.get_connections()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Vpn.GetConnections.Invoke(new()
-    {
-        CustomerGatewayId = "",
-        Id = "vpnx-xfqag",
-        Name = "main",
-        Tags = 
-        {
-            { "test", "tf" },
-        },
-        VpcId = "cgw-xfqag",
-        VpnGatewayId = "vpngw-8ccsnclt",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Vpn.GetConnections(ctx, &vpn.GetConnectionsArgs{
-			CustomerGatewayId: pulumi.StringRef(""),
-			Id:                pulumi.StringRef("vpnx-xfqag"),
-			Name:              pulumi.StringRef("main"),
-			Tags: map[string]interface{}{
-				"test": "tf",
-			},
-			VpcId:        pulumi.StringRef("cgw-xfqag"),
-			VpnGatewayId: pulumi.StringRef("vpngw-8ccsnclt"),
-		}, nil)
+		_, err := vpn.GetConnections(ctx, &vpn.GetConnectionsArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -95,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Vpn.GetConnections.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -103,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Vpn.VpnFunctions;
 import com.pulumi.tencentcloud.Vpn.inputs.GetConnectionsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -116,34 +109,239 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var foo = VpnFunctions.getConnections(GetConnectionsArgs.builder()
-            .customerGatewayId("")
-            .id("vpnx-xfqag")
-            .name("main")
-            .tags(Map.of("test", "tf"))
-            .vpcId("cgw-xfqag")
-            .vpnGatewayId("vpngw-8ccsnclt")
+        final var example = VpnFunctions.getConnections(GetConnectionsArgs.builder()
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  foo:
+  example:
     fn::invoke:
-      Function: tencentcloud:Vpn:getConnections
-      Arguments:
-        customerGatewayId:
-        id: vpnx-xfqag
-        name: main
-        tags:
-          test: tf
-        vpcId: cgw-xfqag
-        vpnGatewayId: vpngw-8ccsnclt
+      function: tencentcloud:Vpn:getConnections
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpn_getconnections" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query vpn connections by filters
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.vpn.getConnections({
+    name: "tf-example",
+    id: "vpnx-fq4e4364",
+    vpnGatewayId: "vpngw-8ccsnclt",
+    vpcId: "vpc-6ccw0s5l",
+    customerGatewayId: "cgw-r1g6c8fr",
+    tags: {
+        createBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.vpn.get_connections(name="tf-example",
+    id="vpnx-fq4e4364",
+    vpn_gateway_id="vpngw-8ccsnclt",
+    vpc_id="vpc-6ccw0s5l",
+    customer_gateway_id="cgw-r1g6c8fr",
+    tags={
+        "createBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpn.GetConnections(ctx, &vpn.GetConnectionsArgs{
+			Name:              pulumi.StringRef("tf-example"),
+			Id:                pulumi.StringRef("vpnx-fq4e4364"),
+			VpnGatewayId:      pulumi.StringRef("vpngw-8ccsnclt"),
+			VpcId:             pulumi.StringRef("vpc-6ccw0s5l"),
+			CustomerGatewayId: pulumi.StringRef("cgw-r1g6c8fr"),
+			Tags: map[string]string{
+				"createBy": "Terraform",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Vpn.GetConnections.Invoke(new()
+    {
+        Name = "tf-example",
+        Id = "vpnx-fq4e4364",
+        VpnGatewayId = "vpngw-8ccsnclt",
+        VpcId = "vpc-6ccw0s5l",
+        CustomerGatewayId = "cgw-r1g6c8fr",
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpn.VpnFunctions;
+import com.pulumi.tencentcloud.Vpn.inputs.GetConnectionsArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = VpnFunctions.getConnections(GetConnectionsArgs.builder()
+            .name("tf-example")
+            .id("vpnx-fq4e4364")
+            .vpnGatewayId("vpngw-8ccsnclt")
+            .vpcId("vpc-6ccw0s5l")
+            .customerGatewayId("cgw-r1g6c8fr")
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Vpn:getConnections
+      arguments:
+        name: tf-example
+        id: vpnx-fq4e4364
+        vpnGatewayId: vpngw-8ccsnclt
+        vpcId: vpc-6ccw0s5l
+        customerGatewayId: cgw-r1g6c8fr
+        tags:
+          createBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpn_getconnections" "example" {
+  name                = "tf-example"
+  id                  = "vpnx-fq4e4364"
+  vpn_gateway_id      = "vpngw-8ccsnclt"
+  vpc_id              = "vpc-6ccw0s5l"
+  customer_gateway_id = "cgw-r1g6c8fr"
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
 
 
 
@@ -155,7 +353,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -163,9 +361,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getConnections<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetConnectionsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>></span
+><span class="k">function </span>getConnections<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetConnectionsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>></span
 ><span class="k">
-function </span>getConnectionsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetConnectionsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>></span
+function </span>getConnectionsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetConnectionsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -178,19 +376,19 @@ function </span>getConnectionsOutput<span class="p">(</span><span class="nx">arg
                     <span class="nx">id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                     <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetConnectionsResult</span
 ><span class="k">
-def </span>get_connections_output<span class="p">(</span><span class="nx">customer_gateway_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                    <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetConnectionsResult]</span
+def </span>get_connections_output<span class="p">(</span><span class="nx">customer_gateway_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                    <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetConnectionsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -215,7 +413,8 @@ func </span>GetConnectionsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetConnections </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetConnectionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetConnectionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetConnectionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetConnectionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,7 +423,8 @@ func </span>GetConnectionsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>> </span>getConnections<span class="p">(</span><span class="nx">GetConnectionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>> </span>getConnections<span class="p">(</span><span class="nx">GetConnectionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetConnectionsResult</a></span>> </span>getConnections<span class="p">(</span><span class="nx">GetConnectionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -236,6 +436,15 @@ func </span>GetConnectionsOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Vpn/getConnections:getConnections
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_vpn_get_connections&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -254,8 +463,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -263,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -272,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -281,17 +487,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -299,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpngatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -308,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd></dl>
+    <dd>VPN gateway ID of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -323,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -332,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -341,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -350,17 +549,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -368,8 +565,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpngatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -377,8 +573,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd></dl>
+    <dd>VPN gateway ID of the VPN connection.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="customer_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpn_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPN gateway ID of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -392,8 +649,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -401,8 +657,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -410,8 +665,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +673,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -437,8 +689,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpngatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -446,8 +697,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd></dl>
+    <dd>VPN gateway ID of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -461,8 +711,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -470,8 +719,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -479,8 +727,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -488,17 +735,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -506,8 +751,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpngatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -515,8 +759,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd></dl>
+    <dd>VPN gateway ID of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -530,8 +773,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -539,8 +781,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -548,8 +789,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -557,17 +797,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -575,8 +813,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpn_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
@@ -584,8 +821,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd></dl>
+    <dd>VPN gateway ID of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -599,8 +835,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -608,8 +843,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPN connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -617,8 +851,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -626,17 +859,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -644,8 +875,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpngatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -653,8 +883,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd></dl>
+    <dd>VPN gateway ID of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -677,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Outputs.<wbr>Get<wbr>Connections<wbr>Connection<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated connections.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated connections.</dd><dt class="property-"
             title="">
         <span id="customergatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Gateway<wbr>Id</a>
@@ -686,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the customer gateway.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -695,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -704,8 +930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -719,10 +944,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -730,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpngatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -739,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd></dl>
+    <dd>ID of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -754,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlist">[]Get<wbr>Connections<wbr>Connection<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the dedicated connections.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated connections.</dd><dt class="property-"
             title="">
         <span id="customergatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Gateway<wbr>Id</a>
@@ -763,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the customer gateway.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -772,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -781,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -796,10 +1014,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -807,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpngatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -816,8 +1032,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd></dl>
+    <dd>ID of the VPN gateway.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="connection_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connection_lists_hcl" style="color: inherit; text-decoration: inherit;">connection_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getconnectionsconnectionlist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the dedicated connections.</dd><dt class="property-"
+            title="">
+        <span id="customer_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the customer gateway.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN connection.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPN connection.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-"
+            title="">
+        <span id="vpn_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -831,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlist">List&lt;Get<wbr>Connections<wbr>Connection<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated connections.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated connections.</dd><dt class="property-"
             title="">
         <span id="customergatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -840,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the customer gateway.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -849,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -858,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -873,10 +1154,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -884,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpngatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -893,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd></dl>
+    <dd>ID of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -908,8 +1186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlist">Get<wbr>Connections<wbr>Connection<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated connections.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated connections.</dd><dt class="property-"
             title="">
         <span id="customergatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -917,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the customer gateway.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -926,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -935,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -950,10 +1224,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -961,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpngatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -970,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd></dl>
+    <dd>ID of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,10 +1254,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connection_lists_python" style="color: inherit; text-decoration: inherit;">connection_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getconnectionsconnectionlist">Get<wbr>Connections<wbr>Connection<wbr>List]</a></span>
+        <span class="property-type"><a href="#getconnectionsconnectionlist">Sequence[Get<wbr>Connections<wbr>Connection<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the dedicated connections.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated connections.</dd><dt class="property-"
             title="">
         <span id="customer_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_gateway_id_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>gateway_<wbr>id</a>
@@ -994,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the customer gateway.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1003,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1012,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1027,10 +1294,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1038,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpn_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
@@ -1047,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd></dl>
+    <dd>ID of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1062,8 +1326,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the dedicated connections.</p>
-</dd><dt class="property-"
+    <dd>Information list of the dedicated connections.</dd><dt class="property-"
             title="">
         <span id="customergatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -1071,8 +1334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the customer gateway.</p>
-</dd><dt class="property-"
+    <dd>ID of the customer gateway.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1080,8 +1342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1089,8 +1350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection.</p>
-</dd><dt class="property-"
+    <dd>Name of the VPN connection.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1104,10 +1364,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-"
             title="">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1115,8 +1374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-"
+    <dd>ID of the VPC.</dd><dt class="property-"
             title="">
         <span id="vpngatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -1124,8 +1382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN gateway.</p>
-</dd></dl>
+    <dd>ID of the VPN gateway.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1149,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="customergatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_csharp" style="color: inherit; text-decoration: inherit;">Customer<wbr>Gateway<wbr>Id</a>
@@ -1158,8 +1414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="encryptproto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_csharp" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Proto</a>
@@ -1167,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1176,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="ikedhgroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -1185,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>DH group name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeexchangemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Exchange<wbr>Mode</a>
@@ -1194,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Exchange mode of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocaladdress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Address</a>
@@ -1203,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalfqdnname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -1212,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalidentity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Identity</a>
@@ -1221,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoauthenalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -1230,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto authenticate algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoencryalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -1239,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto encrypt algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Address</a>
@@ -1248,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremotefqdnname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -1257,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteidentity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Identity</a>
@@ -1266,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikesalifetimeseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1275,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ikeversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_csharp" style="color: inherit; text-decoration: inherit;">Ike<wbr>Version</a>
@@ -1284,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Version of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecencryptalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -1293,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecintegrityalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -1302,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Integrity algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecpfsdhgroup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -1311,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group name of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>PFS DH group name of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimeseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1320,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimetraffic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_csharp" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -1329,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1338,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="netstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Status</a>
@@ -1347,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Net status of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_csharp" style="color: inherit; text-decoration: inherit;">Pre<wbr>Share<wbr>Key</a>
@@ -1356,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -1365,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Route type of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="securitygrouppolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Policies</a>
@@ -1374,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlistsecuritygrouppolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Get<wbr>Connections<wbr>Connection<wbr>List<wbr>Security<wbr>Group<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Security group policy of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Security group policy of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1383,17 +1614,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1401,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpngatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -1410,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>VPN gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="vpnproto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Proto</a>
@@ -1419,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1434,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="customergatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_go" style="color: inherit; text-decoration: inherit;">Customer<wbr>Gateway<wbr>Id</a>
@@ -1443,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="encryptproto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_go" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Proto</a>
@@ -1452,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1461,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="ikedhgroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -1470,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>DH group name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeexchangemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Exchange<wbr>Mode</a>
@@ -1479,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Exchange mode of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocaladdress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Address</a>
@@ -1488,8 +1708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalfqdnname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -1497,8 +1716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalidentity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Local<wbr>Identity</a>
@@ -1506,8 +1724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoauthenalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -1515,8 +1732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto authenticate algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoencryalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -1524,8 +1740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto encrypt algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Address</a>
@@ -1533,8 +1748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremotefqdnname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -1542,8 +1756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteidentity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Remote<wbr>Identity</a>
@@ -1551,8 +1764,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikesalifetimeseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1560,8 +1772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ikeversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_go" style="color: inherit; text-decoration: inherit;">Ike<wbr>Version</a>
@@ -1569,8 +1780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Version of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecencryptalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -1578,8 +1788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecintegrityalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -1587,8 +1796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Integrity algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecpfsdhgroup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -1596,8 +1804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group name of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>PFS DH group name of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimeseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1605,8 +1812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimetraffic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_go" style="color: inherit; text-decoration: inherit;">Ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -1614,8 +1820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1623,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="netstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Status</a>
@@ -1632,8 +1836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Net status of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_go" style="color: inherit; text-decoration: inherit;">Pre<wbr>Share<wbr>Key</a>
@@ -1641,8 +1844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Type</a>
@@ -1650,8 +1852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Route type of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="securitygrouppolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Policies</a>
@@ -1659,8 +1860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlistsecuritygrouppolicy">[]Get<wbr>Connections<wbr>Connection<wbr>List<wbr>Security<wbr>Group<wbr>Policy</a></span>
     </dt>
-    <dd><p>Security group policy of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Security group policy of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1668,17 +1868,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1686,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpngatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -1695,8 +1892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>VPN gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="vpnproto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Proto</a>
@@ -1704,8 +1900,261 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="customer_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">customer_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="encrypt_proto_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_proto_hcl" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>proto</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_dh_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_dh_group_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>dh_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>DH group name of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_exchange_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_exchange_mode_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>exchange_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exchange mode of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_local_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_address_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local address of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_local_fqdn_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_fqdn_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>fqdn_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_local_identity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_identity_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local identity of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_proto_authen_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_proto_authen_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>authen_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proto authenticate algorithm of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_proto_encry_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_proto_encry_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>encry_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proto encrypt algorithm of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_remote_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_address_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote address of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_remote_fqdn_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_fqdn_name_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>fqdn_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_remote_identity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_identity_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>identity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote identity of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_sa_lifetime_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_sa_lifetime_seconds_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ike_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_version_hcl" style="color: inherit; text-decoration: inherit;">ike_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the IKE operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipsec_encrypt_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_encrypt_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>encrypt_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Encrypt algorithm of the IPSEC operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipsec_integrity_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_integrity_algorithm_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>integrity_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Integrity algorithm of the IPSEC operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipsec_pfs_dh_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_pfs_dh_group_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>pfs_<wbr>dh_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>PFS DH group name of the IPSEC operation specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipsec_sa_lifetime_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_sa_lifetime_seconds_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipsec_sa_lifetime_traffic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_sa_lifetime_traffic_hcl" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>traffic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-required"
+            title="Required">
+        <span id="net_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_status_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Net status of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="pre_share_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_share_key_hcl" style="color: inherit; text-decoration: inherit;">pre_<wbr>share_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="route_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_type_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Route type of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_group_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_policies_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getconnectionsconnectionlistsecuritygrouppolicy">list(object)</a></span>
+    </dt>
+    <dd>Security group policy of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpn_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPN gateway ID of the VPN connection.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpn_proto_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_proto_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>proto</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1719,8 +2168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="customergatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_java" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -1728,8 +2176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="encryptproto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_java" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -1737,8 +2184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1746,8 +2192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="ikedhgroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -1755,8 +2200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>DH group name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeexchangemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -1764,8 +2208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Exchange mode of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocaladdress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -1773,8 +2216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalfqdnname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -1782,8 +2224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalidentity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -1791,8 +2232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoauthenalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -1800,8 +2240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto authenticate algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoencryalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -1809,8 +2248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto encrypt algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -1818,8 +2256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremotefqdnname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -1827,8 +2264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteidentity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -1836,8 +2272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikesalifetimeseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1845,8 +2280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ikeversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_java" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -1854,8 +2288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Version of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecencryptalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -1863,8 +2296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecintegrityalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -1872,8 +2304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Integrity algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecpfsdhgroup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -1881,8 +2312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PFS DH group name of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>PFS DH group name of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimeseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -1890,8 +2320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimetraffic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_java" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -1899,8 +2328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1908,8 +2336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="netstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_java" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -1917,8 +2344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Net status of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Net status of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_java" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -1926,8 +2352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_java" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -1935,8 +2360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Route type of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Route type of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="securitygrouppolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
@@ -1944,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlistsecuritygrouppolicy">List&lt;Get<wbr>Connections<wbr>Connection<wbr>List<wbr>Security<wbr>Group<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Security group policy of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Security group policy of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1953,17 +2376,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1971,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpngatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -1980,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>VPN gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="vpnproto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -1989,8 +2408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2004,8 +2422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="customergatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_nodejs" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -2013,8 +2430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="encryptproto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_nodejs" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -2022,8 +2438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2031,8 +2446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="ikedhgroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -2040,8 +2454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>DH group name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeexchangemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -2049,8 +2462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Exchange mode of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocaladdress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -2058,8 +2470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalfqdnname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -2067,8 +2478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalidentity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -2076,8 +2486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoauthenalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -2085,8 +2494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto authenticate algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoencryalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -2094,8 +2502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto encrypt algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -2103,8 +2510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremotefqdnname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -2112,8 +2518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteidentity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -2121,8 +2526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikesalifetimeseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -2130,8 +2534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ikeversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_nodejs" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -2139,8 +2542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Version of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecencryptalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -2148,8 +2550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecintegrityalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -2157,8 +2558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Integrity algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecpfsdhgroup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -2166,8 +2566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PFS DH group name of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>PFS DH group name of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimeseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -2175,8 +2574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimetraffic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_nodejs" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -2184,8 +2582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2193,8 +2590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="netstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -2202,8 +2598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Net status of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Net status of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_nodejs" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -2211,8 +2606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -2220,8 +2614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Route type of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Route type of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="securitygrouppolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
@@ -2229,8 +2622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlistsecuritygrouppolicy">Get<wbr>Connections<wbr>Connection<wbr>List<wbr>Security<wbr>Group<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>Security group policy of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Security group policy of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2238,17 +2630,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2256,8 +2646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpngatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -2265,8 +2654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>VPN gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="vpnproto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -2274,8 +2662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2289,8 +2676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="customer_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customer_gateway_id_python" style="color: inherit; text-decoration: inherit;">customer_<wbr>gateway_<wbr>id</a>
@@ -2298,8 +2684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_proto_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_proto_python" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>proto</a>
@@ -2307,8 +2692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2316,8 +2700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="ike_dh_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_dh_group_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>dh_<wbr>group_<wbr>name</a>
@@ -2325,8 +2708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>DH group name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_exchange_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_exchange_mode_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>exchange_<wbr>mode</a>
@@ -2334,8 +2716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Exchange mode of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_local_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_address_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>address</a>
@@ -2343,8 +2724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_local_fqdn_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_fqdn_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>fqdn_<wbr>name</a>
@@ -2352,8 +2732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_local_identity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_local_identity_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>local_<wbr>identity</a>
@@ -2361,8 +2740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_proto_authen_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_proto_authen_algorithm_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>authen_<wbr>algorithm</a>
@@ -2370,8 +2748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto authenticate algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_proto_encry_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_proto_encry_algorithm_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>proto_<wbr>encry_<wbr>algorithm</a>
@@ -2379,8 +2756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto encrypt algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_remote_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_address_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>address</a>
@@ -2388,8 +2764,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_remote_fqdn_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_fqdn_name_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>fqdn_<wbr>name</a>
@@ -2397,8 +2772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_remote_identity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_remote_identity_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>remote_<wbr>identity</a>
@@ -2406,8 +2780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ike_sa_lifetime_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_sa_lifetime_seconds_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
@@ -2415,8 +2788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ike_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ike_version_python" style="color: inherit; text-decoration: inherit;">ike_<wbr>version</a>
@@ -2424,8 +2796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Version of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsec_encrypt_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_encrypt_algorithm_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>encrypt_<wbr>algorithm</a>
@@ -2433,8 +2804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsec_integrity_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_integrity_algorithm_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>integrity_<wbr>algorithm</a>
@@ -2442,8 +2812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Integrity algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsec_pfs_dh_group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_pfs_dh_group_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>pfs_<wbr>dh_<wbr>group</a>
@@ -2451,8 +2820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>PFS DH group name of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>PFS DH group name of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsec_sa_lifetime_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_sa_lifetime_seconds_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>seconds</a>
@@ -2460,8 +2828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipsec_sa_lifetime_traffic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsec_sa_lifetime_traffic_python" style="color: inherit; text-decoration: inherit;">ipsec_<wbr>sa_<wbr>lifetime_<wbr>traffic</a>
@@ -2469,8 +2836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2478,8 +2844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="net_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_status_python" style="color: inherit; text-decoration: inherit;">net_<wbr>status</a>
@@ -2487,8 +2852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Net status of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Net status of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="pre_share_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_share_key_python" style="color: inherit; text-decoration: inherit;">pre_<wbr>share_<wbr>key</a>
@@ -2496,8 +2860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="route_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_type_python" style="color: inherit; text-decoration: inherit;">route_<wbr>type</a>
@@ -2505,17 +2868,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Route type of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Route type of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="security_group_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_policies_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>policies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getconnectionsconnectionlistsecuritygrouppolicy">Get<wbr>Connections<wbr>Connection<wbr>List<wbr>Security<wbr>Group<wbr>Policy]</a></span>
+        <span class="property-type"><a href="#getconnectionsconnectionlistsecuritygrouppolicy">Sequence[Get<wbr>Connections<wbr>Connection<wbr>List<wbr>Security<wbr>Group<wbr>Policy]</a></span>
     </dt>
-    <dd><p>Security group policy of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Security group policy of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2523,17 +2884,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2541,8 +2900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpn_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
@@ -2550,8 +2908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>VPN gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="vpn_proto_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_proto_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>proto</a>
@@ -2559,8 +2916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2574,8 +2930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="customergatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customergatewayid_yaml" style="color: inherit; text-decoration: inherit;">customer<wbr>Gateway<wbr>Id</a>
@@ -2583,8 +2938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Customer gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Customer gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="encryptproto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptproto_yaml" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Proto</a>
@@ -2592,8 +2946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt proto of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt proto of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2601,8 +2954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="ikedhgroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikedhgroupname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Dh<wbr>Group<wbr>Name</a>
@@ -2610,8 +2962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>DH group name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>DH group name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeexchangemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeexchangemode_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Exchange<wbr>Mode</a>
@@ -2619,8 +2970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exchange mode of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Exchange mode of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocaladdress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocaladdress_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Address</a>
@@ -2628,8 +2978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalfqdnname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalfqdnname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Fqdn<wbr>Name</a>
@@ -2637,8 +2986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikelocalidentity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikelocalidentity_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Local<wbr>Identity</a>
@@ -2646,8 +2994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Local identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoauthenalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoauthenalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Authen<wbr>Algorithm</a>
@@ -2655,8 +3002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto authenticate algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto authenticate algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeprotoencryalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeprotoencryalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Proto<wbr>Encry<wbr>Algorithm</a>
@@ -2664,8 +3010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proto encrypt algorithm of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Proto encrypt algorithm of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteaddress_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Address</a>
@@ -2673,8 +3018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote address of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote address of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremotefqdnname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremotefqdnname_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Fqdn<wbr>Name</a>
@@ -2682,8 +3026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote FQDN name of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote FQDN name of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikeremoteidentity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeremoteidentity_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Remote<wbr>Identity</a>
@@ -2691,8 +3034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote identity of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Remote identity of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ikesalifetimeseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikesalifetimeseconds_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -2700,8 +3042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime of the IKE operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IKE operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ikeversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ikeversion_yaml" style="color: inherit; text-decoration: inherit;">ike<wbr>Version</a>
@@ -2709,8 +3050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the IKE operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Version of the IKE operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecencryptalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecencryptalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Encrypt<wbr>Algorithm</a>
@@ -2718,8 +3058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encrypt algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Encrypt algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecintegrityalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecintegrityalgorithm_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Integrity<wbr>Algorithm</a>
@@ -2727,8 +3066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Integrity algorithm of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>Integrity algorithm of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecpfsdhgroup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecpfsdhgroup_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Pfs<wbr>Dh<wbr>Group</a>
@@ -2736,8 +3074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PFS DH group name of the IPSEC operation specification.</p>
-</dd><dt class="property-required"
+    <dd>PFS DH group name of the IPSEC operation specification.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimeseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimeseconds_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Seconds</a>
@@ -2745,8 +3082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime of the IPSEC operation specification, unit is <code>second</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ipsecsalifetimetraffic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipsecsalifetimetraffic_yaml" style="color: inherit; text-decoration: inherit;">ipsec<wbr>Sa<wbr>Lifetime<wbr>Traffic</a>
@@ -2754,8 +3090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</p>
-</dd><dt class="property-required"
+    <dd>SA lifetime traffic of the IPSEC operation specification, unit is <code>KB</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2763,8 +3098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the VPN connection. The length of character is limited to 1-60.</p>
-</dd><dt class="property-required"
+    <dd>Name of the VPN connection. The length of character is limited to 1-60.</dd><dt class="property-required"
             title="Required">
         <span id="netstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netstatus_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Status</a>
@@ -2772,8 +3106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Net status of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Net status of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="presharekey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#presharekey_yaml" style="color: inherit; text-decoration: inherit;">pre<wbr>Share<wbr>Key</a>
@@ -2781,8 +3114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pre-shared key of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Pre-shared key of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="routetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetype_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Type</a>
@@ -2790,8 +3122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Route type of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Route type of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="securitygrouppolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygrouppolicies_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Policies</a>
@@ -2799,8 +3130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getconnectionsconnectionlistsecuritygrouppolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Security group policy of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>Security group policy of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2808,17 +3138,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>State of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the VPN connection to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the VPN connection to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2826,8 +3154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpngatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -2835,8 +3162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPN gateway ID of the VPN connection.</p>
-</dd><dt class="property-required"
+    <dd>VPN gateway ID of the VPN connection.</dd><dt class="property-required"
             title="Required">
         <span id="vpnproto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpnproto_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Proto</a>
@@ -2844,8 +3170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpn proto of the VPN connection.</p>
-</dd></dl>
+    <dd>Vpn proto of the VPN connection.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2863,8 +3188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_csharp" style="color: inherit; text-decoration: inherit;">Remote<wbr>Cidr<wbr>Blocks</a>
@@ -2872,8 +3196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2887,8 +3210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_go" style="color: inherit; text-decoration: inherit;">Remote<wbr>Cidr<wbr>Blocks</a>
@@ -2896,8 +3218,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="local_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local cidr block.</dd><dt class="property-required"
+            title="Required">
+        <span id="remote_cidr_blocks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_cidr_blocks_hcl" style="color: inherit; text-decoration: inherit;">remote_<wbr>cidr_<wbr>blocks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2911,8 +3254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_java" style="color: inherit; text-decoration: inherit;">remote<wbr>Cidr<wbr>Blocks</a>
@@ -2920,8 +3262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2935,8 +3276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_nodejs" style="color: inherit; text-decoration: inherit;">remote<wbr>Cidr<wbr>Blocks</a>
@@ -2944,8 +3284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2959,8 +3298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remote_cidr_blocks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_cidr_blocks_python" style="color: inherit; text-decoration: inherit;">remote_<wbr>cidr_<wbr>blocks</a>
@@ -2968,8 +3306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2983,8 +3320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local cidr block.</p>
-</dd><dt class="property-required"
+    <dd>Local cidr block.</dd><dt class="property-required"
             title="Required">
         <span id="remotecidrblocks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotecidrblocks_yaml" style="color: inherit; text-decoration: inherit;">remote<wbr>Cidr<wbr>Blocks</a>
@@ -2992,8 +3328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Remote cidr block list.</p>
-</dd></dl>
+    <dd>Remote cidr block list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3008,7 +3343,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getGroupMemberships"
 title_tag: "tencentcloud.Cam.getGroupMemberships"
-meta_desc: "Documentation for the tencentcloud.Cam.getGroupMemberships function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CAM group memberships"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,48 +18,48 @@ Use this data source to query detailed information of CAM group memberships
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cam.getGroupMemberships({
-    groupId: tencentcloud_cam_group.foo.id,
+const foo = tencentcloud.cam.getGroupMemberships({
+    groupId: fooTencentcloudCamGroup.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cam.get_group_memberships(group_id=tencentcloud_cam_group["foo"]["id"])
+foo = tencentcloud.cam.get_group_memberships(group_id=foo_tencentcloud_cam_group["id"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cam.GetGroupMemberships.Invoke(new()
-    {
-        GroupId = tencentcloud_cam_group.Foo.Id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cam.GetGroupMemberships(ctx, &cam.GetGroupMembershipsArgs{
-			GroupId: pulumi.StringRef(tencentcloud_cam_group.Foo.Id),
+		_, err := cam.GetGroupMemberships(ctx, &cam.GetGroupMembershipsArgs{
+			GroupId: pulumi.StringRef(fooTencentcloudCamGroup.Id),
 		}, nil)
 		if err != nil {
 			return err
@@ -66,6 +68,31 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Cam.GetGroupMemberships.Invoke(new()
+    {
+        GroupId = fooTencentcloudCamGroup.Id,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cam.CamFunctions;
 import com.pulumi.tencentcloud.Cam.inputs.GetGroupMembershipsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -88,22 +115,52 @@ public class App {
 
     public static void stack(Context ctx) {
         final var foo = CamFunctions.getGroupMemberships(GetGroupMembershipsArgs.builder()
-            .groupId(tencentcloud_cam_group.foo().id())
+            .groupId(fooTencentcloudCamGroup.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Cam:getGroupMemberships
-      Arguments:
-        groupId: ${tencentcloud_cam_group.foo.id}
+      function: tencentcloud:Cam:getGroupMemberships
+      arguments:
+        groupId: ${fooTencentcloudCamGroup.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cam_getgroupmemberships" "foo" {
+  group_id = fooTencentcloudCamGroup.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getGroupMemberships<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupMembershipsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>></span
+><span class="k">function </span>getGroupMemberships<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupMembershipsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>></span
 ><span class="k">
-function </span>getGroupMembershipsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupMembershipsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>></span
+function </span>getGroupMembershipsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupMembershipsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getGroupMembershipsOutput<span class="p">(</span><span class="nx
                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetGroupMembershipsResult</span
 ><span class="k">
-def </span>get_group_memberships_output<span class="p">(</span><span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGroupMembershipsResult]</span
+def </span>get_group_memberships_output<span class="p">(</span><span class="nx">group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGroupMembershipsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetGroupMembershipsOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetGroupMemberships </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetGroupMembershipsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupMembershipsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupMembershipsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupMembershipsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetGroupMembershipsOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>> </span>getGroupMemberships<span class="p">(</span><span class="nx">GetGroupMembershipsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>> </span>getGroupMemberships<span class="p">(</span><span class="nx">GetGroupMembershipsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGroupMembershipsResult</a></span>> </span>getGroupMemberships<span class="p">(</span><span class="nx">GetGroupMembershipsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetGroupMembershipsOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cam/getGroupMemberships:getGroupMemberships
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cam_get_group_memberships&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CAM group to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="membershiplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membershiplists_csharp" style="color: inherit; text-decoration: inherit;">Membership<wbr>Lists</a>
@@ -366,8 +443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupmembershipsmembershiplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cam.<wbr>Outputs.<wbr>Get<wbr>Group<wbr>Memberships<wbr>Membership<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM group membership. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM group membership. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -375,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group.</p>
-</dd><dt class="property-"
+    <dd>ID of CAM group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -398,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="membershiplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membershiplists_go" style="color: inherit; text-decoration: inherit;">Membership<wbr>Lists</a>
@@ -407,8 +481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupmembershipsmembershiplist">[]Get<wbr>Group<wbr>Memberships<wbr>Membership<wbr>List</a></span>
     </dt>
-    <dd><p>A list of CAM group membership. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM group membership. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -416,11 +489,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group.</p>
-</dd><dt class="property-"
+    <dd>ID of CAM group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="membership_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membership_lists_hcl" style="color: inherit; text-decoration: inherit;">membership_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgroupmembershipsmembershiplist">list(object)</a></span>
+    </dt>
+    <dd>A list of CAM group membership. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CAM group.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -439,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="membershiplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membershiplists_java" style="color: inherit; text-decoration: inherit;">membership<wbr>Lists</a>
@@ -448,8 +557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupmembershipsmembershiplist">List&lt;Get<wbr>Group<wbr>Memberships<wbr>Membership<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM group membership. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM group membership. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -457,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM group.</p>
-</dd><dt class="property-"
+    <dd>ID of CAM group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -480,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="membershiplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membershiplists_nodejs" style="color: inherit; text-decoration: inherit;">membership<wbr>Lists</a>
@@ -489,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupmembershipsmembershiplist">Get<wbr>Group<wbr>Memberships<wbr>Membership<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of CAM group membership. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM group membership. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -498,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group.</p>
-</dd><dt class="property-"
+    <dd>ID of CAM group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -521,17 +625,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="membership_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membership_lists_python" style="color: inherit; text-decoration: inherit;">membership_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgroupmembershipsmembershiplist">Get<wbr>Group<wbr>Memberships<wbr>Membership<wbr>List]</a></span>
+        <span class="property-type"><a href="#getgroupmembershipsmembershiplist">Sequence[Get<wbr>Group<wbr>Memberships<wbr>Membership<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of CAM group membership. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM group membership. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -539,8 +641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CAM group.</p>
-</dd><dt class="property-"
+    <dd>ID of CAM group.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -562,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="membershiplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#membershiplists_yaml" style="color: inherit; text-decoration: inherit;">membership<wbr>Lists</a>
@@ -571,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupmembershipsmembershiplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM group membership. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM group membership. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -580,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM group.</p>
-</dd><dt class="property-"
+    <dd>ID of CAM group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userids_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Ids</a>
@@ -622,9 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>user_names</code> instead. ID set of the CAM group members.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.5. Use <code>user_names</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>userNames</code> instead. ID set of the CAM group members.<p class="property-message">Deprecated: It has been deprecated from version 1.59.5. Use <code>userNames</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="usernames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usernames_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Names</a>
@@ -632,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID set of the CAM group members.</p>
-</dd></dl>
+    <dd>ID set of the CAM group members.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -647,8 +741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userids_go" style="color: inherit; text-decoration: inherit;">User<wbr>Ids</a>
@@ -656,9 +749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>user_names</code> instead. ID set of the CAM group members.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.5. Use <code>user_names</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>userNames</code> instead. ID set of the CAM group members.<p class="property-message">Deprecated: It has been deprecated from version 1.59.5. Use <code>userNames</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="usernames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usernames_go" style="color: inherit; text-decoration: inherit;">User<wbr>Names</a>
@@ -666,8 +757,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID set of the CAM group members.</p>
-</dd></dl>
+    <dd>ID set of the CAM group members.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CAM group to be queried.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="user_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_ids_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>userNames</code> instead. ID set of the CAM group members.<p class="property-message">Deprecated: It has been deprecated from version 1.59.5. Use <code>userNames</code> instead.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="user_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_names_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID set of the CAM group members.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -681,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userids_java" style="color: inherit; text-decoration: inherit;">user<wbr>Ids</a>
@@ -690,9 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>user_names</code> instead. ID set of the CAM group members.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.5. Use <code>user_names</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>userNames</code> instead. ID set of the CAM group members.<p class="property-message">Deprecated: It has been deprecated from version 1.59.5. Use <code>userNames</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="usernames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usernames_java" style="color: inherit; text-decoration: inherit;">user<wbr>Names</a>
@@ -700,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID set of the CAM group members.</p>
-</dd></dl>
+    <dd>ID set of the CAM group members.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -715,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userids_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Ids</a>
@@ -724,9 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>user_names</code> instead. ID set of the CAM group members.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.5. Use <code>user_names</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>userNames</code> instead. ID set of the CAM group members.<p class="property-message">Deprecated: It has been deprecated from version 1.59.5. Use <code>userNames</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="usernames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usernames_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Names</a>
@@ -734,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID set of the CAM group members.</p>
-</dd></dl>
+    <dd>ID set of the CAM group members.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -749,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="user_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_ids_python" style="color: inherit; text-decoration: inherit;">user_<wbr>ids</a>
@@ -758,9 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>user_names</code> instead. ID set of the CAM group members.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.5. Use <code>user_names</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>userNames</code> instead. ID set of the CAM group members.<p class="property-message">Deprecated: It has been deprecated from version 1.59.5. Use <code>userNames</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="user_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_names_python" style="color: inherit; text-decoration: inherit;">user_<wbr>names</a>
@@ -768,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID set of the CAM group members.</p>
-</dd></dl>
+    <dd>ID set of the CAM group members.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -783,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM group to be queried.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>ID of CAM group to be queried.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userids_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Ids</a>
@@ -792,9 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>user_names</code> instead. ID set of the CAM group members.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.5. Use <code>user_names</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.5. Use <code>userNames</code> instead. ID set of the CAM group members.<p class="property-message">Deprecated: It has been deprecated from version 1.59.5. Use <code>userNames</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="usernames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usernames_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Names</a>
@@ -802,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID set of the CAM group members.</p>
-</dd></dl>
+    <dd>ID set of the CAM group members.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -818,7 +922,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

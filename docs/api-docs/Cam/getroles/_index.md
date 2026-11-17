@@ -2,9 +2,11 @@
 ---
 title: "getRoles"
 title_tag: "tencentcloud.Cam.getRoles"
-meta_desc: "Documentation for the tencentcloud.Cam.getRoles function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CAM roles"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,62 +18,63 @@ Use this data source to query detailed information of CAM roles
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cam.getRoles({
-    roleId: tencentcloud_cam_role.foo.id,
+// query by role_id
+const foo = tencentcloud.cam.getRoles({
+    roleId: fooTencentcloudCamRole.id,
 });
-const bar = tencentcloud.Cam.getRoles({
+// query by name
+const bar = tencentcloud.cam.getRoles({
     name: "cam-role-test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cam.get_roles(role_id=tencentcloud_cam_role["foo"]["id"])
-bar = tencentcloud.Cam.get_roles(name="cam-role-test")
+# query by role_id
+foo = tencentcloud.cam.get_roles(role_id=foo_tencentcloud_cam_role["id"])
+# query by name
+bar = tencentcloud.cam.get_roles(name="cam-role-test")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cam.GetRoles.Invoke(new()
-    {
-        RoleId = tencentcloud_cam_role.Foo.Id,
-    });
-
-    var bar = Tencentcloud.Cam.GetRoles.Invoke(new()
-    {
-        Name = "cam-role-test",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cam.GetRoles(ctx, &cam.GetRolesArgs{
-			RoleId: pulumi.StringRef(tencentcloud_cam_role.Foo.Id),
+		// query by role_id
+		_, err := cam.GetRoles(ctx, &cam.GetRolesArgs{
+			RoleId: pulumi.StringRef(fooTencentcloudCamRole.Id),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = Cam.GetRoles(ctx, &cam.GetRolesArgs{
+		// query by name
+		_, err = cam.GetRoles(ctx, &cam.GetRolesArgs{
 			Name: pulumi.StringRef("cam-role-test"),
 		}, nil)
 		if err != nil {
@@ -81,6 +84,38 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    // query by role_id
+    var foo = Tencentcloud.Cam.GetRoles.Invoke(new()
+    {
+        RoleId = fooTencentcloudCamRole.Id,
+    });
+
+    // query by name
+    var bar = Tencentcloud.Cam.GetRoles.Invoke(new()
+    {
+        Name = "cam-role-test",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -89,8 +124,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cam.CamFunctions;
 import com.pulumi.tencentcloud.Cam.inputs.GetRolesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -102,10 +137,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
+        // query by role_id
         final var foo = CamFunctions.getRoles(GetRolesArgs.builder()
-            .roleId(tencentcloud_cam_role.foo().id())
+            .roleId(fooTencentcloudCamRole.id())
             .build());
 
+        // query by name
         final var bar = CamFunctions.getRoles(GetRolesArgs.builder()
             .name("cam-role-test")
             .build());
@@ -113,21 +150,59 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
+  # query by role_id
   foo:
     fn::invoke:
-      Function: tencentcloud:Cam:getRoles
-      Arguments:
-        roleId: ${tencentcloud_cam_role.foo.id}
+      function: tencentcloud:Cam:getRoles
+      arguments:
+        roleId: ${fooTencentcloudCamRole.id}
+  # query by name
   bar:
     fn::invoke:
-      Function: tencentcloud:Cam:getRoles
-      Arguments:
+      function: tencentcloud:Cam:getRoles
+      arguments:
         name: cam-role-test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cam_getroles" "foo" {
+  role_id = fooTencentcloudCamRole.id
+}
+data "tencentcloud_cam_getroles" "bar" {
+  name = "cam-role-test"
+}
+
+# query by role_id
+# query by name
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRoleList](https://www.tencentcloud.com/document/api/598/33559)
 
 
 
@@ -139,7 +214,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +222,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRoles<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRolesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>></span
+><span class="k">function </span>getRoles<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRolesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>></span
 ><span class="k">
-function </span>getRolesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRolesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>></span
+function </span>getRolesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRolesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -164,11 +239,11 @@ function </span>getRolesOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">role_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRolesResult</span
 ><span class="k">
-def </span>get_roles_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">role_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRolesResult]</span
+def </span>get_roles_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">role_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRolesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -193,7 +268,8 @@ func </span>GetRolesOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRoles </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRolesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRolesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRolesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRolesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,7 +278,8 @@ func </span>GetRolesOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>> </span>getRoles<span class="p">(</span><span class="nx">GetRolesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>> </span>getRoles<span class="p">(</span><span class="nx">GetRolesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRolesResult</a></span>> </span>getRoles<span class="p">(</span><span class="nx">GetRolesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -214,6 +291,15 @@ func </span>GetRolesOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cam/getRoles:getRoles
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cam_get_roles&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -232,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -241,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -250,8 +334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Id</a>
@@ -259,8 +342,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd></dl>
+    <dd>ID of the CAM role to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -274,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -283,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -292,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Id</a>
@@ -301,8 +380,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd></dl>
+    <dd>ID of the CAM role to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_id_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CAM role to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -316,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -325,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -334,8 +448,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_java" style="color: inherit; text-decoration: inherit;">role<wbr>Id</a>
@@ -343,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd></dl>
+    <dd>ID of the CAM role to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -358,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -367,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -376,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Id</a>
@@ -385,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd></dl>
+    <dd>ID of the CAM role to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -400,8 +508,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -409,8 +516,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -418,8 +524,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_id_python" style="color: inherit; text-decoration: inherit;">role_<wbr>id</a>
@@ -427,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd></dl>
+    <dd>ID of the CAM role to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -442,8 +546,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -451,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -460,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="roleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Id</a>
@@ -469,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd></dl>
+    <dd>ID of the CAM role to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -493,8 +593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolelists_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Lists</a>
@@ -502,8 +601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrolesrolelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cam.<wbr>Outputs.<wbr>Get<wbr>Roles<wbr>Role<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM roles. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM roles. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -511,8 +609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM role.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -520,8 +617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM role.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -537,8 +633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of CAM role.</p>
-</dd></dl>
+    <dd>Id of CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -552,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolelists_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Lists</a>
@@ -561,8 +655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrolesrolelist">[]Get<wbr>Roles<wbr>Role<wbr>List</a></span>
     </dt>
-    <dd><p>A list of CAM roles. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM roles. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -570,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM role.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -579,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM role.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -596,8 +687,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of CAM role.</p>
-</dd></dl>
+    <dd>Id of CAM role.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="role_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_lists_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrolesrolelist">list(object)</a></span>
+    </dt>
+    <dd>A list of CAM roles. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of CAM role.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CAM role.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="role_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_id_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -611,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolelists_java" style="color: inherit; text-decoration: inherit;">role<wbr>Lists</a>
@@ -620,8 +763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrolesrolelist">List&lt;Get<wbr>Roles<wbr>Role<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM roles. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM roles. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -629,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM role.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -638,8 +779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM role.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -655,8 +795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of CAM role.</p>
-</dd></dl>
+    <dd>Id of CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -670,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolelists_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Lists</a>
@@ -679,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrolesrolelist">Get<wbr>Roles<wbr>Role<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of CAM roles. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM roles. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -688,8 +825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM role.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -697,8 +833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM role.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -714,8 +849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of CAM role.</p>
-</dd></dl>
+    <dd>Id of CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,17 +863,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="role_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_lists_python" style="color: inherit; text-decoration: inherit;">role_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrolesrolelist">Get<wbr>Roles<wbr>Role<wbr>List]</a></span>
+        <span class="property-type"><a href="#getrolesrolelist">Sequence[Get<wbr>Roles<wbr>Role<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of CAM roles. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM roles. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -747,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM role.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -756,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM role.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -773,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of CAM role.</p>
-</dd></dl>
+    <dd>Id of CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -788,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolelists_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Lists</a>
@@ -797,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrolesrolelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM roles. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM roles. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -806,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM role.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -815,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM role.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM role.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -832,8 +957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of CAM role.</p>
-</dd></dl>
+    <dd>Id of CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -857,8 +981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM role can be login or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the CAM role can be login or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -866,8 +989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The create time of the CAM role.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -875,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="document_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#document_csharp" style="color: inherit; text-decoration: inherit;">Document</a>
@@ -884,8 +1005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy document of CAM role.</p>
-</dd><dt class="property-required"
+    <dd>Policy document of CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -893,8 +1013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="roleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Id</a>
@@ -902,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -911,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last update time of the CAM role.</p>
-</dd></dl>
+    <dd>The last update time of the CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -926,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM role can be login or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the CAM role can be login or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -935,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The create time of the CAM role.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -944,8 +1059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="document_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#document_go" style="color: inherit; text-decoration: inherit;">Document</a>
@@ -953,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy document of CAM role.</p>
-</dd><dt class="property-required"
+    <dd>Policy document of CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -962,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="roleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Id</a>
@@ -971,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -980,8 +1091,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last update time of the CAM role.</p>
-</dd></dl>
+    <dd>The last update time of the CAM role.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="console_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#console_login_hcl" style="color: inherit; text-decoration: inherit;">console_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether the CAM role can be login or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The create time of the CAM role.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="document_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#document_hcl" style="color: inherit; text-decoration: inherit;">document</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy document of CAM role.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="role_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_id_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CAM role to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The last update time of the CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -995,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM role can be login or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the CAM role can be login or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1004,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The create time of the CAM role.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1013,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="document_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#document_java" style="color: inherit; text-decoration: inherit;">document</a>
@@ -1022,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy document of CAM role.</p>
-</dd><dt class="property-required"
+    <dd>Policy document of CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1031,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="roleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_java" style="color: inherit; text-decoration: inherit;">role<wbr>Id</a>
@@ -1040,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1049,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The last update time of the CAM role.</p>
-</dd></dl>
+    <dd>The last update time of the CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1064,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM role can be login or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the CAM role can be login or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1073,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The create time of the CAM role.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1082,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="document_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#document_nodejs" style="color: inherit; text-decoration: inherit;">document</a>
@@ -1091,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy document of CAM role.</p>
-</dd><dt class="property-required"
+    <dd>Policy document of CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1100,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="roleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Id</a>
@@ -1109,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1118,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The last update time of the CAM role.</p>
-</dd></dl>
+    <dd>The last update time of the CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1133,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the CAM role can be login or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the CAM role can be login or not.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1142,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The create time of the CAM role.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1151,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="document_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#document_python" style="color: inherit; text-decoration: inherit;">document</a>
@@ -1160,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy document of CAM role.</p>
-</dd><dt class="property-required"
+    <dd>Policy document of CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1169,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="role_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_id_python" style="color: inherit; text-decoration: inherit;">role_<wbr>id</a>
@@ -1178,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1187,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The last update time of the CAM role.</p>
-</dd></dl>
+    <dd>The last update time of the CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1202,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the CAM role can be login or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the CAM role can be login or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1211,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The create time of the CAM role.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1220,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="document_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#document_yaml" style="color: inherit; text-decoration: inherit;">document</a>
@@ -1229,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy document of CAM role.</p>
-</dd><dt class="property-required"
+    <dd>Policy document of CAM role.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1238,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="roleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roleid_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Id</a>
@@ -1247,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CAM role to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CAM role to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1256,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The last update time of the CAM role.</p>
-</dd></dl>
+    <dd>The last update time of the CAM role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1272,7 +1416,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

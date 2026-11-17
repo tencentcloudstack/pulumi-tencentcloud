@@ -2,9 +2,11 @@
 ---
 title: "getTriggers"
 title_tag: "tencentcloud.Scf.getTriggers"
-meta_desc: "Documentation for the tencentcloud.Scf.getTriggers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of scf triggers"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,60 +18,57 @@ Use this data source to query detailed information of scf triggers
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const triggers = tencentcloud.Scf.getTriggers({
+const triggers = tencentcloud.scf.getTriggers({
     functionName: "keep-1676351130",
     namespace: "default",
-    order: "DESC",
     orderBy: "add_time",
+    order: "DESC",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-triggers = tencentcloud.Scf.get_triggers(function_name="keep-1676351130",
+triggers = tencentcloud.scf.get_triggers(function_name="keep-1676351130",
     namespace="default",
-    order="DESC",
-    order_by="add_time")
+    order_by="add_time",
+    order="DESC")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var triggers = Tencentcloud.Scf.GetTriggers.Invoke(new()
-    {
-        FunctionName = "keep-1676351130",
-        Namespace = "default",
-        Order = "DESC",
-        OrderBy = "add_time",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Scf.GetTriggers(ctx, &scf.GetTriggersArgs{
+		_, err := scf.GetTriggers(ctx, &scf.GetTriggersArgs{
 			FunctionName: "keep-1676351130",
 			Namespace:    pulumi.StringRef("default"),
-			Order:        pulumi.StringRef("DESC"),
 			OrderBy:      pulumi.StringRef("add_time"),
+			Order:        pulumi.StringRef("DESC"),
 		}, nil)
 		if err != nil {
 			return err
@@ -78,6 +77,34 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var triggers = Tencentcloud.Scf.GetTriggers.Invoke(new()
+    {
+        FunctionName = "keep-1676351130",
+        Namespace = "default",
+        OrderBy = "add_time",
+        Order = "DESC",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -86,8 +113,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Scf.ScfFunctions;
 import com.pulumi.tencentcloud.Scf.inputs.GetTriggersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -102,26 +129,59 @@ public class App {
         final var triggers = ScfFunctions.getTriggers(GetTriggersArgs.builder()
             .functionName("keep-1676351130")
             .namespace("default")
-            .order("DESC")
             .orderBy("add_time")
+            .order("DESC")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   triggers:
     fn::invoke:
-      Function: tencentcloud:Scf:getTriggers
-      Arguments:
+      function: tencentcloud:Scf:getTriggers
+      arguments:
         functionName: keep-1676351130
         namespace: default
-        order: DESC
         orderBy: add_time
+        order: DESC
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_scf_gettriggers" "triggers" {
+  function_name = "keep-1676351130"
+  namespace     = "default"
+  order_by      = "add_time"
+  order         = "DESC"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
 
 
 
@@ -133,7 +193,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +201,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getTriggers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTriggersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>></span
+><span class="k">function </span>getTriggers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTriggersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>></span
 ><span class="k">
-function </span>getTriggersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTriggersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>></span
+function </span>getTriggersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTriggersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -152,7 +212,7 @@ function </span>getTriggersOutput<span class="p">(</span><span class="nx">args</
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_triggers<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.GetTriggersFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_triggers<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetTriggersFilter]]</span> = None<span class="p">,</span>
                  <span class="nx">function_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">order</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -160,13 +220,13 @@ function </span>getTriggersOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetTriggersResult</span
 ><span class="k">
-def </span>get_triggers_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_scf.GetTriggersFilterArgs]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">function_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">order</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTriggersResult]</span
+def </span>get_triggers_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetTriggersFilterArgs]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">function_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">namespace</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">order</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">order_by</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTriggersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -191,7 +251,8 @@ func </span>GetTriggersOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetTriggers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetTriggersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTriggersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTriggersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTriggersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,7 +261,8 @@ func </span>GetTriggersOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>> </span>getTriggers<span class="p">(</span><span class="nx">GetTriggersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>> </span>getTriggers<span class="p">(</span><span class="nx">GetTriggersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTriggersResult</a></span>> </span>getTriggers<span class="p">(</span><span class="nx">GetTriggersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,6 +274,15 @@ func </span>GetTriggersOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Scf/getTriggers:getTriggers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_scf_get_triggers&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -230,8 +301,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function name.</p>
-</dd><dt class="property-optional"
+    <dd>Function name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -241,8 +311,7 @@ The following arguments are supported:
     </dt>
     <dd><ul>
 <li>Qualifier:Function version, alias.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -250,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. Default value: default.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace. Default value: default.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_csharp" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -259,8 +327,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -268,8 +335,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -277,8 +343,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -292,8 +357,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function name.</p>
-</dd><dt class="property-optional"
+    <dd>Function name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -303,8 +367,7 @@ The following arguments are supported:
     </dt>
     <dd><ul>
 <li>Qualifier:Function version, alias.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -312,8 +375,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. Default value: default.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace. Default value: default.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_go" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -321,8 +383,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -330,8 +391,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -339,8 +399,63 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="function_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_name_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettriggersfilter">list(object)</a></span>
+    </dt>
+    <dd><ul>
+<li>Qualifier:Function version, alias.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace. Default value: default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -354,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function name.</p>
-</dd><dt class="property-optional"
+    <dd>Function name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -365,8 +479,7 @@ The following arguments are supported:
     </dt>
     <dd><ul>
 <li>Qualifier:Function version, alias.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -374,8 +487,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace. Default value: default.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace. Default value: default.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_java" style="color: inherit; text-decoration: inherit;">order</a>
@@ -383,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_java" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -392,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -401,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -416,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function name.</p>
-</dd><dt class="property-optional"
+    <dd>Function name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -427,8 +535,7 @@ The following arguments are supported:
     </dt>
     <dd><ul>
 <li>Qualifier:Function version, alias.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -436,8 +543,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. Default value: default.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace. Default value: default.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_nodejs" style="color: inherit; text-decoration: inherit;">order</a>
@@ -445,8 +551,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -454,8 +559,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -463,8 +567,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -478,19 +581,17 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function name.</p>
-</dd><dt class="property-optional"
+    <dd>Function name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettriggersfilter">Get<wbr>Triggers<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#gettriggersfilter">Sequence[Get<wbr>Triggers<wbr>Filter]</a></span>
     </dt>
     <dd><ul>
 <li>Qualifier:Function version, alias.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -498,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace. Default value: default.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace. Default value: default.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_python" style="color: inherit; text-decoration: inherit;">order</a>
@@ -507,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
@@ -516,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -525,8 +623,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -540,8 +637,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function name.</p>
-</dd><dt class="property-optional"
+    <dd>Function name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -551,8 +647,7 @@ The following arguments are supported:
     </dt>
     <dd><ul>
 <li>Qualifier:Function version, alias.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -560,8 +655,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace. Default value: default.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace. Default value: default.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_yaml" style="color: inherit; text-decoration: inherit;">order</a>
@@ -569,8 +663,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -578,8 +671,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -587,8 +679,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -619,8 +710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scftriggers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scftriggers_csharp" style="color: inherit; text-decoration: inherit;">Scf<wbr>Triggers</a>
@@ -628,8 +718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettriggerstrigger">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Outputs.<wbr>Get<wbr>Triggers<wbr>Trigger&gt;</a></span>
     </dt>
-    <dd><p>Trigger list.</p>
-</dd><dt class="property-"
+    <dd>Trigger list.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -691,8 +780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="triggers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_go" style="color: inherit; text-decoration: inherit;">Triggers</a>
@@ -700,8 +788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettriggerstrigger">[]Get<wbr>Triggers<wbr>Trigger</a></span>
     </dt>
-    <dd><p>Trigger list.</p>
-</dd><dt class="property-"
+    <dd>Trigger list.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -746,6 +833,76 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="function_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_name_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="triggers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_hcl" style="color: inherit; text-decoration: inherit;">triggers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettriggerstrigger">list(object)</a></span>
+    </dt>
+    <dd>Trigger list.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettriggersfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -763,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="triggers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_java" style="color: inherit; text-decoration: inherit;">triggers</a>
@@ -772,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettriggerstrigger">List&lt;Get<wbr>Triggers<wbr>Trigger&gt;</a></span>
     </dt>
-    <dd><p>Trigger list.</p>
-</dd><dt class="property-"
+    <dd>Trigger list.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -835,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="triggers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_nodejs" style="color: inherit; text-decoration: inherit;">triggers</a>
@@ -844,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettriggerstrigger">Get<wbr>Triggers<wbr>Trigger[]</a></span>
     </dt>
-    <dd><p>Trigger list.</p>
-</dd><dt class="property-"
+    <dd>Trigger list.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -907,23 +1060,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="triggers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_python" style="color: inherit; text-decoration: inherit;">triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettriggerstrigger">Get<wbr>Triggers<wbr>Trigger]</a></span>
+        <span class="property-type"><a href="#gettriggerstrigger">Sequence[Get<wbr>Triggers<wbr>Trigger]</a></span>
     </dt>
-    <dd><p>Trigger list.</p>
-</dd><dt class="property-"
+    <dd>Trigger list.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettriggersfilter">Get<wbr>Triggers<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#gettriggersfilter">Sequence[Get<wbr>Triggers<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -979,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="triggers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_yaml" style="color: inherit; text-decoration: inherit;">triggers</a>
@@ -988,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettriggerstrigger">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Trigger list.</p>
-</dd><dt class="property-"
+    <dd>Trigger list.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -1053,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1062,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Filter values of the field.</p>
-</dd></dl>
+    <dd>Filter values of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1077,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1086,8 +1232,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Filter values of the field.</p>
-</dd></dl>
+    <dd>Filter values of the field.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Filter values of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1101,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1110,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter values of the field.</p>
-</dd></dl>
+    <dd>Filter values of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1125,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1134,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Filter values of the field.</p>
-</dd></dl>
+    <dd>Filter values of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1149,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1158,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Filter values of the field.</p>
-</dd></dl>
+    <dd>Filter values of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1173,8 +1334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1182,8 +1342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter values of the field.</p>
-</dd></dl>
+    <dd>Filter values of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1201,8 +1360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger creation time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger creation time.</dd><dt class="property-required"
             title="Required">
         <span id="availablestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablestatus_csharp" style="color: inherit; text-decoration: inherit;">Available<wbr>Status</a>
@@ -1210,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the trigger is available.</p>
-</dd><dt class="property-required"
+    <dd>Whether the trigger is available.</dd><dt class="property-required"
             title="Required">
         <span id="bindstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatus_csharp" style="color: inherit; text-decoration: inherit;">Bind<wbr>Status</a>
@@ -1219,8 +1376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger-Function binding status.</p>
-</dd><dt class="property-required"
+    <dd>Trigger-Function binding status.</dd><dt class="property-required"
             title="Required">
         <span id="customargument_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Argument</a>
@@ -1228,8 +1384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1237,8 +1392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_csharp" style="color: inherit; text-decoration: inherit;">Mod<wbr>Time</a>
@@ -1246,8 +1400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger last modified time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger last modified time.</dd><dt class="property-required"
             title="Required">
         <span id="qualifier_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualifier_csharp" style="color: inherit; text-decoration: inherit;">Qualifier</a>
@@ -1255,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function version or alias.</p>
-</dd><dt class="property-required"
+    <dd>Function version or alias.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1264,8 +1416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Minimum resource ID of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Minimum resource ID of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggerattribute_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerattribute_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Attribute</a>
@@ -1273,8 +1424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</p>
-</dd><dt class="property-required"
+    <dd>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Desc</a>
@@ -1282,8 +1432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed configuration of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Detailed configuration of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggername_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Name</a>
@@ -1291,8 +1440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger name.</p>
-</dd><dt class="property-required"
+    <dd>Trigger name.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1300,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger type.</p>
-</dd></dl>
+    <dd>Trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1315,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger creation time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger creation time.</dd><dt class="property-required"
             title="Required">
         <span id="availablestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablestatus_go" style="color: inherit; text-decoration: inherit;">Available<wbr>Status</a>
@@ -1324,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the trigger is available.</p>
-</dd><dt class="property-required"
+    <dd>Whether the trigger is available.</dd><dt class="property-required"
             title="Required">
         <span id="bindstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatus_go" style="color: inherit; text-decoration: inherit;">Bind<wbr>Status</a>
@@ -1333,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger-Function binding status.</p>
-</dd><dt class="property-required"
+    <dd>Trigger-Function binding status.</dd><dt class="property-required"
             title="Required">
         <span id="customargument_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Argument</a>
@@ -1342,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1351,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_go" style="color: inherit; text-decoration: inherit;">Mod<wbr>Time</a>
@@ -1360,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger last modified time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger last modified time.</dd><dt class="property-required"
             title="Required">
         <span id="qualifier_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualifier_go" style="color: inherit; text-decoration: inherit;">Qualifier</a>
@@ -1369,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function version or alias.</p>
-</dd><dt class="property-required"
+    <dd>Function version or alias.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1378,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Minimum resource ID of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Minimum resource ID of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggerattribute_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerattribute_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Attribute</a>
@@ -1387,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</p>
-</dd><dt class="property-required"
+    <dd>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Desc</a>
@@ -1396,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed configuration of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Detailed configuration of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggername_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Name</a>
@@ -1405,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger name.</p>
-</dd><dt class="property-required"
+    <dd>Trigger name.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1414,8 +1550,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger type.</p>
-</dd></dl>
+    <dd>Trigger type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="add_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#add_time_hcl" style="color: inherit; text-decoration: inherit;">add_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="available_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_status_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether the trigger is available.</dd><dt class="property-required"
+            title="Required">
+        <span id="bind_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_status_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger-Function binding status.</dd><dt class="property-required"
+            title="Required">
+        <span id="custom_argument_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_argument_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>argument</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable.</dd><dt class="property-required"
+            title="Required">
+        <span id="mod_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mod_time_hcl" style="color: inherit; text-decoration: inherit;">mod_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger last modified time.</dd><dt class="property-required"
+            title="Required">
+        <span id="qualifier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualifier_hcl" style="color: inherit; text-decoration: inherit;">qualifier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function version or alias.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Minimum resource ID of trigger.</dd><dt class="property-required"
+            title="Required">
+        <span id="trigger_attribute_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_attribute_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>attribute</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</dd><dt class="property-required"
+            title="Required">
+        <span id="trigger_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_desc_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detailed configuration of trigger.</dd><dt class="property-required"
+            title="Required">
+        <span id="trigger_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_name_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger name.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1429,8 +1666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger creation time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger creation time.</dd><dt class="property-required"
             title="Required">
         <span id="availablestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablestatus_java" style="color: inherit; text-decoration: inherit;">available<wbr>Status</a>
@@ -1438,8 +1674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the trigger is available.</p>
-</dd><dt class="property-required"
+    <dd>Whether the trigger is available.</dd><dt class="property-required"
             title="Required">
         <span id="bindstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatus_java" style="color: inherit; text-decoration: inherit;">bind<wbr>Status</a>
@@ -1447,8 +1682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger-Function binding status.</p>
-</dd><dt class="property-required"
+    <dd>Trigger-Function binding status.</dd><dt class="property-required"
             title="Required">
         <span id="customargument_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Argument</a>
@@ -1456,8 +1690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1465,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_java" style="color: inherit; text-decoration: inherit;">mod<wbr>Time</a>
@@ -1474,8 +1706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger last modified time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger last modified time.</dd><dt class="property-required"
             title="Required">
         <span id="qualifier_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualifier_java" style="color: inherit; text-decoration: inherit;">qualifier</a>
@@ -1483,8 +1714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function version or alias.</p>
-</dd><dt class="property-required"
+    <dd>Function version or alias.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1492,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Minimum resource ID of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Minimum resource ID of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggerattribute_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerattribute_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Attribute</a>
@@ -1501,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</p>
-</dd><dt class="property-required"
+    <dd>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -1510,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detailed configuration of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Detailed configuration of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggername_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Name</a>
@@ -1519,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger name.</p>
-</dd><dt class="property-required"
+    <dd>Trigger name.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1528,8 +1754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger type.</p>
-</dd></dl>
+    <dd>Trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1543,8 +1768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger creation time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger creation time.</dd><dt class="property-required"
             title="Required">
         <span id="availablestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablestatus_nodejs" style="color: inherit; text-decoration: inherit;">available<wbr>Status</a>
@@ -1552,8 +1776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the trigger is available.</p>
-</dd><dt class="property-required"
+    <dd>Whether the trigger is available.</dd><dt class="property-required"
             title="Required">
         <span id="bindstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatus_nodejs" style="color: inherit; text-decoration: inherit;">bind<wbr>Status</a>
@@ -1561,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger-Function binding status.</p>
-</dd><dt class="property-required"
+    <dd>Trigger-Function binding status.</dd><dt class="property-required"
             title="Required">
         <span id="customargument_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Argument</a>
@@ -1570,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1579,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_nodejs" style="color: inherit; text-decoration: inherit;">mod<wbr>Time</a>
@@ -1588,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger last modified time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger last modified time.</dd><dt class="property-required"
             title="Required">
         <span id="qualifier_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualifier_nodejs" style="color: inherit; text-decoration: inherit;">qualifier</a>
@@ -1597,8 +1816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function version or alias.</p>
-</dd><dt class="property-required"
+    <dd>Function version or alias.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1606,8 +1824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Minimum resource ID of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Minimum resource ID of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggerattribute_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerattribute_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Attribute</a>
@@ -1615,8 +1832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</p>
-</dd><dt class="property-required"
+    <dd>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -1624,8 +1840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed configuration of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Detailed configuration of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggername_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Name</a>
@@ -1633,8 +1848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger name.</p>
-</dd><dt class="property-required"
+    <dd>Trigger name.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1642,8 +1856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger type.</p>
-</dd></dl>
+    <dd>Trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1657,8 +1870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger creation time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger creation time.</dd><dt class="property-required"
             title="Required">
         <span id="available_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_status_python" style="color: inherit; text-decoration: inherit;">available_<wbr>status</a>
@@ -1666,8 +1878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether the trigger is available.</p>
-</dd><dt class="property-required"
+    <dd>Whether the trigger is available.</dd><dt class="property-required"
             title="Required">
         <span id="bind_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_status_python" style="color: inherit; text-decoration: inherit;">bind_<wbr>status</a>
@@ -1675,8 +1886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger-Function binding status.</p>
-</dd><dt class="property-required"
+    <dd>Trigger-Function binding status.</dd><dt class="property-required"
             title="Required">
         <span id="custom_argument_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_argument_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>argument</a>
@@ -1684,8 +1894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1693,8 +1902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable.</dd><dt class="property-required"
             title="Required">
         <span id="mod_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mod_time_python" style="color: inherit; text-decoration: inherit;">mod_<wbr>time</a>
@@ -1702,8 +1910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger last modified time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger last modified time.</dd><dt class="property-required"
             title="Required">
         <span id="qualifier_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualifier_python" style="color: inherit; text-decoration: inherit;">qualifier</a>
@@ -1711,8 +1918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function version or alias.</p>
-</dd><dt class="property-required"
+    <dd>Function version or alias.</dd><dt class="property-required"
             title="Required">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -1720,8 +1926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Minimum resource ID of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Minimum resource ID of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="trigger_attribute_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_attribute_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>attribute</a>
@@ -1729,8 +1934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</p>
-</dd><dt class="property-required"
+    <dd>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</dd><dt class="property-required"
             title="Required">
         <span id="trigger_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_desc_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>desc</a>
@@ -1738,8 +1942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detailed configuration of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Detailed configuration of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="trigger_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_name_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>name</a>
@@ -1747,8 +1950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger name.</p>
-</dd><dt class="property-required"
+    <dd>Trigger name.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1756,8 +1958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger type.</p>
-</dd></dl>
+    <dd>Trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1771,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger creation time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger creation time.</dd><dt class="property-required"
             title="Required">
         <span id="availablestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablestatus_yaml" style="color: inherit; text-decoration: inherit;">available<wbr>Status</a>
@@ -1780,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the trigger is available.</p>
-</dd><dt class="property-required"
+    <dd>Whether the trigger is available.</dd><dt class="property-required"
             title="Required">
         <span id="bindstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindstatus_yaml" style="color: inherit; text-decoration: inherit;">bind<wbr>Status</a>
@@ -1789,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger-Function binding status.</p>
-</dd><dt class="property-required"
+    <dd>Trigger-Function binding status.</dd><dt class="property-required"
             title="Required">
         <span id="customargument_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Argument</a>
@@ -1798,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Custom parameterNote: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1807,8 +2004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable.</dd><dt class="property-required"
             title="Required">
         <span id="modtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modtime_yaml" style="color: inherit; text-decoration: inherit;">mod<wbr>Time</a>
@@ -1816,8 +2012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger last modified time.</p>
-</dd><dt class="property-required"
+    <dd>Trigger last modified time.</dd><dt class="property-required"
             title="Required">
         <span id="qualifier_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qualifier_yaml" style="color: inherit; text-decoration: inherit;">qualifier</a>
@@ -1825,8 +2020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function version or alias.</p>
-</dd><dt class="property-required"
+    <dd>Function version or alias.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1834,8 +2028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Minimum resource ID of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Minimum resource ID of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggerattribute_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerattribute_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Attribute</a>
@@ -1843,8 +2036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</p>
-</dd><dt class="property-required"
+    <dd>Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -1852,8 +2044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detailed configuration of trigger.</p>
-</dd><dt class="property-required"
+    <dd>Detailed configuration of trigger.</dd><dt class="property-required"
             title="Required">
         <span id="triggername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggername_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Name</a>
@@ -1861,8 +2052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger name.</p>
-</dd><dt class="property-required"
+    <dd>Trigger name.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1870,8 +2060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger type.</p>
-</dd></dl>
+    <dd>Trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1886,7 +2075,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

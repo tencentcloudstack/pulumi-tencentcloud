@@ -2,9 +2,11 @@
 ---
 title: "Db"
 title_tag: "tencentcloud.Sqlserver.Db"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.Db resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a SQL Server DB resource belongs to SQL Server instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,36 @@ Provides a SQL Server DB resource belongs to SQL Server instance.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "sqlserver",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+    name: "subnet-example",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
-const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-example",
+    description: "desc.",
+});
+const example = new tencentcloud.sqlserver.BasicInstance("example", {
+    name: "tf-example",
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
     chargeType: "POSTPAID_BY_HOUR",
     vpcId: vpc.id,
@@ -55,26 +69,38 @@ const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBa
         test: "test",
     },
 });
-const exampleDb = new tencentcloud.sqlserver.Db("exampleDb", {
-    instanceId: exampleBasicInstance.id,
+const exampleDb = new tencentcloud.sqlserver.Db("example", {
+    instanceId: example.id,
+    name: "tf_example_db",
     charset: "Chinese_PRC_BIN",
     remark: "test-remark",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="sqlserver")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[4].name,
+    name="subnet-example",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="desc.")
-example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-example",
+    description="desc.")
+example = tencentcloud.sqlserver.BasicInstance("example",
+    name="tf-example",
     availability_zone=zones.zones[4].name,
     charge_type="POSTPAID_BY_HOUR",
     vpc_id=vpc.id,
@@ -95,16 +121,111 @@ example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInsta
     tags={
         "test": "test",
     })
-example_db = tencentcloud.sqlserver.Db("exampleDb",
-    instance_id=example_basic_instance.id,
+example_db = tencentcloud.sqlserver.Db("example",
+    instance_id=example.id,
+    name="tf_example_db",
     charset="Chinese_PRC_BIN",
     remark="test-remark")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "sqlserver",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+			Name:             pulumi.String("subnet-example"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-example"),
+			Description: pulumi.String("desc."),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := sqlserver.NewBasicInstance(ctx, "example", &sqlserver.BasicInstanceArgs{
+			Name:             pulumi.String("tf-example"),
+			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			ProjectId:        pulumi.Int(0),
+			Memory:           pulumi.Int(4),
+			Storage:          pulumi.Int(100),
+			Cpu:              pulumi.Int(2),
+			MachineType:      pulumi.String("CLOUD_PREMIUM"),
+			MaintenanceWeekSets: pulumi.IntArray{
+				pulumi.Int(1),
+				pulumi.Int(2),
+				pulumi.Int(3),
+			},
+			MaintenanceStartTime: pulumi.String("09:00"),
+			MaintenanceTimeSpan:  pulumi.Int(3),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = sqlserver.NewDb(ctx, "example", &sqlserver.DbArgs{
+			InstanceId: example.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_db"),
+			Charset:    pulumi.String("Chinese_PRC_BIN"),
+			Remark:     pulumi.String("test-remark"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -116,24 +237,28 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Name = "subnet-example",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
     });
 
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
     {
+        Name = "sg-example",
         Description = "desc.",
     });
 
-    var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new()
+    var example = new Tencentcloud.Sqlserver.BasicInstance("example", new()
     {
+        Name = "tf-example",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
         ChargeType = "POSTPAID_BY_HOUR",
         VpcId = vpc.Id,
@@ -161,95 +286,21 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new()
+    var exampleDb = new Tencentcloud.Sqlserver.Db("example", new()
     {
-        InstanceId = exampleBasicInstance.Id,
+        InstanceId = example.Id,
+        Name = "tf_example_db",
         Charset = "Chinese_PRC_BIN",
         Remark = "test-remark",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "sqlserver",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-			Description: pulumi.String("desc."),
-		})
-		if err != nil {
-			return err
-		}
-		exampleBasicInstance, err := Sqlserver.NewBasicInstance(ctx, "exampleBasicInstance", &Sqlserver.BasicInstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			ProjectId:        pulumi.Int(0),
-			Memory:           pulumi.Int(4),
-			Storage:          pulumi.Int(100),
-			Cpu:              pulumi.Int(2),
-			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-			MaintenanceWeekSets: pulumi.IntArray{
-				pulumi.Int(1),
-				pulumi.Int(2),
-				pulumi.Int(3),
-			},
-			MaintenanceStartTime: pulumi.String("09:00"),
-			MaintenanceTimeSpan:  pulumi.Int(3),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Sqlserver.NewDb(ctx, "exampleDb", &Sqlserver.DbArgs{
-			InstanceId: exampleBasicInstance.ID(),
-			Charset:    pulumi.String("Chinese_PRC_BIN"),
-			Remark:     pulumi.String("test-remark"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -258,18 +309,14 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
 import com.pulumi.tencentcloud.Sqlserver.BasicInstance;
 import com.pulumi.tencentcloud.Sqlserver.BasicInstanceArgs;
 import com.pulumi.tencentcloud.Sqlserver.Db;
 import com.pulumi.tencentcloud.Sqlserver.DbArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -285,23 +332,27 @@ public class App {
             .product("sqlserver")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[4].name())
+            .name("subnet-example")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-example")
             .description("desc.")
             .build());
 
-        var exampleBasicInstance = new BasicInstance("exampleBasicInstance", BasicInstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var example = new BasicInstance("example", BasicInstanceArgs.builder()
+            .name("tf-example")
+            .availabilityZone(zones.zones()[4].name())
             .chargeType("POSTPAID_BY_HOUR")
             .vpcId(vpc.id())
             .subnetId(subnet.id())
@@ -320,8 +371,9 @@ public class App {
             .tags(Map.of("test", "test"))
             .build());
 
-        var exampleDb = new Db("exampleDb", DbArgs.builder()        
-            .instanceId(exampleBasicInstance.id())
+        var exampleDb = new Db("exampleDb", DbArgs.builder()
+            .instanceId(example.id())
+            .name("tf_example_db")
             .charset("Chinese_PRC_BIN")
             .remark("test-remark")
             .build());
@@ -329,26 +381,36 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[4].name}
+      name: subnet-example
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-example
       description: desc.
-  exampleBasicInstance:
+  example:
     type: tencentcloud:Sqlserver:BasicInstance
     properties:
+      name: tf-example
       availabilityZone: ${zones.zones[4].name}
       chargeType: POSTPAID_BY_HOUR
       vpcId: ${vpc.id}
@@ -370,79 +432,172 @@ resources:
         test: test
   exampleDb:
     type: tencentcloud:Sqlserver:Db
+    name: example
     properties:
-      instanceId: ${exampleBasicInstance.id}
+      instanceId: ${example.id}
+      name: tf_example_db
       charset: Chinese_PRC_BIN
       remark: test-remark
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: sqlserver
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "sqlserver"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  name              = "subnet-example"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-example"
+  description = "desc."
+}
+resource "tencentcloud_sqlserver_basicinstance" "example" {
+  name                   = "tf-example"
+  availability_zone      = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  charge_type            = "POSTPAID_BY_HOUR"
+  vpc_id                 = tencentcloud_vpc_instance.vpc.id
+  subnet_id              = tencentcloud_subnet_instance.subnet.id
+  project_id             = 0
+  memory                 = 4
+  storage                = 100
+  cpu                    = 2
+  machine_type           = "CLOUD_PREMIUM"
+  maintenance_week_sets  = [1, 2, 3]
+  maintenance_start_time = "09:00"
+  maintenance_time_span  = 3
+  security_groups        = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "test" = "test"
+  }
+}
+resource "tencentcloud_sqlserver_db" "example" {
+  instance_id = tencentcloud_sqlserver_basicinstance.example.id
+  name        = "tf_example_db"
+  charset     = "Chinese_PRC_BIN"
+  remark      = "test-remark"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDB](https://www.tencentcloud.com/document/api/238/32120)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+  - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+* Read: [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+* Update: [ModifyDBRemark](https://www.tencentcloud.com/document/api/238/32100)
+* Delete:
+  - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+  - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+  - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
 
 
 ## Create Db Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Db</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DbArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Db</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DbArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Db</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-       <span class="nx">charset</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-       <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-       <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-       <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Db</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DbArgs</a></span><span class="p">,</span>
-       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Db</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+       <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+       <span class="nx">charset</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+       <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+       <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDb</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DbArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Db</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDb</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DbArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Db</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Db</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DbArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Db</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DbArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Db</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DbArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Db</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DbArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sqlserver:Db</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Sqlserver:Db</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_sqlserver_db&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -463,7 +618,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -580,11 +735,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Db Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Db resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -600,8 +763,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_csharp" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -609,8 +771,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -618,8 +779,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -627,8 +787,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd></dl>
+    <dd>Remark of the DB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -642,8 +801,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_go" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -651,8 +809,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -660,8 +817,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -669,8 +825,45 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd></dl>
+    <dd>Remark of the DB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_hcl" style="color: inherit; text-decoration: inherit;">charset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark of the DB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -684,8 +877,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_java" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -693,8 +885,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -702,8 +893,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -711,8 +901,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd></dl>
+    <dd>Remark of the DB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -726,8 +915,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_nodejs" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -735,8 +923,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -744,8 +931,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -753,8 +939,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd></dl>
+    <dd>Remark of the DB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -768,8 +953,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_python" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -777,8 +961,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -786,8 +969,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -795,8 +977,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd></dl>
+    <dd>Remark of the DB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -810,8 +991,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_yaml" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -819,8 +999,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -828,8 +1007,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -837,8 +1015,7 @@ The Db resource accepts the following [input](/docs/intro/concepts/inputs-output
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd></dl>
+    <dd>Remark of the DB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -859,8 +1036,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-"
+    <dd>Database creation time.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -868,8 +1044,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -877,8 +1052,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -892,8 +1066,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-"
+    <dd>Database creation time.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -901,8 +1074,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -910,8 +1082,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database creation time.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -925,8 +1126,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-"
+    <dd>Database creation time.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -934,8 +1134,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -943,8 +1142,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -958,8 +1156,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-"
+    <dd>Database creation time.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -967,8 +1164,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -976,8 +1172,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -991,8 +1186,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-"
+    <dd>Database creation time.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1000,8 +1194,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1009,8 +1202,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1024,8 +1216,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-"
+    <dd>Database creation time.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1033,8 +1224,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1042,8 +1232,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1053,18 +1242,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Db resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DbState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Db</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DbState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Db</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1074,104 +1263,143 @@ Get an existing Db resource's state with the given name, ID, and optional extra 
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Db</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDb<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DbState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Db</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDb<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DbState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Db</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Db</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DbState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Db</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DbState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Db</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DbState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Db</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DbState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDb</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Sqlserver:Db</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_sqlserver_db</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DbState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DbState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1179,28 +1407,31 @@ Get an existing Db resource's state with the given name, ID, and optional extra 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DbState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1208,28 +1439,31 @@ Get an existing Db resource's state with the given name, ID, and optional extra 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DbState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1249,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1258,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Database creation time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1267,8 +1499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1276,8 +1507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1285,8 +1515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the DB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1294,8 +1523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1309,8 +1537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1318,8 +1545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Database creation time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1327,8 +1553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1336,8 +1561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1345,8 +1569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the DB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1354,8 +1577,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_hcl" style="color: inherit; text-decoration: inherit;">charset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database creation time.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark of the DB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1369,8 +1645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1378,8 +1653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Database creation time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1387,8 +1661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1396,8 +1669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1405,8 +1677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the DB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1414,8 +1685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1429,8 +1699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1438,8 +1707,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Database creation time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1447,8 +1715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1456,8 +1723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1465,8 +1731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the DB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1474,8 +1739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1489,8 +1753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1498,8 +1761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Database creation time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1507,8 +1769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1516,8 +1777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1525,8 +1785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the DB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1534,8 +1793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1549,8 +1807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Character set DB uses. Valid values: <code>Chinese_PRC_CI_AS</code>, <code>Chinese_PRC_CS_AS</code>, <code>Chinese_PRC_BIN</code>, <code>Chinese_Taiwan_Stroke_CI_AS</code>, <code>SQL_Latin1_General_CP1_CI_AS</code>, and <code>SQL_Latin1_General_CP1_CS_AS</code>. Default value is <code>Chinese_PRC_CI_AS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1558,8 +1815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database creation time.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Database creation time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1567,8 +1823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID which DB belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SQL Server instance ID which DB belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1576,8 +1831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</p>
-</dd><dt class="property-optional"
+    <dd>Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1585,8 +1839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the DB.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the DB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1594,8 +1847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</p>
-</dd></dl>
+    <dd>Database status, could be <code>creating</code>, <code>running</code>, <code>modifying</code> which means changing the remark, and <code>deleting</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1618,6 +1870,9 @@ $ pulumi import tencentcloud:Sqlserver/db:Db example mssql-3cdq7kx5#tf_example_d
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1627,7 +1882,6 @@ $ pulumi import tencentcloud:Sqlserver/db:Db example mssql-3cdq7kx5#tf_example_d
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getInstance"
 title_tag: "tencentcloud.Dnats.getInstance"
-meta_desc: "Documentation for the tencentcloud.Dnats.getInstance function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of DNATs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -13,96 +15,6 @@ no_edit_this_page: true
 <!-- Do not edit by hand unless you're certain you know what you are doing! -->
 
 Use this data source to query detailed information of DNATs.
-
-## Example Usage
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const foo = tencentcloud.Dnats.getInstance({
-    elasticIp: "123.207.115.136",
-});
-```
-```python
-import pulumi
-import pulumi_tencentcloud as tencentcloud
-
-foo = tencentcloud.Dnats.get_instance(elastic_ip="123.207.115.136")
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Dnats.GetInstance.Invoke(new()
-    {
-        ElasticIp = "123.207.115.136",
-    });
-
-});
-```
-```go
-package main
-
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnats"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dnats.GetInstance(ctx, &dnats.GetInstanceArgs{
-			ElasticIp: pulumi.StringRef("123.207.115.136"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
-```java
-package generated_program;
-
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Dnats.DnatsFunctions;
-import com.pulumi.tencentcloud.Dnats.inputs.GetInstanceArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        final var foo = DnatsFunctions.getInstance(GetInstanceArgs.builder()
-            .elasticIp("123.207.115.136")
-            .build());
-
-    }
-}
-```
-```yaml
-variables:
-  foo:
-    fn::invoke:
-      Function: tencentcloud:Dnats:getInstance
-      Arguments:
-        elasticIp: 123.207.115.136
-```
-<!--End PulumiCodeChooser -->
 
 
 
@@ -115,7 +27,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +35,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ><span class="k">
-function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -144,15 +56,15 @@ function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstanceResult</span
 ><span class="k">
-def </span>get_instance_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">elastic_ip</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">elastic_port</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">nat_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">private_ip</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">private_port</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
+def </span>get_instance_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">elastic_ip</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">elastic_port</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">nat_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">private_ip</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">private_port</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -177,7 +89,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstance </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,7 +99,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -198,6 +112,15 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dnats/getInstance:getInstance
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dnats_get_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -216,8 +139,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the NAT forward.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticip_csharp" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Ip</a>
@@ -225,8 +147,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_csharp" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Port</a>
@@ -234,8 +155,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="natid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Id</a>
@@ -243,8 +163,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -252,8 +171,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the backend service.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Port</a>
@@ -261,8 +179,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-optional"
+    <dd>Port of intranet.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -270,8 +187,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -279,8 +195,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -294,8 +209,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the NAT forward.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticip_go" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Ip</a>
@@ -303,8 +217,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_go" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Port</a>
@@ -312,8 +225,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="natid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Id</a>
@@ -321,8 +233,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -330,8 +241,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the backend service.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Port</a>
@@ -339,8 +249,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-optional"
+    <dd>Port of intranet.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -348,8 +257,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -357,8 +265,77 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the NAT forward.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="elastic_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_ip_hcl" style="color: inherit; text-decoration: inherit;">elastic_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network address of the EIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="elastic_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_port_hcl" style="color: inherit; text-decoration: inherit;">elastic_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of the EIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nat_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_id_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the NAT gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="private_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network address of the backend service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="private_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_port_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of intranet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -372,8 +349,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the NAT forward.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticip_java" style="color: inherit; text-decoration: inherit;">elastic<wbr>Ip</a>
@@ -381,8 +357,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_java" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -390,8 +365,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="natid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -399,8 +373,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -408,8 +381,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the backend service.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_java" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -417,8 +389,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-optional"
+    <dd>Port of intranet.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -426,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -435,8 +405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -450,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the NAT forward.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticip_nodejs" style="color: inherit; text-decoration: inherit;">elastic<wbr>Ip</a>
@@ -459,8 +427,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_nodejs" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -468,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="natid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -477,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -486,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the backend service.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -495,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-optional"
+    <dd>Port of intranet.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -504,8 +467,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -513,8 +475,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -528,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the NAT forward.</dd><dt class="property-optional"
             title="Optional">
         <span id="elastic_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_ip_python" style="color: inherit; text-decoration: inherit;">elastic_<wbr>ip</a>
@@ -537,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="elastic_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_port_python" style="color: inherit; text-decoration: inherit;">elastic_<wbr>port</a>
@@ -546,8 +505,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="nat_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_id_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>id</a>
@@ -555,8 +513,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="private_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
@@ -564,8 +521,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the backend service.</dd><dt class="property-optional"
             title="Optional">
         <span id="private_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_port_python" style="color: inherit; text-decoration: inherit;">private_<wbr>port</a>
@@ -573,8 +529,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-optional"
+    <dd>Port of intranet.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -582,8 +537,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -591,8 +545,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -606,8 +559,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the NAT forward.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticip_yaml" style="color: inherit; text-decoration: inherit;">elastic<wbr>Ip</a>
@@ -615,8 +567,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_yaml" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -624,8 +575,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="natid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -633,8 +583,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -642,8 +591,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-optional"
+    <dd>Network address of the backend service.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -651,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-optional"
+    <dd>Port of intranet.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -660,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -669,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -693,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancednatlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dnats.<wbr>Outputs.<wbr>Get<wbr>Instance<wbr>Dnat<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DNATs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DNATs.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -702,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -719,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Network address of the EIP.</dd><dt class="property-"
             title="">
         <span id="elasticport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_csharp" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Port</a>
@@ -728,8 +670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Port of the EIP.</dd><dt class="property-"
             title="">
         <span id="natid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Id</a>
@@ -737,8 +678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT.</p>
-</dd><dt class="property-"
+    <dd>ID of the NAT.</dd><dt class="property-"
             title="">
         <span id="privateip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -746,8 +686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-"
+    <dd>Network address of the backend service.</dd><dt class="property-"
             title="">
         <span id="privateport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Port</a>
@@ -755,8 +694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-"
+    <dd>Port of intranet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -772,8 +710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -787,8 +724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancednatlist">[]Get<wbr>Instance<wbr>Dnat<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the DNATs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DNATs.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -796,8 +732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -813,8 +748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Network address of the EIP.</dd><dt class="property-"
             title="">
         <span id="elasticport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_go" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Port</a>
@@ -822,8 +756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Port of the EIP.</dd><dt class="property-"
             title="">
         <span id="natid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Id</a>
@@ -831,8 +764,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT.</p>
-</dd><dt class="property-"
+    <dd>ID of the NAT.</dd><dt class="property-"
             title="">
         <span id="privateip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -840,8 +772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-"
+    <dd>Network address of the backend service.</dd><dt class="property-"
             title="">
         <span id="privateport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Port</a>
@@ -849,8 +780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-"
+    <dd>Port of intranet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -866,8 +796,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="dnat_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnat_lists_hcl" style="color: inherit; text-decoration: inherit;">dnat_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancednatlist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the DNATs.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="elastic_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_ip_hcl" style="color: inherit; text-decoration: inherit;">elastic_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network address of the EIP.</dd><dt class="property-"
+            title="">
+        <span id="elastic_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_port_hcl" style="color: inherit; text-decoration: inherit;">elastic_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of the EIP.</dd><dt class="property-"
+            title="">
+        <span id="nat_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_id_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the NAT.</dd><dt class="property-"
+            title="">
+        <span id="private_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network address of the backend service.</dd><dt class="property-"
+            title="">
+        <span id="private_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_port_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of intranet.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -881,8 +896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancednatlist">List&lt;Get<wbr>Instance<wbr>Dnat<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DNATs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DNATs.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -890,8 +904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -907,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Network address of the EIP.</dd><dt class="property-"
             title="">
         <span id="elasticport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_java" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -916,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Port of the EIP.</dd><dt class="property-"
             title="">
         <span id="natid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -925,8 +936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the NAT.</p>
-</dd><dt class="property-"
+    <dd>ID of the NAT.</dd><dt class="property-"
             title="">
         <span id="privateip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -934,8 +944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-"
+    <dd>Network address of the backend service.</dd><dt class="property-"
             title="">
         <span id="privateport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_java" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -943,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-"
+    <dd>Port of intranet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -960,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -975,8 +982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancednatlist">Get<wbr>Instance<wbr>Dnat<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the DNATs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DNATs.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -984,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1001,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Network address of the EIP.</dd><dt class="property-"
             title="">
         <span id="elasticport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_nodejs" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -1010,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Port of the EIP.</dd><dt class="property-"
             title="">
         <span id="natid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -1019,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT.</p>
-</dd><dt class="property-"
+    <dd>ID of the NAT.</dd><dt class="property-"
             title="">
         <span id="privateip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1028,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-"
+    <dd>Network address of the backend service.</dd><dt class="property-"
             title="">
         <span id="privateport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -1037,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-"
+    <dd>Port of intranet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1054,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1067,10 +1066,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnat_lists_python" style="color: inherit; text-decoration: inherit;">dnat_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancednatlist">Get<wbr>Instance<wbr>Dnat<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancednatlist">Sequence[Get<wbr>Instance<wbr>Dnat<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the DNATs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DNATs.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1078,8 +1076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1095,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Network address of the EIP.</dd><dt class="property-"
             title="">
         <span id="elastic_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_port_python" style="color: inherit; text-decoration: inherit;">elastic_<wbr>port</a>
@@ -1104,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Port of the EIP.</dd><dt class="property-"
             title="">
         <span id="nat_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_id_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>id</a>
@@ -1113,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the NAT.</p>
-</dd><dt class="property-"
+    <dd>ID of the NAT.</dd><dt class="property-"
             title="">
         <span id="private_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
@@ -1122,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-"
+    <dd>Network address of the backend service.</dd><dt class="property-"
             title="">
         <span id="private_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_port_python" style="color: inherit; text-decoration: inherit;">private_<wbr>port</a>
@@ -1131,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-"
+    <dd>Port of intranet.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1148,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1163,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancednatlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the DNATs.</p>
-</dd><dt class="property-"
+    <dd>Information list of the DNATs.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1172,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1189,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Network address of the EIP.</dd><dt class="property-"
             title="">
         <span id="elasticport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_yaml" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -1198,8 +1186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-"
+    <dd>Port of the EIP.</dd><dt class="property-"
             title="">
         <span id="natid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -1207,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the NAT.</p>
-</dd><dt class="property-"
+    <dd>ID of the NAT.</dd><dt class="property-"
             title="">
         <span id="privateip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1216,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-"
+    <dd>Network address of the backend service.</dd><dt class="property-"
             title="">
         <span id="privateport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -1225,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-"
+    <dd>Port of intranet.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1242,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1267,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="elasticport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_csharp" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Port</a>
@@ -1276,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Port of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="natid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Id</a>
@@ -1285,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the NAT gateway.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -1294,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the backend service.</dd><dt class="property-required"
             title="Required">
         <span id="privateport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Port</a>
@@ -1303,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-required"
+    <dd>Port of intranet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1312,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1321,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1330,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd></dl>
+    <dd>Description of the NAT forward.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1345,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="elasticport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_go" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Port</a>
@@ -1354,8 +1328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Port of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="natid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Id</a>
@@ -1363,8 +1336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the NAT gateway.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -1372,8 +1344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the backend service.</dd><dt class="property-required"
             title="Required">
         <span id="privateport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Port</a>
@@ -1381,8 +1352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-required"
+    <dd>Port of intranet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1390,8 +1360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1399,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1408,8 +1376,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd></dl>
+    <dd>Description of the NAT forward.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="elastic_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_ip_hcl" style="color: inherit; text-decoration: inherit;">elastic_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network address of the EIP.</dd><dt class="property-required"
+            title="Required">
+        <span id="elastic_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_port_hcl" style="color: inherit; text-decoration: inherit;">elastic_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of the EIP.</dd><dt class="property-required"
+            title="Required">
+        <span id="nat_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_id_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the NAT gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="private_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network address of the backend service.</dd><dt class="property-required"
+            title="Required">
+        <span id="private_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_port_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port of intranet.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the NAT forward.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1423,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="elasticport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_java" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -1432,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Port of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="natid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -1441,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the NAT gateway.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1450,8 +1484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the backend service.</dd><dt class="property-required"
             title="Required">
         <span id="privateport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_java" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -1459,8 +1492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-required"
+    <dd>Port of intranet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1468,8 +1500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1477,8 +1508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1486,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd></dl>
+    <dd>Description of the NAT forward.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1501,8 +1530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="elasticport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_nodejs" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -1510,8 +1538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Port of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="natid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -1519,8 +1546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the NAT gateway.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1528,8 +1554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the backend service.</dd><dt class="property-required"
             title="Required">
         <span id="privateport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -1537,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-required"
+    <dd>Port of intranet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1546,8 +1570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1555,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1564,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd></dl>
+    <dd>Description of the NAT forward.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1579,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="elastic_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_port_python" style="color: inherit; text-decoration: inherit;">elastic_<wbr>port</a>
@@ -1588,8 +1608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Port of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="nat_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_id_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>id</a>
@@ -1597,8 +1616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the NAT gateway.</dd><dt class="property-required"
             title="Required">
         <span id="private_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
@@ -1606,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the backend service.</dd><dt class="property-required"
             title="Required">
         <span id="private_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_port_python" style="color: inherit; text-decoration: inherit;">private_<wbr>port</a>
@@ -1615,8 +1632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-required"
+    <dd>Port of intranet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1624,8 +1640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1633,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1642,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd></dl>
+    <dd>Description of the NAT forward.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1657,8 +1670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="elasticport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticport_yaml" style="color: inherit; text-decoration: inherit;">elastic<wbr>Port</a>
@@ -1666,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of the EIP.</p>
-</dd><dt class="property-required"
+    <dd>Port of the EIP.</dd><dt class="property-required"
             title="Required">
         <span id="natid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natid_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Id</a>
@@ -1675,8 +1686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the NAT gateway.</p>
-</dd><dt class="property-required"
+    <dd>ID of the NAT gateway.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1684,8 +1694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network address of the backend service.</p>
-</dd><dt class="property-required"
+    <dd>Network address of the backend service.</dd><dt class="property-required"
             title="Required">
         <span id="privateport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateport_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Port</a>
@@ -1693,8 +1702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port of intranet.</p>
-</dd><dt class="property-required"
+    <dd>Port of intranet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1702,8 +1710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the network protocol. Valid values: <code>TCP</code> and <code>UDP</code>.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1711,8 +1718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1720,8 +1726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the NAT forward.</p>
-</dd></dl>
+    <dd>Description of the NAT forward.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1736,7 +1741,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

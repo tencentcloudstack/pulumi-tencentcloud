@@ -2,9 +2,11 @@
 ---
 title: "ProxyGroup"
 title_tag: "tencentcloud.Gaap.ProxyGroup"
-meta_desc: "Documentation for the tencentcloud.Gaap.ProxyGroup resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a gaap proxy group"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,65 +18,61 @@ Provides a resource to create a gaap proxy group
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const proxyGroup = new tencentcloud.gaap.ProxyGroup("proxyGroup", {
+const proxyGroup = new tencentcloud.gaap.ProxyGroup("proxy_group", {
+    projectId: 0,
     groupName: "tf-test-update",
+    realServerRegion: "Beijing",
     ipAddressVersion: "IPv4",
     packageType: "Thunder",
-    projectId: 0,
-    realServerRegion: "Beijing",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-proxy_group = tencentcloud.gaap.ProxyGroup("proxyGroup",
-    group_name="tf-test-update",
-    ip_address_version="IPv4",
-    package_type="Thunder",
+proxy_group = tencentcloud.gaap.ProxyGroup("proxy_group",
     project_id=0,
-    real_server_region="Beijing")
+    group_name="tf-test-update",
+    real_server_region="Beijing",
+    ip_address_version="IPv4",
+    package_type="Thunder")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var proxyGroup = new Tencentcloud.Gaap.ProxyGroup("proxyGroup", new()
-    {
-        GroupName = "tf-test-update",
-        IpAddressVersion = "IPv4",
-        PackageType = "Thunder",
-        ProjectId = 0,
-        RealServerRegion = "Beijing",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.NewProxyGroup(ctx, "proxyGroup", &Gaap.ProxyGroupArgs{
+		_, err := gaap.NewProxyGroup(ctx, "proxy_group", &gaap.ProxyGroupArgs{
+			ProjectId:        pulumi.Int(0),
 			GroupName:        pulumi.String("tf-test-update"),
+			RealServerRegion: pulumi.String("Beijing"),
 			IpAddressVersion: pulumi.String("IPv4"),
 			PackageType:      pulumi.String("Thunder"),
-			ProjectId:        pulumi.Int(0),
-			RealServerRegion: pulumi.String("Beijing"),
 		})
 		if err != nil {
 			return err
@@ -83,6 +81,35 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var proxyGroup = new Tencentcloud.Gaap.ProxyGroup("proxy_group", new()
+    {
+        ProjectId = 0,
+        GroupName = "tf-test-update",
+        RealServerRegion = "Beijing",
+        IpAddressVersion = "IPv4",
+        PackageType = "Thunder",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -91,8 +118,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.ProxyGroup;
 import com.pulumi.tencentcloud.Gaap.ProxyGroupArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,91 +131,144 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var proxyGroup = new ProxyGroup("proxyGroup", ProxyGroupArgs.builder()        
+        var proxyGroup = new ProxyGroup("proxyGroup", ProxyGroupArgs.builder()
+            .projectId(0)
             .groupName("tf-test-update")
+            .realServerRegion("Beijing")
             .ipAddressVersion("IPv4")
             .packageType("Thunder")
-            .projectId(0)
-            .realServerRegion("Beijing")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   proxyGroup:
     type: tencentcloud:Gaap:ProxyGroup
+    name: proxy_group
     properties:
+      projectId: 0
       groupName: tf-test-update
+      realServerRegion: Beijing
       ipAddressVersion: IPv4
       packageType: Thunder
-      projectId: 0
-      realServerRegion: Beijing
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_gaap_proxygroup" "proxy_group" {
+  project_id         = 0
+  group_name         = "tf-test-update"
+  real_server_region = "Beijing"
+  ip_address_version = "IPv4"
+  package_type       = "Thunder"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateProxyGroup](https://www.tencentcloud.com/document/api/608/33087)
+* Read: [DescribeProxyGroupDetails](https://www.tencentcloud.com/document/api/608/33082)
+* Update: [ModifyProxyGroupAttribute](https://www.tencentcloud.com/document/api/608/33079)
+* Delete: [DeleteProxyGroup](https://www.tencentcloud.com/document/api/608/33085)
 
 
 ## Create ProxyGroup Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                <span class="nx">group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">ip_address_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-               <span class="nx">real_server_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">real_server_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">ip_address_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProxyGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ProxyGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProxyGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ProxyGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ProxyGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:ProxyGroup</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:ProxyGroup</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_gaap_proxy_group&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -209,7 +289,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -326,11 +406,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ProxyGroup Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ProxyGroup resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -346,8 +434,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-required"
+    <dd>Channel group alias.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -355,8 +442,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region</a>
@@ -364,8 +450,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd><dt class="property-optional"
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -373,8 +458,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -382,8 +466,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd></dl>
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -397,8 +480,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-required"
+    <dd>Channel group alias.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -406,8 +488,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region</a>
@@ -415,8 +496,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd><dt class="property-optional"
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -424,8 +504,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -433,8 +512,53 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd></dl>
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Channel group alias.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_region_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_address_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -448,8 +572,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-required"
+    <dd>Channel group alias.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -457,8 +580,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -466,8 +588,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd><dt class="property-optional"
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -475,8 +596,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_java" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -484,8 +604,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd></dl>
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -499,8 +618,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-required"
+    <dd>Channel group alias.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -508,8 +626,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -517,8 +634,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd><dt class="property-optional"
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -526,8 +642,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -535,8 +650,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd></dl>
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -550,8 +664,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-required"
+    <dd>Channel group alias.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -559,8 +672,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_region_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region</a>
@@ -568,8 +680,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd><dt class="property-optional"
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_address_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
@@ -577,8 +688,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="package_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_python" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
@@ -586,8 +696,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd></dl>
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -601,8 +710,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-required"
+    <dd>Channel group alias.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -610,8 +718,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -619,8 +726,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd><dt class="property-optional"
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -628,8 +734,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -637,8 +742,7 @@ The ProxyGroup resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd></dl>
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -659,8 +763,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -674,8 +777,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -689,8 +805,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -704,8 +819,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -719,8 +833,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -734,8 +847,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -745,18 +857,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ProxyGroup resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ProxyGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ProxyGroup</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ProxyGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ProxyGroup</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -765,104 +877,143 @@ Get an existing ProxyGroup resource's state with the given name, ID, and optiona
         <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">real_server_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ProxyGroup</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetProxyGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ProxyGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ProxyGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetProxyGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ProxyGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ProxyGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ProxyGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ProxyGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ProxyGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ProxyGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingProxyGroup</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Gaap:ProxyGroup</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_gaap_proxy_group</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -870,28 +1021,31 @@ Get an existing ProxyGroup resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -899,28 +1053,31 @@ Get an existing ProxyGroup resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -940,8 +1097,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-optional"
+    <dd>Channel group alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipaddressversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipaddressversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -949,8 +1105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -958,8 +1113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd><dt class="property-optional"
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -967,8 +1121,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region</a>
@@ -976,8 +1129,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd></dl>
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -991,8 +1143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-optional"
+    <dd>Channel group alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipaddressversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipaddressversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -1000,8 +1151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -1009,8 +1159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd><dt class="property-optional"
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1018,8 +1167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region</a>
@@ -1027,8 +1175,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd></dl>
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Channel group alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_address_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_address_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_real_server_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_real_server_region_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1042,8 +1235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-optional"
+    <dd>Channel group alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipaddressversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipaddressversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -1051,8 +1243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_java" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -1060,8 +1251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd><dt class="property-optional"
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1069,8 +1259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -1078,8 +1267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd></dl>
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1093,8 +1281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-optional"
+    <dd>Channel group alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipaddressversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipaddressversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -1102,8 +1289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -1111,8 +1297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd><dt class="property-optional"
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1120,8 +1305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -1129,8 +1313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd></dl>
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1144,8 +1327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-optional"
+    <dd>Channel group alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_address_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_address_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
@@ -1153,8 +1335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_type_python" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
@@ -1162,8 +1343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd><dt class="property-optional"
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1171,8 +1351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_real_server_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_real_server_region_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region</a>
@@ -1180,8 +1359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd></dl>
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1195,8 +1373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel group alias.</p>
-</dd><dt class="property-optional"
+    <dd>Channel group alias.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipaddressversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipaddressversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -1204,8 +1381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagetype_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -1213,8 +1389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</p>
-</dd><dt class="property-optional"
+    <dd>Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1222,8 +1397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which the proxy group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to which the proxy group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realserverregion_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -1231,8 +1405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</p>
-</dd></dl>
+    <dd>real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1247,12 +1420,15 @@ The following state arguments are supported:
 
 
 
-gaap proxy_group can be imported using the id, e.g.
+gaap proxyGroup can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1264,7 +1440,6 @@ $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Invoker"
 title_tag: "tencentcloud.Tat.Invoker"
-meta_desc: "Documentation for the tencentcloud.Tat.Invoker resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tat invoker"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,36 +18,88 @@ Provides a resource to create a tat invoker
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const invoker = new tencentcloud.tat.Invoker("invoker", {
+    name: "pwd-1",
+    type: "SCHEDULE",
     commandId: "cmd-6fydo27j",
     instanceIds: ["ins-3c7q2ebs"],
-    scheduleSettings: {
-        invokeTime: "2099-11-17T16:00:00Z",
-        policy: "ONCE",
-    },
-    type: "SCHEDULE",
     username: "root",
+    scheduleSettings: {
+        policy: "ONCE",
+        invokeTime: "2099-11-17T16:00:00Z",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 invoker = tencentcloud.tat.Invoker("invoker",
+    name="pwd-1",
+    type="SCHEDULE",
     command_id="cmd-6fydo27j",
     instance_ids=["ins-3c7q2ebs"],
-    schedule_settings=tencentcloud.tat.InvokerScheduleSettingsArgs(
-        invoke_time="2099-11-17T16:00:00Z",
-        policy="ONCE",
-    ),
-    type="SCHEDULE",
-    username="root")
+    username="root",
+    schedule_settings={
+        "policy": "ONCE",
+        "invoke_time": "2099-11-17T16:00:00Z",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tat"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tat.NewInvoker(ctx, "invoker", &tat.InvokerArgs{
+			Name:      pulumi.String("pwd-1"),
+			Type:      pulumi.String("SCHEDULE"),
+			CommandId: pulumi.String("cmd-6fydo27j"),
+			InstanceIds: pulumi.StringArray{
+				pulumi.String("ins-3c7q2ebs"),
+			},
+			Username: pulumi.String("root"),
+			ScheduleSettings: &tat.InvokerScheduleSettingsArgs{
+				Policy:     pulumi.String("ONCE"),
+				InvokeTime: pulumi.String("2099-11-17T16:00:00Z"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -56,51 +110,28 @@ return await Deployment.RunAsync(() =>
 {
     var invoker = new Tencentcloud.Tat.Invoker("invoker", new()
     {
+        Name = "pwd-1",
+        Type = "SCHEDULE",
         CommandId = "cmd-6fydo27j",
         InstanceIds = new[]
         {
             "ins-3c7q2ebs",
         },
+        Username = "root",
         ScheduleSettings = new Tencentcloud.Tat.Inputs.InvokerScheduleSettingsArgs
         {
-            InvokeTime = "2099-11-17T16:00:00Z",
             Policy = "ONCE",
+            InvokeTime = "2099-11-17T16:00:00Z",
         },
-        Type = "SCHEDULE",
-        Username = "root",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tat.NewInvoker(ctx, "invoker", &Tat.InvokerArgs{
-			CommandId: pulumi.String("cmd-6fydo27j"),
-			InstanceIds: pulumi.StringArray{
-				pulumi.String("ins-3c7q2ebs"),
-			},
-			ScheduleSettings: &tat.InvokerScheduleSettingsArgs{
-				InvokeTime: pulumi.String("2099-11-17T16:00:00Z"),
-				Policy:     pulumi.String("ONCE"),
-			},
-			Type:     pulumi.String("SCHEDULE"),
-			Username: pulumi.String("root"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -110,8 +141,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tat.Invoker;
 import com.pulumi.tencentcloud.Tat.InvokerArgs;
 import com.pulumi.tencentcloud.Tat.inputs.InvokerScheduleSettingsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -123,100 +154,157 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var invoker = new Invoker("invoker", InvokerArgs.builder()        
+        var invoker = new Invoker("invoker", InvokerArgs.builder()
+            .name("pwd-1")
+            .type("SCHEDULE")
             .commandId("cmd-6fydo27j")
             .instanceIds("ins-3c7q2ebs")
-            .scheduleSettings(InvokerScheduleSettingsArgs.builder()
-                .invokeTime("2099-11-17T16:00:00Z")
-                .policy("ONCE")
-                .build())
-            .type("SCHEDULE")
             .username("root")
+            .scheduleSettings(InvokerScheduleSettingsArgs.builder()
+                .policy("ONCE")
+                .invokeTime("2099-11-17T16:00:00Z")
+                .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   invoker:
     type: tencentcloud:Tat:Invoker
     properties:
+      name: pwd-1
+      type: SCHEDULE
       commandId: cmd-6fydo27j
       instanceIds:
         - ins-3c7q2ebs
-      # parameters = ""
-      scheduleSettings:
-        invokeTime: 2099-11-17T16:00:00Z
-        policy: ONCE
-      type: SCHEDULE
       username: root
+      scheduleSettings:
+        policy: ONCE
+        invokeTime: 2099-11-17T16:00:00Z
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tat_invoker" "invoker" {
+  name         = "pwd-1"
+  type         = "SCHEDULE"
+  command_id   = "cmd-6fydo27j"
+  instance_ids = ["ins-3c7q2ebs"]
+  username     = "root"
+  schedule_settings = {
+    policy      = "ONCE"
+    invoke_time = "2099-11-17T16:00:00Z"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateInvoker](https://www.tencentcloud.com/document/api/1147/46701)
+* Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
+* Update: [ModifyInvoker](https://www.tencentcloud.com/document/api/1147/46688)
+* Delete: [DeleteInvoker](https://www.tencentcloud.com/document/api/1147/46699)
 
 
 ## Create Invoker Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
             <span class="nx">command_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+            <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">parameters</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">schedule_settings</span><span class="p">:</span> <span class="nx">Optional[_tat.InvokerScheduleSettingsArgs]</span> = None<span class="p">,</span>
-            <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">username</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">schedule_settings</span><span class="p">:</span> <span class="nx">Optional[InvokerScheduleSettingsArgs]</span> = None<span class="p">,</span>
+            <span class="nx">username</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInvoker</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Invoker</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInvoker</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Invoker</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Invoker</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InvokerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tat:Invoker</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tat:Invoker</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tat_invoker&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -237,7 +325,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -354,11 +442,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Invoker Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -374,8 +470,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-required"
+    <dd>Remote command ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -383,8 +478,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -392,8 +486,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -401,8 +494,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="parameters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_csharp" style="color: inherit; text-decoration: inherit;">Parameters</a>
@@ -410,17 +502,15 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="schedulesettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulesettings_csharp" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#invokerschedulesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tat.<wbr>Inputs.<wbr>Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#invokerschedulesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tat.<wbr>Inputs.<wbr>Invoker<wbr>Schedule<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -428,8 +518,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -443,8 +532,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-required"
+    <dd>Remote command ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -452,8 +540,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -461,8 +548,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -470,8 +556,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="parameters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_go" style="color: inherit; text-decoration: inherit;">Parameters</a>
@@ -479,8 +564,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="schedulesettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulesettings_go" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Settings</a>
@@ -488,8 +572,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -497,8 +580,69 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="command_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_id_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote command ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Invoker name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parameters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_hcl" style="color: inherit; text-decoration: inherit;">parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schedule_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedule_settings_hcl" style="color: inherit; text-decoration: inherit;">schedule_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#invokerschedulesettings">object</a></span>
+    </dt>
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="username_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_hcl" style="color: inherit; text-decoration: inherit;">username</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -512,8 +656,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-required"
+    <dd>Remote command ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -521,8 +664,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -530,8 +672,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -539,8 +680,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="parameters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_java" style="color: inherit; text-decoration: inherit;">parameters</a>
@@ -548,17 +688,15 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="schedulesettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulesettings_java" style="color: inherit; text-decoration: inherit;">schedule<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">username</a>
@@ -566,8 +704,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -581,8 +718,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-required"
+    <dd>Remote command ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -590,8 +726,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -599,8 +734,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -608,8 +742,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="parameters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_nodejs" style="color: inherit; text-decoration: inherit;">parameters</a>
@@ -617,17 +750,15 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="schedulesettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulesettings_nodejs" style="color: inherit; text-decoration: inherit;">schedule<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">username</a>
@@ -635,8 +766,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -650,8 +780,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-required"
+    <dd>Remote command ID.</dd><dt class="property-required"
             title="Required">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -659,8 +788,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -668,8 +796,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -677,8 +804,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="parameters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_python" style="color: inherit; text-decoration: inherit;">parameters</a>
@@ -686,8 +812,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="schedule_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedule_settings_python" style="color: inherit; text-decoration: inherit;">schedule_<wbr>settings</a>
@@ -695,8 +820,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_python" style="color: inherit; text-decoration: inherit;">username</a>
@@ -704,8 +828,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -719,8 +842,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-required"
+    <dd>Remote command ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -728,8 +850,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -737,8 +858,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -746,8 +866,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="parameters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parameters_yaml" style="color: inherit; text-decoration: inherit;">parameters</a>
@@ -755,8 +874,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="schedulesettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulesettings_yaml" style="color: inherit; text-decoration: inherit;">schedule<wbr>Settings</a>
@@ -764,8 +882,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#invokerschedulesettings">Property Map</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">username</a>
@@ -773,8 +890,7 @@ The Invoker resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -795,8 +911,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-"
+    <dd>Creation time.</dd><dt class="property-"
             title="">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -804,8 +919,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the invoker.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -813,8 +927,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="invokerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerid_csharp" style="color: inherit; text-decoration: inherit;">Invoker<wbr>Id</a>
@@ -822,8 +935,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-"
+    <dd>Invoker ID.</dd><dt class="property-"
             title="">
         <span id="updatedtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -831,8 +943,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd></dl>
+    <dd>Modification time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -846,8 +957,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-"
+    <dd>Creation time.</dd><dt class="property-"
             title="">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -855,8 +965,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the invoker.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -864,8 +973,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="invokerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerid_go" style="color: inherit; text-decoration: inherit;">Invoker<wbr>Id</a>
@@ -873,8 +981,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-"
+    <dd>Invoker ID.</dd><dt class="property-"
             title="">
         <span id="updatedtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -882,8 +989,53 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd></dl>
+    <dd>Modification time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time.</dd><dt class="property-"
+            title="">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the invoker.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="invoker_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoker_id_hcl" style="color: inherit; text-decoration: inherit;">invoker_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Invoker ID.</dd><dt class="property-"
+            title="">
+        <span id="updated_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_time_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Modification time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -897,8 +1049,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-"
+    <dd>Creation time.</dd><dt class="property-"
             title="">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -906,8 +1057,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the invoker.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -915,8 +1065,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="invokerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerid_java" style="color: inherit; text-decoration: inherit;">invoker<wbr>Id</a>
@@ -924,8 +1073,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-"
+    <dd>Invoker ID.</dd><dt class="property-"
             title="">
         <span id="updatedtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_java" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -933,8 +1081,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd></dl>
+    <dd>Modification time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -948,8 +1095,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-"
+    <dd>Creation time.</dd><dt class="property-"
             title="">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -957,8 +1103,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the invoker.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -966,8 +1111,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="invokerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerid_nodejs" style="color: inherit; text-decoration: inherit;">invoker<wbr>Id</a>
@@ -975,8 +1119,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-"
+    <dd>Invoker ID.</dd><dt class="property-"
             title="">
         <span id="updatedtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -984,8 +1127,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd></dl>
+    <dd>Modification time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -999,8 +1141,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-"
+    <dd>Creation time.</dd><dt class="property-"
             title="">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1008,8 +1149,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the invoker.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1017,8 +1157,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="invoker_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoker_id_python" style="color: inherit; text-decoration: inherit;">invoker_<wbr>id</a>
@@ -1026,8 +1165,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-"
+    <dd>Invoker ID.</dd><dt class="property-"
             title="">
         <span id="updated_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_time_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
@@ -1035,8 +1173,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd></dl>
+    <dd>Modification time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1050,8 +1187,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-"
+    <dd>Creation time.</dd><dt class="property-"
             title="">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1059,8 +1195,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the invoker.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1068,8 +1203,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="invokerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerid_yaml" style="color: inherit; text-decoration: inherit;">invoker<wbr>Id</a>
@@ -1077,8 +1211,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-"
+    <dd>Invoker ID.</dd><dt class="property-"
             title="">
         <span id="updatedtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1086,8 +1219,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd></dl>
+    <dd>Modification time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1097,18 +1229,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Invoker resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InvokerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Invoker</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InvokerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Invoker</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1119,108 +1251,147 @@ Get an existing Invoker resource's state with the given name, ID, and optional e
         <span class="nx">invoker_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">parameters</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">schedule_settings</span><span class="p">:</span> <span class="nx">Optional[_tat.InvokerScheduleSettingsArgs]</span> = None<span class="p">,</span>
+        <span class="nx">schedule_settings</span><span class="p">:</span> <span class="nx">Optional[InvokerScheduleSettingsArgs]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">updated_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">username</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Invoker</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInvoker<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InvokerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Invoker</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInvoker<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InvokerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Invoker</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Invoker</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InvokerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Invoker</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InvokerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Invoker</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InvokerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Invoker</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InvokerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInvoker</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tat:Invoker</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tat_invoker</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InvokerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InvokerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1228,28 +1399,31 @@ Get an existing Invoker resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InvokerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1257,28 +1431,31 @@ Get an existing Invoker resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InvokerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1298,8 +1475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Remote command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -1307,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1316,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -1325,8 +1499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_invokerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_invokerid_csharp" style="color: inherit; text-decoration: inherit;">Invoker<wbr>Id</a>
@@ -1334,8 +1507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1343,8 +1515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parameters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parameters_csharp" style="color: inherit; text-decoration: inherit;">Parameters</a>
@@ -1352,17 +1523,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulesettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulesettings_csharp" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#invokerschedulesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tat.<wbr>Inputs.<wbr>Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#invokerschedulesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tat.<wbr>Inputs.<wbr>Invoker<wbr>Schedule<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1370,8 +1539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -1379,8 +1547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd><dt class="property-optional"
+    <dd>Modification time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_csharp" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -1388,8 +1555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,8 +1569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Remote command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_go" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -1412,8 +1577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1421,8 +1585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -1430,8 +1593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_invokerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_invokerid_go" style="color: inherit; text-decoration: inherit;">Invoker<wbr>Id</a>
@@ -1439,8 +1601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1448,8 +1609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parameters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parameters_go" style="color: inherit; text-decoration: inherit;">Parameters</a>
@@ -1457,8 +1617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulesettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulesettings_go" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Settings</a>
@@ -1466,8 +1625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1475,8 +1633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -1484,8 +1641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd><dt class="property-optional"
+    <dd>Modification time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_go" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -1493,8 +1649,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_command_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_command_id_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote command ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the invoker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_invoker_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_invoker_id_hcl" style="color: inherit; text-decoration: inherit;">invoker_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Invoker ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Invoker name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_parameters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parameters_hcl" style="color: inherit; text-decoration: inherit;">parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedule_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedule_settings_hcl" style="color: inherit; text-decoration: inherit;">schedule_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#invokerschedulesettings">object</a></span>
+    </dt>
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_updated_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updated_time_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Modification time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_username_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_hcl" style="color: inherit; text-decoration: inherit;">username</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1508,8 +1757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Remote command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_java" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1517,8 +1765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1526,8 +1773,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -1535,8 +1781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_invokerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_invokerid_java" style="color: inherit; text-decoration: inherit;">invoker<wbr>Id</a>
@@ -1544,8 +1789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1553,8 +1797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parameters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parameters_java" style="color: inherit; text-decoration: inherit;">parameters</a>
@@ -1562,17 +1805,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulesettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulesettings_java" style="color: inherit; text-decoration: inherit;">schedule<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1580,8 +1821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_java" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1589,8 +1829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd><dt class="property-optional"
+    <dd>Modification time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_java" style="color: inherit; text-decoration: inherit;">username</a>
@@ -1598,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1613,8 +1851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Remote command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1622,8 +1859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1631,8 +1867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -1640,8 +1875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_invokerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_invokerid_nodejs" style="color: inherit; text-decoration: inherit;">invoker<wbr>Id</a>
@@ -1649,8 +1883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1658,8 +1891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parameters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parameters_nodejs" style="color: inherit; text-decoration: inherit;">parameters</a>
@@ -1667,17 +1899,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulesettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulesettings_nodejs" style="color: inherit; text-decoration: inherit;">schedule<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1685,8 +1915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1694,8 +1923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd><dt class="property-optional"
+    <dd>Modification time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_nodejs" style="color: inherit; text-decoration: inherit;">username</a>
@@ -1703,8 +1931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1718,8 +1945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Remote command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_created_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_created_time_python" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
@@ -1727,8 +1953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1736,8 +1961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -1745,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_invoker_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_invoker_id_python" style="color: inherit; text-decoration: inherit;">invoker_<wbr>id</a>
@@ -1754,8 +1977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1763,8 +1985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parameters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parameters_python" style="color: inherit; text-decoration: inherit;">parameters</a>
@@ -1772,8 +1993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedule_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedule_settings_python" style="color: inherit; text-decoration: inherit;">schedule_<wbr>settings</a>
@@ -1781,8 +2001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1790,8 +2009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updated_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updated_time_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
@@ -1799,8 +2017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd><dt class="property-optional"
+    <dd>Modification time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_python" style="color: inherit; text-decoration: inherit;">username</a>
@@ -1808,8 +2025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1823,8 +2039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Remote command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1832,8 +2047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1841,8 +2055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable the invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -1850,8 +2063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instance bound to the trigger. Up to 100 IDs are allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_invokerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_invokerid_yaml" style="color: inherit; text-decoration: inherit;">invoker<wbr>Id</a>
@@ -1859,8 +2071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker ID.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1868,8 +2079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker name.</p>
-</dd><dt class="property-optional"
+    <dd>Invoker name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_parameters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_parameters_yaml" style="color: inherit; text-decoration: inherit;">parameters</a>
@@ -1877,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom parameters of the command.</p>
-</dd><dt class="property-optional"
+    <dd>Custom parameters of the command.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulesettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulesettings_yaml" style="color: inherit; text-decoration: inherit;">schedule<wbr>Settings</a>
@@ -1886,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#invokerschedulesettings">Property Map</a></span>
     </dt>
-    <dd><p>Settings required for a recurring invoker.</p>
-</dd><dt class="property-optional"
+    <dd>Settings required for a recurring invoker.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1895,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</p>
-</dd><dt class="property-optional"
+    <dd>Invoker type. It can only be <code>SCHEDULE</code> (recurring invokers).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatedtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatedtime_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1904,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modification time.</p>
-</dd><dt class="property-optional"
+    <dd>Modification time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_yaml" style="color: inherit; text-decoration: inherit;">username</a>
@@ -1913,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user who executes the command.</p>
-</dd></dl>
+    <dd>The user who executes the command.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1929,7 +2134,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="invokerschedulesettings">Invoker<wbr>Schedule<wbr>Settings</h4>
+<h4 id="invokerschedulesettings">
+Invoker<wbr>Schedule<wbr>Settings<pulumi-choosable type="language" values="python,go" class="inline">, Invoker<wbr>Schedule<wbr>Settings<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1941,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</p>
-</dd><dt class="property-optional"
+    <dd>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</dd><dt class="property-optional"
             title="Optional">
         <span id="invoketime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoketime_csharp" style="color: inherit; text-decoration: inherit;">Invoke<wbr>Time</a>
@@ -1950,8 +2156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The next execution time of the invoker. This field is required if Policy is ONCE.</p>
-</dd><dt class="property-optional"
+    <dd>The next execution time of the invoker. This field is required if Policy is ONCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_csharp" style="color: inherit; text-decoration: inherit;">Recurrence</a>
@@ -1959,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</p>
-</dd></dl>
+    <dd>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1974,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</p>
-</dd><dt class="property-optional"
+    <dd>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</dd><dt class="property-optional"
             title="Optional">
         <span id="invoketime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoketime_go" style="color: inherit; text-decoration: inherit;">Invoke<wbr>Time</a>
@@ -1983,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The next execution time of the invoker. This field is required if Policy is ONCE.</p>
-</dd><dt class="property-optional"
+    <dd>The next execution time of the invoker. This field is required if Policy is ONCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_go" style="color: inherit; text-decoration: inherit;">Recurrence</a>
@@ -1992,8 +2194,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</p>
-</dd></dl>
+    <dd>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_hcl" style="color: inherit; text-decoration: inherit;">policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="invoke_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoke_time_hcl" style="color: inherit; text-decoration: inherit;">invoke_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The next execution time of the invoker. This field is required if Policy is ONCE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recurrence_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_hcl" style="color: inherit; text-decoration: inherit;">recurrence</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2007,8 +2238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</p>
-</dd><dt class="property-optional"
+    <dd>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</dd><dt class="property-optional"
             title="Optional">
         <span id="invoketime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoketime_java" style="color: inherit; text-decoration: inherit;">invoke<wbr>Time</a>
@@ -2016,8 +2246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The next execution time of the invoker. This field is required if Policy is ONCE.</p>
-</dd><dt class="property-optional"
+    <dd>The next execution time of the invoker. This field is required if Policy is ONCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_java" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -2025,8 +2254,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</p>
-</dd></dl>
+    <dd>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2040,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</p>
-</dd><dt class="property-optional"
+    <dd>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</dd><dt class="property-optional"
             title="Optional">
         <span id="invoketime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoketime_nodejs" style="color: inherit; text-decoration: inherit;">invoke<wbr>Time</a>
@@ -2049,8 +2276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The next execution time of the invoker. This field is required if Policy is ONCE.</p>
-</dd><dt class="property-optional"
+    <dd>The next execution time of the invoker. This field is required if Policy is ONCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_nodejs" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -2058,8 +2284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</p>
-</dd></dl>
+    <dd>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2073,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</p>
-</dd><dt class="property-optional"
+    <dd>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</dd><dt class="property-optional"
             title="Optional">
         <span id="invoke_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoke_time_python" style="color: inherit; text-decoration: inherit;">invoke_<wbr>time</a>
@@ -2082,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The next execution time of the invoker. This field is required if Policy is ONCE.</p>
-</dd><dt class="property-optional"
+    <dd>The next execution time of the invoker. This field is required if Policy is ONCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_python" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -2091,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</p>
-</dd></dl>
+    <dd>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2106,8 +2328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</p>
-</dd><dt class="property-optional"
+    <dd>Execution policy: <code>ONCE</code>: Execute once; <code>RECURRENCE</code>: Execute repeatedly.</dd><dt class="property-optional"
             title="Optional">
         <span id="invoketime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoketime_yaml" style="color: inherit; text-decoration: inherit;">invoke<wbr>Time</a>
@@ -2115,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The next execution time of the invoker. This field is required if Policy is ONCE.</p>
-</dd><dt class="property-optional"
+    <dd>The next execution time of the invoker. This field is required if Policy is ONCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="recurrence_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recurrence_yaml" style="color: inherit; text-decoration: inherit;">recurrence</a>
@@ -2124,8 +2344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</p>
-</dd></dl>
+    <dd>Trigger the crontab expression. This field is required if <code>Policy</code> is <code>RECURRENCE</code>. The crontab expression is parsed in UTC+8.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2134,11 +2353,13 @@ The following state arguments are supported:
 
 
 tat invoker can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Tat/invoker:Invoker invoker ivk-gwb4ztk5
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2150,7 +2371,6 @@ $ pulumi import tencentcloud:Tat/invoker:Invoker invoker ivk-gwb4ztk5
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Association"
 title_tag: "tencentcloud.Eip.Association"
-meta_desc: "Documentation for the tencentcloud.Eip.Association resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides an eip resource associated with other resource like CVM, ENI and CLB. NOTE: Please DO NOT define allocatePublicIp in."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,70 +16,246 @@ no_edit_this_page: true
 
 Provides an eip resource associated with other resource like CVM, ENI and CLB.
 
-> **NOTE:** Please DO NOT define `allocate_public_ip` in `tencentcloud.Instance.Instance` resource when using `tencentcloud.Eip.Association`.
+> **NOTE:** Please DO NOT define `allocatePublicIp` in `tencentcloud.Instance.Instance` resource when using `tencentcloud.Eip.Association`.
 
 ## Example Usage
 
+### Bind elastic public IP By WAF(SaaS)
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.eip.Association("example", {
+    eipId: "eip-4stgtfb8",
+    instanceId: "waf_2opxlbky67yub3gm",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.eip.Association("example",
+    eip_id="eip-4stgtfb8",
+    instance_id="waf_2opxlbky67yub3gm")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eip"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := eip.NewAssociation(ctx, "example", &eip.AssociationArgs{
+			EipId:      pulumi.String("eip-4stgtfb8"),
+			InstanceId: pulumi.String("waf_2opxlbky67yub3gm"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Eip.Association("example", new()
+    {
+        EipId = "eip-4stgtfb8",
+        InstanceId = "waf_2opxlbky67yub3gm",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Eip.Association;
+import com.pulumi.tencentcloud.Eip.AssociationArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Association("example", AssociationArgs.builder()
+            .eipId("eip-4stgtfb8")
+            .instanceId("waf_2opxlbky67yub3gm")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Eip:Association
+    properties:
+      eipId: eip-4stgtfb8
+      instanceId: waf_2opxlbky67yub3gm
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_eip_association" "example" {
+  eip_id      = "eip-4stgtfb8"
+  instance_id = "waf_2opxlbky67yub3gm"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AssociateAddress](https://www.tencentcloud.com/document/api/215/16700)
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+* Read: [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+* Delete:
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
+  - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+  - [DisassociateAddress](https://www.tencentcloud.com/document/api/215/16703)
+  - [DisassociateNatGatewayAddress](https://www.tencentcloud.com/document/api/215/34751)
 
 
 ## Create Association Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Association</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Association</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Association</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Association</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                 <span class="nx">eip_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">network_interface_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">private_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Association</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">private_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAssociation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Association</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAssociation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Association</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Association</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Association</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Association</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Association</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AssociationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Eip:Association</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Eip:Association</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_eip_association&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -98,7 +276,7 @@ Provides an eip resource associated with other resource like CVM, ENI and CLB.
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -215,11 +393,19 @@ Provides an eip resource associated with other resource like CVM, ENI and CLB.
 </pulumi-choosable>
 </div>
 
+
+
 ## Association Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Association resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -235,8 +421,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -244,8 +429,9 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkinterfaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -253,8 +439,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="privateip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -262,8 +447,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -277,8 +461,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -286,8 +469,9 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkinterfaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -295,8 +479,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="privateip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -304,8 +487,47 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="eip_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_id_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="network_interface_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_interface_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="private_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -319,8 +541,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -328,8 +549,9 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkinterfaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -337,8 +559,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="privateip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -346,8 +567,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -361,8 +581,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -370,8 +589,9 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkinterfaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -379,8 +599,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="privateip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -388,8 +607,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -403,8 +621,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -412,8 +629,9 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="network_interface_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_interface_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
@@ -421,8 +639,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="private_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
@@ -430,8 +647,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -445,8 +661,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -454,8 +669,9 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="networkinterfaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -463,8 +679,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="privateip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -472,8 +687,7 @@ The Association resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -488,14 +702,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-"
+            title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -503,14 +724,43 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-"
+            title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -518,14 +768,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-"
+            title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -533,14 +790,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-"
+            title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -548,14 +812,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-"
+            title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -563,14 +834,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-"
+            title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -580,123 +858,163 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Association resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AssociationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Association</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AssociationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Association</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">eip_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">network_interface_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">private_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Association</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAssociation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AssociationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Association</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAssociation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AssociationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Association</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Association</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AssociationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Association</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AssociationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Association</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AssociationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Association</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AssociationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAssociation</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Eip:Association</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_eip_association</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AssociationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AssociationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -704,28 +1022,31 @@ Get an existing Association resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AssociationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -733,28 +1054,31 @@ Get an existing Association resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AssociationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -766,7 +1090,15 @@ The following state arguments are supported:
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_eipid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipid_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Id</a>
@@ -774,8 +1106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -783,8 +1114,9 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinterfaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -792,8 +1124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_privateip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -801,14 +1132,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_eipid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipid_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Id</a>
@@ -816,8 +1154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -825,8 +1162,9 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinterfaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -834,8 +1172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_privateip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -843,14 +1180,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_eip_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eip_id_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_network_interface_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_interface_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_private_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_eipid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipid_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -858,8 +1250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -867,8 +1258,9 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinterfaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -876,8 +1268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_privateip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -885,14 +1276,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_eipid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipid_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -900,8 +1298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -909,8 +1306,9 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinterfaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -918,8 +1316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_privateip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -927,14 +1324,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_eip_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eip_id_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>id</a>
@@ -942,8 +1346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -951,8 +1354,9 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_network_interface_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_interface_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
@@ -960,8 +1364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_private_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
@@ -969,14 +1372,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-optional property-replacement"
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the dedicated cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_eipid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipid_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Id</a>
@@ -984,8 +1394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of EIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of EIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -993,8 +1402,9 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The CVM or CLB instance id going to bind with the EIP. This field is conflict with <code>network_interface_id</code> and <code>private_ip fields</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+Mutual exclusivity: This field conflicts with <code>networkInterfaceId</code> and <code>privateIp</code>. Only one association target can be specified per request.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_networkinterfaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -1002,8 +1412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the network interface id like <code>eni-xxxxxx</code>. This field is conflict with <code>instanceId</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_privateip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1011,8 +1420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates an IP belongs to the <code>network_interface_id</code>. This field is conflict with <code>instance_id</code>.</p>
-</dd></dl>
+    <dd>Indicates an IP belongs to the <code>networkInterfaceId</code>. This field is conflict with <code>instanceId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1030,9 +1438,12 @@ The following state arguments are supported:
 Eip association can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+$ pulumi import tencentcloud:Eip/association:Association example eip-41s6jwy4::ins-0cxjwrog
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1044,7 +1455,6 @@ $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-3
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

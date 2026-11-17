@@ -2,9 +2,11 @@
 ---
 title: "User"
 title_tag: "tencentcloud.Dasb.User"
-meta_desc: "Documentation for the tencentcloud.Dasb.User resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a dasb user"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,36 +18,83 @@ Provides a resource to create a dasb user
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.dasb.User("example", {
-    authType: 0,
-    departmentId: "1.2",
-    email: "demo@tencent.com",
-    phone: "+86|18345678782",
-    realName: "terraform",
     userName: "tf_example",
+    realName: "terraform",
+    phone: "+86|18345678782",
+    email: "demo@tencent.com",
     validateFrom: "2023-09-22T02:00:00+08:00",
     validateTo: "2023-09-23T03:00:00+08:00",
+    departmentId: "1.2",
+    authType: 0,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.dasb.User("example",
-    auth_type=0,
-    department_id="1.2",
-    email="demo@tencent.com",
-    phone="+86|18345678782",
-    real_name="terraform",
     user_name="tf_example",
+    real_name="terraform",
+    phone="+86|18345678782",
+    email="demo@tencent.com",
     validate_from="2023-09-22T02:00:00+08:00",
-    validate_to="2023-09-23T03:00:00+08:00")
+    validate_to="2023-09-23T03:00:00+08:00",
+    department_id="1.2",
+    auth_type=0)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dasb.NewUser(ctx, "example", &dasb.UserArgs{
+			UserName:     pulumi.String("tf_example"),
+			RealName:     pulumi.String("terraform"),
+			Phone:        pulumi.String("+86|18345678782"),
+			Email:        pulumi.String("demo@tencent.com"),
+			ValidateFrom: pulumi.String("2023-09-22T02:00:00+08:00"),
+			ValidateTo:   pulumi.String("2023-09-23T03:00:00+08:00"),
+			DepartmentId: pulumi.String("1.2"),
+			AuthType:     pulumi.Int(0),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -56,45 +105,23 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Dasb.User("example", new()
     {
-        AuthType = 0,
-        DepartmentId = "1.2",
-        Email = "demo@tencent.com",
-        Phone = "+86|18345678782",
-        RealName = "terraform",
         UserName = "tf_example",
+        RealName = "terraform",
+        Phone = "+86|18345678782",
+        Email = "demo@tencent.com",
         ValidateFrom = "2023-09-22T02:00:00+08:00",
         ValidateTo = "2023-09-23T03:00:00+08:00",
+        DepartmentId = "1.2",
+        AuthType = 0,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dasb.NewUser(ctx, "example", &Dasb.UserArgs{
-			AuthType:     pulumi.Int(0),
-			DepartmentId: pulumi.String("1.2"),
-			Email:        pulumi.String("demo@tencent.com"),
-			Phone:        pulumi.String("+86|18345678782"),
-			RealName:     pulumi.String("terraform"),
-			UserName:     pulumi.String("tf_example"),
-			ValidateFrom: pulumi.String("2023-09-22T02:00:00+08:00"),
-			ValidateTo:   pulumi.String("2023-09-23T03:00:00+08:00"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -103,8 +130,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dasb.User;
 import com.pulumi.tencentcloud.Dasb.UserArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -116,102 +143,157 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new User("example", UserArgs.builder()        
-            .authType(0)
-            .departmentId("1.2")
-            .email("demo@tencent.com")
-            .phone("+86|18345678782")
-            .realName("terraform")
+        var example = new User("example", UserArgs.builder()
             .userName("tf_example")
+            .realName("terraform")
+            .phone("+86|18345678782")
+            .email("demo@tencent.com")
             .validateFrom("2023-09-22T02:00:00+08:00")
             .validateTo("2023-09-23T03:00:00+08:00")
+            .departmentId("1.2")
+            .authType(0)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Dasb:User
     properties:
-      authType: 0
-      departmentId: '1.2'
-      email: demo@tencent.com
-      phone: +86|18345678782
-      realName: terraform
       userName: tf_example
+      realName: terraform
+      phone: +86|18345678782
+      email: demo@tencent.com
       validateFrom: 2023-09-22T02:00:00+08:00
       validateTo: 2023-09-23T03:00:00+08:00
+      departmentId: '1.2'
+      authType: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dasb_user" "example" {
+  user_name     = "tf_example"
+  real_name     = "terraform"
+  phone         = "+86|18345678782"
+  email         = "demo@tencent.com"
+  validate_from = "2023-09-22T02:00:00+08:00"
+  validate_to   = "2023-09-23T03:00:00+08:00"
+  department_id = "1.2"
+  auth_type     = 0
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateUser](https://www.tencentcloud.com/search/?wd=CreateUser&type=document&lang=en)
+* Read: [DescribeUsers](https://www.tencentcloud.com/search/?wd=DescribeUsers&type=document&lang=en)
+* Update: [ModifyUser](https://www.tencentcloud.com/search/?wd=ModifyUser&type=document&lang=en)
+* Delete: [DeleteUsers](https://www.tencentcloud.com/search/?wd=DeleteUsers&type=document&lang=en)
 
 
 ## Create User Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">User</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">User</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">User</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">User</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+         <span class="nx">real_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">user_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">auth_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
          <span class="nx">department_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">email</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">group_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
          <span class="nx">phone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">real_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">user_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">validate_from</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">validate_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">validate_to</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">User</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">validate_to</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUser</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">User</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUser</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UserArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">User</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">User</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">User</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">User</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">User</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UserArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dasb:User</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dasb:User</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dasb_user&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -232,7 +314,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -349,11 +431,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## User Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The User resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -369,8 +459,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-required"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-required"
             title="Required">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -378,8 +467,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="authtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Type</a>
@@ -387,8 +475,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_csharp" style="color: inherit; text-decoration: inherit;">Department<wbr>Id</a>
@@ -396,8 +483,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_csharp" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -405,8 +491,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidsets_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id<wbr>Sets</a>
@@ -414,8 +499,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_csharp" style="color: inherit; text-decoration: inherit;">Phone</a>
@@ -423,8 +507,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>From</a>
@@ -432,8 +515,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatetime_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>Time</a>
@@ -441,8 +523,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>To</a>
@@ -450,8 +531,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -465,8 +545,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-required"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-required"
             title="Required">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -474,8 +553,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="authtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Type</a>
@@ -483,8 +561,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_go" style="color: inherit; text-decoration: inherit;">Department<wbr>Id</a>
@@ -492,8 +569,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_go" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -501,8 +577,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidsets_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id<wbr>Sets</a>
@@ -510,8 +585,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_go" style="color: inherit; text-decoration: inherit;">Phone</a>
@@ -519,8 +593,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>From</a>
@@ -528,8 +601,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatetime_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>Time</a>
@@ -537,8 +609,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>To</a>
@@ -546,8 +617,93 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="real_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_name_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auth_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_type_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="department_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#department_id_hcl" style="color: inherit; text-decoration: inherit;">department_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_hcl" style="color: inherit; text-decoration: inherit;">email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_sets_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="phone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_hcl" style="color: inherit; text-decoration: inherit;">phone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="validate_from_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_from_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>from</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="validate_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_time_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="validate_to_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_to_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>to</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -561,8 +717,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-required"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-required"
             title="Required">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -570,8 +725,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="authtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -579,8 +733,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_java" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -588,8 +741,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_java" style="color: inherit; text-decoration: inherit;">email</a>
@@ -597,8 +749,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidsets_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Sets</a>
@@ -606,8 +757,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_java" style="color: inherit; text-decoration: inherit;">phone</a>
@@ -615,8 +765,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_java" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -624,8 +773,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatetime_java" style="color: inherit; text-decoration: inherit;">validate<wbr>Time</a>
@@ -633,8 +781,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_java" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -642,8 +789,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -657,8 +803,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-required"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-required"
             title="Required">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -666,8 +811,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="authtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -675,8 +819,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_nodejs" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -684,8 +827,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_nodejs" style="color: inherit; text-decoration: inherit;">email</a>
@@ -693,8 +835,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidsets_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Sets</a>
@@ -702,8 +843,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_nodejs" style="color: inherit; text-decoration: inherit;">phone</a>
@@ -711,8 +851,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -720,8 +859,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatetime_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>Time</a>
@@ -729,8 +867,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -738,8 +875,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -753,8 +889,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-required"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-required"
             title="Required">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -762,8 +897,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="auth_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_type_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
@@ -771,8 +905,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="department_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#department_id_python" style="color: inherit; text-decoration: inherit;">department_<wbr>id</a>
@@ -780,8 +913,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_python" style="color: inherit; text-decoration: inherit;">email</a>
@@ -789,8 +921,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="group_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_sets_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id_<wbr>sets</a>
@@ -798,8 +929,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_python" style="color: inherit; text-decoration: inherit;">phone</a>
@@ -807,8 +937,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="validate_from_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_from_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>from</a>
@@ -816,8 +945,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validate_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_time_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>time</a>
@@ -825,8 +953,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="validate_to_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_to_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>to</a>
@@ -834,8 +961,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -849,8 +975,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-required"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-required"
             title="Required">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -858,8 +983,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="authtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -867,8 +991,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_yaml" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -876,8 +999,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_yaml" style="color: inherit; text-decoration: inherit;">email</a>
@@ -885,8 +1007,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidsets_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Sets</a>
@@ -894,8 +1015,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_yaml" style="color: inherit; text-decoration: inherit;">phone</a>
@@ -903,8 +1023,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -912,8 +1031,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatetime_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>Time</a>
@@ -921,8 +1039,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -930,8 +1047,7 @@ The User resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -952,8 +1068,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -967,8 +1082,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -982,8 +1110,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -997,8 +1124,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1012,8 +1138,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1027,8 +1152,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,18 +1162,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing User resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UserState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">User</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UserState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">User</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1063,104 +1187,143 @@ Get an existing User resource's state with the given name, ID, and optional extr
         <span class="nx">validate_from</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">validate_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">validate_to</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> User</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUser<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UserState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">User</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUser<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UserState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">User</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">User</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">User</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">User</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">User</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UserState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingUser</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dasb:User</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dasb_user</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1168,28 +1331,31 @@ Get an existing User resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1197,28 +1363,31 @@ Get an existing User resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UserState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1238,8 +1407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_csharp" style="color: inherit; text-decoration: inherit;">Department<wbr>Id</a>
@@ -1247,8 +1415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_csharp" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -1256,8 +1423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupidsets_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id<wbr>Sets</a>
@@ -1265,8 +1431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_csharp" style="color: inherit; text-decoration: inherit;">Phone</a>
@@ -1274,8 +1439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realname_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Name</a>
@@ -1283,8 +1447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-optional"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -1292,8 +1455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>From</a>
@@ -1301,8 +1463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatetime_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>Time</a>
@@ -1310,8 +1471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>To</a>
@@ -1319,8 +1479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1334,8 +1493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_go" style="color: inherit; text-decoration: inherit;">Department<wbr>Id</a>
@@ -1343,8 +1501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_go" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -1352,8 +1509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupidsets_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id<wbr>Sets</a>
@@ -1361,8 +1517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_go" style="color: inherit; text-decoration: inherit;">Phone</a>
@@ -1370,8 +1525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realname_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Name</a>
@@ -1379,8 +1533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-optional"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -1388,8 +1541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>From</a>
@@ -1397,8 +1549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatetime_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>Time</a>
@@ -1406,8 +1557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>To</a>
@@ -1415,8 +1565,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auth_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auth_type_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_department_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_department_id_hcl" style="color: inherit; text-decoration: inherit;">department_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_hcl" style="color: inherit; text-decoration: inherit;">email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_group_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_sets_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_phone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_hcl" style="color: inherit; text-decoration: inherit;">phone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_real_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_real_name_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_validate_from_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_from_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>from</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_validate_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_time_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_validate_to_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_to_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>to</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1430,8 +1665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_java" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -1439,8 +1673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_java" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1448,8 +1681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupidsets_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Sets</a>
@@ -1457,8 +1689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_java" style="color: inherit; text-decoration: inherit;">phone</a>
@@ -1466,8 +1697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realname_java" style="color: inherit; text-decoration: inherit;">real<wbr>Name</a>
@@ -1475,8 +1705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-optional"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1484,8 +1713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_java" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -1493,8 +1721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatetime_java" style="color: inherit; text-decoration: inherit;">validate<wbr>Time</a>
@@ -1502,8 +1729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_java" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -1511,8 +1737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1526,8 +1751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_nodejs" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -1535,8 +1759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_nodejs" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1544,8 +1767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupidsets_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Sets</a>
@@ -1553,8 +1775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_nodejs" style="color: inherit; text-decoration: inherit;">phone</a>
@@ -1562,8 +1783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realname_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Name</a>
@@ -1571,8 +1791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-optional"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1580,8 +1799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -1589,8 +1807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatetime_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>Time</a>
@@ -1598,8 +1815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -1607,8 +1823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1622,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_department_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_department_id_python" style="color: inherit; text-decoration: inherit;">department_<wbr>id</a>
@@ -1631,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_python" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1640,8 +1853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_group_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_sets_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id_<wbr>sets</a>
@@ -1649,8 +1861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_python" style="color: inherit; text-decoration: inherit;">phone</a>
@@ -1658,8 +1869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_real_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_real_name_python" style="color: inherit; text-decoration: inherit;">real_<wbr>name</a>
@@ -1667,8 +1877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-optional"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -1676,8 +1885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validate_from_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_from_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>from</a>
@@ -1685,8 +1893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validate_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_time_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>time</a>
@@ -1694,8 +1901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validate_to_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_to_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>to</a>
@@ -1703,8 +1909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1718,8 +1923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_yaml" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -1727,8 +1931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department ID, such as: 1.2.3.</p>
-</dd><dt class="property-optional"
+    <dd>Department ID, such as: 1.2.3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_email_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_email_yaml" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1736,8 +1939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email.</p>
-</dd><dt class="property-optional"
+    <dd>Email. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupidsets_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Sets</a>
@@ -1745,8 +1947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The set of user group IDs to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>The set of user group IDs to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_phone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_phone_yaml" style="color: inherit; text-decoration: inherit;">phone</a>
@@ -1754,8 +1955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.</p>
-</dd><dt class="property-optional"
+    <dd>Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of <code>phone</code> or <code>email</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_realname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_realname_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Name</a>
@@ -1763,8 +1963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Real name, maximum length 20 characters, cannot contain blank characters.</p>
-</dd><dt class="property-optional"
+    <dd>Real name, maximum length 20 characters, cannot contain blank characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1772,8 +1971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.</p>
-</dd><dt class="property-optional"
+    <dd>Username, 3-20 characters, must start with an English letter and cannot contain characters other than <code>letters</code>, <code>numbers</code>, <code>.</code>, <code>_</code>, <code>-</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -1781,8 +1979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatetime_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>Time</a>
@@ -1790,8 +1987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</p>
-</dd><dt class="property-optional"
+    <dd>Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -1799,8 +1995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</p>
-</dd></dl>
+    <dd>User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1823,6 +2018,9 @@ $ pulumi import tencentcloud:Dasb/user:User example 134
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1832,7 +2030,6 @@ $ pulumi import tencentcloud:Dasb/user:User example 134
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

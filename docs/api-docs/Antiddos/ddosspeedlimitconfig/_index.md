@@ -2,9 +2,11 @@
 ---
 title: "DdosSpeedLimitConfig"
 title_tag: "tencentcloud.Antiddos.DdosSpeedLimitConfig"
-meta_desc: "Documentation for the tencentcloud.Antiddos.DdosSpeedLimitConfig resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a antiddos ddos speed limit config"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,16 +18,20 @@ Provides a resource to create a antiddos ddos speed limit config
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const ddosSpeedLimitConfig = new tencentcloud.antiddos.DdosSpeedLimitConfig("ddosSpeedLimitConfig", {
+const ddosSpeedLimitConfig = new tencentcloud.antiddos.DdosSpeedLimitConfig("ddos_speed_limit_config", {
+    instanceId: "bgp-xxxxxx",
     ddosSpeedLimitConfig: {
-        dstPortList: "8000",
         mode: 1,
-        protocolList: "ALL",
         speedValues: [
             {
                 type: 1,
@@ -36,32 +42,83 @@ const ddosSpeedLimitConfig = new tencentcloud.antiddos.DdosSpeedLimitConfig("ddo
                 value: 2,
             },
         ],
+        protocolList: "ALL",
+        dstPortList: "8000",
     },
-    instanceId: "bgp-xxxxxx",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-ddos_speed_limit_config = tencentcloud.antiddos.DdosSpeedLimitConfig("ddosSpeedLimitConfig",
-    ddos_speed_limit_config=tencentcloud.antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs(
-        dst_port_list="8000",
-        mode=1,
-        protocol_list="ALL",
-        speed_values=[
-            tencentcloud.antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs(
-                type=1,
-                value=1,
-            ),
-            tencentcloud.antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs(
-                type=2,
-                value=2,
-            ),
+ddos_speed_limit_config = tencentcloud.antiddos.DdosSpeedLimitConfig("ddos_speed_limit_config",
+    instance_id="bgp-xxxxxx",
+    ddos_speed_limit_config={
+        "mode": 1,
+        "speed_values": [
+            {
+                "type": 1,
+                "value": 1,
+            },
+            {
+                "type": 2,
+                "value": 2,
+            },
         ],
-    ),
-    instance_id="bgp-xxxxxx")
+        "protocol_list": "ALL",
+        "dst_port_list": "8000",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/antiddos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := antiddos.NewDdosSpeedLimitConfig(ctx, "ddos_speed_limit_config", &antiddos.DdosSpeedLimitConfigArgs{
+			InstanceId: pulumi.String("bgp-xxxxxx"),
+			DdosSpeedLimitConfig: &antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs{
+				Mode: pulumi.Int(1),
+				SpeedValues: antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArray{
+					&antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{
+						Type:  pulumi.Int(1),
+						Value: pulumi.Int(1),
+					},
+					&antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{
+						Type:  pulumi.Int(2),
+						Value: pulumi.Int(2),
+					},
+				},
+				ProtocolList: pulumi.String("ALL"),
+				DstPortList:  pulumi.String("8000"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -70,13 +127,12 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var ddosSpeedLimitConfig = new Tencentcloud.Antiddos.DdosSpeedLimitConfig("ddosSpeedLimitConfig", new()
+    var ddosSpeedLimitConfig = new Tencentcloud.Antiddos.DdosSpeedLimitConfig("ddos_speed_limit_config", new()
     {
+        InstanceId = "bgp-xxxxxx",
         AntiddosDdosSpeedLimitConfig = new Tencentcloud.Antiddos.Inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs
         {
-            DstPortList = "8000",
             Mode = 1,
-            ProtocolList = "ALL",
             SpeedValues = new[]
             {
                 new Tencentcloud.Antiddos.Inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs
@@ -90,47 +146,18 @@ return await Deployment.RunAsync(() =>
                     Value = 2,
                 },
             },
+            ProtocolList = "ALL",
+            DstPortList = "8000",
         },
-        InstanceId = "bgp-xxxxxx",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Antiddos.NewDdosSpeedLimitConfig(ctx, "ddosSpeedLimitConfig", &Antiddos.DdosSpeedLimitConfigArgs{
-			DdosSpeedLimitConfig: &antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs{
-				DstPortList:  pulumi.String("8000"),
-				Mode:         pulumi.Int(1),
-				ProtocolList: pulumi.String("ALL"),
-				SpeedValues: antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArray{
-					&antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{
-						Type:  pulumi.Int(1),
-						Value: pulumi.Int(1),
-					},
-					&antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{
-						Type:  pulumi.Int(2),
-						Value: pulumi.Int(2),
-					},
-				},
-			},
-			InstanceId: pulumi.String("bgp-xxxxxx"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -140,8 +167,9 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Antiddos.DdosSpeedLimitConfig;
 import com.pulumi.tencentcloud.Antiddos.DdosSpeedLimitConfigArgs;
 import com.pulumi.tencentcloud.Antiddos.inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Antiddos.inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -153,11 +181,10 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var ddosSpeedLimitConfig = new DdosSpeedLimitConfig("ddosSpeedLimitConfig", DdosSpeedLimitConfigArgs.builder()        
+        var ddosSpeedLimitConfig = new DdosSpeedLimitConfig("ddosSpeedLimitConfig", DdosSpeedLimitConfigArgs.builder()
+            .instanceId("bgp-xxxxxx")
             .ddosSpeedLimitConfig(DdosSpeedLimitConfigDdosSpeedLimitConfigArgs.builder()
-                .dstPortList("8000")
                 .mode(1)
-                .protocolList("ALL")
                 .speedValues(                
                     DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs.builder()
                         .type(1)
@@ -167,89 +194,155 @@ public class App {
                         .type(2)
                         .value(2)
                         .build())
+                .protocolList("ALL")
+                .dstPortList("8000")
                 .build())
-            .instanceId("bgp-xxxxxx")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   ddosSpeedLimitConfig:
     type: tencentcloud:Antiddos:DdosSpeedLimitConfig
+    name: ddos_speed_limit_config
     properties:
+      instanceId: bgp-xxxxxx
       ddosSpeedLimitConfig:
-        dstPortList: '8000'
         mode: 1
-        protocolList: ALL
         speedValues:
           - type: 1
             value: 1
           - type: 2
             value: 2
-      instanceId: bgp-xxxxxx
+        protocolList: ALL
+        dstPortList: '8000'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_antiddos_ddosspeedlimitconfig" "ddos_speed_limit_config" {
+  instance_id = "bgp-xxxxxx"
+  ddos_speed_limit_config = {
+    mode = 1
+    speed_values = [{
+      "type"  = 1
+      "value" = 1
+      }, {
+      "type"  = 2
+      "value" = 2
+    }]
+    protocol_list = "ALL"
+    dst_port_list = "8000"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61379)
+  - [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
+* Read: [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
+* Update: [ModifyDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61354)
+* Delete:
+  - [DeleteDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61371)
+  - [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
 
 
 ## Create DdosSpeedLimitConfig Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                         <span class="nx">ddos_speed_limit_config</span><span class="p">:</span> <span class="nx">Optional[_antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs]</span> = None<span class="p">,</span>
-                         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                         <span class="nx">ddos_speed_limit_config</span><span class="p">:</span> <span class="nx">Optional[DdosSpeedLimitConfigDdosSpeedLimitConfigArgs]</span> = None<span class="p">,</span>
+                         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosSpeedLimitConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosSpeedLimitConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">DdosSpeedLimitConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosSpeedLimitConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:DdosSpeedLimitConfig</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:DdosSpeedLimitConfig</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_antiddos_ddos_speed_limit_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -270,7 +363,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -387,11 +480,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## DdosSpeedLimitConfig Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -405,10 +506,9 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosddosspeedlimitconfig_csharp" style="color: inherit; text-decoration: inherit;">Antiddos<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-required"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -416,8 +516,7 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -431,8 +530,7 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-required"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -440,8 +538,29 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ddos_speed_limit_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_speed_limit_config_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>speed_<wbr>limit_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">object</a></span>
+    </dt>
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -453,10 +572,9 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosspeedlimitconfig_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-required"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -464,8 +582,7 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -477,10 +594,9 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosspeedlimitconfig_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-required"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -488,8 +604,7 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -503,8 +618,7 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-required"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -512,8 +626,7 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -527,8 +640,7 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Property Map</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-required"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -536,8 +648,7 @@ The DdosSpeedLimitConfig resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -558,8 +669,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -573,8 +683,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -588,8 +711,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -603,8 +725,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -618,8 +739,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -633,8 +753,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -644,121 +763,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing DdosSpeedLimitConfig resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DdosSpeedLimitConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DdosSpeedLimitConfig</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DdosSpeedLimitConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DdosSpeedLimitConfig</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">ddos_speed_limit_config</span><span class="p">:</span> <span class="nx">Optional[_antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">ddos_speed_limit_config</span><span class="p">:</span> <span class="nx">Optional[DdosSpeedLimitConfigDdosSpeedLimitConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> DdosSpeedLimitConfig</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDdosSpeedLimitConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DdosSpeedLimitConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosSpeedLimitConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDdosSpeedLimitConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DdosSpeedLimitConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosSpeedLimitConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DdosSpeedLimitConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosSpeedLimitConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DdosSpeedLimitConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosSpeedLimitConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DdosSpeedLimitConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosSpeedLimitConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DdosSpeedLimitConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosSpeedLimitConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDdosSpeedLimitConfig</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Antiddos:DdosSpeedLimitConfig</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_antiddos_ddos_speed_limit_config</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosSpeedLimitConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosSpeedLimitConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -766,28 +924,31 @@ Get an existing DdosSpeedLimitConfig resource's state with the given name, ID, a
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosSpeedLimitConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -795,28 +956,31 @@ Get an existing DdosSpeedLimitConfig resource's state with the given name, ID, a
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosSpeedLimitConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -834,10 +998,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_antiddosddosspeedlimitconfig_csharp" style="color: inherit; text-decoration: inherit;">Antiddos<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -845,8 +1008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -860,8 +1022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -869,8 +1030,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_ddos_speed_limit_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_speed_limit_config_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>speed_<wbr>limit_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">object</a></span>
+    </dt>
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -882,10 +1064,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosspeedlimitconfig_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -893,8 +1074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -906,10 +1086,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosspeedlimitconfig_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -917,8 +1096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -932,8 +1110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -941,8 +1118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -956,8 +1132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfig">Property Map</a></span>
     </dt>
-    <dd><p>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -965,8 +1140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceId.</p>
-</dd></dl>
+    <dd>InstanceId.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -981,7 +1155,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="ddosspeedlimitconfigddosspeedlimitconfig">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config</h4>
+<h4 id="ddosspeedlimitconfigddosspeedlimitconfig">
+Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -993,8 +1169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</dd><dt class="property-required"
             title="Required">
         <span id="speedvalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#speedvalues_csharp" style="color: inherit; text-decoration: inherit;">Speed<wbr>Values</a>
@@ -1002,8 +1177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value&gt;</a></span>
     </dt>
-    <dd><p>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</p>
-</dd><dt class="property-optional"
+    <dd>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportlist_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Port<wbr>List</a>
@@ -1011,8 +1185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</p>
-</dd><dt class="property-optional"
+    <dd>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportscopes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportscopes_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Port<wbr>Scopes</a>
@@ -1020,8 +1193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigdstportscope">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope&gt;</a></span>
     </dt>
-    <dd><p>This field has been deprecated. Please fill in the new field DstPortList.</p>
-</dd><dt class="property-optional"
+    <dd>This field has been deprecated. Please fill in the new field DstPortList.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocollist_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_csharp" style="color: inherit; text-decoration: inherit;">Protocol<wbr>List</a>
@@ -1029,8 +1201,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</p>
-</dd></dl>
+    <dd>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1044,8 +1215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</dd><dt class="property-required"
             title="Required">
         <span id="speedvalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#speedvalues_go" style="color: inherit; text-decoration: inherit;">Speed<wbr>Values</a>
@@ -1053,8 +1223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">[]Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value</a></span>
     </dt>
-    <dd><p>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</p>
-</dd><dt class="property-optional"
+    <dd>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportlist_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Port<wbr>List</a>
@@ -1062,8 +1231,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</p>
-</dd><dt class="property-optional"
+    <dd>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportscopes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportscopes_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Port<wbr>Scopes</a>
@@ -1071,8 +1239,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigdstportscope">[]Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope</a></span>
     </dt>
-    <dd><p>This field has been deprecated. Please fill in the new field DstPortList.</p>
-</dd><dt class="property-optional"
+    <dd>This field has been deprecated. Please fill in the new field DstPortList.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocollist_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_go" style="color: inherit; text-decoration: inherit;">Protocol<wbr>List</a>
@@ -1080,8 +1247,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</p>
-</dd></dl>
+    <dd>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_hcl" style="color: inherit; text-decoration: inherit;">mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</dd><dt class="property-required"
+            title="Required">
+        <span id="speed_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#speed_values_hcl" style="color: inherit; text-decoration: inherit;">speed_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">list(object)</a></span>
+    </dt>
+    <dd>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dst_port_list_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_port_list_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>port_<wbr>list</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dst_port_scopes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_port_scopes_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>port_<wbr>scopes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigdstportscope">list(object)</a></span>
+    </dt>
+    <dd>This field has been deprecated. Please fill in the new field DstPortList.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_list_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_list_hcl" style="color: inherit; text-decoration: inherit;">protocol_<wbr>list</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1095,8 +1307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</dd><dt class="property-required"
             title="Required">
         <span id="speedvalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#speedvalues_java" style="color: inherit; text-decoration: inherit;">speed<wbr>Values</a>
@@ -1104,8 +1315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">List&lt;Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value&gt;</a></span>
     </dt>
-    <dd><p>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</p>
-</dd><dt class="property-optional"
+    <dd>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportlist_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>List</a>
@@ -1113,8 +1323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</p>
-</dd><dt class="property-optional"
+    <dd>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportscopes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportscopes_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>Scopes</a>
@@ -1122,8 +1331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigdstportscope">List&lt;Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope&gt;</a></span>
     </dt>
-    <dd><p>This field has been deprecated. Please fill in the new field DstPortList.</p>
-</dd><dt class="property-optional"
+    <dd>This field has been deprecated. Please fill in the new field DstPortList.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocollist_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_java" style="color: inherit; text-decoration: inherit;">protocol<wbr>List</a>
@@ -1131,8 +1339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</p>
-</dd></dl>
+    <dd>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1146,8 +1353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</dd><dt class="property-required"
             title="Required">
         <span id="speedvalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#speedvalues_nodejs" style="color: inherit; text-decoration: inherit;">speed<wbr>Values</a>
@@ -1155,8 +1361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value[]</a></span>
     </dt>
-    <dd><p>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</p>
-</dd><dt class="property-optional"
+    <dd>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportlist_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>List</a>
@@ -1164,8 +1369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</p>
-</dd><dt class="property-optional"
+    <dd>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportscopes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportscopes_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>Scopes</a>
@@ -1173,8 +1377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigdstportscope">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope[]</a></span>
     </dt>
-    <dd><p>This field has been deprecated. Please fill in the new field DstPortList.</p>
-</dd><dt class="property-optional"
+    <dd>This field has been deprecated. Please fill in the new field DstPortList.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocollist_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_nodejs" style="color: inherit; text-decoration: inherit;">protocol<wbr>List</a>
@@ -1182,8 +1385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</p>
-</dd></dl>
+    <dd>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1197,17 +1399,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</dd><dt class="property-required"
             title="Required">
         <span id="speed_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#speed_values_python" style="color: inherit; text-decoration: inherit;">speed_<wbr>values</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value]</a></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">Sequence[Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value]</a></span>
     </dt>
-    <dd><p>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</p>
-</dd><dt class="property-optional"
+    <dd>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dst_port_list_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_port_list_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>port_<wbr>list</a>
@@ -1215,17 +1415,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</p>
-</dd><dt class="property-optional"
+    <dd>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dst_port_scopes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_port_scopes_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>port_<wbr>scopes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigdstportscope">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope]</a></span>
+        <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigdstportscope">Sequence[Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope]</a></span>
     </dt>
-    <dd><p>This field has been deprecated. Please fill in the new field DstPortList.</p>
-</dd><dt class="property-optional"
+    <dd>This field has been deprecated. Please fill in the new field DstPortList.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_list_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_list_python" style="color: inherit; text-decoration: inherit;">protocol_<wbr>list</a>
@@ -1233,8 +1431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</p>
-</dd></dl>
+    <dd>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1248,8 +1445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].</dd><dt class="property-required"
             title="Required">
         <span id="speedvalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#speedvalues_yaml" style="color: inherit; text-decoration: inherit;">speed<wbr>Values</a>
@@ -1257,8 +1453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</p>
-</dd><dt class="property-optional"
+    <dd>Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportlist_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>List</a>
@@ -1266,8 +1461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</p>
-</dd><dt class="property-optional"
+    <dd>List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dstportscopes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportscopes_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>Scopes</a>
@@ -1275,8 +1469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddosspeedlimitconfigddosspeedlimitconfigdstportscope">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>This field has been deprecated. Please fill in the new field DstPortList.</p>
-</dd><dt class="property-optional"
+    <dd>This field has been deprecated. Please fill in the new field DstPortList.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocollist_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_yaml" style="color: inherit; text-decoration: inherit;">protocol<wbr>List</a>
@@ -1284,12 +1477,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</p>
-</dd></dl>
+    <dd>IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddosspeedlimitconfigddosspeedlimitconfigdstportscope">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope</h4>
+<h4 id="ddosspeedlimitconfigddosspeedlimitconfigdstportscope">
+Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Dst<wbr>Port<wbr>Scope<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1301,8 +1495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting port, ranging from 1 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting port, ranging from 1 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="endport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Port</a>
@@ -1310,8 +1503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end  port, ranging from 1 to 65535.</p>
-</dd></dl>
+    <dd>end  port, ranging from 1 to 65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1325,8 +1517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting port, ranging from 1 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting port, ranging from 1 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="endport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_go" style="color: inherit; text-decoration: inherit;">End<wbr>Port</a>
@@ -1334,8 +1525,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end  port, ranging from 1 to 65535.</p>
-</dd></dl>
+    <dd>end  port, ranging from 1 to 65535.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="begin_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_port_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Starting port, ranging from 1 to 65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_port_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>end  port, ranging from 1 to 65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1349,8 +1561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Starting port, ranging from 1 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting port, ranging from 1 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="endport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_java" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -1358,8 +1569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>end  port, ranging from 1 to 65535.</p>
-</dd></dl>
+    <dd>end  port, ranging from 1 to 65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1373,8 +1583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Starting port, ranging from 1 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting port, ranging from 1 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="endport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -1382,8 +1591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>end  port, ranging from 1 to 65535.</p>
-</dd></dl>
+    <dd>end  port, ranging from 1 to 65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1397,8 +1605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Starting port, ranging from 1 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting port, ranging from 1 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_port_python" style="color: inherit; text-decoration: inherit;">end_<wbr>port</a>
@@ -1406,8 +1613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>end  port, ranging from 1 to 65535.</p>
-</dd></dl>
+    <dd>end  port, ranging from 1 to 65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1421,8 +1627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Starting port, ranging from 1 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>Starting port, ranging from 1 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="endport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -1430,12 +1635,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>end  port, ranging from 1 to 65535.</p>
-</dd></dl>
+    <dd>end  port, ranging from 1 to 65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value</h4>
+<h4 id="ddosspeedlimitconfigddosspeedlimitconfigspeedvalue">
+Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Speed<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1447,8 +1653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1456,8 +1661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1471,8 +1675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1480,8 +1683,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1495,8 +1719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1504,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1519,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1528,8 +1749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1543,8 +1763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1552,8 +1771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1567,8 +1785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1576,8 +1793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1585,12 +1801,15 @@ The following state arguments are supported:
 
 
 
-antiddos ddos_speed_limit_config can be imported using the id, e.g.
+antiddos ddosSpeedLimitConfig can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1602,7 +1821,6 @@ $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig 
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

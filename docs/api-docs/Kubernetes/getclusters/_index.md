@@ -2,9 +2,11 @@
 ---
 title: "getClusters"
 title_tag: "tencentcloud.Kubernetes.getClusters"
-meta_desc: "Documentation for the tencentcloud.Kubernetes.getClusters function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of kubernetes clusters."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,30 +18,76 @@ Use this data source to query detailed information of kubernetes clusters.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const name = tencentcloud.Kubernetes.getClusters({
+const name = tencentcloud.kubernetes.getClusters({
     clusterName: "terraform",
 });
-const id = tencentcloud.Kubernetes.getClusters({
+const id = tencentcloud.kubernetes.getClusters({
     clusterId: "cls-godovr32",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-name = tencentcloud.Kubernetes.get_clusters(cluster_name="terraform")
-id = tencentcloud.Kubernetes.get_clusters(cluster_id="cls-godovr32")
+name = tencentcloud.kubernetes.get_clusters(cluster_name="terraform")
+id = tencentcloud.kubernetes.get_clusters(cluster_id="cls-godovr32")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kubernetes.GetClusters(ctx, &kubernetes.GetClustersArgs{
+			ClusterName: pulumi.StringRef("terraform"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = kubernetes.GetClusters(ctx, &kubernetes.GetClustersArgs{
+			ClusterId: pulumi.StringRef("cls-godovr32"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -55,32 +103,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kubernetes.GetClusters(ctx, &kubernetes.GetClustersArgs{
-			ClusterName: pulumi.StringRef("terraform"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_, err = Kubernetes.GetClusters(ctx, &kubernetes.GetClustersArgs{
-			ClusterId: pulumi.StringRef("cls-godovr32"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -89,8 +116,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Kubernetes.KubernetesFunctions;
 import com.pulumi.tencentcloud.Kubernetes.inputs.GetClustersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -113,21 +140,54 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   name:
     fn::invoke:
-      Function: tencentcloud:Kubernetes:getClusters
-      Arguments:
+      function: tencentcloud:Kubernetes:getClusters
+      arguments:
         clusterName: terraform
   id:
     fn::invoke:
-      Function: tencentcloud:Kubernetes:getClusters
-      Arguments:
+      function: tencentcloud:Kubernetes:getClusters
+      arguments:
         clusterId: cls-godovr32
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_kubernetes_getclusters" "name" {
+  cluster_name = "terraform"
+}
+data "tencentcloud_kubernetes_getclusters" "id" {
+  cluster_id = "cls-godovr32"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
 
 
 
@@ -139,7 +199,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +207,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getClusters<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClustersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>></span
+><span class="k">function </span>getClusters<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClustersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>></span
 ><span class="k">
-function </span>getClustersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClustersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>></span
+function </span>getClustersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClustersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,15 +222,15 @@ function </span>getClustersOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">kube_config_file_prefix</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetClustersResult</span
 ><span class="k">
-def </span>get_clusters_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">kube_config_file_prefix</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClustersResult]</span
+def </span>get_clusters_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">kube_config_file_prefix</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClustersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -195,7 +255,8 @@ func </span>GetClustersOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetClusters </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetClustersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClustersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClustersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClustersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -204,7 +265,8 @@ func </span>GetClustersOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> </span>getClusters<span class="p">(</span><span class="nx">GetClustersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> </span>getClusters<span class="p">(</span><span class="nx">GetClustersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> </span>getClusters<span class="p">(</span><span class="nx">GetClustersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -216,6 +278,15 @@ func </span>GetClustersOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Kubernetes/getClusters:getClusters
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_kubernetes_get_clusters&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -234,8 +305,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -243,8 +313,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubeconfigfileprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -252,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</p>
-</dd><dt class="property-optional"
+    <dd>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -261,17 +329,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -285,8 +351,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -294,8 +359,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubeconfigfileprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -303,8 +367,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</p>
-</dd><dt class="property-optional"
+    <dd>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -312,17 +375,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kube_config_file_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_config_file_prefix_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>config_<wbr>file_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -336,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -345,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubeconfigfileprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -354,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</p>
-</dd><dt class="property-optional"
+    <dd>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -363,17 +467,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -387,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -396,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubeconfigfileprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -405,8 +505,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</p>
-</dd><dt class="property-optional"
+    <dd>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -414,17 +513,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -438,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -447,8 +543,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="kube_config_file_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_config_file_prefix_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>config_<wbr>file_<wbr>prefix</a>
@@ -456,8 +551,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</p>
-</dd><dt class="property-optional"
+    <dd>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -465,17 +559,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -489,8 +581,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -498,8 +589,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="kubeconfigfileprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -507,8 +597,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</p>
-</dd><dt class="property-optional"
+    <dd>The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -516,17 +605,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -549,8 +636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -558,8 +644,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Outputs.<wbr>Get<wbr>Clusters<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of kubernetes clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of kubernetes clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -567,8 +652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -576,8 +660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of the cluster.</dd><dt class="property-"
             title="">
         <span id="kubeconfigfileprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -599,10 +682,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -616,8 +698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -625,8 +706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslist">[]Get<wbr>Clusters<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of kubernetes clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of kubernetes clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -634,8 +714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -643,8 +722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of the cluster.</dd><dt class="property-"
             title="">
         <span id="kubeconfigfileprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -666,10 +744,71 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterslist">list(object)</a></span>
+    </dt>
+    <dd>An information list of kubernetes clusters. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of cluster.</dd><dt class="property-"
+            title="">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the cluster.</dd><dt class="property-"
+            title="">
+        <span id="kube_config_file_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_config_file_prefix_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>config_<wbr>file_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -683,8 +822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -692,8 +830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslist">List&lt;Get<wbr>Clusters<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of kubernetes clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of kubernetes clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -701,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -710,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of the cluster.</dd><dt class="property-"
             title="">
         <span id="kubeconfigfileprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -733,10 +868,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -750,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -759,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslist">Get<wbr>Clusters<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of kubernetes clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of kubernetes clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -768,8 +900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -777,8 +908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of the cluster.</dd><dt class="property-"
             title="">
         <span id="kubeconfigfileprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -800,10 +930,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -817,17 +946,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterslist">Get<wbr>Clusters<wbr>List]</a></span>
+        <span class="property-type"><a href="#getclusterslist">Sequence[Get<wbr>Clusters<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of kubernetes clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of kubernetes clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -835,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of cluster.</dd><dt class="property-"
             title="">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -844,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of the cluster.</dd><dt class="property-"
             title="">
         <span id="kube_config_file_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_config_file_prefix_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>config_<wbr>file_<wbr>prefix</a>
@@ -867,10 +992,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -884,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -893,8 +1016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of kubernetes clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of kubernetes clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -902,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -911,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of the cluster.</dd><dt class="property-"
             title="">
         <span id="kubeconfigfileprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigfileprefix_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>File<wbr>Prefix</a>
@@ -934,10 +1054,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd></dl>
+    <dd>Tags of the cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -955,14 +1074,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-required"
+            title="Required">
         <span id="certificationauthority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificationauthority_csharp" style="color: inherit; text-decoration: inherit;">Certification<wbr>Authority</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The certificate used for access.</p>
-</dd><dt class="property-required"
+    <dd>The certificate used for access.</dd><dt class="property-required"
             title="Required">
         <span id="claimexpiredseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#claimexpiredseconds_csharp" style="color: inherit; text-decoration: inherit;">Claim<wbr>Expired<wbr>Seconds</a>
@@ -970,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expired seconds to recycle ENI.</p>
-</dd><dt class="property-required"
+    <dd>The expired seconds to recycle ENI.</dd><dt class="property-required"
             title="Required">
         <span id="clusterasenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterasenabled_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>As<wbr>Enabled</a>
@@ -979,8 +1104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable cluster node auto scaler.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to enable cluster node auto scaler.</dd><dt class="property-required"
             title="Required">
         <span id="clustercidr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Cidr</a>
@@ -988,8 +1112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdeploytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdeploytype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Deploy<wbr>Type</a>
@@ -997,8 +1120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deployment type of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Deployment type of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Desc</a>
@@ -1006,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Description of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterexternalendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterexternalendpoint_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>External<wbr>Endpoint</a>
@@ -1015,8 +1136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>External network address to access.</p>
-</dd><dt class="property-required"
+    <dd>External network address to access.</dd><dt class="property-required"
             title="Required">
         <span id="clusterextraargs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterextraargs_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Extra<wbr>Args</a>
@@ -1024,8 +1144,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistclusterextraarg">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Get<wbr>Clusters<wbr>List<wbr>Cluster<wbr>Extra<wbr>Arg&gt;</a></span>
     </dt>
-    <dd><p>Customized parameters for master component.</p>
-</dd><dt class="property-required"
+    <dd>Customized parameters for master component.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1033,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusteripvs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteripvs_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Ipvs</a>
@@ -1042,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether ipvs is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ipvs is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxpodnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxpodnum_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Max<wbr>Pod<wbr>Num</a>
@@ -1051,8 +1168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods per node in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Pods per node in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxservicenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxservicenum_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Max<wbr>Service<wbr>Num</a>
@@ -1060,8 +1176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of services in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1069,8 +1184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusternodenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusternodenum_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Node<wbr>Num</a>
@@ -1078,8 +1192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusteros_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteros_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Os</a>
@@ -1087,8 +1200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Operating system of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -1096,8 +1208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the cluster.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Version of the cluster.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="containerruntime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerruntime_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>Runtime</a>
@@ -1105,9 +1216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.18.1.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.<p class="property-message">Deprecated: It has been deprecated from version 1.18.1.</p></dd><dt class="property-required"
             title="Required">
         <span id="deletionprotection_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_csharp" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
@@ -1115,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether cluster deletion protection is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether cluster deletion protection is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1124,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name for access.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for access.</dd><dt class="property-required"
             title="Required">
         <span id="enisubnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enisubnetids_csharp" style="color: inherit; text-decoration: inherit;">Eni<wbr>Subnet<wbr>Ids</a>
@@ -1133,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Subnet IDs for cluster with VPC-CNI network mode.</p>
-</dd><dt class="property-required"
+    <dd>Subnet IDs for cluster with VPC-CNI network mode.</dd><dt class="property-required"
             title="Required">
         <span id="ignoreclustercidrconflict_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoreclustercidrconflict_csharp" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Cluster<wbr>Cidr<wbr>Conflict</a>
@@ -1142,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to ignore the cluster cidr conflict error.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to ignore the cluster cidr conflict error.</dd><dt class="property-required"
             title="Required">
         <span id="isnonstaticipmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnonstaticipmode_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Non<wbr>Static<wbr>Ip<wbr>Mode</a>
@@ -1151,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether non-static ip mode is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether non-static ip mode is enabled.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfig_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Config</a>
@@ -1160,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kubernetes config.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfigintranet_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigintranet_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Config<wbr>Intranet</a>
@@ -1169,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kubernetes config of private network.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config of private network.</dd><dt class="property-required"
             title="Required">
         <span id="kubeproxymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeproxymode_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Proxy<wbr>Mode</a>
@@ -1178,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster kube-proxy mode.</p>
-</dd><dt class="property-required"
+    <dd>Cluster kube-proxy mode.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1187,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster network type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster network type.</dd><dt class="property-required"
             title="Required">
         <span id="nodenametype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenametype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Name<wbr>Type</a>
@@ -1196,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name type of cluster.</p>
-</dd><dt class="property-required"
+    <dd>Node name type of cluster.</dd><dt class="property-required"
             title="Required">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -1205,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of account.</p>
-</dd><dt class="property-required"
+    <dd>Password of account.</dd><dt class="property-required"
             title="Required">
         <span id="pgwendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pgwendpoint_csharp" style="color: inherit; text-decoration: inherit;">Pgw<wbr>Endpoint</a>
@@ -1214,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Intranet address used for access.</p>
-</dd><dt class="property-required"
+    <dd>The Intranet address used for access.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1223,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="securitypolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Policies</a>
@@ -1232,8 +1328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Access policy.</p>
-</dd><dt class="property-required"
+    <dd>Access policy.</dd><dt class="property-required"
             title="Required">
         <span id="servicecidr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicecidr_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Cidr</a>
@@ -1241,17 +1336,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network address block of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The network address block of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -1259,8 +1352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name of account.</p>
-</dd><dt class="property-required"
+    <dd>User name of account.</dd><dt class="property-required"
             title="Required">
         <span id="vpccnitype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccnitype_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Cni<wbr>Type</a>
@@ -1268,8 +1360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Distinguish between shared network card multi-IP mode and independent network card mode.</p>
-</dd><dt class="property-required"
+    <dd>Distinguish between shared network card multi-IP mode and independent network card mode.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1277,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Vpc ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="workerinstanceslists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workerinstanceslists_csharp" style="color: inherit; text-decoration: inherit;">Worker<wbr>Instances<wbr>Lists</a>
@@ -1286,8 +1376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistworkerinstanceslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Get<wbr>Clusters<wbr>List<wbr>Worker<wbr>Instances<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</p>
-</dd></dl>
+    <dd>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1295,14 +1384,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-required"
+            title="Required">
         <span id="certificationauthority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificationauthority_go" style="color: inherit; text-decoration: inherit;">Certification<wbr>Authority</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The certificate used for access.</p>
-</dd><dt class="property-required"
+    <dd>The certificate used for access.</dd><dt class="property-required"
             title="Required">
         <span id="claimexpiredseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#claimexpiredseconds_go" style="color: inherit; text-decoration: inherit;">Claim<wbr>Expired<wbr>Seconds</a>
@@ -1310,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expired seconds to recycle ENI.</p>
-</dd><dt class="property-required"
+    <dd>The expired seconds to recycle ENI.</dd><dt class="property-required"
             title="Required">
         <span id="clusterasenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterasenabled_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>As<wbr>Enabled</a>
@@ -1319,8 +1414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable cluster node auto scaler.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to enable cluster node auto scaler.</dd><dt class="property-required"
             title="Required">
         <span id="clustercidr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Cidr</a>
@@ -1328,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdeploytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdeploytype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Deploy<wbr>Type</a>
@@ -1337,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deployment type of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Deployment type of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Desc</a>
@@ -1346,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Description of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterexternalendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterexternalendpoint_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>External<wbr>Endpoint</a>
@@ -1355,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>External network address to access.</p>
-</dd><dt class="property-required"
+    <dd>External network address to access.</dd><dt class="property-required"
             title="Required">
         <span id="clusterextraargs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterextraargs_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Extra<wbr>Args</a>
@@ -1364,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistclusterextraarg">[]Get<wbr>Clusters<wbr>List<wbr>Cluster<wbr>Extra<wbr>Arg</a></span>
     </dt>
-    <dd><p>Customized parameters for master component.</p>
-</dd><dt class="property-required"
+    <dd>Customized parameters for master component.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1373,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusteripvs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteripvs_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Ipvs</a>
@@ -1382,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether ipvs is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ipvs is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxpodnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxpodnum_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Max<wbr>Pod<wbr>Num</a>
@@ -1391,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods per node in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Pods per node in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxservicenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxservicenum_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Max<wbr>Service<wbr>Num</a>
@@ -1400,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of services in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1409,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusternodenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusternodenum_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Node<wbr>Num</a>
@@ -1418,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusteros_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteros_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Os</a>
@@ -1427,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Operating system of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -1436,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the cluster.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Version of the cluster.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="containerruntime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerruntime_go" style="color: inherit; text-decoration: inherit;">Container<wbr>Runtime</a>
@@ -1445,9 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.18.1.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.<p class="property-message">Deprecated: It has been deprecated from version 1.18.1.</p></dd><dt class="property-required"
             title="Required">
         <span id="deletionprotection_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_go" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
@@ -1455,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether cluster deletion protection is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether cluster deletion protection is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1464,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name for access.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for access.</dd><dt class="property-required"
             title="Required">
         <span id="enisubnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enisubnetids_go" style="color: inherit; text-decoration: inherit;">Eni<wbr>Subnet<wbr>Ids</a>
@@ -1473,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Subnet IDs for cluster with VPC-CNI network mode.</p>
-</dd><dt class="property-required"
+    <dd>Subnet IDs for cluster with VPC-CNI network mode.</dd><dt class="property-required"
             title="Required">
         <span id="ignoreclustercidrconflict_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoreclustercidrconflict_go" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Cluster<wbr>Cidr<wbr>Conflict</a>
@@ -1482,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to ignore the cluster cidr conflict error.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to ignore the cluster cidr conflict error.</dd><dt class="property-required"
             title="Required">
         <span id="isnonstaticipmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnonstaticipmode_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Non<wbr>Static<wbr>Ip<wbr>Mode</a>
@@ -1491,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether non-static ip mode is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether non-static ip mode is enabled.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfig_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Config</a>
@@ -1500,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kubernetes config.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfigintranet_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigintranet_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Config<wbr>Intranet</a>
@@ -1509,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kubernetes config of private network.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config of private network.</dd><dt class="property-required"
             title="Required">
         <span id="kubeproxymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeproxymode_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Proxy<wbr>Mode</a>
@@ -1518,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster kube-proxy mode.</p>
-</dd><dt class="property-required"
+    <dd>Cluster kube-proxy mode.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1527,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster network type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster network type.</dd><dt class="property-required"
             title="Required">
         <span id="nodenametype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenametype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Name<wbr>Type</a>
@@ -1536,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name type of cluster.</p>
-</dd><dt class="property-required"
+    <dd>Node name type of cluster.</dd><dt class="property-required"
             title="Required">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -1545,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of account.</p>
-</dd><dt class="property-required"
+    <dd>Password of account.</dd><dt class="property-required"
             title="Required">
         <span id="pgwendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pgwendpoint_go" style="color: inherit; text-decoration: inherit;">Pgw<wbr>Endpoint</a>
@@ -1554,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Intranet address used for access.</p>
-</dd><dt class="property-required"
+    <dd>The Intranet address used for access.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1563,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="securitypolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Policies</a>
@@ -1572,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Access policy.</p>
-</dd><dt class="property-required"
+    <dd>Access policy.</dd><dt class="property-required"
             title="Required">
         <span id="servicecidr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicecidr_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Cidr</a>
@@ -1581,17 +1646,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network address block of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The network address block of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -1599,8 +1662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name of account.</p>
-</dd><dt class="property-required"
+    <dd>User name of account.</dd><dt class="property-required"
             title="Required">
         <span id="vpccnitype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccnitype_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Cni<wbr>Type</a>
@@ -1608,8 +1670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Distinguish between shared network card multi-IP mode and independent network card mode.</p>
-</dd><dt class="property-required"
+    <dd>Distinguish between shared network card multi-IP mode and independent network card mode.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1617,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Vpc ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="workerinstanceslists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workerinstanceslists_go" style="color: inherit; text-decoration: inherit;">Worker<wbr>Instances<wbr>Lists</a>
@@ -1626,8 +1686,317 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistworkerinstanceslist">[]Get<wbr>Clusters<wbr>List<wbr>Worker<wbr>Instances<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</p>
-</dd></dl>
+    <dd>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="certification_authority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certification_authority_hcl" style="color: inherit; text-decoration: inherit;">certification_<wbr>authority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The certificate used for access.</dd><dt class="property-required"
+            title="Required">
+        <span id="claim_expired_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#claim_expired_seconds_hcl" style="color: inherit; text-decoration: inherit;">claim_<wbr>expired_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The expired seconds to recycle ENI.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_as_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_as_enabled_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>as_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to enable cluster node auto scaler.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_cidr_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_deploy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_deploy_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>deploy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deployment type of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_desc_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_external_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_external_endpoint_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>external_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>External network address to access.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_extra_args_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_extra_args_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>extra_<wbr>args</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterslistclusterextraarg">list(object)</a></span>
+    </dt>
+    <dd>Customized parameters for master component.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_ipvs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_ipvs_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>ipvs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether ipvs is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_max_pod_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_max_pod_num_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>max_<wbr>pod_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of Pods per node in the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_max_service_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_max_service_num_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>max_<wbr>service_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of services in the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_node_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_node_num_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>node_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of nodes in the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_os_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_os_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>os</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operating system of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_version_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the cluster.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="container_runtime_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_runtime_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>runtime</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.<p class="property-message">Deprecated: It has been deprecated from version 1.18.1.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="deletion_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletion_protection_hcl" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether cluster deletion protection is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name for access.</dd><dt class="property-required"
+            title="Required">
+        <span id="eni_subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eni_subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">eni_<wbr>subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Subnet IDs for cluster with VPC-CNI network mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="ignore_cluster_cidr_conflict_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_cluster_cidr_conflict_hcl" style="color: inherit; text-decoration: inherit;">ignore_<wbr>cluster_<wbr>cidr_<wbr>conflict</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to ignore the cluster cidr conflict error.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_non_static_ip_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_non_static_ip_mode_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>non_<wbr>static_<wbr>ip_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether non-static ip mode is enabled.</dd><dt class="property-required property-secret"
+            title="Required">
+        <span id="kube_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_config_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kubernetes config.</dd><dt class="property-required property-secret"
+            title="Required">
+        <span id="kube_config_intranet_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_config_intranet_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>config_<wbr>intranet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kubernetes config of private network.</dd><dt class="property-required"
+            title="Required">
+        <span id="kube_proxy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_proxy_mode_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>proxy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster kube-proxy mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster network type.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_name_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>name_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node name type of cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password of account.</dd><dt class="property-required"
+            title="Required">
+        <span id="pgw_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pgw_endpoint_hcl" style="color: inherit; text-decoration: inherit;">pgw_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The Intranet address used for access.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_policies_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Access policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_cidr_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The network address block of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User name of account.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_cni_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_cni_type_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>cni_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Distinguish between shared network card multi-IP mode and independent network card mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="worker_instances_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#worker_instances_lists_hcl" style="color: inherit; text-decoration: inherit;">worker_<wbr>instances_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterslistworkerinstanceslist">list(object)</a></span>
+    </dt>
+    <dd>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1635,14 +2004,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-required"
+            title="Required">
         <span id="certificationauthority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificationauthority_java" style="color: inherit; text-decoration: inherit;">certification<wbr>Authority</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The certificate used for access.</p>
-</dd><dt class="property-required"
+    <dd>The certificate used for access.</dd><dt class="property-required"
             title="Required">
         <span id="claimexpiredseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#claimexpiredseconds_java" style="color: inherit; text-decoration: inherit;">claim<wbr>Expired<wbr>Seconds</a>
@@ -1650,8 +2026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The expired seconds to recycle ENI.</p>
-</dd><dt class="property-required"
+    <dd>The expired seconds to recycle ENI.</dd><dt class="property-required"
             title="Required">
         <span id="clusterasenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterasenabled_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>As<wbr>Enabled</a>
@@ -1659,8 +2034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable cluster node auto scaler.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to enable cluster node auto scaler.</dd><dt class="property-required"
             title="Required">
         <span id="clustercidr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -1668,8 +2042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdeploytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdeploytype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Deploy<wbr>Type</a>
@@ -1677,8 +2050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deployment type of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Deployment type of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -1686,8 +2058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Description of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterexternalendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterexternalendpoint_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>External<wbr>Endpoint</a>
@@ -1695,8 +2066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>External network address to access.</p>
-</dd><dt class="property-required"
+    <dd>External network address to access.</dd><dt class="property-required"
             title="Required">
         <span id="clusterextraargs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterextraargs_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Extra<wbr>Args</a>
@@ -1704,8 +2074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistclusterextraarg">List&lt;Get<wbr>Clusters<wbr>List<wbr>Cluster<wbr>Extra<wbr>Arg&gt;</a></span>
     </dt>
-    <dd><p>Customized parameters for master component.</p>
-</dd><dt class="property-required"
+    <dd>Customized parameters for master component.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1713,8 +2082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusteripvs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteripvs_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Ipvs</a>
@@ -1722,8 +2090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether ipvs is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ipvs is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxpodnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxpodnum_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Max<wbr>Pod<wbr>Num</a>
@@ -1731,8 +2098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of Pods per node in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Pods per node in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxservicenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxservicenum_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Max<wbr>Service<wbr>Num</a>
@@ -1740,8 +2106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of services in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1749,8 +2114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusternodenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusternodenum_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Node<wbr>Num</a>
@@ -1758,8 +2122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of nodes in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusteros_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteros_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Os</a>
@@ -1767,8 +2130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operating system of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Operating system of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -1776,8 +2138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the cluster.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Version of the cluster.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="containerruntime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerruntime_java" style="color: inherit; text-decoration: inherit;">container<wbr>Runtime</a>
@@ -1785,9 +2146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.18.1.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.<p class="property-message">Deprecated: It has been deprecated from version 1.18.1.</p></dd><dt class="property-required"
             title="Required">
         <span id="deletionprotection_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_java" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -1795,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether cluster deletion protection is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether cluster deletion protection is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1804,8 +2162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name for access.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for access.</dd><dt class="property-required"
             title="Required">
         <span id="enisubnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enisubnetids_java" style="color: inherit; text-decoration: inherit;">eni<wbr>Subnet<wbr>Ids</a>
@@ -1813,8 +2170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Subnet IDs for cluster with VPC-CNI network mode.</p>
-</dd><dt class="property-required"
+    <dd>Subnet IDs for cluster with VPC-CNI network mode.</dd><dt class="property-required"
             title="Required">
         <span id="ignoreclustercidrconflict_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoreclustercidrconflict_java" style="color: inherit; text-decoration: inherit;">ignore<wbr>Cluster<wbr>Cidr<wbr>Conflict</a>
@@ -1822,8 +2178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to ignore the cluster cidr conflict error.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to ignore the cluster cidr conflict error.</dd><dt class="property-required"
             title="Required">
         <span id="isnonstaticipmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnonstaticipmode_java" style="color: inherit; text-decoration: inherit;">is<wbr>Non<wbr>Static<wbr>Ip<wbr>Mode</a>
@@ -1831,8 +2186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether non-static ip mode is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether non-static ip mode is enabled.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfig_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Config</a>
@@ -1840,8 +2194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kubernetes config.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfigintranet_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigintranet_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>Intranet</a>
@@ -1849,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kubernetes config of private network.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config of private network.</dd><dt class="property-required"
             title="Required">
         <span id="kubeproxymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeproxymode_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Proxy<wbr>Mode</a>
@@ -1858,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster kube-proxy mode.</p>
-</dd><dt class="property-required"
+    <dd>Cluster kube-proxy mode.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1867,8 +2218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster network type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster network type.</dd><dt class="property-required"
             title="Required">
         <span id="nodenametype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenametype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Name<wbr>Type</a>
@@ -1876,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node name type of cluster.</p>
-</dd><dt class="property-required"
+    <dd>Node name type of cluster.</dd><dt class="property-required"
             title="Required">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1885,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of account.</p>
-</dd><dt class="property-required"
+    <dd>Password of account.</dd><dt class="property-required"
             title="Required">
         <span id="pgwendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pgwendpoint_java" style="color: inherit; text-decoration: inherit;">pgw<wbr>Endpoint</a>
@@ -1894,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Intranet address used for access.</p>
-</dd><dt class="property-required"
+    <dd>The Intranet address used for access.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1903,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="securitypolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_java" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
@@ -1912,8 +2258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Access policy.</p>
-</dd><dt class="property-required"
+    <dd>Access policy.</dd><dt class="property-required"
             title="Required">
         <span id="servicecidr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicecidr_java" style="color: inherit; text-decoration: inherit;">service<wbr>Cidr</a>
@@ -1921,17 +2266,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The network address block of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The network address block of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1939,8 +2282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name of account.</p>
-</dd><dt class="property-required"
+    <dd>User name of account.</dd><dt class="property-required"
             title="Required">
         <span id="vpccnitype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccnitype_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cni<wbr>Type</a>
@@ -1948,8 +2290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Distinguish between shared network card multi-IP mode and independent network card mode.</p>
-</dd><dt class="property-required"
+    <dd>Distinguish between shared network card multi-IP mode and independent network card mode.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1957,8 +2298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Vpc ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="workerinstanceslists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workerinstanceslists_java" style="color: inherit; text-decoration: inherit;">worker<wbr>Instances<wbr>Lists</a>
@@ -1966,8 +2306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistworkerinstanceslist">List&lt;Get<wbr>Clusters<wbr>List<wbr>Worker<wbr>Instances<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</p>
-</dd></dl>
+    <dd>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1975,14 +2314,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-required"
+            title="Required">
         <span id="certificationauthority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificationauthority_nodejs" style="color: inherit; text-decoration: inherit;">certification<wbr>Authority</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The certificate used for access.</p>
-</dd><dt class="property-required"
+    <dd>The certificate used for access.</dd><dt class="property-required"
             title="Required">
         <span id="claimexpiredseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#claimexpiredseconds_nodejs" style="color: inherit; text-decoration: inherit;">claim<wbr>Expired<wbr>Seconds</a>
@@ -1990,8 +2336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The expired seconds to recycle ENI.</p>
-</dd><dt class="property-required"
+    <dd>The expired seconds to recycle ENI.</dd><dt class="property-required"
             title="Required">
         <span id="clusterasenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterasenabled_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>As<wbr>Enabled</a>
@@ -1999,8 +2344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable cluster node auto scaler.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to enable cluster node auto scaler.</dd><dt class="property-required"
             title="Required">
         <span id="clustercidr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -2008,8 +2352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdeploytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdeploytype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Deploy<wbr>Type</a>
@@ -2017,8 +2360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deployment type of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Deployment type of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -2026,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Description of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterexternalendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterexternalendpoint_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>External<wbr>Endpoint</a>
@@ -2035,8 +2376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>External network address to access.</p>
-</dd><dt class="property-required"
+    <dd>External network address to access.</dd><dt class="property-required"
             title="Required">
         <span id="clusterextraargs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterextraargs_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Extra<wbr>Args</a>
@@ -2044,8 +2384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistclusterextraarg">Get<wbr>Clusters<wbr>List<wbr>Cluster<wbr>Extra<wbr>Arg[]</a></span>
     </dt>
-    <dd><p>Customized parameters for master component.</p>
-</dd><dt class="property-required"
+    <dd>Customized parameters for master component.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2053,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusteripvs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteripvs_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Ipvs</a>
@@ -2062,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether ipvs is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ipvs is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxpodnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxpodnum_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Max<wbr>Pod<wbr>Num</a>
@@ -2071,8 +2408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of Pods per node in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Pods per node in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxservicenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxservicenum_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Max<wbr>Service<wbr>Num</a>
@@ -2080,8 +2416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of services in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -2089,8 +2424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusternodenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusternodenum_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Node<wbr>Num</a>
@@ -2098,8 +2432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of nodes in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusteros_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteros_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Os</a>
@@ -2107,8 +2440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Operating system of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -2116,8 +2448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the cluster.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Version of the cluster.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="containerruntime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerruntime_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>Runtime</a>
@@ -2125,9 +2456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.18.1.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.<p class="property-message">Deprecated: It has been deprecated from version 1.18.1.</p></dd><dt class="property-required"
             title="Required">
         <span id="deletionprotection_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_nodejs" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -2135,8 +2464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether cluster deletion protection is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether cluster deletion protection is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2144,8 +2472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name for access.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for access.</dd><dt class="property-required"
             title="Required">
         <span id="enisubnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enisubnetids_nodejs" style="color: inherit; text-decoration: inherit;">eni<wbr>Subnet<wbr>Ids</a>
@@ -2153,8 +2480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Subnet IDs for cluster with VPC-CNI network mode.</p>
-</dd><dt class="property-required"
+    <dd>Subnet IDs for cluster with VPC-CNI network mode.</dd><dt class="property-required"
             title="Required">
         <span id="ignoreclustercidrconflict_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoreclustercidrconflict_nodejs" style="color: inherit; text-decoration: inherit;">ignore<wbr>Cluster<wbr>Cidr<wbr>Conflict</a>
@@ -2162,8 +2488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether to ignore the cluster cidr conflict error.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to ignore the cluster cidr conflict error.</dd><dt class="property-required"
             title="Required">
         <span id="isnonstaticipmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnonstaticipmode_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Non<wbr>Static<wbr>Ip<wbr>Mode</a>
@@ -2171,8 +2496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether non-static ip mode is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether non-static ip mode is enabled.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfig_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Config</a>
@@ -2180,8 +2504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kubernetes config.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfigintranet_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigintranet_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>Intranet</a>
@@ -2189,8 +2512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Kubernetes config of private network.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config of private network.</dd><dt class="property-required"
             title="Required">
         <span id="kubeproxymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeproxymode_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Proxy<wbr>Mode</a>
@@ -2198,8 +2520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster kube-proxy mode.</p>
-</dd><dt class="property-required"
+    <dd>Cluster kube-proxy mode.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2207,8 +2528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster network type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster network type.</dd><dt class="property-required"
             title="Required">
         <span id="nodenametype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenametype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Name<wbr>Type</a>
@@ -2216,8 +2536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name type of cluster.</p>
-</dd><dt class="property-required"
+    <dd>Node name type of cluster.</dd><dt class="property-required"
             title="Required">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2225,8 +2544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of account.</p>
-</dd><dt class="property-required"
+    <dd>Password of account.</dd><dt class="property-required"
             title="Required">
         <span id="pgwendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pgwendpoint_nodejs" style="color: inherit; text-decoration: inherit;">pgw<wbr>Endpoint</a>
@@ -2234,8 +2552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Intranet address used for access.</p>
-</dd><dt class="property-required"
+    <dd>The Intranet address used for access.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2243,8 +2560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="securitypolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
@@ -2252,8 +2568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Access policy.</p>
-</dd><dt class="property-required"
+    <dd>Access policy.</dd><dt class="property-required"
             title="Required">
         <span id="servicecidr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicecidr_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Cidr</a>
@@ -2261,17 +2576,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network address block of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The network address block of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -2279,8 +2592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name of account.</p>
-</dd><dt class="property-required"
+    <dd>User name of account.</dd><dt class="property-required"
             title="Required">
         <span id="vpccnitype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccnitype_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cni<wbr>Type</a>
@@ -2288,8 +2600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Distinguish between shared network card multi-IP mode and independent network card mode.</p>
-</dd><dt class="property-required"
+    <dd>Distinguish between shared network card multi-IP mode and independent network card mode.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2297,8 +2608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Vpc ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="workerinstanceslists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workerinstanceslists_nodejs" style="color: inherit; text-decoration: inherit;">worker<wbr>Instances<wbr>Lists</a>
@@ -2306,8 +2616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistworkerinstanceslist">Get<wbr>Clusters<wbr>List<wbr>Worker<wbr>Instances<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</p>
-</dd></dl>
+    <dd>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2315,14 +2624,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-required"
+            title="Required">
         <span id="certification_authority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certification_authority_python" style="color: inherit; text-decoration: inherit;">certification_<wbr>authority</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The certificate used for access.</p>
-</dd><dt class="property-required"
+    <dd>The certificate used for access.</dd><dt class="property-required"
             title="Required">
         <span id="claim_expired_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#claim_expired_seconds_python" style="color: inherit; text-decoration: inherit;">claim_<wbr>expired_<wbr>seconds</a>
@@ -2330,8 +2646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expired seconds to recycle ENI.</p>
-</dd><dt class="property-required"
+    <dd>The expired seconds to recycle ENI.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_as_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_as_enabled_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>as_<wbr>enabled</a>
@@ -2339,8 +2654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable cluster node auto scaler.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to enable cluster node auto scaler.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_cidr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_cidr_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>cidr</a>
@@ -2348,8 +2662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_deploy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_deploy_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>deploy_<wbr>type</a>
@@ -2357,8 +2670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deployment type of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Deployment type of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_desc_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>desc</a>
@@ -2366,8 +2678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Description of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_external_endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_external_endpoint_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>external_<wbr>endpoint</a>
@@ -2375,17 +2686,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>External network address to access.</p>
-</dd><dt class="property-required"
+    <dd>External network address to access.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_extra_args_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_extra_args_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>extra_<wbr>args</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterslistclusterextraarg">Get<wbr>Clusters<wbr>List<wbr>Cluster<wbr>Extra<wbr>Arg]</a></span>
+        <span class="property-type"><a href="#getclusterslistclusterextraarg">Sequence[Get<wbr>Clusters<wbr>List<wbr>Cluster<wbr>Extra<wbr>Arg]</a></span>
     </dt>
-    <dd><p>Customized parameters for master component.</p>
-</dd><dt class="property-required"
+    <dd>Customized parameters for master component.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -2393,8 +2702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_ipvs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_ipvs_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>ipvs</a>
@@ -2402,8 +2710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether ipvs is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ipvs is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_max_pod_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_max_pod_num_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>max_<wbr>pod_<wbr>num</a>
@@ -2411,8 +2718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of Pods per node in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Pods per node in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_max_service_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_max_service_num_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>max_<wbr>service_<wbr>num</a>
@@ -2420,8 +2726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of services in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -2429,8 +2734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_node_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_node_num_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>node_<wbr>num</a>
@@ -2438,8 +2742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_os_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_os_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>os</a>
@@ -2447,8 +2750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operating system of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Operating system of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_version_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
@@ -2456,8 +2758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the cluster.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Version of the cluster.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="container_runtime_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_runtime_python" style="color: inherit; text-decoration: inherit;">container_<wbr>runtime</a>
@@ -2465,9 +2766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.18.1.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.<p class="property-message">Deprecated: It has been deprecated from version 1.18.1.</p></dd><dt class="property-required"
             title="Required">
         <span id="deletion_protection_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletion_protection_python" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
@@ -2475,8 +2774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether cluster deletion protection is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether cluster deletion protection is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2484,8 +2782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name for access.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for access.</dd><dt class="property-required"
             title="Required">
         <span id="eni_subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eni_subnet_ids_python" style="color: inherit; text-decoration: inherit;">eni_<wbr>subnet_<wbr>ids</a>
@@ -2493,8 +2790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Subnet IDs for cluster with VPC-CNI network mode.</p>
-</dd><dt class="property-required"
+    <dd>Subnet IDs for cluster with VPC-CNI network mode.</dd><dt class="property-required"
             title="Required">
         <span id="ignore_cluster_cidr_conflict_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_cluster_cidr_conflict_python" style="color: inherit; text-decoration: inherit;">ignore_<wbr>cluster_<wbr>cidr_<wbr>conflict</a>
@@ -2502,8 +2798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to ignore the cluster cidr conflict error.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to ignore the cluster cidr conflict error.</dd><dt class="property-required"
             title="Required">
         <span id="is_non_static_ip_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_non_static_ip_mode_python" style="color: inherit; text-decoration: inherit;">is_<wbr>non_<wbr>static_<wbr>ip_<wbr>mode</a>
@@ -2511,8 +2806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether non-static ip mode is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether non-static ip mode is enabled.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kube_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_config_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>config</a>
@@ -2520,8 +2814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Kubernetes config.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kube_config_intranet_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_config_intranet_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>config_<wbr>intranet</a>
@@ -2529,8 +2822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Kubernetes config of private network.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config of private network.</dd><dt class="property-required"
             title="Required">
         <span id="kube_proxy_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_proxy_mode_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>proxy_<wbr>mode</a>
@@ -2538,8 +2830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster kube-proxy mode.</p>
-</dd><dt class="property-required"
+    <dd>Cluster kube-proxy mode.</dd><dt class="property-required"
             title="Required">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -2547,8 +2838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster network type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster network type.</dd><dt class="property-required"
             title="Required">
         <span id="node_name_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>name_<wbr>type</a>
@@ -2556,8 +2846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node name type of cluster.</p>
-</dd><dt class="property-required"
+    <dd>Node name type of cluster.</dd><dt class="property-required"
             title="Required">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2565,8 +2854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password of account.</p>
-</dd><dt class="property-required"
+    <dd>Password of account.</dd><dt class="property-required"
             title="Required">
         <span id="pgw_endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pgw_endpoint_python" style="color: inherit; text-decoration: inherit;">pgw_<wbr>endpoint</a>
@@ -2574,8 +2862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The Intranet address used for access.</p>
-</dd><dt class="property-required"
+    <dd>The Intranet address used for access.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2583,8 +2870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="security_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_policies_python" style="color: inherit; text-decoration: inherit;">security_<wbr>policies</a>
@@ -2592,8 +2878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Access policy.</p>
-</dd><dt class="property-required"
+    <dd>Access policy.</dd><dt class="property-required"
             title="Required">
         <span id="service_cidr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_cidr_python" style="color: inherit; text-decoration: inherit;">service_<wbr>cidr</a>
@@ -2601,17 +2886,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The network address block of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The network address block of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -2619,8 +2902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User name of account.</p>
-</dd><dt class="property-required"
+    <dd>User name of account.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_cni_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_cni_type_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>cni_<wbr>type</a>
@@ -2628,8 +2910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Distinguish between shared network card multi-IP mode and independent network card mode.</p>
-</dd><dt class="property-required"
+    <dd>Distinguish between shared network card multi-IP mode and independent network card mode.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2637,17 +2918,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Vpc ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="worker_instances_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#worker_instances_lists_python" style="color: inherit; text-decoration: inherit;">worker_<wbr>instances_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterslistworkerinstanceslist">Get<wbr>Clusters<wbr>List<wbr>Worker<wbr>Instances<wbr>List]</a></span>
+        <span class="property-type"><a href="#getclusterslistworkerinstanceslist">Sequence[Get<wbr>Clusters<wbr>List<wbr>Worker<wbr>Instances<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</p>
-</dd></dl>
+    <dd>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2655,14 +2934,21 @@ The following output properties are available:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-required"
+            title="Required">
         <span id="certificationauthority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificationauthority_yaml" style="color: inherit; text-decoration: inherit;">certification<wbr>Authority</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The certificate used for access.</p>
-</dd><dt class="property-required"
+    <dd>The certificate used for access.</dd><dt class="property-required"
             title="Required">
         <span id="claimexpiredseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#claimexpiredseconds_yaml" style="color: inherit; text-decoration: inherit;">claim<wbr>Expired<wbr>Seconds</a>
@@ -2670,8 +2956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The expired seconds to recycle ENI.</p>
-</dd><dt class="property-required"
+    <dd>The expired seconds to recycle ENI.</dd><dt class="property-required"
             title="Required">
         <span id="clusterasenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterasenabled_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>As<wbr>Enabled</a>
@@ -2679,8 +2964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable cluster node auto scaler.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to enable cluster node auto scaler.</dd><dt class="property-required"
             title="Required">
         <span id="clustercidr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustercidr_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Cidr</a>
@@ -2688,8 +2972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdeploytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdeploytype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Deploy<wbr>Type</a>
@@ -2697,8 +2980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deployment type of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Deployment type of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -2706,8 +2988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Description of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterexternalendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterexternalendpoint_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>External<wbr>Endpoint</a>
@@ -2715,8 +2996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>External network address to access.</p>
-</dd><dt class="property-required"
+    <dd>External network address to access.</dd><dt class="property-required"
             title="Required">
         <span id="clusterextraargs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterextraargs_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Extra<wbr>Args</a>
@@ -2724,8 +3004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistclusterextraarg">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Customized parameters for master component.</p>
-</dd><dt class="property-required"
+    <dd>Customized parameters for master component.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2733,8 +3012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster. Conflict with cluster_name, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusteripvs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteripvs_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Ipvs</a>
@@ -2742,8 +3020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether ipvs is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether ipvs is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxpodnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxpodnum_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Max<wbr>Pod<wbr>Num</a>
@@ -2751,8 +3028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of Pods per node in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of Pods per node in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustermaxservicenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustermaxservicenum_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Max<wbr>Service<wbr>Num</a>
@@ -2760,8 +3036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of services in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of services in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -2769,8 +3044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster. Conflict with cluster_id, can not be set at the same time.</dd><dt class="property-required"
             title="Required">
         <span id="clusternodenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusternodenum_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Node<wbr>Num</a>
@@ -2778,8 +3052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of nodes in the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes in the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusteros_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteros_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Os</a>
@@ -2787,8 +3060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operating system of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Operating system of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -2796,8 +3068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the cluster.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Version of the cluster.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="containerruntime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerruntime_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>Runtime</a>
@@ -2805,9 +3076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.18.1.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.18.1. Container runtime of the cluster.<p class="property-message">Deprecated: It has been deprecated from version 1.18.1.</p></dd><dt class="property-required"
             title="Required">
         <span id="deletionprotection_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_yaml" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -2815,8 +3084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether cluster deletion protection is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether cluster deletion protection is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2824,8 +3092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name for access.</p>
-</dd><dt class="property-required"
+    <dd>Domain name for access.</dd><dt class="property-required"
             title="Required">
         <span id="enisubnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enisubnetids_yaml" style="color: inherit; text-decoration: inherit;">eni<wbr>Subnet<wbr>Ids</a>
@@ -2833,8 +3100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Subnet IDs for cluster with VPC-CNI network mode.</p>
-</dd><dt class="property-required"
+    <dd>Subnet IDs for cluster with VPC-CNI network mode.</dd><dt class="property-required"
             title="Required">
         <span id="ignoreclustercidrconflict_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignoreclustercidrconflict_yaml" style="color: inherit; text-decoration: inherit;">ignore<wbr>Cluster<wbr>Cidr<wbr>Conflict</a>
@@ -2842,8 +3108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to ignore the cluster cidr conflict error.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether to ignore the cluster cidr conflict error.</dd><dt class="property-required"
             title="Required">
         <span id="isnonstaticipmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnonstaticipmode_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Non<wbr>Static<wbr>Ip<wbr>Mode</a>
@@ -2851,8 +3116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether non-static ip mode is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether non-static ip mode is enabled.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfig_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Config</a>
@@ -2860,8 +3124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kubernetes config.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="kubeconfigintranet_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeconfigintranet_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Config<wbr>Intranet</a>
@@ -2869,8 +3132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Kubernetes config of private network.</p>
-</dd><dt class="property-required"
+    <dd>Kubernetes config of private network.</dd><dt class="property-required"
             title="Required">
         <span id="kubeproxymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeproxymode_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Proxy<wbr>Mode</a>
@@ -2878,8 +3140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster kube-proxy mode.</p>
-</dd><dt class="property-required"
+    <dd>Cluster kube-proxy mode.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2887,8 +3148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster network type.</p>
-</dd><dt class="property-required"
+    <dd>Cluster network type.</dd><dt class="property-required"
             title="Required">
         <span id="nodenametype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodenametype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Name<wbr>Type</a>
@@ -2896,8 +3156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node name type of cluster.</p>
-</dd><dt class="property-required"
+    <dd>Node name type of cluster.</dd><dt class="property-required"
             title="Required">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2905,8 +3164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of account.</p>
-</dd><dt class="property-required"
+    <dd>Password of account.</dd><dt class="property-required"
             title="Required">
         <span id="pgwendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pgwendpoint_yaml" style="color: inherit; text-decoration: inherit;">pgw<wbr>Endpoint</a>
@@ -2914,8 +3172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Intranet address used for access.</p>
-</dd><dt class="property-required"
+    <dd>The Intranet address used for access.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2923,8 +3180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="securitypolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitypolicies_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Policies</a>
@@ -2932,8 +3188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Access policy.</p>
-</dd><dt class="property-required"
+    <dd>Access policy.</dd><dt class="property-required"
             title="Required">
         <span id="servicecidr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicecidr_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Cidr</a>
@@ -2941,17 +3196,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The network address block of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>The network address block of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -2959,8 +3212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name of account.</p>
-</dd><dt class="property-required"
+    <dd>User name of account.</dd><dt class="property-required"
             title="Required">
         <span id="vpccnitype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccnitype_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cni<wbr>Type</a>
@@ -2968,8 +3220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Distinguish between shared network card multi-IP mode and independent network card mode.</p>
-</dd><dt class="property-required"
+    <dd>Distinguish between shared network card multi-IP mode and independent network card mode.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2977,8 +3228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>Vpc ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="workerinstanceslists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workerinstanceslists_yaml" style="color: inherit; text-decoration: inherit;">worker<wbr>Instances<wbr>Lists</a>
@@ -2986,8 +3236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterslistworkerinstanceslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</p>
-</dd></dl>
+    <dd>An information list of cvm within the WORKER clusters. Each element contains the following attributes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3005,8 +3254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-apiserver.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-apiserver.</dd><dt class="property-required"
             title="Required">
         <span id="kubecontrollermanagers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubecontrollermanagers_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Controller<wbr>Managers</a>
@@ -3014,8 +3262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-controller-manager.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-controller-manager.</dd><dt class="property-required"
             title="Required">
         <span id="kubeschedulers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeschedulers_csharp" style="color: inherit; text-decoration: inherit;">Kube<wbr>Schedulers</a>
@@ -3023,8 +3270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-scheduler.</p>
-</dd></dl>
+    <dd>The customized parameters for kube-scheduler.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3038,8 +3284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The customized parameters for kube-apiserver.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-apiserver.</dd><dt class="property-required"
             title="Required">
         <span id="kubecontrollermanagers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubecontrollermanagers_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Controller<wbr>Managers</a>
@@ -3047,8 +3292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The customized parameters for kube-controller-manager.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-controller-manager.</dd><dt class="property-required"
             title="Required">
         <span id="kubeschedulers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeschedulers_go" style="color: inherit; text-decoration: inherit;">Kube<wbr>Schedulers</a>
@@ -3056,8 +3300,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The customized parameters for kube-scheduler.</p>
-</dd></dl>
+    <dd>The customized parameters for kube-scheduler.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kube_apiservers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_apiservers_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>apiservers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The customized parameters for kube-apiserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="kube_controller_managers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_controller_managers_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>controller_<wbr>managers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The customized parameters for kube-controller-manager.</dd><dt class="property-required"
+            title="Required">
+        <span id="kube_schedulers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_schedulers_hcl" style="color: inherit; text-decoration: inherit;">kube_<wbr>schedulers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The customized parameters for kube-scheduler.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3071,8 +3344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-apiserver.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-apiserver.</dd><dt class="property-required"
             title="Required">
         <span id="kubecontrollermanagers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubecontrollermanagers_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Controller<wbr>Managers</a>
@@ -3080,8 +3352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-controller-manager.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-controller-manager.</dd><dt class="property-required"
             title="Required">
         <span id="kubeschedulers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeschedulers_java" style="color: inherit; text-decoration: inherit;">kube<wbr>Schedulers</a>
@@ -3089,8 +3360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-scheduler.</p>
-</dd></dl>
+    <dd>The customized parameters for kube-scheduler.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3104,8 +3374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The customized parameters for kube-apiserver.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-apiserver.</dd><dt class="property-required"
             title="Required">
         <span id="kubecontrollermanagers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubecontrollermanagers_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Controller<wbr>Managers</a>
@@ -3113,8 +3382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The customized parameters for kube-controller-manager.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-controller-manager.</dd><dt class="property-required"
             title="Required">
         <span id="kubeschedulers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeschedulers_nodejs" style="color: inherit; text-decoration: inherit;">kube<wbr>Schedulers</a>
@@ -3122,8 +3390,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The customized parameters for kube-scheduler.</p>
-</dd></dl>
+    <dd>The customized parameters for kube-scheduler.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3137,8 +3404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The customized parameters for kube-apiserver.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-apiserver.</dd><dt class="property-required"
             title="Required">
         <span id="kube_controller_managers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_controller_managers_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>controller_<wbr>managers</a>
@@ -3146,8 +3412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The customized parameters for kube-controller-manager.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-controller-manager.</dd><dt class="property-required"
             title="Required">
         <span id="kube_schedulers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kube_schedulers_python" style="color: inherit; text-decoration: inherit;">kube_<wbr>schedulers</a>
@@ -3155,8 +3420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The customized parameters for kube-scheduler.</p>
-</dd></dl>
+    <dd>The customized parameters for kube-scheduler.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3170,8 +3434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-apiserver.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-apiserver.</dd><dt class="property-required"
             title="Required">
         <span id="kubecontrollermanagers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubecontrollermanagers_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Controller<wbr>Managers</a>
@@ -3179,8 +3442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-controller-manager.</p>
-</dd><dt class="property-required"
+    <dd>The customized parameters for kube-controller-manager.</dd><dt class="property-required"
             title="Required">
         <span id="kubeschedulers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kubeschedulers_yaml" style="color: inherit; text-decoration: inherit;">kube<wbr>Schedulers</a>
@@ -3188,8 +3450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The customized parameters for kube-scheduler.</p>
-</dd></dl>
+    <dd>The customized parameters for kube-scheduler.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3207,8 +3468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Information of the cvm when it is failed.</p>
-</dd><dt class="property-required"
+    <dd>Information of the cvm when it is failed.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3216,8 +3476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Role</a>
@@ -3225,8 +3484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>Role of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancestate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestate_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>State</a>
@@ -3234,8 +3492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>State of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="lanip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanip_csharp" style="color: inherit; text-decoration: inherit;">Lan<wbr>Ip</a>
@@ -3243,8 +3500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LAN IP of the cvm.</p>
-</dd></dl>
+    <dd>LAN IP of the cvm.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3258,8 +3514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Information of the cvm when it is failed.</p>
-</dd><dt class="property-required"
+    <dd>Information of the cvm when it is failed.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3267,8 +3522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Role</a>
@@ -3276,8 +3530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>Role of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancestate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestate_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>State</a>
@@ -3285,8 +3538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>State of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="lanip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanip_go" style="color: inherit; text-decoration: inherit;">Lan<wbr>Ip</a>
@@ -3294,8 +3546,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LAN IP of the cvm.</p>
-</dd></dl>
+    <dd>LAN IP of the cvm.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="failed_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#failed_reason_hcl" style="color: inherit; text-decoration: inherit;">failed_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Information of the cvm when it is failed.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cvm.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_role_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Role of the cvm.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_state_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the cvm.</dd><dt class="property-required"
+            title="Required">
+        <span id="lan_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lan_ip_hcl" style="color: inherit; text-decoration: inherit;">lan_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>LAN IP of the cvm.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3309,8 +3606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Information of the cvm when it is failed.</p>
-</dd><dt class="property-required"
+    <dd>Information of the cvm when it is failed.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3318,8 +3614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -3327,8 +3622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Role of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>Role of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancestate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestate_java" style="color: inherit; text-decoration: inherit;">instance<wbr>State</a>
@@ -3336,8 +3630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>State of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="lanip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanip_java" style="color: inherit; text-decoration: inherit;">lan<wbr>Ip</a>
@@ -3345,8 +3638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>LAN IP of the cvm.</p>
-</dd></dl>
+    <dd>LAN IP of the cvm.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3360,8 +3652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Information of the cvm when it is failed.</p>
-</dd><dt class="property-required"
+    <dd>Information of the cvm when it is failed.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3369,8 +3660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -3378,8 +3668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>Role of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancestate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestate_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>State</a>
@@ -3387,8 +3676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>State of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="lanip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanip_nodejs" style="color: inherit; text-decoration: inherit;">lan<wbr>Ip</a>
@@ -3396,8 +3684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LAN IP of the cvm.</p>
-</dd></dl>
+    <dd>LAN IP of the cvm.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3411,8 +3698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Information of the cvm when it is failed.</p>
-</dd><dt class="property-required"
+    <dd>Information of the cvm when it is failed.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -3420,8 +3706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instance_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_role_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>role</a>
@@ -3429,8 +3714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Role of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>Role of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instance_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_state_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>state</a>
@@ -3438,8 +3722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>State of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="lan_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lan_ip_python" style="color: inherit; text-decoration: inherit;">lan_<wbr>ip</a>
@@ -3447,8 +3730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>LAN IP of the cvm.</p>
-</dd></dl>
+    <dd>LAN IP of the cvm.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3462,8 +3744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Information of the cvm when it is failed.</p>
-</dd><dt class="property-required"
+    <dd>Information of the cvm when it is failed.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3471,8 +3752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -3480,8 +3760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Role of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>Role of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="instancestate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestate_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>State</a>
@@ -3489,8 +3768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the cvm.</p>
-</dd><dt class="property-required"
+    <dd>State of the cvm.</dd><dt class="property-required"
             title="Required">
         <span id="lanip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanip_yaml" style="color: inherit; text-decoration: inherit;">lan<wbr>Ip</a>
@@ -3498,8 +3776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>LAN IP of the cvm.</p>
-</dd></dl>
+    <dd>LAN IP of the cvm.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3514,7 +3791,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

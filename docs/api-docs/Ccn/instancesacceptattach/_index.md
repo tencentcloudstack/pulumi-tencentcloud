@@ -2,9 +2,11 @@
 ---
 title: "InstancesAcceptAttach"
 title_tag: "tencentcloud.Ccn.InstancesAcceptAttach"
-meta_desc: "Documentation for the tencentcloud.Ccn.InstancesAcceptAttach resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a vpc ccn_instances_accept_attach, you can use this resource to approve cross-region attachment."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,73 +18,67 @@ Provides a resource to create a vpc ccn_instances_accept_attach, you can use thi
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const ccnInstancesAcceptAttach = new tencentcloud.ccn.InstancesAcceptAttach("ccnInstancesAcceptAttach", {
+const ccnInstancesAcceptAttach = new tencentcloud.ccn.InstancesAcceptAttach("ccn_instances_accept_attach", {
     ccnId: "ccn-39lqkygf",
     instances: [{
         instanceId: "vpc-j9yhbzpn",
         instanceRegion: "ap-guangzhou",
         instanceType: "VPC",
+        orderType: "PayByCcnOwner",
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-ccn_instances_accept_attach = tencentcloud.ccn.InstancesAcceptAttach("ccnInstancesAcceptAttach",
+ccn_instances_accept_attach = tencentcloud.ccn.InstancesAcceptAttach("ccn_instances_accept_attach",
     ccn_id="ccn-39lqkygf",
-    instances=[tencentcloud.ccn.InstancesAcceptAttachInstanceArgs(
-        instance_id="vpc-j9yhbzpn",
-        instance_region="ap-guangzhou",
-        instance_type="VPC",
-    )])
+    instances=[{
+        "instance_id": "vpc-j9yhbzpn",
+        "instance_region": "ap-guangzhou",
+        "instance_type": "VPC",
+        "order_type": "PayByCcnOwner",
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var ccnInstancesAcceptAttach = new Tencentcloud.Ccn.InstancesAcceptAttach("ccnInstancesAcceptAttach", new()
-    {
-        CcnId = "ccn-39lqkygf",
-        Instances = new[]
-        {
-            new Tencentcloud.Ccn.Inputs.InstancesAcceptAttachInstanceArgs
-            {
-                InstanceId = "vpc-j9yhbzpn",
-                InstanceRegion = "ap-guangzhou",
-                InstanceType = "VPC",
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ccn.NewInstancesAcceptAttach(ctx, "ccnInstancesAcceptAttach", &Ccn.InstancesAcceptAttachArgs{
+		_, err := ccn.NewInstancesAcceptAttach(ctx, "ccn_instances_accept_attach", &ccn.InstancesAcceptAttachArgs{
 			CcnId: pulumi.String("ccn-39lqkygf"),
 			Instances: ccn.InstancesAcceptAttachInstanceArray{
 				&ccn.InstancesAcceptAttachInstanceArgs{
 					InstanceId:     pulumi.String("vpc-j9yhbzpn"),
 					InstanceRegion: pulumi.String("ap-guangzhou"),
 					InstanceType:   pulumi.String("VPC"),
+					OrderType:      pulumi.String("PayByCcnOwner"),
 				},
 			},
 		})
@@ -93,6 +89,41 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var ccnInstancesAcceptAttach = new Tencentcloud.Ccn.InstancesAcceptAttach("ccn_instances_accept_attach", new()
+    {
+        CcnId = "ccn-39lqkygf",
+        Instances = new[]
+        {
+            new Tencentcloud.Ccn.Inputs.InstancesAcceptAttachInstanceArgs
+            {
+                InstanceId = "vpc-j9yhbzpn",
+                InstanceRegion = "ap-guangzhou",
+                InstanceType = "VPC",
+                OrderType = "PayByCcnOwner",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -102,8 +133,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ccn.InstancesAcceptAttach;
 import com.pulumi.tencentcloud.Ccn.InstancesAcceptAttachArgs;
 import com.pulumi.tencentcloud.Ccn.inputs.InstancesAcceptAttachInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -115,90 +146,144 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var ccnInstancesAcceptAttach = new InstancesAcceptAttach("ccnInstancesAcceptAttach", InstancesAcceptAttachArgs.builder()        
+        var ccnInstancesAcceptAttach = new InstancesAcceptAttach("ccnInstancesAcceptAttach", InstancesAcceptAttachArgs.builder()
             .ccnId("ccn-39lqkygf")
             .instances(InstancesAcceptAttachInstanceArgs.builder()
                 .instanceId("vpc-j9yhbzpn")
                 .instanceRegion("ap-guangzhou")
                 .instanceType("VPC")
+                .orderType("PayByCcnOwner")
                 .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   ccnInstancesAcceptAttach:
     type: tencentcloud:Ccn:InstancesAcceptAttach
+    name: ccn_instances_accept_attach
     properties:
       ccnId: ccn-39lqkygf
       instances:
         - instanceId: vpc-j9yhbzpn
           instanceRegion: ap-guangzhou
           instanceType: VPC
+          orderType: PayByCcnOwner
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ccn_instancesacceptattach" "ccn_instances_accept_attach" {
+  ccn_id = "ccn-39lqkygf"
+  instances {
+    instance_id     = "vpc-j9yhbzpn"
+    instance_region = "ap-guangzhou"
+    instance_type   = "VPC"
+    order_type      = "PayByCcnOwner"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [AcceptAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34793)
 
 
 
 ## Create InstancesAcceptAttach Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                           <span class="nx">ccn_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                          <span class="nx">instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ccn.InstancesAcceptAttachInstanceArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                          <span class="nx">instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstancesAcceptAttachInstanceArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstancesAcceptAttach</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">InstancesAcceptAttach</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstancesAcceptAttach</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">InstancesAcceptAttach</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">InstancesAcceptAttach</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstancesAcceptAttachArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ccn:InstancesAcceptAttach</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ccn:InstancesAcceptAttach</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ccn_instances_accept_attach&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -219,7 +304,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -336,11 +421,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## InstancesAcceptAttach Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The InstancesAcceptAttach resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -356,17 +449,15 @@ The InstancesAcceptAttach resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instances_csharp" style="color: inherit; text-decoration: inherit;">Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ccn.<wbr>Inputs.<wbr>Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ccn.<wbr>Inputs.<wbr>Instances<wbr>Accept<wbr>Attach<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -380,8 +471,7 @@ The InstancesAcceptAttach resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instances_go" style="color: inherit; text-decoration: inherit;">Instances</a>
@@ -389,8 +479,29 @@ The InstancesAcceptAttach resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesacceptattachinstance">[]Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="ccn_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN Instance ID.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instances_hcl" style="color: inherit; text-decoration: inherit;">instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">list(object)</a></span>
+    </dt>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -404,17 +515,15 @@ The InstancesAcceptAttach resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instances_java" style="color: inherit; text-decoration: inherit;">instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Instances<wbr>Accept<wbr>Attach<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -428,17 +537,15 @@ The InstancesAcceptAttach resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instances_nodejs" style="color: inherit; text-decoration: inherit;">instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesacceptattachinstance">Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">Instances<wbr>Accept<wbr>Attach<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -452,17 +559,15 @@ The InstancesAcceptAttach resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instances_python" style="color: inherit; text-decoration: inherit;">instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesacceptattachinstance">Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">Sequence[Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args]</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +581,7 @@ The InstancesAcceptAttach resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instances_yaml" style="color: inherit; text-decoration: inherit;">instances</a>
@@ -485,8 +589,7 @@ The InstancesAcceptAttach resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -507,8 +610,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -522,8 +624,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -537,8 +652,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -552,8 +666,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -567,8 +680,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -582,8 +694,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,121 +704,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing InstancesAcceptAttach resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstancesAcceptAttachState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">InstancesAcceptAttach</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstancesAcceptAttachState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">InstancesAcceptAttach</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">ccn_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ccn.InstancesAcceptAttachInstanceArgs]]</span> = None<span class="p">) -&gt;</span> InstancesAcceptAttach</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstancesAcceptAttachInstanceArgs]]</span> = None<span class="p">) -&gt;</span> InstancesAcceptAttach</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstancesAcceptAttach<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstancesAcceptAttachState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">InstancesAcceptAttach</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstancesAcceptAttach<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstancesAcceptAttachState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">InstancesAcceptAttach</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">InstancesAcceptAttach</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstancesAcceptAttachState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">InstancesAcceptAttach</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstancesAcceptAttachState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">InstancesAcceptAttach</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstancesAcceptAttachState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">InstancesAcceptAttach</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstancesAcceptAttachState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstancesAcceptAttach</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ccn:InstancesAcceptAttach</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ccn_instances_accept_attach</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstancesAcceptAttachState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstancesAcceptAttachState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -715,28 +865,31 @@ Get an existing InstancesAcceptAttach resource's state with the given name, ID, 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstancesAcceptAttachState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -744,28 +897,31 @@ Get an existing InstancesAcceptAttach resource's state with the given name, ID, 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstancesAcceptAttachState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -785,17 +941,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instances_csharp" style="color: inherit; text-decoration: inherit;">Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ccn.<wbr>Inputs.<wbr>Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ccn.<wbr>Inputs.<wbr>Instances<wbr>Accept<wbr>Attach<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -809,8 +963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instances_go" style="color: inherit; text-decoration: inherit;">Instances</a>
@@ -818,8 +971,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesacceptattachinstance">[]Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_ccn_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccn_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CCN Instance ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instances_hcl" style="color: inherit; text-decoration: inherit;">instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">list(object)</a></span>
+    </dt>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -833,17 +1007,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instances_java" style="color: inherit; text-decoration: inherit;">instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Instances<wbr>Accept<wbr>Attach<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -857,17 +1029,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instances_nodejs" style="color: inherit; text-decoration: inherit;">instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesacceptattachinstance">Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">Instances<wbr>Accept<wbr>Attach<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -881,17 +1051,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instances_python" style="color: inherit; text-decoration: inherit;">instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancesacceptattachinstance">Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancesacceptattachinstance">Sequence[Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args]</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -905,8 +1073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CCN Instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>CCN Instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instances_yaml" style="color: inherit; text-decoration: inherit;">instances</a>
@@ -914,8 +1081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancesacceptattachinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Accept List Of Attachment Instances.</p>
-</dd></dl>
+    <dd>Accept List Of Attachment Instances.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -930,7 +1096,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instancesacceptattachinstance">Instances<wbr>Accept<wbr>Attach<wbr>Instance</h4>
+<h4 id="instancesacceptattachinstance">
+Instances<wbr>Accept<wbr>Attach<wbr>Instance<pulumi-choosable type="language" values="python,go" class="inline">, Instances<wbr>Accept<wbr>Attach<wbr>Instance<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -942,8 +1110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Attachment Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Attachment Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Region</a>
@@ -951,8 +1118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Region.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -960,8 +1126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -969,8 +1134,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</p>
-</dd><dt class="property-optional"
+    <dd>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ordertype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance billing method. Valid values: <code>PayByCcnOwner</code> (CCN owner pays), <code>PayByInstanceOwner</code> (instance owner pays).</dd><dt class="property-optional"
             title="Optional">
         <span id="routetableid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Table<wbr>Id</a>
@@ -978,8 +1150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -993,8 +1164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Attachment Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Attachment Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Region</a>
@@ -1002,8 +1172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Region.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1011,8 +1180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1020,8 +1188,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</p>
-</dd><dt class="property-optional"
+    <dd>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ordertype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance billing method. Valid values: <code>PayByCcnOwner</code> (CCN owner pays), <code>PayByInstanceOwner</code> (instance owner pays).</dd><dt class="property-optional"
             title="Optional">
         <span id="routetableid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Table<wbr>Id</a>
@@ -1029,8 +1204,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Attachment Instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_region_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance Region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance billing method. Valid values: <code>PayByCcnOwner</code> (CCN owner pays), <code>PayByInstanceOwner</code> (instance owner pays).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="route_table_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_table_id_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>table_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1044,8 +1272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Attachment Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Attachment Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Region</a>
@@ -1053,8 +1280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Region.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1062,8 +1288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1071,8 +1296,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</p>
-</dd><dt class="property-optional"
+    <dd>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ordertype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_java" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance billing method. Valid values: <code>PayByCcnOwner</code> (CCN owner pays), <code>PayByInstanceOwner</code> (instance owner pays).</dd><dt class="property-optional"
             title="Optional">
         <span id="routetableid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_java" style="color: inherit; text-decoration: inherit;">route<wbr>Table<wbr>Id</a>
@@ -1080,8 +1312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1095,8 +1326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Attachment Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Attachment Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Region</a>
@@ -1104,8 +1334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Region.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1113,8 +1342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1122,8 +1350,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</p>
-</dd><dt class="property-optional"
+    <dd>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ordertype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance billing method. Valid values: <code>PayByCcnOwner</code> (CCN owner pays), <code>PayByInstanceOwner</code> (instance owner pays).</dd><dt class="property-optional"
             title="Optional">
         <span id="routetableid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Table<wbr>Id</a>
@@ -1131,8 +1366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1146,8 +1380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Attachment Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Attachment Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instance_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_region_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>region</a>
@@ -1155,8 +1388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance Region.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1164,8 +1396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1173,8 +1404,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</p>
-</dd><dt class="property-optional"
+    <dd>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_python" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance billing method. Valid values: <code>PayByCcnOwner</code> (CCN owner pays), <code>PayByInstanceOwner</code> (instance owner pays).</dd><dt class="property-optional"
             title="Optional">
         <span id="route_table_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_table_id_python" style="color: inherit; text-decoration: inherit;">route_<wbr>table_<wbr>id</a>
@@ -1182,8 +1420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1197,8 +1434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Attachment Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Attachment Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceregion_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Region</a>
@@ -1206,8 +1442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Region.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1215,8 +1450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1224,8 +1458,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</p>
-</dd><dt class="property-optional"
+    <dd>InstanceType: <code>VPC</code>, <code>DIRECTCONNECT</code>, <code>BMVPC</code>, <code>VPNGW</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ordertype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance billing method. Valid values: <code>PayByCcnOwner</code> (CCN owner pays), <code>PayByInstanceOwner</code> (instance owner pays).</dd><dt class="property-optional"
             title="Optional">
         <span id="routetableid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routetableid_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Table<wbr>Id</a>
@@ -1233,8 +1474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1246,7 +1486,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

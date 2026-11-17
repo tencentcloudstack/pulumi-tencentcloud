@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Eb.getSearch"
 meta_desc: "Documentation for the tencentcloud.Eb.getSearch function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,7 +25,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -31,9 +33,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSearch<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSearchArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>></span
+><span class="k">function </span>getSearch<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSearchArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>></span
 ><span class="k">
-function </span>getSearchOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSearchOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>></span
+function </span>getSearchOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSearchOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -44,7 +46,7 @@ function </span>getSearchOutput<span class="p">(</span><span class="nx">args</sp
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_search<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">event_bus_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_eb.GetSearchFilter]]</span> = None<span class="p">,</span>
+               <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetSearchFilter]]</span> = None<span class="p">,</span>
                <span class="nx">group_field</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">order_fields</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
@@ -52,15 +54,15 @@ function </span>getSearchOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSearchResult</span
 ><span class="k">
-def </span>get_search_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-               <span class="nx">event_bus_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_eb.GetSearchFilterArgs]]]]</span> = None<span class="p">,</span>
-               <span class="nx">group_field</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">order_fields</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSearchResult]</span
+def </span>get_search_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+               <span class="nx">event_bus_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetSearchFilterArgs]]]]</span> = None<span class="p">,</span>
+               <span class="nx">group_field</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">order_by</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">order_fields</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">start_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSearchResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -69,12 +71,12 @@ def </span>get_search_output<span class="p">(</span><span class="nx">end_time</s
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetSearch<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetSearchArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetSearchResult</a></span>, error)</span
+><span class="k">func </span>LookupSearch<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupSearchArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupSearchResult</a></span>, error)</span
 ><span class="k">
-func </span>GetSearchOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetSearchOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetSearchResultOutput</span
+func </span>LookupSearchOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupSearchOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupSearchResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetSearch` in the Go SDK.
+&gt; Note: This function is named `LookupSearch` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -85,7 +87,8 @@ func </span>GetSearchOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSearch </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSearchArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSearchInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSearchInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSearchInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -94,7 +97,8 @@ func </span>GetSearchOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>> </span>getSearch<span class="p">(</span><span class="nx">GetSearchArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>> </span>getSearch<span class="p">(</span><span class="nx">GetSearchArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSearchResult</a></span>> </span>getSearch<span class="p">(</span><span class="nx">GetSearchArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -106,6 +110,15 @@ func </span>GetSearchOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Eb/getSearch:getSearch
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_eb_get_search&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -246,6 +259,76 @@ The following arguments are supported:
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-required"
+            title="Required">
+        <span id="event_bus_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_bus_id_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>bus_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsearchfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_field_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_fields_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -426,7 +509,7 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsearchfilter">Get<wbr>Search<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getsearchfilter">Sequence[Get<wbr>Search<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-optional"
             title="Optional">
@@ -577,8 +660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -672,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -734,6 +815,100 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="dimension_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimension_values_hcl" style="color: inherit; text-decoration: inherit;">dimension_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="event_bus_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_bus_id_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>bus_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsearchresult">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsearchfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="group_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_field_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_fields_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -767,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -862,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -957,14 +1130,13 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsearchresult">Get<wbr>Search<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getsearchresult">Sequence[Get<wbr>Search<wbr>Result]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -980,7 +1152,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsearchfilter">Get<wbr>Search<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getsearchfilter">Sequence[Get<wbr>Search<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -1052,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -1133,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsearchfilterfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Eb.<wbr>Inputs.<wbr>Get<wbr>Search<wbr>Filter<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>LogFilters array.</p>
-</dd><dt class="property-optional"
+    <dd>LogFilters array.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -1142,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-optional"
+    <dd>filter field name.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_csharp" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -1151,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</p>
-</dd><dt class="property-optional"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1160,8 +1328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The logical relationship of the level filters, the value AND or OR.</p>
-</dd><dt class="property-optional"
+    <dd>The logical relationship of the level filters, the value AND or OR.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1169,8 +1336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter value, range operation needs to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter value, range operation needs to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1184,8 +1350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsearchfilterfilter">[]Get<wbr>Search<wbr>Filter<wbr>Filter</a></span>
     </dt>
-    <dd><p>LogFilters array.</p>
-</dd><dt class="property-optional"
+    <dd>LogFilters array.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -1193,8 +1358,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-optional"
+    <dd>filter field name.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_go" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -1202,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</p>
-</dd><dt class="property-optional"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1211,8 +1374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The logical relationship of the level filters, the value AND or OR.</p>
-</dd><dt class="property-optional"
+    <dd>The logical relationship of the level filters, the value AND or OR.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1220,8 +1382,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter value, range operation needs to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter value, range operation needs to enter two values at the same time, separated by commas.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsearchfilterfilter">list(object)</a></span>
+    </dt>
+    <dd>LogFilters array.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>filter field name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The logical relationship of the level filters, the value AND or OR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter value, range operation needs to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsearchfilterfilter">List&lt;Get<wbr>Search<wbr>Filter<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>LogFilters array.</p>
-</dd><dt class="property-optional"
+    <dd>LogFilters array.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1244,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-optional"
+    <dd>filter field name.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_java" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1253,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</p>
-</dd><dt class="property-optional"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1262,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The logical relationship of the level filters, the value AND or OR.</p>
-</dd><dt class="property-optional"
+    <dd>The logical relationship of the level filters, the value AND or OR.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1271,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter value, range operation needs to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter value, range operation needs to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1286,8 +1488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsearchfilterfilter">Get<wbr>Search<wbr>Filter<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>LogFilters array.</p>
-</dd><dt class="property-optional"
+    <dd>LogFilters array.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1295,8 +1496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-optional"
+    <dd>filter field name.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_nodejs" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1304,8 +1504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</p>
-</dd><dt class="property-optional"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1313,8 +1512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The logical relationship of the level filters, the value AND or OR.</p>
-</dd><dt class="property-optional"
+    <dd>The logical relationship of the level filters, the value AND or OR.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1322,8 +1520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter value, range operation needs to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter value, range operation needs to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1335,10 +1532,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsearchfilterfilter">Get<wbr>Search<wbr>Filter<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getsearchfilterfilter">Sequence[Get<wbr>Search<wbr>Filter<wbr>Filter]</a></span>
     </dt>
-    <dd><p>LogFilters array.</p>
-</dd><dt class="property-optional"
+    <dd>LogFilters array.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1346,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-optional"
+    <dd>filter field name.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_python" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1355,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</p>
-</dd><dt class="property-optional"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1364,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The logical relationship of the level filters, the value AND or OR.</p>
-</dd><dt class="property-optional"
+    <dd>The logical relationship of the level filters, the value AND or OR.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1373,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter value, range operation needs to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter value, range operation needs to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1388,8 +1580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsearchfilterfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>LogFilters array.</p>
-</dd><dt class="property-optional"
+    <dd>LogFilters array.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -1397,8 +1588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-optional"
+    <dd>filter field name.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_yaml" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1406,8 +1596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</p>
-</dd><dt class="property-optional"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1415,8 +1604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The logical relationship of the level filters, the value AND or OR.</p>
-</dd><dt class="property-optional"
+    <dd>The logical relationship of the level filters, the value AND or OR.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1424,8 +1612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter value, range operation needs to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter value, range operation needs to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1443,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-required"
+    <dd>filter field name.</dd><dt class="property-required"
             title="Required">
         <span id="operator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_csharp" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -1452,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</p>
-</dd><dt class="property-required"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1461,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter values, range operations need to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter values, range operations need to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1476,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-required"
+    <dd>filter field name.</dd><dt class="property-required"
             title="Required">
         <span id="operator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_go" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -1485,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</p>
-</dd><dt class="property-required"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1494,8 +1676,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter values, range operations need to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter values, range operations need to enter two values at the same time, separated by commas.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>filter field name.</dd><dt class="property-required"
+            title="Required">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter values, range operations need to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1509,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-required"
+    <dd>filter field name.</dd><dt class="property-required"
             title="Required">
         <span id="operator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_java" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1518,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</p>
-</dd><dt class="property-required"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1527,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter values, range operations need to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter values, range operations need to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1542,8 +1750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-required"
+    <dd>filter field name.</dd><dt class="property-required"
             title="Required">
         <span id="operator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_nodejs" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1551,8 +1758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</p>
-</dd><dt class="property-required"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1560,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter values, range operations need to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter values, range operations need to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1575,8 +1780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-required"
+    <dd>filter field name.</dd><dt class="property-required"
             title="Required">
         <span id="operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_python" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1584,8 +1788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</p>
-</dd><dt class="property-required"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1593,8 +1796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter values, range operations need to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter values, range operations need to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1608,8 +1810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter field name.</p>
-</dd><dt class="property-required"
+    <dd>filter field name.</dd><dt class="property-required"
             title="Required">
         <span id="operator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_yaml" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1617,8 +1818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</p>
-</dd><dt class="property-required"
+    <dd>operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1626,8 +1826,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter values, range operations need to enter two values at the same time, separated by commas.</p>
-</dd></dl>
+    <dd>Filter values, range operations need to enter two values at the same time, separated by commas.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1645,8 +1844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log content details, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Log content details, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1654,8 +1852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region, Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Region, Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ruleids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleids_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Ids</a>
@@ -1663,8 +1860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="source_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_csharp" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1672,8 +1868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event source, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event source, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1681,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="subject_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_csharp" style="color: inherit; text-decoration: inherit;">Subject</a>
@@ -1690,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timestamp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_csharp" style="color: inherit; text-decoration: inherit;">Timestamp</a>
@@ -1699,8 +1892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1708,8 +1900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event type, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Event type, note: this field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1723,8 +1914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log content details, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Log content details, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1732,8 +1922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region, Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Region, Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ruleids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleids_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Ids</a>
@@ -1741,8 +1930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="source_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_go" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1750,8 +1938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event source, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event source, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1759,8 +1946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="subject_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_go" style="color: inherit; text-decoration: inherit;">Subject</a>
@@ -1768,8 +1954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timestamp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_go" style="color: inherit; text-decoration: inherit;">Timestamp</a>
@@ -1777,8 +1962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1786,8 +1970,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event type, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Event type, note: this field may return null, indicating that no valid value can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log content details, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region, Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_ids_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event source, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="subject_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_hcl" style="color: inherit; text-decoration: inherit;">subject</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="timestamp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_hcl" style="color: inherit; text-decoration: inherit;">timestamp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event type, note: this field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1801,8 +2054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log content details, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Log content details, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1810,8 +2062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region, Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Region, Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ruleids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleids_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Ids</a>
@@ -1819,8 +2070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="source_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_java" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1828,8 +2078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event source, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event source, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1837,8 +2086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="subject_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_java" style="color: inherit; text-decoration: inherit;">subject</a>
@@ -1846,8 +2094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timestamp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_java" style="color: inherit; text-decoration: inherit;">timestamp</a>
@@ -1855,8 +2102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1864,8 +2110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event type, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Event type, note: this field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1879,8 +2124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log content details, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Log content details, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1888,8 +2132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region, Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Region, Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ruleids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleids_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Ids</a>
@@ -1897,8 +2140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="source_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_nodejs" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1906,8 +2148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event source, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event source, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1915,8 +2156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="subject_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_nodejs" style="color: inherit; text-decoration: inherit;">subject</a>
@@ -1924,8 +2164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timestamp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_nodejs" style="color: inherit; text-decoration: inherit;">timestamp</a>
@@ -1933,8 +2172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1942,8 +2180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event type, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Event type, note: this field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1957,8 +2194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log content details, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Log content details, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1966,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region, Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Region, Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="rule_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_ids_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>ids</a>
@@ -1975,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_python" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1984,8 +2218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event source, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event source, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1993,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="subject_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_python" style="color: inherit; text-decoration: inherit;">subject</a>
@@ -2002,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timestamp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_python" style="color: inherit; text-decoration: inherit;">timestamp</a>
@@ -2011,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2020,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event type, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Event type, note: this field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2035,8 +2264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log content details, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Log content details, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2044,8 +2272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region, Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Region, Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="ruleids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleids_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Ids</a>
@@ -2053,8 +2280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event matching rules, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="source_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_yaml" style="color: inherit; text-decoration: inherit;">source</a>
@@ -2062,8 +2288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event source, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event source, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2071,8 +2296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event status, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Event status, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="subject_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_yaml" style="color: inherit; text-decoration: inherit;">subject</a>
@@ -2080,8 +2304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timestamp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_yaml" style="color: inherit; text-decoration: inherit;">timestamp</a>
@@ -2089,8 +2312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2098,8 +2320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event type, note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Event type, note: this field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2114,7 +2335,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

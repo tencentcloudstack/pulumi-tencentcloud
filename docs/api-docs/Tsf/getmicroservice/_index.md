@@ -2,9 +2,11 @@
 ---
 title: "getMicroservice"
 title_tag: "tencentcloud.Tsf.getMicroservice"
-meta_desc: "Documentation for the tencentcloud.Tsf.getMicroservice function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tsf microservice"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,60 +18,52 @@ Use this data source to query detailed information of tsf microservice
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const microservice = tencentcloud.Tsf.getMicroservice({
-    namespaceId: _var.namespace_id,
+const microservice = tencentcloud.tsf.getMicroservice({
+    namespaceId: namespaceId,
     microserviceIdLists: ["ms-yq3jo6jd"],
     microserviceNameLists: ["provider-demo"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-microservice = tencentcloud.Tsf.get_microservice(namespace_id=var["namespace_id"],
+microservice = tencentcloud.tsf.get_microservice(namespace_id=namespace_id,
     microservice_id_lists=["ms-yq3jo6jd"],
     microservice_name_lists=["provider-demo"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var microservice = Tencentcloud.Tsf.GetMicroservice.Invoke(new()
-    {
-        NamespaceId = @var.Namespace_id,
-        MicroserviceIdLists = new[]
-        {
-            "ms-yq3jo6jd",
-        },
-        MicroserviceNameLists = new[]
-        {
-            "provider-demo",
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.GetMicroservice(ctx, &tsf.GetMicroserviceArgs{
-			NamespaceId: _var.Namespace_id,
+		_, err := tsf.GetMicroservice(ctx, &tsf.GetMicroserviceArgs{
+			NamespaceId: namespaceId,
 			MicroserviceIdLists: []string{
 				"ms-yq3jo6jd",
 			},
@@ -84,6 +78,39 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var microservice = Tencentcloud.Tsf.GetMicroservice.Invoke(new()
+    {
+        NamespaceId = namespaceId,
+        MicroserviceIdLists = new[]
+        {
+            "ms-yq3jo6jd",
+        },
+        MicroserviceNameLists = new[]
+        {
+            "provider-demo",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -92,8 +119,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.TsfFunctions;
 import com.pulumi.tencentcloud.Tsf.inputs.GetMicroserviceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -106,7 +133,7 @@ public class App {
 
     public static void stack(Context ctx) {
         final var microservice = TsfFunctions.getMicroservice(GetMicroserviceArgs.builder()
-            .namespaceId(var_.namespace_id())
+            .namespaceId(namespaceId)
             .microserviceIdLists("ms-yq3jo6jd")
             .microserviceNameLists("provider-demo")
             .build());
@@ -114,20 +141,52 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   microservice:
     fn::invoke:
-      Function: tencentcloud:Tsf:getMicroservice
-      Arguments:
-        namespaceId: ${var.namespace_id}
+      function: tencentcloud:Tsf:getMicroservice
+      arguments:
+        namespaceId: ${namespaceId}
         microserviceIdLists:
           - ms-yq3jo6jd
         microserviceNameLists:
           - provider-demo
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tsf_getmicroservice" "microservice" {
+  namespace_id            = namespaceId
+  microservice_id_lists   = ["ms-yq3jo6jd"]
+  microservice_name_lists = ["provider-demo"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&type=document&lang=en)
 
 
 
@@ -139,7 +198,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +206,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getMicroservice<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMicroserviceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>></span
+><span class="k">function </span>getMicroservice<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMicroserviceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>></span
 ><span class="k">
-function </span>getMicroserviceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMicroserviceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>></span
+function </span>getMicroserviceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMicroserviceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,12 +224,12 @@ function </span>getMicroserviceOutput<span class="p">(</span><span class="nx">ar
                      <span class="nx">statuses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetMicroserviceResult</span
 ><span class="k">
-def </span>get_microservice_output<span class="p">(</span><span class="nx">microservice_id_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">microservice_name_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">namespace_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">statuses</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMicroserviceResult]</span
+def </span>get_microservice_output<span class="p">(</span><span class="nx">microservice_id_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">microservice_name_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">namespace_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">statuses</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMicroserviceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -179,12 +238,12 @@ def </span>get_microservice_output<span class="p">(</span><span class="nx">micro
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetMicroservice<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetMicroserviceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetMicroserviceResult</a></span>, error)</span
+><span class="k">func </span>LookupMicroservice<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupMicroserviceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupMicroserviceResult</a></span>, error)</span
 ><span class="k">
-func </span>GetMicroserviceOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetMicroserviceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetMicroserviceResultOutput</span
+func </span>LookupMicroserviceOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupMicroserviceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupMicroserviceResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetMicroservice` in the Go SDK.
+&gt; Note: This function is named `LookupMicroservice` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -195,7 +254,8 @@ func </span>GetMicroserviceOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetMicroservice </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetMicroserviceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMicroserviceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMicroserviceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMicroserviceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -204,7 +264,8 @@ func </span>GetMicroserviceOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>> </span>getMicroservice<span class="p">(</span><span class="nx">GetMicroserviceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>> </span>getMicroservice<span class="p">(</span><span class="nx">GetMicroserviceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMicroserviceResult</a></span>> </span>getMicroservice<span class="p">(</span><span class="nx">GetMicroserviceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -216,6 +277,15 @@ func </span>GetMicroserviceOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tsf/getMicroservice:getMicroservice
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tsf_get_microservice&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -234,8 +304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace id.</dd><dt class="property-optional"
             title="Optional">
         <span id="microserviceidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Id<wbr>Lists</a>
@@ -243,8 +312,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>microservice id list.</p>
-</dd><dt class="property-optional"
+    <dd>microservice id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicenamelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicenamelists_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Name<wbr>Lists</a>
@@ -252,8 +320,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of service names for search.</p>
-</dd><dt class="property-optional"
+    <dd>List of service names for search.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -261,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_csharp" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -270,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>status filter, online, offline, single_online.</p>
-</dd></dl>
+    <dd>status filter, online, offline, single_online.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -285,8 +350,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace id.</dd><dt class="property-optional"
             title="Optional">
         <span id="microserviceidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Id<wbr>Lists</a>
@@ -294,8 +358,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>microservice id list.</p>
-</dd><dt class="property-optional"
+    <dd>microservice id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicenamelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicenamelists_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Name<wbr>Lists</a>
@@ -303,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of service names for search.</p>
-</dd><dt class="property-optional"
+    <dd>List of service names for search.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -312,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_go" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -321,8 +382,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>status filter, online, offline, single_online.</p>
-</dd></dl>
+    <dd>status filter, online, offline, single_online.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="microservice_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_id_lists_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>microservice id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="microservice_name_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_name_lists_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>name_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of service names for search.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>status filter, online, offline, single_online.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -336,8 +442,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace id.</dd><dt class="property-optional"
             title="Optional">
         <span id="microserviceidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id<wbr>Lists</a>
@@ -345,8 +450,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>microservice id list.</p>
-</dd><dt class="property-optional"
+    <dd>microservice id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicenamelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicenamelists_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Name<wbr>Lists</a>
@@ -354,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of service names for search.</p>
-</dd><dt class="property-optional"
+    <dd>List of service names for search.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -363,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_java" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -372,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>status filter, online, offline, single_online.</p>
-</dd></dl>
+    <dd>status filter, online, offline, single_online.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -387,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace id.</dd><dt class="property-optional"
             title="Optional">
         <span id="microserviceidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id<wbr>Lists</a>
@@ -396,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>microservice id list.</p>
-</dd><dt class="property-optional"
+    <dd>microservice id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicenamelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicenamelists_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Name<wbr>Lists</a>
@@ -405,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of service names for search.</p>
-</dd><dt class="property-optional"
+    <dd>List of service names for search.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -414,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_nodejs" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -423,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>status filter, online, offline, single_online.</p>
-</dd></dl>
+    <dd>status filter, online, offline, single_online.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -438,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace id.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservice_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_id_lists_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>id_<wbr>lists</a>
@@ -447,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>microservice id list.</p>
-</dd><dt class="property-optional"
+    <dd>microservice id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservice_name_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_name_lists_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>name_<wbr>lists</a>
@@ -456,8 +550,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of service names for search.</p>
-</dd><dt class="property-optional"
+    <dd>List of service names for search.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -465,8 +558,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_python" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -474,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>status filter, online, offline, single_online.</p>
-</dd></dl>
+    <dd>status filter, online, offline, single_online.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -489,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace id.</dd><dt class="property-optional"
             title="Optional">
         <span id="microserviceidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id<wbr>Lists</a>
@@ -498,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>microservice id list.</p>
-</dd><dt class="property-optional"
+    <dd>microservice id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="microservicenamelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicenamelists_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Name<wbr>Lists</a>
@@ -507,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of service names for search.</p>
-</dd><dt class="property-optional"
+    <dd>List of service names for search.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -516,8 +604,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_yaml" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -525,8 +612,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>status filter, online, offline, single_online.</p>
-</dd></dl>
+    <dd>status filter, online, offline, single_online.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -549,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -558,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -567,8 +651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Outputs.<wbr>Get<wbr>Microservice<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="microserviceidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Id<wbr>Lists</a>
@@ -614,8 +697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -623,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -632,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresult">[]Get<wbr>Microservice<wbr>Result</a></span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="microserviceidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Id<wbr>Lists</a>
@@ -670,6 +750,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmicroserviceresult">list(object)</a></span>
+    </dt>
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="microservice_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_id_lists_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="microservice_name_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_name_lists_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>name_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -679,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -688,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -697,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresult">List&lt;Get<wbr>Microservice<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="microserviceidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id<wbr>Lists</a>
@@ -744,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -753,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -762,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresult">Get<wbr>Microservice<wbr>Result[]</a></span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="microserviceidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id<wbr>Lists</a>
@@ -809,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespace_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
@@ -818,17 +953,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmicroserviceresult">Get<wbr>Microservice<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getmicroserviceresult">Sequence[Get<wbr>Microservice<wbr>Result]</a></span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="microservice_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_id_lists_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>id_<wbr>lists</a>
@@ -874,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -883,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Namespace Id.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -892,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="microserviceidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceidlists_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id<wbr>Lists</a>
@@ -949,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresultcontent">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Microservice<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -958,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -973,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresultcontent">[]Get<wbr>Microservice<wbr>Result<wbr>Content</a></span>
     </dt>
-    <dd><p>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -982,8 +1109,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contents_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_hcl" style="color: inherit; text-decoration: inherit;">contents</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmicroserviceresultcontent">list(object)</a></span>
+    </dt>
+    <dd>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -997,8 +1145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresultcontent">List&lt;Get<wbr>Microservice<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_java" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1006,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1021,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresultcontent">Get<wbr>Microservice<wbr>Result<wbr>Content[]</a></span>
     </dt>
-    <dd><p>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1030,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1043,10 +1187,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_python" style="color: inherit; text-decoration: inherit;">contents</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmicroserviceresultcontent">Get<wbr>Microservice<wbr>Result<wbr>Content]</a></span>
+        <span class="property-type"><a href="#getmicroserviceresultcontent">Sequence[Get<wbr>Microservice<wbr>Result<wbr>Content]</a></span>
     </dt>
-    <dd><p>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="total_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_python" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
@@ -1054,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1069,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmicroserviceresultcontent">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1078,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Microservice paging list information. Note: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1097,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="criticalinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#criticalinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Critical<wbr>Instance<wbr>Count</a>
@@ -1106,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicedesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicedesc_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Desc</a>
@@ -1115,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microserviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceid_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Id</a>
@@ -1124,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicename_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Name</a>
@@ -1133,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -1142,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-required"
+    <dd>namespace id.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Instance<wbr>Count</a>
@@ -1151,8 +1285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1160,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1175,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="criticalinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#criticalinstancecount_go" style="color: inherit; text-decoration: inherit;">Critical<wbr>Instance<wbr>Count</a>
@@ -1184,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicedesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicedesc_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Desc</a>
@@ -1193,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microserviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceid_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Id</a>
@@ -1202,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicename_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Name</a>
@@ -1211,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -1220,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-required"
+    <dd>namespace id.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Instance<wbr>Count</a>
@@ -1229,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1238,8 +1363,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="critical_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#critical_instance_count_hcl" style="color: inherit; text-decoration: inherit;">critical_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="microservice_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_desc_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="microservice_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_id_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="microservice_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_name_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace id.</dd><dt class="property-required"
+            title="Required">
+        <span id="run_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_instance_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1253,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="criticalinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#criticalinstancecount_java" style="color: inherit; text-decoration: inherit;">critical<wbr>Instance<wbr>Count</a>
@@ -1262,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicedesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicedesc_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Desc</a>
@@ -1271,8 +1463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microserviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceid_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id</a>
@@ -1280,8 +1471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicename_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Name</a>
@@ -1289,8 +1479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -1298,8 +1487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-required"
+    <dd>namespace id.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -1307,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1316,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1331,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="criticalinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#criticalinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">critical<wbr>Instance<wbr>Count</a>
@@ -1340,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicedesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicedesc_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Desc</a>
@@ -1349,8 +1533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microserviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceid_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id</a>
@@ -1358,8 +1541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicename_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Name</a>
@@ -1367,8 +1549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -1376,8 +1557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-required"
+    <dd>namespace id.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -1385,8 +1565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1394,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1409,8 +1587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="critical_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#critical_instance_count_python" style="color: inherit; text-decoration: inherit;">critical_<wbr>instance_<wbr>count</a>
@@ -1418,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservice_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_desc_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>desc</a>
@@ -1427,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservice_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_id_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>id</a>
@@ -1436,8 +1611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservice_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_name_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>name</a>
@@ -1445,8 +1619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
@@ -1454,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-required"
+    <dd>namespace id.</dd><dt class="property-required"
             title="Required">
         <span id="run_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_instance_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>instance_<wbr>count</a>
@@ -1463,8 +1635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1472,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1487,8 +1657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="criticalinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#criticalinstancecount_yaml" style="color: inherit; text-decoration: inherit;">critical<wbr>Instance<wbr>Count</a>
@@ -1496,8 +1665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>offline instance count.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicedesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicedesc_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Desc</a>
@@ -1505,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice description. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microserviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microserviceid_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Id</a>
@@ -1514,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice Id. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="microservicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicename_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Name</a>
@@ -1523,8 +1689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Microservice name. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -1532,8 +1697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace id.</p>
-</dd><dt class="property-required"
+    <dd>namespace id.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -1541,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>run instance count in namespace.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1550,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1566,7 +1728,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

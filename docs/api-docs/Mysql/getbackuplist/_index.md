@@ -2,9 +2,11 @@
 ---
 title: "getBackupList"
 title_tag: "tencentcloud.Mysql.getBackupList"
-meta_desc: "Documentation for the tencentcloud.Mysql.getBackupList function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the list of backup databases."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,55 +18,53 @@ Use this data source to query the list of backup databases.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const default = tencentcloud.Mysql.getBackupList({
-    maxNumber: 10,
+const _default = tencentcloud.mysql.getBackupList({
     mysqlId: "terraform-test-local-database",
+    maxNumber: 10,
     resultOutputFile: "mytestpath",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-default = tencentcloud.Mysql.get_backup_list(max_number=10,
-    mysql_id="terraform-test-local-database",
+default = tencentcloud.mysql.get_backup_list(mysql_id="terraform-test-local-database",
+    max_number=10,
     result_output_file="mytestpath")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var @default = Tencentcloud.Mysql.GetBackupList.Invoke(new()
-    {
-        MaxNumber = 10,
-        MysqlId = "terraform-test-local-database",
-        ResultOutputFile = "mytestpath",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mysql.GetBackupList(ctx, &mysql.GetBackupListArgs{
-			MaxNumber:        pulumi.IntRef(10),
+		_, err := mysql.GetBackupList(ctx, &mysql.GetBackupListArgs{
 			MysqlId:          "terraform-test-local-database",
+			MaxNumber:        pulumi.IntRef(10),
 			ResultOutputFile: pulumi.StringRef("mytestpath"),
 		}, nil)
 		if err != nil {
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var @default = Tencentcloud.Mysql.GetBackupList.Invoke(new()
+    {
+        MysqlId = "terraform-test-local-database",
+        MaxNumber = 10,
+        ResultOutputFile = "mytestpath",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Mysql.MysqlFunctions;
 import com.pulumi.tencentcloud.Mysql.inputs.GetBackupListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,26 +123,58 @@ public class App {
 
     public static void stack(Context ctx) {
         final var default = MysqlFunctions.getBackupList(GetBackupListArgs.builder()
-            .maxNumber(10)
             .mysqlId("terraform-test-local-database")
+            .maxNumber(10)
             .resultOutputFile("mytestpath")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   default:
     fn::invoke:
-      Function: tencentcloud:Mysql:getBackupList
-      Arguments:
-        maxNumber: 10
+      function: tencentcloud:Mysql:getBackupList
+      arguments:
         mysqlId: terraform-test-local-database
+        maxNumber: 10
         resultOutputFile: mytestpath
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_mysql_getbackuplist" "default" {
+  mysql_id           = "terraform-test-local-database"
+  max_number         = 10
+  result_output_file = "mytestpath"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
 
 
 
@@ -127,7 +186,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +194,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBackupList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>></span
+><span class="k">function </span>getBackupList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>></span
 ><span class="k">
-function </span>getBackupListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>></span
+function </span>getBackupListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -151,10 +210,10 @@ function </span>getBackupListOutput<span class="p">(</span><span class="nx">args
                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBackupListResult</span
 ><span class="k">
-def </span>get_backup_list_output<span class="p">(</span><span class="nx">max_number</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                    <span class="nx">mysql_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBackupListResult]</span
+def </span>get_backup_list_output<span class="p">(</span><span class="nx">max_number</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                    <span class="nx">mysql_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBackupListResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -179,7 +238,8 @@ func </span>GetBackupListOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBackupList </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBackupListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -188,7 +248,8 @@ func </span>GetBackupListOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>> </span>getBackupList<span class="p">(</span><span class="nx">GetBackupListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>> </span>getBackupList<span class="p">(</span><span class="nx">GetBackupListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBackupListResult</a></span>> </span>getBackupList<span class="p">(</span><span class="nx">GetBackupListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,6 +261,15 @@ func </span>GetBackupListOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Mysql/getBackupList:getBackupList
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_mysql_get_backup_list&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -218,8 +288,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumber_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Number</a>
@@ -227,8 +296,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -236,8 +304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -251,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumber_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Number</a>
@@ -260,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -269,8 +334,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="mysql_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_hcl" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_number_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -284,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumber_java" style="color: inherit; text-decoration: inherit;">max<wbr>Number</a>
@@ -293,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -302,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -317,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumber_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Number</a>
@@ -326,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -335,8 +424,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -350,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_number_python" style="color: inherit; text-decoration: inherit;">max_<wbr>number</a>
@@ -359,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -368,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -383,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxnumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumber_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Number</a>
@@ -392,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The latest files to list, rang from 1 to 10000. And the default value is <code>10</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -401,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -425,8 +507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -434,8 +515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuplistlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Outputs.<wbr>Get<wbr>Backup<wbr>List<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of MySQL backup. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of MySQL backup. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mysqlid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_csharp" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -473,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -482,8 +561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuplistlist">[]Get<wbr>Backup<wbr>List<wbr>List</a></span>
     </dt>
-    <dd><p>A list of MySQL backup. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of MySQL backup. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mysqlid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_go" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -512,6 +590,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbackuplistlist">list(object)</a></span>
+    </dt>
+    <dd>A list of MySQL backup. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="mysql_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_hcl" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="max_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_number_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -521,8 +645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -530,8 +653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuplistlist">List&lt;Get<wbr>Backup<wbr>List<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of MySQL backup. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of MySQL backup. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mysqlid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_java" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -569,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -578,8 +699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuplistlist">Get<wbr>Backup<wbr>List<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of MySQL backup. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of MySQL backup. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mysqlid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_nodejs" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -617,17 +737,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbackuplistlist">Get<wbr>Backup<wbr>List<wbr>List]</a></span>
+        <span class="property-type"><a href="#getbackuplistlist">Sequence[Get<wbr>Backup<wbr>List<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of MySQL backup. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of MySQL backup. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mysql_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_python" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
@@ -665,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -674,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackuplistlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of MySQL backup. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of MySQL backup. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="mysqlid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_yaml" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -723,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of Backup task.</p>
-</dd><dt class="property-required"
+    <dd>ID of Backup task.</dd><dt class="property-required"
             title="Required">
         <span id="backupmodel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupmodel_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Model</a>
@@ -732,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</p>
-</dd><dt class="property-required"
+    <dd>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</dd><dt class="property-required"
             title="Required">
         <span id="creator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_csharp" style="color: inherit; text-decoration: inherit;">Creator</a>
@@ -741,8 +855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The owner of the backup files.</p>
-</dd><dt class="property-required"
+    <dd>The owner of the backup files.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_csharp" style="color: inherit; text-decoration: inherit;">Finish<wbr>Time</a>
@@ -750,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time at which the backup finishes.</p>
-</dd><dt class="property-required"
+    <dd>The time at which the backup finishes.</dd><dt class="property-required"
             title="Required">
         <span id="interneturl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interneturl_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Url</a>
@@ -759,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>URL for downloads externally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads externally.</dd><dt class="property-required"
             title="Required">
         <span id="intraneturl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intraneturl_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Url</a>
@@ -768,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>URL for downloads internally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads internally.</dd><dt class="property-required"
             title="Required">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -777,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the size of backup file.</p>
-</dd><dt class="property-required"
+    <dd>the size of backup file.</dd><dt class="property-required"
             title="Required">
         <span id="time_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_csharp" style="color: inherit; text-decoration: inherit;">Time</a>
@@ -786,8 +895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</p>
-</dd></dl>
+    <dd>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -801,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of Backup task.</p>
-</dd><dt class="property-required"
+    <dd>ID of Backup task.</dd><dt class="property-required"
             title="Required">
         <span id="backupmodel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupmodel_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Model</a>
@@ -810,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</p>
-</dd><dt class="property-required"
+    <dd>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</dd><dt class="property-required"
             title="Required">
         <span id="creator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_go" style="color: inherit; text-decoration: inherit;">Creator</a>
@@ -819,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The owner of the backup files.</p>
-</dd><dt class="property-required"
+    <dd>The owner of the backup files.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_go" style="color: inherit; text-decoration: inherit;">Finish<wbr>Time</a>
@@ -828,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time at which the backup finishes.</p>
-</dd><dt class="property-required"
+    <dd>The time at which the backup finishes.</dd><dt class="property-required"
             title="Required">
         <span id="interneturl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interneturl_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Url</a>
@@ -837,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>URL for downloads externally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads externally.</dd><dt class="property-required"
             title="Required">
         <span id="intraneturl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intraneturl_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Url</a>
@@ -846,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>URL for downloads internally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads internally.</dd><dt class="property-required"
             title="Required">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -855,8 +957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the size of backup file.</p>
-</dd><dt class="property-required"
+    <dd>the size of backup file.</dd><dt class="property-required"
             title="Required">
         <span id="time_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_go" style="color: inherit; text-decoration: inherit;">Time</a>
@@ -864,8 +965,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</p>
-</dd></dl>
+    <dd>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_id_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of Backup task.</dd><dt class="property-required"
+            title="Required">
+        <span id="backup_model_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_model_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>model</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</dd><dt class="property-required"
+            title="Required">
+        <span id="creator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_hcl" style="color: inherit; text-decoration: inherit;">creator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The owner of the backup files.</dd><dt class="property-required"
+            title="Required">
+        <span id="finish_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finish_time_hcl" style="color: inherit; text-decoration: inherit;">finish_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time at which the backup finishes.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_url_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL for downloads externally.</dd><dt class="property-required"
+            title="Required">
+        <span id="intranet_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_url_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL for downloads internally.</dd><dt class="property-required"
+            title="Required">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>the size of backup file.</dd><dt class="property-required"
+            title="Required">
+        <span id="time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_hcl" style="color: inherit; text-decoration: inherit;">time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -879,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of Backup task.</p>
-</dd><dt class="property-required"
+    <dd>ID of Backup task.</dd><dt class="property-required"
             title="Required">
         <span id="backupmodel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupmodel_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Model</a>
@@ -888,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</p>
-</dd><dt class="property-required"
+    <dd>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</dd><dt class="property-required"
             title="Required">
         <span id="creator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_java" style="color: inherit; text-decoration: inherit;">creator</a>
@@ -897,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The owner of the backup files.</p>
-</dd><dt class="property-required"
+    <dd>The owner of the backup files.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_java" style="color: inherit; text-decoration: inherit;">finish<wbr>Time</a>
@@ -906,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time at which the backup finishes.</p>
-</dd><dt class="property-required"
+    <dd>The time at which the backup finishes.</dd><dt class="property-required"
             title="Required">
         <span id="interneturl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interneturl_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Url</a>
@@ -915,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>URL for downloads externally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads externally.</dd><dt class="property-required"
             title="Required">
         <span id="intraneturl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intraneturl_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Url</a>
@@ -924,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>URL for downloads internally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads internally.</dd><dt class="property-required"
             title="Required">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -933,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>the size of backup file.</p>
-</dd><dt class="property-required"
+    <dd>the size of backup file.</dd><dt class="property-required"
             title="Required">
         <span id="time_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_java" style="color: inherit; text-decoration: inherit;">time</a>
@@ -942,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</p>
-</dd></dl>
+    <dd>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -957,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of Backup task.</p>
-</dd><dt class="property-required"
+    <dd>ID of Backup task.</dd><dt class="property-required"
             title="Required">
         <span id="backupmodel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupmodel_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Model</a>
@@ -966,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</p>
-</dd><dt class="property-required"
+    <dd>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</dd><dt class="property-required"
             title="Required">
         <span id="creator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_nodejs" style="color: inherit; text-decoration: inherit;">creator</a>
@@ -975,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The owner of the backup files.</p>
-</dd><dt class="property-required"
+    <dd>The owner of the backup files.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_nodejs" style="color: inherit; text-decoration: inherit;">finish<wbr>Time</a>
@@ -984,8 +1143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time at which the backup finishes.</p>
-</dd><dt class="property-required"
+    <dd>The time at which the backup finishes.</dd><dt class="property-required"
             title="Required">
         <span id="interneturl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interneturl_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Url</a>
@@ -993,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>URL for downloads externally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads externally.</dd><dt class="property-required"
             title="Required">
         <span id="intraneturl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intraneturl_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Url</a>
@@ -1002,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>URL for downloads internally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads internally.</dd><dt class="property-required"
             title="Required">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1011,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>the size of backup file.</p>
-</dd><dt class="property-required"
+    <dd>the size of backup file.</dd><dt class="property-required"
             title="Required">
         <span id="time_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_nodejs" style="color: inherit; text-decoration: inherit;">time</a>
@@ -1020,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</p>
-</dd></dl>
+    <dd>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1035,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of Backup task.</p>
-</dd><dt class="property-required"
+    <dd>ID of Backup task.</dd><dt class="property-required"
             title="Required">
         <span id="backup_model_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_model_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>model</a>
@@ -1044,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</p>
-</dd><dt class="property-required"
+    <dd>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</dd><dt class="property-required"
             title="Required">
         <span id="creator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_python" style="color: inherit; text-decoration: inherit;">creator</a>
@@ -1053,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The owner of the backup files.</p>
-</dd><dt class="property-required"
+    <dd>The owner of the backup files.</dd><dt class="property-required"
             title="Required">
         <span id="finish_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finish_time_python" style="color: inherit; text-decoration: inherit;">finish_<wbr>time</a>
@@ -1062,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time at which the backup finishes.</p>
-</dd><dt class="property-required"
+    <dd>The time at which the backup finishes.</dd><dt class="property-required"
             title="Required">
         <span id="internet_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_url_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>url</a>
@@ -1071,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>URL for downloads externally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads externally.</dd><dt class="property-required"
             title="Required">
         <span id="intranet_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_url_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>url</a>
@@ -1080,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>URL for downloads internally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads internally.</dd><dt class="property-required"
             title="Required">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1089,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the size of backup file.</p>
-</dd><dt class="property-required"
+    <dd>the size of backup file.</dd><dt class="property-required"
             title="Required">
         <span id="time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_python" style="color: inherit; text-decoration: inherit;">time</a>
@@ -1098,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</p>
-</dd></dl>
+    <dd>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1113,8 +1259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of Backup task.</p>
-</dd><dt class="property-required"
+    <dd>ID of Backup task.</dd><dt class="property-required"
             title="Required">
         <span id="backupmodel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupmodel_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Model</a>
@@ -1122,8 +1267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</p>
-</dd><dt class="property-required"
+    <dd>Backup method. Supported values include: <code>physical</code> - physical backup, and <code>logical</code> - logical backup.</dd><dt class="property-required"
             title="Required">
         <span id="creator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_yaml" style="color: inherit; text-decoration: inherit;">creator</a>
@@ -1131,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The owner of the backup files.</p>
-</dd><dt class="property-required"
+    <dd>The owner of the backup files.</dd><dt class="property-required"
             title="Required">
         <span id="finishtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishtime_yaml" style="color: inherit; text-decoration: inherit;">finish<wbr>Time</a>
@@ -1140,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time at which the backup finishes.</p>
-</dd><dt class="property-required"
+    <dd>The time at which the backup finishes.</dd><dt class="property-required"
             title="Required">
         <span id="interneturl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interneturl_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Url</a>
@@ -1149,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>URL for downloads externally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads externally.</dd><dt class="property-required"
             title="Required">
         <span id="intraneturl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intraneturl_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Url</a>
@@ -1158,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>URL for downloads internally.</p>
-</dd><dt class="property-required"
+    <dd>URL for downloads internally.</dd><dt class="property-required"
             title="Required">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1167,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>the size of backup file.</p>
-</dd><dt class="property-required"
+    <dd>the size of backup file.</dd><dt class="property-required"
             title="Required">
         <span id="time_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_yaml" style="color: inherit; text-decoration: inherit;">time</a>
@@ -1176,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</p>
-</dd></dl>
+    <dd>The earliest time at which the backup starts. For example, <code>2</code> indicates 2:00 am.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1192,7 +1330,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

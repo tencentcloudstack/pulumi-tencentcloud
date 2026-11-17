@@ -2,9 +2,11 @@
 ---
 title: "getCommand"
 title_tag: "tencentcloud.Tat.getCommand"
-meta_desc: "Documentation for the tencentcloud.Tat.getCommand function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tat command"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query detailed information of tat command
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const command = tencentcloud.Tat.getCommand({
+const command = tencentcloud.tat.getCommand({
     commandType: "SHELL",
     createdBy: "TAT",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-command = tencentcloud.Tat.get_command(command_type="SHELL",
+command = tencentcloud.tat.get_command(command_type="SHELL",
     created_by="TAT")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tat"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tat.GetCommand(ctx, &tat.GetCommandArgs{
+			CommandType: pulumi.StringRef("SHELL"),
+			CreatedBy:   pulumi.StringRef("TAT"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tat.GetCommand(ctx, &tat.GetCommandArgs{
-			CommandType: pulumi.StringRef("SHELL"),
-			CreatedBy:   pulumi.StringRef("TAT"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tat.TatFunctions;
 import com.pulumi.tencentcloud.Tat.inputs.GetCommandArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   command:
     fn::invoke:
-      Function: tencentcloud:Tat:getCommand
-      Arguments:
+      function: tencentcloud:Tat:getCommand
+      arguments:
         commandType: SHELL
         createdBy: TAT
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tat_getcommand" "command" {
+  command_type = "SHELL"
+  created_by   = "TAT"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCommands](https://www.tencentcloud.com/document/api/1147/46697)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCommand<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCommandArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>></span
+><span class="k">function </span>getCommand<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCommandArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>></span
 ><span class="k">
-function </span>getCommandOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCommandOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>></span
+function </span>getCommandOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCommandOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -147,12 +205,12 @@ function </span>getCommandOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetCommandResult</span
 ><span class="k">
-def </span>get_command_output<span class="p">(</span><span class="nx">command_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">command_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">command_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">created_by</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCommandResult]</span
+def </span>get_command_output<span class="p">(</span><span class="nx">command_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">command_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">command_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">created_by</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCommandResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -161,12 +219,12 @@ def </span>get_command_output<span class="p">(</span><span class="nx">command_id
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetCommand<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetCommandArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetCommandResult</a></span>, error)</span
+><span class="k">func </span>LookupCommand<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupCommandArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupCommandResult</a></span>, error)</span
 ><span class="k">
-func </span>GetCommandOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetCommandOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetCommandResultOutput</span
+func </span>LookupCommandOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupCommandOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupCommandResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetCommand` in the Go SDK.
+&gt; Note: This function is named `LookupCommand` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -177,7 +235,8 @@ func </span>GetCommandOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCommand </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetCommandArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCommandInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCommandInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCommandInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,7 +245,8 @@ func </span>GetCommandOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>> </span>getCommand<span class="p">(</span><span class="nx">GetCommandArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>> </span>getCommand<span class="p">(</span><span class="nx">GetCommandArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCommandResult</a></span>> </span>getCommand<span class="p">(</span><span class="nx">GetCommandArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -198,6 +258,15 @@ func </span>GetCommandOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tat/getCommand:getCommand
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tat_get_command&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -216,8 +285,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_csharp" style="color: inherit; text-decoration: inherit;">Command<wbr>Name</a>
@@ -225,8 +293,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-optional"
+    <dd>Command name.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_csharp" style="color: inherit; text-decoration: inherit;">Command<wbr>Type</a>
@@ -234,8 +301,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createdby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>By</a>
@@ -243,8 +309,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-optional"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -252,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +331,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_go" style="color: inherit; text-decoration: inherit;">Command<wbr>Name</a>
@@ -276,8 +339,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-optional"
+    <dd>Command name.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_go" style="color: inherit; text-decoration: inherit;">Command<wbr>Type</a>
@@ -285,8 +347,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createdby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_go" style="color: inherit; text-decoration: inherit;">Created<wbr>By</a>
@@ -294,8 +355,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-optional"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -303,8 +363,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="command_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_id_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="command_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_name_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="command_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_type_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="created_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_by_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -318,8 +423,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_java" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -327,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-optional"
+    <dd>Command name.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_java" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -336,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createdby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_java" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -345,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-optional"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -354,8 +455,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -369,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_nodejs" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -378,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-optional"
+    <dd>Command name.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_nodejs" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -387,8 +485,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createdby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -396,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-optional"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -405,8 +501,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -420,8 +515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="command_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_name_python" style="color: inherit; text-decoration: inherit;">command_<wbr>name</a>
@@ -429,8 +523,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-optional"
+    <dd>Command name.</dd><dt class="property-optional"
             title="Optional">
         <span id="command_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_type_python" style="color: inherit; text-decoration: inherit;">command_<wbr>type</a>
@@ -438,8 +531,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="created_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_by_python" style="color: inherit; text-decoration: inherit;">created_<wbr>by</a>
@@ -447,8 +539,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-optional"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -456,8 +547,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -471,8 +561,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-optional"
+    <dd>Command ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_yaml" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -480,8 +569,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-optional"
+    <dd>Command name.</dd><dt class="property-optional"
             title="Optional">
         <span id="commandtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_yaml" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -489,8 +577,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="createdby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -498,8 +585,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-optional"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -507,8 +593,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -531,8 +616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tat.<wbr>Outputs.<wbr>Get<wbr>Command<wbr>Command<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of command details.</p>
-</dd><dt class="property-"
+    <dd>List of command details.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -540,8 +624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="commandid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_csharp" style="color: inherit; text-decoration: inherit;">Command<wbr>Id</a>
@@ -549,8 +632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-"
+    <dd>Command ID.</dd><dt class="property-"
             title="">
         <span id="commandname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_csharp" style="color: inherit; text-decoration: inherit;">Command<wbr>Name</a>
@@ -558,8 +640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-"
+    <dd>Command name.</dd><dt class="property-"
             title="">
         <span id="commandtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_csharp" style="color: inherit; text-decoration: inherit;">Command<wbr>Type</a>
@@ -567,8 +648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type.</p>
-</dd><dt class="property-"
+    <dd>Command type.</dd><dt class="property-"
             title="">
         <span id="createdby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>By</a>
@@ -576,8 +656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -599,8 +678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandset">[]Get<wbr>Command<wbr>Command<wbr>Set</a></span>
     </dt>
-    <dd><p>List of command details.</p>
-</dd><dt class="property-"
+    <dd>List of command details.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -608,8 +686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="commandid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_go" style="color: inherit; text-decoration: inherit;">Command<wbr>Id</a>
@@ -617,8 +694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-"
+    <dd>Command ID.</dd><dt class="property-"
             title="">
         <span id="commandname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_go" style="color: inherit; text-decoration: inherit;">Command<wbr>Name</a>
@@ -626,8 +702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-"
+    <dd>Command name.</dd><dt class="property-"
             title="">
         <span id="commandtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_go" style="color: inherit; text-decoration: inherit;">Command<wbr>Type</a>
@@ -635,8 +710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type.</p>
-</dd><dt class="property-"
+    <dd>Command type.</dd><dt class="property-"
             title="">
         <span id="createdby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_go" style="color: inherit; text-decoration: inherit;">Created<wbr>By</a>
@@ -644,11 +718,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="command_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_sets_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcommandcommandset">list(object)</a></span>
+    </dt>
+    <dd>List of command details.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="command_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_id_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command ID.</dd><dt class="property-"
+            title="">
+        <span id="command_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_name_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command name.</dd><dt class="property-"
+            title="">
+        <span id="command_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_type_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command type.</dd><dt class="property-"
+            title="">
+        <span id="created_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_by_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -667,8 +802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandset">List&lt;Get<wbr>Command<wbr>Command<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of command details.</p>
-</dd><dt class="property-"
+    <dd>List of command details.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -676,8 +810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="commandid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_java" style="color: inherit; text-decoration: inherit;">command<wbr>Id</a>
@@ -685,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-"
+    <dd>Command ID.</dd><dt class="property-"
             title="">
         <span id="commandname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_java" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -694,8 +826,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-"
+    <dd>Command name.</dd><dt class="property-"
             title="">
         <span id="commandtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_java" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -703,8 +834,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command type.</p>
-</dd><dt class="property-"
+    <dd>Command type.</dd><dt class="property-"
             title="">
         <span id="createdby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_java" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -712,8 +842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -735,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandset">Get<wbr>Command<wbr>Command<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of command details.</p>
-</dd><dt class="property-"
+    <dd>List of command details.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -744,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="commandid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_nodejs" style="color: inherit; text-decoration: inherit;">command<wbr>Id</a>
@@ -753,8 +880,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-"
+    <dd>Command ID.</dd><dt class="property-"
             title="">
         <span id="commandname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_nodejs" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -762,8 +888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-"
+    <dd>Command name.</dd><dt class="property-"
             title="">
         <span id="commandtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_nodejs" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -771,8 +896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type.</p>
-</dd><dt class="property-"
+    <dd>Command type.</dd><dt class="property-"
             title="">
         <span id="createdby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -780,8 +904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -801,10 +924,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_sets_python" style="color: inherit; text-decoration: inherit;">command_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcommandcommandset">Get<wbr>Command<wbr>Command<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getcommandcommandset">Sequence[Get<wbr>Command<wbr>Command<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of command details.</p>
-</dd><dt class="property-"
+    <dd>List of command details.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -812,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="command_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_id_python" style="color: inherit; text-decoration: inherit;">command_<wbr>id</a>
@@ -821,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-"
+    <dd>Command ID.</dd><dt class="property-"
             title="">
         <span id="command_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_name_python" style="color: inherit; text-decoration: inherit;">command_<wbr>name</a>
@@ -830,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-"
+    <dd>Command name.</dd><dt class="property-"
             title="">
         <span id="command_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_type_python" style="color: inherit; text-decoration: inherit;">command_<wbr>type</a>
@@ -839,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command type.</p>
-</dd><dt class="property-"
+    <dd>Command type.</dd><dt class="property-"
             title="">
         <span id="created_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_by_python" style="color: inherit; text-decoration: inherit;">created_<wbr>by</a>
@@ -848,8 +966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -871,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of command details.</p>
-</dd><dt class="property-"
+    <dd>List of command details.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -880,8 +996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="commandid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandid_yaml" style="color: inherit; text-decoration: inherit;">command<wbr>Id</a>
@@ -889,8 +1004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-"
+    <dd>Command ID.</dd><dt class="property-"
             title="">
         <span id="commandname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_yaml" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -898,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-"
+    <dd>Command name.</dd><dt class="property-"
             title="">
         <span id="commandtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_yaml" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -907,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command type.</p>
-</dd><dt class="property-"
+    <dd>Command type.</dd><dt class="property-"
             title="">
         <span id="createdby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -916,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -949,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-required"
+    <dd>Command ID.</dd><dt class="property-required"
             title="Required">
         <span id="commandname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_csharp" style="color: inherit; text-decoration: inherit;">Command<wbr>Name</a>
@@ -958,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-required"
+    <dd>Command name.</dd><dt class="property-required"
             title="Required">
         <span id="commandtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_csharp" style="color: inherit; text-decoration: inherit;">Command<wbr>Type</a>
@@ -967,8 +1076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="content_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_csharp" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -976,8 +1084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>command.</p>
-</dd><dt class="property-required"
+    <dd>command.</dd><dt class="property-required"
             title="Required">
         <span id="createdby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>By</a>
@@ -985,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-required"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -994,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creation time.</p>
-</dd><dt class="property-required"
+    <dd>Command creation time.</dd><dt class="property-required"
             title="Required">
         <span id="defaultparameters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultparameters_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Parameters</a>
@@ -1003,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default custom parameter value.</p>
-</dd><dt class="property-required"
+    <dd>Default custom parameter value.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1012,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command description.</p>
-</dd><dt class="property-required"
+    <dd>Command description.</dd><dt class="property-required"
             title="Required">
         <span id="enableparameter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableparameter_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Parameter</a>
@@ -1021,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the custom parameter feature.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the custom parameter feature.</dd><dt class="property-required"
             title="Required">
         <span id="formatteddescription_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#formatteddescription_csharp" style="color: inherit; text-decoration: inherit;">Formatted<wbr>Description</a>
@@ -1030,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</p>
-</dd><dt class="property-required"
+    <dd>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</dd><dt class="property-required"
             title="Required">
         <span id="outputcosbucketurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcosbucketurl_csharp" style="color: inherit; text-decoration: inherit;">Output<wbr>Cos<wbr>Bucket<wbr>Url</a>
@@ -1039,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The COS bucket URL for uploading logs.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket URL for uploading logs.</dd><dt class="property-required"
             title="Required">
         <span id="outputcoskeyprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcoskeyprefix_csharp" style="color: inherit; text-decoration: inherit;">Output<wbr>Cos<wbr>Key<wbr>Prefix</a>
@@ -1048,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The COS bucket directory where the logs are saved.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket directory where the logs are saved.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1057,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandsettag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tat.<wbr>Inputs.<wbr>Get<wbr>Command<wbr>Command<wbr>Set<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Tags bound to the command. At most 10 tags are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Tags bound to the command. At most 10 tags are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_csharp" style="color: inherit; text-decoration: inherit;">Timeout</a>
@@ -1066,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Command timeout period.</p>
-</dd><dt class="property-required"
+    <dd>Command timeout period.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -1075,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command update time.</p>
-</dd><dt class="property-required"
+    <dd>Command update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -1084,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command on the instance.</p>
-</dd><dt class="property-required"
+    <dd>The user who executes the command on the instance.</dd><dt class="property-required"
             title="Required">
         <span id="workingdirectory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workingdirectory_csharp" style="color: inherit; text-decoration: inherit;">Working<wbr>Directory</a>
@@ -1093,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command execution path.</p>
-</dd></dl>
+    <dd>Command execution path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1108,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-required"
+    <dd>Command ID.</dd><dt class="property-required"
             title="Required">
         <span id="commandname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_go" style="color: inherit; text-decoration: inherit;">Command<wbr>Name</a>
@@ -1117,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-required"
+    <dd>Command name.</dd><dt class="property-required"
             title="Required">
         <span id="commandtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_go" style="color: inherit; text-decoration: inherit;">Command<wbr>Type</a>
@@ -1126,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="content_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_go" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -1135,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>command.</p>
-</dd><dt class="property-required"
+    <dd>command.</dd><dt class="property-required"
             title="Required">
         <span id="createdby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_go" style="color: inherit; text-decoration: inherit;">Created<wbr>By</a>
@@ -1144,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-required"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_go" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -1153,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creation time.</p>
-</dd><dt class="property-required"
+    <dd>Command creation time.</dd><dt class="property-required"
             title="Required">
         <span id="defaultparameters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultparameters_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Parameters</a>
@@ -1162,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default custom parameter value.</p>
-</dd><dt class="property-required"
+    <dd>Default custom parameter value.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1171,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command description.</p>
-</dd><dt class="property-required"
+    <dd>Command description.</dd><dt class="property-required"
             title="Required">
         <span id="enableparameter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableparameter_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Parameter</a>
@@ -1180,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the custom parameter feature.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the custom parameter feature.</dd><dt class="property-required"
             title="Required">
         <span id="formatteddescription_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#formatteddescription_go" style="color: inherit; text-decoration: inherit;">Formatted<wbr>Description</a>
@@ -1189,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</p>
-</dd><dt class="property-required"
+    <dd>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</dd><dt class="property-required"
             title="Required">
         <span id="outputcosbucketurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcosbucketurl_go" style="color: inherit; text-decoration: inherit;">Output<wbr>Cos<wbr>Bucket<wbr>Url</a>
@@ -1198,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The COS bucket URL for uploading logs.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket URL for uploading logs.</dd><dt class="property-required"
             title="Required">
         <span id="outputcoskeyprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcoskeyprefix_go" style="color: inherit; text-decoration: inherit;">Output<wbr>Cos<wbr>Key<wbr>Prefix</a>
@@ -1207,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The COS bucket directory where the logs are saved.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket directory where the logs are saved.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1216,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandsettag">[]Get<wbr>Command<wbr>Command<wbr>Set<wbr>Tag</a></span>
     </dt>
-    <dd><p>Tags bound to the command. At most 10 tags are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Tags bound to the command. At most 10 tags are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_go" style="color: inherit; text-decoration: inherit;">Timeout</a>
@@ -1225,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Command timeout period.</p>
-</dd><dt class="property-required"
+    <dd>Command timeout period.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -1234,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command update time.</p>
-</dd><dt class="property-required"
+    <dd>Command update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">Username</a>
@@ -1243,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command on the instance.</p>
-</dd><dt class="property-required"
+    <dd>The user who executes the command on the instance.</dd><dt class="property-required"
             title="Required">
         <span id="workingdirectory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workingdirectory_go" style="color: inherit; text-decoration: inherit;">Working<wbr>Directory</a>
@@ -1252,8 +1330,149 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command execution path.</p>
-</dd></dl>
+    <dd>Command execution path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="command_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_id_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="command_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_name_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command name.</dd><dt class="property-required"
+            title="Required">
+        <span id="command_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_type_hcl" style="color: inherit; text-decoration: inherit;">command_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>command.</dd><dt class="property-required"
+            title="Required">
+        <span id="created_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_by_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-required"
+            title="Required">
+        <span id="created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="default_parameters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_parameters_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Default custom parameter value.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command description.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_parameter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_parameter_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>parameter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the custom parameter feature.</dd><dt class="property-required"
+            title="Required">
+        <span id="formatted_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#formatted_description_hcl" style="color: inherit; text-decoration: inherit;">formatted_<wbr>description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</dd><dt class="property-required"
+            title="Required">
+        <span id="output_cos_bucket_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_cos_bucket_url_hcl" style="color: inherit; text-decoration: inherit;">output_<wbr>cos_<wbr>bucket_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The COS bucket URL for uploading logs.</dd><dt class="property-required"
+            title="Required">
+        <span id="output_cos_key_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_cos_key_prefix_hcl" style="color: inherit; text-decoration: inherit;">output_<wbr>cos_<wbr>key_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The COS bucket directory where the logs are saved.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcommandcommandsettag">list(object)</a></span>
+    </dt>
+    <dd>Tags bound to the command. At most 10 tags are allowed.</dd><dt class="property-required"
+            title="Required">
+        <span id="timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_hcl" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Command timeout period.</dd><dt class="property-required"
+            title="Required">
+        <span id="updated_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_time_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command update time.</dd><dt class="property-required"
+            title="Required">
+        <span id="username_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_hcl" style="color: inherit; text-decoration: inherit;">username</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user who executes the command on the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="working_directory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#working_directory_hcl" style="color: inherit; text-decoration: inherit;">working_<wbr>directory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Command execution path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1267,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-required"
+    <dd>Command ID.</dd><dt class="property-required"
             title="Required">
         <span id="commandname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_java" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -1276,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-required"
+    <dd>Command name.</dd><dt class="property-required"
             title="Required">
         <span id="commandtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_java" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -1285,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="content_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_java" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1294,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>command.</p>
-</dd><dt class="property-required"
+    <dd>command.</dd><dt class="property-required"
             title="Required">
         <span id="createdby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_java" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -1303,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-required"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_java" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1312,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command creation time.</p>
-</dd><dt class="property-required"
+    <dd>Command creation time.</dd><dt class="property-required"
             title="Required">
         <span id="defaultparameters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultparameters_java" style="color: inherit; text-decoration: inherit;">default<wbr>Parameters</a>
@@ -1321,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default custom parameter value.</p>
-</dd><dt class="property-required"
+    <dd>Default custom parameter value.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1330,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command description.</p>
-</dd><dt class="property-required"
+    <dd>Command description.</dd><dt class="property-required"
             title="Required">
         <span id="enableparameter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableparameter_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Parameter</a>
@@ -1339,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable the custom parameter feature.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the custom parameter feature.</dd><dt class="property-required"
             title="Required">
         <span id="formatteddescription_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#formatteddescription_java" style="color: inherit; text-decoration: inherit;">formatted<wbr>Description</a>
@@ -1348,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</p>
-</dd><dt class="property-required"
+    <dd>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</dd><dt class="property-required"
             title="Required">
         <span id="outputcosbucketurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcosbucketurl_java" style="color: inherit; text-decoration: inherit;">output<wbr>Cos<wbr>Bucket<wbr>Url</a>
@@ -1357,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The COS bucket URL for uploading logs.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket URL for uploading logs.</dd><dt class="property-required"
             title="Required">
         <span id="outputcoskeyprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcoskeyprefix_java" style="color: inherit; text-decoration: inherit;">output<wbr>Cos<wbr>Key<wbr>Prefix</a>
@@ -1366,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The COS bucket directory where the logs are saved.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket directory where the logs are saved.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -1375,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandsettag">List&lt;Get<wbr>Command<wbr>Command<wbr>Set<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Tags bound to the command. At most 10 tags are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Tags bound to the command. At most 10 tags are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_java" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -1384,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Command timeout period.</p>
-</dd><dt class="property-required"
+    <dd>Command timeout period.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_java" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1393,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command update time.</p>
-</dd><dt class="property-required"
+    <dd>Command update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">username</a>
@@ -1402,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user who executes the command on the instance.</p>
-</dd><dt class="property-required"
+    <dd>The user who executes the command on the instance.</dd><dt class="property-required"
             title="Required">
         <span id="workingdirectory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workingdirectory_java" style="color: inherit; text-decoration: inherit;">working<wbr>Directory</a>
@@ -1411,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command execution path.</p>
-</dd></dl>
+    <dd>Command execution path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1426,8 +1628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-required"
+    <dd>Command ID.</dd><dt class="property-required"
             title="Required">
         <span id="commandname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_nodejs" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -1435,8 +1636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-required"
+    <dd>Command name.</dd><dt class="property-required"
             title="Required">
         <span id="commandtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_nodejs" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -1444,8 +1644,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="content_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_nodejs" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1453,8 +1652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>command.</p>
-</dd><dt class="property-required"
+    <dd>command.</dd><dt class="property-required"
             title="Required">
         <span id="createdby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -1462,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-required"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1471,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command creation time.</p>
-</dd><dt class="property-required"
+    <dd>Command creation time.</dd><dt class="property-required"
             title="Required">
         <span id="defaultparameters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultparameters_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Parameters</a>
@@ -1480,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default custom parameter value.</p>
-</dd><dt class="property-required"
+    <dd>Default custom parameter value.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1489,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command description.</p>
-</dd><dt class="property-required"
+    <dd>Command description.</dd><dt class="property-required"
             title="Required">
         <span id="enableparameter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableparameter_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Parameter</a>
@@ -1498,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable the custom parameter feature.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the custom parameter feature.</dd><dt class="property-required"
             title="Required">
         <span id="formatteddescription_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#formatteddescription_nodejs" style="color: inherit; text-decoration: inherit;">formatted<wbr>Description</a>
@@ -1507,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</p>
-</dd><dt class="property-required"
+    <dd>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</dd><dt class="property-required"
             title="Required">
         <span id="outputcosbucketurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcosbucketurl_nodejs" style="color: inherit; text-decoration: inherit;">output<wbr>Cos<wbr>Bucket<wbr>Url</a>
@@ -1516,8 +1708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The COS bucket URL for uploading logs.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket URL for uploading logs.</dd><dt class="property-required"
             title="Required">
         <span id="outputcoskeyprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcoskeyprefix_nodejs" style="color: inherit; text-decoration: inherit;">output<wbr>Cos<wbr>Key<wbr>Prefix</a>
@@ -1525,8 +1716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The COS bucket directory where the logs are saved.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket directory where the logs are saved.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -1534,8 +1724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandsettag">Get<wbr>Command<wbr>Command<wbr>Set<wbr>Tag[]</a></span>
     </dt>
-    <dd><p>Tags bound to the command. At most 10 tags are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Tags bound to the command. At most 10 tags are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_nodejs" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -1543,8 +1732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Command timeout period.</p>
-</dd><dt class="property-required"
+    <dd>Command timeout period.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1552,8 +1740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command update time.</p>
-</dd><dt class="property-required"
+    <dd>Command update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">username</a>
@@ -1561,8 +1748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user who executes the command on the instance.</p>
-</dd><dt class="property-required"
+    <dd>The user who executes the command on the instance.</dd><dt class="property-required"
             title="Required">
         <span id="workingdirectory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workingdirectory_nodejs" style="color: inherit; text-decoration: inherit;">working<wbr>Directory</a>
@@ -1570,8 +1756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Command execution path.</p>
-</dd></dl>
+    <dd>Command execution path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1585,8 +1770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-required"
+    <dd>Command ID.</dd><dt class="property-required"
             title="Required">
         <span id="command_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_name_python" style="color: inherit; text-decoration: inherit;">command_<wbr>name</a>
@@ -1594,8 +1778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-required"
+    <dd>Command name.</dd><dt class="property-required"
             title="Required">
         <span id="command_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_type_python" style="color: inherit; text-decoration: inherit;">command_<wbr>type</a>
@@ -1603,8 +1786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_python" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1612,8 +1794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>command.</p>
-</dd><dt class="property-required"
+    <dd>command.</dd><dt class="property-required"
             title="Required">
         <span id="created_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_by_python" style="color: inherit; text-decoration: inherit;">created_<wbr>by</a>
@@ -1621,8 +1802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-required"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-required"
             title="Required">
         <span id="created_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_python" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
@@ -1630,8 +1810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command creation time.</p>
-</dd><dt class="property-required"
+    <dd>Command creation time.</dd><dt class="property-required"
             title="Required">
         <span id="default_parameters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_parameters_python" style="color: inherit; text-decoration: inherit;">default_<wbr>parameters</a>
@@ -1639,8 +1818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Default custom parameter value.</p>
-</dd><dt class="property-required"
+    <dd>Default custom parameter value.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1648,8 +1826,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command description.</p>
-</dd><dt class="property-required"
+    <dd>Command description.</dd><dt class="property-required"
             title="Required">
         <span id="enable_parameter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_parameter_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>parameter</a>
@@ -1657,8 +1834,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the custom parameter feature.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the custom parameter feature.</dd><dt class="property-required"
             title="Required">
         <span id="formatted_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#formatted_description_python" style="color: inherit; text-decoration: inherit;">formatted_<wbr>description</a>
@@ -1666,8 +1842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</p>
-</dd><dt class="property-required"
+    <dd>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</dd><dt class="property-required"
             title="Required">
         <span id="output_cos_bucket_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_cos_bucket_url_python" style="color: inherit; text-decoration: inherit;">output_<wbr>cos_<wbr>bucket_<wbr>url</a>
@@ -1675,8 +1850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The COS bucket URL for uploading logs.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket URL for uploading logs.</dd><dt class="property-required"
             title="Required">
         <span id="output_cos_key_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#output_cos_key_prefix_python" style="color: inherit; text-decoration: inherit;">output_<wbr>cos_<wbr>key_<wbr>prefix</a>
@@ -1684,17 +1858,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The COS bucket directory where the logs are saved.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket directory where the logs are saved.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcommandcommandsettag">Get<wbr>Command<wbr>Command<wbr>Set<wbr>Tag]</a></span>
+        <span class="property-type"><a href="#getcommandcommandsettag">Sequence[Get<wbr>Command<wbr>Command<wbr>Set<wbr>Tag]</a></span>
     </dt>
-    <dd><p>Tags bound to the command. At most 10 tags are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Tags bound to the command. At most 10 tags are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_python" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -1702,8 +1874,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Command timeout period.</p>
-</dd><dt class="property-required"
+    <dd>Command timeout period.</dd><dt class="property-required"
             title="Required">
         <span id="updated_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_time_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
@@ -1711,8 +1882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command update time.</p>
-</dd><dt class="property-required"
+    <dd>Command update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_python" style="color: inherit; text-decoration: inherit;">username</a>
@@ -1720,8 +1890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user who executes the command on the instance.</p>
-</dd><dt class="property-required"
+    <dd>The user who executes the command on the instance.</dd><dt class="property-required"
             title="Required">
         <span id="working_directory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#working_directory_python" style="color: inherit; text-decoration: inherit;">working_<wbr>directory</a>
@@ -1729,8 +1898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Command execution path.</p>
-</dd></dl>
+    <dd>Command execution path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1744,8 +1912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command ID.</p>
-</dd><dt class="property-required"
+    <dd>Command ID.</dd><dt class="property-required"
             title="Required">
         <span id="commandname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandname_yaml" style="color: inherit; text-decoration: inherit;">command<wbr>Name</a>
@@ -1753,8 +1920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command name.</p>
-</dd><dt class="property-required"
+    <dd>Command name.</dd><dt class="property-required"
             title="Required">
         <span id="commandtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#commandtype_yaml" style="color: inherit; text-decoration: inherit;">command<wbr>Type</a>
@@ -1762,8 +1928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Command type, Value is <code>SHELL</code> or <code>POWERSHELL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="content_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_yaml" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1771,8 +1936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>command.</p>
-</dd><dt class="property-required"
+    <dd>command.</dd><dt class="property-required"
             title="Required">
         <span id="createdby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdby_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>By</a>
@@ -1780,8 +1944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</p>
-</dd><dt class="property-required"
+    <dd>Command creator. <code>TAT</code> indicates a public command and <code>USER</code> indicates a personal command.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1789,8 +1952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command creation time.</p>
-</dd><dt class="property-required"
+    <dd>Command creation time.</dd><dt class="property-required"
             title="Required">
         <span id="defaultparameters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultparameters_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Parameters</a>
@@ -1798,8 +1960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default custom parameter value.</p>
-</dd><dt class="property-required"
+    <dd>Default custom parameter value.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1807,8 +1968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command description.</p>
-</dd><dt class="property-required"
+    <dd>Command description.</dd><dt class="property-required"
             title="Required">
         <span id="enableparameter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableparameter_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Parameter</a>
@@ -1816,8 +1976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable the custom parameter feature.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the custom parameter feature.</dd><dt class="property-required"
             title="Required">
         <span id="formatteddescription_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#formatteddescription_yaml" style="color: inherit; text-decoration: inherit;">formatted<wbr>Description</a>
@@ -1825,8 +1984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</p>
-</dd><dt class="property-required"
+    <dd>Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.</dd><dt class="property-required"
             title="Required">
         <span id="outputcosbucketurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcosbucketurl_yaml" style="color: inherit; text-decoration: inherit;">output<wbr>Cos<wbr>Bucket<wbr>Url</a>
@@ -1834,8 +1992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The COS bucket URL for uploading logs.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket URL for uploading logs.</dd><dt class="property-required"
             title="Required">
         <span id="outputcoskeyprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outputcoskeyprefix_yaml" style="color: inherit; text-decoration: inherit;">output<wbr>Cos<wbr>Key<wbr>Prefix</a>
@@ -1843,8 +2000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The COS bucket directory where the logs are saved.</p>
-</dd><dt class="property-required"
+    <dd>The COS bucket directory where the logs are saved.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -1852,8 +2008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcommandcommandsettag">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Tags bound to the command. At most 10 tags are allowed.</p>
-</dd><dt class="property-required"
+    <dd>Tags bound to the command. At most 10 tags are allowed.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_yaml" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -1861,8 +2016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Command timeout period.</p>
-</dd><dt class="property-required"
+    <dd>Command timeout period.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -1870,8 +2024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command update time.</p>
-</dd><dt class="property-required"
+    <dd>Command update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">username</a>
@@ -1879,8 +2032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user who executes the command on the instance.</p>
-</dd><dt class="property-required"
+    <dd>The user who executes the command on the instance.</dd><dt class="property-required"
             title="Required">
         <span id="workingdirectory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workingdirectory_yaml" style="color: inherit; text-decoration: inherit;">working<wbr>Directory</a>
@@ -1888,8 +2040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Command execution path.</p>
-</dd></dl>
+    <dd>Command execution path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1907,8 +2058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1916,8 +2066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1931,8 +2080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1940,8 +2088,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1955,8 +2124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1964,8 +2132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1979,8 +2146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1988,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2003,8 +2168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2012,8 +2176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2027,8 +2190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2036,8 +2198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2052,7 +2213,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

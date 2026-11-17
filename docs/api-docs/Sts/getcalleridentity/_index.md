@@ -2,9 +2,11 @@
 ---
 title: "getCallerIdentity"
 title_tag: "tencentcloud.Sts.getCallerIdentity"
-meta_desc: "Documentation for the tencentcloud.Sts.getCallerIdentity function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of sts callerIdentity"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of sts callerIdentity
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const callerIdentity = tencentcloud.Sts.getCallerIdentity({});
+const callerIdentity = tencentcloud.sts.getCallerIdentity({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-caller_identity = tencentcloud.Sts.get_caller_identity()
+caller_identity = tencentcloud.sts.get_caller_identity()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var callerIdentity = Tencentcloud.Sts.GetCallerIdentity.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sts"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sts"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Sts.GetCallerIdentity(ctx, nil, nil)
+		_, err := sts.GetCallerIdentity(ctx, &sts.GetCallerIdentityArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var callerIdentity = Tencentcloud.Sts.GetCallerIdentity.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Sts.StsFunctions;
 import com.pulumi.tencentcloud.Sts.inputs.GetCallerIdentityArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var callerIdentity = StsFunctions.getCallerIdentity();
+        final var callerIdentity = StsFunctions.getCallerIdentity(GetCallerIdentityArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   callerIdentity:
     fn::invoke:
-      Function: tencentcloud:Sts:getCallerIdentity
-      Arguments: {}
+      function: tencentcloud:Sts:getCallerIdentity
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_sts_getcalleridentity" "callerIdentity" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCallerIdentity<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCallerIdentityArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>></span
+><span class="k">function </span>getCallerIdentity<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCallerIdentityArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>></span
 ><span class="k">
-function </span>getCallerIdentityOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCallerIdentityOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>></span
+function </span>getCallerIdentityOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCallerIdentityOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getCallerIdentityOutput<span class="p">(</span><span class="nx">
 ><span class="k">def </span>get_caller_identity<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetCallerIdentityResult</span
 ><span class="k">
-def </span>get_caller_identity_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCallerIdentityResult]</span
+def </span>get_caller_identity_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCallerIdentityResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetCallerIdentityOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCallerIdentity </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetCallerIdentityArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCallerIdentityInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCallerIdentityInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCallerIdentityInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetCallerIdentityOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>> </span>getCallerIdentity<span class="p">(</span><span class="nx">GetCallerIdentityArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>> </span>getCallerIdentity<span class="p">(</span><span class="nx">GetCallerIdentityArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCallerIdentityResult</a></span>> </span>getCallerIdentity<span class="p">(</span><span class="nx">GetCallerIdentityArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetCallerIdentityOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Sts/getCallerIdentity:getCallerIdentity
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_sts_get_caller_identity&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The primary account Uin to which the current caller belongs.</p>
-</dd><dt class="property-"
+    <dd>The primary account Uin to which the current caller belongs.</dd><dt class="property-"
             title="">
         <span id="arn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arn_csharp" style="color: inherit; text-decoration: inherit;">Arn</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current caller ARN.</p>
-</dd><dt class="property-"
+    <dd>Current caller ARN.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -309,8 +383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="principalid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalid_csharp" style="color: inherit; text-decoration: inherit;">Principal<wbr>Id</a>
@@ -318,8 +391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</p>
-</dd><dt class="property-"
+    <dd>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</dd><dt class="property-"
             title="">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -327,8 +399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity type.</p>
-</dd><dt class="property-"
+    <dd>Identity type.</dd><dt class="property-"
             title="">
         <span id="userid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -336,8 +407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</p>
-</dd><dt class="property-"
+    <dd>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -359,8 +429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The primary account Uin to which the current caller belongs.</p>
-</dd><dt class="property-"
+    <dd>The primary account Uin to which the current caller belongs.</dd><dt class="property-"
             title="">
         <span id="arn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arn_go" style="color: inherit; text-decoration: inherit;">Arn</a>
@@ -368,8 +437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current caller ARN.</p>
-</dd><dt class="property-"
+    <dd>Current caller ARN.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -377,8 +445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="principalid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalid_go" style="color: inherit; text-decoration: inherit;">Principal<wbr>Id</a>
@@ -386,8 +453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</p>
-</dd><dt class="property-"
+    <dd>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</dd><dt class="property-"
             title="">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -395,8 +461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity type.</p>
-</dd><dt class="property-"
+    <dd>Identity type.</dd><dt class="property-"
             title="">
         <span id="userid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -404,11 +469,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</p>
-</dd><dt class="property-"
+    <dd>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="account_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_id_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The primary account Uin to which the current caller belongs.</dd><dt class="property-"
+            title="">
+        <span id="arn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arn_hcl" style="color: inherit; text-decoration: inherit;">arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current caller ARN.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="principal_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_id_hcl" style="color: inherit; text-decoration: inherit;">principal_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</dd><dt class="property-"
+            title="">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity type.</dd><dt class="property-"
+            title="">
+        <span id="user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -427,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The primary account Uin to which the current caller belongs.</p>
-</dd><dt class="property-"
+    <dd>The primary account Uin to which the current caller belongs.</dd><dt class="property-"
             title="">
         <span id="arn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arn_java" style="color: inherit; text-decoration: inherit;">arn</a>
@@ -436,8 +561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current caller ARN.</p>
-</dd><dt class="property-"
+    <dd>Current caller ARN.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -445,8 +569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="principalid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalid_java" style="color: inherit; text-decoration: inherit;">principal<wbr>Id</a>
@@ -454,8 +577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</p>
-</dd><dt class="property-"
+    <dd>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</dd><dt class="property-"
             title="">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -463,8 +585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity type.</p>
-</dd><dt class="property-"
+    <dd>Identity type.</dd><dt class="property-"
             title="">
         <span id="userid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -472,8 +593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</p>
-</dd><dt class="property-"
+    <dd>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -495,8 +615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The primary account Uin to which the current caller belongs.</p>
-</dd><dt class="property-"
+    <dd>The primary account Uin to which the current caller belongs.</dd><dt class="property-"
             title="">
         <span id="arn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arn_nodejs" style="color: inherit; text-decoration: inherit;">arn</a>
@@ -504,8 +623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current caller ARN.</p>
-</dd><dt class="property-"
+    <dd>Current caller ARN.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -513,8 +631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="principalid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalid_nodejs" style="color: inherit; text-decoration: inherit;">principal<wbr>Id</a>
@@ -522,8 +639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</p>
-</dd><dt class="property-"
+    <dd>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</dd><dt class="property-"
             title="">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -531,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity type.</p>
-</dd><dt class="property-"
+    <dd>Identity type.</dd><dt class="property-"
             title="">
         <span id="userid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -540,8 +655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</p>
-</dd><dt class="property-"
+    <dd>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -563,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The primary account Uin to which the current caller belongs.</p>
-</dd><dt class="property-"
+    <dd>The primary account Uin to which the current caller belongs.</dd><dt class="property-"
             title="">
         <span id="arn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arn_python" style="color: inherit; text-decoration: inherit;">arn</a>
@@ -572,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current caller ARN.</p>
-</dd><dt class="property-"
+    <dd>Current caller ARN.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -581,8 +693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="principal_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_id_python" style="color: inherit; text-decoration: inherit;">principal_<wbr>id</a>
@@ -590,8 +701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</p>
-</dd><dt class="property-"
+    <dd>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</dd><dt class="property-"
             title="">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -599,8 +709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Identity type.</p>
-</dd><dt class="property-"
+    <dd>Identity type.</dd><dt class="property-"
             title="">
         <span id="user_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
@@ -608,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</p>
-</dd><dt class="property-"
+    <dd>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -631,8 +739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The primary account Uin to which the current caller belongs.</p>
-</dd><dt class="property-"
+    <dd>The primary account Uin to which the current caller belongs.</dd><dt class="property-"
             title="">
         <span id="arn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arn_yaml" style="color: inherit; text-decoration: inherit;">arn</a>
@@ -640,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current caller ARN.</p>
-</dd><dt class="property-"
+    <dd>Current caller ARN.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -649,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="principalid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principalid_yaml" style="color: inherit; text-decoration: inherit;">principal<wbr>Id</a>
@@ -658,8 +763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</p>
-</dd><dt class="property-"
+    <dd>Account Uin to which the key belongs:- The caller is a cloud account, and the returned current account Uin- The caller is a role, and the returned account Uin that applies for the role key.</dd><dt class="property-"
             title="">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -667,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity type.</p>
-</dd><dt class="property-"
+    <dd>Identity type.</dd><dt class="property-"
             title="">
         <span id="userid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -676,8 +779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</p>
-</dd><dt class="property-"
+    <dd>Identity:- When the caller is a cloud account, the current account <code>Uin</code> is returned.- When the caller is a role, it returns <code>roleId:roleSessionName</code>- When the caller is a federated identity, it returns <code>uin:federatedUserName</code>.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -700,7 +802,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

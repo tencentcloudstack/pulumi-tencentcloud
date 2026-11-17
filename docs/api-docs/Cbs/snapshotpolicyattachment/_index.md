@@ -2,9 +2,11 @@
 ---
 title: "SnapshotPolicyAttachment"
 title_tag: "tencentcloud.Cbs.SnapshotPolicyAttachment"
-meta_desc: "Documentation for the tencentcloud.Cbs.SnapshotPolicyAttachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a CBS snapshot policy attachment resource. NOTE: To distinguish between storageId and storageId, use storageId when there is only one diskId."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,55 +16,124 @@ no_edit_this_page: true
 
 Provides a CBS snapshot policy attachment resource.
 
+> **NOTE:** To distinguish between `storageId` and `storageId`, use `storageId` when there is only one diskId, otherwise use `storageIds`.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Attachment CBS snapshot policy by storageId
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.cbs.SnapshotPolicyAttachment("foo", {
-    storageId: tencentcloud_cbs_storage.foo.id,
-    snapshotPolicyId: tencentcloud_cbs_snapshot_policy.policy.id,
+const example = new tencentcloud.cbs.Storage("example", {
+    storageName: "tf-example",
+    storageType: "CLOUD_SSD",
+    storageSize: 60,
+    availabilityZone: "ap-guangzhou-6",
+    projectId: 0,
+    encrypt: false,
+    tags: {
+        createBy: "Terraform",
+    },
+});
+const exampleSnapshotPolicy = new tencentcloud.cbs.SnapshotPolicy("example", {
+    snapshotPolicyName: "tf-example",
+    repeatWeekdays: [
+        1,
+        4,
+    ],
+    repeatHours: [1],
+    retentionDays: 7,
+});
+const exampleSnapshotPolicyAttachment = new tencentcloud.cbs.SnapshotPolicyAttachment("example", {
+    storageId: example.id,
+    snapshotPolicyId: exampleSnapshotPolicy.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.cbs.SnapshotPolicyAttachment("foo",
-    storage_id=tencentcloud_cbs_storage["foo"]["id"],
-    snapshot_policy_id=tencentcloud_cbs_snapshot_policy["policy"]["id"])
+example = tencentcloud.cbs.Storage("example",
+    storage_name="tf-example",
+    storage_type="CLOUD_SSD",
+    storage_size=60,
+    availability_zone="ap-guangzhou-6",
+    project_id=0,
+    encrypt=False,
+    tags={
+        "createBy": "Terraform",
+    })
+example_snapshot_policy = tencentcloud.cbs.SnapshotPolicy("example",
+    snapshot_policy_name="tf-example",
+    repeat_weekdays=[
+        1,
+        4,
+    ],
+    repeat_hours=[1],
+    retention_days=7)
+example_snapshot_policy_attachment = tencentcloud.cbs.SnapshotPolicyAttachment("example",
+    storage_id=example.id,
+    snapshot_policy_id=example_snapshot_policy.id)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Cbs.SnapshotPolicyAttachment("foo", new()
-    {
-        StorageId = tencentcloud_cbs_storage.Foo.Id,
-        SnapshotPolicyId = tencentcloud_cbs_snapshot_policy.Policy.Id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cbs.NewSnapshotPolicyAttachment(ctx, "foo", &Cbs.SnapshotPolicyAttachmentArgs{
-			StorageId:        pulumi.Any(tencentcloud_cbs_storage.Foo.Id),
-			SnapshotPolicyId: pulumi.Any(tencentcloud_cbs_snapshot_policy.Policy.Id),
+		example, err := cbs.NewStorage(ctx, "example", &cbs.StorageArgs{
+			StorageName:      pulumi.String("tf-example"),
+			StorageType:      pulumi.String("CLOUD_SSD"),
+			StorageSize:      pulumi.Int(60),
+			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+			ProjectId:        pulumi.Int(0),
+			Encrypt:          pulumi.Bool(false),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleSnapshotPolicy, err := cbs.NewSnapshotPolicy(ctx, "example", &cbs.SnapshotPolicyArgs{
+			SnapshotPolicyName: pulumi.String("tf-example"),
+			RepeatWeekdays: pulumi.IntArray{
+				pulumi.Int(1),
+				pulumi.Int(4),
+			},
+			RepeatHours: pulumi.IntArray{
+				pulumi.Int(1),
+			},
+			RetentionDays: pulumi.Int(7),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cbs.NewSnapshotPolicyAttachment(ctx, "example", &cbs.SnapshotPolicyAttachmentArgs{
+			StorageId:        example.ID().ToIDOutput().ToStringOutput(),
+			SnapshotPolicyId: exampleSnapshotPolicy.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
@@ -71,16 +142,75 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cbs.Storage("example", new()
+    {
+        StorageName = "tf-example",
+        StorageType = "CLOUD_SSD",
+        StorageSize = 60,
+        AvailabilityZone = "ap-guangzhou-6",
+        ProjectId = 0,
+        Encrypt = false,
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+    var exampleSnapshotPolicy = new Tencentcloud.Cbs.SnapshotPolicy("example", new()
+    {
+        SnapshotPolicyName = "tf-example",
+        RepeatWeekdays = new[]
+        {
+            1,
+            4,
+        },
+        RepeatHours = new[]
+        {
+            1,
+        },
+        RetentionDays = 7,
+    });
+
+    var exampleSnapshotPolicyAttachment = new Tencentcloud.Cbs.SnapshotPolicyAttachment("example", new()
+    {
+        StorageId = example.Id,
+        SnapshotPolicyId = exampleSnapshotPolicy.Id,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cbs.Storage;
+import com.pulumi.tencentcloud.Cbs.StorageArgs;
+import com.pulumi.tencentcloud.Cbs.SnapshotPolicy;
+import com.pulumi.tencentcloud.Cbs.SnapshotPolicyArgs;
 import com.pulumi.tencentcloud.Cbs.SnapshotPolicyAttachment;
 import com.pulumi.tencentcloud.Cbs.SnapshotPolicyAttachmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,83 +222,594 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new SnapshotPolicyAttachment("foo", SnapshotPolicyAttachmentArgs.builder()        
-            .storageId(tencentcloud_cbs_storage.foo().id())
-            .snapshotPolicyId(tencentcloud_cbs_snapshot_policy.policy().id())
+        var example = new Storage("example", StorageArgs.builder()
+            .storageName("tf-example")
+            .storageType("CLOUD_SSD")
+            .storageSize(60)
+            .availabilityZone("ap-guangzhou-6")
+            .projectId(0)
+            .encrypt(false)
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+        var exampleSnapshotPolicy = new SnapshotPolicy("exampleSnapshotPolicy", SnapshotPolicyArgs.builder()
+            .snapshotPolicyName("tf-example")
+            .repeatWeekdays(            
+                1,
+                4)
+            .repeatHours(1)
+            .retentionDays(7)
+            .build());
+
+        var exampleSnapshotPolicyAttachment = new SnapshotPolicyAttachment("exampleSnapshotPolicyAttachment", SnapshotPolicyAttachmentArgs.builder()
+            .storageId(example.id())
+            .snapshotPolicyId(exampleSnapshotPolicy.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
-    type: tencentcloud:Cbs:SnapshotPolicyAttachment
+  example:
+    type: tencentcloud:Cbs:Storage
     properties:
-      storageId: ${tencentcloud_cbs_storage.foo.id}
-      snapshotPolicyId: ${tencentcloud_cbs_snapshot_policy.policy.id}
+      storageName: tf-example
+      storageType: CLOUD_SSD
+      storageSize: 60
+      availabilityZone: ap-guangzhou-6
+      projectId: 0
+      encrypt: false
+      tags:
+        createBy: Terraform
+  exampleSnapshotPolicy:
+    type: tencentcloud:Cbs:SnapshotPolicy
+    name: example
+    properties:
+      snapshotPolicyName: tf-example
+      repeatWeekdays:
+        - 1
+        - 4
+      repeatHours:
+        - 1
+      retentionDays: 7
+  exampleSnapshotPolicyAttachment:
+    type: tencentcloud:Cbs:SnapshotPolicyAttachment
+    name: example
+    properties:
+      storageId: ${example.id}
+      snapshotPolicyId: ${exampleSnapshotPolicy.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cbs_storage" "example" {
+  storage_name      = "tf-example"
+  storage_type      = "CLOUD_SSD"
+  storage_size      = 60
+  availability_zone = "ap-guangzhou-6"
+  project_id        = 0
+  encrypt           = false
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+resource "tencentcloud_cbs_snapshotpolicy" "example" {
+  snapshot_policy_name = "tf-example"
+  repeat_weekdays      = [1, 4]
+  repeat_hours         = [1]
+  retention_days       = 7
+}
+resource "tencentcloud_cbs_snapshotpolicyattachment" "example" {
+  storage_id         = tencentcloud_cbs_storage.example.id
+  snapshot_policy_id = tencentcloud_cbs_snapshotpolicy.example.id
+}
+```
+</pulumi-choosable>
+</div>
 
 
+### Attachment CBS snapshot policy by storageIds
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example1 = new tencentcloud.cbs.Storage("example1", {
+    storageName: "tf-example1",
+    storageType: "CLOUD_SSD",
+    storageSize: 60,
+    availabilityZone: "ap-guangzhou-6",
+    projectId: 0,
+    encrypt: false,
+    tags: {
+        createBy: "Terraform",
+    },
+});
+const example2 = new tencentcloud.cbs.Storage("example2", {
+    storageName: "tf-example2",
+    storageType: "CLOUD_SSD",
+    storageSize: 60,
+    availabilityZone: "ap-guangzhou-6",
+    projectId: 0,
+    encrypt: false,
+    tags: {
+        createBy: "Terraform",
+    },
+});
+const example = new tencentcloud.cbs.SnapshotPolicy("example", {
+    snapshotPolicyName: "tf-example",
+    repeatWeekdays: [
+        1,
+        4,
+    ],
+    repeatHours: [1],
+    retentionDays: 7,
+});
+const exampleSnapshotPolicyAttachment = new tencentcloud.cbs.SnapshotPolicyAttachment("example", {
+    storageIds: [
+        example1.id,
+        example2.id,
+    ],
+    snapshotPolicyId: example.id,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example1 = tencentcloud.cbs.Storage("example1",
+    storage_name="tf-example1",
+    storage_type="CLOUD_SSD",
+    storage_size=60,
+    availability_zone="ap-guangzhou-6",
+    project_id=0,
+    encrypt=False,
+    tags={
+        "createBy": "Terraform",
+    })
+example2 = tencentcloud.cbs.Storage("example2",
+    storage_name="tf-example2",
+    storage_type="CLOUD_SSD",
+    storage_size=60,
+    availability_zone="ap-guangzhou-6",
+    project_id=0,
+    encrypt=False,
+    tags={
+        "createBy": "Terraform",
+    })
+example = tencentcloud.cbs.SnapshotPolicy("example",
+    snapshot_policy_name="tf-example",
+    repeat_weekdays=[
+        1,
+        4,
+    ],
+    repeat_hours=[1],
+    retention_days=7)
+example_snapshot_policy_attachment = tencentcloud.cbs.SnapshotPolicyAttachment("example",
+    storage_ids=[
+        example1.id,
+        example2.id,
+    ],
+    snapshot_policy_id=example.id)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example1, err := cbs.NewStorage(ctx, "example1", &cbs.StorageArgs{
+			StorageName:      pulumi.String("tf-example1"),
+			StorageType:      pulumi.String("CLOUD_SSD"),
+			StorageSize:      pulumi.Int(60),
+			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+			ProjectId:        pulumi.Int(0),
+			Encrypt:          pulumi.Bool(false),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		example2, err := cbs.NewStorage(ctx, "example2", &cbs.StorageArgs{
+			StorageName:      pulumi.String("tf-example2"),
+			StorageType:      pulumi.String("CLOUD_SSD"),
+			StorageSize:      pulumi.Int(60),
+			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+			ProjectId:        pulumi.Int(0),
+			Encrypt:          pulumi.Bool(false),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		example, err := cbs.NewSnapshotPolicy(ctx, "example", &cbs.SnapshotPolicyArgs{
+			SnapshotPolicyName: pulumi.String("tf-example"),
+			RepeatWeekdays: pulumi.IntArray{
+				pulumi.Int(1),
+				pulumi.Int(4),
+			},
+			RepeatHours: pulumi.IntArray{
+				pulumi.Int(1),
+			},
+			RetentionDays: pulumi.Int(7),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cbs.NewSnapshotPolicyAttachment(ctx, "example", &cbs.SnapshotPolicyAttachmentArgs{
+			StorageIds: pulumi.StringArray{
+				example1.ID().ToIDOutput().ToStringOutput(),
+				example2.ID().ToIDOutput().ToStringOutput(),
+			},
+			SnapshotPolicyId: example.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example1 = new Tencentcloud.Cbs.Storage("example1", new()
+    {
+        StorageName = "tf-example1",
+        StorageType = "CLOUD_SSD",
+        StorageSize = 60,
+        AvailabilityZone = "ap-guangzhou-6",
+        ProjectId = 0,
+        Encrypt = false,
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+    var example2 = new Tencentcloud.Cbs.Storage("example2", new()
+    {
+        StorageName = "tf-example2",
+        StorageType = "CLOUD_SSD",
+        StorageSize = 60,
+        AvailabilityZone = "ap-guangzhou-6",
+        ProjectId = 0,
+        Encrypt = false,
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+    var example = new Tencentcloud.Cbs.SnapshotPolicy("example", new()
+    {
+        SnapshotPolicyName = "tf-example",
+        RepeatWeekdays = new[]
+        {
+            1,
+            4,
+        },
+        RepeatHours = new[]
+        {
+            1,
+        },
+        RetentionDays = 7,
+    });
+
+    var exampleSnapshotPolicyAttachment = new Tencentcloud.Cbs.SnapshotPolicyAttachment("example", new()
+    {
+        StorageIds = new[]
+        {
+            example1.Id,
+            example2.Id,
+        },
+        SnapshotPolicyId = example.Id,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cbs.Storage;
+import com.pulumi.tencentcloud.Cbs.StorageArgs;
+import com.pulumi.tencentcloud.Cbs.SnapshotPolicy;
+import com.pulumi.tencentcloud.Cbs.SnapshotPolicyArgs;
+import com.pulumi.tencentcloud.Cbs.SnapshotPolicyAttachment;
+import com.pulumi.tencentcloud.Cbs.SnapshotPolicyAttachmentArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example1 = new Storage("example1", StorageArgs.builder()
+            .storageName("tf-example1")
+            .storageType("CLOUD_SSD")
+            .storageSize(60)
+            .availabilityZone("ap-guangzhou-6")
+            .projectId(0)
+            .encrypt(false)
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+        var example2 = new Storage("example2", StorageArgs.builder()
+            .storageName("tf-example2")
+            .storageType("CLOUD_SSD")
+            .storageSize(60)
+            .availabilityZone("ap-guangzhou-6")
+            .projectId(0)
+            .encrypt(false)
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+        var example = new SnapshotPolicy("example", SnapshotPolicyArgs.builder()
+            .snapshotPolicyName("tf-example")
+            .repeatWeekdays(            
+                1,
+                4)
+            .repeatHours(1)
+            .retentionDays(7)
+            .build());
+
+        var exampleSnapshotPolicyAttachment = new SnapshotPolicyAttachment("exampleSnapshotPolicyAttachment", SnapshotPolicyAttachmentArgs.builder()
+            .storageIds(            
+                example1.id(),
+                example2.id())
+            .snapshotPolicyId(example.id())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example1:
+    type: tencentcloud:Cbs:Storage
+    properties:
+      storageName: tf-example1
+      storageType: CLOUD_SSD
+      storageSize: 60
+      availabilityZone: ap-guangzhou-6
+      projectId: 0
+      encrypt: false
+      tags:
+        createBy: Terraform
+  example2:
+    type: tencentcloud:Cbs:Storage
+    properties:
+      storageName: tf-example2
+      storageType: CLOUD_SSD
+      storageSize: 60
+      availabilityZone: ap-guangzhou-6
+      projectId: 0
+      encrypt: false
+      tags:
+        createBy: Terraform
+  example:
+    type: tencentcloud:Cbs:SnapshotPolicy
+    properties:
+      snapshotPolicyName: tf-example
+      repeatWeekdays:
+        - 1
+        - 4
+      repeatHours:
+        - 1
+      retentionDays: 7
+  exampleSnapshotPolicyAttachment:
+    type: tencentcloud:Cbs:SnapshotPolicyAttachment
+    name: example
+    properties:
+      storageIds:
+        - ${example1.id}
+        - ${example2.id}
+      snapshotPolicyId: ${example.id}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cbs_storage" "example1" {
+  storage_name      = "tf-example1"
+  storage_type      = "CLOUD_SSD"
+  storage_size      = 60
+  availability_zone = "ap-guangzhou-6"
+  project_id        = 0
+  encrypt           = false
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+resource "tencentcloud_cbs_storage" "example2" {
+  storage_name      = "tf-example2"
+  storage_type      = "CLOUD_SSD"
+  storage_size      = 60
+  availability_zone = "ap-guangzhou-6"
+  project_id        = 0
+  encrypt           = false
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+resource "tencentcloud_cbs_snapshotpolicy" "example" {
+  snapshot_policy_name = "tf-example"
+  repeat_weekdays      = [1, 4]
+  repeat_hours         = [1]
+  retention_days       = 7
+}
+resource "tencentcloud_cbs_snapshotpolicyattachment" "example" {
+  storage_ids        = [tencentcloud_cbs_storage.example1.id, tencentcloud_cbs_storage.example2.id]
+  snapshot_policy_id = tencentcloud_cbs_snapshotpolicy.example.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [BindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32168)
+* Read:
+  - [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+  - [DescribeDiskAssociatedAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32164)
+* Delete: [UnbindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32161)
 
 
 ## Create SnapshotPolicyAttachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p">,</span>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                              <span class="nx">snapshot_policy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                             <span class="nx">storage_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                             <span class="nx">storage_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                             <span class="nx">storage_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SnapshotPolicyAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SnapshotPolicyAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">SnapshotPolicyAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SnapshotPolicyAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cbs:SnapshotPolicyAttachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cbs:SnapshotPolicyAttachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cbs_snapshot_policy_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -189,7 +830,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -306,11 +947,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## SnapshotPolicyAttachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The SnapshotPolicyAttachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -326,17 +975,23 @@ The SnapshotPolicyAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="storageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storageids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageids_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -350,17 +1005,53 @@ The SnapshotPolicyAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="storageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storageids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageids_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="snapshot_policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_policy_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storage_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_ids_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -374,17 +1065,23 @@ The SnapshotPolicyAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="storageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storageids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageids_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -398,17 +1095,23 @@ The SnapshotPolicyAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="storageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storageids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageids_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -422,17 +1125,23 @@ The SnapshotPolicyAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="storage_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storage_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_ids_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -446,17 +1155,23 @@ The SnapshotPolicyAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="storageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storageids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageids_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -477,8 +1192,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -492,8 +1206,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -507,8 +1234,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -522,8 +1248,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -537,8 +1262,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -552,8 +1276,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -563,121 +1286,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing SnapshotPolicyAttachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SnapshotPolicyAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SnapshotPolicyAttachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SnapshotPolicyAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SnapshotPolicyAttachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">snapshot_policy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">storage_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> SnapshotPolicyAttachment</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">storage_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">storage_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">) -&gt;</span> SnapshotPolicyAttachment</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSnapshotPolicyAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SnapshotPolicyAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SnapshotPolicyAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSnapshotPolicyAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SnapshotPolicyAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SnapshotPolicyAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SnapshotPolicyAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SnapshotPolicyAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SnapshotPolicyAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SnapshotPolicyAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SnapshotPolicyAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SnapshotPolicyAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SnapshotPolicyAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SnapshotPolicyAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSnapshotPolicyAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cbs:SnapshotPolicyAttachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cbs_snapshot_policy_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SnapshotPolicyAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SnapshotPolicyAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -685,28 +1448,31 @@ Get an existing SnapshotPolicyAttachment resource's state with the given name, I
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SnapshotPolicyAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -714,28 +1480,31 @@ Get an existing SnapshotPolicyAttachment resource's state with the given name, I
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SnapshotPolicyAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -755,8 +1524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -764,8 +1532,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storageids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageids_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -779,8 +1554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -788,8 +1562,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storageids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageids_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_snapshot_policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snapshot_policy_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storage_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_ids_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -803,8 +1614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -812,8 +1622,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storageids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageids_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -836,8 +1652,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storageids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageids_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +1674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storage_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
@@ -860,8 +1682,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storage_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_ids_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -875,8 +1704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS snapshot policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of CBS snapshot policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_storageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -884,8 +1712,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd></dl>
+    <dd>ID of CBS.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storageids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageids_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>IDs of CBS.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -893,6 +1728,30 @@ The following state arguments are supported:
 
 
 
+
+
+
+## Import
+
+
+
+CBS snapshot policy attachment can be imported using the id, e.g.
+
+If use storageId
+
+```sh
+$ pulumi import tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment example disk-fesgc43m#asp-8abupspr
+```
+
+If use storageIds
+
+```sh
+$ pulumi import tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment example disk-ghylus9y,disk-0tm61hla#asp-ng87uf4t
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -904,7 +1763,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

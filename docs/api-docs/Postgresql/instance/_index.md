@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Postgresql.Instance"
-meta_desc: "Documentation for the tencentcloud.Postgresql.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create postgresql instance. Note: To update the charge type, please update the chargeType and specify the period for the charging."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,12 +16,24 @@ no_edit_this_page: true
 
 Use this resource to create postgresql instance.
 
-> **Note:** To update the charge type, please update the `charge_type` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
-**Note:** If no values are set for the two parameters: `db_major_version` and `engine_version`, then `engine_version` is set to `10.4` by default. Suggest using parameter `db_major_version` to create an instance
+> **Note:** To update the charge type, please update the `chargeType` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
+
+> **Note:** If no values are set for the parameters: `dbKernelVersion`, `dbMajorVersion` and `engineVersion`, then `engineVersion` is set to `10.4` by default. Suggest using parameter `dbMajorVersion` to create an instance
+
+> **Note:** If you need to upgrade the database version, Please use data source `tencentcloud.Postgresql.getDbVersions` to obtain the valid version value for `dbKernelVersion`, `dbMajorVersion` and `engineVersion`. And when modifying, `dbKernelVersion`, `dbMajorVersion` and `engineVersion` must be set.
+
+> **Note:** If upgrade `dbKernelVersion`, will synchronize the upgrade of the read-only instance version; If upgrade `dbMajorVersion`, cannot have read-only instances.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Create a postgresql instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -27,16 +41,21 @@ import * as tencentcloud from "@tencentcloud_iac/pulumi";
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
 // create vpc
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc",
+    cidrBlock: "10.0.0.0/16",
+});
 // create vpc subnet
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: availabilityZone,
+    name: "subnet",
     vpcId: vpc.id,
     cidrBlock: "10.0.20.0/28",
     isMulticast: false,
 });
 // create postgresql
 const example = new tencentcloud.postgresql.Instance("example", {
+    name: "example",
     availabilityZone: availabilityZone,
     chargeType: "POSTPAID_BY_HOUR",
     vpcId: vpc.id,
@@ -51,10 +70,15 @@ const example = new tencentcloud.postgresql.Instance("example", {
     memory: 2,
     storage: 10,
     tags: {
-        test: "tf",
+        CreateBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -64,15 +88,19 @@ availability_zone = config.get("availabilityZone")
 if availability_zone is None:
     availability_zone = "ap-guangzhou-3"
 # create vpc
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc",
+    cidr_block="10.0.0.0/16")
 # create vpc subnet
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=availability_zone,
+    name="subnet",
     vpc_id=vpc.id,
     cidr_block="10.0.20.0/28",
     is_multicast=False)
 # create postgresql
 example = tencentcloud.postgresql.Instance("example",
+    name="example",
     availability_zone=availability_zone,
     charge_type="POSTPAID_BY_HOUR",
     vpc_id=vpc.id,
@@ -87,9 +115,83 @@ example = tencentcloud.postgresql.Instance("example",
     memory=2,
     storage=10,
     tags={
-        "test": "tf",
+        "CreateBy": "Terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-3"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		// create vpc subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.20.0/28"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create postgresql
+		_, err = postgresql.NewInstance(ctx, "example", &postgresql.InstanceArgs{
+			Name:             pulumi.String("example"),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			DbMajorVersion:   pulumi.String("10"),
+			EngineVersion:    pulumi.String("10.23"),
+			RootUser:         pulumi.String("root123"),
+			RootPassword:     pulumi.String("Root123$"),
+			Charset:          pulumi.String("UTF8"),
+			ProjectId:        pulumi.Int(0),
+			Cpu:              pulumi.Int(1),
+			Memory:           pulumi.Int(2),
+			Storage:          pulumi.Int(10),
+			Tags: pulumi.StringMap{
+				"CreateBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -103,6 +205,7 @@ return await Deployment.RunAsync(() =>
     // create vpc
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc",
         CidrBlock = "10.0.0.0/16",
     });
 
@@ -110,6 +213,7 @@ return await Deployment.RunAsync(() =>
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = availabilityZone,
+        Name = "subnet",
         VpcId = vpc.Id,
         CidrBlock = "10.0.20.0/28",
         IsMulticast = false,
@@ -118,6 +222,7 @@ return await Deployment.RunAsync(() =>
     // create postgresql
     var example = new Tencentcloud.Postgresql.Instance("example", new()
     {
+        Name = "example",
         AvailabilityZone = availabilityZone,
         ChargeType = "POSTPAID_BY_HOUR",
         VpcId = vpc.Id,
@@ -133,87 +238,25 @@ return await Deployment.RunAsync(() =>
         Storage = 10,
         Tags = 
         {
-            { "test", "tf" },
+            { "CreateBy", "Terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-3"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		// create vpc
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		// create vpc subnet
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(availabilityZone),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.20.0/28"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		// create postgresql
-		_, err = Postgresql.NewInstance(ctx, "example", &Postgresql.InstanceArgs{
-			AvailabilityZone: pulumi.String(availabilityZone),
-			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			DbMajorVersion:   pulumi.String("10"),
-			EngineVersion:    pulumi.String("10.23"),
-			RootUser:         pulumi.String("root123"),
-			RootPassword:     pulumi.String("Root123$"),
-			Charset:          pulumi.String("UTF8"),
-			ProjectId:        pulumi.Int(0),
-			Cpu:              pulumi.Int(1),
-			Memory:           pulumi.Int(2),
-			Storage:          pulumi.Int(10),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Postgresql.Instance;
-import com.pulumi.tencentcloud.Postgresql.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -228,20 +271,23 @@ public class App {
         final var config = ctx.config();
         final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
         // create vpc
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc")
             .cidrBlock("10.0.0.0/16")
             .build());
 
         // create vpc subnet
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .availabilityZone(availabilityZone)
+            .name("subnet")
             .vpcId(vpc.id())
             .cidrBlock("10.0.20.0/28")
             .isMulticast(false)
             .build());
 
         // create postgresql
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Postgresql.Instance("example", com.pulumi.tencentcloud.Postgresql.InstanceArgs.builder()
+            .name("example")
             .availabilityZone(availabilityZone)
             .chargeType("POSTPAID_BY_HOUR")
             .vpcId(vpc.id())
@@ -255,12 +301,17 @@ public class App {
             .cpu(1)
             .memory(2)
             .storage(10)
-            .tags(Map.of("test", "tf"))
+            .tags(Map.of("CreateBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
@@ -271,12 +322,14 @@ resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc
       cidrBlock: 10.0.0.0/16
   # create vpc subnet
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${availabilityZone}
+      name: subnet
       vpcId: ${vpc.id}
       cidrBlock: 10.0.20.0/28
       isMulticast: false
@@ -284,6 +337,7 @@ resources:
   example:
     type: tencentcloud:Postgresql:Instance
     properties:
+      name: example
       availabilityZone: ${availabilityZone}
       chargeType: POSTPAID_BY_HOUR
       vpcId: ${vpc.id}
@@ -298,13 +352,463 @@ resources:
       memory: 2
       storage: 10
       tags:
-        test: tf
+        CreateBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Create a multi available zone bucket
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+# create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc"
+  cidr_block = "10.0.0.0/16"
+}
+# create vpc subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.20.0/28"
+  is_multicast      = false
+}
+# create postgresql
+resource "tencentcloud_postgresql_instance" "example" {
+  name              = "example"
+  availability_zone = var.availabilityZone
+  charge_type       = "POSTPAID_BY_HOUR"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  db_major_version  = "10"
+  engine_version    = "10.23"
+  root_user         = "root123"
+  root_password     = "Root123$"
+  charset           = "UTF8"
+  project_id        = 0
+  cpu               = 1
+  memory            = 2
+  storage           = 10
+  tags = {
+    "CreateBy" = "Terraform"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a postgresql instance with delete protection
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc",
+    cidrBlock: "10.0.0.0/16",
+});
+// create vpc subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    vpcId: vpc.id,
+    cidrBlock: "10.0.20.0/28",
+    isMulticast: false,
+});
+// create postgresql
+const example = new tencentcloud.postgresql.Instance("example", {
+    name: "example",
+    availabilityZone: availabilityZone,
+    chargeType: "POSTPAID_BY_HOUR",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    dbMajorVersion: "10",
+    engineVersion: "10.23",
+    rootUser: "root123",
+    rootPassword: "Root123$",
+    charset: "UTF8",
+    projectId: 0,
+    cpu: 1,
+    memory: 2,
+    storage: 10,
+    deleteProtection: true,
+    tags: {
+        CreateBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-3"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc",
+    cidr_block="10.0.0.0/16")
+# create vpc subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    availability_zone=availability_zone,
+    name="subnet",
+    vpc_id=vpc.id,
+    cidr_block="10.0.20.0/28",
+    is_multicast=False)
+# create postgresql
+example = tencentcloud.postgresql.Instance("example",
+    name="example",
+    availability_zone=availability_zone,
+    charge_type="POSTPAID_BY_HOUR",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    db_major_version="10",
+    engine_version="10.23",
+    root_user="root123",
+    root_password="Root123$",
+    charset="UTF8",
+    project_id=0,
+    cpu=1,
+    memory=2,
+    storage=10,
+    delete_protection=True,
+    tags={
+        "CreateBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-3"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		// create vpc subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.20.0/28"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create postgresql
+		_, err = postgresql.NewInstance(ctx, "example", &postgresql.InstanceArgs{
+			Name:             pulumi.String("example"),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			DbMajorVersion:   pulumi.String("10"),
+			EngineVersion:    pulumi.String("10.23"),
+			RootUser:         pulumi.String("root123"),
+			RootPassword:     pulumi.String("Root123$"),
+			Charset:          pulumi.String("UTF8"),
+			ProjectId:        pulumi.Int(0),
+			Cpu:              pulumi.Int(1),
+			Memory:           pulumi.Int(2),
+			Storage:          pulumi.Int(10),
+			DeleteProtection: pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"CreateBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    // create vpc subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        VpcId = vpc.Id,
+        CidrBlock = "10.0.20.0/28",
+        IsMulticast = false,
+    });
+
+    // create postgresql
+    var example = new Tencentcloud.Postgresql.Instance("example", new()
+    {
+        Name = "example",
+        AvailabilityZone = availabilityZone,
+        ChargeType = "POSTPAID_BY_HOUR",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        DbMajorVersion = "10",
+        EngineVersion = "10.23",
+        RootUser = "root123",
+        RootPassword = "Root123$",
+        Charset = "UTF8",
+        ProjectId = 0,
+        Cpu = 1,
+        Memory = 2,
+        Storage = 10,
+        DeleteProtection = true,
+        Tags = 
+        {
+            { "CreateBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc")
+            .cidrBlock("10.0.0.0/16")
+            .build());
+
+        // create vpc subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .vpcId(vpc.id())
+            .cidrBlock("10.0.20.0/28")
+            .isMulticast(false)
+            .build());
+
+        // create postgresql
+        var example = new com.pulumi.tencentcloud.Postgresql.Instance("example", com.pulumi.tencentcloud.Postgresql.InstanceArgs.builder()
+            .name("example")
+            .availabilityZone(availabilityZone)
+            .chargeType("POSTPAID_BY_HOUR")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .dbMajorVersion("10")
+            .engineVersion("10.23")
+            .rootUser("root123")
+            .rootPassword("Root123$")
+            .charset("UTF8")
+            .projectId(0)
+            .cpu(1)
+            .memory(2)
+            .storage(10)
+            .deleteProtection(true)
+            .tags(Map.of("CreateBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-3
+resources:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      name: vpc
+      cidrBlock: 10.0.0.0/16
+  # create vpc subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      vpcId: ${vpc.id}
+      cidrBlock: 10.0.20.0/28
+      isMulticast: false
+  # create postgresql
+  example:
+    type: tencentcloud:Postgresql:Instance
+    properties:
+      name: example
+      availabilityZone: ${availabilityZone}
+      chargeType: POSTPAID_BY_HOUR
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      dbMajorVersion: '10'
+      engineVersion: '10.23'
+      rootUser: root123
+      rootPassword: Root123$
+      charset: UTF8
+      projectId: 0
+      cpu: 1
+      memory: 2
+      storage: 10
+      deleteProtection: true
+      tags:
+        CreateBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+# create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc"
+  cidr_block = "10.0.0.0/16"
+}
+# create vpc subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.20.0/28"
+  is_multicast      = false
+}
+# create postgresql
+resource "tencentcloud_postgresql_instance" "example" {
+  name              = "example"
+  availability_zone = var.availabilityZone
+  charge_type       = "POSTPAID_BY_HOUR"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  db_major_version  = "10"
+  engine_version    = "10.23"
+  root_user         = "root123"
+  root_password     = "Root123$"
+  charset           = "UTF8"
+  project_id        = 0
+  cpu               = 1
+  memory            = 2
+  storage           = 10
+  delete_protection = true
+  tags = {
+    "CreateBy" = "Terraform"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a multi available zone postgresql instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -313,16 +817,21 @@ const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
 const standbyAvailabilityZone = config.get("standbyAvailabilityZone") || "ap-guangzhou-7";
 // create vpc
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc",
+    cidrBlock: "10.0.0.0/16",
+});
 // create vpc subnet
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: availabilityZone,
+    name: "subnet",
     vpcId: vpc.id,
     cidrBlock: "10.0.20.0/28",
     isMulticast: false,
 });
 // create postgresql
 const example = new tencentcloud.postgresql.Instance("example", {
+    name: "example",
     availabilityZone: availabilityZone,
     chargeType: "POSTPAID_BY_HOUR",
     vpcId: vpc.id,
@@ -345,10 +854,15 @@ const example = new tencentcloud.postgresql.Instance("example", {
         },
     ],
     tags: {
-        test: "tf",
+        CreateBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -361,15 +875,19 @@ standby_availability_zone = config.get("standbyAvailabilityZone")
 if standby_availability_zone is None:
     standby_availability_zone = "ap-guangzhou-7"
 # create vpc
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc",
+    cidr_block="10.0.0.0/16")
 # create vpc subnet
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=availability_zone,
+    name="subnet",
     vpc_id=vpc.id,
     cidr_block="10.0.20.0/28",
     is_multicast=False)
 # create postgresql
 example = tencentcloud.postgresql.Instance("example",
+    name="example",
     availability_zone=availability_zone,
     charge_type="POSTPAID_BY_HOUR",
     vpc_id=vpc.id,
@@ -383,18 +901,104 @@ example = tencentcloud.postgresql.Instance("example",
     cpu=1,
     storage=10,
     db_node_sets=[
-        tencentcloud.postgresql.InstanceDbNodeSetArgs(
-            role="Primary",
-            zone=availability_zone,
-        ),
-        tencentcloud.postgresql.InstanceDbNodeSetArgs(
-            zone=standby_availability_zone,
-        ),
+        {
+            "role": "Primary",
+            "zone": availability_zone,
+        },
+        {
+            "zone": standby_availability_zone,
+        },
     ],
     tags={
-        "test": "tf",
+        "CreateBy": "Terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-6"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		standbyAvailabilityZone := "ap-guangzhou-7"
+		if param := cfg.Get("standbyAvailabilityZone"); param != "" {
+			standbyAvailabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		// create vpc subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.20.0/28"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create postgresql
+		_, err = postgresql.NewInstance(ctx, "example", &postgresql.InstanceArgs{
+			Name:             pulumi.String("example"),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			DbMajorVersion:   pulumi.String("10"),
+			RootUser:         pulumi.String("root123"),
+			RootPassword:     pulumi.String("Root123$"),
+			Charset:          pulumi.String("UTF8"),
+			ProjectId:        pulumi.Int(0),
+			Memory:           pulumi.Int(2),
+			Cpu:              pulumi.Int(1),
+			Storage:          pulumi.Int(10),
+			DbNodeSets: postgresql.InstanceDbNodeSetArray{
+				&postgresql.InstanceDbNodeSetArgs{
+					Role: pulumi.String("Primary"),
+					Zone: pulumi.String(availabilityZone),
+				},
+				&postgresql.InstanceDbNodeSetArgs{
+					Zone: pulumi.String(standbyAvailabilityZone),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"CreateBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -409,6 +1013,7 @@ return await Deployment.RunAsync(() =>
     // create vpc
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc",
         CidrBlock = "10.0.0.0/16",
     });
 
@@ -416,6 +1021,7 @@ return await Deployment.RunAsync(() =>
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = availabilityZone,
+        Name = "subnet",
         VpcId = vpc.Id,
         CidrBlock = "10.0.20.0/28",
         IsMulticast = false,
@@ -424,6 +1030,7 @@ return await Deployment.RunAsync(() =>
     // create postgresql
     var example = new Tencentcloud.Postgresql.Instance("example", new()
     {
+        Name = "example",
         AvailabilityZone = availabilityZone,
         ChargeType = "POSTPAID_BY_HOUR",
         VpcId = vpc.Id,
@@ -450,100 +1057,26 @@ return await Deployment.RunAsync(() =>
         },
         Tags = 
         {
-            { "test", "tf" },
+            { "CreateBy", "Terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-6"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		standbyAvailabilityZone := "ap-guangzhou-7"
-		if param := cfg.Get("standbyAvailabilityZone"); param != "" {
-			standbyAvailabilityZone = param
-		}
-		// create vpc
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		// create vpc subnet
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(availabilityZone),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.20.0/28"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		// create postgresql
-		_, err = Postgresql.NewInstance(ctx, "example", &Postgresql.InstanceArgs{
-			AvailabilityZone: pulumi.String(availabilityZone),
-			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			DbMajorVersion:   pulumi.String("10"),
-			RootUser:         pulumi.String("root123"),
-			RootPassword:     pulumi.String("Root123$"),
-			Charset:          pulumi.String("UTF8"),
-			ProjectId:        pulumi.Int(0),
-			Memory:           pulumi.Int(2),
-			Cpu:              pulumi.Int(1),
-			Storage:          pulumi.Int(10),
-			DbNodeSets: postgresql.InstanceDbNodeSetArray{
-				&postgresql.InstanceDbNodeSetArgs{
-					Role: pulumi.String("Primary"),
-					Zone: pulumi.String(availabilityZone),
-				},
-				&postgresql.InstanceDbNodeSetArgs{
-					Zone: pulumi.String(standbyAvailabilityZone),
-				},
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("tf"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Postgresql.Instance;
-import com.pulumi.tencentcloud.Postgresql.InstanceArgs;
 import com.pulumi.tencentcloud.Postgresql.inputs.InstanceDbNodeSetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -559,20 +1092,23 @@ public class App {
         final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-6");
         final var standbyAvailabilityZone = config.get("standbyAvailabilityZone").orElse("ap-guangzhou-7");
         // create vpc
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc")
             .cidrBlock("10.0.0.0/16")
             .build());
 
         // create vpc subnet
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .availabilityZone(availabilityZone)
+            .name("subnet")
             .vpcId(vpc.id())
             .cidrBlock("10.0.20.0/28")
             .isMulticast(false)
             .build());
 
         // create postgresql
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Postgresql.Instance("example", com.pulumi.tencentcloud.Postgresql.InstanceArgs.builder()
+            .name("example")
             .availabilityZone(availabilityZone)
             .chargeType("POSTPAID_BY_HOUR")
             .vpcId(vpc.id())
@@ -593,12 +1129,17 @@ public class App {
                 InstanceDbNodeSetArgs.builder()
                     .zone(standbyAvailabilityZone)
                     .build())
-            .tags(Map.of("test", "tf"))
+            .tags(Map.of("CreateBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
@@ -612,12 +1153,14 @@ resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc
       cidrBlock: 10.0.0.0/16
   # create vpc subnet
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${availabilityZone}
+      name: subnet
       vpcId: ${vpc.id}
       cidrBlock: 10.0.20.0/28
       isMulticast: false
@@ -625,6 +1168,7 @@ resources:
   example:
     type: tencentcloud:Postgresql:Instance
     properties:
+      name: example
       availabilityZone: ${availabilityZone}
       chargeType: POSTPAID_BY_HOUR
       vpcId: ${vpc.id}
@@ -642,13 +1186,532 @@ resources:
           zone: ${availabilityZone}
         - zone: ${standbyAvailabilityZone}
       tags:
-        test: tf
+        CreateBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### create pgsql with kms key
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+# create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc"
+  cidr_block = "10.0.0.0/16"
+}
+# create vpc subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.20.0/28"
+  is_multicast      = false
+}
+# create postgresql
+resource "tencentcloud_postgresql_instance" "example" {
+  name              = "example"
+  availability_zone = var.availabilityZone
+  charge_type       = "POSTPAID_BY_HOUR"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  db_major_version  = "10"
+  root_user         = "root123"
+  root_password     = "Root123$"
+  charset           = "UTF8"
+  project_id        = 0
+  memory            = 2
+  cpu               = 1
+  storage           = 10
+  db_node_sets {
+    role = "Primary"
+    zone = var.availabilityZone
+  }
+  db_node_sets {
+    zone = var.standbyAvailabilityZone
+  }
+  tags = {
+    "CreateBy" = "Terraform"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-6"
+}
+variable "standbyAvailabilityZone" {
+  type    = string
+  default = "ap-guangzhou-7"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a multi available zone postgresql instance of CDC
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc",
+    cidrBlock: "10.0.0.0/16",
+});
+// create vpc subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    vpcId: vpc.id,
+    cidrBlock: "10.0.20.0/28",
+    isMulticast: false,
+});
+// create postgresql
+const example = new tencentcloud.postgresql.Instance("example", {
+    name: "tf-example",
+    availabilityZone: availabilityZone,
+    chargeType: "POSTPAID_BY_HOUR",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    dbMajorVersion: "10",
+    rootUser: "root123",
+    rootPassword: "Root123$",
+    charset: "UTF8",
+    projectId: 0,
+    memory: 2,
+    cpu: 1,
+    storage: 10,
+    dbNodeSets: [
+        {
+            role: "Primary",
+            zone: availabilityZone,
+            dedicatedClusterId: "cluster-262n63e8",
+        },
+        {
+            zone: availabilityZone,
+            dedicatedClusterId: "cluster-262n63e8",
+        },
+    ],
+    tags: {
+        CreateBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc",
+    cidr_block="10.0.0.0/16")
+# create vpc subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    availability_zone=availability_zone,
+    name="subnet",
+    vpc_id=vpc.id,
+    cidr_block="10.0.20.0/28",
+    is_multicast=False)
+# create postgresql
+example = tencentcloud.postgresql.Instance("example",
+    name="tf-example",
+    availability_zone=availability_zone,
+    charge_type="POSTPAID_BY_HOUR",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    db_major_version="10",
+    root_user="root123",
+    root_password="Root123$",
+    charset="UTF8",
+    project_id=0,
+    memory=2,
+    cpu=1,
+    storage=10,
+    db_node_sets=[
+        {
+            "role": "Primary",
+            "zone": availability_zone,
+            "dedicated_cluster_id": "cluster-262n63e8",
+        },
+        {
+            "zone": availability_zone,
+            "dedicated_cluster_id": "cluster-262n63e8",
+        },
+    ],
+    tags={
+        "CreateBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		// create vpc subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.20.0/28"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create postgresql
+		_, err = postgresql.NewInstance(ctx, "example", &postgresql.InstanceArgs{
+			Name:             pulumi.String("tf-example"),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			DbMajorVersion:   pulumi.String("10"),
+			RootUser:         pulumi.String("root123"),
+			RootPassword:     pulumi.String("Root123$"),
+			Charset:          pulumi.String("UTF8"),
+			ProjectId:        pulumi.Int(0),
+			Memory:           pulumi.Int(2),
+			Cpu:              pulumi.Int(1),
+			Storage:          pulumi.Int(10),
+			DbNodeSets: postgresql.InstanceDbNodeSetArray{
+				&postgresql.InstanceDbNodeSetArgs{
+					Role:               pulumi.String("Primary"),
+					Zone:               pulumi.String(availabilityZone),
+					DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+				},
+				&postgresql.InstanceDbNodeSetArgs{
+					Zone:               pulumi.String(availabilityZone),
+					DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"CreateBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    // create vpc subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        VpcId = vpc.Id,
+        CidrBlock = "10.0.20.0/28",
+        IsMulticast = false,
+    });
+
+    // create postgresql
+    var example = new Tencentcloud.Postgresql.Instance("example", new()
+    {
+        Name = "tf-example",
+        AvailabilityZone = availabilityZone,
+        ChargeType = "POSTPAID_BY_HOUR",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        DbMajorVersion = "10",
+        RootUser = "root123",
+        RootPassword = "Root123$",
+        Charset = "UTF8",
+        ProjectId = 0,
+        Memory = 2,
+        Cpu = 1,
+        Storage = 10,
+        DbNodeSets = new[]
+        {
+            new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+            {
+                Role = "Primary",
+                Zone = availabilityZone,
+                DedicatedClusterId = "cluster-262n63e8",
+            },
+            new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+            {
+                Zone = availabilityZone,
+                DedicatedClusterId = "cluster-262n63e8",
+            },
+        },
+        Tags = 
+        {
+            { "CreateBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Postgresql.inputs.InstanceDbNodeSetArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc")
+            .cidrBlock("10.0.0.0/16")
+            .build());
+
+        // create vpc subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .vpcId(vpc.id())
+            .cidrBlock("10.0.20.0/28")
+            .isMulticast(false)
+            .build());
+
+        // create postgresql
+        var example = new com.pulumi.tencentcloud.Postgresql.Instance("example", com.pulumi.tencentcloud.Postgresql.InstanceArgs.builder()
+            .name("tf-example")
+            .availabilityZone(availabilityZone)
+            .chargeType("POSTPAID_BY_HOUR")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .dbMajorVersion("10")
+            .rootUser("root123")
+            .rootPassword("Root123$")
+            .charset("UTF8")
+            .projectId(0)
+            .memory(2)
+            .cpu(1)
+            .storage(10)
+            .dbNodeSets(            
+                InstanceDbNodeSetArgs.builder()
+                    .role("Primary")
+                    .zone(availabilityZone)
+                    .dedicatedClusterId("cluster-262n63e8")
+                    .build(),
+                InstanceDbNodeSetArgs.builder()
+                    .zone(availabilityZone)
+                    .dedicatedClusterId("cluster-262n63e8")
+                    .build())
+            .tags(Map.of("CreateBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
+resources:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      name: vpc
+      cidrBlock: 10.0.0.0/16
+  # create vpc subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      vpcId: ${vpc.id}
+      cidrBlock: 10.0.20.0/28
+      isMulticast: false
+  # create postgresql
+  example:
+    type: tencentcloud:Postgresql:Instance
+    properties:
+      name: tf-example
+      availabilityZone: ${availabilityZone}
+      chargeType: POSTPAID_BY_HOUR
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      dbMajorVersion: '10'
+      rootUser: root123
+      rootPassword: Root123$
+      charset: UTF8
+      projectId: 0
+      memory: 2
+      cpu: 1
+      storage: 10
+      dbNodeSets:
+        - role: Primary
+          zone: ${availabilityZone}
+          dedicatedClusterId: cluster-262n63e8
+        - zone: ${availabilityZone}
+          dedicatedClusterId: cluster-262n63e8
+      tags:
+        CreateBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+# create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc"
+  cidr_block = "10.0.0.0/16"
+}
+# create vpc subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.20.0/28"
+  is_multicast      = false
+}
+# create postgresql
+resource "tencentcloud_postgresql_instance" "example" {
+  name              = "tf-example"
+  availability_zone = var.availabilityZone
+  charge_type       = "POSTPAID_BY_HOUR"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  db_major_version  = "10"
+  root_user         = "root123"
+  root_password     = "Root123$"
+  charset           = "UTF8"
+  project_id        = 0
+  memory            = 2
+  cpu               = 1
+  storage           = 10
+  db_node_sets {
+    role                 = "Primary"
+    zone                 = var.availabilityZone
+    dedicated_cluster_id = "cluster-262n63e8"
+  }
+  db_node_sets {
+    zone                 = var.availabilityZone
+    dedicated_cluster_id = "cluster-262n63e8"
+  }
+  tags = {
+    "CreateBy" = "Terraform"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create pgsql with kms key
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -656,6 +1719,7 @@ import * as tencentcloud from "@tencentcloud_iac/pulumi";
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
 const example = new tencentcloud.postgresql.Instance("example", {
+    name: "tf_postsql_instance",
     availabilityZone: availabilityZone,
     chargeType: "POSTPAID_BY_HOUR",
     vpcId: "vpc-86v957zb",
@@ -681,10 +1745,15 @@ const example = new tencentcloud.postgresql.Instance("example", {
         ],
     },
     tags: {
-        tf: "test",
+        CreateBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -694,6 +1763,7 @@ availability_zone = config.get("availabilityZone")
 if availability_zone is None:
     availability_zone = "ap-guangzhou-6"
 example = tencentcloud.postgresql.Instance("example",
+    name="tf_postsql_instance",
     availability_zone=availability_zone,
     charge_type="POSTPAID_BY_HOUR",
     vpc_id="vpc-86v957zb",
@@ -709,19 +1779,82 @@ example = tencentcloud.postgresql.Instance("example",
     project_id=0,
     memory=4,
     storage=100,
-    backup_plan=tencentcloud.postgresql.InstanceBackupPlanArgs(
-        min_backup_start_time="00:10:11",
-        max_backup_start_time="01:10:11",
-        base_backup_retention_period=7,
-        backup_periods=[
+    backup_plan={
+        "min_backup_start_time": "00:10:11",
+        "max_backup_start_time": "01:10:11",
+        "base_backup_retention_period": 7,
+        "backup_periods": [
             "tuesday",
             "wednesday",
         ],
-    ),
+    },
     tags={
-        "tf": "test",
+        "CreateBy": "Terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-6"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		_, err := postgresql.NewInstance(ctx, "example", &postgresql.InstanceArgs{
+			Name:             pulumi.String("tf_postsql_instance"),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:            pulumi.String("vpc-86v957zb"),
+			SubnetId:         pulumi.String("subnet-enm92y0m"),
+			DbMajorVersion:   pulumi.String("11"),
+			EngineVersion:    pulumi.String("11.12"),
+			DbKernelVersion:  pulumi.String("v11.12_r1.3"),
+			NeedSupportTde:   pulumi.Int(1),
+			KmsKeyId:         pulumi.String("788c606a-c7b7-11ec-82d1-5254001e5c4e"),
+			KmsRegion:        pulumi.String("ap-guangzhou"),
+			RootPassword:     pulumi.String("Root123$"),
+			Charset:          pulumi.String("LATIN1"),
+			ProjectId:        pulumi.Int(0),
+			Memory:           pulumi.Int(4),
+			Storage:          pulumi.Int(100),
+			BackupPlan: &postgresql.InstanceBackupPlanArgs{
+				MinBackupStartTime:        pulumi.String("00:10:11"),
+				MaxBackupStartTime:        pulumi.String("01:10:11"),
+				BaseBackupRetentionPeriod: pulumi.Int(7),
+				BackupPeriods: pulumi.StringArray{
+					pulumi.String("tuesday"),
+					pulumi.String("wednesday"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"CreateBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -734,6 +1867,7 @@ return await Deployment.RunAsync(() =>
     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
     var example = new Tencentcloud.Postgresql.Instance("example", new()
     {
+        Name = "tf_postsql_instance",
         AvailabilityZone = availabilityZone,
         ChargeType = "POSTPAID_BY_HOUR",
         VpcId = "vpc-86v957zb",
@@ -762,64 +1896,17 @@ return await Deployment.RunAsync(() =>
         },
         Tags = 
         {
-            { "tf", "test" },
+            { "CreateBy", "Terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-6"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		_, err := Postgresql.NewInstance(ctx, "example", &Postgresql.InstanceArgs{
-			AvailabilityZone: pulumi.String(availabilityZone),
-			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-			VpcId:            pulumi.String("vpc-86v957zb"),
-			SubnetId:         pulumi.String("subnet-enm92y0m"),
-			DbMajorVersion:   pulumi.String("11"),
-			EngineVersion:    pulumi.String("11.12"),
-			DbKernelVersion:  pulumi.String("v11.12_r1.3"),
-			NeedSupportTde:   pulumi.Int(1),
-			KmsKeyId:         pulumi.String("788c606a-c7b7-11ec-82d1-5254001e5c4e"),
-			KmsRegion:        pulumi.String("ap-guangzhou"),
-			RootPassword:     pulumi.String("Root123$"),
-			Charset:          pulumi.String("LATIN1"),
-			ProjectId:        pulumi.Int(0),
-			Memory:           pulumi.Int(4),
-			Storage:          pulumi.Int(100),
-			BackupPlan: &postgresql.InstanceBackupPlanArgs{
-				MinBackupStartTime:        pulumi.String("00:10:11"),
-				MaxBackupStartTime:        pulumi.String("01:10:11"),
-				BaseBackupRetentionPeriod: pulumi.Int(7),
-				BackupPeriods: pulumi.StringArray{
-					pulumi.String("tuesday"),
-					pulumi.String("wednesday"),
-				},
-			},
-			Tags: pulumi.Map{
-				"tf": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -829,8 +1916,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Postgresql.Instance;
 import com.pulumi.tencentcloud.Postgresql.InstanceArgs;
 import com.pulumi.tencentcloud.Postgresql.inputs.InstanceBackupPlanArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -844,7 +1931,8 @@ public class App {
     public static void stack(Context ctx) {
         final var config = ctx.config();
         final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-6");
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf_postsql_instance")
             .availabilityZone(availabilityZone)
             .chargeType("POSTPAID_BY_HOUR")
             .vpcId("vpc-86v957zb")
@@ -868,12 +1956,17 @@ public class App {
                     "tuesday",
                     "wednesday")
                 .build())
-            .tags(Map.of("tf", "test"))
+            .tags(Map.of("CreateBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
@@ -883,6 +1976,7 @@ resources:
   example:
     type: tencentcloud:Postgresql:Instance
     properties:
+      name: tf_postsql_instance
       availabilityZone: ${availabilityZone}
       chargeType: POSTPAID_BY_HOUR
       vpcId: vpc-86v957zb
@@ -906,13 +2000,66 @@ resources:
           - tuesday
           - wednesday
       tags:
-        tf: test
+        CreateBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### upgrade kernel version
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_postgresql_instance" "example" {
+  name              = "tf_postsql_instance"
+  availability_zone = var.availabilityZone
+  charge_type       = "POSTPAID_BY_HOUR"
+  vpc_id            = "vpc-86v957zb"
+  subnet_id         = "subnet-enm92y0m"
+  db_major_version  = "11"
+  engine_version    = "11.12"
+  db_kernel_version = "v11.12_r1.3"
+  need_support_tde  = 1
+  kms_key_id        = "788c606a-c7b7-11ec-82d1-5254001e5c4e"
+  kms_region        = "ap-guangzhou"
+  root_password     = "Root123$"
+  charset           = "LATIN1"
+  project_id        = 0
+  memory            = 4
+  storage           = 100
+  backup_plan = {
+    min_backup_start_time        = "00:10:11"
+    max_backup_start_time        = "01:10:11"
+    base_backup_retention_period = 7
+    backup_periods               = ["tuesday", "wednesday"]
+  }
+  tags = {
+    "CreateBy" = "Terraform"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-6"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Upgrade kernel version
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -920,11 +2067,14 @@ import * as tencentcloud from "@tencentcloud_iac/pulumi";
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
 const example = new tencentcloud.postgresql.Instance("example", {
+    name: "tf_postsql_instance_update_kernel",
     availabilityZone: availabilityZone,
     chargeType: "POSTPAID_BY_HOUR",
     vpcId: "vpc-86v957zb",
     subnetId: "subnet-enm92y0m",
     engineVersion: "13.3",
+    dbKernelVersion: "v13.3_r1.4",
+    dbMajorVersion: "13",
     rootPassword: "Root123$",
     charset: "LATIN1",
     projectId: 0,
@@ -942,12 +2092,16 @@ const example = new tencentcloud.postgresql.Instance("example", {
             "sunday",
         ],
     },
-    dbKernelVersion: "v13.3_r1.4",
     tags: {
-        tf: "test",
+        CreateBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -957,11 +2111,14 @@ availability_zone = config.get("availabilityZone")
 if availability_zone is None:
     availability_zone = "ap-guangzhou-6"
 example = tencentcloud.postgresql.Instance("example",
+    name="tf_postsql_instance_update_kernel",
     availability_zone=availability_zone,
     charge_type="POSTPAID_BY_HOUR",
     vpc_id="vpc-86v957zb",
     subnet_id="subnet-enm92y0m",
     engine_version="13.3",
+    db_kernel_version="v13.3_r1.4",
+    db_major_version="13",
     root_password="Root123$",
     charset="LATIN1",
     project_id=0,
@@ -969,21 +2126,85 @@ example = tencentcloud.postgresql.Instance("example",
     security_groups=["sg-cm7fbbf3"],
     memory=4,
     storage=250,
-    backup_plan=tencentcloud.postgresql.InstanceBackupPlanArgs(
-        min_backup_start_time="01:10:11",
-        max_backup_start_time="02:10:11",
-        base_backup_retention_period=5,
-        backup_periods=[
+    backup_plan={
+        "min_backup_start_time": "01:10:11",
+        "max_backup_start_time": "02:10:11",
+        "base_backup_retention_period": 5,
+        "backup_periods": [
             "monday",
             "thursday",
             "sunday",
         ],
-    ),
-    db_kernel_version="v13.3_r1.4",
+    },
     tags={
-        "tf": "test",
+        "CreateBy": "Terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-6"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		_, err := postgresql.NewInstance(ctx, "example", &postgresql.InstanceArgs{
+			Name:               pulumi.String("tf_postsql_instance_update_kernel"),
+			AvailabilityZone:   pulumi.String(availabilityZone),
+			ChargeType:         pulumi.String("POSTPAID_BY_HOUR"),
+			VpcId:              pulumi.String("vpc-86v957zb"),
+			SubnetId:           pulumi.String("subnet-enm92y0m"),
+			EngineVersion:      pulumi.String("13.3"),
+			DbKernelVersion:    pulumi.String("v13.3_r1.4"),
+			DbMajorVersion:     pulumi.String("13"),
+			RootPassword:       pulumi.String("Root123$"),
+			Charset:            pulumi.String("LATIN1"),
+			ProjectId:          pulumi.Int(0),
+			PublicAccessSwitch: pulumi.Bool(false),
+			SecurityGroups: pulumi.StringArray{
+				pulumi.String("sg-cm7fbbf3"),
+			},
+			Memory:  pulumi.Int(4),
+			Storage: pulumi.Int(250),
+			BackupPlan: &postgresql.InstanceBackupPlanArgs{
+				MinBackupStartTime:        pulumi.String("01:10:11"),
+				MaxBackupStartTime:        pulumi.String("02:10:11"),
+				BaseBackupRetentionPeriod: pulumi.Int(5),
+				BackupPeriods: pulumi.StringArray{
+					pulumi.String("monday"),
+					pulumi.String("thursday"),
+					pulumi.String("sunday"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"CreateBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -996,11 +2217,14 @@ return await Deployment.RunAsync(() =>
     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
     var example = new Tencentcloud.Postgresql.Instance("example", new()
     {
+        Name = "tf_postsql_instance_update_kernel",
         AvailabilityZone = availabilityZone,
         ChargeType = "POSTPAID_BY_HOUR",
         VpcId = "vpc-86v957zb",
         SubnetId = "subnet-enm92y0m",
         EngineVersion = "13.3",
+        DbKernelVersion = "v13.3_r1.4",
+        DbMajorVersion = "13",
         RootPassword = "Root123$",
         Charset = "LATIN1",
         ProjectId = 0,
@@ -1023,68 +2247,19 @@ return await Deployment.RunAsync(() =>
                 "sunday",
             },
         },
-        DbKernelVersion = "v13.3_r1.4",
         Tags = 
         {
-            { "tf", "test" },
+            { "CreateBy", "Terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-6"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		_, err := Postgresql.NewInstance(ctx, "example", &Postgresql.InstanceArgs{
-			AvailabilityZone:   pulumi.String(availabilityZone),
-			ChargeType:         pulumi.String("POSTPAID_BY_HOUR"),
-			VpcId:              pulumi.String("vpc-86v957zb"),
-			SubnetId:           pulumi.String("subnet-enm92y0m"),
-			EngineVersion:      pulumi.String("13.3"),
-			RootPassword:       pulumi.String("Root123$"),
-			Charset:            pulumi.String("LATIN1"),
-			ProjectId:          pulumi.Int(0),
-			PublicAccessSwitch: pulumi.Bool(false),
-			SecurityGroups: pulumi.StringArray{
-				pulumi.String("sg-cm7fbbf3"),
-			},
-			Memory:  pulumi.Int(4),
-			Storage: pulumi.Int(250),
-			BackupPlan: &postgresql.InstanceBackupPlanArgs{
-				MinBackupStartTime:        pulumi.String("01:10:11"),
-				MaxBackupStartTime:        pulumi.String("02:10:11"),
-				BaseBackupRetentionPeriod: pulumi.Int(5),
-				BackupPeriods: pulumi.StringArray{
-					pulumi.String("monday"),
-					pulumi.String("thursday"),
-					pulumi.String("sunday"),
-				},
-			},
-			DbKernelVersion: pulumi.String("v13.3_r1.4"),
-			Tags: pulumi.Map{
-				"tf": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -1094,8 +2269,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Postgresql.Instance;
 import com.pulumi.tencentcloud.Postgresql.InstanceArgs;
 import com.pulumi.tencentcloud.Postgresql.inputs.InstanceBackupPlanArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1109,12 +2284,15 @@ public class App {
     public static void stack(Context ctx) {
         final var config = ctx.config();
         final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-6");
-        var example = new Instance("example", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf_postsql_instance_update_kernel")
             .availabilityZone(availabilityZone)
             .chargeType("POSTPAID_BY_HOUR")
             .vpcId("vpc-86v957zb")
             .subnetId("subnet-enm92y0m")
             .engineVersion("13.3")
+            .dbKernelVersion("v13.3_r1.4")
+            .dbMajorVersion("13")
             .rootPassword("Root123$")
             .charset("LATIN1")
             .projectId(0)
@@ -1131,13 +2309,17 @@ public class App {
                     "thursday",
                     "sunday")
                 .build())
-            .dbKernelVersion("v13.3_r1.4")
-            .tags(Map.of("tf", "test"))
+            .tags(Map.of("CreateBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
@@ -1147,11 +2329,14 @@ resources:
   example:
     type: tencentcloud:Postgresql:Instance
     properties:
+      name: tf_postsql_instance_update_kernel
       availabilityZone: ${availabilityZone}
       chargeType: POSTPAID_BY_HOUR
       vpcId: vpc-86v957zb
       subnetId: subnet-enm92y0m
       engineVersion: '13.3'
+      dbKernelVersion: v13.3_r1.4
+      dbMajorVersion: '13'
       rootPassword: Root123$
       charset: LATIN1
       projectId: 0
@@ -1168,98 +2353,217 @@ resources:
           - monday
           - thursday
           - sunday
-      dbKernelVersion: v13.3_r1.4 # eg:from v13.3_r1.1 to v13.3_r1.4
       tags:
-        tf: test
+        CreateBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_postgresql_instance" "example" {
+  name                 = "tf_postsql_instance_update_kernel"
+  availability_zone    = var.availabilityZone
+  charge_type          = "POSTPAID_BY_HOUR"
+  vpc_id               = "vpc-86v957zb"
+  subnet_id            = "subnet-enm92y0m"
+  engine_version       = "13.3"
+  db_kernel_version    = "v13.3_r1.4"
+  db_major_version     = "13"
+  root_password        = "Root123$"
+  charset              = "LATIN1"
+  project_id           = 0
+  public_access_switch = false
+  security_groups      = ["sg-cm7fbbf3"]
+  memory               = 4
+  storage              = 250
+  backup_plan = {
+    min_backup_start_time        = "01:10:11"
+    max_backup_start_time        = "02:10:11"
+    base_backup_retention_period = 5
+    backup_periods               = ["monday", "thursday", "sunday"]
+  }
+  tags = {
+    "CreateBy" = "Terraform"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-6"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CloseDBExtranetAccess](https://www.tencentcloud.com/document/api/409/18105)
+  - [CreateBackupPlan](https://www.tencentcloud.com/document/api/409/78805)
+  - [CreateInstances](https://www.tencentcloud.com/document/api/409/40583)
+  - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+  - [DescribeOrders](https://www.tencentcloud.com/document/api/409/18104)
+  - [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
+  - [ModifyBackupPlan](https://www.tencentcloud.com/document/api/409/45149)
+  - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/409/18101)
+  - [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [OpenDBExtranetAccess](https://www.tencentcloud.com/document/api/409/18099)
+* Read:
+  - [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109)
+  - [DescribeBackupPlans](https://www.tencentcloud.com/document/api/409/45151)
+  - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+  - [DescribeDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43284)
+  - [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773)
+  - [DescribeEncryptionKeys](https://www.tencentcloud.com/document/api/409/46989)
+  - [DescribeParamsEvent](https://www.tencentcloud.com/document/api/409/43283)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [CloseDBExtranetAccess](https://www.tencentcloud.com/document/api/409/18105)
+  - [CreateBackupPlan](https://www.tencentcloud.com/document/api/409/78805)
+  - [CreateDBInstanceNetworkAccess](https://www.tencentcloud.com/document/api/409/45951)
+  - [DeleteBackupPlan](https://www.tencentcloud.com/document/api/409/78814)
+  - [DeleteDBInstanceNetworkAccess](https://www.tencentcloud.com/document/api/409/45949)
+  - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+  - [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
+  - [ModifyBackupPlan](https://www.tencentcloud.com/document/api/409/45149)
+  - [ModifyDBInstanceChargeType](https://www.tencentcloud.com/document/api/409/55665)
+  - [ModifyDBInstanceDeletionProtection](https://www.tencentcloud.com/document/api/409/79011)
+  - [ModifyDBInstanceDeployment](https://www.tencentcloud.com/document/api/409/45148)
+  - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/409/18101)
+  - [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
+  - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
+  - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/409/43296)
+  - [ModifyDBInstancesProject](https://www.tencentcloud.com/document/api/409/18100)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [OpenDBExtranetAccess](https://www.tencentcloud.com/document/api/409/18099)
+  - [RenewInstance](https://www.tencentcloud.com/document/api/409/18098)
+  - [ResetAccountPassword](https://www.tencentcloud.com/document/api/409/18107)
+  - [SetAutoRenewFlag](https://www.tencentcloud.com/document/api/409/18096)
+  - [UpgradeDBInstanceKernelVersion](https://www.tencentcloud.com/document/api/409/54340)
+  - [UpgradeDBInstanceMajorVersion](https://www.tencentcloud.com/document/api/409/60784)
+* Delete:
+  - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+  - [DestroyDBInstance](https://www.tencentcloud.com/document/api/409/37117)
+  - [IsolateDBInstances](https://www.tencentcloud.com/document/api/409/40109)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">memory</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">backup_plan</span><span class="p">:</span> <span class="nx">Optional[_postgresql.InstanceBackupPlanArgs]</span> = None<span class="p">,</span>
-             <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">charset</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">db_kernel_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">root_password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">db_major_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">db_major_vesion</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">db_node_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_postgresql.InstanceDbNodeSetArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">db_node_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceDbNodeSetArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">delete_protection</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">kms_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">kms_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">kms_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">max_standby_archive_delay</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">max_standby_streaming_delay</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">memory</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">db_kernel_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">need_support_tde</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">public_access_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">root_password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">charset</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">root_user</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-             <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+             <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">backup_plan</span><span class="p">:</span> <span class="nx">Optional[InstanceBackupPlanArgs]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
              <span class="nx">voucher_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">wait_switch</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Postgresql:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Postgresql:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_postgresql_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -1280,7 +2584,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1397,11 +2701,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1417,8 +2729,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1426,8 +2737,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="rootpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootpassword_csharp" style="color: inherit; text-decoration: inherit;">Root<wbr>Password</a>
@@ -1435,8 +2745,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -1444,8 +2753,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1453,8 +2761,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1462,8 +2769,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -1471,8 +2777,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -1480,17 +2785,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="backupplan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupplan_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancebackupplan">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancebackupplan">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Instance<wbr>Backup<wbr>Plan</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1498,8 +2801,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_csharp" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -1507,8 +2809,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -1516,8 +2817,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbkernelversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernelversion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Kernel<wbr>Version</a>
@@ -1525,8 +2825,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmajorversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorversion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Major<wbr>Version</a>
@@ -1534,8 +2833,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="dbmajorvesion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorvesion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Major<wbr>Vesion</a>
@@ -1543,18 +2841,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="dbnodesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbnodesets_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Node<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancedbnodeset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancedbnodeset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Instance<wbr>Db<wbr>Node<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deleteprotection_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotection_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1562,8 +2865,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsclusterid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1571,8 +2881,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmsregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
@@ -1580,8 +2889,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbyarchivedelay_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbyarchivedelay_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -1589,8 +2897,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbystreamingdelay_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbystreamingdelay_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -1598,8 +2905,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1607,8 +2913,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="needsupporttde_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsupporttde_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Support<wbr>Tde</a>
@@ -1616,8 +2921,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1625,8 +2929,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1634,8 +2937,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicaccessswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessswitch_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Switch</a>
@@ -1643,8 +2945,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="rootuser_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootuser_csharp" style="color: inherit; text-decoration: inherit;">Root<wbr>User</a>
@@ -1652,8 +2953,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1661,17 +2961,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storagetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_csharp" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -1679,8 +2985,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd></dl>
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_csharp" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1694,8 +3007,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1703,8 +3015,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="rootpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootpassword_go" style="color: inherit; text-decoration: inherit;">Root<wbr>Password</a>
@@ -1712,8 +3023,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -1721,8 +3031,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1730,8 +3039,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1739,8 +3047,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -1748,8 +3055,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -1757,17 +3063,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="backupplan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupplan_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1775,8 +3079,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_go" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -1784,8 +3087,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -1793,8 +3095,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbkernelversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernelversion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Kernel<wbr>Version</a>
@@ -1802,8 +3103,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmajorversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorversion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Major<wbr>Version</a>
@@ -1811,8 +3111,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="dbmajorvesion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorvesion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Major<wbr>Vesion</a>
@@ -1820,9 +3119,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="dbnodesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbnodesets_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Node<wbr>Sets</a>
@@ -1830,8 +3127,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancedbnodeset">[]Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deleteprotection_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotection_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1839,8 +3143,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsclusterid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1848,8 +3159,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmsregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
@@ -1857,8 +3167,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbyarchivedelay_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbyarchivedelay_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -1866,8 +3175,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbystreamingdelay_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbystreamingdelay_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -1875,8 +3183,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1884,8 +3191,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="needsupporttde_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsupporttde_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Support<wbr>Tde</a>
@@ -1893,8 +3199,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1902,8 +3207,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1911,8 +3215,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicaccessswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessswitch_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Switch</a>
@@ -1920,8 +3223,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="rootuser_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootuser_go" style="color: inherit; text-decoration: inherit;">Root<wbr>User</a>
@@ -1929,8 +3231,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1938,17 +3239,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storagetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_go" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -1956,8 +3263,293 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd></dl>
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_go" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required property-secret"
+            title="Required">
+        <span id="root_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#root_password_hcl" style="color: inherit; text-decoration: inherit;">root_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of subnet.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="backup_plan_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_plan_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>plan</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancebackupplan">object</a></span>
+    </dt>
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_hcl" style="color: inherit; text-decoration: inherit;">charset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="db_kernel_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_kernel_version_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>kernel_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="db_major_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_major_version_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>major_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="db_major_vesion_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_major_vesion_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>major_<wbr>vesion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="db_node_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_node_sets_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>node_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancedbnodeset">list(object)</a></span>
+    </dt>
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_protection_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_region_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the custom key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_standby_archive_delay_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_standby_archive_delay_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>standby_<wbr>archive_<wbr>delay</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_standby_streaming_delay_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_standby_streaming_delay_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>standby_<wbr>streaming_<wbr>delay</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="need_support_tde_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_support_tde_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>support_<wbr>tde</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_access_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_access_switch_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="root_user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#root_user_hcl" style="color: inherit; text-decoration: inherit;">root_<wbr>user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="voucher_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucher_ids_hcl" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wait_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wait_switch_hcl" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1971,8 +3563,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1980,8 +3571,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="rootpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootpassword_java" style="color: inherit; text-decoration: inherit;">root<wbr>Password</a>
@@ -1989,8 +3579,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1998,8 +3587,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2007,8 +3595,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2016,8 +3603,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -2025,8 +3611,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -2034,17 +3619,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="backupplan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupplan_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2052,8 +3635,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_java" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -2061,8 +3643,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -2070,8 +3651,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbkernelversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernelversion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel<wbr>Version</a>
@@ -2079,8 +3659,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmajorversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorversion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Version</a>
@@ -2088,8 +3667,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="dbmajorvesion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorvesion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Vesion</a>
@@ -2097,18 +3675,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="dbnodesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbnodesets_java" style="color: inherit; text-decoration: inherit;">db<wbr>Node<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancedbnodeset">List&lt;Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancedbnodeset">List&lt;Instance<wbr>Db<wbr>Node<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deleteprotection_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotection_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2116,8 +3699,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsclusterid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -2125,8 +3715,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmsregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -2134,8 +3723,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbyarchivedelay_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbyarchivedelay_java" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -2143,8 +3731,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbystreamingdelay_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbystreamingdelay_java" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -2152,8 +3739,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2161,8 +3747,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="needsupporttde_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsupporttde_java" style="color: inherit; text-decoration: inherit;">need<wbr>Support<wbr>Tde</a>
@@ -2170,8 +3755,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2179,8 +3763,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2188,8 +3771,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicaccessswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessswitch_java" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Switch</a>
@@ -2197,8 +3779,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="rootuser_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootuser_java" style="color: inherit; text-decoration: inherit;">root<wbr>User</a>
@@ -2206,8 +3787,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2215,17 +3795,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storagetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_java" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -2233,8 +3819,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd></dl>
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_java" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2248,8 +3841,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2257,8 +3849,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="rootpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootpassword_nodejs" style="color: inherit; text-decoration: inherit;">root<wbr>Password</a>
@@ -2266,8 +3857,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -2275,8 +3865,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2284,8 +3873,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2293,8 +3881,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -2302,8 +3889,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -2311,17 +3897,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="backupplan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupplan_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2329,8 +3913,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_nodejs" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -2338,8 +3921,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -2347,8 +3929,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbkernelversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernelversion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel<wbr>Version</a>
@@ -2356,8 +3937,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmajorversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorversion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Version</a>
@@ -2365,8 +3945,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="dbmajorvesion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorvesion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Vesion</a>
@@ -2374,18 +3953,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="dbnodesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbnodesets_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Node<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancedbnodeset">Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancedbnodeset">Instance<wbr>Db<wbr>Node<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deleteprotection_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotection_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2393,8 +3977,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsclusterid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -2402,8 +3993,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmsregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -2411,8 +4001,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbyarchivedelay_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbyarchivedelay_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -2420,8 +4009,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbystreamingdelay_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbystreamingdelay_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -2429,8 +4017,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2438,8 +4025,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="needsupporttde_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsupporttde_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Support<wbr>Tde</a>
@@ -2447,8 +4033,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2456,8 +4041,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2465,8 +4049,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicaccessswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessswitch_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Switch</a>
@@ -2474,8 +4057,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="rootuser_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootuser_nodejs" style="color: inherit; text-decoration: inherit;">root<wbr>User</a>
@@ -2483,8 +4065,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2492,17 +4073,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storagetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_nodejs" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -2510,8 +4097,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd></dl>
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_nodejs" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2525,8 +4119,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2534,8 +4127,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="root_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#root_password_python" style="color: inherit; text-decoration: inherit;">root_<wbr>password</a>
@@ -2543,8 +4135,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -2552,8 +4143,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2561,8 +4151,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2570,8 +4159,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -2579,8 +4167,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_voucher_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
@@ -2588,17 +4175,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="backup_plan_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_plan_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>plan</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -2606,8 +4191,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_python" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -2615,8 +4199,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -2624,8 +4207,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="db_kernel_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_kernel_version_python" style="color: inherit; text-decoration: inherit;">db_<wbr>kernel_<wbr>version</a>
@@ -2633,8 +4215,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="db_major_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_major_version_python" style="color: inherit; text-decoration: inherit;">db_<wbr>major_<wbr>version</a>
@@ -2642,8 +4223,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="db_major_vesion_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_major_vesion_python" style="color: inherit; text-decoration: inherit;">db_<wbr>major_<wbr>vesion</a>
@@ -2651,18 +4231,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="db_node_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_node_sets_python" style="color: inherit; text-decoration: inherit;">db_<wbr>node_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancedbnodeset">Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancedbnodeset">Sequence[Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_protection_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_protection_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -2670,8 +4255,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_cluster_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="kms_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
@@ -2679,8 +4271,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="kms_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_region_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
@@ -2688,8 +4279,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_standby_archive_delay_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_standby_archive_delay_python" style="color: inherit; text-decoration: inherit;">max_<wbr>standby_<wbr>archive_<wbr>delay</a>
@@ -2697,8 +4287,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_standby_streaming_delay_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_standby_streaming_delay_python" style="color: inherit; text-decoration: inherit;">max_<wbr>standby_<wbr>streaming_<wbr>delay</a>
@@ -2706,8 +4295,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2715,8 +4303,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="need_support_tde_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_support_tde_python" style="color: inherit; text-decoration: inherit;">need_<wbr>support_<wbr>tde</a>
@@ -2724,8 +4311,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2733,8 +4319,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2742,8 +4327,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="public_access_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_access_switch_python" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>switch</a>
@@ -2751,8 +4335,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="root_user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#root_user_python" style="color: inherit; text-decoration: inherit;">root_<wbr>user</a>
@@ -2760,8 +4343,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -2769,17 +4351,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storage_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucher_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucher_ids_python" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
@@ -2787,8 +4375,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd></dl>
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wait_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wait_switch_python" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2802,8 +4397,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2811,8 +4405,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="rootpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootpassword_yaml" style="color: inherit; text-decoration: inherit;">root<wbr>Password</a>
@@ -2820,8 +4413,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -2829,8 +4421,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-required"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2838,8 +4429,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2847,8 +4437,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -2856,8 +4445,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -2865,17 +4453,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="backupplan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupplan_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancebackupplan">Property Map</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2883,8 +4469,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_yaml" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -2892,8 +4477,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -2901,8 +4485,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbkernelversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbkernelversion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel<wbr>Version</a>
@@ -2910,8 +4493,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmajorversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorversion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Version</a>
@@ -2919,8 +4501,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="dbmajorvesion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmajorvesion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Vesion</a>
@@ -2928,9 +4509,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="dbnodesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbnodesets_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Node<wbr>Sets</a>
@@ -2938,8 +4517,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancedbnodeset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deleteprotection_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteprotection_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2947,8 +4533,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsclusterid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -2956,8 +4549,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmsregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -2965,8 +4557,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbyarchivedelay_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbyarchivedelay_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -2974,8 +4565,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxstandbystreamingdelay_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstandbystreamingdelay_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -2983,8 +4573,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2992,8 +4581,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="needsupporttde_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsupporttde_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Support<wbr>Tde</a>
@@ -3001,8 +4589,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3010,8 +4597,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3019,8 +4605,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicaccessswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessswitch_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Switch</a>
@@ -3028,8 +4613,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="rootuser_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rootuser_yaml" style="color: inherit; text-decoration: inherit;">root<wbr>User</a>
@@ -3037,8 +4621,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3046,17 +4629,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="storagetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="voucherids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#voucherids_yaml" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -3064,8 +4653,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd></dl>
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_yaml" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3086,8 +4682,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -3095,8 +4690,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaccessip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Access<wbr>Ip</a>
@@ -3104,8 +4698,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="privateaccessport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessport_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Access<wbr>Port</a>
@@ -3113,8 +4706,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-"
+    <dd>Port for private access.</dd><dt class="property-"
             title="">
         <span id="publicaccesshost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccesshost_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Host</a>
@@ -3122,8 +4714,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-"
+    <dd>Host for public access.</dd><dt class="property-"
             title="">
         <span id="publicaccessport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessport_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Port</a>
@@ -3131,8 +4722,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-"
+    <dd>Port for public access.</dd><dt class="property-"
             title="">
         <span id="uid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_csharp" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -3140,8 +4730,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd></dl>
+    <dd>Uid of the postgresql instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3155,8 +4744,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -3164,8 +4752,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaccessip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Access<wbr>Ip</a>
@@ -3173,8 +4760,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="privateaccessport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessport_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Access<wbr>Port</a>
@@ -3182,8 +4768,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-"
+    <dd>Port for private access.</dd><dt class="property-"
             title="">
         <span id="publicaccesshost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccesshost_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Host</a>
@@ -3191,8 +4776,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-"
+    <dd>Host for public access.</dd><dt class="property-"
             title="">
         <span id="publicaccessport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessport_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Port</a>
@@ -3200,8 +4784,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-"
+    <dd>Port for public access.</dd><dt class="property-"
             title="">
         <span id="uid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_go" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -3209,8 +4792,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd></dl>
+    <dd>Uid of the postgresql instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="private_access_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_access_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>access_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP for private access.</dd><dt class="property-"
+            title="">
+        <span id="private_access_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_access_port_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>access_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port for private access.</dd><dt class="property-"
+            title="">
+        <span id="public_access_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_access_host_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host for public access.</dd><dt class="property-"
+            title="">
+        <span id="public_access_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_access_port_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port for public access.</dd><dt class="property-"
+            title="">
+        <span id="uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uid of the postgresql instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3224,8 +4868,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3233,8 +4876,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaccessip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Ip</a>
@@ -3242,8 +4884,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="privateaccessport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessport_java" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Port</a>
@@ -3251,8 +4892,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-"
+    <dd>Port for private access.</dd><dt class="property-"
             title="">
         <span id="publicaccesshost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccesshost_java" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Host</a>
@@ -3260,8 +4900,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-"
+    <dd>Host for public access.</dd><dt class="property-"
             title="">
         <span id="publicaccessport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessport_java" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Port</a>
@@ -3269,8 +4908,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-"
+    <dd>Port for public access.</dd><dt class="property-"
             title="">
         <span id="uid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_java" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -3278,8 +4916,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd></dl>
+    <dd>Uid of the postgresql instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3293,8 +4930,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3302,8 +4938,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaccessip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Ip</a>
@@ -3311,8 +4946,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="privateaccessport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessport_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Port</a>
@@ -3320,8 +4954,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-"
+    <dd>Port for private access.</dd><dt class="property-"
             title="">
         <span id="publicaccesshost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccesshost_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Host</a>
@@ -3329,8 +4962,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-"
+    <dd>Host for public access.</dd><dt class="property-"
             title="">
         <span id="publicaccessport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessport_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Port</a>
@@ -3338,8 +4970,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-"
+    <dd>Port for public access.</dd><dt class="property-"
             title="">
         <span id="uid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_nodejs" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -3347,8 +4978,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd></dl>
+    <dd>Uid of the postgresql instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3362,8 +4992,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3371,8 +5000,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="private_access_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_access_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>access_<wbr>ip</a>
@@ -3380,8 +5008,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="private_access_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_access_port_python" style="color: inherit; text-decoration: inherit;">private_<wbr>access_<wbr>port</a>
@@ -3389,8 +5016,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-"
+    <dd>Port for private access.</dd><dt class="property-"
             title="">
         <span id="public_access_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_access_host_python" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>host</a>
@@ -3398,8 +5024,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-"
+    <dd>Host for public access.</dd><dt class="property-"
             title="">
         <span id="public_access_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_access_port_python" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>port</a>
@@ -3407,8 +5032,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-"
+    <dd>Port for public access.</dd><dt class="property-"
             title="">
         <span id="uid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_python" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -3416,8 +5040,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd></dl>
+    <dd>Uid of the postgresql instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3431,8 +5054,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3440,8 +5062,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="privateaccessip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Ip</a>
@@ -3449,8 +5070,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-"
+    <dd>IP for private access.</dd><dt class="property-"
             title="">
         <span id="privateaccessport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateaccessport_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Port</a>
@@ -3458,8 +5078,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-"
+    <dd>Port for private access.</dd><dt class="property-"
             title="">
         <span id="publicaccesshost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccesshost_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Host</a>
@@ -3467,8 +5086,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-"
+    <dd>Host for public access.</dd><dt class="property-"
             title="">
         <span id="publicaccessport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicaccessport_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Port</a>
@@ -3476,8 +5094,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-"
+    <dd>Port for public access.</dd><dt class="property-"
             title="">
         <span id="uid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_yaml" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -3485,8 +5102,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd></dl>
+    <dd>Uid of the postgresql instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3496,25 +5112,25 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">backup_plan</span><span class="p">:</span> <span class="nx">Optional[_postgresql.InstanceBackupPlanArgs]</span> = None<span class="p">,</span>
+        <span class="nx">backup_plan</span><span class="p">:</span> <span class="nx">Optional[InstanceBackupPlanArgs]</span> = None<span class="p">,</span>
         <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">charset</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -3522,8 +5138,10 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">db_kernel_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">db_major_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">db_major_vesion</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">db_node_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_postgresql.InstanceDbNodeSetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">db_node_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceDbNodeSetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">delete_protection</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">kms_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">kms_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">kms_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">max_standby_archive_delay</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -3542,109 +5160,150 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">root_user</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">uid</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">voucher_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">wait_switch</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Postgresql:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_postgresql_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3652,28 +5311,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3681,28 +5343,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3722,8 +5387,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -3731,8 +5395,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -3740,17 +5403,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_backupplan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backupplan_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancebackupplan">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancebackupplan">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Instance<wbr>Backup<wbr>Plan</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -3758,8 +5419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_csharp" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -3767,8 +5427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -3776,8 +5435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3785,8 +5443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbkernelversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbkernelversion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Kernel<wbr>Version</a>
@@ -3794,8 +5451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmajorversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorversion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Major<wbr>Version</a>
@@ -3803,8 +5459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_dbmajorvesion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorvesion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Major<wbr>Vesion</a>
@@ -3812,18 +5467,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbnodesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbnodesets_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Node<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancedbnodeset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancedbnodeset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Inputs.<wbr>Instance<wbr>Db<wbr>Node<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deleteprotection_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotection_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -3831,8 +5491,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsclusterid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -3840,8 +5507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
@@ -3849,8 +5515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbyarchivedelay_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbyarchivedelay_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -3858,8 +5523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbystreamingdelay_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbystreamingdelay_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -3867,8 +5531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -3876,8 +5539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3885,8 +5547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needsupporttde_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needsupporttde_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Support<wbr>Tde</a>
@@ -3894,8 +5555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -3903,8 +5563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Access<wbr>Ip</a>
@@ -3912,8 +5571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessport_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Access<wbr>Port</a>
@@ -3921,8 +5579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -3930,8 +5587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccesshost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccesshost_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Host</a>
@@ -3939,8 +5595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Host for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessport_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Port</a>
@@ -3948,8 +5603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessswitch_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Switch</a>
@@ -3957,8 +5611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_rootpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootpassword_csharp" style="color: inherit; text-decoration: inherit;">Root<wbr>Password</a>
@@ -3966,8 +5619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootuser_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootuser_csharp" style="color: inherit; text-decoration: inherit;">Root<wbr>User</a>
@@ -3975,8 +5627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -3984,8 +5635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -3993,8 +5643,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storagetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -4002,17 +5659,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_csharp" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -4020,8 +5675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_csharp" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -4029,8 +5683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -4038,8 +5691,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_csharp" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4053,8 +5713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -4062,8 +5721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -4071,17 +5729,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_backupplan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backupplan_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -4089,8 +5745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_go" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -4098,8 +5753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -4107,8 +5761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -4116,8 +5769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbkernelversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbkernelversion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Kernel<wbr>Version</a>
@@ -4125,8 +5777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmajorversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorversion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Major<wbr>Version</a>
@@ -4134,8 +5785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_dbmajorvesion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorvesion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Major<wbr>Vesion</a>
@@ -4143,9 +5793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbnodesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbnodesets_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Node<wbr>Sets</a>
@@ -4153,8 +5801,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancedbnodeset">[]Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deleteprotection_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotection_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -4162,8 +5817,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsclusterid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -4171,8 +5833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
@@ -4180,8 +5841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbyarchivedelay_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbyarchivedelay_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -4189,8 +5849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbystreamingdelay_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbystreamingdelay_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -4198,8 +5857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -4207,8 +5865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -4216,8 +5873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needsupporttde_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needsupporttde_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Support<wbr>Tde</a>
@@ -4225,8 +5881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -4234,8 +5889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Access<wbr>Ip</a>
@@ -4243,8 +5897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessport_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Access<wbr>Port</a>
@@ -4252,8 +5905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -4261,8 +5913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccesshost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccesshost_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Host</a>
@@ -4270,8 +5921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Host for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessport_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Port</a>
@@ -4279,8 +5929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessswitch_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Access<wbr>Switch</a>
@@ -4288,8 +5937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_rootpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootpassword_go" style="color: inherit; text-decoration: inherit;">Root<wbr>Password</a>
@@ -4297,8 +5945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootuser_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootuser_go" style="color: inherit; text-decoration: inherit;">Root<wbr>User</a>
@@ -4306,8 +5953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -4315,8 +5961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -4324,8 +5969,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storagetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -4333,17 +5985,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_go" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -4351,8 +6001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_go" style="color: inherit; text-decoration: inherit;">Voucher<wbr>Ids</a>
@@ -4360,8 +6009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -4369,8 +6017,341 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_go" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_backup_plan_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backup_plan_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>plan</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancebackupplan">object</a></span>
+    </dt>
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_hcl" style="color: inherit; text-decoration: inherit;">charset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_kernel_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_kernel_version_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>kernel_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_major_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_major_version_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>major_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_db_major_vesion_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_major_vesion_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>major_<wbr>vesion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_node_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_node_sets_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>node_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancedbnodeset">list(object)</a></span>
+    </dt>
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_protection_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_region_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the custom key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_standby_archive_delay_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_standby_archive_delay_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>standby_<wbr>archive_<wbr>delay</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_standby_streaming_delay_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_standby_streaming_delay_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>standby_<wbr>streaming_<wbr>delay</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_need_support_tde_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_need_support_tde_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>support_<wbr>tde</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_private_access_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_access_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>access_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP for private access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_private_access_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_access_port_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>access_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port for private access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_access_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_access_host_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host for public access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_access_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_access_port_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port for public access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_access_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_access_switch_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_root_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_root_password_hcl" style="color: inherit; text-decoration: inherit;">root_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_root_user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_root_user_hcl" style="color: inherit; text-decoration: inherit;">root_<wbr>user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of subnet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uid of the postgresql instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_voucher_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucher_ids_hcl" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wait_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wait_switch_hcl" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4384,8 +6365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -4393,8 +6373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -4402,17 +6381,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_backupplan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backupplan_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -4420,8 +6397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_java" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -4429,8 +6405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -4438,8 +6413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4447,8 +6421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbkernelversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbkernelversion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel<wbr>Version</a>
@@ -4456,8 +6429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmajorversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorversion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Version</a>
@@ -4465,8 +6437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_dbmajorvesion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorvesion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Vesion</a>
@@ -4474,18 +6445,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbnodesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbnodesets_java" style="color: inherit; text-decoration: inherit;">db<wbr>Node<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancedbnodeset">List&lt;Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancedbnodeset">List&lt;Instance<wbr>Db<wbr>Node<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deleteprotection_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotection_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -4493,8 +6469,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsclusterid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -4502,8 +6485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -4511,8 +6493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbyarchivedelay_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbyarchivedelay_java" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -4520,8 +6501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbystreamingdelay_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbystreamingdelay_java" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -4529,8 +6509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -4538,8 +6517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4547,8 +6525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needsupporttde_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needsupporttde_java" style="color: inherit; text-decoration: inherit;">need<wbr>Support<wbr>Tde</a>
@@ -4556,8 +6533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -4565,8 +6541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Ip</a>
@@ -4574,8 +6549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessport_java" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Port</a>
@@ -4583,8 +6557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -4592,8 +6565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccesshost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccesshost_java" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Host</a>
@@ -4601,8 +6573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Host for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessport_java" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Port</a>
@@ -4610,8 +6581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessswitch_java" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Switch</a>
@@ -4619,8 +6589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_rootpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootpassword_java" style="color: inherit; text-decoration: inherit;">root<wbr>Password</a>
@@ -4628,8 +6597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootuser_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootuser_java" style="color: inherit; text-decoration: inherit;">root<wbr>User</a>
@@ -4637,8 +6605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -4646,8 +6613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -4655,8 +6621,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storagetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4664,17 +6637,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_java" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -4682,8 +6653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_java" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -4691,8 +6661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4700,8 +6669,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_java" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4715,8 +6691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -4724,8 +6699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -4733,17 +6707,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_backupplan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backupplan_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -4751,8 +6723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_nodejs" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -4760,8 +6731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -4769,8 +6739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4778,8 +6747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbkernelversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbkernelversion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel<wbr>Version</a>
@@ -4787,8 +6755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmajorversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorversion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Version</a>
@@ -4796,8 +6763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_dbmajorvesion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorvesion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Vesion</a>
@@ -4805,18 +6771,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbnodesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbnodesets_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Node<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancedbnodeset">Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancedbnodeset">Instance<wbr>Db<wbr>Node<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deleteprotection_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotection_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -4824,8 +6795,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsclusterid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -4833,8 +6811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -4842,8 +6819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbyarchivedelay_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbyarchivedelay_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -4851,8 +6827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbystreamingdelay_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbystreamingdelay_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -4860,8 +6835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -4869,8 +6843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4878,8 +6851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needsupporttde_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needsupporttde_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Support<wbr>Tde</a>
@@ -4887,8 +6859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -4896,8 +6867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Ip</a>
@@ -4905,8 +6875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessport_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Port</a>
@@ -4914,8 +6883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -4923,8 +6891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccesshost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccesshost_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Host</a>
@@ -4932,8 +6899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Host for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessport_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Port</a>
@@ -4941,8 +6907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessswitch_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Switch</a>
@@ -4950,8 +6915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_rootpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootpassword_nodejs" style="color: inherit; text-decoration: inherit;">root<wbr>Password</a>
@@ -4959,8 +6923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootuser_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootuser_nodejs" style="color: inherit; text-decoration: inherit;">root<wbr>User</a>
@@ -4968,8 +6931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -4977,8 +6939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -4986,8 +6947,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storagetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4995,17 +6963,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_nodejs" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -5013,8 +6979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_nodejs" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -5022,8 +6987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5031,8 +6995,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_nodejs" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5046,8 +7017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_voucher_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
@@ -5055,8 +7025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -5064,17 +7033,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_backup_plan_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backup_plan_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>plan</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancebackupplan">Instance<wbr>Backup<wbr>Plan<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -5082,8 +7049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_python" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -5091,8 +7057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -5100,8 +7065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -5109,8 +7073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_kernel_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_kernel_version_python" style="color: inherit; text-decoration: inherit;">db_<wbr>kernel_<wbr>version</a>
@@ -5118,8 +7081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_major_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_major_version_python" style="color: inherit; text-decoration: inherit;">db_<wbr>major_<wbr>version</a>
@@ -5127,8 +7089,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_db_major_vesion_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_major_vesion_python" style="color: inherit; text-decoration: inherit;">db_<wbr>major_<wbr>vesion</a>
@@ -5136,18 +7097,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_node_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_node_sets_python" style="color: inherit; text-decoration: inherit;">db_<wbr>node_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancedbnodeset">Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancedbnodeset">Sequence[Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_protection_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_protection_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -5155,8 +7121,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_cluster_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kms_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
@@ -5164,8 +7137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kms_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_region_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
@@ -5173,8 +7145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_standby_archive_delay_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_standby_archive_delay_python" style="color: inherit; text-decoration: inherit;">max_<wbr>standby_<wbr>archive_<wbr>delay</a>
@@ -5182,8 +7153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_standby_streaming_delay_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_standby_streaming_delay_python" style="color: inherit; text-decoration: inherit;">max_<wbr>standby_<wbr>streaming_<wbr>delay</a>
@@ -5191,8 +7161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -5200,8 +7169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -5209,8 +7177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_need_support_tde_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_need_support_tde_python" style="color: inherit; text-decoration: inherit;">need_<wbr>support_<wbr>tde</a>
@@ -5218,8 +7185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -5227,8 +7193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_private_access_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_access_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>access_<wbr>ip</a>
@@ -5236,8 +7201,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_private_access_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_access_port_python" style="color: inherit; text-decoration: inherit;">private_<wbr>access_<wbr>port</a>
@@ -5245,8 +7209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -5254,8 +7217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_access_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_access_host_python" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>host</a>
@@ -5263,8 +7225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Host for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_access_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_access_port_python" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>port</a>
@@ -5272,8 +7233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_access_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_access_switch_python" style="color: inherit; text-decoration: inherit;">public_<wbr>access_<wbr>switch</a>
@@ -5281,8 +7241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_root_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_root_password_python" style="color: inherit; text-decoration: inherit;">root_<wbr>password</a>
@@ -5290,8 +7249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_root_user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_root_user_python" style="color: inherit; text-decoration: inherit;">root_<wbr>user</a>
@@ -5299,8 +7257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -5308,8 +7265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -5317,8 +7273,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storage_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -5326,17 +7289,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_python" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -5344,8 +7305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucher_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucher_ids_python" style="color: inherit; text-decoration: inherit;">voucher_<wbr>ids</a>
@@ -5353,8 +7313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -5362,8 +7321,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wait_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wait_switch_python" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5377,8 +7343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, <code>1</code> for enabled. NOTES: Only support prepaid instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -5386,8 +7351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to use voucher, <code>1</code> for enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to use voucher, <code>1</code> for enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -5395,17 +7359,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone. NOTE: This field could not be modified, please use <code>db_node_set</code> instead of modification. The changes on this field will be suppressed when using the <code>db_node_set</code>.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Availability zone. NOTE: This field could not be modified, please use <code>dbNodeSet</code> instead of modification. The changes on this field will be suppressed when using the <code>dbNodeSet</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_backupplan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backupplan_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Plan</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancebackupplan">Property Map</a></span>
     </dt>
-    <dd><p>Specify DB backup plan.</p>
-</dd><dt class="property-optional"
+    <dd>This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan. Specify DB backup plan.<p class="property-message">Deprecated: This field is deprecated from version 1.83.9. Use resource <code>tencentcloud.Postgresql.BackupPlan</code> to manage PG instance backup plan.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -5413,8 +7375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Pay type of the postgresql instance. Values <code>POSTPAID_BY_HOUR</code> (Default), <code>PREPAID</code>. It only support to update the type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_yaml" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -5422,8 +7383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charset of the root account. Valid values are <code>UTF8</code>,<code>LATIN1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -5431,8 +7391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Number of CPU cores. Allowed value must be equal <code>cpu</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -5440,8 +7399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbkernelversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbkernelversion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Kernel<wbr>Version</a>
@@ -5449,8 +7407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmajorversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorversion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Version</a>
@@ -5458,8 +7415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_dbmajorvesion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmajorvesion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Major<wbr>Vesion</a>
@@ -5467,9 +7423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.</p>
-<p class="property-message">Deprecated:<p><code>db_major_vesion</code> will be deprecated, use <code>db_major_version</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd><code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.<p class="property-message">Deprecated: <code>dbMajorVesion</code> will be deprecated, use <code>dbMajorVersion</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbnodesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbnodesets_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Node<wbr>Sets</a>
@@ -5477,8 +7431,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancedbnodeset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specify instance node info for disaster migration.</p>
-</dd><dt class="property-optional"
+    <dd>Specify instance node info for disaster migration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deleteprotection_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deleteprotection_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable instance deletion protection. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -5486,8 +7447,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of the postgresql database engine. Valid values: <code>10.4</code>, <code>10.17</code>, <code>10.23</code>, <code>11.8</code>, <code>11.12</code>, <code>11.22</code>, <code>12.4</code>, <code>12.7</code>, <code>12.18</code>, <code>13.3</code>, <code>14.2</code>, <code>14.11</code>, <code>15.1</code>, <code>16.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsclusterid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -5495,8 +7463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>KeyId of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>KeyId of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmsregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
@@ -5504,8 +7471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the custom key.</p>
-</dd><dt class="property-optional"
+    <dd>Region of the custom key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbyarchivedelay_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbyarchivedelay_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Archive<wbr>Delay</a>
@@ -5513,8 +7479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxstandbystreamingdelay_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxstandbystreamingdelay_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Standby<wbr>Streaming<wbr>Delay</a>
@@ -5522,8 +7487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</p>
-</dd><dt class="property-optional"
+    <dd>max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -5531,8 +7495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size(in GB). Allowed value must be larger than <code>memory</code> that data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -5540,8 +7503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_needsupporttde_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_needsupporttde_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Support<wbr>Tde</a>
@@ -5549,8 +7511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to support data transparent encryption, 1: yes, 0: no (default).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to support data transparent encryption, 1: yes, 0: no (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -5558,8 +7519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Prepaid period in month. Default <code>1</code>. Values: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. This field is valid only when creating a <code>PREPAID</code> type instance, or updating the charge type from <code>POSTPAID_BY_HOUR</code> to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Ip</a>
@@ -5567,8 +7527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP for private access.</p>
-</dd><dt class="property-optional"
+    <dd>IP for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateaccessport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateaccessport_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Access<wbr>Port</a>
@@ -5576,8 +7535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port for private access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for private access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -5585,8 +7543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project id, default value is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project id, default value is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccesshost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccesshost_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Host</a>
@@ -5594,8 +7551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Host for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessport_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Port</a>
@@ -5603,8 +7559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port for public access.</p>
-</dd><dt class="property-optional"
+    <dd>Port for public access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicaccessswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicaccessswitch_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Access<wbr>Switch</a>
@@ -5612,8 +7567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether to enable the access to an instance from public network or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to enable the access to an instance from public network or not.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_rootpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootpassword_yaml" style="color: inherit; text-decoration: inherit;">root<wbr>Password</a>
@@ -5621,8 +7575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rootuser_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rootuser_yaml" style="color: inherit; text-decoration: inherit;">root<wbr>User</a>
@@ -5630,8 +7583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance root account name. This parameter is optional, Default value is <code>root</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance root account name. This parameter is optional, Default value is <code>root</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -5639,8 +7591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -5648,8 +7599,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storage_min</code> and <code>storage_max</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</p>
-</dd><dt class="property-optional"
+    <dd>Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of <code>storageMin</code> and <code>storageMax</code> which data source <code>tencentcloud.Postgresql.getSpecinfos</code> provides.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_storagetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Storage type of the instance. Valid values: <code>PHYSICAL_LOCAL_SSD</code> (default, local SSD), <code>CLOUD_PREMIUM</code> (premium cloud disk), <code>CLOUD_SSD</code> (cloud SSD), <code>CLOUD_HSSD</code> (enhanced cloud SSD). NOTE: This field will force new resource when modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5657,17 +7615,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet.</p>
-</dd><dt class="property-optional"
+    <dd>ID of subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this postgresql.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this postgresql.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uid_yaml" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -5675,8 +7631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uid of the postgresql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the postgresql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_voucherids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_voucherids_yaml" style="color: inherit; text-decoration: inherit;">voucher<wbr>Ids</a>
@@ -5684,8 +7639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specify Voucher Ids if <code>auto_voucher</code> was <code>1</code>, only support using 1 vouchers for now.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Voucher Ids if <code>autoVoucher</code> was <code>1</code>, only support using 1 vouchers for now.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5693,8 +7647,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC.</p>
-</dd></dl>
+    <dd>ID of VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_yaml" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Switch time after instance configurations are modified. <code>0</code>: Switch immediately; <code>2</code>: Switch during maintenance time window. Default: <code>0</code>. Note: This only takes effect when updating the <code>memory</code>, <code>storage</code>, <code>cpu</code>, <code>dbNodeSet</code>, <code>dbKernelVersion</code> fields.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -5709,7 +7670,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instancebackupplan">Instance<wbr>Backup<wbr>Plan</h4>
+<h4 id="instancebackupplan">
+Instance<wbr>Backup<wbr>Plan<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Backup<wbr>Plan<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5721,8 +7684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</p>
-</dd><dt class="property-optional"
+    <dd>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</dd><dt class="property-optional"
             title="Optional">
         <span id="basebackupretentionperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basebackupretentionperiod_csharp" style="color: inherit; text-decoration: inherit;">Base<wbr>Backup<wbr>Retention<wbr>Period</a>
@@ -5730,8 +7692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify days of the retention.</p>
-</dd><dt class="property-optional"
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxbackupstarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbackupstarttime_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5739,8 +7700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify latest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify latest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="minbackupstarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minbackupstarttime_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5748,8 +7708,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify earliest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd></dl>
+    <dd>Specify earliest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupperiods_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupperiods_csharp" style="color: inherit; text-decoration: inherit;">Monthly<wbr>Backup<wbr>Periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>If it is in monthly dimension, the format is numeric characters, such as [&quot;1&quot;,&quot;2&quot;].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupretentionperiod_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupretentionperiod_csharp" style="color: inherit; text-decoration: inherit;">Monthly<wbr>Backup<wbr>Retention<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlyplanid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlyplanid_csharp" style="color: inherit; text-decoration: inherit;">Monthly<wbr>Plan<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Monthly plan id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5763,8 +7746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</p>
-</dd><dt class="property-optional"
+    <dd>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</dd><dt class="property-optional"
             title="Optional">
         <span id="basebackupretentionperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basebackupretentionperiod_go" style="color: inherit; text-decoration: inherit;">Base<wbr>Backup<wbr>Retention<wbr>Period</a>
@@ -5772,8 +7754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify days of the retention.</p>
-</dd><dt class="property-optional"
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxbackupstarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbackupstarttime_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5781,8 +7762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify latest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify latest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="minbackupstarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minbackupstarttime_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5790,8 +7770,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify earliest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd></dl>
+    <dd>Specify earliest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupperiods_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupperiods_go" style="color: inherit; text-decoration: inherit;">Monthly<wbr>Backup<wbr>Periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>If it is in monthly dimension, the format is numeric characters, such as [&quot;1&quot;,&quot;2&quot;].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupretentionperiod_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupretentionperiod_go" style="color: inherit; text-decoration: inherit;">Monthly<wbr>Backup<wbr>Retention<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlyplanid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlyplanid_go" style="color: inherit; text-decoration: inherit;">Monthly<wbr>Plan<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Monthly plan id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="backup_periods_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_periods_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="base_backup_retention_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#base_backup_retention_period_hcl" style="color: inherit; text-decoration: inherit;">base_<wbr>backup_<wbr>retention_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_backup_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_backup_start_time_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>backup_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify latest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="min_backup_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_backup_start_time_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>backup_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify earliest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthly_backup_periods_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthly_backup_periods_hcl" style="color: inherit; text-decoration: inherit;">monthly_<wbr>backup_<wbr>periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>If it is in monthly dimension, the format is numeric characters, such as [&quot;1&quot;,&quot;2&quot;].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthly_backup_retention_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthly_backup_retention_period_hcl" style="color: inherit; text-decoration: inherit;">monthly_<wbr>backup_<wbr>retention_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthly_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthly_plan_id_hcl" style="color: inherit; text-decoration: inherit;">monthly_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Monthly plan id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5805,8 +7870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</p>
-</dd><dt class="property-optional"
+    <dd>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</dd><dt class="property-optional"
             title="Optional">
         <span id="basebackupretentionperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basebackupretentionperiod_java" style="color: inherit; text-decoration: inherit;">base<wbr>Backup<wbr>Retention<wbr>Period</a>
@@ -5814,8 +7878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify days of the retention.</p>
-</dd><dt class="property-optional"
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxbackupstarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbackupstarttime_java" style="color: inherit; text-decoration: inherit;">max<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5823,8 +7886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify latest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify latest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="minbackupstarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minbackupstarttime_java" style="color: inherit; text-decoration: inherit;">min<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5832,8 +7894,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify earliest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd></dl>
+    <dd>Specify earliest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupperiods_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupperiods_java" style="color: inherit; text-decoration: inherit;">monthly<wbr>Backup<wbr>Periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>If it is in monthly dimension, the format is numeric characters, such as [&quot;1&quot;,&quot;2&quot;].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupretentionperiod_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupretentionperiod_java" style="color: inherit; text-decoration: inherit;">monthly<wbr>Backup<wbr>Retention<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlyplanid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlyplanid_java" style="color: inherit; text-decoration: inherit;">monthly<wbr>Plan<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Monthly plan id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5847,8 +7932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</p>
-</dd><dt class="property-optional"
+    <dd>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</dd><dt class="property-optional"
             title="Optional">
         <span id="basebackupretentionperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basebackupretentionperiod_nodejs" style="color: inherit; text-decoration: inherit;">base<wbr>Backup<wbr>Retention<wbr>Period</a>
@@ -5856,8 +7940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify days of the retention.</p>
-</dd><dt class="property-optional"
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxbackupstarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbackupstarttime_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5865,8 +7948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify latest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify latest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="minbackupstarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minbackupstarttime_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5874,8 +7956,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify earliest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd></dl>
+    <dd>Specify earliest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupperiods_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupperiods_nodejs" style="color: inherit; text-decoration: inherit;">monthly<wbr>Backup<wbr>Periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>If it is in monthly dimension, the format is numeric characters, such as [&quot;1&quot;,&quot;2&quot;].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupretentionperiod_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupretentionperiod_nodejs" style="color: inherit; text-decoration: inherit;">monthly<wbr>Backup<wbr>Retention<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlyplanid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlyplanid_nodejs" style="color: inherit; text-decoration: inherit;">monthly<wbr>Plan<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Monthly plan id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5889,8 +7994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</p>
-</dd><dt class="property-optional"
+    <dd>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</dd><dt class="property-optional"
             title="Optional">
         <span id="base_backup_retention_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#base_backup_retention_period_python" style="color: inherit; text-decoration: inherit;">base_<wbr>backup_<wbr>retention_<wbr>period</a>
@@ -5898,8 +8002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify days of the retention.</p>
-</dd><dt class="property-optional"
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_backup_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_backup_start_time_python" style="color: inherit; text-decoration: inherit;">max_<wbr>backup_<wbr>start_<wbr>time</a>
@@ -5907,8 +8010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify latest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify latest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_backup_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_backup_start_time_python" style="color: inherit; text-decoration: inherit;">min_<wbr>backup_<wbr>start_<wbr>time</a>
@@ -5916,8 +8018,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify earliest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd></dl>
+    <dd>Specify earliest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthly_backup_periods_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthly_backup_periods_python" style="color: inherit; text-decoration: inherit;">monthly_<wbr>backup_<wbr>periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>If it is in monthly dimension, the format is numeric characters, such as [&quot;1&quot;,&quot;2&quot;].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthly_backup_retention_period_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthly_backup_retention_period_python" style="color: inherit; text-decoration: inherit;">monthly_<wbr>backup_<wbr>retention_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthly_plan_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthly_plan_id_python" style="color: inherit; text-decoration: inherit;">monthly_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Monthly plan id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5931,8 +8056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</p>
-</dd><dt class="property-optional"
+    <dd>List of backup period per week, available values: <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code>, <code>sunday</code>. NOTE: At least specify two days.</dd><dt class="property-optional"
             title="Optional">
         <span id="basebackupretentionperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#basebackupretentionperiod_yaml" style="color: inherit; text-decoration: inherit;">base<wbr>Backup<wbr>Retention<wbr>Period</a>
@@ -5940,8 +8064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify days of the retention.</p>
-</dd><dt class="property-optional"
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxbackupstarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbackupstarttime_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5949,8 +8072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify latest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify latest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="minbackupstarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minbackupstarttime_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Backup<wbr>Start<wbr>Time</a>
@@ -5958,12 +8080,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify earliest backup start time, format <code>hh:mm:ss</code>.</p>
-</dd></dl>
+    <dd>Specify earliest backup start time, format <code>hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupperiods_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupperiods_yaml" style="color: inherit; text-decoration: inherit;">monthly<wbr>Backup<wbr>Periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>If it is in monthly dimension, the format is numeric characters, such as [&quot;1&quot;,&quot;2&quot;].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlybackupretentionperiod_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlybackupretentionperiod_yaml" style="color: inherit; text-decoration: inherit;">monthly<wbr>Backup<wbr>Retention<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Specify days of the retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monthlyplanid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlyplanid_yaml" style="color: inherit; text-decoration: inherit;">monthly<wbr>Plan<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Monthly plan id.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instancedbnodeset">Instance<wbr>Db<wbr>Node<wbr>Set</h4>
+<h4 id="instancedbnodeset">
+Instance<wbr>Db<wbr>Node<wbr>Set<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Db<wbr>Node<wbr>Set<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5975,8 +8122,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the node available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the node available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_csharp" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -5984,8 +8138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</p>
-</dd></dl>
+    <dd>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5999,8 +8152,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the node available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the node available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_go" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -6008,8 +8168,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</p>
-</dd></dl>
+    <dd>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the node available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_hcl" style="color: inherit; text-decoration: inherit;">role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6023,8 +8212,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the node available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the node available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_java" style="color: inherit; text-decoration: inherit;">role</a>
@@ -6032,8 +8228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</p>
-</dd></dl>
+    <dd>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6047,8 +8242,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the node available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the node available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_nodejs" style="color: inherit; text-decoration: inherit;">role</a>
@@ -6056,8 +8258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</p>
-</dd></dl>
+    <dd>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6071,8 +8272,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the node available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the node available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Dedicated cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_python" style="color: inherit; text-decoration: inherit;">role</a>
@@ -6080,8 +8288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</p>
-</dd></dl>
+    <dd>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6095,8 +8302,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the node available zone.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the node available zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_yaml" style="color: inherit; text-decoration: inherit;">role</a>
@@ -6104,8 +8318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</p>
-</dd></dl>
+    <dd>Indicates node type, available values:<code>Primary</code>, <code>Standby</code>. Default: <code>Standby</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6121,6 +8334,9 @@ $ pulumi import tencentcloud:Postgresql/instance:Instance example postgres-cda1i
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -6130,7 +8346,6 @@ $ pulumi import tencentcloud:Postgresql/instance:Instance example postgres-cda1i
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

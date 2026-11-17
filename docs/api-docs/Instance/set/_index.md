@@ -2,9 +2,11 @@
 ---
 title: "Set"
 title_tag: "tencentcloud.Instance.Set"
-meta_desc: "Documentation for the tencentcloud.Instance.Set resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a CVM instance set resource. NOTE: You can launch an CVM instance for a VPC network via specifying parameter vpcId. One instance can only belong."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,7 +16,7 @@ no_edit_this_page: true
 
 Provides a CVM instance set resource.
 
-> **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpc_id`. One instance can only belong to one VPC.
+> **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpcId`. One instance can only belong to one VPC.
 
 > **NOTE:** This resource is designed to cater for the scenario of creating CVM in large batches.
 
@@ -24,39 +26,48 @@ Provides a CVM instance set resource.
 
 
 ## Create Set Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Set</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Set</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Set</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SetArgs</a></span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Set</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">allocate_public_ip</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">image_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">cam_role_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">internet_max_bandwidth_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">user_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">disable_monitor_service</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">disable_security_service</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">exclude_instance_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">hostname</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">image_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">internet_max_bandwidth_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">keep_image_login</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">key_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cam_role_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">allocate_public_ip</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">placement_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">private_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -66,46 +77,52 @@ Provides a CVM instance set resource.
         <span class="nx">system_disk_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">system_disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">system_disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">user_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">keep_image_login</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">user_data_raw</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Set</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SetArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Set</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Set</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Set</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Set</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Set</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Set</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Instance:Set</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Instance:Set</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_instance_set&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -126,7 +143,7 @@ Provides a CVM instance set resource.
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -243,11 +260,19 @@ Provides a CVM instance set resource.
 </pulumi-choosable>
 </div>
 
+
+
 ## Set Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Set resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -263,8 +288,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="imageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -272,8 +296,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="allocatepublicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allocatepublicip_csharp" style="color: inherit; text-decoration: inherit;">Allocate<wbr>Public<wbr>Ip</a>
@@ -281,8 +304,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -290,8 +312,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_csharp" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -299,8 +320,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablemonitorservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablemonitorservice_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Monitor<wbr>Service</a>
@@ -308,8 +328,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablesecurityservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablesecurityservice_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Security<wbr>Service</a>
@@ -317,8 +336,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludeinstanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludeinstanceids_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Instance<wbr>Ids</a>
@@ -326,8 +344,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_csharp" style="color: inherit; text-decoration: inherit;">Hostname</a>
@@ -335,8 +352,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -344,8 +360,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -353,8 +368,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -362,8 +376,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -371,8 +384,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -380,8 +392,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -389,8 +400,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_csharp" style="color: inherit; text-decoration: inherit;">Keep<wbr>Image<wbr>Login</a>
@@ -398,8 +408,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -407,8 +416,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -416,8 +424,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="placementgroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#placementgroupid_csharp" style="color: inherit; text-decoration: inherit;">Placement<wbr>Group<wbr>Id</a>
@@ -425,8 +432,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -434,8 +440,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -443,8 +448,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -452,8 +456,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -461,8 +464,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdiskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Id</a>
@@ -470,8 +472,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -479,8 +480,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -488,8 +488,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -497,8 +496,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdataraw_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdataraw_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Data<wbr>Raw</a>
@@ -506,8 +504,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -515,8 +512,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -530,8 +526,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="imageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -539,8 +534,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="allocatepublicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allocatepublicip_go" style="color: inherit; text-decoration: inherit;">Allocate<wbr>Public<wbr>Ip</a>
@@ -548,8 +542,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -557,8 +550,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_go" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -566,8 +558,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablemonitorservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablemonitorservice_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Monitor<wbr>Service</a>
@@ -575,8 +566,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablesecurityservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablesecurityservice_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Security<wbr>Service</a>
@@ -584,8 +574,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludeinstanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludeinstanceids_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Instance<wbr>Ids</a>
@@ -593,8 +582,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_go" style="color: inherit; text-decoration: inherit;">Hostname</a>
@@ -602,8 +590,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -611,8 +598,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -620,8 +606,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -629,8 +614,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -638,8 +622,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -647,8 +630,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -656,8 +638,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_go" style="color: inherit; text-decoration: inherit;">Keep<wbr>Image<wbr>Login</a>
@@ -665,8 +646,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -674,8 +654,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -683,8 +662,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="placementgroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#placementgroupid_go" style="color: inherit; text-decoration: inherit;">Placement<wbr>Group<wbr>Id</a>
@@ -692,8 +670,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -701,8 +678,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -710,8 +686,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -719,8 +694,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -728,8 +702,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdiskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Id</a>
@@ -737,8 +710,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -746,8 +718,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -755,8 +726,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_go" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -764,8 +734,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdataraw_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdataraw_go" style="color: inherit; text-decoration: inherit;">User<wbr>Data<wbr>Raw</a>
@@ -773,8 +742,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -782,8 +750,245 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone for the CVM instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="allocate_public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allocate_public_ip_hcl" style="color: inherit; text-decoration: inherit;">allocate_<wbr>public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cam_role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_hcl" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_monitor_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_monitor_service_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>monitor_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_security_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_security_service_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>security_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exclude_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hostname_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_hcl" style="color: inherit; text-decoration: inherit;">hostname</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keep_image_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keep_image_login_hcl" style="color: inherit; text-decoration: inherit;">keep_<wbr>image_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="placement_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#placement_group_id_hcl" style="color: inherit; text-decoration: inherit;">placement_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="private_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="system_disk_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_id_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="system_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="system_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="user_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="user_data_raw_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_raw_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>data_<wbr>raw</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,8 +1002,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="imageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -806,8 +1010,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="allocatepublicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allocatepublicip_java" style="color: inherit; text-decoration: inherit;">allocate<wbr>Public<wbr>Ip</a>
@@ -815,8 +1018,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -824,8 +1026,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_java" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -833,8 +1034,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablemonitorservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablemonitorservice_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Monitor<wbr>Service</a>
@@ -842,8 +1042,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablesecurityservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablesecurityservice_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Security<wbr>Service</a>
@@ -851,8 +1050,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludeinstanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludeinstanceids_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Instance<wbr>Ids</a>
@@ -860,8 +1058,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_java" style="color: inherit; text-decoration: inherit;">hostname</a>
@@ -869,8 +1066,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -878,8 +1074,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -887,8 +1082,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -896,8 +1090,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -905,8 +1098,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -914,8 +1106,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -923,8 +1114,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_java" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -932,8 +1122,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_java" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -941,8 +1130,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -950,8 +1138,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="placementgroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#placementgroupid_java" style="color: inherit; text-decoration: inherit;">placement<wbr>Group<wbr>Id</a>
@@ -959,8 +1146,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -968,8 +1154,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -977,8 +1162,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -986,8 +1170,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -995,8 +1178,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdiskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -1004,8 +1186,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1013,8 +1194,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1022,8 +1202,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_java" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -1031,8 +1210,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdataraw_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdataraw_java" style="color: inherit; text-decoration: inherit;">user<wbr>Data<wbr>Raw</a>
@@ -1040,8 +1218,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1049,8 +1226,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1064,8 +1240,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="imageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1073,8 +1248,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="allocatepublicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allocatepublicip_nodejs" style="color: inherit; text-decoration: inherit;">allocate<wbr>Public<wbr>Ip</a>
@@ -1082,8 +1256,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -1091,8 +1264,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_nodejs" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -1100,8 +1272,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablemonitorservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablemonitorservice_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Monitor<wbr>Service</a>
@@ -1109,8 +1280,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablesecurityservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablesecurityservice_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Security<wbr>Service</a>
@@ -1118,8 +1288,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludeinstanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludeinstanceids_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Instance<wbr>Ids</a>
@@ -1127,8 +1296,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_nodejs" style="color: inherit; text-decoration: inherit;">hostname</a>
@@ -1136,8 +1304,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -1145,8 +1312,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1154,8 +1320,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1163,8 +1328,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1172,8 +1336,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1181,8 +1344,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1190,8 +1352,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_nodejs" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -1199,8 +1360,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -1208,8 +1368,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1217,8 +1376,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="placementgroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#placementgroupid_nodejs" style="color: inherit; text-decoration: inherit;">placement<wbr>Group<wbr>Id</a>
@@ -1226,8 +1384,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1235,8 +1392,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1244,8 +1400,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1253,8 +1408,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1262,8 +1416,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdiskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -1271,8 +1424,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1280,8 +1432,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1289,8 +1440,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -1298,8 +1448,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdataraw_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdataraw_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Data<wbr>Raw</a>
@@ -1307,8 +1456,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1316,8 +1464,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1331,8 +1478,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="image_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
@@ -1340,8 +1486,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="allocate_public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allocate_public_ip_python" style="color: inherit; text-decoration: inherit;">allocate_<wbr>public_<wbr>ip</a>
@@ -1349,8 +1494,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_package_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
@@ -1358,8 +1502,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cam_role_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_python" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
@@ -1367,8 +1510,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="disable_monitor_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_monitor_service_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>monitor_<wbr>service</a>
@@ -1376,8 +1518,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="disable_security_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_security_service_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>security_<wbr>service</a>
@@ -1385,8 +1526,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="exclude_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_instance_ids_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>instance_<wbr>ids</a>
@@ -1394,8 +1534,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_python" style="color: inherit; text-decoration: inherit;">hostname</a>
@@ -1403,8 +1542,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
@@ -1412,8 +1550,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -1421,8 +1558,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1430,8 +1566,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1439,8 +1574,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -1448,8 +1582,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -1457,8 +1590,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="keep_image_login_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keep_image_login_python" style="color: inherit; text-decoration: inherit;">keep_<wbr>image_<wbr>login</a>
@@ -1466,8 +1598,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_python" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
@@ -1475,8 +1606,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1484,8 +1614,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="placement_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#placement_group_id_python" style="color: inherit; text-decoration: inherit;">placement_<wbr>group_<wbr>id</a>
@@ -1493,8 +1622,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="private_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
@@ -1502,8 +1630,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1511,8 +1638,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -1520,8 +1646,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1529,8 +1654,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="system_disk_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_id_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>id</a>
@@ -1538,8 +1662,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="system_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
@@ -1547,8 +1670,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="system_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
@@ -1556,8 +1678,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="user_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_python" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
@@ -1565,8 +1686,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="user_data_raw_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_raw_python" style="color: inherit; text-decoration: inherit;">user_<wbr>data_<wbr>raw</a>
@@ -1574,8 +1694,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1583,8 +1702,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1598,8 +1716,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="imageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1607,8 +1724,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="allocatepublicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allocatepublicip_yaml" style="color: inherit; text-decoration: inherit;">allocate<wbr>Public<wbr>Ip</a>
@@ -1616,8 +1732,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -1625,8 +1740,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_yaml" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -1634,8 +1748,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablemonitorservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablemonitorservice_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Monitor<wbr>Service</a>
@@ -1643,8 +1756,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="disablesecurityservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablesecurityservice_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Security<wbr>Service</a>
@@ -1652,8 +1764,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludeinstanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludeinstanceids_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Instance<wbr>Ids</a>
@@ -1661,8 +1772,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_yaml" style="color: inherit; text-decoration: inherit;">hostname</a>
@@ -1670,8 +1780,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -1679,8 +1788,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1688,8 +1796,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1697,8 +1804,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1706,8 +1812,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1715,8 +1820,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1724,8 +1828,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_yaml" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -1733,8 +1836,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -1742,8 +1844,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1751,8 +1852,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="placementgroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#placementgroupid_yaml" style="color: inherit; text-decoration: inherit;">placement<wbr>Group<wbr>Id</a>
@@ -1760,8 +1860,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="privateip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1769,8 +1868,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1778,8 +1876,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1787,8 +1884,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1796,8 +1892,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdiskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -1805,8 +1900,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1814,8 +1908,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1823,8 +1916,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -1832,8 +1924,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="userdataraw_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdataraw_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Data<wbr>Raw</a>
@@ -1841,8 +1932,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1850,8 +1940,7 @@ The Set resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1872,8 +1961,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1881,8 +1969,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1890,8 +1977,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -1899,8 +1985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-"
+    <dd>instance id list.</dd><dt class="property-"
             title="">
         <span id="instancestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -1908,8 +1993,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Current status of the instance.</dd><dt class="property-"
             title="">
         <span id="publicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1917,8 +2001,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd></dl>
+    <dd>Public IP of the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1932,8 +2015,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1941,8 +2023,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1950,8 +2031,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -1959,8 +2039,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-"
+    <dd>instance id list.</dd><dt class="property-"
             title="">
         <span id="instancestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -1968,8 +2047,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Current status of the instance.</dd><dt class="property-"
             title="">
         <span id="publicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1977,8 +2055,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd></dl>
+    <dd>Public IP of the instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the instance.</dd><dt class="property-"
+            title="">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expired time of the instance.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>instance id list.</dd><dt class="property-"
+            title="">
+        <span id="instance_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of the instance.</dd><dt class="property-"
+            title="">
+        <span id="public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public IP of the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1992,8 +2123,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -2001,8 +2131,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2010,8 +2139,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -2019,8 +2147,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-"
+    <dd>instance id list.</dd><dt class="property-"
             title="">
         <span id="instancestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -2028,8 +2155,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Current status of the instance.</dd><dt class="property-"
             title="">
         <span id="publicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -2037,8 +2163,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd></dl>
+    <dd>Public IP of the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2052,8 +2177,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -2061,8 +2185,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2070,8 +2193,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -2079,8 +2201,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-"
+    <dd>instance id list.</dd><dt class="property-"
             title="">
         <span id="instancestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -2088,8 +2209,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Current status of the instance.</dd><dt class="property-"
             title="">
         <span id="publicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -2097,8 +2217,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd></dl>
+    <dd>Public IP of the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2112,8 +2231,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -2121,8 +2239,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2130,8 +2247,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -2139,8 +2255,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-"
+    <dd>instance id list.</dd><dt class="property-"
             title="">
         <span id="instance_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
@@ -2148,8 +2263,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Current status of the instance.</dd><dt class="property-"
             title="">
         <span id="public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
@@ -2157,8 +2271,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd></dl>
+    <dd>Public IP of the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2172,8 +2285,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Create time of the instance.</dd><dt class="property-"
             title="">
         <span id="expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -2181,8 +2293,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-"
+    <dd>Expired time of the instance.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2190,8 +2301,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -2199,8 +2309,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-"
+    <dd>instance id list.</dd><dt class="property-"
             title="">
         <span id="instancestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -2208,8 +2317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Current status of the instance.</dd><dt class="property-"
             title="">
         <span id="publicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -2217,8 +2325,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd></dl>
+    <dd>Public IP of the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2228,18 +2335,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Set resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Set</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Set</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -2277,104 +2384,143 @@ Get an existing Set resource's state with the given name, ID, and optional extra
         <span class="nx">user_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">user_data_raw</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Set</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSet<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Set</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSet<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Set</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Set</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SetState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Set</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SetState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Set</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SetState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Set</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SetState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSet</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Instance:Set</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_instance_set</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2382,28 +2528,31 @@ Get an existing Set resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2411,28 +2560,31 @@ Get an existing Set resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2452,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -2461,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -2470,8 +2620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_camrolename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_csharp" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -2479,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2488,8 +2636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablemonitorservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablemonitorservice_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Monitor<wbr>Service</a>
@@ -2497,8 +2644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablesecurityservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablesecurityservice_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Security<wbr>Service</a>
@@ -2506,8 +2652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludeinstanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludeinstanceids_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Instance<wbr>Ids</a>
@@ -2515,8 +2660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -2524,8 +2668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_csharp" style="color: inherit; text-decoration: inherit;">Hostname</a>
@@ -2533,8 +2676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_imageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -2542,8 +2684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -2551,8 +2692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -2560,8 +2700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -2569,8 +2708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-optional"
+    <dd>instance id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2578,8 +2716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -2587,8 +2724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -2596,8 +2732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -2605,8 +2740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2614,8 +2748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_csharp" style="color: inherit; text-decoration: inherit;">Keep<wbr>Image<wbr>Login</a>
@@ -2623,8 +2756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -2632,8 +2764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2641,8 +2772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_placementgroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_placementgroupid_csharp" style="color: inherit; text-decoration: inherit;">Placement<wbr>Group<wbr>Id</a>
@@ -2650,8 +2780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -2659,8 +2788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2668,8 +2796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -2677,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public IP of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2686,8 +2812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2695,8 +2820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdiskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdiskid_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Id</a>
@@ -2704,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -2713,8 +2836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -2722,8 +2844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -2731,8 +2852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdataraw_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdataraw_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Data<wbr>Raw</a>
@@ -2740,8 +2860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2749,8 +2868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2764,8 +2882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -2773,8 +2890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -2782,8 +2898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_camrolename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_go" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -2791,8 +2906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2800,8 +2914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablemonitorservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablemonitorservice_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Monitor<wbr>Service</a>
@@ -2809,8 +2922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablesecurityservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablesecurityservice_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Security<wbr>Service</a>
@@ -2818,8 +2930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludeinstanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludeinstanceids_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Instance<wbr>Ids</a>
@@ -2827,8 +2938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -2836,8 +2946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_go" style="color: inherit; text-decoration: inherit;">Hostname</a>
@@ -2845,8 +2954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_imageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -2854,8 +2962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -2863,8 +2970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -2872,8 +2978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -2881,8 +2986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-optional"
+    <dd>instance id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2890,8 +2994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -2899,8 +3002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -2908,8 +3010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -2917,8 +3018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2926,8 +3026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_go" style="color: inherit; text-decoration: inherit;">Keep<wbr>Image<wbr>Login</a>
@@ -2935,8 +3034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
@@ -2944,8 +3042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2953,8 +3050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_placementgroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_placementgroupid_go" style="color: inherit; text-decoration: inherit;">Placement<wbr>Group<wbr>Id</a>
@@ -2962,8 +3058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -2971,8 +3066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2980,8 +3074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -2989,8 +3082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public IP of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2998,8 +3090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3007,8 +3098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdiskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdiskid_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Id</a>
@@ -3016,8 +3106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -3025,8 +3114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -3034,8 +3122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_go" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -3043,8 +3130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdataraw_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdataraw_go" style="color: inherit; text-decoration: inherit;">User<wbr>Data<wbr>Raw</a>
@@ -3052,8 +3138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3061,8 +3146,285 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_allocate_public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allocate_public_ip_hcl" style="color: inherit; text-decoration: inherit;">allocate_<wbr>public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone for the CVM instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cam_role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cam_role_name_hcl" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disable_monitor_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disable_monitor_service_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>monitor_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disable_security_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disable_security_service_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>security_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_exclude_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclude_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hostname_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_hcl" style="color: inherit; text-decoration: inherit;">hostname</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>instance id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_status_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keep_image_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keep_image_login_hcl" style="color: inherit; text-decoration: inherit;">keep_<wbr>image_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_placement_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_placement_group_id_hcl" style="color: inherit; text-decoration: inherit;">placement_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_private_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_ip_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public IP of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_system_disk_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_id_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_system_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_size_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_system_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_type_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_user_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_data_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_user_data_raw_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_data_raw_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>data_<wbr>raw</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3076,8 +3438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -3085,8 +3446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -3094,8 +3454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_camrolename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_java" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -3103,8 +3462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3112,8 +3470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablemonitorservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablemonitorservice_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Monitor<wbr>Service</a>
@@ -3121,8 +3478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablesecurityservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablesecurityservice_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Security<wbr>Service</a>
@@ -3130,8 +3486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludeinstanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludeinstanceids_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Instance<wbr>Ids</a>
@@ -3139,8 +3494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -3148,8 +3502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_java" style="color: inherit; text-decoration: inherit;">hostname</a>
@@ -3157,8 +3510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_imageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -3166,8 +3518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -3175,8 +3526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -3184,8 +3534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -3193,8 +3542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-optional"
+    <dd>instance id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3202,8 +3550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -3211,8 +3558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -3220,8 +3566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -3229,8 +3574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -3238,8 +3582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_java" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -3247,8 +3590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_java" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -3256,8 +3598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3265,8 +3606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_placementgroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_placementgroupid_java" style="color: inherit; text-decoration: inherit;">placement<wbr>Group<wbr>Id</a>
@@ -3274,8 +3614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -3283,8 +3622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3292,8 +3630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -3301,8 +3638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public IP of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3310,8 +3646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3319,8 +3654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdiskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdiskid_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -3328,8 +3662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -3337,8 +3670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -3346,8 +3678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_java" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -3355,8 +3686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdataraw_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdataraw_java" style="color: inherit; text-decoration: inherit;">user<wbr>Data<wbr>Raw</a>
@@ -3364,8 +3694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3373,8 +3702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3388,8 +3716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -3397,8 +3724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -3406,8 +3732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_camrolename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_nodejs" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -3415,8 +3740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3424,8 +3748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablemonitorservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablemonitorservice_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Monitor<wbr>Service</a>
@@ -3433,8 +3756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablesecurityservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablesecurityservice_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Security<wbr>Service</a>
@@ -3442,8 +3764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludeinstanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludeinstanceids_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Instance<wbr>Ids</a>
@@ -3451,8 +3772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -3460,8 +3780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_nodejs" style="color: inherit; text-decoration: inherit;">hostname</a>
@@ -3469,8 +3788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_imageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -3478,8 +3796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -3487,8 +3804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -3496,8 +3812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -3505,8 +3820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-optional"
+    <dd>instance id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3514,8 +3828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -3523,8 +3836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -3532,8 +3844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -3541,8 +3852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -3550,8 +3860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_nodejs" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -3559,8 +3868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -3568,8 +3876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3577,8 +3884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_placementgroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_placementgroupid_nodejs" style="color: inherit; text-decoration: inherit;">placement<wbr>Group<wbr>Id</a>
@@ -3586,8 +3892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -3595,8 +3900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3604,8 +3908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -3613,8 +3916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public IP of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3622,8 +3924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3631,8 +3932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdiskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdiskid_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -3640,8 +3940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -3649,8 +3948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -3658,8 +3956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -3667,8 +3964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdataraw_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdataraw_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Data<wbr>Raw</a>
@@ -3676,8 +3972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3685,8 +3980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3700,8 +3994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -3709,8 +4002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_package_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
@@ -3718,8 +4010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cam_role_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cam_role_name_python" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
@@ -3727,8 +4018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3736,8 +4026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disable_monitor_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disable_monitor_service_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>monitor_<wbr>service</a>
@@ -3745,8 +4034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disable_security_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disable_security_service_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>security_<wbr>service</a>
@@ -3754,8 +4042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_exclude_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclude_instance_ids_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>instance_<wbr>ids</a>
@@ -3763,8 +4050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -3772,8 +4058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_python" style="color: inherit; text-decoration: inherit;">hostname</a>
@@ -3781,8 +4066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_image_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
@@ -3790,8 +4074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
@@ -3799,8 +4082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -3808,8 +4090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -3817,8 +4098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-optional"
+    <dd>instance id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -3826,8 +4106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_status_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
@@ -3835,8 +4114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -3844,8 +4122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -3853,8 +4130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -3862,8 +4138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keep_image_login_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keep_image_login_python" style="color: inherit; text-decoration: inherit;">keep_<wbr>image_<wbr>login</a>
@@ -3871,8 +4146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_name_python" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
@@ -3880,8 +4154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3889,8 +4162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_placement_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_placement_group_id_python" style="color: inherit; text-decoration: inherit;">placement_<wbr>group_<wbr>id</a>
@@ -3898,8 +4170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_private_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_private_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
@@ -3907,8 +4178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3916,8 +4186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_ip_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
@@ -3925,8 +4194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public IP of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -3934,8 +4202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -3943,8 +4210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_system_disk_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_id_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>id</a>
@@ -3952,8 +4218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_system_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_size_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
@@ -3961,8 +4226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_system_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_type_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
@@ -3970,8 +4234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_user_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_data_python" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
@@ -3979,8 +4242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_user_data_raw_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_data_raw_python" style="color: inherit; text-decoration: inherit;">user_<wbr>data_<wbr>raw</a>
@@ -3988,8 +4250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3997,8 +4258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4012,8 +4272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -4021,8 +4280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone for the CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone for the CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -4030,8 +4288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_camrolename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_yaml" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -4039,8 +4296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4048,8 +4304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablemonitorservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablemonitorservice_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Monitor<wbr>Service</a>
@@ -4057,8 +4312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disablesecurityservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablesecurityservice_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Security<wbr>Service</a>
@@ -4066,8 +4320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludeinstanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludeinstanceids_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Instance<wbr>Ids</a>
@@ -4075,8 +4328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>instance ids list to exclude.</p>
-</dd><dt class="property-optional"
+    <dd>instance ids list to exclude.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -4084,8 +4336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Expired time of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostname_yaml" style="color: inherit; text-decoration: inherit;">hostname</a>
@@ -4093,8 +4344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_imageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -4102,8 +4352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image to use for the instance. Changing <code>image_id</code> will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The image to use for the instance. Changing <code>imageId</code> will cause the instance reset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -4111,8 +4360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Only support <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -4120,8 +4368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of instances to be purchased. Value range:[1,100]; default value: 1.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instances to be purchased. Value range:[1,100]; default value: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -4129,8 +4376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>instance id list.</p>
-</dd><dt class="property-optional"
+    <dd>instance id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -4138,8 +4384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the instance. The max length of instance_name is 60, and default value is <code>Terraform-CVM-Instance</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the instance. The max length of instanceName is 128, and default value is <code>Terraform-CVM-Instance</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -4147,8 +4392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -4156,8 +4400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of the instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of the instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -4165,8 +4408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Internet charge type of the instance, Valid values are <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>. This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -4174,8 +4416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocate_public_ip</code> is false.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when <code>allocatePublicIp</code> is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_yaml" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -4183,8 +4424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to keep image login or not, default is <code>false</code>. When the image type is private or shared or imported, this parameter can be set <code>true</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyname_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
@@ -4192,8 +4432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional"
+    <dd>The key pair to use for the instance, it looks like <code>skey-16jig7tx</code>. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -4201,8 +4440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_placementgroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_placementgroupid_yaml" style="color: inherit; text-decoration: inherit;">placement<wbr>Group<wbr>Id</a>
@@ -4210,8 +4448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a placement group.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a placement group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_privateip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_privateip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -4219,8 +4456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The private IP to be assigned to this instance, must be in the provided subnet and available.</p>
-</dd><dt class="property-optional"
+    <dd>The private IP to be assigned to this instance, must be in the provided subnet and available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -4228,8 +4464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project the instance belongs to, default to 0.</p>
-</dd><dt class="property-optional"
+    <dd>The project the instance belongs to, default to 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -4237,8 +4472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Public IP of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -4246,8 +4480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of security group IDs to associate with.</p>
-</dd><dt class="property-optional"
+    <dd>A list of security group IDs to associate with.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4255,8 +4488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdiskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdiskid_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -4264,8 +4496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</p>
-</dd><dt class="property-optional"
+    <dd>System disk snapshot ID used to initialize the system disk. When system disk type is <code>LOCAL_BASIC</code> and <code>LOCAL_SSD</code>, disk id is not supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -4273,8 +4504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</p>
-</dd><dt class="property-optional"
+    <dd>Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -4282,8 +4512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>System disk type. For more information on limits of system disk types, see <a href="https://intl.cloud.tencent.com/document/product/213/4952">Storage Overview</a>. Valid values: <code>LOCAL_BASIC</code>: local disk, <code>LOCAL_SSD</code>: local SSD disk, <code>CLOUD_SSD</code>: SSD, <code>CLOUD_PREMIUM</code>: Premium Cloud Storage, <code>CLOUD_BSSD</code>: Basic SSD. NOTE: If modified, the instance may force stop.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -4291,8 +4520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_userdataraw_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdataraw_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Data<wbr>Raw</a>
@@ -4300,8 +4528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The user data to be injected into this instance, in plain text. Conflicts with <code>user_data</code>. Up to 16 KB after base64 encoded.</p>
-</dd><dt class="property-optional"
+    <dd>The user data to be injected into this instance, in plain text. Conflicts with <code>userData</code>. Up to 16 KB after base64 encoded.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4309,8 +4536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</p>
-</dd></dl>
+    <dd>The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -4329,7 +4555,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

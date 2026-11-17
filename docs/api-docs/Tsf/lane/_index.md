@@ -2,9 +2,11 @@
 ---
 title: "Lane"
 title_tag: "tencentcloud.Tsf.Lane"
-meta_desc: "Documentation for the tencentcloud.Tsf.Lane resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tsf lane"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,32 +18,79 @@ Provides a resource to create a tsf lane
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const lane = new tencentcloud.tsf.Lane("lane", {
-    laneGroupLists: [{
-        entrance: true,
-        groupId: "group-yn7j5l8a",
-    }],
     laneName: "lane-name-1",
     remark: "lane desc1",
+    laneGroupLists: [{
+        groupId: "group-yn7j5l8a",
+        entrance: true,
+    }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 lane = tencentcloud.tsf.Lane("lane",
-    lane_group_lists=[tencentcloud.tsf.LaneLaneGroupListArgs(
-        entrance=True,
-        group_id="group-yn7j5l8a",
-    )],
     lane_name="lane-name-1",
-    remark="lane desc1")
+    remark="lane desc1",
+    lane_group_lists=[{
+        "group_id": "group-yn7j5l8a",
+        "entrance": True,
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tsf.NewLane(ctx, "lane", &tsf.LaneArgs{
+			LaneName: pulumi.String("lane-name-1"),
+			Remark:   pulumi.String("lane desc1"),
+			LaneGroupLists: tsf.LaneLaneGroupListArray{
+				&tsf.LaneLaneGroupListArgs{
+					GroupId:  pulumi.String("group-yn7j5l8a"),
+					Entrance: pulumi.Bool(true),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -52,47 +101,25 @@ return await Deployment.RunAsync(() =>
 {
     var lane = new Tencentcloud.Tsf.Lane("lane", new()
     {
+        LaneName = "lane-name-1",
+        Remark = "lane desc1",
         LaneGroupLists = new[]
         {
             new Tencentcloud.Tsf.Inputs.LaneLaneGroupListArgs
             {
-                Entrance = true,
                 GroupId = "group-yn7j5l8a",
+                Entrance = true,
             },
         },
-        LaneName = "lane-name-1",
-        Remark = "lane desc1",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.NewLane(ctx, "lane", &Tsf.LaneArgs{
-			LaneGroupLists: tsf.LaneLaneGroupListArray{
-				&tsf.LaneLaneGroupListArgs{
-					Entrance: pulumi.Bool(true),
-					GroupId:  pulumi.String("group-yn7j5l8a"),
-				},
-			},
-			LaneName: pulumi.String("lane-name-1"),
-			Remark:   pulumi.String("lane desc1"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -102,8 +129,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.Lane;
 import com.pulumi.tencentcloud.Tsf.LaneArgs;
 import com.pulumi.tencentcloud.Tsf.inputs.LaneLaneGroupListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -115,92 +142,145 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var lane = new Lane("lane", LaneArgs.builder()        
-            .laneGroupLists(LaneLaneGroupListArgs.builder()
-                .entrance(true)
-                .groupId("group-yn7j5l8a")
-                .build())
+        var lane = new Lane("lane", LaneArgs.builder()
             .laneName("lane-name-1")
             .remark("lane desc1")
+            .laneGroupLists(LaneLaneGroupListArgs.builder()
+                .groupId("group-yn7j5l8a")
+                .entrance(true)
+                .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   lane:
     type: tencentcloud:Tsf:Lane
     properties:
-      laneGroupLists:
-        - entrance: true
-          groupId: group-yn7j5l8a
       laneName: lane-name-1
       remark: lane desc1
+      laneGroupLists:
+        - groupId: group-yn7j5l8a
+          entrance: true
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tsf_lane" "lane" {
+  lane_name = "lane-name-1"
+  remark    = "lane desc1"
+  lane_group_lists {
+    group_id = "group-yn7j5l8a"
+    entrance = true
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateLane](https://www.tencentcloud.com/search/?wd=CreateLane&type=document&lang=en)
+* Read: [DescribeLanes](https://www.tencentcloud.com/search/?wd=DescribeLanes&type=document&lang=en)
+* Update: [ModifyLane](https://www.tencentcloud.com/search/?wd=ModifyLane&type=document&lang=en)
+* Delete: [DeleteLane](https://www.tencentcloud.com/search/?wd=DeleteLane&type=document&lang=en)
 
 
 
 ## Create Lane Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-         <span class="nx">lane_group_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tsf.LaneLaneGroupListArgs]]</span> = None<span class="p">,</span>
-         <span class="nx">lane_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+         <span class="nx">lane_group_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[LaneLaneGroupListArgs]]</span> = None<span class="p">,</span>
+         <span class="nx">lane_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLane</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Lane</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLane</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Lane</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Lane</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">LaneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Lane</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Lane</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tsf_lane&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -221,7 +301,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -338,11 +418,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Lane Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -356,10 +444,9 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanegrouplists_csharp" style="color: inherit; text-decoration: inherit;">Lane<wbr>Group<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#lanelanegrouplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#lanelanegrouplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Lane<wbr>Lane<wbr>Group<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-required"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-required"
             title="Required">
         <span id="lanename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanename_csharp" style="color: inherit; text-decoration: inherit;">Lane<wbr>Name</a>
@@ -367,8 +454,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-required"
+    <dd>Lane name.</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -376,8 +462,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -385,8 +470,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -400,8 +484,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#lanelanegrouplist">[]Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-required"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-required"
             title="Required">
         <span id="lanename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanename_go" style="color: inherit; text-decoration: inherit;">Lane<wbr>Name</a>
@@ -409,8 +492,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-required"
+    <dd>Lane name.</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -418,8 +500,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -427,8 +508,45 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="lane_group_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_group_lists_hcl" style="color: inherit; text-decoration: inherit;">lane_<wbr>group_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lanelanegrouplist">list(object)</a></span>
+    </dt>
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-required"
+            title="Required">
+        <span id="lane_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_name_hcl" style="color: inherit; text-decoration: inherit;">lane_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Lane name.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Lane Remarks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -440,10 +558,9 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanegrouplists_java" style="color: inherit; text-decoration: inherit;">lane<wbr>Group<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#lanelanegrouplist">List&lt;Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#lanelanegrouplist">List&lt;Lane<wbr>Lane<wbr>Group<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-required"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-required"
             title="Required">
         <span id="lanename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanename_java" style="color: inherit; text-decoration: inherit;">lane<wbr>Name</a>
@@ -451,8 +568,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-required"
+    <dd>Lane name.</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -460,8 +576,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -469,8 +584,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -482,10 +596,9 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanegrouplists_nodejs" style="color: inherit; text-decoration: inherit;">lane<wbr>Group<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#lanelanegrouplist">Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#lanelanegrouplist">Lane<wbr>Lane<wbr>Group<wbr>List[]</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-required"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-required"
             title="Required">
         <span id="lanename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanename_nodejs" style="color: inherit; text-decoration: inherit;">lane<wbr>Name</a>
@@ -493,8 +606,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-required"
+    <dd>Lane name.</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -502,8 +614,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -511,8 +622,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -524,10 +634,9 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_group_lists_python" style="color: inherit; text-decoration: inherit;">lane_<wbr>group_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#lanelanegrouplist">Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#lanelanegrouplist">Sequence[Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-required"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-required"
             title="Required">
         <span id="lane_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_name_python" style="color: inherit; text-decoration: inherit;">lane_<wbr>name</a>
@@ -535,8 +644,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-required"
+    <dd>Lane name.</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -544,8 +652,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -553,8 +660,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -568,8 +674,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#lanelanegrouplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-required"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-required"
             title="Required">
         <span id="lanename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanename_yaml" style="color: inherit; text-decoration: inherit;">lane<wbr>Name</a>
@@ -577,8 +682,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-required"
+    <dd>Lane name.</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -586,8 +690,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -595,8 +698,7 @@ The Lane resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd></dl>
+    <dd>Program id list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -617,8 +719,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="entrance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrance_csharp" style="color: inherit; text-decoration: inherit;">Entrance</a>
@@ -626,8 +727,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-"
+    <dd>Whether to enter the application.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -635,8 +735,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="laneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_csharp" style="color: inherit; text-decoration: inherit;">Lane<wbr>Id</a>
@@ -644,8 +743,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-"
+    <dd>Lane id.</dd><dt class="property-"
             title="">
         <span id="namespaceidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceidlists_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id<wbr>Lists</a>
@@ -653,8 +751,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-"
             title="">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -662,8 +759,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -677,8 +773,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="entrance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrance_go" style="color: inherit; text-decoration: inherit;">Entrance</a>
@@ -686,8 +781,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-"
+    <dd>Whether to enter the application.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -695,8 +789,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="laneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_go" style="color: inherit; text-decoration: inherit;">Lane<wbr>Id</a>
@@ -704,8 +797,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-"
+    <dd>Lane id.</dd><dt class="property-"
             title="">
         <span id="namespaceidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceidlists_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id<wbr>Lists</a>
@@ -713,8 +805,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-"
             title="">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -722,8 +813,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>creation time.</dd><dt class="property-"
+            title="">
+        <span id="entrance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrance_hcl" style="color: inherit; text-decoration: inherit;">entrance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enter the application.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lane_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_id_hcl" style="color: inherit; text-decoration: inherit;">lane_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Lane id.</dd><dt class="property-"
+            title="">
+        <span id="namespace_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_lists_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-"
+            title="">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -737,8 +881,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="entrance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrance_java" style="color: inherit; text-decoration: inherit;">entrance</a>
@@ -746,8 +889,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-"
+    <dd>Whether to enter the application.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -755,8 +897,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="laneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_java" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -764,8 +905,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-"
+    <dd>Lane id.</dd><dt class="property-"
             title="">
         <span id="namespaceidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceidlists_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id<wbr>Lists</a>
@@ -773,8 +913,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-"
             title="">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -782,8 +921,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,8 +935,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="entrance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrance_nodejs" style="color: inherit; text-decoration: inherit;">entrance</a>
@@ -806,8 +943,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-"
+    <dd>Whether to enter the application.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -815,8 +951,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="laneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_nodejs" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -824,8 +959,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-"
+    <dd>Lane id.</dd><dt class="property-"
             title="">
         <span id="namespaceidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceidlists_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id<wbr>Lists</a>
@@ -833,8 +967,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-"
             title="">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -842,8 +975,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -857,8 +989,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="entrance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrance_python" style="color: inherit; text-decoration: inherit;">entrance</a>
@@ -866,8 +997,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-"
+    <dd>Whether to enter the application.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -875,8 +1005,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lane_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_id_python" style="color: inherit; text-decoration: inherit;">lane_<wbr>id</a>
@@ -884,8 +1013,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-"
+    <dd>Lane id.</dd><dt class="property-"
             title="">
         <span id="namespace_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_lists_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id_<wbr>lists</a>
@@ -893,8 +1021,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-"
             title="">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -902,8 +1029,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -917,8 +1043,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-"
+    <dd>creation time.</dd><dt class="property-"
             title="">
         <span id="entrance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrance_yaml" style="color: inherit; text-decoration: inherit;">entrance</a>
@@ -926,8 +1051,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-"
+    <dd>Whether to enter the application.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -935,8 +1059,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="laneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_yaml" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -944,8 +1067,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-"
+    <dd>Lane id.</dd><dt class="property-"
             title="">
         <span id="namespaceidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceidlists_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id<wbr>Lists</a>
@@ -953,8 +1075,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-"
             title="">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -962,8 +1083,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -973,128 +1093,167 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Lane resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">LaneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Lane</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">LaneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Lane</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">entrance</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">lane_group_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tsf.LaneLaneGroupListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">lane_group_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[LaneLaneGroupListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">lane_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">lane_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">namespace_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">update_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Lane</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLane<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">LaneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Lane</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLane<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">LaneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Lane</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Lane</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LaneState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Lane</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LaneState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Lane</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LaneState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Lane</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">LaneState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingLane</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tsf:Lane</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tsf_lane</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LaneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LaneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1102,28 +1261,31 @@ Get an existing Lane resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LaneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1131,28 +1293,31 @@ Get an existing Lane resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">LaneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1172,8 +1337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_entrance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_entrance_csharp" style="color: inherit; text-decoration: inherit;">Entrance</a>
@@ -1181,17 +1345,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enter the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanegrouplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanegrouplists_csharp" style="color: inherit; text-decoration: inherit;">Lane<wbr>Group<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#lanelanegrouplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#lanelanegrouplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Lane<wbr>Lane<wbr>Group<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_laneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_laneid_csharp" style="color: inherit; text-decoration: inherit;">Lane<wbr>Id</a>
@@ -1199,8 +1361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanename_csharp" style="color: inherit; text-decoration: inherit;">Lane<wbr>Name</a>
@@ -1208,8 +1369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-optional"
+    <dd>Lane name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceidlists_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id<wbr>Lists</a>
@@ -1217,8 +1377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -1226,8 +1385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1235,8 +1393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1244,8 +1401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1259,8 +1415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_entrance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_entrance_go" style="color: inherit; text-decoration: inherit;">Entrance</a>
@@ -1268,8 +1423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enter the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanegrouplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanegrouplists_go" style="color: inherit; text-decoration: inherit;">Lane<wbr>Group<wbr>Lists</a>
@@ -1277,8 +1431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#lanelanegrouplist">[]Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_laneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_laneid_go" style="color: inherit; text-decoration: inherit;">Lane<wbr>Id</a>
@@ -1286,8 +1439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanename_go" style="color: inherit; text-decoration: inherit;">Lane<wbr>Name</a>
@@ -1295,8 +1447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-optional"
+    <dd>Lane name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceidlists_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id<wbr>Lists</a>
@@ -1304,8 +1455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -1313,8 +1463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1322,8 +1471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1331,8 +1479,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>creation time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_entrance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_entrance_hcl" style="color: inherit; text-decoration: inherit;">entrance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enter the application.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lane_group_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lane_group_lists_hcl" style="color: inherit; text-decoration: inherit;">lane_<wbr>group_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#lanelanegrouplist">list(object)</a></span>
+    </dt>
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lane_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lane_id_hcl" style="color: inherit; text-decoration: inherit;">lane_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Lane id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lane_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lane_name_hcl" style="color: inherit; text-decoration: inherit;">lane_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Lane name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_namespace_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_id_lists_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Program id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Lane Remarks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1346,8 +1571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_entrance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_entrance_java" style="color: inherit; text-decoration: inherit;">entrance</a>
@@ -1355,17 +1579,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enter the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanegrouplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanegrouplists_java" style="color: inherit; text-decoration: inherit;">lane<wbr>Group<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#lanelanegrouplist">List&lt;Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#lanelanegrouplist">List&lt;Lane<wbr>Lane<wbr>Group<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_laneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_laneid_java" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -1373,8 +1595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanename_java" style="color: inherit; text-decoration: inherit;">lane<wbr>Name</a>
@@ -1382,8 +1603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-optional"
+    <dd>Lane name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceidlists_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id<wbr>Lists</a>
@@ -1391,8 +1611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1400,8 +1619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1409,8 +1627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1418,8 +1635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1433,8 +1649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_entrance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_entrance_nodejs" style="color: inherit; text-decoration: inherit;">entrance</a>
@@ -1442,17 +1657,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enter the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanegrouplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanegrouplists_nodejs" style="color: inherit; text-decoration: inherit;">lane<wbr>Group<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#lanelanegrouplist">Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#lanelanegrouplist">Lane<wbr>Lane<wbr>Group<wbr>List[]</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_laneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_laneid_nodejs" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -1460,8 +1673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanename_nodejs" style="color: inherit; text-decoration: inherit;">lane<wbr>Name</a>
@@ -1469,8 +1681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-optional"
+    <dd>Lane name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceidlists_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id<wbr>Lists</a>
@@ -1478,8 +1689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1487,8 +1697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1496,8 +1705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1505,8 +1713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1520,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_entrance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_entrance_python" style="color: inherit; text-decoration: inherit;">entrance</a>
@@ -1529,17 +1735,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enter the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lane_group_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lane_group_lists_python" style="color: inherit; text-decoration: inherit;">lane_<wbr>group_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#lanelanegrouplist">Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#lanelanegrouplist">Sequence[Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lane_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lane_id_python" style="color: inherit; text-decoration: inherit;">lane_<wbr>id</a>
@@ -1547,8 +1751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lane_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lane_name_python" style="color: inherit; text-decoration: inherit;">lane_<wbr>name</a>
@@ -1556,8 +1759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-optional"
+    <dd>Lane name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespace_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_id_lists_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id_<wbr>lists</a>
@@ -1565,8 +1767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -1574,8 +1775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1583,8 +1783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1592,8 +1791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1607,8 +1805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_entrance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_entrance_yaml" style="color: inherit; text-decoration: inherit;">entrance</a>
@@ -1616,8 +1813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enter the application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanegrouplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanegrouplists_yaml" style="color: inherit; text-decoration: inherit;">lane<wbr>Group<wbr>Lists</a>
@@ -1625,8 +1821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#lanelanegrouplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Swimlane Deployment Group Information.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane Deployment Group Information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_laneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_laneid_yaml" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -1634,8 +1829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lanename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lanename_yaml" style="color: inherit; text-decoration: inherit;">lane<wbr>Name</a>
@@ -1643,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane name.</p>
-</dd><dt class="property-optional"
+    <dd>Lane name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_namespaceidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespaceidlists_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id<wbr>Lists</a>
@@ -1652,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of namespaces to which the swimlane has associated deployment groups.</p>
-</dd><dt class="property-optional"
+    <dd>A list of namespaces to which the swimlane has associated deployment groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1661,8 +1853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1670,8 +1861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane Remarks.</p>
-</dd><dt class="property-optional"
+    <dd>Lane Remarks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1679,8 +1869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1695,7 +1884,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="lanelanegrouplist">Lane<wbr>Lane<wbr>Group<wbr>List</h4>
+<h4 id="lanelanegrouplist">
+Lane<wbr>Lane<wbr>Group<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Lane<wbr>Lane<wbr>Group<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1707,8 +1898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enter the application.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -1716,8 +1906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Id</a>
@@ -1725,8 +1914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Name</a>
@@ -1734,8 +1922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application name.</p>
-</dd><dt class="property-optional"
+    <dd>application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -1743,8 +1930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1752,8 +1938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -1761,8 +1946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group name.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lanegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanegroupid_csharp" style="color: inherit; text-decoration: inherit;">Lane<wbr>Group<wbr>Id</a>
@@ -1770,8 +1954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Swimlane deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="laneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_csharp" style="color: inherit; text-decoration: inherit;">Lane<wbr>Id</a>
@@ -1779,8 +1962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -1788,8 +1970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1797,8 +1978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1806,8 +1986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1821,8 +2000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enter the application.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -1830,8 +2008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Id</a>
@@ -1839,8 +2016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Name</a>
@@ -1848,8 +2024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application name.</p>
-</dd><dt class="property-optional"
+    <dd>application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -1857,8 +2032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1866,8 +2040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -1875,8 +2048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group name.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lanegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanegroupid_go" style="color: inherit; text-decoration: inherit;">Lane<wbr>Group<wbr>Id</a>
@@ -1884,8 +2056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Swimlane deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="laneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_go" style="color: inherit; text-decoration: inherit;">Lane<wbr>Id</a>
@@ -1893,8 +2064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -1902,8 +2072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1911,8 +2080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1920,8 +2088,109 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="entrance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrance_hcl" style="color: inherit; text-decoration: inherit;">entrance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enter the application.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deployment group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="application_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_name_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>creation time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>deployment group name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lane_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_group_id_hcl" style="color: inherit; text-decoration: inherit;">lane_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Swimlane deployment group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lane_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_id_hcl" style="color: inherit; text-decoration: inherit;">lane_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Lane ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1935,8 +2204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enter the application.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1944,8 +2212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_java" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -1953,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_java" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -1962,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application name.</p>
-</dd><dt class="property-optional"
+    <dd>application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1971,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1980,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_java" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1989,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deployment group name.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lanegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanegroupid_java" style="color: inherit; text-decoration: inherit;">lane<wbr>Group<wbr>Id</a>
@@ -1998,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Swimlane deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="laneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_java" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -2007,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -2016,8 +2276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2025,8 +2284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2034,8 +2292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2049,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enter the application.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2058,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -2067,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -2076,8 +2330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application name.</p>
-</dd><dt class="property-optional"
+    <dd>application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -2085,8 +2338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2094,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -2103,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group name.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lanegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanegroupid_nodejs" style="color: inherit; text-decoration: inherit;">lane<wbr>Group<wbr>Id</a>
@@ -2112,8 +2362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Swimlane deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="laneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_nodejs" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -2121,8 +2370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -2130,8 +2378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2139,8 +2386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2148,8 +2394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2163,8 +2408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enter the application.</dd><dt class="property-required"
             title="Required">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -2172,8 +2416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="application_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_python" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
@@ -2181,8 +2424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="application_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_name_python" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
@@ -2190,8 +2432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application name.</p>
-</dd><dt class="property-optional"
+    <dd>application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -2199,8 +2440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2208,8 +2448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_python" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
@@ -2217,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>deployment group name.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lane_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_group_id_python" style="color: inherit; text-decoration: inherit;">lane_<wbr>group_<wbr>id</a>
@@ -2226,8 +2464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Swimlane deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="lane_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lane_id_python" style="color: inherit; text-decoration: inherit;">lane_<wbr>id</a>
@@ -2235,8 +2472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
@@ -2244,8 +2480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -2253,8 +2488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2262,8 +2496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2277,8 +2510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enter the application.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enter the application.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2286,8 +2518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -2295,8 +2526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -2304,8 +2534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application name.</p>
-</dd><dt class="property-optional"
+    <dd>application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -2313,8 +2542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster type.</p>
-</dd><dt class="property-optional"
+    <dd>cluster type.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2322,8 +2550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -2331,8 +2558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deployment group name.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group name.</dd><dt class="property-optional"
             title="Optional">
         <span id="lanegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lanegroupid_yaml" style="color: inherit; text-decoration: inherit;">lane<wbr>Group<wbr>Id</a>
@@ -2340,8 +2566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Swimlane deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Swimlane deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="laneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#laneid_yaml" style="color: inherit; text-decoration: inherit;">lane<wbr>Id</a>
@@ -2349,8 +2574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Lane ID.</p>
-</dd><dt class="property-optional"
+    <dd>Lane ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -2358,8 +2582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace ID.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2367,8 +2590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional"
+    <dd>namespace name.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2376,8 +2598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2389,7 +2610,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

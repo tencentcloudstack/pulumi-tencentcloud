@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Tdmq.getRabbitmqNodeList"
 meta_desc: "Documentation for the tencentcloud.Tdmq.getRabbitmqNodeList function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,7 +25,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -31,9 +33,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRabbitmqNodeList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRabbitmqNodeListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>></span
+><span class="k">function </span>getRabbitmqNodeList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRabbitmqNodeListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>></span
 ><span class="k">
-function </span>getRabbitmqNodeListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRabbitmqNodeListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>></span
+function </span>getRabbitmqNodeListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRabbitmqNodeListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -42,7 +44,7 @@ function </span>getRabbitmqNodeListOutput<span class="p">(</span><span class="nx
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_rabbitmq_node_list<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tdmq.GetRabbitmqNodeListFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_rabbitmq_node_list<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetRabbitmqNodeListFilter]]</span> = None<span class="p">,</span>
                            <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                            <span class="nx">node_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -50,13 +52,13 @@ function </span>getRabbitmqNodeListOutput<span class="p">(</span><span class="nx
                            <span class="nx">sort_order</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRabbitmqNodeListResult</span
 ><span class="k">
-def </span>get_rabbitmq_node_list_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_tdmq.GetRabbitmqNodeListFilterArgs]]]]</span> = None<span class="p">,</span>
-                           <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">node_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">sort_element</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">sort_order</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRabbitmqNodeListResult]</span
+def </span>get_rabbitmq_node_list_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetRabbitmqNodeListFilterArgs]]]]</span> = None<span class="p">,</span>
+                           <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">node_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">sort_element</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">sort_order</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRabbitmqNodeListResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -81,7 +83,8 @@ func </span>GetRabbitmqNodeListOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRabbitmqNodeList </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRabbitmqNodeListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRabbitmqNodeListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRabbitmqNodeListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRabbitmqNodeListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -90,7 +93,8 @@ func </span>GetRabbitmqNodeListOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>> </span>getRabbitmqNodeList<span class="p">(</span><span class="nx">GetRabbitmqNodeListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>> </span>getRabbitmqNodeList<span class="p">(</span><span class="nx">GetRabbitmqNodeListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRabbitmqNodeListResult</a></span>> </span>getRabbitmqNodeList<span class="p">(</span><span class="nx">GetRabbitmqNodeListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -102,6 +106,15 @@ func </span>GetRabbitmqNodeListOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tdmq/getRabbitmqNodeList:getRabbitmqNodeList
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tdmq_get_rabbitmq_node_list&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -219,6 +232,60 @@ The following arguments are supported:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrabbitmqnodelistfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="sort_element_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_element_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>element</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="sort_order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_order_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
@@ -342,7 +409,7 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrabbitmqnodelistfilter">Get<wbr>Rabbitmq<wbr>Node<wbr>List<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getrabbitmqnodelistfilter">Sequence[Get<wbr>Rabbitmq<wbr>Node<wbr>List<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-optional"
             title="Optional">
@@ -453,8 +520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -524,8 +590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -586,6 +651,76 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="node_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_lists_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrabbitmqnodelistnodelist">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrabbitmqnodelistfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="node_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="sort_element_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_element_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>element</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="sort_order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_order_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -595,8 +730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -666,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -737,8 +870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -752,7 +884,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_lists_python" style="color: inherit; text-decoration: inherit;">node_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrabbitmqnodelistnodelist">Get<wbr>Rabbitmq<wbr>Node<wbr>List<wbr>Node<wbr>List]</a></span>
+        <span class="property-type"><a href="#getrabbitmqnodelistnodelist">Sequence[Get<wbr>Rabbitmq<wbr>Node<wbr>List<wbr>Node<wbr>List]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -760,7 +892,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrabbitmqnodelistfilter">Get<wbr>Rabbitmq<wbr>Node<wbr>List<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getrabbitmqnodelistfilter">Sequence[Get<wbr>Rabbitmq<wbr>Node<wbr>List<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -808,8 +940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -889,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -898,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -913,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -922,8 +1050,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -937,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -946,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -961,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -970,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -985,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -994,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1009,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1018,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1037,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
@@ -1046,8 +1186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>disk usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>disk usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1055,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Name</a>
@@ -1064,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node nameNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodestatus_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Status</a>
@@ -1073,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node statusNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node statusNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="processnumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#processnumber_csharp" style="color: inherit; text-decoration: inherit;">Process<wbr>Number</a>
@@ -1082,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1097,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
@@ -1106,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>disk usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>disk usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1115,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Name</a>
@@ -1124,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node nameNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodestatus_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Status</a>
@@ -1133,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node statusNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node statusNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="processnumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#processnumber_go" style="color: inherit; text-decoration: inherit;">Process<wbr>Number</a>
@@ -1142,8 +1272,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cpu_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_usage_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>disk usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>node nameNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_status_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>node statusNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="process_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#process_number_hcl" style="color: inherit; text-decoration: inherit;">process_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -1166,8 +1348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>disk usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>disk usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1175,8 +1356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_java" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -1184,8 +1364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node nameNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodestatus_java" style="color: inherit; text-decoration: inherit;">node<wbr>Status</a>
@@ -1193,8 +1372,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node statusNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node statusNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="processnumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#processnumber_java" style="color: inherit; text-decoration: inherit;">process<wbr>Number</a>
@@ -1202,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1217,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -1226,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>disk usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>disk usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1235,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -1244,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node nameNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodestatus_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Status</a>
@@ -1253,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>node statusNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node statusNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="processnumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#processnumber_nodejs" style="color: inherit; text-decoration: inherit;">process<wbr>Number</a>
@@ -1262,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1277,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="disk_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
@@ -1286,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>disk usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>disk usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1295,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="node_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_python" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
@@ -1304,8 +1472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>node nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node nameNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="node_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_status_python" style="color: inherit; text-decoration: inherit;">node_<wbr>status</a>
@@ -1313,8 +1480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>node statusNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node statusNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="process_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#process_number_python" style="color: inherit; text-decoration: inherit;">process_<wbr>number</a>
@@ -1322,8 +1488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1337,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CPU usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -1346,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>disk usageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>disk usageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1355,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -1364,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node nameNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nodestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodestatus_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Status</a>
@@ -1373,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>node statusNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>node statusNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="processnumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#processnumber_yaml" style="color: inherit; text-decoration: inherit;">process<wbr>Number</a>
@@ -1382,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1398,7 +1557,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getClusters"
 title_tag: "tencentcloud.Cynosdb.getClusters"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.getClusters function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of Cynosdb clusters."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,60 +18,57 @@ Use this data source to query detailed information of Cynosdb clusters.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cynosdb.getClusters({
+const foo = tencentcloud.cynosdb.getClusters({
     clusterId: "cynosdbmysql-dzj5l8gz",
-    clusterName: "test",
-    dbType: "MYSQL",
     projectId: 0,
+    dbType: "MYSQL",
+    clusterName: "test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cynosdb.get_clusters(cluster_id="cynosdbmysql-dzj5l8gz",
-    cluster_name="test",
+foo = tencentcloud.cynosdb.get_clusters(cluster_id="cynosdbmysql-dzj5l8gz",
+    project_id=0,
     db_type="MYSQL",
-    project_id=0)
+    cluster_name="test")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cynosdb.GetClusters.Invoke(new()
-    {
-        ClusterId = "cynosdbmysql-dzj5l8gz",
-        ClusterName = "test",
-        DbType = "MYSQL",
-        ProjectId = 0,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.GetClusters(ctx, &cynosdb.GetClustersArgs{
+		_, err := cynosdb.GetClusters(ctx, &cynosdb.GetClustersArgs{
 			ClusterId:   pulumi.StringRef("cynosdbmysql-dzj5l8gz"),
-			ClusterName: pulumi.StringRef("test"),
-			DbType:      pulumi.StringRef("MYSQL"),
 			ProjectId:   pulumi.IntRef(0),
+			DbType:      pulumi.StringRef("MYSQL"),
+			ClusterName: pulumi.StringRef("test"),
 		}, nil)
 		if err != nil {
 			return err
@@ -78,6 +77,34 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Cynosdb.GetClusters.Invoke(new()
+    {
+        ClusterId = "cynosdbmysql-dzj5l8gz",
+        ProjectId = 0,
+        DbType = "MYSQL",
+        ClusterName = "test",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -86,8 +113,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.CynosdbFunctions;
 import com.pulumi.tencentcloud.Cynosdb.inputs.GetClustersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -101,27 +128,60 @@ public class App {
     public static void stack(Context ctx) {
         final var foo = CynosdbFunctions.getClusters(GetClustersArgs.builder()
             .clusterId("cynosdbmysql-dzj5l8gz")
-            .clusterName("test")
-            .dbType("MYSQL")
             .projectId(0)
+            .dbType("MYSQL")
+            .clusterName("test")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Cynosdb:getClusters
-      Arguments:
+      function: tencentcloud:Cynosdb:getClusters
+      arguments:
         clusterId: cynosdbmysql-dzj5l8gz
-        clusterName: test
-        dbType: MYSQL
         projectId: 0
+        dbType: MYSQL
+        clusterName: test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cynosdb_getclusters" "foo" {
+  cluster_id   = "cynosdbmysql-dzj5l8gz"
+  project_id   = 0
+  db_type      = "MYSQL"
+  cluster_name = "test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeClusters](https://www.tencentcloud.com/document/api/1098/40750)
 
 
 
@@ -133,7 +193,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +201,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getClusters<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClustersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>></span
+><span class="k">function </span>getClusters<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClustersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>></span
 ><span class="k">
-function </span>getClustersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClustersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>></span
+function </span>getClustersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClustersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -159,12 +219,12 @@ function </span>getClustersOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetClustersResult</span
 ><span class="k">
-def </span>get_clusters_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">db_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClustersResult]</span
+def </span>get_clusters_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">db_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClustersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -189,7 +249,8 @@ func </span>GetClustersOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetClusters </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetClustersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClustersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClustersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClustersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -198,7 +259,8 @@ func </span>GetClustersOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> </span>getClusters<span class="p">(</span><span class="nx">GetClustersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> </span>getClusters<span class="p">(</span><span class="nx">GetClustersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClustersResult</a></span>> </span>getClusters<span class="p">(</span><span class="nx">GetClustersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -210,6 +272,15 @@ func </span>GetClustersOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cynosdb/getClusters:getClusters
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cynosdb_get_clusters&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -237,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -246,8 +315,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -255,8 +323,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -264,8 +331,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -279,8 +345,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -288,8 +353,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -297,8 +361,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -306,8 +369,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -315,8 +377,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the cluster to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -339,8 +445,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_java" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -348,8 +453,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -357,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -366,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -381,8 +483,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -390,8 +491,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -399,8 +499,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -408,8 +507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -417,8 +515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -432,8 +529,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -441,8 +537,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="db_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_python" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
@@ -450,8 +545,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -459,8 +553,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -468,8 +561,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +575,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -492,8 +583,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -501,8 +591,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -510,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -519,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustersclusterlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Get<wbr>Clusters<wbr>Cluster<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -552,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -561,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -570,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="dbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -579,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -588,8 +670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -611,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustersclusterlist">[]Get<wbr>Clusters<wbr>Cluster<wbr>List</a></span>
     </dt>
-    <dd><p>A list of clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -620,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -629,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -638,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="dbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -647,8 +724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -656,11 +732,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cluster_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_lists_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclustersclusterlist">list(object)</a></span>
+    </dt>
+    <dd>A list of clusters. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CynosDB cluster.</dd><dt class="property-"
+            title="">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CynosDB cluster.</dd><dt class="property-"
+            title="">
+        <span id="db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -679,8 +816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustersclusterlist">List&lt;Get<wbr>Clusters<wbr>Cluster<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -688,8 +824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -697,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -706,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="dbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_java" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -715,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -724,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -747,8 +878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustersclusterlist">Get<wbr>Clusters<wbr>Cluster<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -756,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -765,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -774,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="dbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -783,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -792,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -813,10 +938,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_lists_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclustersclusterlist">Get<wbr>Clusters<wbr>Cluster<wbr>List]</a></span>
+        <span class="property-type"><a href="#getclustersclusterlist">Sequence[Get<wbr>Clusters<wbr>Cluster<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -824,8 +948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -833,8 +956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -842,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="db_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_python" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
@@ -851,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -860,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -883,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustersclusterlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of clusters. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of clusters. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -892,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -901,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>ID of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -910,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="dbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -919,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -928,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -961,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</dd><dt class="property-required"
             title="Required">
         <span id="availablezone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_csharp" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone</a>
@@ -970,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -979,8 +1090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -988,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimit_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit</a>
@@ -997,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1006,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -1015,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1024,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -1033,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Version</a>
@@ -1042,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1051,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Port of CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1060,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1069,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1078,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1093,8 +1192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</dd><dt class="property-required"
             title="Required">
         <span id="availablezone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_go" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone</a>
@@ -1102,8 +1200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1111,8 +1208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1120,8 +1216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimit_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit</a>
@@ -1129,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1138,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -1147,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1156,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -1165,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Version</a>
@@ -1174,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1183,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Port of CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1192,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1201,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1210,8 +1296,125 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="available_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage limit of CynosDB cluster instance, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the cluster to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_status_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_version_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of CynosDB cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1225,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</dd><dt class="property-required"
             title="Required">
         <span id="availablezone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_java" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -1234,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1243,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1252,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimit_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit</a>
@@ -1261,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1270,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -1279,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1288,8 +1484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_java" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -1297,8 +1492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -1306,8 +1500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1315,8 +1508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Port of CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1324,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1333,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1342,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1357,8 +1546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</dd><dt class="property-required"
             title="Required">
         <span id="availablezone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_nodejs" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -1366,8 +1554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1375,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1384,8 +1570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimit_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit</a>
@@ -1393,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1402,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -1411,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1420,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -1429,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -1438,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1447,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Port of CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1456,8 +1634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1465,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1474,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1489,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</dd><dt class="property-required"
             title="Required">
         <span id="available_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_python" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
@@ -1498,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1507,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1516,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit</a>
@@ -1525,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -1534,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_status_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
@@ -1543,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1552,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="db_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_python" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
@@ -1561,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="db_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_version_python" style="color: inherit; text-decoration: inherit;">db_<wbr>version</a>
@@ -1570,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1579,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Port of CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1588,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1597,8 +1760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1606,8 +1768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1621,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Only works for PREPAID cluster.</dd><dt class="property-required"
             title="Required">
         <span id="availablezone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezone_yaml" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -1630,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1639,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1648,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimit_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit</a>
@@ -1657,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1666,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the cluster to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the cluster to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -1675,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1684,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -1693,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -1702,8 +1854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1711,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-required"
+    <dd>Port of CynosDB cluster.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1720,8 +1870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1729,8 +1878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1738,8 +1886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1754,7 +1901,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

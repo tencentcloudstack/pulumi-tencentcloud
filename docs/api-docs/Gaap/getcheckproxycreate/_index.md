@@ -2,9 +2,11 @@
 ---
 title: "getCheckProxyCreate"
 title_tag: "tencentcloud.Gaap.getCheckProxyCreate"
-meta_desc: "Documentation for the tencentcloud.Gaap.getCheckProxyCreate function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap check proxy create"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,59 +18,101 @@ Use this data source to query detailed information of gaap check proxy create
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
-```java
-package generated_program;
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
 
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Gaap.GaapFunctions;
-import com.pulumi.tencentcloud.Gaap.inputs.GetCheckProxyCreateArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        final var checkProxyCreate = GaapFunctions.getCheckProxyCreate(GetCheckProxyCreateArgs.builder()
-            .accessRegion("Guangzhou")
-            .bandwidth(10)
-            .concurrent(2)
-            .http3Supported(0)
-            .ipAddressVersion("IPv4")
-            .networkType("normal")
-            .packageType("Thunder")
-            .realServerRegion("Beijing")
-            .build());
-
-    }
-}
 ```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   checkProxyCreate:
     fn::invoke:
-      Function: tencentcloud:Gaap:getCheckProxyCreate
-      Arguments:
+      function: tencentcloud:Gaap:getCheckProxyCreate
+      arguments:
         accessRegion: Guangzhou
+        realServerRegion: Beijing
         bandwidth: 10
         concurrent: 2
-        http3Supported: 0
         ipAddressVersion: IPv4
         networkType: normal
         packageType: Thunder
-        realServerRegion: Beijing
+        http3Supported: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getcheckproxycreate" "checkProxyCreate" {
+  access_region      = "Guangzhou"
+  real_server_region = "Beijing"
+  bandwidth          = 10
+  concurrent         = 2
+  ip_address_version = "IPv4"
+  network_type       = "normal"
+  package_type       = "Thunder"
+  http3_supported    = 0
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
 
 
 
@@ -80,7 +124,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -88,9 +132,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCheckProxyCreate<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCheckProxyCreateArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>></span
+><span class="k">function </span>getCheckProxyCreate<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCheckProxyCreateArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>></span
 ><span class="k">
-function </span>getCheckProxyCreateOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCheckProxyCreateOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>></span
+function </span>getCheckProxyCreateOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCheckProxyCreateOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -110,16 +154,16 @@ function </span>getCheckProxyCreateOutput<span class="p">(</span><span class="nx
                            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetCheckProxyCreateResult</span
 ><span class="k">
-def </span>get_check_proxy_create_output<span class="p">(</span><span class="nx">access_region</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">bandwidth</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                           <span class="nx">concurrent</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                           <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">ip_address_version</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">package_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">real_server_region</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCheckProxyCreateResult]</span
+def </span>get_check_proxy_create_output<span class="p">(</span><span class="nx">access_region</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">bandwidth</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                           <span class="nx">concurrent</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                           <span class="nx">group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">ip_address_version</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">network_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">package_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">real_server_region</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCheckProxyCreateResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -144,7 +188,8 @@ func </span>GetCheckProxyCreateOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCheckProxyCreate </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetCheckProxyCreateArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCheckProxyCreateInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCheckProxyCreateInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCheckProxyCreateInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +198,8 @@ func </span>GetCheckProxyCreateOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>> </span>getCheckProxyCreate<span class="p">(</span><span class="nx">GetCheckProxyCreateArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>> </span>getCheckProxyCreate<span class="p">(</span><span class="nx">GetCheckProxyCreateArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCheckProxyCreateResult</a></span>> </span>getCheckProxyCreate<span class="p">(</span><span class="nx">GetCheckProxyCreateArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,6 +211,15 @@ func </span>GetCheckProxyCreateOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_check_proxy_create&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -183,8 +238,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</p>
-</dd><dt class="property-required"
+    <dd>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -192,8 +246,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of proxy bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of proxy bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_csharp" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -201,8 +254,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region</a>
@@ -210,8 +262,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</p>
-</dd><dt class="property-optional"
+    <dd>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -219,8 +270,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -228,8 +278,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -237,8 +286,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</p>
-</dd><dt class="property-optional"
+    <dd>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -246,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -255,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -270,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</p>
-</dd><dt class="property-required"
+    <dd>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -279,8 +324,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of proxy bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of proxy bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_go" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -288,8 +332,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region</a>
@@ -297,8 +340,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</p>
-</dd><dt class="property-optional"
+    <dd>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -306,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address<wbr>Version</a>
@@ -315,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -324,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</p>
-</dd><dt class="property-optional"
+    <dd>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Type</a>
@@ -333,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -342,8 +380,85 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="access_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</dd><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The upper limit of proxy bandwidth, in Mbps.</dd><dt class="property-required"
+            title="Required">
+        <span id="concurrent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_hcl" style="color: inherit; text-decoration: inherit;">concurrent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</dd><dt class="property-required"
+            title="Required">
+        <span id="real_server_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_region_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_address_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</p>
-</dd><dt class="property-required"
+    <dd>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -366,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The upper limit of proxy bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of proxy bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_java" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -375,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -384,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</p>
-</dd><dt class="property-optional"
+    <dd>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -393,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -402,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -411,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</p>
-</dd><dt class="property-optional"
+    <dd>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_java" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -420,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -429,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -444,8 +550,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</p>
-</dd><dt class="property-required"
+    <dd>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -453,8 +558,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The upper limit of proxy bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of proxy bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_nodejs" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -462,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -471,8 +574,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</p>
-</dd><dt class="property-optional"
+    <dd>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -480,8 +582,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -489,8 +590,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -498,8 +598,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</p>
-</dd><dt class="property-optional"
+    <dd>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -507,8 +606,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -516,8 +614,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -531,8 +628,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</p>
-</dd><dt class="property-required"
+    <dd>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -540,8 +636,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of proxy bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of proxy bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_python" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -549,8 +644,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</dd><dt class="property-required"
             title="Required">
         <span id="real_server_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_region_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region</a>
@@ -558,8 +652,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</p>
-</dd><dt class="property-optional"
+    <dd>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</dd><dt class="property-optional"
             title="Optional">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -567,8 +660,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_address_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
@@ -576,8 +668,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -585,8 +676,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</p>
-</dd><dt class="property-optional"
+    <dd>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</dd><dt class="property-optional"
             title="Optional">
         <span id="package_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_python" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
@@ -594,8 +684,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -603,8 +692,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -618,8 +706,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</p>
-</dd><dt class="property-required"
+    <dd>The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.</dd><dt class="property-required"
             title="Required">
         <span id="bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -627,8 +714,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The upper limit of proxy bandwidth, in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of proxy bandwidth, in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="concurrent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_yaml" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -636,8 +722,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</p>
-</dd><dt class="property-required"
+    <dd>The upper limit of chanproxynel concurrency, representing the number of simultaneous online connections, in tens of thousands.</dd><dt class="property-required"
             title="Required">
         <span id="realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -645,8 +730,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</p>
-</dd><dt class="property-optional"
+    <dd>The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -654,8 +738,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</p>
-</dd><dt class="property-optional"
+    <dd>If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddressversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddressversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Address<wbr>Version</a>
@@ -663,8 +746,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</p>
-</dd><dt class="property-optional"
+    <dd>IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -672,8 +754,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</p>
-</dd><dt class="property-optional"
+    <dd>Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagetype_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Type</a>
@@ -681,8 +762,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</p>
-</dd><dt class="property-optional"
+    <dd>Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -690,8 +770,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -730,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</p>
-</dd><dt class="property-"
+    <dd>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</dd><dt class="property-"
             title="">
         <span id="concurrent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_csharp" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -747,8 +825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_csharp" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region</a>
@@ -826,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</p>
-</dd><dt class="property-"
+    <dd>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</dd><dt class="property-"
             title="">
         <span id="concurrent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_go" style="color: inherit; text-decoration: inherit;">Concurrent</a>
@@ -843,8 +919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_go" style="color: inherit; text-decoration: inherit;">Real<wbr>Server<wbr>Region</a>
@@ -897,6 +972,100 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="access_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_region_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="check_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_flag_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</dd><dt class="property-"
+            title="">
+        <span id="concurrent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_hcl" style="color: inherit; text-decoration: inherit;">concurrent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="real_server_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_region_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="ip_address_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>address_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="package_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_type_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -922,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</p>
-</dd><dt class="property-"
+    <dd>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</dd><dt class="property-"
             title="">
         <span id="concurrent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_java" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -939,8 +1107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_java" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -1018,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</p>
-</dd><dt class="property-"
+    <dd>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</dd><dt class="property-"
             title="">
         <span id="concurrent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_nodejs" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -1035,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_nodejs" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -1114,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</p>
-</dd><dt class="property-"
+    <dd>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</dd><dt class="property-"
             title="">
         <span id="concurrent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_python" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -1131,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="real_server_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_server_region_python" style="color: inherit; text-decoration: inherit;">real_<wbr>server_<wbr>region</a>
@@ -1210,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</p>
-</dd><dt class="property-"
+    <dd>Query whether the proxy with the given configuration can be created, 1 can be created, 0 cannot be created.</dd><dt class="property-"
             title="">
         <span id="concurrent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_yaml" style="color: inherit; text-decoration: inherit;">concurrent</a>
@@ -1227,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realserverregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserverregion_yaml" style="color: inherit; text-decoration: inherit;">real<wbr>Server<wbr>Region</a>
@@ -1291,7 +1452,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 
